@@ -1,1 +1,1 @@
-# tcf-sdk-ts
+# Transparency and Consent Framework Library
