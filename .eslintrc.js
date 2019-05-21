@@ -9,6 +9,7 @@ module.exports =  {
     sourceType:  'module',  
   },
   rules: {
+    "@typescript-eslint/indent": ["error", 2],
     'max-len': ['error', {'code':120}],
     'require-jsdoc':[0],
     'padded-blocks': ['error', 'always'],
