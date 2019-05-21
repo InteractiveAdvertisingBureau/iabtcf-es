@@ -1,0 +1,43 @@
+{
+  "name": "tcf-lib",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrispaterson/tcf-lib.git"
+  },
+  "keywords": [
+    "Interactive",
+    "Advertising",
+    "Bureau",
+    "iab",
+    "Transparency",
+    "Consent",
+    "ConsentString",
+    "Framework",
+    "TCF",
+    "2.0",
+    "Software",
+    "Development",
+    "API",
+    "Kit",
+    "SDK",
+    "GDPR"
+  ],
+  "author": "Chris Paterson",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/chrispaterson/tcf-lib/issues"
+  },
+  "homepage": "https://github.com/chrispaterson/tcf-lib#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "@typescript-eslint/parser": "^1.9.0",
+    "eslint": "^5.16.0",
+    "eslint-config-google": "^0.13.0",
+    "typescript": "^3.4.0"
+  },
+  "dependencies": {}
+}

@@ -1,1 +1,2 @@
-# Transparency and Consent Framework Library
+# tcf-lib
+> Transparency and Consent Framework Library

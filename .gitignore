@@ -1,0 +1,17 @@
+.DS_Store
+node_modules/
+dist/
+npm-debug.log
+yarn-error.log
+mocha.json
+build/cmp.tgz
+perf/
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.swo
