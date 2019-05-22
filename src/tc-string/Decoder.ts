@@ -1,6 +1,6 @@
-import {TCModel} from 'model/TCModel';
+import {TCModel} from '../model/TCModel';
 
-class TCStringDecoder {
+class Decoder {
 
   private encodedString: string;
 
@@ -27,4 +27,4 @@ class TCStringDecoder {
 
 }
 
-export {TCStringDecoder};
+export {Decoder};

@@ -1,7 +1,7 @@
 import {EncodingError} from 'errors/EncodingError';
-import {TCModel} from 'model/TCModel';
+import {TCModel} from '../model/TCModel';
 
-class TCStringEncoder {
+class Encoder {
 
   private tcModel: TCModel;
 
@@ -35,4 +35,4 @@ class TCStringEncoder {
 
 }
 
-export {TCStringEncoder};
+export {Encoder};

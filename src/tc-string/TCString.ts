@@ -1,6 +1,6 @@
-import {TCStringEncoder} from './TCStringEncoder';
-import {TCStringDecoder} from './TCStringDecoder';
-import {TCModel} from './model/TCModel';
+import {Encoder} from './Encoder';
+import {Decoder} from './Decoder';
+import {TCModel} from '../model/TCModel';
 
 /**
  * Main class for encoding and decoding a
@@ -17,7 +17,7 @@ class TCString {
    */
   public static encode(tcModel: TCModel): string {
 
-    const encoder = new TCStringEncoder(tcModel);
+    const encoder = new Encoder(tcModel);
 
     return encoder.encode();
 
@@ -32,7 +32,7 @@ class TCString {
    */
   public static decode(encodedString: string) {
 
-    const decoder = new TCStringDecoder(encodedString);
+    const decoder = new Decoder(encodedString);
 
     return decoder.decode();
 
