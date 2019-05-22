@@ -1,7 +1,3 @@
-import {OutOfRangeError} from '../errors/OutOfRangeError';
-import {valueWithinRange} from './FieldBitLengths';
-
-
 /**
  * CMPManifest class that collects CMP specific values for encoding a TC String
  */
@@ -39,15 +35,7 @@ class CMPManifest {
    */
   public setCmpId(num: number): void {
 
-    if (valueWithinRange('CmpId', num)) {
-
-      this.cmpId = num;
-
-    } else {
-
-      throw new OutOfRangeError('CmpVersion');
-
-    }
+    this.cmpId = num;
 
   }
   /**
@@ -73,15 +61,7 @@ class CMPManifest {
    */
   public setCmpVersion(num: number): void {
 
-    if (valueWithinRange('CmpVersion', num)) {
-
-      this.cmpVersion = num;
-
-    } else {
-
-      throw new OutOfRangeError('CmpVersion');
-
-    }
+    this.cmpVersion = num;
 
   }
   /**

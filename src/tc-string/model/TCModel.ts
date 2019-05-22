@@ -1,7 +1,9 @@
 import {OutOfRangeError} from '../errors/OutOfRangeError';
 import {InvalidValueError} from '../errors/InvalidValueError';
-import {CMPManifest} from './CMPManifest';
+import {CMPManifest} from '../../model/CMPManifest';
 import {valueWithinRange} from './FieldBitLengths';
+import {PurposeVector} from '../../model/PurposeVector';
+import {VendorVector} from '../../model/VendorVector';
 
 
 /**
@@ -22,6 +24,12 @@ class TCModel {
   private isServiceSpecific: boolean;
   private useNonStandardStacks: boolean;
   private cmpManifest: CMPManifest;
+  // private specialFeatureOptIns
+  private purposeConsents: PurposeVector;
+  private purposeLITransparency: PurposeVector;
+  private vendorConsents: VendorVector;
+  private vendorLegitimateInterest: VendorVector;
+  private publisherRestrictions: VendorVector;
 
   /**
    * getVersion
@@ -264,17 +272,143 @@ class TCModel {
 
   }
 
+  /**
+   * setCMPManifest
+   *
+   * @param {CMPManifest} cmpManifest
+   * @return {void}
+   */
   public setCMPManifest(cmpManifest: CMPManifest): void {
 
     this.cmpManifest = cmpManifest;
 
   }
 
+  /**
+   * getCMPManifest
+   *
+   * @return {CMPManifest}
+   */
   public getCMPManifest(): CMPManifest {
 
     return this.cmpManifest;
 
   }
+
+  /**
+   * setPurposeConsents
+   *
+   * @param {PurposeVector} purposeConsents
+   * @return {void}
+   */
+  public setPurposeConsents(purposeConsents: PurposeVector): void {
+
+    this.purposeConsents = purposeConsents;
+
+  };
+
+  /**
+   * getPurposeConsents
+   *
+   * @return {PurposeVector}
+   */
+  public getPurposeConsents(): PurposeVector {
+
+    return this.purposeConsents;
+
+  };
+
+  /**
+   * setPurposeLITransparency
+   *
+   * @param {PurposeVector} purposeLITransparency
+   * @return {void}
+   */
+  public setPurposeLITransparency(purposeLITransparency: PurposeVector): void {
+
+    this.purposeLITransparency = purposeLITransparency;
+
+  };
+
+  /**
+   * getPurposeLITransparency
+   *
+   * @return {PurposeVector}
+   */
+  public getPurposeLITransparency(): PurposeVector {
+
+    return this.purposeLITransparency;
+
+  };
+
+  /**
+   * setVendorConsents
+   *
+   * @param {VendorVector} vendorConsents
+   * @return {void}
+   */
+  public setVendorConsents(vendorConsents: VendorVector): void {
+
+    this.vendorConsents = vendorConsents;
+
+  };
+
+  /**
+   * getVendorConsents
+   *
+   * @return {VendorVector}
+   */
+  public getVendorConsents(): VendorVector {
+
+    return this.vendorConsents;
+
+  };
+
+  /**
+   * setVendorLegitimateInterest
+   *
+   * @param {VendorVector} vendorLegitimateInterest
+   * @return {void}
+   */
+  public setVendorLegitimateInterest(vendorLegitimateInterest: VendorVector): void {
+
+    this.vendorLegitimateInterest = vendorLegitimateInterest;
+
+  };
+
+  /**
+   * getVendorLegitimateInterest
+   *
+   * @return {VendorVector}
+   */
+  public getVendorLegitimateInterest(): VendorVector {
+
+    return this.vendorLegitimateInterest;
+
+  };
+
+  /**
+   * setPublisherRestrictions
+   *
+   * @param {VendorVector} publisherRestrictions
+   * @return {void}
+   */
+  public setPublisherRestrictions(publisherRestrictions: VendorVector): void {
+
+    this.publisherRestrictions = publisherRestrictions;
+
+  };
+
+  /**
+   * getPublisherRestrictions
+   *
+   * @return {VendorVector}
+   */
+  public getPublisherRestrictions(): VendorVector {
+
+    return this.publisherRestrictions;
+
+  };
 
 }
 
