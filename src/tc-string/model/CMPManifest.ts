@@ -1,13 +1,15 @@
-import OutOfRangeError from './OutOfRangeError';
+import {OutOfRangeError} from '../errors/OutOfRangeError';
 import {valueWithinRange} from './FieldBitLengths';
 
-let _cmpId;
-let _cmpVersion;
 
 /**
  * CMPManifest class that collects CMP specific values for encoding a TC String
  */
 class CMPManifest {
+
+  private cmpId: number;
+  private cmpVersion: number;
+
   /**
    * constructor - constructs a CMPManifest Object
    *
@@ -19,10 +21,13 @@ class CMPManifest {
    * should receive a new version number, for logging proof of consent
    * @return {undefined}
    */
-  constructor(cmpId = null, cmpVersion = null) {
-    _cmpId = cmpId;
-    _cmpVersion = cmpVersion;
+  public constructor(cmpId: number = null, cmpVersion: number = null) {
+
+    this.cmpId = cmpId;
+    this.cmpVersion = cmpVersion;
+
   }
+
   /**
    * setCmpId - sets the Consent Manager Provider ID that last updated the TC
    * string
@@ -32,12 +37,18 @@ class CMPManifest {
    * please go to https://register.consensu.org/CMP
    * @return {undefined}
    */
-  setCmpId(num) {
+  public setCmpId(num: number): void {
+
     if (valueWithinRange('CmpId', num)) {
-      _cmpId = num;
+
+      this.cmpId = num;
+
     } else {
+
       throw new OutOfRangeError('CmpVersion');
+
     }
+
   }
   /**
    * getCmpId - gets the Consent Manager Provider ID that last updated the TC
@@ -47,8 +58,10 @@ class CMPManifest {
    * the iab. This ID is encoded in the string. To register as a CMP please go
    * to https://register.consensu.org/CMP
    */
-  getCmpId() {
-    return _cmpId;
+  public getCmpId(): number {
+
+    return this.cmpId;
+
   }
   /**
    * setCmpVersion - sets the Consent Manager Provider version. This is a CMP's
@@ -58,12 +71,18 @@ class CMPManifest {
    * @param {number} num - number to set CmpVersion to
    * @return {undefined}
    */
-  setCmpVersion(num) {
+  public setCmpVersion(num: number): void {
+
     if (valueWithinRange('CmpVersion', num)) {
-      _cmpVersion = num;
+
+      this.cmpVersion = num;
+
     } else {
+
       throw new OutOfRangeError('CmpVersion');
+
     }
+
   }
   /**
    * getCmpVersion - gets the Consent Manager Provider version. This is a CMP's
@@ -72,8 +91,10 @@ class CMPManifest {
    *
    * @return {number}
    */
-  getCmpVersion() {
-    return _cmpVersion;
+  public getCmpVersion(): number {
+
+    return this.cmpVersion;
+
   }
   /**
    * isValid
@@ -81,9 +102,12 @@ class CMPManifest {
    * @return {boolean} whether or not this CMP manifest is valid ie. are the
    * values all set and within reasonable parameters for those values
    */
-  isValid() {
-    return (_cmpId > 1 && _cmpVersion > 0);
+  public isValid(): boolean {
+
+    return (this.cmpId > 1 && this.cmpVersion > 0);
+
   }
+
 }
 
-export default CMPManifest;
+export {CMPManifest};

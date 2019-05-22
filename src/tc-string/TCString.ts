@@ -1,11 +1,13 @@
-import TCStringEncoder from 'TCStringEncoder';
-import TCStringDecoder from 'TCStringDecoder';
+import {TCStringEncoder} from './TCStringEncoder';
+import {TCStringDecoder} from './TCStringDecoder';
+import {TCModel} from './model/TCModel';
 
 /**
  * Main class for encoding and decoding a
  * TCF Transparency and Consent String
  */
 class TCString {
+
   /**
    *  encodes a model into a TCString
    *
@@ -13,9 +15,12 @@ class TCString {
    * @param {TCModel} tcModel - model to convert into encoded string
    * @return {string}
    */
-  static encode(tcModel) {
+  public static encode(tcModel: TCModel): string {
+
     const encoder = new TCStringEncoder(tcModel);
+
     return encoder.encode();
+
   }
 
   /**
@@ -25,9 +30,14 @@ class TCString {
    * @type {TCModel}
    * @return {TCModel}
    */
-  static decode(encodedString) {
+  public static decode(encodedString: string) {
+
     const decoder = new TCStringDecoder(encodedString);
+
     return decoder.decode();
+
   }
+
 }
+
 export {TCString};

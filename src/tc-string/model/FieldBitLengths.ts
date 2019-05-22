@@ -22,11 +22,13 @@ fields.set('SpecialFeatureOptIns', 12);
 fields.set('PurposesConsent', 24);
 fields.set('PurposesLIEstablished', 24);
 
-const valueWithinRange = (fieldName, valuePassed) => {
+const valueWithinRange = (fieldName: string, valuePassed: number): boolean => {
+
   const numBits = fields.get(fieldName);
   const maxValue = Math.pow(2, numBits);
 
   return (valuePassed < 0 || maxValue > valuePassed );
+
 };
 
 export {fields, valueWithinRange};

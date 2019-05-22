@@ -1,29 +1,38 @@
-import EncodingError from 'model/EncodingError';
+import {EncodingError} from 'errors/EncodingError';
+import {TCModel} from 'model/TCModel';
 
-/**
- * @class
- */
 class TCStringEncoder {
+
+  private tcModel: TCModel;
+
   /**
    * @type {TCModel}
    * @param {TCModel} tcModel - model to convert into encoded string
    */
-  constructor(tcModel) {
+  public constructor(tcModel: TCModel) {
+
     if ((tcModel instanceof TCModel)) {
+
       throw new EncodingError('TCModel required to encode a TCString');
+
     }
 
     /**
     * @private
     * @const {!tcModel}
     * */
-    this.tcModel_ = tcModel;
+    this.tcModel = tcModel;
+
   }
   /**
    * @return {string} - web-safe base64 encoded Transparency and Consent String
    */
-  encode() {
+  public encode(): string {
+
     return '';
+
   }
+
 }
+
 export {TCStringEncoder};

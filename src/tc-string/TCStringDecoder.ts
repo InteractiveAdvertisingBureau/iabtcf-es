@@ -1,34 +1,30 @@
-import DecodingError from 'model/DecodingError';
+import {TCModel} from 'model/TCModel';
 
-/**
- * @class
- */
-class TCStringEncoder {
+class TCStringDecoder {
+
+  private encodedString: string;
+
   /**
    * @param {string} encodedString - model to convert into encoded string
    */
-  constructor(encodedString) {
-    if (!isAString(encodedString)) {
-      throw new DecodingError('decode value must be a string');
-    }
-    /**
-    * @private
-    * @const {!encodedString}
-    * */
-    this.encodedString_ = encodedString;
+  public constructor(encodedString: string) {
+
+    this.encodedString = encodedString;
+
   }
   /**
-   * getString
-   *
    * @return {string} - web-safe base64 encoded Transparency and Consent String
    */
-  decode() {
+  public decode(): TCModel {
+
     const tcModel = new TCModel();
 
     // populate it
 
     return tcModel;
-    return '';
+
   }
+
 }
-export {TCStringEncoder};
+
+export {TCStringDecoder};

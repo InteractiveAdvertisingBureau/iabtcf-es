@@ -1,62 +1,57 @@
-import OutOfRangeError from './OutOfRangeError';
-import InvalidValueError from './InvalidValueError';
-import CMPManifest from './CMPManifest';
+import {OutOfRangeError} from '../errors/OutOfRangeError';
+import {InvalidValueError} from '../errors/InvalidValueError';
+import {CMPManifest} from './CMPManifest';
 import {valueWithinRange} from './FieldBitLengths';
 
-let _version;
-let _created;
-let _lastUpdated;
-let _cmpId;
-let _cmpVersion;
-let _consentScreen;
-let _consentLanguage;
-let _vendorListVersion;
-let _policyVersion;
-let _isServiceSpecific;
-let _useNonStandardStacks;
 
 /**
- * Class representing a Transparancy and Consent String as defined by the iab's
- * Transparency and Consent Framework v2
+ * Class representing the data contained within the  Transparancy and Consent String as defined by the iab's
+ * Transparency and Consent Framework v2.0
  */
 class TCModel {
-  /**
-   * constructor - constructs a TCModel
-   *
-   * @type {CMPManifest}
-   * @param {CMPManifest} cmpManifest - To generate a model, there must be iab
-   * sanctioned CMP parameters.
-   * @return {undefined}
-   */
-  constructor(cmpManifest) {
-    if (cmpManifest instanceof CMPManifest && cmpManifest.isValid()) {
-      _cmpId = cmpManifest.getCmpId();
-      _cmpVersion = cmpManifest.getCmpId();
-    }
-  }
+
+  private version: number;
+  private created: Date;
+  private lastUpdated: Date;
+  private cmpId: number;
+  private cmpVersion: number;
+  private consentScreen: number;
+  private consentLanguage: string;
+  private vendorListVersion: number;
+  private policyVersion: number;
+  private isServiceSpecific: boolean;
+  private useNonStandardStacks: boolean;
+  private cmpManifest: CMPManifest;
+
   /**
    * getVersion
    *
    * @return {number} version of the consent string encoding
    */
-  getVersion() {
-    return _version;
+  public getVersion(): number {
+
+    return this.version;
+
   }
   /**
    * getCreated
    *
    * @return {Date} when this TC String was created
    */
-  getCreated() {
-    return _created;
+  public getCreated(): Date {
+
+    return this.created;
+
   }
   /**
    * getLastUpdated
    *
    * @return {Date} the last time the string was updated
    */
-  getLastUpdated() {
-    return _lastUpdated;
+  public getLastUpdated(): Date {
+
+    return this.lastUpdated;
+
   }
   /**
    * getCmpId - gets the Consent Manager Provider ID that last updated the TC
@@ -66,8 +61,10 @@ class TCModel {
    * the iab. This ID is encoded in the string. To register as a CMP please go
    * to https://register.consensu.org/CMP
    */
-  getCmpId() {
-    return _cmpId;
+  public getCmpId(): number {
+
+    return this.cmpId;
+
   }
   /**
    * getCmpVersion - gets the Consent Manager Provider version. This is a CMP's
@@ -76,8 +73,10 @@ class TCModel {
    *
    * @return {number}
    */
-  getCmpVersion() {
-    return _cmpVersion;
+  public getCmpVersion(): number {
+
+    return this.cmpVersion;
+
   }
 
   /**
@@ -89,12 +88,18 @@ class TCModel {
    * @param {number} num - number to set the consent screen to
    * @return {undefined}
    */
-  setConsentScreen(num) {
+  public setConsentScreen(num: number): void {
+
     if (valueWithinRange('ConsentScreen', num)) {
-      _consentScreen = num;
+
+      this.consentScreen = num;
+
     } else {
+
       throw new OutOfRangeError('CmpVersion');
+
     }
+
   }
   /**
    * getConsentScreen - gets the screen number in the CMP where consent was
@@ -104,8 +109,10 @@ class TCModel {
    *
    * @return {number}
    */
-  getConsentScreen() {
-    return _consentScreen;
+  public getConsentScreen(): number {
+
+    return this.consentScreen;
+
   }
   /**
    * setConsentLanguage - sets the Two-letter ISO639-1 language code in which
@@ -115,13 +122,19 @@ class TCModel {
    * eg. 'en' or 'fr', etc..
    * @return {undefined}
    */
-  setConsentLanguage(twoLetterLangCode) {
+  public setConsentLanguage(twoLetterLangCode: string): void {
+
     if (typeof twoLetterLangCode === 'string'
       && twoLetterLangCode.length === 2) {
-      _consentLanguage = twoLetterLangCode.toLowerCase();
+
+      this.consentLanguage = twoLetterLangCode.toLowerCase();
+
     } else {
+
       throw new InvalidValueError('ConsentLanguage');
+
     }
+
   }
   /**
    * getConsentLanguage - gets the Two-letter ISO639-1 language code in which
@@ -130,8 +143,10 @@ class TCModel {
    * @return {string} two letter lowercase language code
    * eg. 'en' or 'fr', etc..
    */
-  getConsentLanguage() {
-    return _consentLanguage;
+  public getConsentLanguage(): string {
+
+    return this.consentLanguage;
+
   }
   /**
    * getVendorListVersion - gets the version of global vendor list used in most
@@ -140,8 +155,10 @@ class TCModel {
    *
    * @return {number}
    */
-  getVendorListVersion() {
-    return _vendorListVersion;
+  public getVendorListVersion(): number {
+
+    return this.vendorListVersion;
+
   }
 
   /**
@@ -153,8 +170,10 @@ class TCModel {
    *
    * @return {number}
    */
-  getPolicyVersion() {
-    return _policyVersion;
+  public getPolicyVersion(): number {
+
+    return this.policyVersion;
+
   }
 
   /**
@@ -171,12 +190,18 @@ class TCModel {
    * domain space
    * @return {undefined}
    */
-  setIsServiceSpecific(bool) {
+  public setIsServiceSpecific(bool): void {
+
     if (typeof bool === 'boolean') {
-      _isServiceSpecific = bool;
+
+      this.isServiceSpecific = bool;
+
     } else {
+
       throw new InvalidValueError('IsServiceSpecific');
+
     }
+
   }
   /**
    * getIsServiceSpecific - gets whether the signals encoded in this TC String
@@ -189,8 +214,10 @@ class TCModel {
    *
    * @return {boolean}
    */
-  getIsServiceSpecific() {
-    return _isServiceSpecific;
+  public getIsServiceSpecific(): boolean {
+
+    return this.isServiceSpecific;
+
   }
   /**
    * setUseNonStandardStacks - Non-standard stacks means that a CMP is using
@@ -201,16 +228,22 @@ class TCModel {
    * they do, they need to set this bit to indicate that they've customized
    * descriptions
    *
-   * @param {boolean} bool - true if CMP used non-standard stacks during consent
+   * @param {boolean} value - true if CMP used non-standard stacks during consent
    * gathering; false if IAB standard stacks were used.
    * @return {undefined}
    */
-  setUseNonStandardStacks(bool) {
-    if (typeof bool === 'boolean') {
-      _useNonStandardStacks = bool;
+  public setUseNonStandardStacks(value: boolean): void {
+
+    if (typeof value === 'boolean') {
+
+      this.useNonStandardStacks = value;
+
     } else {
+
       throw new InvalidValueError('UseNonStandardStacks');
+
     }
+
   }
   /**
    * getUseNonStandardStacks - Non-standard stacks means that a CMP is using
@@ -225,9 +258,24 @@ class TCModel {
    * @return {boolean} - true if CMP used non-standard stacks during consent
    * gathering; false if IAB standard stacks were used.
    */
-  getUseNonStandardStacks() {
-    return _useNonStandardStacks;
+  public getUseNonStandardStacks(): boolean {
+
+    return this.useNonStandardStacks;
+
   }
+
+  public setCMPManifest(cmpManifest: CMPManifest): void {
+
+    this.cmpManifest = cmpManifest;
+
+  }
+
+  public getCMPManifest(): CMPManifest {
+
+    return this.cmpManifest;
+
+  }
+
 }
 
-export default TCModel;
+export {TCModel};

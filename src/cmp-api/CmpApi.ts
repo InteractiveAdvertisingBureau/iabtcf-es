@@ -13,30 +13,37 @@ const WINDOW_REF = '__tcfapi';
  * getVendorList
  */
 class CmpApi {
+
   /**
    * constructor constructs the API
    *
    * @return {undefined}
    */
   constructor() {
+
     let consentString;
     let hasGlobalScope;
     let gdprApplies;
     let gdprAppliesGlobally;
 
     const allAreDefined = (...items) => {
+
       const len = items.length;
       let retr = true;
 
       for (let i = 0; i < len && retr; i ++) {
+
         retr = (items[i] !== undefined && items[i] !== null);
+
       }
 
       return retr;
+
     };
     const waitingForThingsQueue = [];
     const purgeWaitingFor = () => {
-    /**
+
+      /**
      * capture length as an independent variable because we don't
      * want it to update since this queue will be added to as we
      * process it here
@@ -49,8 +56,10 @@ class CmpApi {
        * but I didn't try it
        */
       if (len > 0) {
+
         for (let i = 0; i < len; i++) {
-        /**
+
+          /**
          * first paraemeter is the "command", so we'll call that "method" I'm
          * not checking here if we actually have that method because that is
          * checked before being pushed into the queue.  The next parameters
@@ -59,7 +68,9 @@ class CmpApi {
          */
           const dequeued = waitingForThingsQueue[i];
           const methodName = dequeued[0];
+
           methods[methodName].fn.apply(null, dequeued.slice(1));
+
         }
 
         /**
@@ -67,7 +78,9 @@ class CmpApi {
        * I'm going remove the queued functions we already ran
        */
         waitingForThingsQueue = waitingForThingsQueue.slice(len);
+
       }
+
     };
     const methods = {
 
@@ -95,8 +108,11 @@ class CmpApi {
          * successful.
          */
         fn(vendorIds, callback) {
+
           if (allAreDefined(consentString, gdprApplies, hasGlobalScope)) {
+
             const hollaBack = () => {
+
               callback(VendorConsents.create({
                 consentString: consentString,
                 gdprApplies: gdprApplies,
@@ -104,23 +120,35 @@ class CmpApi {
                 vendors: consentString.vendorList.vendors,
                 subset: vendorIds,
               }), true);
+
             };
+
             if (consentString.vendorList) {
+
               hollaBack();
+
             } else {
+
               methods.getVendorList(
-                  consentString.getVendorListVersion(), (gvl) => {
-                    consentString.setGlobalVendorList(gvl);
-                    hollaBack();
-                  });
+                consentString.getVendorListVersion(), (gvl) => {
+
+                  consentString.setGlobalVendorList(gvl);
+                  hollaBack();
+
+                });
+
             }
+
           } else {
+
             waitingForThingsQueue.push([
               'getVendorConsents',
               vendorIds,
               callback,
             ]);
+
           }
+
         },
       },
 
@@ -152,8 +180,11 @@ class CmpApi {
          * @param {boolean} success - whether or not this call succeeded
          */
         fn(ignored, callback) {
+
           if (allAreDefined(consentString, gdprApplies, hasGlobalScope)) {
+
             const hollaBack = () => {
+
               callback(VendorConsents.create({
                 consentString: consentString,
                 gdprApplies: gdprApplies,
@@ -161,23 +192,35 @@ class CmpApi {
                 vendors: consentString.vendorList.vendors,
                 subset: vendorIds,
               }), true);
+
             };
+
             if (consentString.vendorList) {
+
               hollaBack();
+
             } else {
+
               methods.getVendorList(
-                  consentString.getVendorListVersion(), (gvl) => {
-                    consentString.setGlobalVendorList(gvl);
-                    hollaBack();
-                  });
+                consentString.getVendorListVersion(), (gvl) => {
+
+                  consentString.setGlobalVendorList(gvl);
+                  hollaBack();
+
+                });
+
             }
+
           } else {
+
             waitingForThingsQueue.push([
               'getVendorConsents',
               vendorIds,
               callback,
             ]);
+
           }
+
         },
       },
 
@@ -198,25 +241,35 @@ class CmpApi {
          * requested version.
          */
         fn(versionId, callback) {
+
           const gvlLoader = new GVLLoader();
 
           // is a valid versionId
           if (versionId === undefined || versionId === null || versionId > 0) {
+
             switch (versionId) {
+
               case undefined:
               case null:
 
                 if (consentString) {
+
                   if (consentString.vendorList) {
+
                     callback(consentString.vendorList, true);
                   } else {
+
                     const version = consentString.getVendorListVersion();
+
                     gvlLoader.load(version).then((gvl) => {
+
                       callback(gvl, true);
                     }, (err) => callback(null, false));
                   }
                 } else {
+
                   gvlLoader.load().then((gvl) => {
+
                     callback(gvl, true);
                   }, (err) => callback(null, false));
                 }
@@ -224,18 +277,25 @@ class CmpApi {
               case 'LATEST':
 
                 gvlLoader.load().then((gvl) => {
+
                   callback(gvl, true);
                 }, (err) => callback(null, false));
                 break;
               default:
 
                 gvlLoader.load(versionId).then((gvl) => {
+
                   callback(gvl, true);
                 }, (err) => callback(null, false));
+
             }
+
           } else {
+
             callback(null, false);
+
           }
+
         },
       },
 
@@ -259,21 +319,28 @@ class CmpApi {
          *    "error" - CMP detected an error
          */
         fn(ignored, callback) {
+
           if (allAreDefined(gdprAppliesGlobally)) {
+
             const pingReturn = new PingReturn({
               apiVersion: '2.0',
               cmpVersion: /* TODO*/'',
               gvlVersion: /* TODO*/1,
               policyVersion: 2, /* TODO*/
             });
+
             callback(pingReturn.create({
               gdprAppliesGlobally: gdprAppliesGlobally,
               cmpStatus: cmpStatus,
               displayStatus: displayStatus,
             }), true);
+
           } else {
+
             waitingForThingsQueue.push(['ping', callback]);
+
           }
+
         },
       },
     };
@@ -282,28 +349,45 @@ class CmpApi {
     const api = window[WINDOW_REF];
 
     if (api !== undefined && Array.isArray(api.a)) {
+
       oldQueue = api.a;
+
     }
 
     window[WINDOW_REF] = (command, param, version, callback) => {
+
       const method = methods[command];
+
       // Do we even have a method like that?
       if (method) {
+
         // do we require a callback and has one been passed?
         if (method.needsCallback && !callback) {
+
           console.error(new Error(`${command} requires callback`));
+
         } else {
+
           methods[command].fn.call(self, param, callback);
+
         }
+
       } else {
+
         console.error(new Error(`${command} is not a supported command`));
+
       }
+
     };
 
     if (oldQueue) {
+
       oldQueue.forEach((item) => {
+
         api(...item);
+
       });
+
     }
 
     window.addEventListener('message', cmpMsgHandler, false);
@@ -321,7 +405,9 @@ class CmpApi {
      * function requires a callback to be valid
      */
     this.addMethod = (name, def, requiresCallback=true) => {
+
       methods[name] = {fn: def, needsCallback: requiresCallback};
+
     };
     /**
      * @param {boolean} bool - true if the vendor consent data is retrieved from
@@ -329,8 +415,10 @@ class CmpApi {
      * publisher-group-specific) cookie
      */
     this.setHasGlobalScope = (bool) => {
+
       hasGlobalScope = bool;
       purgeWaitingFor();
+
     };
     /**
      * @param {boolean} bool - true if the user is determined (by geo-IP lookup)
@@ -339,25 +427,33 @@ class CmpApi {
      * publisher and thus the CMP UI should be shown for everyone.
      */
     this.setGdprApplies = (bool) => {
+
       gdprApplies = bool;
       purgeWaitingFor();
+
     };
     /**
    * @param {boolean} bool - true if publisher has configured CMP to apply GDPR
    * to all (including non-EU) visitors
    */
     this.setGdprAppliesGlobally = (bool) => {
+
       gdprAppliesGlobally = bool;
       purgeWaitingFor();
+
     };
     /**
      * @param {tcString} tcStringSDK - instance of the current
      * working tcString object
      */
     this.setTCString = (tcStringSDK) => {
+
       tcString = tcStringSDK;
       purgeWaitingFor();
+
     };
+
   }
+
 };
 export {CmpApi};

@@ -5,7 +5,9 @@
  * @return {boolean} - whether or not it's a string, of course...
  */
 function isAString(val) {
+
   return (typeof val === 'string');
+
 }
 
 /**
@@ -15,6 +17,8 @@ function isAString(val) {
  * @return {boolean} - whether or not it's a function, of course...
  */
 function isAFunction(val) {
+
   return (typeof val === 'function');
+
 }
 export {isAString, isAFunction};

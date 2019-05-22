@@ -6,12 +6,15 @@
  * getInAppConsentData
  * getVendorList
  */
-export class CmpApi {
 
-    private tcString: TCString;
-    private hasGlobalScope: boolean;
-    private gdprApplies: boolean;
-    private gdprAppliesGlobally: boolean;
+import TCString from '../tc-string';
+
+export default class CmpApi {
+
+  private tcString: TCString;
+  private hasGlobalScope: boolean;
+  private gdprApplies: boolean;
+  private gdprAppliesGlobally: boolean;
 
   /**
    * constructor
