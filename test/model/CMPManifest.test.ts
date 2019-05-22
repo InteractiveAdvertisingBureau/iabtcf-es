@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {CMPManifest} from '../../src/model/CMPManifest';
 
-describe('valid CMPManifest', (): void => {
+describe('CMPManifest Tests', (): void => {
 
   it('is valid when everything is set correctly through constructor', (): void => {
 

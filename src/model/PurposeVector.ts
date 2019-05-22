@@ -14,9 +14,17 @@ class PurposeVector {
 
   }
 
-  public getPurpose(purposeId: number): boolean {
+  public getPurpose(purposeId: number): boolean | never {
 
-    return this.map.get(purposeId);
+    if (this.map && this.map.has(purposeId)) {
+
+      return this.map.get(purposeId) || false;
+
+    } else {
+
+      throw new RangeError(`Purpose id ${purposeId} does not exist`);
+
+    }
 
   }
 
