@@ -17,7 +17,7 @@ class CMPManifest {
    * should receive a new version number, for logging proof of consent
    * @return {undefined}
    */
-  public constructor(cmpId: number = null, cmpVersion: number = null) {
+  public constructor(cmpId: number = NaN, cmpVersion: number = NaN) {
 
     this.cmpId = cmpId;
     this.cmpVersion = cmpVersion;

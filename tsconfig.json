@@ -1,16 +1,23 @@
 {
-  "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "dist",
     "noImplicitAny" :true,
     "removeComments": false,
+    "esModuleInterop": true,
     "preserveConstEnums": true,
     "declaration": true,
+    "allowUnreachableCode": false,
+    "strict": true,
+    "pretty": true,
+    "forceConsistentCasingInFileNames": true,
     "target": "ES6",
     "forceConsistentCasingInFileNames": true,
     "sourceMap": true
   },
+  "exclude": [
+    "node_modules"
+  ],
   "include": [
     "src/**/*.ts",
     "test/**/*.ts"
