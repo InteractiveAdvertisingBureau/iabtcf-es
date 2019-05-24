@@ -1,2 +1,0 @@
-# iabtcf lib
----
