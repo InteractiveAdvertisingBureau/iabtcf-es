@@ -18,6 +18,7 @@ module.exports =  {
         'ArrayExpression': "first",
         'FunctionExpression': {'body':1, 'parameters':"first"},
         'ObjectExpression': 1, 
+        'SwitchCase': 1, 
         'CallExpression': {'arguments': 'first'}
       }
     ],

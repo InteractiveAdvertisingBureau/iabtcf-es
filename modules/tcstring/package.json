@@ -1,0 +1,22 @@
+{
+  "name": "@iabtcf/tcstring",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "Chris Paterson <cpaterson@conversantmedia.com>",
+  "homepage": "",
+  "license": "MIT",
+  "directories": {
+    "src": "src",
+    "test": "test"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "tsc": "../../node_modules/.bin/tsc"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "@iabtcf/core":"1.0.0"
+  }
+}
