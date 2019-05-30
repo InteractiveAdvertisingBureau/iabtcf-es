@@ -1,6 +1,7 @@
 .DS_Store
 node_modules/
-packages/*/dist/
+modules/**/dist
+modules/**/node_modules
 npm-debug.log
 lerna-debug.log
 
