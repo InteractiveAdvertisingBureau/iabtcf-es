@@ -2,7 +2,7 @@
   "name": "iabtcf",
   "scripts": {
     "test": "mocha --require ts-node/register \"modules/**/test/**/*.{ts,tsx}\"",
-    "build": "lerna exec -- \"rm -rf dist/* && mkdir -p dist/ts && cp -r src/* dist/ts/ \" && lerna run tsc && lerna exec -- mv dist/src dist/js"
+    "build": "lerna run build"
   },
   "keywords": [
     "interactive",

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "rootDir": ".",
+    "rootDir": "src",
     "outDir": "dist",
     "noImplicitAny" :true,
     "removeComments": false,
@@ -21,8 +21,6 @@
   ],
   "include": [
     "src/*.ts",
-    "src/**/*.ts",
-    "test/**/*.ts",
-    "test/*.ts"
+    "src/**/*.ts"
   ]
 }

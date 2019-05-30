@@ -10,10 +10,10 @@
     "test": "test"
   },
   "files": [
-    "src"
+    "dist/**/*.js"
   ],
   "scripts": {
-    "tsc": "../../node_modules/.bin/tsc"
+    "build": "../../node_modules/.bin/tsc"
   },
   "devDependencies": {},
   "dependencies": {}
