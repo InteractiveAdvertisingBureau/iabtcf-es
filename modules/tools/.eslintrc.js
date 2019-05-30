@@ -1,12 +1,11 @@
 module.exports = {
   extends: [
-    // add more generic rulesets here, such as:
-    // 'eslint:recommended',
+    '../../.eslintrc.js',
     'plugin:vue/recommended'
   ],
-  rules: {
-    // override/add rules settings here, such as:
-    // 'vue/no-unused-vars': 'error'
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    extraFileExtensions: ['.vue']
   }
 }
 

@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./src"
+  },
+  "compilerOptions": {
+    "target": "es5"
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [ "**/*.ts"]
+}
