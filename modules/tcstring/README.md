@@ -1,2 +1,2 @@
-# `tcstring`
+# `@iabtcf/tcstring`
 ---

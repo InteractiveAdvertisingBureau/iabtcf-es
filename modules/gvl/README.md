@@ -1,2 +1,2 @@
-# `gvl`
+# `@iabtcf/gvl`
 ---

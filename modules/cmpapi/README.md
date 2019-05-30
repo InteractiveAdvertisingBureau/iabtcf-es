@@ -1,2 +1,2 @@
-# `cmpapi`
+# `@iabtcf/cmpapi`
 ---

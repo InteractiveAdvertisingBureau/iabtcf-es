@@ -1,2 +1,2 @@
-# `core`
+# `@iabtcf/core`
 ---
