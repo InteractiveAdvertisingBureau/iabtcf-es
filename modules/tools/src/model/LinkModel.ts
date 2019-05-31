@@ -9,6 +9,12 @@ class LinkModel {
     this.link = link;
 
   }
+  public getTitle(): string {
+    return this.title;
+  }
+  public getLink(): string {
+    return this.link;
+  }
 
 }
 export {LinkModel};

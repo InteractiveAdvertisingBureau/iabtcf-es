@@ -1,11 +1,19 @@
 module.exports = {
-  extends: [
+  root: true,
+  env: {
+    node: true
+  },
+  'extends': [
     '../../.eslintrc.js',
-    'plugin:vue/recommended'
+    'plugin:vue/essential',
+    'eslint:recommended',
+    '@vue/typescript'
   ],
-  parser: '@typescript-eslint/parser',
+  rules: {
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+  },
   parserOptions: {
-    extraFileExtensions: ['.vue']
+    parser: '@typescript-eslint/parser'
   }
 }
-

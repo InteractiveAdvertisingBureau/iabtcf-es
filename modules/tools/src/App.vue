@@ -1,27 +1,28 @@
 <template>
   <div id="app">
-    <LeftNav />
+    <LeftNav></LeftNav>
+    <div></div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import LeftNav from './components/LeftNav.vue';
 
-import LeftNav from './components/LeftNav';
-
-export default {
-  name: 'App',
+@Component({
   components: {
     LeftNav,
-  }
-};
-
+  },
+})
+export default class App extends Vue {}
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  border-top: 1px solid #ccc;
   margin: 0px;
   padding: 0px;
 }

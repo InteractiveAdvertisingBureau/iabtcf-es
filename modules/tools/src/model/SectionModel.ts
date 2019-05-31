@@ -1,10 +1,28 @@
 import {LinkModel} from './LinkModel';
 
-const model: Map<string, Array<LinkModel>> = new Map();
+class SectionModel extends Map {
 
-const encoder:LinkModel = new LinkModel('Encode', 'Encode');
-const decoder:LinkModel = new LinkModel('Decode', 'Decode');
+  public constructor() {
 
-model.set('TCString', [encoder, decoder]);
+    super();
 
-export {model as SectionModel};
+    this.init();
+
+  }
+  private init(): void {
+
+    const encoder: LinkModel = new LinkModel('Encode', 'TCStringEncode');
+    const decoder: LinkModel = new LinkModel('Decode', 'TCStringDecode');
+
+    this.set('TCString', [encoder, decoder]);
+
+    const create: LinkModel = new LinkModel('Create Sample', 'GVLCreate');
+    const view: LinkModel = new LinkModel('View GVL', 'GVLView');
+
+    this.set('GVL', [create, view]);
+
+  }
+
+}
+
+export { SectionModel };
