@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>{{ title }}</h3>
-    <p v-for="(link, index) in links" :key="index" v-on:click="$emit(link.getLink())" >{{ link.getTitle() }}</p>
+    <p v-for="(link, index) in links" :key="index" v-on:click="$emit(this.events.NavItemClick)" >{{ link.getTitle() }}</p>
   </div>
 </template>
 
@@ -9,9 +9,10 @@
 
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { LinkModel } from '../model/LinkModel';
+import { Events } from '../Events';
 
 @Component
-export default class LeftNav extends Vue {
+export default class NavGroup extends Vue {
 
   @Prop() private sectionTitle: string;
   @Prop() private sectionLinks: LinkModel[];
@@ -21,6 +22,9 @@ export default class LeftNav extends Vue {
   }
   public get links(): LinkModel[] {
     return this.sectionLinks;
+  }
+  public get events(): Events {
+    return Events;
   }
 
 

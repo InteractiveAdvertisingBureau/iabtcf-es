@@ -1,4 +1,4 @@
-import {LinkModel} from './LinkModel';
+import { LinkModel } from './LinkModel';
 
 class SectionModel extends Map {
 
