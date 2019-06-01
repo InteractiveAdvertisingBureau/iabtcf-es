@@ -3,7 +3,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script src="./TCStringEncode.vue.ts" lang="ts">
 </script>
 
 <style lang="scss">

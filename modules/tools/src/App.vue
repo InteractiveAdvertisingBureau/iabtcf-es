@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <Nav></Nav>
+    <Nav
+      v-on:click="onNavClick"
+      />
     <component
        id="page"
       :is="selectedComponent"
@@ -8,29 +10,7 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component,Prop, Vue } from 'vue-property-decorator';
-import Nav from './components/nav/Nav.vue';
-import Landing from './components/pages/Landing';
-import TCStringEncode from './components/pages/TCStringEncode';
-
-@Component({
-  components: {
-    Nav,
-    Landing,
-    TCStringEncode, 
-  },
-})
-export default class App extends Vue {
-
-  @Prop() private selectedComponent: string;
-
-  public constructor() {
-    super();
-
-    this.selectedComponent = "Landing";
-  }
-}
+<script src="./App.vue.ts" lang="ts">
 </script>
 
 <style lang="scss">
