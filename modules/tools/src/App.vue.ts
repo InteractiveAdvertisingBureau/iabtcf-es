@@ -1,4 +1,4 @@
-import { Component, Vue } from 'vue-property-decorator';
+import {Component, Vue} from 'vue-property-decorator';
 import Nav from './components/nav/Nav.vue';
 import Landing from './components/pages/Landing.vue';
 import TCStringEncode from './components/pages/TCStringEncode.vue';
@@ -7,7 +7,7 @@ import TCStringEncode from './components/pages/TCStringEncode.vue';
   components: {
     Nav,
     Landing,
-    TCStringEncode, 
+    TCStringEncode,
   },
 })
 export default class App extends Vue {
@@ -15,18 +15,23 @@ export default class App extends Vue {
   private currentComponent: string;
 
   public constructor() {
+
     super();
 
-    this.currentComponent = "Landing";
+    this.currentComponent = 'Landing';
+
   }
 
   public get selectedComponent(): string {
 
     return this.currentComponent;
+
   }
-  
+
   public onNavClick(event: Event): void {
 
     console.dir(event);
+
   }
+
 }
