@@ -1,6 +1,7 @@
+/* eslint-disable */
 module.exports = {
   env: {
-    node: true
+    node: true,
   },
   extends: [
     '../../.eslintrc.js',
@@ -8,16 +9,16 @@ module.exports = {
   ],
   rules: {
     'new-cap': ['error',
-      {
-        'capIsNewExceptions':['@Component', 
+      { 'capIsNewExceptions': 
+        [ '@Component',
           '@Prop',
           '@Model',
           '@Watch',
           '@Inject',
           '@Provide',
-          '@Emit'
-        ]
-      }
-    ]
-  }
-}
+          '@Emit',
+        ],
+      },
+    ],
+  },
+};

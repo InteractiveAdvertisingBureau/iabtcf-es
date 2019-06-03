@@ -1,4 +1,4 @@
-import { LinkModel } from './LinkModel';
+import {LinkModel} from './LinkModel';
 
 class SectionModel extends Map {
 
@@ -25,4 +25,4 @@ class SectionModel extends Map {
 
 }
 
-export { SectionModel };
+export {SectionModel};

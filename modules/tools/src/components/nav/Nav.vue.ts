@@ -1,5 +1,5 @@
-import { Component, Vue } from 'vue-property-decorator';
-import { SectionModel } from '../../model/SectionModel';
+import {Component, Vue} from 'vue-property-decorator';
+import {SectionModel} from '../../model/SectionModel';
 import NavGroup from './NavGroup.vue';
 
 @Component({

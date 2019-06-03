@@ -10,10 +10,14 @@ class LinkModel {
 
   }
   public getTitle(): string {
+
     return this.title;
+
   }
   public getLink(): string {
+
     return this.link;
+
   }
 
 }

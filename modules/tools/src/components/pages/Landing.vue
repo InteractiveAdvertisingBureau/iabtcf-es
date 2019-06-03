@@ -8,7 +8,9 @@
         <a href="https://iabtechlab.com/">iab. Tech Lab</a>
       </li>
       <li>
-        <a href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework">iab. TCF Github</a>
+        <a href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework">
+          iab. TCF Github
+        </a>
       </li>
     </ul>
   </div>
@@ -16,7 +18,7 @@
 
 <script lang="ts">
 
-import { Component, Vue } from 'vue-property-decorator';
+import {Component, Vue} from 'vue-property-decorator';
 
 @Component
 export default class Landing extends Vue {
