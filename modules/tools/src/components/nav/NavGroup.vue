@@ -1,23 +1,20 @@
 <template>
   <div>
-    <h3>{{ title }}</h3>
-    <p v-for="(link, index) in links" :key="index">
+    <h6>{{ title }}</h6>
+    <ul>
+    <li v-for="(link, index) in links" :key="index">
     <router-link :to="{name:link.getLink()}" >{{ link.getTitle() }}</router-link>
-    </p>
+    </li>
+    </ul>
   </div>
 </template>
 
-<script src="./NavGroup.vue.ts" lang="ts">
-</script>
-
-<style scoped>
-div {
-  float: left;
+<script src="./NavGroup.vue.ts" lang="ts"></script>
+<style scoped=true>
+ul {
+  padding-inline-start: 10px;
 }
-h3 {
-  margin-top: 0px;
-  padding-top: 30px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #ccc;
+li {
+      list-style-type: none;
 }
 </style>

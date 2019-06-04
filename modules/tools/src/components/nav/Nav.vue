@@ -1,12 +1,17 @@
 <template>
   <div class="nav">
-    <NavGroup
-      v-for="(section, index) in sections"
-      v-bind:sectionTitle="section"
-      v-bind:sectionLinks="sectionModel.get(section)"
-      :key="index"
-      class="section"
-    />
+    <div class="nav-groups">
+      <p class="home-link">
+        <router-link to="/">Home</router-link>
+      </p>
+      <NavGroup
+        v-for="(section, index) in sections"
+        v-bind:sectionTitle="section"
+        v-bind:sectionLinks="sectionModel.get(section)"
+        :key="index"
+        class="section"
+      />
+    </div>
   </div>
 </template>
 
@@ -20,5 +25,13 @@
     height: 100vh;
     display: block;
     float:left;
+    background: #FCFCFF;
+  }
+  .nav-groups {
+    margin-top:30px;
+    padding-left:10px;
+  }
+  .section, .home-link {
+    border-bottom: 1px solid #eee;
   }
 </style>

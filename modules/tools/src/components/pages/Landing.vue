@@ -2,7 +2,7 @@
   <div>
     <PageHead title="TCF Tools">
     </PageHead>
-    <h2>Resources</h2>
+    <h4>Resources</h4>
     <ul>
       <li>
         <a href="https://iabtechlab.com/">iab. Tech Lab</a>

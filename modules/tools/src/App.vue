@@ -2,7 +2,12 @@
   <div id="app">
     <Nav />
     <div id="page">
-      <router-view></router-view>
+      <transition
+        name="fade"
+        mode="out-in"
+      >
+        <router-view />
+      </transition>
     </div>
   </div>
 </template>
@@ -22,7 +27,7 @@
 #page {
   display: block;
   float:left;
-  margin-left: 20px;
+  margin: 20px;
 }
 a {
   color: #DA70D6;
@@ -30,5 +35,16 @@ a {
 }
 h1 {
   color: #555;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.15s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
 }
 </style>
