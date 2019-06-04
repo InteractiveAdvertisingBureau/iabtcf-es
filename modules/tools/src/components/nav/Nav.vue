@@ -18,20 +18,4 @@
 <script src="./Nav.vue.ts" lang="ts">
 </script>
 <style scoped>
-  .nav {
-    margin-top:0px;
-    width: 150px;
-    border-right: 1px solid #ccc;
-    height: 100vh;
-    display: block;
-    float:left;
-    background: #FCFCFF;
-  }
-  .nav-groups {
-    margin-top:30px;
-    padding-left:10px;
-  }
-  .section, .home-link {
-    border-bottom: 1px solid #eee;
-  }
 </style>

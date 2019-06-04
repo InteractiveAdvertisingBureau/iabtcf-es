@@ -1,0 +1,68 @@
+
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index';
+
+$link-color: #da70d6;
+$link-hover-color: #f0f;
+$mutted-title-color: #555;
+$subtle-background-color: #fcfcff;
+$separator-color: #ccc;
+$subtle-separator-color: #eee;
+$borders: 1px solid;
+
+.tools-app {
+  font-family: monospace;
+  margin: 0;
+  padding: 0;
+}
+
+.page {
+  display: block;
+  float: left;
+  margin: 20px;
+}
+
+a {
+  color: $link-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $link-hover-color;
+  }
+}
+
+h1 {
+  color: $mutted-title-color;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: .15s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+}
+
+.nav {
+  background: $subtle-background-color;
+  border-right: $borders $separator-color;
+  display: block;
+  float: left;
+  height: 100vh;
+  margin-top: 0;
+  width: 150px;
+}
+
+.nav-groups {
+  margin-top: 30px;
+  padding-left: 10px;
+}
+
+.section,
+.home-link {
+  border-bottom: $borders $subtle-separator-color;
+}

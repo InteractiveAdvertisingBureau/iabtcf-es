@@ -31,11 +31,23 @@ class TCModel {
   /**
    * getVersion
    *
-   * @return {number} version of the consent string encoding
+   * @return {number} - TCString Encoding Version
    */
   public getVersion(): number {
 
     return this.version;
+
+  }
+
+  /**
+   * getVersion
+   * @param {number} version - TCString Encoding Version
+   *
+   * @return {void}
+   */
+  public setVersion(version: number): void {
+
+    this.version = version; ;
 
   }
 

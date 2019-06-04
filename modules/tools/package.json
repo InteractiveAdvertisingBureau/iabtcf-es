@@ -1,11 +1,10 @@
 {
-  "name": "tools",
+  "name": "@iabtcf/tools",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "eslint . --ext .js,.ts.,.vue"
+    "lint": "eslint . --ext .js,.ts.,.vue && sass-lint ./src/assests/*.scss"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
@@ -27,6 +26,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "lint-staged": "^8.1.5",
     "node-sass": "^4.9.0",
+    "sass-lint": "^1.13.1",
     "sass-loader": "^7.1.0",
     "typescript": "^3.4.5",
     "vue-template-compiler": "^2.6.10"
