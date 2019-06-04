@@ -1,37 +1,22 @@
 import {Component, Vue} from 'vue-property-decorator';
+import VueRouter from 'vue-router';
+import {RouteConfig} from 'vue-router';
 import Nav from './components/nav/Nav.vue';
-import Landing from './components/pages/Landing.vue';
-import TCStringEncode from './components/pages/TCStringEncode.vue';
+import {SectionModel} from './model/SectionModel';
 
+Vue.use(VueRouter);
+
+const sectionModel: SectionModel = new SectionModel();
+const routes: RouteConfig[] = sectionModel.getRouteConfig();
+
+const router = new VueRouter({routes});
+
+// eslint doesn't like these decorators...
+// eslint-disable-next-line
 @Component({
+  router,
   components: {
     Nav,
-    Landing,
-    TCStringEncode,
   },
 })
-export default class App extends Vue {
-
-  private currentComponent: string;
-
-  public constructor() {
-
-    super();
-
-    this.currentComponent = 'Landing';
-
-  }
-
-  public get selectedComponent(): string {
-
-    return this.currentComponent;
-
-  }
-
-  public onNavClick(event: Event): void {
-
-    console.dir(event);
-
-  }
-
-}
+export default class App extends Vue {};

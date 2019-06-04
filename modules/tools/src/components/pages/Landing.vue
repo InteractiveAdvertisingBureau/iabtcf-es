@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>TCF Tools</h1>
-    <hr/>
+    <PageHead title="TCF Tools">
+    </PageHead>
     <h2>Resources</h2>
     <ul>
       <li>
@@ -16,16 +16,4 @@
   </div>
 </template>
 
-<script lang="ts">
-
-import {Component, Vue} from 'vue-property-decorator';
-
-@Component
-export default class Landing extends Vue {
-}
-
-</script>
-
-
-<style lang="scss">
-</style>
+<script src="./Landing.vue.ts"></script>

@@ -1,4 +1,7 @@
-import {LinkModel} from './LinkModel';
+import {RouteConfig} from 'vue-router';
+import Landing from '../components/pages/Landing.vue';
+import TCStringEncode from '../components/pages/TCStringEncode.vue';
+import {LinkModel} from '../model/LinkModel';
 
 class SectionModel extends Map {
 
@@ -11,15 +14,33 @@ class SectionModel extends Map {
   }
   private init(): void {
 
-    const encoder: LinkModel = new LinkModel('Encode', 'TCStringEncode');
-    const decoder: LinkModel = new LinkModel('Decode', 'TCStringDecode');
+    const encoder: LinkModel = new LinkModel('Encode', TCStringEncode);
 
-    this.set('TCString', [encoder, decoder]);
+    this.set('TCString', [encoder]);
 
-    const create: LinkModel = new LinkModel('Create Sample', 'GVLCreate');
-    const view: LinkModel = new LinkModel('View GVL', 'GVLView');
+  }
 
-    this.set('GVL', [create, view]);
+  public getRouteConfig(): RouteConfig[] {
+
+    const routes: RouteConfig[] = [
+      {path: '/', name: 'home', component: Landing},
+    ];
+
+    this.forEach((links: LinkModel[]): void => {
+
+      links.forEach((link: LinkModel): void => {
+
+        routes.push({
+          path: '/'+link.getLink(),
+          name: link.getLink(),
+          component: link.getComponent(),
+        });
+
+      });
+
+    });
+
+    return routes;
 
   }
 

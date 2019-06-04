@@ -1,12 +1,15 @@
+import {VueConstructor} from 'vue';
 class LinkModel {
 
   private title: string;
   private link: string;
+  private component: VueConstructor;
 
-  public constructor(title: string, link: string) {
+  public constructor(title: string, component: VueConstructor) {
 
     this.title = title;
-    this.link = link;
+    this.link = component.name || '';
+    this.component = component;
 
   }
   public getTitle(): string {
@@ -17,6 +20,11 @@ class LinkModel {
   public getLink(): string {
 
     return this.link;
+
+  }
+  public getComponent(): VueConstructor {
+
+    return this.component;
 
   }
 
