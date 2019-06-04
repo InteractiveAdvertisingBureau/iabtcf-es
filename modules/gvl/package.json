@@ -1,6 +1,6 @@
 {
   "name": "@iabtcf/gvl",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.0",
   "description": "> TODO: description",
   "author": "Chris Paterson <cpaterson@conversantmedia.com>",
   "homepage": "",
@@ -14,7 +14,5 @@
   ],
   "scripts": {
     "build": "../../node_modules/.bin/tsc"
-  },
-  "devDependencies": {},
-  "dependencies": {}
+  }
 }
