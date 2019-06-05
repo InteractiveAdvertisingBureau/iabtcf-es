@@ -17,5 +17,8 @@
   },
   "dependencies": {
     "@iabtcf/core": "1.0.0"
-  }
+  },
+  "eslintIgnore": [
+    "lib"
+  ]
 }

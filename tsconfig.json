@@ -1,7 +1,5 @@
 {
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist",
     "noImplicitAny" :true,
     "removeComments": false,
     "esModuleInterop": true,
@@ -15,14 +13,5 @@
     "target": "ES6",
     "forceConsistentCasingInFileNames": true,
     "sourceMap": false
-  },
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "src/*.ts",
-    "src/**/*.ts",
-    "src/*.js",
-    "src/**/*.js"
-  ]
+  }
 }

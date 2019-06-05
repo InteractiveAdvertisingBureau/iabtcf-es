@@ -40,7 +40,7 @@ class TCModel {
   }
 
   /**
-   * getVersion
+   * setVersion
    * @param {number} version - TCString Encoding Version
    *
    * @return {void}

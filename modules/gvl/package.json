@@ -14,5 +14,8 @@
   ],
   "scripts": {
     "build": "../../node_modules/.bin/tsc"
-  }
+  },
+  "eslintIgnore": [
+    "lib"
+  ]
 }

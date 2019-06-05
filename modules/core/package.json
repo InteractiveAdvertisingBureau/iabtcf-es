@@ -5,14 +5,23 @@
   "author": "Chris Paterson <cpaterson@conversantmedia.com>",
   "homepage": "",
   "license": "MIT",
-  "directories": {
-    "src": "src",
-    "test": "test"
-  },
+  "main": "lib/index.js",
+  "types": "lib/index.js",
   "files": [
-    "dist/"
+    "lib/**/*"
   ],
   "scripts": {
-    "build": "../../node_modules/.bin/tsc"
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "create-index": "^2.4.0",
+    "eslint": "^5.16.0",
+    "typescript": "^3.5.1"
+  },
+  "eslintIgnore": [
+    "lib"
+  ],
+  "dependencies": {
+    "class-validator": "^0.9.1"
   }
 }
