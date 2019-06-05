@@ -7,18 +7,4 @@ module.exports = {
     '../../.eslintrc.js',
     'plugin:vue/essential',
   ],
-  rules: {
-    'new-cap': ['error',
-      { 'capIsNewExceptions': 
-        [ '@Component',
-          '@Prop',
-          '@Model',
-          '@Watch',
-          '@Inject',
-          '@Provide',
-          '@Emit',
-        ],
-      },
-    ],
-  },
 };
