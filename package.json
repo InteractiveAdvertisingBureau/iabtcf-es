@@ -2,7 +2,8 @@
   "name": "iabtcf",
   "scripts": {
     "test": "mocha --require ts-node/register \"modules/**/test/**/*.{ts,tsx}\"",
-    "build": "lerna run build"
+    "build": "lerna run build",
+    "prepublishOnly": "npm run test && npm run build"
   },
   "keywords": [
     "interactive",

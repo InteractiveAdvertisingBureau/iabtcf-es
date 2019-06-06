@@ -1,15 +1,21 @@
-import {CMPManifest} from './CMPManifest';
 import {PurposeVector} from './PurposeVector';
 import {VendorVector} from './VendorVector';
-import {IsInt, IsDate, IsString} from 'class-validator';
-import {IsIntWithinBits} from './IsIntWithinBits';
-import {IsConsentLanguage} from './IsConsentLanguage';
+import {IsInt, IsDate, IsString, IsBoolean, Min} from 'class-validator';
+import {IsConsentLanguage} from './validators/IsConsentLanguage';
 
-import {GVL} from '@iabtcf/gvl';
+import {GVL} from './GVL';
 
 class TCModel {
 
   public readonly version: number = 2;
+
+  @IsInt()
+  @Min(2)
+  public cmpId: number;
+
+  @IsInt()
+  @Min(1)
+  public cmpVersion: number;
 
   @IsDate()
   public created: Date;
@@ -18,25 +24,30 @@ class TCModel {
   public readonly lastUpdated: Date;
 
   @IsInt()
-  @IsIntWithinBits(6)
   public consentScreen: number;
 
   @IsString()
   @IsConsentLanguage()
-  private consentLanguage: string;
+  public consentLanguage: string;
 
   @IsInt()
-  private vendorListVersion: number;
-  private policyVersion: number;
-  private isServiceSpecific: boolean;
-  private useNonStandardStacks: boolean;
-  private cmpManifest: CMPManifest;
-  // private specialFeatureOptIns
-  private purposeConsents: PurposeVector;
-  private purposeLITransparency: PurposeVector;
-  private vendorConsents: VendorVector;
-  private vendorLegitimateInterest: VendorVector;
-  private publisherRestrictions: VendorVector;
+  public vendorListVersion: number;
+
+  public policyVersion: number;
+
+  @IsBoolean()
+  public isServiceSpecific: boolean;
+
+  @IsBoolean()
+  public useNonStandardStacks: boolean;
+
+  // public specialFeatureOptIns
+  public purposeConsents: PurposeVector;
+  public purposeLITransparency: PurposeVector;
+
+  public vendorConsents: VendorVector;
+  public vendorLegitimateInterest: VendorVector;
+  public publisherRestrictions: VendorVector;
 
   public constructor(gvl?: GVL) {
 

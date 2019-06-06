@@ -1,6 +1,6 @@
 import {Encoder} from './Encoder';
 import {Decoder} from './Decoder';
-import {TCModel} from '@iabtcf/core/model/TCModel';
+import {TCModel} from '@iabtcf/core/TCModel';
 
 /**
  * Main class for encoding and decoding a
