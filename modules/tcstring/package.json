@@ -2,7 +2,7 @@
   "name": "@iabtcf/tcstring",
   "version": "1.0.0-alpha.0",
   "description": "> TODO: description",
-  "author": "Chris Paterson <cpaterson@conversantmedia.com>",
+  "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "",
   "license": "MIT",
   "directories": {
@@ -15,9 +15,7 @@
   "scripts": {
     "build": "../../node_modules/.bin/tsc"
   },
-  "dependencies": {
-    "@iabtcf/core": "1.0.0"
-  },
+  "dependencies": {},
   "eslintIgnore": [
     "lib"
   ]

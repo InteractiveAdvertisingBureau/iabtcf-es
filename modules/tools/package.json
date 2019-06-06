@@ -42,5 +42,6 @@
   },
   "eslintIgnore": [
     "lib"
-  ]
+  ],
+  "author": "Chris Paterson <tcf@chrispaterson.io>"
 }

@@ -1,8 +1,8 @@
 {
-  "name": "@iabtcf/core",
+  "name": "@iabtcf/restrictions",
   "version": "1.0.0-alpha.0",
+  "description": "Library to handle publisher restrictions",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
-  "homepage": "",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.js",
@@ -12,14 +12,7 @@
   "scripts": {
     "build": "tsc"
   },
-  "devDependencies": {
-    "eslint": "^5.16.0",
-    "typescript": "^3.4.0"
-  },
   "eslintIgnore": [
     "lib"
-  ],
-  "dependencies": {
-    "class-validator": "^0.9.1"
-  }
+  ]
 }

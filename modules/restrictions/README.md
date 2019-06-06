@@ -1,0 +1,2 @@
+# `@iabtcf/restrictions`
+---
