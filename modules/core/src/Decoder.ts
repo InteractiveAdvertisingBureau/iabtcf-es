@@ -1,21 +1,12 @@
-import {TCModel} from '@iabtcf/core/model/TCModel';
+import {TCModel} from './TCModel';
 
 class Decoder {
 
-  private encodedString: string;
-
   /**
-   * @param {string} encodedString - model to convert into encoded string
+   * @param {string} encodedString - web-safe base64 encoded Transparency and Consent String to decode
+   * @return {TCModel} - Returns populated TCModel
    */
-  public constructor(encodedString: string) {
-
-    this.encodedString = encodedString;
-
-  }
-  /**
-   * @return {string} - web-safe base64 encoded Transparency and Consent String
-   */
-  public decode(): TCModel {
+  public static decode(encodedString: string) {
 
     const tcModel = new TCModel();
 

@@ -1,4 +1,4 @@
-import {TCModel} from '@iabtcf/core/TCModel';
+import {TCModel} from './TCModel';
 
 class Encoder {
 

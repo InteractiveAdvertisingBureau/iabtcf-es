@@ -13,8 +13,8 @@
     "build": "tsc"
   },
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "typescript": "^3.4.0"
+    "eslint": "~5.16.0",
+    "typescript": "~3.4.0"
   },
   "eslintIgnore": [
     "lib"

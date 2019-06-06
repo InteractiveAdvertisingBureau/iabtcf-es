@@ -1,6 +1,6 @@
 import {Encoder} from './Encoder';
 import {Decoder} from './Decoder';
-import {TCModel} from '@iabtcf/core/TCModel';
+import {TCModel} from './TCModel';
 
 /**
  * Main class for encoding and decoding a
@@ -17,24 +17,19 @@ class TCString {
    */
   public static encode(tcModel: TCModel): string {
 
-    const encoder = new Encoder(tcModel);
-
-    return encoder.encode();
+    return Encoder.encode(tcModel);
 
   }
 
   /**
    * Decodes a string into a TCModel
    *
-   * @param {string} encodedString - string to turn into a TCModel
-   * @type {TCModel}
+   * @param {string} encodedString - web-safe base64 encoded Transparency and Consent String to decode
    * @return {TCModel}
    */
   public static decode(encodedString: string) {
 
-    const decoder = new Decoder(encodedString);
-
-    return decoder.decode();
+    return Decoder.decode(encodedString);
 
   }
 

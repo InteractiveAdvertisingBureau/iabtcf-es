@@ -7,7 +7,7 @@ import {GVL} from './GVL';
 
 class TCModel {
 
-  public readonly version: number = 2;
+  public version: number;
 
   @IsInt()
   @Min(2)

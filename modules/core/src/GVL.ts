@@ -1,5 +1,5 @@
 import {GetJSON} from './GetJSON';
-import {GVLError} from './GVLError';
+import {GVLError} from './errors/GVLError';
 import {GVLJson} from './GVLJson';
 import {Purpose} from './GVLJson';
 import {Purposes} from './GVLJson';
