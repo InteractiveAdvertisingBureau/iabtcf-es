@@ -1,7 +1,7 @@
 {
   "name": "iabtcf",
   "scripts": {
-    "test": "mocha --require ts-node/register \"modules/**/test/**/*.{ts,tsx}\"",
+    "test": "lerna run test",
     "build": "lerna run build",
     "prepublishOnly": "npm run test && npm run build"
   },

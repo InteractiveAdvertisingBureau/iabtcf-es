@@ -10,10 +10,14 @@
     "lib/**/*"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "mocha --r ts-node/register -r jsdom-global/register \"./test/**/*.{ts,tsx}\""
   },
   "devDependencies": {
     "eslint": "~5.16.0",
+    "jsdom": "15.1.1",
+    "jsdom-global": "3.0.2",
+    "mocha": "^6.1.4",
     "typescript": "~3.4.0"
   },
   "eslintIgnore": [

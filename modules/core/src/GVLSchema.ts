@@ -51,6 +51,17 @@ interface Vendors {
   [id: string]: Vendor;
 };
 
+interface Stack {
+  id: number;
+  purposes: number[];
+  specialPurposes: number[];
+  name: string;
+  description: string;
+}
+interface Stacks {
+  [id: string]: Stack;
+};
+
 interface GVLSchema {
   gvlSpecificationVersion: number;
   vendorListVersion: number;
@@ -61,6 +72,7 @@ interface GVLSchema {
   features: Features;
   speciaLFeatures: SpecialFeatures;
   vendors: Vendors;
+  stacks: Stacks;
 };
 
-export {GVLSchema, Purpose, Purposes, Feature, Features, Vendor, Vendors, SpecialPurposes, SpecialFeatures};
+export {GVLSchema, Purpose, Purposes, Feature, Features, Vendor, Vendors, SpecialPurposes, SpecialFeatures, Stack, Stacks};

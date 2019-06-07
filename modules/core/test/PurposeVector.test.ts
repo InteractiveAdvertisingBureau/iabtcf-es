@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {PurposeVector} from '../../src/model/PurposeVector';
+import {PurposeVector} from '../src/PurposeVector';
 
 describe('PurposeVector Tests', (): void => {
 

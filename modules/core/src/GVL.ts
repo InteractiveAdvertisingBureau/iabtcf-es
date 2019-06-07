@@ -1,8 +1,13 @@
 import {Json} from './Json';
 import {GVLError} from './errors/GVLError';
-import {GVLSchema, Purposes, Features, Vendors, SpecialPurposes, SpecialFeatures} from './GVLSchema';
+import {GVLSchema, Purposes, Features, Vendors, SpecialPurposes, SpecialFeatures, Stacks} from './GVLSchema';
 
 type VersionOrObject = string | number | object;
+
+/**
+ * TODO: consider alternate url schemes
+ * TODO: consider fetching v1 GVLs for for supporting __cmp api calls
+ */
 
 class GVL implements GVLSchema {
 
@@ -16,6 +21,7 @@ class GVL implements GVLSchema {
    * @param {string} filename - filename assumed to be vendorlist.json, but it could be different... if you want
    */
   public static filename: string = 'vendorlist.json';
+
 
   /**
    * @param {Promise} readyPromise - resolved when this object is populated or rejected if there is an error
@@ -54,6 +60,7 @@ class GVL implements GVLSchema {
   public features: Features;
   public speciaLFeatures: SpecialFeatures;
   public vendors: Vendors;
+  public stacks: Stacks;
 
   /**
    * @param {VersionOrObject} [versionOrObject] - can be either the
@@ -77,11 +84,23 @@ class GVL implements GVLSchema {
 
     } else if (versionOrObject as number > 0) {
 
+      if (!url) {
+
+        throw new GVLError('must specify GVL.baseUrl before loading GVL json');
+
+      }
+
       // load version specified
       url += 'v-' + versionOrObject + '/' + GVL.filename;
       this.getGVL(url);
 
     } else {
+
+      if (!url) {
+
+        throw new GVLError('must specify GVL.baseUrl before loading GVL json');
+
+      }
 
       // whatever it is (or isn't)... it doesn't matter we'll just get the latest
       url += GVL.filename;
@@ -127,6 +146,7 @@ class GVL implements GVLSchema {
     this.features = gvlObject.features;
     this.speciaLFeatures = gvlObject.speciaLFeatures;
     this.vendors = gvlObject.vendors;
+    this.stacks = gvlObject.stacks;
 
   }
 
