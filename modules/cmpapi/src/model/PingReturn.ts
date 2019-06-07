@@ -5,6 +5,7 @@ let _policyVersion;
 
 /** A class representing the PingReturn object specified by the TCF */
 class PingReturn {
+
   /**
    * varioud versions can be passed into the function in the constructor
    * because they won't change for the lifecycle of the app
@@ -16,10 +17,12 @@ class PingReturn {
    * @param {int} policyVersion - Number of the supported TCF version
    */
   constructor({apiVersion, cmpVersion, gvlVersion, policyVersion}) {
+
     _apiVersion = apiVersion;
     _cmpVersion = cmpVersion;
     _gvlVersion = gvlVersion;
     _policyVersion = policyVersion;
+
   }
 
   /**
@@ -41,6 +44,7 @@ class PingReturn {
    * loading status and configuration of the CMP.
    */
   create({gdprAppliesGlobally, cmpStatus, displayStatus}) {
+
     return {
       gdprAppliesGlobally: gdprAppliesGlobally,
       cmpLoaded: true,
@@ -51,6 +55,8 @@ class PingReturn {
       gvlVersion: _gvlVersion,
       policyVersion: _policyVersion,
     };
+
   }
+
 };
 export default PingReturn;

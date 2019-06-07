@@ -1,30 +1,26 @@
-/**
- * @class
- */
-class GetJSON {
+class Json {
 
   /**
-   * @param {string} jsonURL
+   * @param {string} jsonURL - full path to the json
+   * @param {boolean} sendCookies - Whether or not to send the XMLHttpRequest with credentials or not
    * @param {number} [timeout] - optional timeout in miliseconds
    * @return {Promise} - resolves with parsed JSON
    */
-  public static get(jsonURL: string, timeout: number = NaN): Promise<object> {
+  public static fetch(jsonURL: string, sendCookies: boolean = false, timeout: number = NaN): Promise<object> {
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: (response: object) => void, reject: (error: Error) => void): void => {
 
-      const xobj = new XMLHttpRequest();
+      const xobj: XMLHttpRequest = new XMLHttpRequest();
 
-      if (timeout !== undefined && timeout > 0) {
+      // if timeout is defined and greater than zero we'll set it otherwise, no...
+      if (timeout !== NaN && timeout > 0) {
 
         xobj.timeout = timeout;
 
       }
 
-      // if this is the euconsent endpoint we want to send our cookies
-      // so we will set this to true;
-      xobj.withCredentials = !!~jsonURL.indexOf('euconsent');
-
-      xobj.open('GET', jsonURL, true);
+      // send cookies
+      xobj.withCredentials = sendCookies;
       xobj.ontimeout = (): void => {
 
         reject(new Error('Timeout ' + timeout + 'ms ' + jsonURL));
@@ -65,6 +61,9 @@ class GetJSON {
         }
 
       };
+
+      // execute GET request (will require CORS)
+      xobj.open('GET', jsonURL, true);
       xobj.send(null);
 
     });
@@ -72,4 +71,4 @@ class GetJSON {
   }
 
 }
-export {GetJSON};
+export {Json};

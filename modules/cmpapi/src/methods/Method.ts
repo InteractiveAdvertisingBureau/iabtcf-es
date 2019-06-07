@@ -1,11 +1,11 @@
-import isAFunction from '../../utils/IsAType';
-import CmpApiModel from '../model/CmpApiModel';
+import {CmpApiModel} from '../model/CmpApiModel';
 
 /**
  * @classdesc Abstract class for CMP API methods
  * @class
  */
 class Method {
+
   /**
    * @constructor
    *
@@ -15,11 +15,15 @@ class Method {
    * @param {CmpApiModel} model
    * @return {undefined}
    */
-  constructor(callback, model) {
+  public constructor(callback: Function, model) {
+
     if (isAFunction(callback)) {
+
       throw new Error('Invalid (or undefined) Callback!');
+
     }
     this._cb = callback;
+
   }
 
   /**
@@ -30,14 +34,19 @@ class Method {
    * @return {boolean}
    */
   allAreDefined(...items) {
+
     const len = items.length;
     let retr = true;
 
     for (let i = 0; i < len && retr; i ++) {
+
       retr = (items[i] !== undefined && items[i] !== null);
+
     }
 
     return retr;
+
   }
+
 }
 export {Method};
