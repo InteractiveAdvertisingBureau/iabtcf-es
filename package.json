@@ -1,5 +1,7 @@
 {
   "name": "iabtcf",
+  "description":"Official compliant tool suite for implementing the iab. Transparency and Consent Framework (TCF).",
+  "private":true,
   "scripts": {
     "test": "lerna run test",
     "build": "lerna run build",

@@ -1,16 +1,21 @@
 {
   "name": "@iabtcf/core",
   "version": "1.0.0-alpha.0",
+  "description": "Ensures consistent encoding and decoding of TC Signals for the iab. Transparency and Consent Framework (TCF).",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
-  "homepage": "",
-  "license": "MIT",
+  "homepage": "https://github.com/chrispaterson/iabtcf-es",
+  "license": {
+    "type": "MIT",
+    "url": "https://www.opensource.org/licenses/mit-license.php"
+  },
   "main": "lib/index.js",
   "types": "lib/index.js",
   "files": [
     "lib/**/*"
   ],
   "scripts": {
-    "build": "tsc",
+    "prepack": "npm run build",
+    "build": "rm -r lib/* && tsc",
     "test": "mocha --r ts-node/register -r jsdom-global/register \"./test/**/*.{ts,tsx}\""
   },
   "devDependencies": {
@@ -23,9 +28,6 @@
   "eslintIgnore": [
     "lib"
   ],
-  "dependencies": {
-    "class-validator": "^0.9.1"
-  },
   "publishConfig": {
     "access": "public"
   },
@@ -54,5 +56,10 @@
     "kit",
     "sdk",
     "gdpr"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chrispaterson/iabtcf-es.git",
+    "directory": "modules/core"
+  }
 }

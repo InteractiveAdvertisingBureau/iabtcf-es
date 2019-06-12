@@ -1,6 +1,8 @@
 {
   "name": "@iabtcf/tools",
   "version": "1.0.0-alpha.0",
+  "private":true,
+  "description":"Provides easy web-based tools to help developers visually and interactively understand each aspect of the iab. Transparency and Consent Framework (TCF).",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -44,9 +46,6 @@
     "lib"
   ],
   "author": "Chris Paterson <tcf@chrispaterson.io>",
-  "publishConfig": {
-    "access": "public"
-  },
   "keywords": [
     "interactive",
     "advertising",
@@ -72,5 +71,15 @@
     "kit",
     "sdk",
     "gdpr"
-  ]
+  ],
+  "homepage": "https://github.com/chrispaterson/iabtcf-es",
+  "license": {
+    "type": "MIT",
+    "url": "https://www.opensource.org/licenses/mit-license.php"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chrispaterson/iabtcf-es.git",
+    "directory":"modules/tools"
+  }
 }
