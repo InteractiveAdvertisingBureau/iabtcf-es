@@ -2,8 +2,8 @@
   "compilerOptions": {
     "moduleResolution": "node",
     "experimentalDecorators":true,
-    "noImplicitAny" :true,
     "removeComments": false,
+    "noImplicitAny": false,
     "esModuleInterop": true,
     "preserveConstEnums": true,
     "declaration": true,

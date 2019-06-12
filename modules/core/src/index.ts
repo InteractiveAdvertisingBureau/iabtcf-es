@@ -1,7 +1,6 @@
 export * from './TCModel';
-export * from './PurposeVector';
+export * from './Vector';
 export * from './PurposeRestriction';
-export * from './VendorVector';
 
 export * from './GVL';
 

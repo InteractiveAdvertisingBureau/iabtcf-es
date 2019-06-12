@@ -6,7 +6,6 @@ type VersionOrObject = string | number | object;
 
 /**
  * TODO: consider alternate url schemes
- * TODO: consider fetching v1 GVLs for for supporting __cmp api calls
  */
 
 class GVL implements GVLSchema {

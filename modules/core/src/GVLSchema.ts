@@ -75,4 +75,4 @@ interface GVLSchema {
   stacks: Stacks;
 };
 
-export {GVLSchema, Purpose, Purposes, Feature, Features, Vendor, Vendors, SpecialPurposes, SpecialFeatures, Stack, Stacks};
+export {GVLSchema, Purpose, Purposes, Features, Vendor, Vendors, SpecialPurposes, SpecialFeatures, Stacks};
