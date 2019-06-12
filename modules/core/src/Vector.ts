@@ -1,13 +1,23 @@
 class Vector<T> {
 
   private map: Map<number, T> = new Map();
-  private maxId: number = 0;
+  private maxId_: number = 0;
 
   public set(id: number, value: T): void {
 
     this.map.set(id, value);
 
-    this.maxId = Math.max(this.maxId, id);
+    if (id > this.maxId_) {
+
+      this.maxId_ = id;
+
+    }
+
+  }
+
+  public get maxId(): number {
+
+    return this.maxId_;
 
   }
 
