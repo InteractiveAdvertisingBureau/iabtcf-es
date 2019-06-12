@@ -125,17 +125,19 @@ const testInstanceOf = <T>(fieldName: string, theInstanceOf: {new (): T}): void 
 
 };
 
-describe('TCModel construction', (): void => {
+describe('TCModel', (): void => {
 
   it('should construct a TCModel with no arguments', (): void => {
 
-    expect((): void => {
+    const makeModel: () => void = (): void => {
 
       // disabling because it's upset that I'm not doing anything with this
       // eslint-disable-next-line
       const tcModel: TCModel = new TCModel();
 
-    }).to.not.throw();
+    };
+
+    expect(makeModel).to.not.throw();
 
     const tcModel = new TCModel();
 
