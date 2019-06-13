@@ -16,7 +16,7 @@ const runDescribe = (fieldName: string, handler: () => void): void => {
 };
 const testInt = (fieldName: string, lowestValue: number): void => {
 
-  const validTest = (): void => {
+  const shouldBeOk = (): void => {
 
     runValidTest(fieldName, (): void => {
 
@@ -29,7 +29,7 @@ const testInt = (fieldName: string, lowestValue: number): void => {
     });
 
   };
-  const invalidTest = (valueToTest: number): void => {
+  const shouldBeNotOk = (valueToTest: number): void => {
 
     it(`should not allow cmpId to be ${valueToTest}`, (): void => {
 
@@ -55,10 +55,10 @@ const testInt = (fieldName: string, lowestValue: number): void => {
 
   runDescribe(fieldName, (): void => {
 
-    validTest();
-    invalidTest(lowestValue - 1);
-    invalidTest(-1);
-    invalidTest(1.1);
+    shouldBeOk();
+    shouldBeNotOk(lowestValue - 1);
+    shouldBeNotOk(-1);
+    shouldBeNotOk(1.1);
 
   });
 
@@ -177,6 +177,30 @@ describe('TCModel', (): void => {
 
   });
 
+  it('should throw an error if gvl is attempted to be set more than once', (): void => {
+
+    // eslint-disable-next-line
+    const vendorlistJson = require('../dev/vendorlist.json');
+    const gvl: GVL = new GVL(vendorlistJson);
+
+    expect((): void => {
+
+      // disabling because it's upset that I'm not doing anything with this
+      // eslint-disable-next-line
+      const tcModel: TCModel = new TCModel(gvl);
+
+    }).to.not.throw();
+
+    const tcModel = new TCModel(gvl);
+
+    expect((): void => {
+
+      tcModel.gvl = gvl;
+
+    }).to.throw();
+
+  });
+
 });
 
 testInt('cmpId', 2);
@@ -195,3 +219,106 @@ testInstanceOf('purposeLITransparency', Vector);
 testInstanceOf('vendorConsents', Vector);
 testInstanceOf('vendorLegitimateInterest', Vector);
 testInstanceOf('specialFeatureOptIns', Vector);
+
+runDescribe('consentLanguage', (): void => {
+
+  const shouldBeOk: (value: string) => void = (value: string): void => {
+
+    it(`should be ok with ${value}`, (): void => {
+
+      const tcModel = new TCModel();
+
+      expect((): void => {
+
+        tcModel.consentLanguage = value;
+
+      }).not.to.throw();
+
+      expect(tcModel.consentLanguage).to.equal(value);
+
+    });
+
+  };
+  const shouldBeNotOk: (value: string) => void = (value: string): void => {
+
+    it(`should not be ok with ${value}`, (): void => {
+
+      const tcModel = new TCModel();
+
+      expect((): void => {
+
+        tcModel.consentLanguage = value;
+
+      }).to.throw();
+
+      expect(tcModel.consentLanguage).to.be.undefined;
+
+    });
+
+  };
+
+  shouldBeOk('aa');
+  shouldBeOk('zz');
+
+  // length is checked first
+  shouldBeNotOk('aaa');
+  shouldBeNotOk('a');
+
+  // not check the ascii bounds
+  // this is just before lowercase a -- have to escape because that's interpreted as string literal in js!
+  shouldBeNotOk('\`\`');
+
+  // this is just after lowercase z
+  shouldBeNotOk('{{');
+
+  // just for fun
+  shouldBeNotOk('AA');
+  shouldBeNotOk('ZZ');
+
+});
+
+runDescribe('version', (): void => {
+
+
+  const shouldBeOk: (value: number) => void = (value: number): void => {
+
+    it(`should be ok with ${value}`, (): void => {
+
+      const tcModel = new TCModel();
+
+      expect((): void => {
+
+        tcModel.version = value;
+
+      }).not.to.throw();
+
+      expect(tcModel.version).to.equal(value);
+
+    });
+
+  };
+  const shouldBeNotOk: (value: number) => void = (value: number): void => {
+
+    it(`should not be ok with ${value}`, (): void => {
+
+      const tcModel = new TCModel();
+
+      expect((): void => {
+
+        tcModel.version = value;
+
+      }).to.throw();
+
+      expect(tcModel.version).to.be.undefined;
+
+    });
+
+  };
+
+  shouldBeOk(1);
+  shouldBeOk(2);
+  shouldBeNotOk(0);
+  shouldBeNotOk(3);
+  shouldBeNotOk(1.1);
+
+});

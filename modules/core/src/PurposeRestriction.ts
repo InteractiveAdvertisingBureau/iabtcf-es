@@ -3,9 +3,9 @@ import {PurposeRestrictionTypes} from './PurposeRestrictionTypes';
 
 class PurposeRestriction {
 
-  public static availablePurposeIds: Set<number>;
+  public static availablePurposeIds: Set<number> = new Set();
   private purposeId_: number;
-  private restrictionType_: PurposeRestrictionTypes;
+  public restrictionType: PurposeRestrictionTypes;
 
   /**
    * @return {number} The purpose Id associated with a publisher
@@ -33,18 +33,6 @@ class PurposeRestriction {
       throw new TCModelError('purposeId', idNum);
 
     }
-
-  }
-
-  public get restrictionType(): PurposeRestrictionTypes {
-
-    return this.restrictionType_;
-
-  }
-
-  public set restrictionType(value: PurposeRestrictionTypes) {
-
-    this.restrictionType_ = value;
 
   }
 

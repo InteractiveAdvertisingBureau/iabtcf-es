@@ -6,6 +6,7 @@ import {TCModelError} from './errors/TCModelError';
 
 class TCModel {
 
+  public static MAX_ENCODING_VERSION: number = 2;
   private version_: number;
   private cmpId_: number;
   private cmpVersion_: number;
@@ -296,8 +297,11 @@ class TCModel {
    */
   public set consentLanguage(lang: string) {
 
+    // lowercase a is 97
     const ASCII_START = 96;
     const ALPHABET_CARDINALITY = 26;
+
+    // for error messages if needed
     const fieldName = 'consentLanguage';
 
     if (lang.length === 2) {
@@ -305,7 +309,10 @@ class TCModel {
       const firstLetter: number = lang.charCodeAt(0) - ASCII_START;
       const secondLetter: number = lang.charCodeAt(1) - ASCII_START;
 
-      if ((firstLetter <= ALPHABET_CARDINALITY && secondLetter <= ALPHABET_CARDINALITY)) {
+      if (firstLetter > 0
+          && secondLetter > 0
+          && firstLetter <= ALPHABET_CARDINALITY
+          && secondLetter <= ALPHABET_CARDINALITY) {
 
         this.consentLanguage_ = lang;
 
@@ -357,7 +364,15 @@ class TCModel {
    */
   public set version(num: number) {
 
-    this.version_ = num;
+    if (Number.isInteger(num) && num <= TCModel.MAX_ENCODING_VERSION && num > 0) {
+
+      this.version_ = num;
+
+    } else {
+
+      throw new TCModelError('version', num, `max version is ${TCModel.MAX_ENCODING_VERSION}, can't be higher`);
+
+    }
 
   }
 
