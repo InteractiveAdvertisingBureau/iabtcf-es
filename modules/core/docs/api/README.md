@@ -53,7 +53,7 @@
 
 **Ƭ VersionOrObject**: *`string` \| `number` \| `object`*
 
-*Defined in [GVL.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/4c5d7e6/modules/core/src/GVL.ts#L5)*
+*Defined in [GVL.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/GVL.ts#L5)*
 
 ___
 
