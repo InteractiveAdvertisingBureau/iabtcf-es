@@ -67,7 +67,7 @@
     ],
   ]
 
-*Defined in [Encodings.ts:39](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L39)*
+*Defined in [Encodings.ts:39](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L39)*
 
 The outer array describes index is encoding version - 1 (since it's zero-based) and the inner array is the string representation of the BITS static above ordered by "IAB Tech Lab - Consent string and vendor list formats v2"
 
@@ -81,7 +81,7 @@ ___
 
 ▸ **intWithinRange**(bits: *`number`*, checkValue: *`number`*): `boolean`
 
-*Defined in [Encodings.ts:86](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L86)*
+*Defined in [Encodings.ts:86](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L86)*
 
 intWithinRange - Determines weither a given value will fit within the encoding of bits
 
@@ -107,7 +107,7 @@ ___
 
 **BITS**: *`object`*
 
-*Defined in [Encodings.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L10)*
+*Defined in [Encodings.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L10)*
 
 key is the name of the field and the value is the number of bits reserved for the field. These values come directly from the "IAB Tech Lab - Consent string and vendor list formats v2". If the value is 0, that means that is is a variable length encoding.
 
@@ -117,7 +117,7 @@ key is the name of the field and the value is the number of bits reserved for th
 
 **● CHECKSUM**: *`number`* = 18
 
-*Defined in [Encodings.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L12)*
+*Defined in [Encodings.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L12)*
 
 ___
 <a id="bits.cmpid"></a>
@@ -126,7 +126,7 @@ ___
 
 **● CMPID**: *`number`* = 12
 
-*Defined in [Encodings.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L15)*
+*Defined in [Encodings.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L15)*
 
 ___
 <a id="bits.cmp_version"></a>
@@ -135,7 +135,7 @@ ___
 
 **● CMP_VERSION**: *`number`* = 12
 
-*Defined in [Encodings.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L16)*
+*Defined in [Encodings.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L16)*
 
 ___
 <a id="bits.consent_language"></a>
@@ -144,7 +144,7 @@ ___
 
 **● CONSENT_LANGUAGE**: *`number`* = 12
 
-*Defined in [Encodings.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L18)*
+*Defined in [Encodings.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L18)*
 
 ___
 <a id="bits.consent_screen"></a>
@@ -153,7 +153,7 @@ ___
 
 **● CONSENT_SCREEN**: *`number`* = 6
 
-*Defined in [Encodings.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L17)*
+*Defined in [Encodings.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L17)*
 
 ___
 <a id="bits.created"></a>
@@ -162,7 +162,7 @@ ___
 
 **● CREATED**: *`number`* = 36
 
-*Defined in [Encodings.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L13)*
+*Defined in [Encodings.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L13)*
 
 ___
 <a id="bits.is_service_specific"></a>
@@ -171,7 +171,7 @@ ___
 
 **● IS_SERVICE_SPECIFIC**: *`number`* = 1
 
-*Defined in [Encodings.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L21)*
+*Defined in [Encodings.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L21)*
 
 ___
 <a id="bits.last_updated"></a>
@@ -180,7 +180,7 @@ ___
 
 **● LAST_UPDATED**: *`number`* = 36
 
-*Defined in [Encodings.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L14)*
+*Defined in [Encodings.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L14)*
 
 ___
 <a id="bits.policy_version"></a>
@@ -189,7 +189,7 @@ ___
 
 **● POLICY_VERSION**: *`number`* = 6
 
-*Defined in [Encodings.ts:20](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L20)*
+*Defined in [Encodings.ts:20](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L20)*
 
 ___
 <a id="bits.publisher_restrictions"></a>
@@ -198,7 +198,7 @@ ___
 
 **● PUBLISHER_RESTRICTIONS**: *`number`* = 0
 
-*Defined in [Encodings.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L28)*
+*Defined in [Encodings.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L28)*
 
 ___
 <a id="bits.purposes_consent"></a>
@@ -207,7 +207,7 @@ ___
 
 **● PURPOSES_CONSENT**: *`number`* = 24
 
-*Defined in [Encodings.ts:24](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L24)*
+*Defined in [Encodings.ts:24](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L24)*
 
 ___
 <a id="bits.purposes_li_established"></a>
@@ -216,7 +216,7 @@ ___
 
 **● PURPOSES_LI_ESTABLISHED**: *`number`* = 24
 
-*Defined in [Encodings.ts:25](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L25)*
+*Defined in [Encodings.ts:25](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L25)*
 
 ___
 <a id="bits.special_feature_optins"></a>
@@ -225,7 +225,7 @@ ___
 
 **● SPECIAL_FEATURE_OPTINS**: *`number`* = 12
 
-*Defined in [Encodings.ts:23](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L23)*
+*Defined in [Encodings.ts:23](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L23)*
 
 ___
 <a id="bits.use_non_standard_stacks"></a>
@@ -234,7 +234,7 @@ ___
 
 **● USE_NON_STANDARD_STACKS**: *`number`* = 1
 
-*Defined in [Encodings.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L22)*
+*Defined in [Encodings.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L22)*
 
 ___
 <a id="bits.vendor_consent"></a>
@@ -243,7 +243,7 @@ ___
 
 **● VENDOR_CONSENT**: *`number`* = 0
 
-*Defined in [Encodings.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L26)*
+*Defined in [Encodings.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L26)*
 
 ___
 <a id="bits.vendor_li"></a>
@@ -252,7 +252,7 @@ ___
 
 **● VENDOR_LI**: *`number`* = 0
 
-*Defined in [Encodings.ts:27](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L27)*
+*Defined in [Encodings.ts:27](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L27)*
 
 ___
 <a id="bits.vendor_list_version"></a>
@@ -261,7 +261,7 @@ ___
 
 **● VENDOR_LIST_VERSION**: *`number`* = 12
 
-*Defined in [Encodings.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L19)*
+*Defined in [Encodings.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L19)*
 
 ___
 <a id="bits.version"></a>
@@ -270,7 +270,7 @@ ___
 
 **● VERSION**: *`number`* = 6
 
-*Defined in [Encodings.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/Encodings.ts#L11)*
+*Defined in [Encodings.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encodings.ts#L11)*
 
 ___
 

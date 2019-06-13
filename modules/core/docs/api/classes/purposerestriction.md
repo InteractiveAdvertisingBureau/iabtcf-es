@@ -27,7 +27,7 @@
 
 **● restrictionType**: *[PurposeRestrictionTypes](../enums/purposerestrictiontypes.md)*
 
-*Defined in [PurposeRestriction.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/PurposeRestriction.ts#L8)*
+*Defined in [PurposeRestriction.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/PurposeRestriction.ts#L8)*
 
 ___
 <a id="availablepurposeids"></a>
@@ -36,7 +36,7 @@ ___
 
 **● availablePurposeIds**: *`Set`<`number`>* =  new Set()
 
-*Defined in [PurposeRestriction.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/PurposeRestriction.ts#L6)*
+*Defined in [PurposeRestriction.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/PurposeRestriction.ts#L6)*
 
 ___
 
@@ -50,12 +50,12 @@ ___
 
 **set purposeId**(idNum: *`number`*): `void`
 
-*Defined in [PurposeRestriction.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/PurposeRestriction.ts#L15)*
+*Defined in [PurposeRestriction.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/PurposeRestriction.ts#L15)*
 
 **Returns:** `number`
 The purpose Id associated with a publisher purpose-by-vendor restriction that resulted in a different consent or LI status than the consent or LI purposes allowed lists.
 
-*Defined in [PurposeRestriction.ts:25](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/PurposeRestriction.ts#L25)*
+*Defined in [PurposeRestriction.ts:25](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/PurposeRestriction.ts#L25)*
 
 **Parameters:**
 

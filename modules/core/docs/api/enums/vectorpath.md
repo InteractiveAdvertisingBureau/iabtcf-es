@@ -20,7 +20,7 @@
 
 **PURPOSE**:  = 0
 
-*Defined in [VectorPath.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/VectorPath.ts#L2)*
+*Defined in [VectorPath.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/VectorPath.ts#L2)*
 
 ___
 <a id="special_feature"></a>
@@ -29,7 +29,7 @@ ___
 
 **SPECIAL_FEATURE**:  = 2
 
-*Defined in [VectorPath.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/VectorPath.ts#L4)*
+*Defined in [VectorPath.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/VectorPath.ts#L4)*
 
 ___
 <a id="vendor"></a>
@@ -38,7 +38,7 @@ ___
 
 **VENDOR**:  = 1
 
-*Defined in [VectorPath.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/0fbe340/modules/core/src/VectorPath.ts#L3)*
+*Defined in [VectorPath.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/VectorPath.ts#L3)*
 
 ___
 
