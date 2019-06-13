@@ -1,61 +1,123 @@
-import * as chai from 'chai';
+import {expect} from 'chai';
 import * as sinon from 'sinon';
 import {Json} from '../src/Json';
-
-const expect = chai.expect;
+import {XMLHttpTestTools} from './support/XMLHttpTestTools';
 
 describe('Json->fetch', (): void => {
 
-  const xhr: sinon.SinonFakeXMLHttpRequestStatic = sinon.useFakeXMLHttpRequest();
-  let requests: sinon.SinonFakeXMLHttpRequest[] = [];
-  const JSON_HEADER: object = {'Content-Type': 'application/json'};
-
-  xhr.onCreate = (xhr): void => {
-
-    requests.push(xhr);
-
+  const responseObj: object = {
+    foo: 'bar',
   };
 
-  afterEach((): void => {
+  beforeEach(XMLHttpTestTools.beforeEach);
+  afterEach(XMLHttpTestTools.afterEach);
 
-    xhr.restore();
-    requests = [];
+  it('should fetch and parse a json with only a url', (done: () => void): void => {
+
+
+    Json.fetch('blah')
+      .then((response: object): void => {
+
+        expect(response).to.deep.equal(responseObj);
+        done();
+
+      })
+      .catch((error: Error): void => {
+
+        expect.fail('an error occured: ' + error.message);
+        done();
+
+      });
+
+    expect(XMLHttpTestTools.requests.length).to.equal(1);
+
+    const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+
+    expect(req.method).to.equal('GET');
+
+    req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(responseObj));
+
 
   });
 
-  it('should fetch and parse a json with only a url', (): void => {
+  it('should fail if a 404 returned', (done: () => void): void => {
 
-    const responseObj: object = {
-      foo: 'bar',
-    };
-    const spy: sinon.SinonSpy = sinon.spy();
+    Json.fetch('blah')
+      .then((): void => {
 
-    Json.fetch('blah').then(spy).catch(spy);
+        expect.fail('should have errored out');
+        done();
 
-    requests[0].respond(200, JSON_HEADER, JSON.stringify(responseObj));
-    expect(requests.length).to.equal(1);
-    expect(spy.calledWith(responseObj));
+      })
+      .catch((error: Error): void => {
+
+        expect(error.message).to.include('404');
+        done();
+
+      });
+
+    XMLHttpTestTools.requests[0].respond(404, {}, '');
+
+    expect(XMLHttpTestTools.requests.length).to.equal(1);
+
 
   });
+
+  it('should fail if a network error occurs', (done: () => void): void => {
+
+    Json.fetch('blah')
+      .then((): void => {
+
+        expect.fail('should have errored out');
+        done();
+
+      })
+      .catch((error: Error): void => {
+
+        expect(error.message).to.include('error');
+        done();
+
+      });
+
+    const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+
+    expect(req.method).to.equal('GET');
+
+    req.error();
+
+
+  });
+
   /**
-  it('should timeout if a timeout is passed', (done): void => {
+   // this one SUCKS!!
 
-    const responseObj: object = {
-      foo: 'bar',
-    };
-    const spy: sinon.SinonSpy = sinon.spy();
+  it('should error if it times out', (done: () => void): void => {
 
-    Json.fetch('blah', false, 50).then(spy).catch(spy);
-    expect(requests.length).to.equal(1);
+    Json.fetch('blah', false, 5)
+      .then((): void => {
 
-    setTimeout((): void => {
+        expect.fail('should have timed out');
+        done();
 
-      debugger;
-      requests[0].respond(200, JSON_HEADER, JSON.stringify(responseObj));
-      expect(spy.neverCalledWith(responseObj));
+      })
+      .catch((error: Error): void => {
+
+        expect(error.message).to.include('Timeout');
+        done();
+
+      });
+
+    const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+
+    expect(req.method).to.equal('GET');
+
+    req.autoRespond = (ms: number): void => {
+
       done();
+      debugger;
 
-    }, 52);
+    };
+
 
   });
   */

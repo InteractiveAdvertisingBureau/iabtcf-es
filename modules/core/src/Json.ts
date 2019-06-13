@@ -6,65 +6,66 @@ class Json {
    * @param {number} [timeout] - optional timeout in miliseconds
    * @return {Promise} - resolves with parsed JSON
    */
-  public static fetch(jsonURL: string, sendCookies: boolean = false, timeout: number = NaN): Promise<object> {
+  public static fetch(jsonURL: string, sendCookies: boolean = false, timeout: number = 0): Promise<object> {
 
     return new Promise((resolve: (response: object) => void, reject: (error: Error) => void): void => {
 
-      const xobj: XMLHttpRequest = new XMLHttpRequest();
+      const req: XMLHttpRequest = new XMLHttpRequest();
+      const onLoad: (evt: Event) => void = (): void => {
 
-      // if timeout is defined and greater than zero we'll set it otherwise, no...
-      if (timeout !== NaN && timeout > 0) {
-
-        xobj.timeout = timeout;
-
-      }
-
-      // send cookies
-      xobj.withCredentials = sendCookies;
-      xobj.ontimeout = (): void => {
-
-        reject(new Error('Timeout ' + timeout + 'ms ' + jsonURL));
-
-      };
-      xobj.onreadystatechange = (): void => {
-
-        if (xobj.readyState == 4 ) {
+        if (req.readyState == 4 ) {
 
           // anything that is not in the two hundreds is an error
-          if (xobj.status >= 200 && xobj.status < 300) {
+          if (req.status >= 200 && req.status < 300) {
 
-            if (xobj.responseText !== '') {
+            if (req.responseText === '') {
 
-              try {
-
-                resolve(JSON.parse(xobj.responseText));
-
-              } catch (err) {
-
-                reject(new Error('Unable to parse JSON response'));
-
-              }
+              reject(new Error('JSON response empty'));
 
             } else {
 
-              reject(new Error('JSON response empty'));
+              resolve(req.response);
 
             }
 
           } else {
 
-            reject(new Error('HTTP Error ' + xobj.status));
+            reject(new Error('HTTP Error ' + req.status));
 
           }
-          xobj.onreadystatechange = null;
 
         }
 
       };
+      const onError: (evt: Event) => void = (): void => {
 
-      // execute GET request (will require CORS)
-      xobj.open('GET', jsonURL, true);
-      xobj.send(null);
+        reject(new Error('fetch error'));
+
+      };
+      const onAbort: (evt: Event) => void = (): void => {
+
+        reject(new Error('fetch aborted'));
+
+      };
+      const onTimeout: () => void = (): void => {
+
+        reject(new Error('Timeout ' + timeout + 'ms ' + jsonURL));
+
+      };
+
+      req.responseType = 'json';
+      req.withCredentials = sendCookies;
+      req.timeout = timeout;
+      req.ontimeout = onTimeout;
+
+
+      req.addEventListener('load', onLoad);
+      req.addEventListener('error', onError);
+      req.addEventListener('abort', onAbort);
+
+
+      req.open('GET', jsonURL, true);
+      req.send(null);
 
     });
 
