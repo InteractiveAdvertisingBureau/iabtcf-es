@@ -1,23 +1,65 @@
+import {GVL} from './GVL';
+import {VectorPath} from './VectorPath';
 class Vector<T> {
 
   private map: Map<number, T> = new Map();
-  private maxId_: number = 0;
+  private length_: number = 0;
 
-  public set(id: number, value: T): void {
+  public constructor(gvl?: GVL, vectorPath?: VectorPath, initValue?: T) {
 
-    this.map.set(id, value);
+    // make sure they're all defined if not we'll just construct an empty Vector
+    if (gvl && vectorPath !== undefined && initValue !== undefined) {
 
-    if (id > this.maxId_) {
+      let idsToInit: string[] = [];
 
-      this.maxId_ = id;
+      switch (vectorPath) {
+
+        case VectorPath.PURPOSE:
+
+          idsToInit = Object.keys(gvl.purposes);
+
+          break;
+        case VectorPath.VENDOR:
+
+          idsToInit = Object.keys(gvl.vendors);
+
+          break;
+        case VectorPath.SPECIAL_FEATURE:
+
+          idsToInit = Object.keys(gvl.specialFeatures);
+
+          break;
+
+      }
+
+      idsToInit.forEach((strId: string): void => {
+
+        this.set(parseInt(strId, 10), initValue as T);
+
+      });
 
     }
 
   }
 
-  public get maxId(): number {
+  public set(id: number, value: T): void {
 
-    return this.maxId_;
+    this.map.set(id, value);
+
+    if (id > this.length_) {
+
+      this.length_ = id;
+
+    }
+
+  }
+
+  /**
+   * @return {number} the highest id passed set on this Vector
+   */
+  public get length(): number {
+
+    return this.length_;
 
   }
 

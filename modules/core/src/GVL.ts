@@ -12,18 +12,38 @@ class GVL implements GVLSchema {
 
   /**
    * @static
-   * @param {string} baseUrl - base path (everything except the file name)
+   * @param {string} - the base url to load the vendor-list.json from.  This is
+   * broken out from the filename because it follows a different scheme for
+   * latest file vs versioned files.
    */
   public static baseUrl: string;
+
   /**
    * @static
-   * @param {string} filename - filename assumed to be vendorlist.json, but it could be different... if you want
+   * @param {string} - the latest is assumed to be vendor-list.json because
+   * that is what the iab uses, but it could be different... if you want
    */
-  public static filename: string = 'vendorlist.json';
-
+  public static latestFilename: string = 'vendor-list.json';
 
   /**
-   * @param {Promise} readyPromise - resolved when this object is populated or rejected if there is an error
+   * @static
+   * @param {string} - the versioned name is assumed to be
+   * vendor-list-v[VERSION].json where [VERSION] will be replaced with the
+   * specified version.  But it could be different... if you want just make
+   * sure to include the [VERSION] macro if you have a numbering scheme, it's a
+   * simple string substitution.
+   *
+   * eg.
+   * ```javascript
+   * GVL.baseUrl = "http://www.mydomain.com/iabcmp/";
+   * GVL.versionedFilename = "vendorlist?getVersion=[VERSION]";
+   * ```
+   */
+  public static versionedFilename: string = 'archives/vendor-list-v[VERSION].json';
+
+  /**
+   * @param {Promise} resolved when this GVL object is populated with the data
+   * from the [[GVLSchema]] or rejected if there is an error
    */
   public readyPromise: Promise<void | GVLError>;
 
@@ -33,7 +53,7 @@ class GVL implements GVLSchema {
   public gvlSpecificationVersion: number;
 
   /**
-   * @param {number} vendorListVersion - incremented with each published file change
+   * @param {number} incremented with each published file change
    */
   public vendorListVersion: number;
 
@@ -49,16 +69,36 @@ class GVL implements GVLSchema {
    */
   public tcfPolicyVersion: number;
 
-  /**
-   * @param {number} vendorListVersion - incremented with each published file change
-   */
   public lastUpdated: string | Date;
 
+  /**
+   * @param {Purposes} a collection of [[Purpose]]s
+   */
   public purposes: Purposes;
+
+  /**
+   * @param {Purposes} a collection of [[Purpose]]s
+   */
   public specialPurposes: SpecialPurposes;
+
+  /**
+   * @param {Features} a collection of [[Feature]]s
+   */
   public features: Features;
-  public speciaLFeatures: SpecialFeatures;
+
+  /**
+   * @param {Features} a collection of [[Feature]]s
+   */
+  public specialFeatures: SpecialFeatures;
+
+  /**
+   * @param {Features} a collection of [[Vendor]]s
+   */
   public vendors: Vendors;
+
+  /**
+   * @param {Features} a collection of [[Stack]]s
+   */
   public stacks: Stacks;
 
   /**
@@ -81,18 +121,6 @@ class GVL implements GVLSchema {
 
       });
 
-    } else if (versionOrObject as number > 0) {
-
-      if (!url) {
-
-        throw new GVLError('must specify GVL.baseUrl before loading GVL json');
-
-      }
-
-      // load version specified
-      url += 'v-' + versionOrObject + '/' + GVL.filename;
-      this.getGVL(url);
-
     } else {
 
       if (!url) {
@@ -101,9 +129,26 @@ class GVL implements GVLSchema {
 
       }
 
-      // whatever it is (or isn't)... it doesn't matter we'll just get the latest
-      url += GVL.filename;
-      this.getGVL(url);
+      // if a trailing slash was forgotten
+      if (url[url.length - 1] !== '/') {
+
+        url += '/';
+
+      }
+
+      if (versionOrObject as number > 0) {
+
+        // load version specified
+        url += GVL.versionedFilename.replace('[VERSION]', versionOrObject + '');
+        this.getGVL(url);
+
+      } else {
+
+        // whatever it is (or isn't)... it doesn't matter we'll just get the latest
+        url += GVL.latestFilename;
+        this.getGVL(url);
+
+      }
 
     }
 
@@ -143,7 +188,7 @@ class GVL implements GVLSchema {
     this.purposes = gvlObject.purposes;
     this.specialPurposes = gvlObject.specialPurposes;
     this.features = gvlObject.features;
-    this.speciaLFeatures = gvlObject.speciaLFeatures;
+    this.specialFeatures = gvlObject.specialFeatures;
     this.vendors = gvlObject.vendors;
     this.stacks = gvlObject.stacks;
 

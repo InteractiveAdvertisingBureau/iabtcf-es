@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {GVL} from '../src/GVL';
-import {GVLError} from '../src/errors/GVLError';
 
 // eslint-disable-next-line
-const vendorlistJson =require('../dev/vendorlist.json');
+const vendorlistJson = require('../dev/vendorlist.json');
 
 describe('GVL', (): void => {
 
@@ -14,7 +13,7 @@ describe('GVL', (): void => {
 
       new GVL();
 
-    }).to.throw(GVLError, /baseUrl/);
+    }).to.throw('must specify GVL.baseUrl before loading GVL json');
 
   });
   it('Should propogate all values with passed in json', (): void => {
@@ -30,7 +29,7 @@ describe('GVL', (): void => {
     expect(gvl.purposes, 'purposes should match').to.deep.equal(vendorlistJson.purposes);
     expect(gvl.specialPurposes, 'specialPurposes should match').to.deep.equal(vendorlistJson.specialPurposes);
     expect(gvl.features, 'features should match').to.deep.equal(vendorlistJson.features);
-    expect(gvl.speciaLFeatures, 'speciaLFeatures should match').to.deep.equal(vendorlistJson.speciaLFeatures);
+    expect(gvl.specialFeatures, 'specialFeatures should match').to.deep.equal(vendorlistJson.specialFeatures);
     expect(gvl.vendors, 'vendors should match').to.deep.equal(vendorlistJson.vendors);
     expect(gvl.stacks, 'stacks should match').to.deep.equal(vendorlistJson.stacks);
 

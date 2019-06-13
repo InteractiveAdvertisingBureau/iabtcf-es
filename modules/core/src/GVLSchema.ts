@@ -3,7 +3,15 @@ interface Purpose {
   name: string;
   description: string;
   descriptionLegal: string;
+  /*
+   * default=true  false means CMPs should never afford users the means to
+   * provide an opt-in consent choice
+   */
   consentable? : boolean;
+  /**
+   * default=true  false means CMPs should never afford users the means to
+   * exercise a right to object
+   */
   rightToObject?: boolean;
 };
 
@@ -70,7 +78,7 @@ interface GVLSchema {
   purposes: Purposes;
   specialPurposes: SpecialPurposes;
   features: Features;
-  speciaLFeatures: SpecialFeatures;
+  specialFeatures: SpecialFeatures;
   vendors: Vendors;
   stacks: Stacks;
 };

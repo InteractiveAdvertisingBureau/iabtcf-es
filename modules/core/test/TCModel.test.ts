@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {TCModel} from '../src/TCModel';
-import {TCModelError} from '../src/errors/TCModelError';
 
 import {Vector} from '../src/Vector';
 import {GVL} from '../src/GVL';
@@ -43,7 +42,7 @@ const testInt = (fieldName: string, lowestValue: number): void => {
 
       } catch (error) {
 
-        expect(error).to.be.an.instanceof(TCModelError);
+        expect(error.name).to.equal('TCModelError');
         expect(error.message).to.include(`${valueToTest}`);
         expect(error.message).to.include(fieldName);
 
@@ -110,9 +109,13 @@ const testInstanceOf = <T>(fieldName: string, theInstanceOf: {new (): T}): void 
 
   runDescribe(fieldName, (): void => {
 
+    // eslint-disable-next-line
+    const vendorlistJson = require('../dev/vendorlist.json');
+    const gvl: GVL = new GVL(vendorlistJson);
+
     it(`should create an instance of ${instanceName} as ${fieldName} on init`, (): void => {
 
-      const tcModel = new TCModel();
+      const tcModel = new TCModel(gvl);
 
       expect(
         tcModel[fieldName],
@@ -152,7 +155,7 @@ describe('TCModel', (): void => {
   it('should construct a TCModel with a GVL argument', (): void => {
 
     // eslint-disable-next-line
-    const vendorlistJson =require('../dev/vendorlist.json');
+    const vendorlistJson = require('../dev/vendorlist.json');
     const gvl: GVL = new GVL(vendorlistJson);
 
     expect((): void => {
@@ -191,5 +194,4 @@ testInstanceOf('purposeLITransparency', Vector);
 
 testInstanceOf('vendorConsents', Vector);
 testInstanceOf('vendorLegitimateInterest', Vector);
-testInstanceOf('publisherRestrictions', Vector);
 testInstanceOf('specialFeatureOptIns', Vector);
