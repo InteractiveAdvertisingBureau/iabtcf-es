@@ -6,7 +6,7 @@ import {TCModelError} from './errors/TCModelError';
 
 class TCModel {
 
-  public static MAX_ENCODING_VERSION: number = 2;
+  public static readonly MAX_ENCODING_VERSION: number = 2;
   private version_: number;
   private cmpId_: number;
   private cmpVersion_: number;
@@ -297,34 +297,13 @@ class TCModel {
    */
   public set consentLanguage(lang: string) {
 
-    // lowercase a is 97
-    const ASCII_START = 96;
-    const ALPHABET_CARDINALITY = 26;
+    if (/^([A-z]){2}$/.test(lang)) {
 
-    // for error messages if needed
-    const fieldName = 'consentLanguage';
-
-    if (lang.length === 2) {
-
-      const firstLetter: number = lang.charCodeAt(0) - ASCII_START;
-      const secondLetter: number = lang.charCodeAt(1) - ASCII_START;
-
-      if (firstLetter > 0
-          && secondLetter > 0
-          && firstLetter <= ALPHABET_CARDINALITY
-          && secondLetter <= ALPHABET_CARDINALITY) {
-
-        this.consentLanguage_ = lang;
-
-      } else {
-
-        throw new TCModelError(fieldName, lang);
-
-      }
+      this.consentLanguage_ = lang;
 
     } else {
 
-      throw new TCModelError(fieldName, lang);
+      throw new TCModelError('consentLanguage', lang);
 
     }
 

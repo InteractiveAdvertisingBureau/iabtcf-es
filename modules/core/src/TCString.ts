@@ -17,7 +17,9 @@ class TCString {
    */
   public static encode(tcModel: TCModel): string {
 
-    return Encoder.encode(tcModel);
+    const encoder: Encoder = new Encoder();
+
+    return encoder.encode(tcModel);
 
   }
 

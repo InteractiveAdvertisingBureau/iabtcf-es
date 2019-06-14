@@ -259,21 +259,19 @@ runDescribe('consentLanguage', (): void => {
 
   shouldBeOk('aa');
   shouldBeOk('zz');
+  shouldBeOk('AA');
+  shouldBeOk('ZZ');
 
-  // length is checked first
+  // too long
   shouldBeNotOk('aaa');
+
+  // too short
   shouldBeNotOk('a');
 
-  // not check the ascii bounds
-  // this is just before lowercase a -- have to escape because that's interpreted as string literal in js!
-  shouldBeNotOk('\`\`');
-
-  // this is just after lowercase z
+  shouldBeNotOk('@#');
+  shouldBeNotOk('15');
   shouldBeNotOk('{{');
 
-  // just for fun
-  shouldBeNotOk('AA');
-  shouldBeNotOk('ZZ');
 
 });
 
