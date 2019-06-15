@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {PurposeRestriction} from '../src/PurposeRestriction';
-import {PurposeRestrictionTypes} from '../src/PurposeRestrictionTypes';
+import {PurposeRestriction} from '../src/model/PurposeRestriction';
+import {PurposeRestrictionTypes} from '../src/model/enum/PurposeRestrictionTypes';
 
 const runDescribe = (fieldName: string, handler: () => void): void => {
 
