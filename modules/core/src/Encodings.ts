@@ -2,7 +2,9 @@ import {IntEncoder} from './encoder/IntEncoder';
 import {LangEncoder} from './encoder/LangEncoder';
 import {BooleanEncoder} from './encoder/BooleanEncoder';
 import {DateEncoder} from './encoder/DateEncoder';
-import {VectorEncoder} from './encoder/VectorEncoder';
+import {VendorVectorEncoder} from './encoder/VendorVectorEncoder';
+import {FixedVectorEncoder} from './encoder/FixedVectorEncoder';
+import {PublisherRestrictionsEncoder} from './encoder/PublisherRestrictionsEncoder';
 import {SpecificEncoder} from './encoder/SpecificEncoder';
 
 class Encodings {
@@ -65,12 +67,12 @@ class Encodings {
     policyVersion: IntEncoder,
     isServiceSpecific: BooleanEncoder,
     useNonStandardStacks: BooleanEncoder,
-    specialFeatureOptIns: VectorEncoder,
-    purposeConsents: VectorEncoder,
-    purposeLITransparency: VectorEncoder,
-    vendorConsents: VectorEncoder,
-    vendorLegitimateInterest: VectorEncoder,
-    publisherRestrictions: VectorEncoder,
+    specialFeatureOptIns: FixedVectorEncoder,
+    purposeConsents: FixedVectorEncoder,
+    purposeLITransparency: FixedVectorEncoder,
+    vendorConsents: VendorVectorEncoder,
+    vendorLegitimateInterest: VendorVectorEncoder,
+    publisherRestrictions: PublisherRestrictionsEncoder,
 
   };
 

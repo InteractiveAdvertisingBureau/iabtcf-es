@@ -36,5 +36,11 @@ class PurposeRestriction {
 
   }
 
+  public isValid(): boolean {
+
+    return !!(this.purposeId && this.restrictionType !== undefined);
+
+  }
+
 }
 export {PurposeRestriction};

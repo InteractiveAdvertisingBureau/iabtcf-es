@@ -1,18 +1,22 @@
 import {GVL} from './GVL';
 import {VectorPath} from './VectorPath';
+
 class Vector<T> {
 
   private map: Map<number, T> = new Map();
-  private length_: number = 0;
+  private maxId_: number = 0;
+  public path: VectorPath;
 
-  public constructor(gvl?: GVL, vectorPath?: VectorPath, initValue?: T) {
+  public constructor(gvl?: GVL, path?: VectorPath, initValue?: T) {
 
     // make sure they're all defined if not we'll just construct an empty Vector
-    if (gvl && vectorPath !== undefined && initValue !== undefined) {
+    if (gvl && path !== undefined && initValue !== undefined) {
 
       let idsToInit: string[] = [];
 
-      switch (vectorPath) {
+      this.path = path;
+
+      switch (path) {
 
         case VectorPath.PURPOSE:
 
@@ -46,9 +50,9 @@ class Vector<T> {
 
     this.map.set(id, value);
 
-    if (id > this.length_) {
+    if (id > this.maxId_) {
 
-      this.length_ = id;
+      this.maxId_ = id;
 
     }
 
@@ -57,9 +61,9 @@ class Vector<T> {
   /**
    * @return {number} the highest id passed set on this Vector
    */
-  public get length(): number {
+  public get maxId(): number {
 
-    return this.length_;
+    return this.maxId_;
 
   }
 
