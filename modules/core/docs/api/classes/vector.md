@@ -14,9 +14,13 @@
 
 * [constructor](vector.md#constructor)
 
+### Properties
+
+* [path](vector.md#path)
+
 ### Accessors
 
-* [length](vector.md#length)
+* [maxId](vector.md#maxid)
 
 ### Methods
 
@@ -35,31 +39,43 @@
 
 ###  constructor
 
-⊕ **new Vector**(gvl?: *[GVL](gvl.md)*, vectorPath?: *[VectorPath](../enums/vectorpath.md)*, initValue?: *[T]()*): [Vector](vector.md)
+⊕ **new Vector**(gvl?: *[GVL](gvl.md)*, path?: *[VectorPath](../enums/vectorpath.md)*, initValue?: *[T]()*): [Vector](vector.md)
 
-*Defined in [Vector.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Vector.ts#L6)*
+*Defined in [Vector.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/Vector.ts#L8)*
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
 | `Optional` gvl | [GVL](gvl.md) |
-| `Optional` vectorPath | [VectorPath](../enums/vectorpath.md) |
+| `Optional` path | [VectorPath](../enums/vectorpath.md) |
 | `Optional` initValue | [T]() |
 
 **Returns:** [Vector](vector.md)
 
 ___
 
+## Properties
+
+<a id="path"></a>
+
+###  path
+
+**● path**: *[VectorPath](../enums/vectorpath.md)*
+
+*Defined in [Vector.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/Vector.ts#L8)*
+
+___
+
 ## Accessors
 
-<a id="length"></a>
+<a id="maxid"></a>
 
-###  length
+###  maxId
 
-**get length**(): `number`
+**get maxId**(): `number`
 
-*Defined in [Vector.ts:60](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Vector.ts#L60)*
+*Defined in [Vector.ts:64](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/Vector.ts#L64)*
 
 **Returns:** `number`
 the highest id passed set on this Vector
@@ -74,7 +90,7 @@ ___
 
 ▸ **get**(id: *`number`*): `T` \| `undefined`
 
-*Defined in [Vector.ts:66](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Vector.ts#L66)*
+*Defined in [Vector.ts:70](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/Vector.ts#L70)*
 
 **Parameters:**
 
@@ -91,7 +107,7 @@ ___
 
 ▸ **has**(id: *`number`*): `boolean`
 
-*Defined in [Vector.ts:72](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Vector.ts#L72)*
+*Defined in [Vector.ts:76](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/Vector.ts#L76)*
 
 **Parameters:**
 
@@ -108,7 +124,7 @@ ___
 
 ▸ **isEmpty**(): `boolean`
 
-*Defined in [Vector.ts:90](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Vector.ts#L90)*
+*Defined in [Vector.ts:94](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/Vector.ts#L94)*
 
 **Returns:** `boolean`
 
@@ -119,7 +135,7 @@ ___
 
 ▸ **keys**(): `Iterator`<`number`>
 
-*Defined in [Vector.ts:78](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Vector.ts#L78)*
+*Defined in [Vector.ts:82](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/Vector.ts#L82)*
 
 **Returns:** `Iterator`<`number`>
 
@@ -130,7 +146,7 @@ ___
 
 ▸ **set**(id: *`number`*, value: *`T`*): `void`
 
-*Defined in [Vector.ts:45](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Vector.ts#L45)*
+*Defined in [Vector.ts:49](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/Vector.ts#L49)*
 
 **Parameters:**
 
@@ -148,7 +164,7 @@ ___
 
 ▸ **values**(): `Iterator`<`T`>
 
-*Defined in [Vector.ts:84](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Vector.ts#L84)*
+*Defined in [Vector.ts:88](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/Vector.ts#L88)*
 
 **Returns:** `Iterator`<`T`>
 

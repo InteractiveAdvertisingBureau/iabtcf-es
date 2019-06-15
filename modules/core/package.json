@@ -14,10 +14,10 @@
     "lib/**/*"
   ],
   "scripts": {
-    "docs": "typedoc src",
+    "docs": "typedoc --ignoreCompilerErrors src",
     "karma": "karma start",
     "prepack": "npm run build",
-    "build": "rm -r lib/* && tsc",
+    "build": "tsc",
     "test": "mocha -r ts-node/register -r jsdom-global/register \"./test/**/*.{ts,tsx}\""
   },
   "devDependencies": {

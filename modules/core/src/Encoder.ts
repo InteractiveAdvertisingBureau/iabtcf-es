@@ -10,8 +10,10 @@ class Encoder {
 
   /**
    * @param {TCModel} tcModel - model to convert into encoded string
+   *
    * @return {string} - web-safe base64 encoded Transparency and Consent String
-, ModelProperty   */
+  */
+
   public encode(tcModel: TCModel): string {
 
     const encoding: readonly string[] = Encodings.order[tcModel.version - 1];

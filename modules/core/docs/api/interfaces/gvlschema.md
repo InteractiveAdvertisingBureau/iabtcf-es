@@ -35,7 +35,7 @@
 
 **● features**: *[Features](features.md)*
 
-*Defined in [GVLSchema.ts:80](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/GVLSchema.ts#L80)*
+*Defined in [GVLSchema.ts:80](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L80)*
 
 ___
 <a id="gvlspecificationversion"></a>
@@ -44,7 +44,7 @@ ___
 
 **● gvlSpecificationVersion**: *`number`*
 
-*Defined in [GVLSchema.ts:74](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/GVLSchema.ts#L74)*
+*Defined in [GVLSchema.ts:74](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L74)*
 
 ___
 <a id="lastupdated"></a>
@@ -53,7 +53,7 @@ ___
 
 **● lastUpdated**: *`string` \| `Date`*
 
-*Defined in [GVLSchema.ts:77](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/GVLSchema.ts#L77)*
+*Defined in [GVLSchema.ts:77](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L77)*
 
 ___
 <a id="purposes"></a>
@@ -62,7 +62,7 @@ ___
 
 **● purposes**: *[Purposes](purposes.md)*
 
-*Defined in [GVLSchema.ts:78](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/GVLSchema.ts#L78)*
+*Defined in [GVLSchema.ts:78](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L78)*
 
 ___
 <a id="specialfeatures"></a>
@@ -71,7 +71,7 @@ ___
 
 **● specialFeatures**: *[SpecialFeatures](specialfeatures.md)*
 
-*Defined in [GVLSchema.ts:81](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/GVLSchema.ts#L81)*
+*Defined in [GVLSchema.ts:81](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L81)*
 
 ___
 <a id="specialpurposes"></a>
@@ -80,7 +80,7 @@ ___
 
 **● specialPurposes**: *[SpecialPurposes](specialpurposes.md)*
 
-*Defined in [GVLSchema.ts:79](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/GVLSchema.ts#L79)*
+*Defined in [GVLSchema.ts:79](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L79)*
 
 ___
 <a id="stacks"></a>
@@ -89,7 +89,7 @@ ___
 
 **● stacks**: *[Stacks](stacks.md)*
 
-*Defined in [GVLSchema.ts:83](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/GVLSchema.ts#L83)*
+*Defined in [GVLSchema.ts:83](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L83)*
 
 ___
 <a id="tcfpolicyversion"></a>
@@ -98,7 +98,7 @@ ___
 
 **● tcfPolicyVersion**: *`number`*
 
-*Defined in [GVLSchema.ts:76](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/GVLSchema.ts#L76)*
+*Defined in [GVLSchema.ts:76](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L76)*
 
 ___
 <a id="vendorlistversion"></a>
@@ -107,7 +107,7 @@ ___
 
 **● vendorListVersion**: *`number`*
 
-*Defined in [GVLSchema.ts:75](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/GVLSchema.ts#L75)*
+*Defined in [GVLSchema.ts:75](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L75)*
 
 ___
 <a id="vendors"></a>
@@ -116,7 +116,7 @@ ___
 
 **● vendors**: *[Vendors](vendors.md)*
 
-*Defined in [GVLSchema.ts:82](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/GVLSchema.ts#L82)*
+*Defined in [GVLSchema.ts:82](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L82)*
 
 ___
 

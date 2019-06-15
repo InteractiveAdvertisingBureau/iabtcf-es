@@ -18,11 +18,11 @@
 
 <a id="encode"></a>
 
-### `<Static>` encode
+###  encode
 
 ▸ **encode**(tcModel: *[TCModel](tcmodel.md)*): `string`
 
-*Defined in [Encoder.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/c30aecb/modules/core/src/Encoder.ts#L9)*
+*Defined in [Encoder.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/Encoder.ts#L17)*
 
 **Parameters:**
 
