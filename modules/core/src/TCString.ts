@@ -1,5 +1,5 @@
-import {Encoder} from './Encoder';
-import {Decoder} from './Decoder';
+import {Encoder} from './tcstring/Encoder';
+import {Decoder} from './tcstring/Decoder';
 import {TCModel} from './TCModel';
 
 /**

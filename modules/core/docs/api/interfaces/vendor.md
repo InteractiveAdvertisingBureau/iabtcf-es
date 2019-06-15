@@ -31,7 +31,7 @@
 
 **● deletedDate**: *`Date` \| `string`*
 
-*Defined in [GVLSchema.ts:54](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L54)*
+*Defined in model/GVLSchema.ts:54*
 
 ___
 <a id="featureids"></a>
@@ -40,7 +40,7 @@ ___
 
 **● featureIds**: *`number`[]*
 
-*Defined in [GVLSchema.ts:51](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L51)*
+*Defined in model/GVLSchema.ts:51*
 
 ___
 <a id="flexiblepurposeids"></a>
@@ -49,7 +49,7 @@ ___
 
 **● flexiblePurposeIds**: *`number`[]*
 
-*Defined in [GVLSchema.ts:50](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L50)*
+*Defined in model/GVLSchema.ts:50*
 
 ___
 <a id="id"></a>
@@ -58,7 +58,7 @@ ___
 
 **● id**: *`number`*
 
-*Defined in [GVLSchema.ts:46](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L46)*
+*Defined in model/GVLSchema.ts:46*
 
 ___
 <a id="legintpurposeids"></a>
@@ -67,7 +67,7 @@ ___
 
 **● legIntPurposeIds**: *`number`[]*
 
-*Defined in [GVLSchema.ts:49](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L49)*
+*Defined in model/GVLSchema.ts:49*
 
 ___
 <a id="name"></a>
@@ -76,7 +76,7 @@ ___
 
 **● name**: *`string`*
 
-*Defined in [GVLSchema.ts:47](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L47)*
+*Defined in model/GVLSchema.ts:47*
 
 ___
 <a id="overflow"></a>
@@ -85,7 +85,7 @@ ___
 
 **● overflow**: *[Overflow](overflow.md)*
 
-*Defined in [GVLSchema.ts:55](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L55)*
+*Defined in model/GVLSchema.ts:55*
 
 ___
 <a id="policyurl"></a>
@@ -94,7 +94,7 @@ ___
 
 **● policyUrl**: *`string`*
 
-*Defined in [GVLSchema.ts:53](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L53)*
+*Defined in model/GVLSchema.ts:53*
 
 ___
 <a id="purposeids"></a>
@@ -103,7 +103,7 @@ ___
 
 **● purposeIds**: *`number`[]*
 
-*Defined in [GVLSchema.ts:48](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L48)*
+*Defined in model/GVLSchema.ts:48*
 
 ___
 <a id="specialfeatureids"></a>
@@ -112,7 +112,7 @@ ___
 
 **● specialFeatureIds**: *`number`[]*
 
-*Defined in [GVLSchema.ts:52](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L52)*
+*Defined in model/GVLSchema.ts:52*
 
 ___
 

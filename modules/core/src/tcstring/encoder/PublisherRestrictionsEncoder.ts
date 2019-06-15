@@ -1,8 +1,8 @@
 import {SpecificEncoder} from './SpecificEncoder';
-import {BitLength} from '../BitLength';
-import {Vector} from '../Vector';
+import {BitLength} from '../../model/BitLength';
+import {Vector} from '../../model/Vector';
 import {VendorVectorEncoder} from './VendorVectorEncoder';
-import {PurposeRestriction} from '../PurposeRestriction';
+import {PurposeRestriction} from '../../model/PurposeRestriction';
 
 export class PublisherRestrictionsEncoder extends VendorVectorEncoder implements SpecificEncoder {
 

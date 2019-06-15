@@ -1,4 +1,4 @@
-import {TCModel} from './TCModel';
+import {TCModel} from '../TCModel';
 
 class Decoder {
 

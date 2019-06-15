@@ -1,6 +1,6 @@
 import {Json} from './Json';
 import {GVLError} from './errors/GVLError';
-import {GVLSchema, Purposes, Features, Vendors, SpecialPurposes, SpecialFeatures, Stacks} from './GVLSchema';
+import {GVLSchema, Purposes, Features, Vendors, SpecialPurposes, SpecialFeatures, Stacks} from './model/GVLSchema';
 
 type VersionOrObject = string | number | object;
 

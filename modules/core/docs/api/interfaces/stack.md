@@ -26,7 +26,7 @@
 
 **● description**: *`string`*
 
-*Defined in [GVLSchema.ts:67](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L67)*
+*Defined in model/GVLSchema.ts:67*
 
 ___
 <a id="id"></a>
@@ -35,7 +35,7 @@ ___
 
 **● id**: *`number`*
 
-*Defined in [GVLSchema.ts:63](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L63)*
+*Defined in model/GVLSchema.ts:63*
 
 ___
 <a id="name"></a>
@@ -44,7 +44,7 @@ ___
 
 **● name**: *`string`*
 
-*Defined in [GVLSchema.ts:66](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L66)*
+*Defined in model/GVLSchema.ts:66*
 
 ___
 <a id="purposes"></a>
@@ -53,7 +53,7 @@ ___
 
 **● purposes**: *`number`[]*
 
-*Defined in [GVLSchema.ts:64](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L64)*
+*Defined in model/GVLSchema.ts:64*
 
 ___
 <a id="specialpurposes"></a>
@@ -62,7 +62,7 @@ ___
 
 **● specialPurposes**: *`number`[]*
 
-*Defined in [GVLSchema.ts:65](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L65)*
+*Defined in model/GVLSchema.ts:65*
 
 ___
 

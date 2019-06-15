@@ -1,5 +1,5 @@
-import {TCModelError} from './errors/TCModelError';
-import {PurposeRestrictionTypes} from './PurposeRestrictionTypes';
+import {TCModelError} from '../errors/TCModelError';
+import {PurposeRestrictionTypes} from './enum/PurposeRestrictionTypes';
 
 class PurposeRestriction {
 

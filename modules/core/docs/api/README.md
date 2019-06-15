@@ -64,7 +64,7 @@
 
 **Ƭ TCModelPropType**: *`number` \| `Date` \| `string` \| `boolean` \| [Vector](classes/vector.md)<`boolean`> \| [Vector](classes/vector.md)<[PurposeRestriction](classes/purposerestriction.md)>*
 
-*Defined in [TCModelPropType.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/TCModelPropType.ts#L5)*
+*Defined in types/TCModelPropType.ts:4*
 
 ___
 <a id="versionorobject"></a>
@@ -73,7 +73,7 @@ ___
 
 **Ƭ VersionOrObject**: *`string` \| `number` \| `object`*
 
-*Defined in [GVL.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVL.ts#L5)*
+*Defined in [GVL.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/b5ac254/modules/core/src/GVL.ts#L5)*
 
 ___
 

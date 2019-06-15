@@ -25,7 +25,7 @@
 
 **● description**: *`string`*
 
-*Defined in [GVLSchema.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L29)*
+*Defined in model/GVLSchema.ts:29*
 
 ___
 <a id="descriptionlegal"></a>
@@ -34,7 +34,7 @@ ___
 
 **● descriptionLegal**: *`string`*
 
-*Defined in [GVLSchema.ts:30](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L30)*
+*Defined in model/GVLSchema.ts:30*
 
 ___
 <a id="id"></a>
@@ -43,7 +43,7 @@ ___
 
 **● id**: *`number`*
 
-*Defined in [GVLSchema.ts:27](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L27)*
+*Defined in model/GVLSchema.ts:27*
 
 ___
 <a id="name"></a>
@@ -52,7 +52,7 @@ ___
 
 **● name**: *`string`*
 
-*Defined in [GVLSchema.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/GVLSchema.ts#L28)*
+*Defined in model/GVLSchema.ts:28*
 
 ___
 

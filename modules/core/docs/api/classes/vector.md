@@ -41,7 +41,7 @@
 
 ⊕ **new Vector**(gvl?: *[GVL](gvl.md)*, path?: *[VectorPath](../enums/vectorpath.md)*, initValue?: *[T]()*): [Vector](vector.md)
 
-*Defined in [Vector.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/Vector.ts#L8)*
+*Defined in model/Vector.ts:8*
 
 **Parameters:**
 
@@ -63,7 +63,7 @@ ___
 
 **● path**: *[VectorPath](../enums/vectorpath.md)*
 
-*Defined in [Vector.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/Vector.ts#L8)*
+*Defined in model/Vector.ts:8*
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 **get maxId**(): `number`
 
-*Defined in [Vector.ts:64](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/Vector.ts#L64)*
+*Defined in model/Vector.ts:64*
 
 **Returns:** `number`
 the highest id passed set on this Vector
@@ -90,7 +90,7 @@ ___
 
 ▸ **get**(id: *`number`*): `T` \| `undefined`
 
-*Defined in [Vector.ts:70](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/Vector.ts#L70)*
+*Defined in model/Vector.ts:70*
 
 **Parameters:**
 
@@ -107,7 +107,7 @@ ___
 
 ▸ **has**(id: *`number`*): `boolean`
 
-*Defined in [Vector.ts:76](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/Vector.ts#L76)*
+*Defined in model/Vector.ts:76*
 
 **Parameters:**
 
@@ -124,7 +124,7 @@ ___
 
 ▸ **isEmpty**(): `boolean`
 
-*Defined in [Vector.ts:94](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/Vector.ts#L94)*
+*Defined in model/Vector.ts:94*
 
 **Returns:** `boolean`
 
@@ -135,7 +135,7 @@ ___
 
 ▸ **keys**(): `Iterator`<`number`>
 
-*Defined in [Vector.ts:82](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/Vector.ts#L82)*
+*Defined in model/Vector.ts:82*
 
 **Returns:** `Iterator`<`number`>
 
@@ -146,7 +146,7 @@ ___
 
 ▸ **set**(id: *`number`*, value: *`T`*): `void`
 
-*Defined in [Vector.ts:49](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/Vector.ts#L49)*
+*Defined in model/Vector.ts:49*
 
 **Parameters:**
 
@@ -164,7 +164,7 @@ ___
 
 ▸ **values**(): `Iterator`<`T`>
 
-*Defined in [Vector.ts:88](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/Vector.ts#L88)*
+*Defined in model/Vector.ts:88*
 
 **Returns:** `Iterator`<`T`>
 

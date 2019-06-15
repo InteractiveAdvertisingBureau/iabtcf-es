@@ -2,9 +2,9 @@ import {SpecificEncoder} from './SpecificEncoder';
 import {VectorEncodingTypeEnum} from './VectorEncodingTypeEnum';
 import {IntEncoder} from './IntEncoder';
 import {BooleanEncoder} from './BooleanEncoder';
-import {BitLength} from '../BitLength';
-import {Vector} from '../Vector';
-import {TCModelPropType} from '../TCModelPropType';
+import {BitLength} from '../../model/BitLength';
+import {Vector} from '../../model/Vector';
+import {TCModelPropType} from '../../types/TCModelPropType';
 
 export class VendorVectorEncoder implements SpecificEncoder {
 

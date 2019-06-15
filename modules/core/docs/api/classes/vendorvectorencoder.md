@@ -40,7 +40,7 @@
 
 **● boolEnc**: *[BooleanEncoder](booleanencoder.md)* =  new BooleanEncoder()
 
-*Defined in [encoder/VendorVectorEncoder.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/encoder/VendorVectorEncoder.ts#L14)*
+*Defined in tcstring/encoder/VendorVectorEncoder.ts:14*
 
 ___
 <a id="intencoder"></a>
@@ -49,7 +49,7 @@ ___
 
 **● intEncoder**: *[IntEncoder](intencoder.md)* =  new IntEncoder()
 
-*Defined in [encoder/VendorVectorEncoder.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/encoder/VendorVectorEncoder.ts#L13)*
+*Defined in tcstring/encoder/VendorVectorEncoder.ts:13*
 
 ___
 <a id="ranges"></a>
@@ -58,7 +58,7 @@ ___
 
 **● ranges**: *`number`[][]*
 
-*Defined in [encoder/VendorVectorEncoder.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/encoder/VendorVectorEncoder.ts#L17)*
+*Defined in tcstring/encoder/VendorVectorEncoder.ts:17*
 
 ___
 <a id="range_default"></a>
@@ -67,7 +67,7 @@ ___
 
 **● RANGE_DEFAULT**: *`boolean`* = false
 
-*Defined in [encoder/VendorVectorEncoder.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/encoder/VendorVectorEncoder.ts#L11)*
+*Defined in tcstring/encoder/VendorVectorEncoder.ts:11*
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 **get useRange**(): `boolean`
 
-*Defined in [encoder/VendorVectorEncoder.ts:130](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/encoder/VendorVectorEncoder.ts#L130)*
+*Defined in tcstring/encoder/VendorVectorEncoder.ts:130*
 
 **Returns:** `boolean`
 
@@ -93,7 +93,7 @@ ___
 
 ▸ **buildRangeEncoding**(): `string`
 
-*Defined in [encoder/VendorVectorEncoder.ts:98](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/encoder/VendorVectorEncoder.ts#L98)*
+*Defined in tcstring/encoder/VendorVectorEncoder.ts:98*
 
 **Returns:** `string`
 
@@ -104,7 +104,7 @@ ___
 
 ▸ **encode**(vector: *[TCModelPropType](../#tcmodelproptype)*): `string`
 
-*Defined in [encoder/VendorVectorEncoder.ts:20](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/encoder/VendorVectorEncoder.ts#L20)*
+*Defined in tcstring/encoder/VendorVectorEncoder.ts:20*
 
 **Parameters:**
 

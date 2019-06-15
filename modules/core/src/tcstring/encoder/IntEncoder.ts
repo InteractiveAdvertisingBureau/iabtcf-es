@@ -1,4 +1,4 @@
-import {EncodingError} from '../errors/EncodingError';
+import {EncodingError} from '../../errors/EncodingError';
 import {SpecificEncoder} from './SpecificEncoder';
 
 class IntEncoder implements SpecificEncoder {

@@ -1,6 +1,6 @@
-import {Vector} from './Vector';
-import {VectorPath} from './VectorPath';
-import {PurposeRestriction} from './PurposeRestriction';
+import {Vector} from './model/Vector';
+import {VectorPath} from './model/enum/VectorPath';
+import {PurposeRestriction} from './model/PurposeRestriction';
 import {GVL} from './GVL';
 import {TCModelError} from './errors/TCModelError';
 

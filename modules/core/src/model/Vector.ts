@@ -1,5 +1,5 @@
-import {GVL} from './GVL';
-import {VectorPath} from './VectorPath';
+import {GVL} from '../GVL';
+import {VectorPath} from './enum/VectorPath';
 
 class Vector<T> {
 

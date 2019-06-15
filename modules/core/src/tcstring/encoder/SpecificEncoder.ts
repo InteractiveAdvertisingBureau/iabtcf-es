@@ -1,4 +1,4 @@
-import {TCModelPropType} from '../TCModelPropType';
+import {TCModelPropType} from '../../types/TCModelPropType';
 
 export interface SpecificEncoder {
 

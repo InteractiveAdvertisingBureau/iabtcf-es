@@ -1,11 +1,11 @@
-import {IntEncoder} from './encoder/IntEncoder';
-import {LangEncoder} from './encoder/LangEncoder';
-import {BooleanEncoder} from './encoder/BooleanEncoder';
-import {DateEncoder} from './encoder/DateEncoder';
-import {VendorVectorEncoder} from './encoder/VendorVectorEncoder';
-import {FixedVectorEncoder} from './encoder/FixedVectorEncoder';
-import {PublisherRestrictionsEncoder} from './encoder/PublisherRestrictionsEncoder';
-import {SpecificEncoder} from './encoder/SpecificEncoder';
+import {IntEncoder} from './IntEncoder';
+import {LangEncoder} from './LangEncoder';
+import {BooleanEncoder} from './BooleanEncoder';
+import {DateEncoder} from './DateEncoder';
+import {VendorVectorEncoder} from './VendorVectorEncoder';
+import {FixedVectorEncoder} from './FixedVectorEncoder';
+import {PublisherRestrictionsEncoder} from './PublisherRestrictionsEncoder';
+import {SpecificEncoder} from './SpecificEncoder';
 
 class Encodings {
 

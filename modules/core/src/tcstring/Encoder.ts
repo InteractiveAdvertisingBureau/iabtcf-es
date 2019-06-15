@@ -1,8 +1,8 @@
-import {TCModel} from './TCModel';
-import {EncodingError} from './errors/EncodingError';
-import {TCModelPropType} from './TCModelPropType';
-import {Encodings, SpecificEncoder} from './Encodings';
-import {BitLength} from './BitLength';
+import {TCModel} from '../TCModel';
+import {EncodingError} from '../errors/EncodingError';
+import {TCModelPropType} from '../types/TCModelPropType';
+import {Encodings, SpecificEncoder} from './encoder/Encodings';
+import {BitLength} from '../model/BitLength';
 import {Base64} from 'base-64';
 
 

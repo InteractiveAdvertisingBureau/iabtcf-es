@@ -22,7 +22,7 @@ if a Vendor has declared flexible purposes (see: [Vendor](../interfaces/vendor.m
 
 **NOT_ALLOWED**:  = 0
 
-*Defined in [PurposeRestrictionTypes.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/PurposeRestrictionTypes.ts#L11)*
+*Defined in model/enum/PurposeRestrictionTypes.ts:11*
 
 under no circumstances is this purpose allowed.
 
@@ -33,7 +33,7 @@ ___
 
 **REQUIRE_CONSENT**:  = 1
 
-*Defined in [PurposeRestrictionTypes.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/PurposeRestrictionTypes.ts#L16)*
+*Defined in model/enum/PurposeRestrictionTypes.ts:16*
 
 if the default declaration is legitimate interest then this flips the purpose to consent in the encoding.
 
@@ -44,7 +44,7 @@ ___
 
 **REQUIRE_LI**:  = 2
 
-*Defined in [PurposeRestrictionTypes.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/PurposeRestrictionTypes.ts#L21)*
+*Defined in model/enum/PurposeRestrictionTypes.ts:21*
 
 if the default declaration is consent then this flips the purpose to Legitimate Interest in the encoding.
 

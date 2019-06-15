@@ -43,7 +43,7 @@
 
 *Inherited from [VendorVectorEncoder](vendorvectorencoder.md).[boolEnc](vendorvectorencoder.md#boolenc)*
 
-*Defined in [encoder/VendorVectorEncoder.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/encoder/VendorVectorEncoder.ts#L14)*
+*Defined in tcstring/encoder/VendorVectorEncoder.ts:14*
 
 ___
 <a id="intencoder"></a>
@@ -54,7 +54,7 @@ ___
 
 *Inherited from [VendorVectorEncoder](vendorvectorencoder.md).[intEncoder](vendorvectorencoder.md#intencoder)*
 
-*Defined in [encoder/VendorVectorEncoder.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/encoder/VendorVectorEncoder.ts#L13)*
+*Defined in tcstring/encoder/VendorVectorEncoder.ts:13*
 
 ___
 <a id="ranges"></a>
@@ -65,7 +65,7 @@ ___
 
 *Inherited from [VendorVectorEncoder](vendorvectorencoder.md).[ranges](vendorvectorencoder.md#ranges)*
 
-*Defined in [encoder/VendorVectorEncoder.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/encoder/VendorVectorEncoder.ts#L17)*
+*Defined in tcstring/encoder/VendorVectorEncoder.ts:17*
 
 ___
 <a id="range_default"></a>
@@ -76,7 +76,7 @@ ___
 
 *Inherited from [VendorVectorEncoder](vendorvectorencoder.md).[RANGE_DEFAULT](vendorvectorencoder.md#range_default)*
 
-*Defined in [encoder/VendorVectorEncoder.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/encoder/VendorVectorEncoder.ts#L11)*
+*Defined in tcstring/encoder/VendorVectorEncoder.ts:11*
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 *Overrides [VendorVectorEncoder](vendorvectorencoder.md).[useRange](vendorvectorencoder.md#userange)*
 
-*Defined in [encoder/PublisherRestrictionsEncoder.ts:61](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/encoder/PublisherRestrictionsEncoder.ts#L61)*
+*Defined in tcstring/encoder/PublisherRestrictionsEncoder.ts:61*
 
 **Returns:** `boolean`
 
@@ -106,7 +106,7 @@ ___
 
 *Overrides [VendorVectorEncoder](vendorvectorencoder.md).[buildRangeEncoding](vendorvectorencoder.md#buildrangeencoding)*
 
-*Defined in [encoder/PublisherRestrictionsEncoder.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/encoder/PublisherRestrictionsEncoder.ts#L19)*
+*Defined in tcstring/encoder/PublisherRestrictionsEncoder.ts:19*
 
 **Returns:** `string`
 
@@ -119,7 +119,7 @@ ___
 
 *Overrides [VendorVectorEncoder](vendorvectorencoder.md).[encode](vendorvectorencoder.md#encode)*
 
-*Defined in [encoder/PublisherRestrictionsEncoder.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/5f390d3/modules/core/src/encoder/PublisherRestrictionsEncoder.ts#L11)*
+*Defined in tcstring/encoder/PublisherRestrictionsEncoder.ts:11*
 
 **Parameters:**
 
