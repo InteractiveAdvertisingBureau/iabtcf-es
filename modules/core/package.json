@@ -76,5 +76,6 @@
   },
   "dependencies": {
     "base-64": "^0.1.0"
-  }
+  },
+  "gitHead": "1cc7fc723d8cbfa784dde27ce7bb95100107b750"
 }

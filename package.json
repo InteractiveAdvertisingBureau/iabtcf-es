@@ -4,8 +4,7 @@
   "private":true,
   "scripts": {
     "test": "lerna run test",
-    "build": "lerna run build",
-    "prepublishOnly": "npm run test && npm run build"
+    "build": "lerna run build"
   },
   "keywords": [
     "interactive",

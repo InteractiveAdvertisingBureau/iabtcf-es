@@ -55,5 +55,6 @@
     "type": "git",
     "url": "https://github.com/chrispaterson/iabtcf-es.git",
     "directory": "modules/cmpapi"
-  }
+  },
+  "gitHead": "1cc7fc723d8cbfa784dde27ce7bb95100107b750"
 }
