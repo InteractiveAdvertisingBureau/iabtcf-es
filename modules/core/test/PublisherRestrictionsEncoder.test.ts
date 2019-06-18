@@ -12,63 +12,46 @@ describe('PublisherRestrictionsEncoder', (): void => {
 
   };
 
-  const getVector = (maxId: number): Vector<PurposeRestriction> => {
-
-    const vector: Vector<PurposeRestriction> = new Vector<PurposeRestriction>();
-    const purposes: number[] = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-
-    PurposeRestriction.availablePurposeIds = new Set<number>(purposes);
-
-    for (let i = 1; i <= maxId; i++) {
-
-      const pr: PurposeRestriction = new PurposeRestriction();
-
-      pr.purposeId = purposes[Math.floor(Math.random() * purposes.length)];
-      pr.restrictionType = Math.round(Math.random()* 2);
-
-      vector.set(i, pr);
-
-    }
-    return vector;
-
-  };
-
-  const checkRangeEntry = (rangeEntry: string, isMoreThanOne: boolean, vector: Vector<PurposeRestriction>): void => {
+  const checkRangeEntry = (
+    rangeEntry: string,
+    ids: number[],
+    purpRestriction: PurposeRestriction
+  ): number => {
 
     let index = 0;
 
+    // number of entries
     expect(rangeEntry.substr(index, 1))
-      .to.equal(+isMoreThanOne + '');
+      .to.equal(+(ids.length > 1) + '');
 
     index += 1;
 
+    //
     expect(rangeEntry.substr(index, BitLength.vendorId))
-      .to.equal(pad('1', BitLength.vendorId));
+      .to.equal(pad(ids[0].toString(2), BitLength.vendorId));
 
     index += BitLength.vendorId;
 
-    expect(rangeEntry.substr(index, BitLength.vendorId))
-      .to.equal(pad(vector.maxId.toString(2), BitLength.vendorId));
+    if (ids.length > 1) {
 
-    index += BitLength.vendorId;
+      expect(rangeEntry.substr(index, BitLength.vendorId))
+        .to.equal(pad(ids[1].toString(2), BitLength.vendorId));
 
-    for (let i =1; i <= vector.maxId; i ++) {
-
-      const vendor: PurposeRestriction = vector.get(i) as PurposeRestriction;
-      const msg1 = `purposeId: ${vendor.purposeId} should be set on vendor ${i}`;
-
-      // first purpose restriciton purpose ID
-      expect(rangeEntry.substr(index, BitLength.purposeRestrictionId), msg1)
-        .to.equal(pad((vendor.purposeId).toString(2), BitLength.purposeRestrictionId));
-
-      index += BitLength.purposeRestrictionId;
-
-      expect(rangeEntry.substr(index, BitLength.purposeRestrictionType))
-        .to.equal(pad((vendor.restrictionType).toString(2), BitLength.purposeRestrictionType));
-
-      index += BitLength.purposeRestrictionType;
+      index += BitLength.vendorId;
 
     }
+    // first purpose restriciton purpose ID
+    expect(rangeEntry.substr(index, BitLength.purposeRestrictionId))
+      .to.equal(pad((purpRestriction.purposeId).toString(2), BitLength.purposeRestrictionId));
+
+    index += BitLength.purposeRestrictionId;
+
+    expect(rangeEntry.substr(index, BitLength.purposeRestrictionType))
+      .to.equal(pad((purpRestriction.restrictionType).toString(2), BitLength.purposeRestrictionType));
+
+    index += BitLength.purposeRestrictionType;
+
+    return index;
 
   };
 
@@ -78,23 +61,45 @@ describe('PublisherRestrictionsEncoder', (): void => {
 
   });
 
-  it('should properly encode a vector of publisher restrictions into one range', (): void => {
+  it('should properly encode a vector of different restrictions into different ranges', (): void => {
 
     const numEntries = 3;
     const prEnc: PublisherRestrictionsEncoder = new PublisherRestrictionsEncoder();
-    const vector: Vector<PurposeRestriction> = getVector(numEntries);
+
+    const vector: Vector<PurposeRestriction> = new Vector<PurposeRestriction>();
+    const purposes: number[] = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+    PurposeRestriction.availablePurposeIds = new Set<number>(purposes);
+
+    for (let i = 1; i <= numEntries; i++) {
+
+      const pr: PurposeRestriction = new PurposeRestriction();
+
+      pr.purposeId = purposes[i+1];
+      pr.restrictionType = Math.round(Math.random()* 2);
+
+      vector.set(i, pr);
+
+    }
 
     const result: string = prEnc.encode(vector);
 
     let index = 0;
 
     expect(result.substr(index, BitLength.rangeEncodingNumEntries))
-      .to.equal(pad('1', BitLength.rangeEncodingNumEntries));
+      .to.equal(pad(numEntries.toString(2), BitLength.rangeEncodingNumEntries));
 
     index += BitLength.rangeEncodingNumEntries;
-    checkRangeEntry(result.substr(index), true, vector);
+
+    for (let i = 1; i <= numEntries; i ++) {
+
+      index += checkRangeEntry(result.substr(index), [i], vector.get(i) as PurposeRestriction);
+
+    }
 
   });
+
+  // This encoding may need to be revisited... I will write more tests in the future
 
 
 });

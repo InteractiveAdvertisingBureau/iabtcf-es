@@ -41,6 +41,12 @@ class PurposeRestriction {
     return !!(this.purposeId && this.restrictionType !== undefined);
 
   }
+  public isSameAs(otherPR: PurposeRestriction): boolean {
+
+    return (this.purposeId === otherPR.purposeId
+      && this.restrictionType === otherPR.restrictionType);
+
+  }
 
 }
 export {PurposeRestriction};

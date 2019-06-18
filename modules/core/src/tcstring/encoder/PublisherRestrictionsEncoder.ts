@@ -1,74 +1,96 @@
 import {SpecificEncoder} from './SpecificEncoder';
 import {BitLength} from '../../model/BitLength';
+import {IntEncoder} from './IntEncoder';
+import {BooleanEncoder} from './BooleanEncoder';
 import {Vector} from '../../model/Vector';
-import {VendorVectorEncoder} from './VendorVectorEncoder';
 import {PurposeRestriction} from '../../model/PurposeRestriction';
 
-export class PublisherRestrictionsEncoder extends VendorVectorEncoder implements SpecificEncoder {
-
-  private vector: Vector<PurposeRestriction>;
+export class PublisherRestrictionsEncoder implements SpecificEncoder {
 
   public encode(vector: Vector<PurposeRestriction>): string {
 
-    this.vector = vector;
+    const intEncoder: IntEncoder = new IntEncoder();
+    const boolEnc: BooleanEncoder = new BooleanEncoder();
+    const ranges: number[][] = [];
+    let range: number[] = [];
+    const ids = vector.ids();
 
-    return super.encode(vector);
+    const closeRange = (): void => {
 
-  }
+      ranges.push(range);
+      range = [];
 
-  /**
-   * TODO: this can not inherit from VendorVectorEncoder becuase ranges would
-   * be both no gaps in IDs and the same purposeId and restriction type are
-   * assigned together.
-   *
-   * @return {string} encoded bit string for the ranges
-   */
-  protected buildRangeEncoding(): string {
+    };
 
-    const numEntries = this.ranges.length;
+    for (let i = 0; i < ids.length; i ++) {
+
+      const curId = ids[i];
+      const curValue = vector.get(curId);
+
+      if ( i === 0) {
+
+        range[0] = curId;
+
+      } else {
+
+        const prevId = ids[i-1];
+        const prevValue = vector.get(prevId );
+
+        // no gap between ids, cur and prev values and same values as previous?
+        if (prevId === curId - 1
+          && curValue
+          && prevValue
+          && prevValue.isSameAs(curValue)) {
+
+          // put it onto the existing range in position 2
+          range[1] = curId;
+
+        } else {
+
+          // non sequential entry
+
+          closeRange();
+          range[0] = curId;
+          if (i === ids.length - 1) {
+
+            closeRange();
+
+          }
+
+        }
+
+      }
+
+    }
 
     // Number of entries
-    let rangeString = this.intEncoder.encode(numEntries, BitLength.rangeEncodingNumEntries);
+    let rangeString = intEncoder.encode(ranges.length, BitLength.rangeEncodingNumEntries);
 
-
-    this.ranges.forEach((range: number[]): void => {
+    ranges.forEach((range: number[]): void => {
 
       const single = (range.length === 1);
-      let thisRange = '';
 
-      // first is the indicator of whether this is a single id or range (two)
+      // first is the indicator of whether is a single id or range (two)
       // 0 is single and range is 1
-      thisRange += this.boolEnc.encode(!single);
+      rangeString += boolEnc.encode(!single);
 
       // second is the first (or only) vendorId
-      thisRange += this.intEncoder.encode(range[0], BitLength.vendorId);
+      rangeString += intEncoder.encode(range[0], BitLength.vendorId);
 
       if (!single) {
 
-        thisRange += this.intEncoder.encode(range[1], BitLength.vendorId);
+        rangeString += intEncoder.encode(range[1], BitLength.vendorId);
 
       }
 
-      const pr: PurposeRestriction = this.vector.get(range[0]) as PurposeRestriction;
+      const pr: PurposeRestriction = vector.get(range[0]) as PurposeRestriction;
 
-      thisRange += this.intEncoder.encode(pr.purposeId, BitLength.purposeRestrictionId);
-      thisRange += this.intEncoder.encode(pr.restrictionType, BitLength.purposeRestrictionType);
-
-      if (pr.isValid()) {
-
-        rangeString += thisRange;
-
-      }
+      rangeString += intEncoder.encode(pr.purposeId, BitLength.purposeRestrictionId);
+      rangeString += intEncoder.encode(pr.restrictionType, BitLength.purposeRestrictionType);
 
     });
 
     return rangeString;
-
-  }
-
-  protected get useRange(): boolean {
-
-    return true;
 
   }
 

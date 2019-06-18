@@ -4,24 +4,23 @@ import {IntEncoder} from './IntEncoder';
 import {BooleanEncoder} from './BooleanEncoder';
 import {BitLength} from '../../model/BitLength';
 import {Vector} from '../../model/Vector';
-import {TCModelPropType} from '../../types/TCModelPropType';
 
 export class VendorVectorEncoder implements SpecificEncoder {
 
   public static readonly RANGE_DEFAULT: boolean = false;
-  private encodingType: VectorEncodingTypeEnum;
-  protected intEncoder: IntEncoder = new IntEncoder();
-  protected boolEnc: BooleanEncoder = new BooleanEncoder();
-  private bitString: string = '';
-  private range: number[];
-  protected ranges: number[][];
+  private intEncoder: IntEncoder = new IntEncoder();
+  private boolEnc: BooleanEncoder = new BooleanEncoder();
+  private bitString: string;
+  private ranges: number[][];
   private maxId: number;
 
-  public encode(vector: TCModelPropType): string {
+  public encode(vector: Vector<boolean>): string {
 
-    vector = vector as Vector<boolean>;
-    this.encodingType = VectorEncodingTypeEnum.RANGE;
-    this.range = [];
+    let range: number[] = [];
+    let bitString = '';
+
+    ;
+
     this.ranges = [];
     this.maxId = vector.maxId;
 
@@ -29,6 +28,7 @@ export class VendorVectorEncoder implements SpecificEncoder {
 
     for (let i = 1; i <= vector.maxId; i ++) {
 
+      // has to be true -- false or undefined is false
       const curValue = !!vector.get(i);
 
       // build our bitfield no matter what
@@ -52,18 +52,18 @@ export class VendorVectorEncoder implements SpecificEncoder {
            * this is the last value of the range, so we'll push it on to the
            * end into position 1
            */
-          this.range.push(i);
+          range.push(i);
 
           // store the array in our bigger array
-          this.ranges.push(this.range);
+          this.ranges.push(range);
 
           // clear the array for the next range
-          this.range = [];
+          range = [];
 
-        } else if (this.range.length === 0) {
+        } else if (range.length === 0) {
 
           // this is the first  value for this range
-          this.range.push(i);
+          range.push(i);
 
         }
 
@@ -71,45 +71,47 @@ export class VendorVectorEncoder implements SpecificEncoder {
 
     }
 
+    const encodingType: VectorEncodingTypeEnum = this.rangeIsSmaller()
+      ? VectorEncodingTypeEnum.RANGE
+      : VectorEncodingTypeEnum.FIELD;
 
-    // if the range encoding is shorter
-    if (this.useRange) {
+    // maxId
+    bitString = this.intEncoder.encode(this.maxId, BitLength.maxId);
 
-      this.bitString = this.buildRangeEncoding();
+    // encoding type
+    bitString += encodingType + '';
+
+    if (encodingType === VectorEncodingTypeEnum.RANGE) {
+
+      bitString += this.buildRangeEncoding();
 
     } else {
 
-      this.encodingType = VectorEncodingTypeEnum.FIELD;
-      // first item after maxId
-      this.bitString = this.intEncoder.encode(this.maxId, BitLength.maxId);
-      this.bitString += this.encodingType + '';
-
-      this.bitString += bitField;
+      bitString += bitField;
 
     }
 
     this.ranges = [];
 
-    return this.bitString;
+    return bitString;
 
   }
 
-  protected buildRangeEncoding(): string {
+  private buildRangeEncoding(): string {
 
     const numEntries = this.ranges.length;
 
-    let rangeString = this.intEncoder.encode(this.maxId, BitLength.maxId);
+    // set with range default (always 0 because there is no practical case for a default of 1)
+    let rangeString = this.boolEnc.encode(VendorVectorEncoder.RANGE_DEFAULT);
 
-    rangeString += this.encodingType + '';
-
-    // first set the max Vendor ID
-
-    rangeString += this.boolEnc.encode(VendorVectorEncoder.RANGE_DEFAULT);
+    // describe the number of entries to follow
     rangeString += this.intEncoder.encode(numEntries, BitLength.rangeEncodingNumEntries);
 
 
+    // each range
     this.ranges.forEach((range: number[]): void => {
 
+      // is this range a single?
       const single = (range.length === 1);
 
       // first is the indicator of whether this is a single id or range (two)
@@ -121,6 +123,7 @@ export class VendorVectorEncoder implements SpecificEncoder {
 
       if (!single) {
 
+        // add the second id if it exists
         rangeString += this.intEncoder.encode(range[1], BitLength.vendorId);
 
       }
@@ -130,7 +133,7 @@ export class VendorVectorEncoder implements SpecificEncoder {
     return rangeString;
 
   }
-  protected get useRange(): boolean {
+  private rangeIsSmaller(): boolean {
 
     // the one is for the default consent value
     let rLength = BitLength.rangeEncodingDefaultConsent + BitLength.rangeEncodingNumEntries;

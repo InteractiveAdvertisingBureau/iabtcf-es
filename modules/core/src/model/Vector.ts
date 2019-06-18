@@ -79,9 +79,9 @@ class Vector<T> {
 
   }
 
-  public keys(): Iterator<number> {
+  public ids(): number[] {
 
-    return this.map.keys();
+    return Array.from(this.map.keys());
 
   }
 
