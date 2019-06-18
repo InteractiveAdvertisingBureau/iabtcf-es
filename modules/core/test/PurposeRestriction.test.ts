@@ -26,6 +26,11 @@ runDescribe('purposeId', (): void => {
     }
 
   });
+  afterEach((): void => {
+
+    PurposeRestriction.availablePurposeIds = new Set<number>();
+
+  });
   const shouldBeOk: (value: number) => void = (value: number): void => {
 
     it(`should be ok with ${value}`, (): void => {

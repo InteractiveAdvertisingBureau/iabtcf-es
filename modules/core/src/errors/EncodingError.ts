@@ -13,7 +13,7 @@ class EncodingError extends Error {
    */
   public constructor(msg: string) {
 
-    super('Encoding Error: ' + msg);
+    super(msg);
     this.name = 'EncodingError';
 
   }

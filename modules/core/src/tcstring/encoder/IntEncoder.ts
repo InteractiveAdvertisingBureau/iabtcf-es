@@ -7,7 +7,7 @@ class IntEncoder implements SpecificEncoder {
 
     let bitString = value.toString(2);
 
-    if (bitString.length > numBits) {
+    if (bitString.length > numBits || value < 0) {
 
       throw new EncodingError(`${value} too large to encode into ${numBits}`);
 

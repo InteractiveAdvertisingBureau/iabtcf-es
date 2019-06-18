@@ -16,6 +16,13 @@ export class PublisherRestrictionsEncoder extends VendorVectorEncoder implements
 
   }
 
+  /**
+   * TODO: this can not inherit from VendorVectorEncoder becuase ranges would
+   * be both no gaps in IDs and the same purposeId and restriction type are
+   * assigned together.
+   *
+   * @return {string} encoded bit string for the ranges
+   */
   protected buildRangeEncoding(): string {
 
     const numEntries = this.ranges.length;
@@ -30,7 +37,8 @@ export class PublisherRestrictionsEncoder extends VendorVectorEncoder implements
       let thisRange = '';
 
       // first is the indicator of whether this is a single id or range (two)
-      thisRange += this.boolEnc.encode(single);
+      // 0 is single and range is 1
+      thisRange += this.boolEnc.encode(!single);
 
       // second is the first (or only) vendorId
       thisRange += this.intEncoder.encode(range[0], BitLength.vendorId);

@@ -7,7 +7,7 @@ class DateEncoder implements SpecificEncoder {
 
     const intEncoder: IntEncoder = new IntEncoder();
 
-    return intEncoder.encode(value.getTime() / 100, numBits);
+    return intEncoder.encode(Math.round(value.getTime()/100), numBits);
 
   }
 
