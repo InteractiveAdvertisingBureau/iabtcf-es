@@ -2,8 +2,8 @@
 
 # Class: Vector
 
-## Type parameters
-#### T 
+Vector class is like a Set except it keeps track of a max id
+
 ## Hierarchy
 
 **Vector**
@@ -14,22 +14,16 @@
 
 * [constructor](vector.md#constructor)
 
-### Properties
-
-* [path](vector.md#path)
-
 ### Accessors
 
 * [maxId](vector.md#maxid)
 
 ### Methods
 
-* [get](vector.md#get)
+* [forEach](vector.md#foreach)
 * [has](vector.md#has)
-* [isEmpty](vector.md#isempty)
-* [keys](vector.md#keys)
 * [set](vector.md#set)
-* [values](vector.md#values)
+* [unset](vector.md#unset)
 
 ---
 
@@ -39,31 +33,19 @@
 
 ###  constructor
 
-⊕ **new Vector**(gvl?: *[GVL](gvl.md)*, path?: *[VectorPath](../enums/vectorpath.md)*, initValue?: *[T]()*): [Vector](vector.md)
+⊕ **new Vector**(ids?: *[idOrIds](../#idorids)*): [Vector](vector.md)
 
-*Defined in model/Vector.ts:8*
+*Defined in [model/Vector.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/model/Vector.ts#L14)*
+
+constructor
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| `Optional` gvl | [GVL](gvl.md) |
-| `Optional` path | [VectorPath](../enums/vectorpath.md) |
-| `Optional` initValue | [T]() |
+| `Optional` ids | [idOrIds](../#idorids) |
 
 **Returns:** [Vector](vector.md)
-
-___
-
-## Properties
-
-<a id="path"></a>
-
-###  path
-
-**● path**: *[VectorPath](../enums/vectorpath.md)*
-
-*Defined in model/Vector.ts:8*
 
 ___
 
@@ -75,30 +57,36 @@ ___
 
 **get maxId**(): `number`
 
-*Defined in model/Vector.ts:64*
+*Defined in [model/Vector.ts:37](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/model/Vector.ts#L37)*
+
+maxId
 
 **Returns:** `number`
-the highest id passed set on this Vector
+*   the highest id in this Vector
 
 ___
 
 ## Methods
 
-<a id="get"></a>
+<a id="foreach"></a>
 
-###  get
+###  forEach
 
-▸ **get**(id: *`number`*): `T` \| `undefined`
+▸ **forEach**(callback: *`function`*): `void`
 
-*Defined in model/Vector.ts:70*
+*Defined in [model/Vector.ts:134](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/model/Vector.ts#L134)*
+
+forEach - to traverse from id=1 to id=maxId in a sequential non-sparse manner
+
+*__callback__*: forEachCallback
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| id | `number` |
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| callback | `function` |  callback to execute |
 
-**Returns:** `T` \| `undefined`
+**Returns:** `void`
 
 ___
 <a id="has"></a>
@@ -107,66 +95,56 @@ ___
 
 ▸ **has**(id: *`number`*): `boolean`
 
-*Defined in model/Vector.ts:76*
+*Defined in [model/Vector.ts:49](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/model/Vector.ts#L49)*
+
+get
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| id | `number` |
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| id | `number` |  key for value to check |
 
 **Returns:** `boolean`
-
-___
-<a id="isempty"></a>
-
-###  isEmpty
-
-▸ **isEmpty**(): `boolean`
-
-*Defined in model/Vector.ts:94*
-
-**Returns:** `boolean`
-
-___
-<a id="keys"></a>
-
-###  keys
-
-▸ **keys**(): `Iterator`<`number`>
-
-*Defined in model/Vector.ts:82*
-
-**Returns:** `Iterator`<`number`>
+*   value of that key, if never set it will be false
 
 ___
 <a id="set"></a>
 
 ###  set
 
-▸ **set**(id: *`number`*, value: *`T`*): `void`
+▸ **set**(id: *[idOrIds](../#idorids)*): `void`
 
-*Defined in model/Vector.ts:49*
+*Defined in [model/Vector.ts:100](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/model/Vector.ts#L100)*
+
+set - sets an id assumed to be a truthy value by its presence
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| id | `number` |
-| value | `T` |
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| id | [idOrIds](../#idorids) |  id to set a value for or array of ids to include |
 
 **Returns:** `void`
 
 ___
-<a id="values"></a>
+<a id="unset"></a>
 
-###  values
+###  unset
 
-▸ **values**(): `Iterator`<`T`>
+▸ **unset**(id: *[idOrIds](../#idorids)*): `void`
 
-*Defined in model/Vector.ts:88*
+*Defined in [model/Vector.ts:63](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/model/Vector.ts#L63)*
 
-**Returns:** `Iterator`<`T`>
+unset
+
+**Parameters:**
+
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| id | [idOrIds](../#idorids) |  id or ids to unset |
+
+**Returns:** `void`
 
 ___
 

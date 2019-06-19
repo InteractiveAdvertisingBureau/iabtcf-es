@@ -6,12 +6,12 @@ describe('FixedVectorEncoder', (): void => {
 
   it('should encode a vector', (): void => {
 
-    const vector: Vector<boolean> = new Vector<boolean>();
+    const vector: Vector = new Vector();
     const numBits = 10;
 
-    vector.set(1, true);
-    vector.set(2, true);
-    vector.set(5, true);
+    vector.set(1);
+    vector.set(2);
+    vector.set(5);
 
     const FVEnc: FixedVectorEncoder = new FixedVectorEncoder();
 

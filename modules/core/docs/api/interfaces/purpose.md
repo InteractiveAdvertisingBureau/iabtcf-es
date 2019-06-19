@@ -27,7 +27,7 @@
 
 **● consentable**: *`undefined` \| `false` \| `true`*
 
-*Defined in model/GVLSchema.ts:10*
+*Defined in [model/GVLSchema.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/model/GVLSchema.ts#L10)*
 
 ___
 <a id="description"></a>
@@ -36,7 +36,7 @@ ___
 
 **● description**: *`string`*
 
-*Defined in model/GVLSchema.ts:4*
+*Defined in [model/GVLSchema.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/model/GVLSchema.ts#L4)*
 
 ___
 <a id="descriptionlegal"></a>
@@ -45,7 +45,7 @@ ___
 
 **● descriptionLegal**: *`string`*
 
-*Defined in model/GVLSchema.ts:5*
+*Defined in [model/GVLSchema.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/model/GVLSchema.ts#L5)*
 
 ___
 <a id="id"></a>
@@ -54,7 +54,7 @@ ___
 
 **● id**: *`number`*
 
-*Defined in model/GVLSchema.ts:2*
+*Defined in [model/GVLSchema.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/model/GVLSchema.ts#L2)*
 
 ___
 <a id="name"></a>
@@ -63,7 +63,7 @@ ___
 
 **● name**: *`string`*
 
-*Defined in model/GVLSchema.ts:3*
+*Defined in [model/GVLSchema.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/model/GVLSchema.ts#L3)*
 
 ___
 <a id="righttoobject"></a>
@@ -72,7 +72,7 @@ ___
 
 **● rightToObject**: *`undefined` \| `false` \| `true`*
 
-*Defined in model/GVLSchema.ts:15*
+*Defined in [model/GVLSchema.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/model/GVLSchema.ts#L15)*
 
 default=true false means CMPs should never afford users the means to exercise a right to object
 

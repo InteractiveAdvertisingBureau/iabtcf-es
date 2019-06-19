@@ -1,65 +1,38 @@
-import {GVL} from '../GVL';
-import {VectorPath} from './enum/VectorPath';
+import {TCModelError} from '../errors/TCModelError';
 
-class Vector<T> {
+type idOrIds = number | number[];
+/**
+ * Vector class is like a Set except it keeps track of a max id
+ */
 
-  private map: Map<number, T> = new Map();
+class Vector {
+
   private maxId_: number = 0;
-  public path: VectorPath;
+  /**
+   * keep a set for faster lookup
+   */
+  private set_: Set<number> = new Set<number>();
 
-  public constructor(gvl?: GVL, path?: VectorPath, initValue?: T) {
+  /**
+   * constructor
+   *
+   * @param {number[]} ids? - initialized set of `true` values
+   * @return {undefined}
+   */
+  public constructor(ids?: idOrIds) {
 
-    // make sure they're all defined if not we'll just construct an empty Vector
-    if (gvl && path !== undefined && initValue !== undefined) {
+    if (ids !== undefined) {
 
-      let idsToInit: string[] = [];
-
-      this.path = path;
-
-      switch (path) {
-
-        case VectorPath.PURPOSE:
-
-          idsToInit = Object.keys(gvl.purposes);
-
-          break;
-        case VectorPath.VENDOR:
-
-          idsToInit = Object.keys(gvl.vendors);
-
-          break;
-        case VectorPath.SPECIAL_FEATURE:
-
-          idsToInit = Object.keys(gvl.specialFeatures);
-
-          break;
-
-      }
-
-      idsToInit.forEach((strId: string): void => {
-
-        this.set(parseInt(strId, 10), initValue as T);
-
-      });
-
-    }
-
-  }
-
-  public set(id: number, value: T): void {
-
-    this.map.set(id, value);
-
-    if (id > this.maxId_) {
-
-      this.maxId_ = id;
+      this.set(ids);
 
     }
 
   }
 
   /**
-   * @return {number} the highest id passed set on this Vector
+   * maxId
+   *
+   * @return {number} - the highest id in this Vector
    */
   public get maxId(): number {
 
@@ -67,33 +40,104 @@ class Vector<T> {
 
   }
 
-  public get(id: number): T | undefined {
-
-    return this.map.get(id);
-
-  }
-
+  /**
+   * get
+   *
+   * @param {number} id - key for value to check
+   * @return {boolean} - value of that key, if never set it will be false
+   */
   public has(id: number): boolean {
 
-    return this.map.has(id);
+    /**
+     * if it exists in the set we'll return true
+     */
+    return this.set_.has(id);
+
+  }
+  /**
+   * unset
+   *
+   * @param {idOrIds} id - id or ids to unset
+   * @return {void}
+   */
+  public unset(id: idOrIds): void {
+
+    if (Array.isArray(id)) {
+
+      id.forEach((id): void => this.unset(id));
+
+    } else {
+
+      this.set_.delete(id);
+
+      if (id === this.maxId) {
+
+        /**
+         * aww bummer we lost our maxId... now we've got to search through
+         * all the ids and find the biggest one.
+         */
+        this.maxId_ = 0;
+        this.set_.forEach((id: number): void => {
+
+          this.maxId_ = Math.max(this.maxId, id);
+
+        });
+
+      }
+
+    }
 
   }
 
-  public ids(): number[] {
+  /**
+   * set - sets an id assumed to be a truthy value by its presence
+   *
+   * @param {idOrIds} id - id to set a value for or array of ids to
+   * include
+   *
+   * @return {void}
+   */
+  public set(id: idOrIds): void {
 
-    return Array.from(this.map.keys());
+    if (Array.isArray(id)) {
+
+      id.forEach((id): void => this.set(id));
+
+    } else {
+
+      if (!(Number.isInteger(id) && id > 0)) {
+
+        /**
+         * Super not cool to try and set something that's not a positive integer
+         */
+        throw new TCModelError('set()', id, 'must be positive integer');
+
+      }
+
+      this.set_.add(id);
+      this.maxId_ = Math.max(this.maxId, id);
+
+    }
 
   }
+  /**
+   * forEach - to traverse from id=1 to id=maxId in a sequential non-sparse manner
+   *
+   *
+   * @param {forEachCallback} callback - callback to execute
+   * @return {void}
+   *
+   * @callback forEachCallback
+   * @param {boolean} value - whether or not this id exists in the vector
+   * @param {number} id - the id number of the current iteration
+   */
+  public forEach(callback: (value: boolean, id: number) => void): void {
 
-  public values(): Iterator<T> {
+    for (let i = 1; i <= this.maxId; i++) {
 
-    return this.map.values();
+      callback(this.has(i), i);
 
-  }
-
-  public isEmpty(): boolean {
-
-    return (this.map.size === 0);
+    }
 
   }
 

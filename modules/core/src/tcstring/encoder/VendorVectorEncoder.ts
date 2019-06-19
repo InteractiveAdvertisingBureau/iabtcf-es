@@ -14,22 +14,17 @@ export class VendorVectorEncoder implements SpecificEncoder {
   private ranges: number[][];
   private maxId: number;
 
-  public encode(vector: Vector<boolean>): string {
+  public encode(vector: Vector): string {
 
     let range: number[] = [];
     let bitString = '';
-
-    ;
 
     this.ranges = [];
     this.maxId = vector.maxId;
 
     let bitField = '';
 
-    for (let i = 1; i <= vector.maxId; i ++) {
-
-      // has to be true -- false or undefined is false
-      const curValue = !!vector.get(i);
+    vector.forEach((curValue: boolean, i): void => {
 
       // build our bitfield no matter what
       bitField += this.boolEnc.encode(curValue);
@@ -43,7 +38,7 @@ export class VendorVectorEncoder implements SpecificEncoder {
         /**
          * Look ahead to see if this is the last value in our range
          */
-        const nextValue = !!vector.get(i + 1);
+        const nextValue = vector.has(i + 1);
 
         // if there isn't a next value, then we'll wrap up this range
         if (!nextValue) {
@@ -69,7 +64,8 @@ export class VendorVectorEncoder implements SpecificEncoder {
 
       }
 
-    }
+    });
+
 
     const encodingType: VectorEncodingTypeEnum = this.rangeIsSmaller()
       ? VectorEncodingTypeEnum.RANGE

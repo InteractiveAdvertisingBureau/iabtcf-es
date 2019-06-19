@@ -147,7 +147,7 @@ describe('TCModel', (): void => {
     // since we didn't construct with a gvl we should
     // have empty fields here
     expect(tcModel.vendorListVersion).to.be.undefined;
-    expect(tcModel.policyVersion).to.be.undefined;
+    expect(tcModel.policyVersion).to.equal(2);
     expect(tcModel.gvl).to.be.undefined;
 
   });
@@ -301,13 +301,16 @@ runDescribe('version', (): void => {
 
       const tcModel = new TCModel();
 
+      const defaultVersion: number = tcModel.version;
+
       expect((): void => {
 
         tcModel.version = value;
 
       }).to.throw();
 
-      expect(tcModel.version).to.be.undefined;
+      // should not be changed
+      expect(tcModel.version).to.equal(defaultVersion);
 
     });
 

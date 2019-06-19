@@ -7,7 +7,6 @@
 
 * [PurposeRestrictionTypes](enums/purposerestrictiontypes.md)
 * [VectorEncodingTypeEnum](enums/vectorencodingtypeenum.md)
-* [VectorPath](enums/vectorpath.md)
 
 ### Classes
 
@@ -25,7 +24,6 @@
 * [IntEncoder](classes/intencoder.md)
 * [Json](classes/json.md)
 * [LangEncoder](classes/langencoder.md)
-* [PublisherRestrictionsEncoder](classes/publisherrestrictionsencoder.md)
 * [PurposeRestriction](classes/purposerestriction.md)
 * [TCModel](classes/tcmodel.md)
 * [TCModelError](classes/tcmodelerror.md)
@@ -53,6 +51,7 @@
 
 * [TCModelPropType](#tcmodelproptype)
 * [VersionOrObject](#versionorobject)
+* [idOrIds](#idorids)
 
 ---
 
@@ -62,9 +61,9 @@
 
 ###  TCModelPropType
 
-**Ƭ TCModelPropType**: *`number` \| `Date` \| `string` \| `boolean` \| [Vector](classes/vector.md)<`boolean`> \| [Vector](classes/vector.md)<[PurposeRestriction](classes/purposerestriction.md)>*
+**Ƭ TCModelPropType**: *`number` \| `Date` \| `string` \| `boolean` \| [Vector](classes/vector.md)*
 
-*Defined in types/TCModelPropType.ts:4*
+*Defined in [types/TCModelPropType.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/types/TCModelPropType.ts#L4)*
 
 ___
 <a id="versionorobject"></a>
@@ -73,7 +72,16 @@ ___
 
 **Ƭ VersionOrObject**: *`string` \| `number` \| `object`*
 
-*Defined in [GVL.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/b5ac254/modules/core/src/GVL.ts#L5)*
+*Defined in [GVL.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/GVL.ts#L5)*
+
+___
+<a id="idorids"></a>
+
+###  idOrIds
+
+**Ƭ idOrIds**: *`number` \| `number`[]*
+
+*Defined in [model/Vector.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/model/Vector.ts#L3)*
 
 ___
 

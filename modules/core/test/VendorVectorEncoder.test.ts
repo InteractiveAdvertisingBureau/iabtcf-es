@@ -14,13 +14,13 @@ describe('VendorVectorEncoder', (): void => {
 
   };
 
-  const getVector = (maxId: number): Vector<boolean> => {
+  const getVector = (maxId: number): Vector => {
 
-    const vector: Vector<boolean> = new Vector<boolean>();
+    const vector: Vector = new Vector();
 
     for (let i = 1; i <= maxId; i++) {
 
-      vector.set(i, true);
+      vector.set(i);
 
     }
     return vector;
@@ -31,7 +31,7 @@ describe('VendorVectorEncoder', (): void => {
 
     const vvEnc: VendorVectorEncoder = new VendorVectorEncoder();
     const numVendors = 10;
-    const vector: Vector<boolean> = getVector(numVendors);
+    const vector: Vector = getVector(numVendors);
     const result: string = vvEnc.encode(vector);
 
     expect(result.length).to.equal(headerLength + numVendors);
@@ -43,7 +43,7 @@ describe('VendorVectorEncoder', (): void => {
 
     for (let i=0; i < bitField.length; i ++) {
 
-      expect(bitField[i]).to.equal(!!vector.get(i+1) ? '1': '0');
+      expect(bitField[i]).to.equal(vector.has(i+1) ? '1': '0');
 
     }
 
@@ -53,7 +53,7 @@ describe('VendorVectorEncoder', (): void => {
 
     const vvEnc: VendorVectorEncoder = new VendorVectorEncoder();
     const numVendors = 46;
-    const vector: Vector<boolean> = getVector(numVendors);
+    const vector: Vector = getVector(numVendors);
     const result: string = vvEnc.encode(vector);
 
     expect(result.length).to.equal(headerLength + numVendors);
@@ -98,9 +98,9 @@ describe('VendorVectorEncoder', (): void => {
 
     const vvEnc: VendorVectorEncoder = new VendorVectorEncoder();
     const numVendors = 46;
-    const vector: Vector<boolean> = getVector(numVendors);
+    const vector: Vector = getVector(numVendors);
 
-    vector.set(numVendors/2, false);
+    vector.unset(numVendors/2);
 
     const result: string = vvEnc.encode(vector);
 
@@ -115,7 +115,7 @@ describe('VendorVectorEncoder', (): void => {
 
     for (let i=0; i < bitField.length; i ++) {
 
-      expect(bitField[i]).to.equal(!!vector.get(i+1) ? '1': '0');
+      expect(bitField[i]).to.equal(!!vector.has(i+1) ? '1': '0');
 
     }
 
@@ -124,10 +124,10 @@ describe('VendorVectorEncoder', (): void => {
 
     const vvEnc: VendorVectorEncoder = new VendorVectorEncoder();
     const numVendors = 100;
-    const vector: Vector<boolean> = getVector(numVendors);
+    const vector: Vector = getVector(numVendors);
     const vendorWithNo: number = numVendors/2;
 
-    vector.set(vendorWithNo, false);
+    vector.unset(vendorWithNo);
 
     const result: string = vvEnc.encode(vector);
     const range = result.substr(headerLength);

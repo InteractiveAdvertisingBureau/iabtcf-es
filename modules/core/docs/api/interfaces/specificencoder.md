@@ -13,8 +13,6 @@
 * [FixedVectorEncoder](../classes/fixedvectorencoder.md)
 * [IntEncoder](../classes/intencoder.md)
 * [LangEncoder](../classes/langencoder.md)
-* [PublisherRestrictionsEncoder](../classes/publisherrestrictionsencoder.md)
-* [PublisherRestrictionsEncoder](../classes/publisherrestrictionsencoder.md)
 * [VendorVectorEncoder](../classes/vendorvectorencoder.md)
 
 ## Index
@@ -33,7 +31,7 @@
 
 ▸ **encode**(value: *[TCModelPropType](../#tcmodelproptype)*, numBits: *`number`*): `string`
 
-*Defined in tcstring/encoder/SpecificEncoder.ts:5*
+*Defined in [tcstring/encoder/SpecificEncoder.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/tcstring/encoder/SpecificEncoder.ts#L5)*
 
 **Parameters:**
 

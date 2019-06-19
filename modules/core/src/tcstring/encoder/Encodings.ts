@@ -4,7 +4,7 @@ import {BooleanEncoder} from './BooleanEncoder';
 import {DateEncoder} from './DateEncoder';
 import {VendorVectorEncoder} from './VendorVectorEncoder';
 import {FixedVectorEncoder} from './FixedVectorEncoder';
-import {PublisherRestrictionsEncoder} from './PublisherRestrictionsEncoder';
+// import {PublisherRestrictionsEncoder} from './PublisherRestrictionsEncoder';
 import {SpecificEncoder} from './SpecificEncoder';
 
 class Encodings {
@@ -72,7 +72,7 @@ class Encodings {
     purposeLITransparency: FixedVectorEncoder,
     vendorConsents: VendorVectorEncoder,
     vendorLegitimateInterest: VendorVectorEncoder,
-    publisherRestrictions: PublisherRestrictionsEncoder,
+    //    publisherRestrictions: PublisherRestrictionsEncoder,
 
   };
 

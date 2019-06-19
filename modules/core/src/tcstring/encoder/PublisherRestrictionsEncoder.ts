@@ -1,3 +1,4 @@
+/*
 import {SpecificEncoder} from './SpecificEncoder';
 import {BitLength} from '../../model/BitLength';
 import {IntEncoder} from './IntEncoder';
@@ -95,3 +96,4 @@ export class PublisherRestrictionsEncoder implements SpecificEncoder {
   }
 
 }
+*/

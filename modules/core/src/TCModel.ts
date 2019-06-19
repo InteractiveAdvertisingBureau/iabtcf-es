@@ -1,40 +1,24 @@
 import {Vector} from './model/Vector';
-import {VectorPath} from './model/enum/VectorPath';
-import {PurposeRestriction} from './model/PurposeRestriction';
+// import {PurposeRestriction} from './model/PurposeRestriction';
 import {GVL} from './GVL';
 import {TCModelError} from './errors/TCModelError';
+import {TCModelPropType} from './types/TCModelPropType';
 
 class TCModel {
 
   public static readonly MAX_ENCODING_VERSION: number = 2;
-  private version_: number;
+  private version_: number = 2;
   private cmpId_: number;
   private cmpVersion_: number;
   private created_: Date;
   private lastUpdated_: Date;
-  private consentScreen_: number;
+  private consentScreen_: number = 0;
   private consentLanguage_: string;
   private vendorListVersion_: number;
   private gvl_: GVL;
-  private policyVersion_: number;
-
-  /**
-   * Whether the signals encoded in this TC String were from site-specific
-   * storage (True) versus ‘global’ consensu.org shared storage (False). A
-   * string intended to be stored in global/shared scope but the CMP is unable
-   * to store due to a user agent not accepting third-party cookies would be
-   * considered site-specific (True).
-   */
-  public isServiceSpecific: boolean = false;
-
-  /**
-   * Non-standard stacks means that a CMP is using publisher-customized stack
-   * descriptions. Stacks (in terms of purposes in a stack) are pre-set by the
-   * IAB. As are titles. Descriptions are pre-set, but publishers can customize
-   * them. If they do, they need to set this bit to indicate that they've
-   * customized descriptions.
-   */
-  public useNonStandardStacks: boolean = false;
+  private policyVersion_: number = 2;
+  private isServiceSpecific_: boolean = false;
+  private useNonStandardStacks_: boolean = false;
 
   /**
    * The TCF designates certain Features as special, that is, a CMP must afford
@@ -42,21 +26,21 @@ class TCModel {
    * published and numbered in the GVL separately from normal Features.
    * Provides for up to 12 special features.
    */
-  public specialFeatureOptIns: Vector<boolean> = new Vector<boolean>();
+  public specialFeatureOptIns: Vector = new Vector();
 
   /**
    * Renamed from `PurposesAllowed` in TCF v1.1
    * The user’s consent value for each Purpose established on the legal basis
    * of consent. Purposes are published in the Global Vendor List (see. [[GVL]]).
    */
-  public purposeConsents: Vector<boolean>;
+  public purposeConsents: Vector = new Vector();
 
   /**
    * The user’s permission for each Purpose established on the legal basis of
    * legitimate interest. If the user has exercised right-to-object for a
    * purpose, the corresponding bit for that purpose should be set to false.
    */
-  public purposeLITransparency: Vector<boolean>;
+  public purposeLITransparency: Vector = new Vector();
 
   /**
    * Each [[Vendor]] is keyed by id. Their consent value is stored as boolean.
@@ -69,7 +53,7 @@ class TCModel {
    * const hasConsent = tcModel.vendorConsents.get(2222);
    * ```
    */
-  public vendorConsents: Vector<boolean>;
+  public vendorConsents: Vector = new Vector();
 
   /**
    * Each [[Vendor]] is keyed by id. Whether their Legitimate Interest
@@ -83,7 +67,7 @@ class TCModel {
    * const hasConsent = tcModel.vendorLegitimateInterest.get(2222);
    * ```
    */
-  public vendorLegitimateInterest: Vector<boolean>;
+  public vendorLegitimateInterest: Vector = new Vector();
 
   /**
    * Each [[Vendor]] is keyed by id. The value stored is a
@@ -98,7 +82,7 @@ class TCModel {
    * const hasConsent = tcModel.vendorLegitimateInterest.get(2222);
    * ```
    */
-  public publisherRestrictions: Vector<PurposeRestriction>;
+  // public publisherRestrictions: Vectorn;
 
   /**
    * Constructs the TCModel. Passing a [[GVL]] is optional when constructing
@@ -131,11 +115,6 @@ class TCModel {
       this.vendorListVersion_ = gvl.vendorListVersion;
       this.policyVersion_ = gvl.tcfPolicyVersion;
 
-      this.specialFeatureOptIns = new Vector<boolean>(gvl, VectorPath.SPECIAL_FEATURE, false);
-      this.purposeConsents = new Vector<boolean>(gvl, VectorPath.PURPOSE, false);
-      this.purposeLITransparency = new Vector<boolean>(gvl, VectorPath.PURPOSE, false);
-      this.vendorConsents = new Vector<boolean>(gvl, VectorPath.VENDOR, false);
-      this.vendorLegitimateInterest = new Vector<boolean>(gvl, VectorPath.VENDOR, false);
 
     } else {
 
@@ -210,6 +189,7 @@ class TCModel {
 
 
       this.cmpId_ = integer;
+      this.updated();
 
     } else {
 
@@ -238,6 +218,7 @@ class TCModel {
     if (this.isIntAbove(integer, -1)) {
 
       this.cmpVersion_ = integer;
+      this.updated();
 
     } else {
 
@@ -269,6 +250,7 @@ class TCModel {
     if (this.isIntAbove(integer, -1)) {
 
       this.consentScreen_ = integer;
+      this.updated();
 
     } else {
 
@@ -300,6 +282,7 @@ class TCModel {
     if (/^([A-z]){2}$/.test(lang)) {
 
       this.consentLanguage_ = lang;
+      this.updated();
 
     } else {
 
@@ -346,6 +329,7 @@ class TCModel {
     if (Number.isInteger(num) && num <= TCModel.MAX_ENCODING_VERSION && num > 0) {
 
       this.version_ = num;
+      this.updated();
 
     } else {
 
@@ -365,6 +349,66 @@ class TCModel {
     return this.version_;
 
   }
+
+
+  /**
+   * Whether the signals encoded in this TC String were from site-specific
+   * storage (True) versus ‘global’ consensu.org shared storage (False). A
+   * string intended to be stored in global/shared scope but the CMP is unable
+   * to store due to a user agent not accepting third-party cookies would be
+   * considered site-specific (True).
+   * @param {boolean} bool - value to set
+   */
+  public set isServiceSpecific(bool: boolean) {
+
+    this.isServiceSpecific_ = bool;
+    this.updated();
+
+  };
+
+  /**
+   * Whether the signals encoded in this TC String were from site-specific
+   * storage (True) versus ‘global’ consensu.org shared storage (False). A
+   * string intended to be stored in global/shared scope but the CMP is unable
+   * to store due to a user agent not accepting third-party cookies would be
+   * considered site-specific (True).
+   * @return {boolean} bool - value that was set
+   */
+  public get isServiceSpecific(): boolean {
+
+    return this.isServiceSpecific_;
+
+  };
+
+  /**
+   * Non-standard stacks means that a CMP is using publisher-customized stack
+   * descriptions. Stacks (in terms of purposes in a stack) are pre-set by the
+   * IAB. As are titles. Descriptions are pre-set, but publishers can customize
+   * them. If they do, they need to set this bit to indicate that they've
+   * customized descriptions.
+   * @param {boolean} bool - value to set
+   */
+  public set useNonStandardStacks(bool: boolean) {
+
+    this.useNonStandardStacks_ = bool;
+    this.updated();
+
+  };
+
+  /**
+   * Non-standard stacks means that a CMP is using publisher-customized stack
+   * descriptions. Stacks (in terms of purposes in a stack) are pre-set by the
+   * IAB. As are titles. Descriptions are pre-set, but publishers can customize
+   * them. If they do, they need to set this bit to indicate that they've
+   * customized descriptions.
+   * @return {boolean} bool - value that was set
+   */
+  public get useNonStandardStacks(): boolean {
+
+    return this.useNonStandardStacks_;
+
+  };
+
   /**
    * isIntAbove - private method for validating that a passed in value is both
    * an int and above a certain number
@@ -376,6 +420,41 @@ class TCModel {
   private isIntAbove(possibleInt: number, above: number): boolean {
 
     return (Number.isInteger(possibleInt) && possibleInt > above);
+
+  }
+
+  private updated(): void {
+
+    this.lastUpdated = new Date();
+
+  }
+
+  public isValid(): boolean {
+
+    const yup = (value: TCModelPropType): boolean => {
+
+      return (value !== undefined);
+
+    };
+
+    return (yup(this.isServiceSpecific)
+      // && yup(this.publisherRestrictions)
+      && yup(this.purposeConsents)
+      && yup(this.purposeLITransparency)
+      && yup(this.specialFeatureOptIns)
+      && yup(this.useNonStandardStacks)
+      && yup(this.vendorConsents)
+      && yup(this.vendorLegitimateInterest)
+      && yup(this.cmpId)
+      && yup(this.cmpVersion)
+      && yup(this.consentLanguage)
+      && yup(this.consentScreen)
+      && yup(this.created)
+      && this.gvl !== undefined
+      && yup(this.lastUpdated)
+      && yup(this.policyVersion)
+      && yup(this.vendorListVersion)
+      && yup(this.version));
 
   }
 

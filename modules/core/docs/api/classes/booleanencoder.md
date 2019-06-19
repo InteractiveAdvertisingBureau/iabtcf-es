@@ -26,7 +26,7 @@
 
 ▸ **encode**(value: *`boolean`*): `string`
 
-*Defined in tcstring/encoder/BooleanEncoder.ts:5*
+*Defined in [tcstring/encoder/BooleanEncoder.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/tcstring/encoder/BooleanEncoder.ts#L5)*
 
 **Parameters:**
 

@@ -14,7 +14,7 @@
     "lib/**/*"
   ],
   "scripts": {
-    "docs": "typedoc --ignoreCompilerErrors src",
+    "docs": "typedoc --ignoreCompilerErrors --tsconfig ./tsconfig.json  src",
     "karma": "karma start",
     "prepack": "npm run build",
     "build": "tsc",
@@ -75,7 +75,7 @@
     "directory": "modules/core"
   },
   "dependencies": {
-    "base-64": "^0.1.0"
+    "crc": "^3.8.0"
   },
   "gitHead": "1cc7fc723d8cbfa784dde27ce7bb95100107b750"
 }
