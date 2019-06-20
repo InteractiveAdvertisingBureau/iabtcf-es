@@ -22,7 +22,7 @@
 
 **● httpGetLimit**: *`32` \| `128`*
 
-*Defined in [model/GVLSchema.ts:42](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/model/GVLSchema.ts#L42)*
+*Defined in [model/GVLSchema.ts:42](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L42)*
 
 ___
 

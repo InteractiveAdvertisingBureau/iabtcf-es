@@ -31,7 +31,7 @@
 
 ▸ **encode**(value: *[TCModelPropType](../#tcmodelproptype)*, numBits: *`number`*): `string`
 
-*Defined in [tcstring/encoder/SpecificEncoder.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/tcstring/encoder/SpecificEncoder.ts#L5)*
+*Defined in tcstring/encoders/SpecificEncoder.ts:7*
 
 **Parameters:**
 

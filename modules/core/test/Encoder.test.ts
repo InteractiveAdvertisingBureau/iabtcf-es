@@ -1,4 +1,3 @@
-/*
 import {expect} from 'chai';
 import {Encoder} from '../src/tcstring/Encoder';
 import {TCModel} from '../src/TCModel';
@@ -27,4 +26,3 @@ describe('IntEncoder', (): void => {
   });
 
 });
-*/

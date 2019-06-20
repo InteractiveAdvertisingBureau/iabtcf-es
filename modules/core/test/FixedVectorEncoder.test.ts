@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {FixedVectorEncoder} from '../src/tcstring/encoder/FixedVectorEncoder';
+import {FixedVectorEncoder} from '../src/tcstring/encoders/FixedVectorEncoder';
 import {Vector} from '../src/model/Vector';
 
 describe('FixedVectorEncoder', (): void => {

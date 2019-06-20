@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {DateEncoder} from '../src/tcstring/encoder/DateEncoder';
+import {DateEncoder} from '../src/tcstring/encoders/DateEncoder';
 
 describe('DateEncoder', (): void => {
 

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {VendorVectorEncoder} from '../src/tcstring/encoder/VendorVectorEncoder';
+import {VendorVectorEncoder} from '../src/tcstring/encoders/VendorVectorEncoder';
 import {Vector} from '../src/model/Vector';
 import {BitLength} from '../src/model/BitLength';
 

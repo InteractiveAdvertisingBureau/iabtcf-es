@@ -2,7 +2,6 @@ import {Vector} from './model/Vector';
 // import {PurposeRestriction} from './model/PurposeRestriction';
 import {GVL} from './GVL';
 import {TCModelError} from './errors/TCModelError';
-import {TCModelPropType} from './types/TCModelPropType';
 
 class TCModel {
 
@@ -423,38 +422,43 @@ class TCModel {
 
   }
 
+  /**
+   * updated - updates the lastUpdatedDate with a 'now' timestamp
+   *
+   * @return {void}
+   */
   private updated(): void {
 
     this.lastUpdated = new Date();
 
   }
 
+
+  /**
+   * isValid - returns whether all fields have a value
+   *
+   * @return {boolean}
+   */
   public isValid(): boolean {
 
-    const yup = (value: TCModelPropType): boolean => {
-
-      return (value !== undefined);
-
-    };
-
-    return (yup(this.isServiceSpecific)
-      // && yup(this.publisherRestrictions)
-      && yup(this.purposeConsents)
-      && yup(this.purposeLITransparency)
-      && yup(this.specialFeatureOptIns)
-      && yup(this.useNonStandardStacks)
-      && yup(this.vendorConsents)
-      && yup(this.vendorLegitimateInterest)
-      && yup(this.cmpId)
-      && yup(this.cmpVersion)
-      && yup(this.consentLanguage)
-      && yup(this.consentScreen)
-      && yup(this.created)
+    return (this.isServiceSpecific !== undefined
+      // && this.publisherRestrictions !== undefined
+      && this.purposeConsents !== undefined
+      && this.purposeLITransparency !== undefined
+      && this.specialFeatureOptIns !== undefined
+      && this.useNonStandardStacks !== undefined
+      && this.vendorConsents !== undefined
+      && this.vendorLegitimateInterest !== undefined
+      && this.cmpId !== undefined
+      && this.cmpVersion !== undefined
+      && this.consentLanguage !== undefined
+      && this.consentScreen !== undefined
+      && this.created !== undefined
       && this.gvl !== undefined
-      && yup(this.lastUpdated)
-      && yup(this.policyVersion)
-      && yup(this.vendorListVersion)
-      && yup(this.version));
+      && this.lastUpdated !== undefined
+      && this.policyVersion !== undefined
+      && this.vendorListVersion !== undefined
+      && this.version !== undefined);
 
   }
 

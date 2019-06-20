@@ -1,11 +1,4 @@
-import {IntEncoder} from './IntEncoder';
-import {LangEncoder} from './LangEncoder';
-import {BooleanEncoder} from './BooleanEncoder';
-import {DateEncoder} from './DateEncoder';
-import {VendorVectorEncoder} from './VendorVectorEncoder';
-import {FixedVectorEncoder} from './FixedVectorEncoder';
-// import {PublisherRestrictionsEncoder} from './PublisherRestrictionsEncoder';
-import {SpecificEncoder} from './SpecificEncoder';
+import * as encoders from './encoders';
 
 class Encodings {
 
@@ -51,31 +44,32 @@ class Encodings {
       'purposeLITransparency',
       'vendorConsents',
       'vendorLegitimateInterest',
-      'publisherRestrictions',
+      //      'publisherRestrictions',
     ],
   ];
 
   public static readonly encoders: object = {
-    version: IntEncoder,
-    created: DateEncoder,
-    lastUpdated: DateEncoder,
-    cmpId: IntEncoder,
-    cmpVersion: IntEncoder,
-    consentScreen: IntEncoder,
-    consentLanguage: LangEncoder,
-    vendorListVersion: IntEncoder,
-    policyVersion: IntEncoder,
-    isServiceSpecific: BooleanEncoder,
-    useNonStandardStacks: BooleanEncoder,
-    specialFeatureOptIns: FixedVectorEncoder,
-    purposeConsents: FixedVectorEncoder,
-    purposeLITransparency: FixedVectorEncoder,
-    vendorConsents: VendorVectorEncoder,
-    vendorLegitimateInterest: VendorVectorEncoder,
+    version: encoders.IntEncoder,
+    created: encoders.DateEncoder,
+    lastUpdated: encoders.DateEncoder,
+    cmpId: encoders.IntEncoder,
+    cmpVersion: encoders.IntEncoder,
+    consentScreen: encoders.IntEncoder,
+    consentLanguage: encoders.LangEncoder,
+    vendorListVersion: encoders.IntEncoder,
+    policyVersion: encoders.IntEncoder,
+    isServiceSpecific: encoders.BooleanEncoder,
+    useNonStandardStacks: encoders.BooleanEncoder,
+    specialFeatureOptIns: encoders.FixedVectorEncoder,
+    purposeConsents: encoders.FixedVectorEncoder,
+    purposeLITransparency: encoders.FixedVectorEncoder,
+    vendorConsents: encoders.VendorVectorEncoder,
+    vendorLegitimateInterest: encoders.VendorVectorEncoder,
     //    publisherRestrictions: PublisherRestrictionsEncoder,
 
   };
 
 }
 
-export {Encodings, SpecificEncoder};
+export {Encodings};
+export {SpecificEncoder, TCModelPropType} from './encoders';

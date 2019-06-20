@@ -1,11 +1,11 @@
 import {TCModelError} from '../errors/TCModelError';
-import {PurposeRestrictionTypes} from './enum/PurposeRestrictionTypes';
+import {PurposeRestrictionTypeEnum} from './enum/PurposeRestrictionTypeEnum';
 
 class PurposeRestriction {
 
   public static availablePurposeIds: Set<number> = new Set();
   private purposeId_: number;
-  public restrictionType: PurposeRestrictionTypes;
+  public restrictionType: PurposeRestrictionTypeEnum;
 
   /**
    * @return {number} The purpose Id associated with a publisher

@@ -1,6 +1,6 @@
 /*
 import {expect} from 'chai';
-import {PublisherRestrictionsEncoder} from '../src/tcstring/encoder/PublisherRestrictionsEncoder';
+import {PublisherRestrictionsEncoder} from '../src/tcstring/encoders/PublisherRestrictionsEncoder';
 import {PurposeRestriction} from '../src/model/PurposeRestriction';
 import {Vector} from '../src/model/Vector';
 import {BitLength} from '../src/model/BitLength';

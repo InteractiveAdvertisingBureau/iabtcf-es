@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {BooleanEncoder} from '../src/tcstring/encoder/BooleanEncoder';
+import {BooleanEncoder} from '../src/tcstring/encoders/BooleanEncoder';
 
 describe('BooleanEncoder', (): void => {
 

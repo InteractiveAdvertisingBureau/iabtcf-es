@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {PurposeRestriction} from '../src/model/PurposeRestriction';
-import {PurposeRestrictionTypes} from '../src/model/enum/PurposeRestrictionTypes';
+import {PurposeRestrictionTypeEnum} from '../src/model/enum/PurposeRestrictionTypeEnum';
 
 const runDescribe = (fieldName: string, handler: () => void): void => {
 
@@ -80,14 +80,14 @@ runDescribe('restrictionType', (): void => {
 
     const purposeRestriction = new PurposeRestriction();
 
-    purposeRestriction.restrictionType = PurposeRestrictionTypes.NOT_ALLOWED;
-    expect(purposeRestriction.restrictionType).to.equal(PurposeRestrictionTypes.NOT_ALLOWED);
+    purposeRestriction.restrictionType = PurposeRestrictionTypeEnum.NOT_ALLOWED;
+    expect(purposeRestriction.restrictionType).to.equal(PurposeRestrictionTypeEnum.NOT_ALLOWED);
 
-    purposeRestriction.restrictionType = PurposeRestrictionTypes.REQUIRE_CONSENT;
-    expect(purposeRestriction.restrictionType).to.equal(PurposeRestrictionTypes.REQUIRE_CONSENT);
+    purposeRestriction.restrictionType = PurposeRestrictionTypeEnum.REQUIRE_CONSENT;
+    expect(purposeRestriction.restrictionType).to.equal(PurposeRestrictionTypeEnum.REQUIRE_CONSENT);
 
-    purposeRestriction.restrictionType = PurposeRestrictionTypes.REQUIRE_LI;
-    expect(purposeRestriction.restrictionType).to.equal(PurposeRestrictionTypes.REQUIRE_LI);
+    purposeRestriction.restrictionType = PurposeRestrictionTypeEnum.REQUIRE_LI;
+    expect(purposeRestriction.restrictionType).to.equal(PurposeRestrictionTypeEnum.REQUIRE_LI);
 
   });
 

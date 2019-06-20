@@ -26,7 +26,7 @@
 
 ▸ **encode**(value: *`string`*, numBits: *`number`*): `string`
 
-*Defined in [tcstring/encoder/LangEncoder.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/tcstring/encoder/LangEncoder.ts#L7)*
+*Defined in tcstring/encoders/LangEncoder.ts:7*
 
 **Parameters:**
 

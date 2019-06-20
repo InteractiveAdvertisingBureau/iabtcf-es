@@ -1,5 +1,5 @@
 import {SpecificEncoder} from './SpecificEncoder';
-import {VectorEncodingTypeEnum} from './VectorEncodingTypeEnum';
+import {VectorEncodingTypeEnum} from '../VectorEncodingTypeEnum';
 import {IntEncoder} from './IntEncoder';
 import {BooleanEncoder} from './BooleanEncoder';
 import {BitLength} from '../../model/BitLength';

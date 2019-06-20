@@ -3,7 +3,7 @@
  * `flexiblePurposeIds`) on the Global Vendor List ([[GVLSchema]]) a CMP may
  * change their legal basis for processing in the encoding.
  */
-export enum PurposeRestrictionTypes {
+export enum PurposeRestrictionTypeEnum {
 
   /**
    * under no circumstances is this purpose allowed.

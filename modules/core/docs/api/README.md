@@ -5,7 +5,7 @@
 
 ### Enumerations
 
-* [PurposeRestrictionTypes](enums/purposerestrictiontypes.md)
+* [PurposeRestrictionTypeEnum](enums/purposerestrictiontypeenum.md)
 * [VectorEncodingTypeEnum](enums/vectorencodingtypeenum.md)
 
 ### Classes
@@ -30,6 +30,7 @@
 * [TCString](classes/tcstring.md)
 * [Vector](classes/vector.md)
 * [VendorVectorEncoder](classes/vendorvectorencoder.md)
+* [WebSafeBase64](classes/websafebase64.md)
 
 ### Interfaces
 
@@ -63,7 +64,7 @@
 
 **Ƭ TCModelPropType**: *`number` \| `Date` \| `string` \| `boolean` \| [Vector](classes/vector.md)*
 
-*Defined in [types/TCModelPropType.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/types/TCModelPropType.ts#L4)*
+*Defined in tcstring/encoders/SpecificEncoder.ts:3*
 
 ___
 <a id="versionorobject"></a>
@@ -72,7 +73,7 @@ ___
 
 **Ƭ VersionOrObject**: *`string` \| `number` \| `object`*
 
-*Defined in [GVL.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/GVL.ts#L5)*
+*Defined in [GVL.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/GVL.ts#L5)*
 
 ___
 <a id="idorids"></a>
@@ -81,7 +82,7 @@ ___
 
 **Ƭ idOrIds**: *`number` \| `number`[]*
 
-*Defined in [model/Vector.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/d162d92/modules/core/src/model/Vector.ts#L3)*
+*Defined in [model/Vector.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/Vector.ts#L3)*
 
 ___
 

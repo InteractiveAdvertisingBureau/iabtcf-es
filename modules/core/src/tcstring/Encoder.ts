@@ -1,9 +1,9 @@
 import {TCModel} from '../TCModel';
 import {EncodingError} from '../errors/EncodingError';
-import {TCModelPropType} from '../types/TCModelPropType';
-import {Encodings, SpecificEncoder} from './encoder/Encodings';
+import {Encodings, SpecificEncoder, TCModelPropType} from './Encodings';
 import {BitLength} from '../model/BitLength';
-import crc16 from 'crc';
+import {WebSafeBase64} from './WebSafeBase64';
+import crc from 'crc';
 
 class Encoder {
 
@@ -56,19 +56,14 @@ class Encoder {
     // Generate checksum
     if (bitString.length === 3) {
 
-      bitString[1] = crc16(bitString[2]).toString();
+      // I'm not totally sure this is right
+      const checksum = crc.crc16(bitString[2]).toString(2);
+
+      bitString[1] = '0'.repeat(BitLength.checksum - checksum.length) + checksum;
 
     }
 
-    return this.base64Encode(bitString.join(''));
-
-  }
-  private base64Encode(bitString: string): string {
-
-    return btoa(bitString)
-      .replace(/\+/g, '-')
-      .replace(/\//g, '_')
-      .replace(/=+$/, '');
+    return WebSafeBase64.encode(bitString.join(''));
 
   }
 
