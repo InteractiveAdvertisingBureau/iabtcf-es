@@ -1,6 +1,12 @@
-interface Purpose {
+export interface GVLMapItem {
   id: number;
   name: string;
+}
+export interface Feature extends GVLMapItem {
+  description: string;
+  descriptionLegal: string;
+};
+export interface Purpose extends GVLMapItem {
   description: string;
   descriptionLegal: string;
   /*
@@ -15,36 +21,7 @@ interface Purpose {
   rightToObject?: boolean;
 };
 
-interface Purposes {
-  [id: string]: Purpose;
-};
-
-interface SpecialPurposes {
-  [id: string]: Purpose;
-};
-
-interface Feature {
-  id: number;
-  name: string;
-  description: string;
-  descriptionLegal: string;
-};
-
-interface Features {
-  [id: string]: Feature;
-};
-
-interface SpecialFeatures {
-  [id: string]: Feature;
-};
-
-interface Overflow {
-  httpGetLimit: 32 | 128;
-}
-
-interface Vendor {
-  id: number;
-  name: string;
+export interface Vendor extends GVLMapItem {
   purposeIds: number[];
   legIntPurposeIds: number[];
   flexiblePurposeIds?: number[];
@@ -52,35 +29,29 @@ interface Vendor {
   specialFeatureIds: number[];
   policyUrl: string;
   deletedDate?: Date | string;
-  overflow?: Overflow;
+  overflow?: {
+    httpGetLimit: 32 | 128;
+  };
 };
 
-interface Vendors {
-  [id: string]: Vendor;
-};
-
-interface Stack {
-  id: number;
+export interface Stack extends GVLMapItem {
   purposes: number[];
   specialPurposes: number[];
-  name: string;
   description: string;
 }
-interface Stacks {
-  [id: string]: Stack;
-};
-
-interface GVLSchema {
+export interface GVLMap<T> {
+  [id: string]: T;
+}
+export interface GVLSchema {
   gvlSpecificationVersion: number;
   vendorListVersion: number;
   tcfPolicyVersion: number;
   lastUpdated: string | Date;
-  purposes: Purposes;
-  specialPurposes: SpecialPurposes;
-  features: Features;
-  specialFeatures: SpecialFeatures;
-  vendors: Vendors;
-  stacks: Stacks;
+  purposes: GVLMap<Purpose>;
+  specialPurposes: GVLMap<Purpose>;
+  features: GVLMap<Feature>;
+  specialFeatures: GVLMap<Feature>;
+  vendors: GVLMap<Vendor>;
+  stacks: GVLMap<Stack>;
 };
 
-export {GVLSchema, Purpose, Purposes, Features, Vendor, Vendors, SpecialPurposes, SpecialFeatures, Stacks};

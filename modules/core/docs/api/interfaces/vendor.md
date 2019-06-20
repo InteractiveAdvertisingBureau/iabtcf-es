@@ -4,7 +4,9 @@
 
 ## Hierarchy
 
-**Vendor**
+ [GVLMapItem](gvlmapitem.md)
+
+**↳ Vendor**
 
 ## Index
 
@@ -31,7 +33,7 @@
 
 **● deletedDate**: *`Date` \| `string`*
 
-*Defined in [model/GVLSchema.ts:54](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L54)*
+*Defined in [model/GVLSchema.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L31)*
 
 ___
 <a id="featureids"></a>
@@ -40,7 +42,7 @@ ___
 
 **● featureIds**: *`number`[]*
 
-*Defined in [model/GVLSchema.ts:51](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L51)*
+*Defined in [model/GVLSchema.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L28)*
 
 ___
 <a id="flexiblepurposeids"></a>
@@ -49,7 +51,7 @@ ___
 
 **● flexiblePurposeIds**: *`number`[]*
 
-*Defined in [model/GVLSchema.ts:50](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L50)*
+*Defined in [model/GVLSchema.ts:27](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L27)*
 
 ___
 <a id="id"></a>
@@ -58,7 +60,9 @@ ___
 
 **● id**: *`number`*
 
-*Defined in [model/GVLSchema.ts:46](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L46)*
+*Inherited from [GVLMapItem](gvlmapitem.md).[id](gvlmapitem.md#id)*
+
+*Defined in [model/GVLSchema.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L2)*
 
 ___
 <a id="legintpurposeids"></a>
@@ -67,7 +71,7 @@ ___
 
 **● legIntPurposeIds**: *`number`[]*
 
-*Defined in [model/GVLSchema.ts:49](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L49)*
+*Defined in [model/GVLSchema.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L26)*
 
 ___
 <a id="name"></a>
@@ -76,16 +80,18 @@ ___
 
 **● name**: *`string`*
 
-*Defined in [model/GVLSchema.ts:47](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L47)*
+*Inherited from [GVLMapItem](gvlmapitem.md).[name](gvlmapitem.md#name)*
+
+*Defined in [model/GVLSchema.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L3)*
 
 ___
 <a id="overflow"></a>
 
 ### `<Optional>` overflow
 
-**● overflow**: *[Overflow](overflow.md)*
+**● overflow**: *`undefined` \| `object`*
 
-*Defined in [model/GVLSchema.ts:55](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L55)*
+*Defined in [model/GVLSchema.ts:32](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L32)*
 
 ___
 <a id="policyurl"></a>
@@ -94,7 +100,7 @@ ___
 
 **● policyUrl**: *`string`*
 
-*Defined in [model/GVLSchema.ts:53](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L53)*
+*Defined in [model/GVLSchema.ts:30](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L30)*
 
 ___
 <a id="purposeids"></a>
@@ -103,7 +109,7 @@ ___
 
 **● purposeIds**: *`number`[]*
 
-*Defined in [model/GVLSchema.ts:48](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L48)*
+*Defined in [model/GVLSchema.ts:25](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L25)*
 
 ___
 <a id="specialfeatureids"></a>
@@ -112,7 +118,7 @@ ___
 
 **● specialFeatureIds**: *`number`[]*
 
-*Defined in [model/GVLSchema.ts:52](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L52)*
+*Defined in [model/GVLSchema.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L29)*
 
 ___
 

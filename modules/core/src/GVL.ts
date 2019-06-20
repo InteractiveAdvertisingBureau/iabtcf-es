@@ -1,11 +1,13 @@
 import {Json} from './Json';
 import {GVLError} from './errors/GVLError';
-import {GVLSchema, Purposes, Features, Vendors, SpecialPurposes, SpecialFeatures, Stacks} from './model/GVLSchema';
+import {Feature, Purpose, Vendor, Stack, GVLMap, GVLSchema} from './model/GVLSchema';
 
 type VersionOrObject = string | number | object;
 
 /**
- * TODO: consider alternate url schemes
+ *  TODO: Want a way to group vendors by keys, like purposes they use under legal basis
+ *          * return all vendors who have purpose under [legalbasis]
+ *  TODO: way to pass in a whitelist of vendors
  */
 
 class GVL implements GVLSchema {
@@ -72,34 +74,39 @@ class GVL implements GVLSchema {
   public lastUpdated: string | Date;
 
   /**
-   * @param {Purposes} a collection of [[Purpose]]s
+   * @param {GVLMap<Purpose>} a collection of [[Purpose]]s
    */
-  public purposes: Purposes;
+  public purposes: GVLMap<Purpose>;
 
   /**
-   * @param {Purposes} a collection of [[Purpose]]s
+   * @param {GVLMap<Purpose>} a collection of [[Purpose]]s
    */
-  public specialPurposes: SpecialPurposes;
+  public specialPurposes: GVLMap<Purpose>;
 
   /**
-   * @param {Features} a collection of [[Feature]]s
+   * @param {GVLMap<Feature>} a collection of [[Feature]]s
    */
-  public features: Features;
+  public features: GVLMap<Feature>;
 
   /**
-   * @param {Features} a collection of [[Feature]]s
+   * @param {GVLMap<Feature>} a collection of [[Feature]]s
    */
-  public specialFeatures: SpecialFeatures;
+  public specialFeatures: GVLMap<Feature>;
 
   /**
-   * @param {Features} a collection of [[Vendor]]s
+   * @param {GVLMap<Vendor>} a collection of [[Vendor]]s
    */
-  public vendors: Vendors;
+  public vendors: GVLMap<Vendor>;
 
   /**
-   * @param {Features} a collection of [[Stack]]s
+   * @param {GVLMap<Vendor>} a collection of [[Vendor]]. Used as a backup if a whitelist is sets
    */
-  public stacks: Stacks;
+  private backupVendors: GVLMap<Vendor>;
+
+  /**
+   * @param {GVLMap<Stack>} a collection of [[Stack]]s
+   */
+  public stacks: GVLMap<Stack>;
 
   /**
    * @param {VersionOrObject} [versionOrObject] - can be either the
@@ -191,6 +198,24 @@ class GVL implements GVLSchema {
     this.specialFeatures = gvlObject.specialFeatures;
     this.vendors = gvlObject.vendors;
     this.stacks = gvlObject.stacks;
+
+  }
+
+  public setWhiteList(ids: number[]): void {
+
+    this.backupVendors = this.vendors;
+    this.vendors = {};
+    ids.forEach((id: number): void => {
+
+      const strId = id + '';
+
+      if (this.backupVendors[strId]) {
+
+        this.vendors[strId] = this.backupVendors[strId];
+
+      }
+
+    });
 
   }
 

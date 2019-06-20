@@ -23,7 +23,7 @@
 
 ▸ **decode**(str: *`string`*): `string`
 
-*Defined in tcstring/WebSafeBase64.ts:35*
+*Defined in [tcstring/WebSafeBase64.ts:35](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/tcstring/WebSafeBase64.ts#L35)*
 
 **Parameters:**
 
@@ -40,7 +40,7 @@ ___
 
 ▸ **encode**(str: *`string`*): `string`
 
-*Defined in tcstring/WebSafeBase64.ts:15*
+*Defined in [tcstring/WebSafeBase64.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/tcstring/WebSafeBase64.ts#L15)*
 
 **Parameters:**
 

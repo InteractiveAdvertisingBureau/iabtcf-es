@@ -4,7 +4,9 @@
 
 ## Hierarchy
 
-**Stack**
+ [GVLMapItem](gvlmapitem.md)
+
+**↳ Stack**
 
 ## Index
 
@@ -26,7 +28,7 @@
 
 **● description**: *`string`*
 
-*Defined in [model/GVLSchema.ts:67](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L67)*
+*Defined in [model/GVLSchema.ts:40](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L40)*
 
 ___
 <a id="id"></a>
@@ -35,7 +37,9 @@ ___
 
 **● id**: *`number`*
 
-*Defined in [model/GVLSchema.ts:63](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L63)*
+*Inherited from [GVLMapItem](gvlmapitem.md).[id](gvlmapitem.md#id)*
+
+*Defined in [model/GVLSchema.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L2)*
 
 ___
 <a id="name"></a>
@@ -44,7 +48,9 @@ ___
 
 **● name**: *`string`*
 
-*Defined in [model/GVLSchema.ts:66](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L66)*
+*Inherited from [GVLMapItem](gvlmapitem.md).[name](gvlmapitem.md#name)*
+
+*Defined in [model/GVLSchema.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L3)*
 
 ___
 <a id="purposes"></a>
@@ -53,7 +59,7 @@ ___
 
 **● purposes**: *`number`[]*
 
-*Defined in [model/GVLSchema.ts:64](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L64)*
+*Defined in [model/GVLSchema.ts:38](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L38)*
 
 ___
 <a id="specialpurposes"></a>
@@ -62,7 +68,7 @@ ___
 
 **● specialPurposes**: *`number`[]*
 
-*Defined in [model/GVLSchema.ts:65](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L65)*
+*Defined in [model/GVLSchema.ts:39](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L39)*
 
 ___
 

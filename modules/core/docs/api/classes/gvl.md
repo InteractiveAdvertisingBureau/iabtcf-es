@@ -2,7 +2,13 @@
 
 # Class: GVL
 
-TODO: consider alternate url schemes
+TODO: Want a way to group vendors by keys, like purposes they use under legal basis
+
+```
+     * return all vendors who have purpose under [legalbasis]
+```
+
+TODO: way to pass in a whitelist of vendors
 
 ## Hierarchy
 
@@ -45,7 +51,7 @@ TODO: consider alternate url schemes
 
 ⊕ **new GVL**(versionOrObject?: *[VersionOrObject](../#versionorobject)*): [GVL](gvl.md)
 
-*Defined in [GVL.ts:102](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/GVL.ts#L102)*
+*Defined in [GVL.ts:104](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L104)*
 
 **Parameters:**
 
@@ -63,11 +69,11 @@ ___
 
 ###  features
 
-**● features**: *[Features](../interfaces/features.md)*
+**● features**: *[GVLMap](../interfaces/gvlmap.md)<[Feature](../interfaces/feature.md)>*
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[features](../interfaces/gvlschema.md#features)*
 
-*Defined in [GVL.ts:87](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/GVL.ts#L87)*
+*Defined in [GVL.ts:89](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L89)*
 
 *__param__*: collection of [Feature](../interfaces/feature.md)s
 
@@ -80,7 +86,7 @@ ___
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[gvlSpecificationVersion](../interfaces/gvlschema.md#gvlspecificationversion)*
 
-*Defined in [GVL.ts:53](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/GVL.ts#L53)*
+*Defined in [GVL.ts:55](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L55)*
 
 *__param__*: schema version for the GVL that is used
 
@@ -93,18 +99,18 @@ ___
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[lastUpdated](../interfaces/gvlschema.md#lastupdated)*
 
-*Defined in [GVL.ts:72](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/GVL.ts#L72)*
+*Defined in [GVL.ts:74](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L74)*
 
 ___
 <a id="purposes"></a>
 
 ###  purposes
 
-**● purposes**: *[Purposes](../interfaces/purposes.md)*
+**● purposes**: *[GVLMap](../interfaces/gvlmap.md)<[Purpose](../interfaces/purpose.md)>*
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[purposes](../interfaces/gvlschema.md#purposes)*
 
-*Defined in [GVL.ts:77](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/GVL.ts#L77)*
+*Defined in [GVL.ts:79](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L79)*
 
 *__param__*: collection of [Purpose](../interfaces/purpose.md)s
 
@@ -115,7 +121,7 @@ ___
 
 **● readyPromise**: *`Promise`<`void` \| [GVLError](gvlerror.md)>*
 
-*Defined in [GVL.ts:48](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/GVL.ts#L48)*
+*Defined in [GVL.ts:50](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L50)*
 
 *__param__*: when this GVL object is populated with the data from the [GVLSchema](../interfaces/gvlschema.md) or rejected if there is an error
 
@@ -124,11 +130,11 @@ ___
 
 ###  specialFeatures
 
-**● specialFeatures**: *[SpecialFeatures](../interfaces/specialfeatures.md)*
+**● specialFeatures**: *[GVLMap](../interfaces/gvlmap.md)<[Feature](../interfaces/feature.md)>*
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[specialFeatures](../interfaces/gvlschema.md#specialfeatures)*
 
-*Defined in [GVL.ts:92](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/GVL.ts#L92)*
+*Defined in [GVL.ts:94](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L94)*
 
 *__param__*: collection of [Feature](../interfaces/feature.md)s
 
@@ -137,11 +143,11 @@ ___
 
 ###  specialPurposes
 
-**● specialPurposes**: *[SpecialPurposes](../interfaces/specialpurposes.md)*
+**● specialPurposes**: *[GVLMap](../interfaces/gvlmap.md)<[Purpose](../interfaces/purpose.md)>*
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[specialPurposes](../interfaces/gvlschema.md#specialpurposes)*
 
-*Defined in [GVL.ts:82](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/GVL.ts#L82)*
+*Defined in [GVL.ts:84](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L84)*
 
 *__param__*: collection of [Purpose](../interfaces/purpose.md)s
 
@@ -150,11 +156,11 @@ ___
 
 ###  stacks
 
-**● stacks**: *[Stacks](../interfaces/stacks.md)*
+**● stacks**: *[GVLMap](../interfaces/gvlmap.md)<[Stack](../interfaces/stack.md)>*
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[stacks](../interfaces/gvlschema.md#stacks)*
 
-*Defined in [GVL.ts:102](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/GVL.ts#L102)*
+*Defined in [GVL.ts:104](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L104)*
 
 *__param__*: collection of [Stack](../interfaces/stack.md)s
 
@@ -167,7 +173,7 @@ ___
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[tcfPolicyVersion](../interfaces/gvlschema.md#tcfpolicyversion)*
 
-*Defined in [GVL.ts:70](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/GVL.ts#L70)*
+*Defined in [GVL.ts:72](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L72)*
 
 *__param__*: The TCF MO will increment this value whenever a GVL change (such as adding a new Purpose or Feature or a change in Purpose wording) legally invalidates existing TC Strings and requires CMPs to re-establish transparency and consent from users. If the policy version number in the latest GVL is different from the value in your TC String, then you need to re-establish transparency and consent for that user. A version 1 format TC String is considered to have a version value of 1.
 
@@ -180,7 +186,7 @@ ___
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[vendorListVersion](../interfaces/gvlschema.md#vendorlistversion)*
 
-*Defined in [GVL.ts:58](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/GVL.ts#L58)*
+*Defined in [GVL.ts:60](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L60)*
 
 *__param__*: with each published file change
 
@@ -189,11 +195,11 @@ ___
 
 ###  vendors
 
-**● vendors**: *[Vendors](../interfaces/vendors.md)*
+**● vendors**: *[GVLMap](../interfaces/gvlmap.md)<[Vendor](../interfaces/vendor.md)>*
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[vendors](../interfaces/gvlschema.md#vendors)*
 
-*Defined in [GVL.ts:97](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/GVL.ts#L97)*
+*Defined in [GVL.ts:99](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L99)*
 
 *__param__*: collection of [Vendor](../interfaces/vendor.md)s
 
@@ -204,7 +210,7 @@ ___
 
 **● baseUrl**: *`string`*
 
-*Defined in [GVL.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/GVL.ts#L19)*
+*Defined in [GVL.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L21)*
 
 *__static__*: 
 
@@ -217,7 +223,7 @@ ___
 
 **● latestFilename**: *`string`* = "vendor-list.json"
 
-*Defined in [GVL.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/GVL.ts#L26)*
+*Defined in [GVL.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L28)*
 
 *__static__*: 
 
@@ -230,7 +236,7 @@ ___
 
 **● versionedFilename**: *`string`* = "archives/vendor-list-v[VERSION].json"
 
-*Defined in [GVL.ts:42](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/GVL.ts#L42)*
+*Defined in [GVL.ts:44](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L44)*
 
 *__static__*: 
 

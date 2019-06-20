@@ -4,7 +4,9 @@
 
 ## Hierarchy
 
-**Purpose**
+ [GVLMapItem](gvlmapitem.md)
+
+**↳ Purpose**
 
 ## Index
 
@@ -27,7 +29,7 @@
 
 **● consentable**: *`undefined` \| `false` \| `true`*
 
-*Defined in [model/GVLSchema.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L10)*
+*Defined in [model/GVLSchema.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L16)*
 
 ___
 <a id="description"></a>
@@ -36,7 +38,7 @@ ___
 
 **● description**: *`string`*
 
-*Defined in [model/GVLSchema.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L4)*
+*Defined in [model/GVLSchema.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L10)*
 
 ___
 <a id="descriptionlegal"></a>
@@ -45,7 +47,7 @@ ___
 
 **● descriptionLegal**: *`string`*
 
-*Defined in [model/GVLSchema.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L5)*
+*Defined in [model/GVLSchema.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L11)*
 
 ___
 <a id="id"></a>
@@ -54,7 +56,9 @@ ___
 
 **● id**: *`number`*
 
-*Defined in [model/GVLSchema.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L2)*
+*Inherited from [GVLMapItem](gvlmapitem.md).[id](gvlmapitem.md#id)*
+
+*Defined in [model/GVLSchema.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L2)*
 
 ___
 <a id="name"></a>
@@ -63,7 +67,9 @@ ___
 
 **● name**: *`string`*
 
-*Defined in [model/GVLSchema.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L3)*
+*Inherited from [GVLMapItem](gvlmapitem.md).[name](gvlmapitem.md#name)*
+
+*Defined in [model/GVLSchema.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L3)*
 
 ___
 <a id="righttoobject"></a>
@@ -72,7 +78,7 @@ ___
 
 **● rightToObject**: *`undefined` \| `false` \| `true`*
 
-*Defined in [model/GVLSchema.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L15)*
+*Defined in [model/GVLSchema.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L21)*
 
 default=true false means CMPs should never afford users the means to exercise a right to object
 

@@ -2,10 +2,11 @@ import {Vector} from './model/Vector';
 // import {PurposeRestriction} from './model/PurposeRestriction';
 import {GVL} from './GVL';
 import {TCModelError} from './errors/TCModelError';
+import {GVLMap, GVLMapItem} from './model/GVLSchema';
 
 class TCModel {
 
-  public static readonly MAX_ENCODING_VERSION: number = 2;
+  private static readonly MAX_ENCODING_VERSION: number = 2;
   private version_: number = 2;
   private cmpId_: number;
   private cmpVersion_: number;
@@ -25,21 +26,21 @@ class TCModel {
    * published and numbered in the GVL separately from normal Features.
    * Provides for up to 12 special features.
    */
-  public specialFeatureOptIns: Vector = new Vector();
+  public readonly specialFeatureOptIns: Vector = new Vector();
 
   /**
    * Renamed from `PurposesAllowed` in TCF v1.1
    * The user’s consent value for each Purpose established on the legal basis
    * of consent. Purposes are published in the Global Vendor List (see. [[GVL]]).
    */
-  public purposeConsents: Vector = new Vector();
+  public readonly purposeConsents: Vector = new Vector();
 
   /**
    * The user’s permission for each Purpose established on the legal basis of
    * legitimate interest. If the user has exercised right-to-object for a
    * purpose, the corresponding bit for that purpose should be set to false.
    */
-  public purposeLITransparency: Vector = new Vector();
+  public readonly purposeLITransparency: Vector = new Vector();
 
   /**
    * Each [[Vendor]] is keyed by id. Their consent value is stored as boolean.
@@ -52,7 +53,7 @@ class TCModel {
    * const hasConsent = tcModel.vendorConsents.get(2222);
    * ```
    */
-  public vendorConsents: Vector = new Vector();
+  public readonly vendorConsents: Vector = new Vector();
 
   /**
    * Each [[Vendor]] is keyed by id. Whether their Legitimate Interest
@@ -66,7 +67,7 @@ class TCModel {
    * const hasConsent = tcModel.vendorLegitimateInterest.get(2222);
    * ```
    */
-  public vendorLegitimateInterest: Vector = new Vector();
+  public readonly vendorLegitimateInterest: Vector = new Vector();
 
   /**
    * Each [[Vendor]] is keyed by id. The value stored is a
@@ -408,6 +409,189 @@ class TCModel {
 
   };
 
+  // This is a type check I need it to be an 'any'
+  // eslint-disable-next-line
+  private isGVLMapItem(obj: any): obj is GVLMapItem {
+
+    return typeof obj.id === 'number';
+
+  }
+
+  /**
+   * setAllOnVector - sets all items on the vector
+   *
+   * @param {GVLMap<T>} gvlMap - this will be one of the maps defined in the [[GVLMap]]
+   * @param {Vector)} vector - vector to affect
+   * @return {void}
+   */
+  private setAllOnVector<T>(gvlMap: GVLMap<T>, vector: Vector): void {
+
+    if (!this.gvl) {
+
+      throw new TCModelError('setAll', '' + this.gvl, 'No GVL!');
+
+    }
+    for (const id in gvlMap) {
+
+      if (gvlMap.hasOwnProperty(id)) {
+
+        const pathItem = gvlMap[id];
+
+        if (this.isGVLMapItem(pathItem)) {
+
+          vector.set(pathItem.id);
+
+        }
+
+      }
+
+    }
+
+  }
+
+  /**
+   * unsetAllOnVector - unsets all items on the vector
+   *
+   * @param {GVLMap<T>} gvlMap - this will be one of the maps defined in the [[GVLMap]]
+   * @param {Vector)} vector - vector to affect
+   * @return {void}
+   */
+  private unsetAllOnVector<T>(gvlMap: GVLMap<T>, vector: Vector): void {
+
+    if (!this.gvl) {
+
+      throw new TCModelError('unsetAll', '' + this.gvl, 'No GVL!');
+
+    }
+
+    for (const id in gvlMap) {
+
+      if (gvlMap.hasOwnProperty(id)) {
+
+        const pathItem = gvlMap[id];
+
+        if (this.isGVLMapItem(pathItem)) {
+
+          vector.unset(pathItem.id);
+
+        }
+
+      }
+
+    }
+
+  }
+
+  /**
+   * setAllVendorConsents - sets all vendors on the GVL Consent (true)
+   *
+   * @return {void}
+   */
+  public setAllVendorConsents(): void {
+
+    this.setAllOnVector(this.gvl.vendors, this.vendorConsents);
+
+  }
+
+  /**
+   * unsetAllVendorConsents - unsets all vendors on the GVL Consent (false)
+   *
+   * @return {void}
+   */
+  public unsetAllVendorConsents(): void {
+
+    this.unsetAllOnVector(this.gvl.vendors, this.vendorConsents);
+
+  }
+
+  /**
+   * setAllVendorLegitimateInterest - sets all vendors on the GVL LegitimateInterest (true)
+   *
+   * @return {void}
+   */
+  public setAllVendorLegitimateInterest(): void {
+
+    this.setAllOnVector(this.gvl.vendors, this.vendorLegitimateInterest);
+
+  }
+
+  /**
+   * unsetAllVendorLegitimateInterest - unsets all vendors on the GVL LegitimateInterest (false)
+   *
+   * @return {void}
+   */
+  public unsetAllVendorLegitimateInterest(): void {
+
+    this.unsetAllOnVector(this.gvl.vendors, this.vendorLegitimateInterest);
+
+  }
+
+  /**
+   * setAllPurposeConsents - sets all purposes on the GVL Consent (true)
+   *
+   * @return {void}
+   */
+  public setAllPurposeConsents(): void {
+
+    this.setAllOnVector(this.gvl.purposes, this.purposeConsents);
+
+  }
+
+  /**
+   * unsetAllPurposeConsents - unsets all purposes on the GVL Consent (false)
+   *
+   * @return {void}
+   */
+  public unsetAllPurposeConsents(): void {
+
+    this.unsetAllOnVector(this.gvl.purposes, this.purposeConsents);
+
+  }
+
+  /**
+   * setAllPurposeLITransparency - sets all purposes on the GVL LI Transparency (true)
+   *
+   * @return {void}
+   */
+  public setAllPurposeLITransparency(): void {
+
+    this.setAllOnVector(this.gvl.purposes, this.purposeLITransparency);
+
+  }
+
+  /**
+   * unsetAllPurposeLITransparency - unsets all purposes on the GVL LI Transparency (false)
+   *
+   * @return {void}
+   */
+  public unsetAllPurposeLITransparency(): void {
+
+    this.unsetAllOnVector(this.gvl.purposes, this.purposeLITransparency);
+
+  }
+
+  /**
+   * setAllSpecialFeatureOptIns - sets all special featuresOptins on the GVL (true)
+   *
+   * @return {void}
+   */
+  public setAllSpecialFeatureOptIns(): void {
+
+    this.setAllOnVector(this.gvl.specialFeatures, this.specialFeatureOptIns);
+
+  }
+
+  /**
+   * unsetAllSpecialFeatureOptIns - unsets all special featuresOptins on the GVL (true)
+   *
+   * @return {void}
+   */
+  public unsetAllSpecialFeatureOptIns(): void {
+
+    this.unsetAllOnVector(this.gvl.specialFeatures, this.specialFeatureOptIns);
+
+  }
+
   /**
    * isIntAbove - private method for validating that a passed in value is both
    * an int and above a certain number
@@ -442,13 +626,7 @@ class TCModel {
   public isValid(): boolean {
 
     return (this.isServiceSpecific !== undefined
-      // && this.publisherRestrictions !== undefined
-      && this.purposeConsents !== undefined
-      && this.purposeLITransparency !== undefined
-      && this.specialFeatureOptIns !== undefined
       && this.useNonStandardStacks !== undefined
-      && this.vendorConsents !== undefined
-      && this.vendorLegitimateInterest !== undefined
       && this.cmpId !== undefined
       && this.cmpVersion !== undefined
       && this.consentLanguage !== undefined

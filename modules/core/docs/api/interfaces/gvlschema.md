@@ -33,9 +33,9 @@
 
 ###  features
 
-**● features**: *[Features](features.md)*
+**● features**: *[GVLMap](gvlmap.md)<[Feature](feature.md)>*
 
-*Defined in [model/GVLSchema.ts:80](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L80)*
+*Defined in [model/GVLSchema.ts:52](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L52)*
 
 ___
 <a id="gvlspecificationversion"></a>
@@ -44,7 +44,7 @@ ___
 
 **● gvlSpecificationVersion**: *`number`*
 
-*Defined in [model/GVLSchema.ts:74](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L74)*
+*Defined in [model/GVLSchema.ts:46](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L46)*
 
 ___
 <a id="lastupdated"></a>
@@ -53,43 +53,43 @@ ___
 
 **● lastUpdated**: *`string` \| `Date`*
 
-*Defined in [model/GVLSchema.ts:77](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L77)*
+*Defined in [model/GVLSchema.ts:49](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L49)*
 
 ___
 <a id="purposes"></a>
 
 ###  purposes
 
-**● purposes**: *[Purposes](purposes.md)*
+**● purposes**: *[GVLMap](gvlmap.md)<[Purpose](purpose.md)>*
 
-*Defined in [model/GVLSchema.ts:78](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L78)*
+*Defined in [model/GVLSchema.ts:50](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L50)*
 
 ___
 <a id="specialfeatures"></a>
 
 ###  specialFeatures
 
-**● specialFeatures**: *[SpecialFeatures](specialfeatures.md)*
+**● specialFeatures**: *[GVLMap](gvlmap.md)<[Feature](feature.md)>*
 
-*Defined in [model/GVLSchema.ts:81](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L81)*
+*Defined in [model/GVLSchema.ts:53](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L53)*
 
 ___
 <a id="specialpurposes"></a>
 
 ###  specialPurposes
 
-**● specialPurposes**: *[SpecialPurposes](specialpurposes.md)*
+**● specialPurposes**: *[GVLMap](gvlmap.md)<[Purpose](purpose.md)>*
 
-*Defined in [model/GVLSchema.ts:79](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L79)*
+*Defined in [model/GVLSchema.ts:51](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L51)*
 
 ___
 <a id="stacks"></a>
 
 ###  stacks
 
-**● stacks**: *[Stacks](stacks.md)*
+**● stacks**: *[GVLMap](gvlmap.md)<[Stack](stack.md)>*
 
-*Defined in [model/GVLSchema.ts:83](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L83)*
+*Defined in [model/GVLSchema.ts:55](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L55)*
 
 ___
 <a id="tcfpolicyversion"></a>
@@ -98,7 +98,7 @@ ___
 
 **● tcfPolicyVersion**: *`number`*
 
-*Defined in [model/GVLSchema.ts:76](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L76)*
+*Defined in [model/GVLSchema.ts:48](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L48)*
 
 ___
 <a id="vendorlistversion"></a>
@@ -107,16 +107,16 @@ ___
 
 **● vendorListVersion**: *`number`*
 
-*Defined in [model/GVLSchema.ts:75](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L75)*
+*Defined in [model/GVLSchema.ts:47](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L47)*
 
 ___
 <a id="vendors"></a>
 
 ###  vendors
 
-**● vendors**: *[Vendors](vendors.md)*
+**● vendors**: *[GVLMap](gvlmap.md)<[Vendor](vendor.md)>*
 
-*Defined in [model/GVLSchema.ts:82](https://github.com/chrispaterson/iabtcf-es/blob/8dedfba/modules/core/src/model/GVLSchema.ts#L82)*
+*Defined in [model/GVLSchema.ts:54](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/GVLSchema.ts#L54)*
 
 ___
 
