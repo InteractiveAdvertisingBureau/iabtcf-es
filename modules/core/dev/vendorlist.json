@@ -60,8 +60,8 @@
     }
   },
   "vendors": {
-    "1":{
-      "id": 1,
+    "2": {
+      "id": 2,
       "name": "Vendor Name",
       "purposeIds": [1],
       "legIntPurposeIds": [2, 3],
@@ -69,10 +69,119 @@
       "featureIds": [1, 2],
       "specialFeatureIds": [1, 2],
       "policyUrl": "https://vendorname.com/gdpr.html",
-      "deletedDate": "2019-02-28T00:00:00Z",
       "overflow": {
         "httpGetLimit": 32
       }
+    },
+    "8": {
+      "id": 8,
+      "name": "Emerse Sverige AB",
+      "policyUrl": "https://www.emerse.com/privacy-policy/",
+      "purposeIds": [1, 2, 4],
+      "flexiblePurposeIds": [1, 4],
+      "specialFeatureIds": [1, 2],
+      "legIntPurposeIds": [3, 5],
+      "featureIds": [1, 2]
+    },
+    "12": {
+      "id": 12,
+      "name": "BeeswaxIO Corporation",
+      "policyUrl": "https://www.beeswax.com/privacy.html",
+      "purposeIds": [1, 3, 5],
+      "flexiblePurposeIds": [1, 3],
+      "specialFeatureIds": [1, 2],
+      "legIntPurposeIds": [],
+      "featureIds": [3]
+    },
+    "28": {
+      "id": 28,
+      "name": "TripleLift, Inc.",
+      "policyUrl": "https://triplelift.com/privacy/",
+      "purposeIds": [1, 3],
+      "flexiblePurposeIds": [1],
+      "specialFeatureIds": [1, 2],
+      "legIntPurposeIds": [],
+      "featureIds": [3]
+    },
+    "27": {
+      "id": 27,
+      "name": "ADventori SAS",
+      "policyUrl": "https://www.adventori.com/with-us/legal-notice/",
+      "purposeIds": [1, 3],
+      "flexiblePurposeIds": [1],
+      "specialFeatureIds": [1, 2],
+      "legIntPurposeIds": [],
+      "featureIds": []
+    },
+    "25": {
+      "id": 25,
+      "name": "Oath (EMEA) Limited",
+      "policyUrl": "https://policies.oath.com/ie/en/oath/privacy/index.html",
+      "purposeIds": [1, 2],
+      "flexiblePurposeIds": [1],
+      "specialFeatureIds": [1, 2],
+      "legIntPurposeIds": [3, 5],
+      "featureIds": [1, 2, 3]
+    },
+    "26": {
+      "id": 26,
+      "name": "Venatus Media Limited",
+      "policyUrl": "https://www.venatusmedia.com/privacy/",
+      "purposeIds": [1, 2, 3, 4, 5],
+      "flexiblePurposeIds": [1, 4],
+      "specialFeatureIds": [1, 2],
+      "legIntPurposeIds": [],
+      "featureIds": []
+    },
+    "1": {
+      "id": 1,
+      "name": "Exponential Interactive, Inc",
+      "policyUrl": "http://exponential.com/privacy",
+      "specialFeatureIds": [1, 2],
+      "flexiblePurposeIds": [3, 4],
+      "purposeIds": [1, 2, 3, 4, 5],
+      "legIntPurposeIds": [],
+      "featureIds": []
+    },
+    "6": {
+      "id": 6,
+      "name": "AdSpirit GmbH",
+      "policyUrl": "http://www.adspirit.de/privacy",
+      "purposeIds": [1, 2, 3, 4, 5],
+      "flexiblePurposeIds": [5],
+      "specialFeatureIds": [1, 2],
+      "legIntPurposeIds": [],
+      "featureIds": []
+    },
+    "30": {
+      "id": 30,
+      "name": "BidTheatre AB",
+      "policyUrl": "https://www.bidtheatre.com/privacy-policy",
+      "specialFeatureIds": [1, 2],
+      "flexiblePurposeIds": [2],
+      "purposeIds": [2],
+      "legIntPurposeIds": [1, 3],
+      "featureIds": [2, 3]
+    },
+    "24": {
+      "id": 24,
+      "name": "Conversant Europe Ltd.",
+      "policyUrl": "https://www.conversantmedia.eu/legal/privacy-policy",
+      "purposeIds": [1],
+      "flexiblePurposeIds": [],
+      "specialFeatureIds": [1, 2],
+      "legIntPurposeIds": [2, 3, 4, 5],
+      "featureIds": [1, 2, 3]
+    },
+    "29": {
+      "id": 29,
+      "name": "Etarget SE",
+      "policyUrl": "https://www.etarget.sk/privacy.php",
+      "purposeIds": [1, 2, 3, 4, 5],
+      "flexiblePurposeIds": [3],
+      "specialFeatureIds": [1, 2],
+      "legIntPurposeIds": [],
+      "featureIds": [1]
     }
   },
  "stacks": {

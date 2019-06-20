@@ -7,18 +7,26 @@ import {GVLMap, GVLMapItem} from './model/GVLSchema';
 class TCModel {
 
   private static readonly MAX_ENCODING_VERSION: number = 2;
-  private version_: number = 2;
-  private cmpId_: number;
-  private cmpVersion_: number;
-  private created_: Date;
-  private lastUpdated_: Date;
+
+  // Defaults
+  private version_: number = TCModel.MAX_ENCODING_VERSION;
   private consentScreen_: number = 0;
-  private consentLanguage_: string;
-  private vendorListVersion_: number;
-  private gvl_: GVL;
   private policyVersion_: number = 2;
   private isServiceSpecific_: boolean = false;
   private useNonStandardStacks_: boolean = false;
+
+
+  // needs some settin' (no default)
+  private cmpId_: number;
+  private cmpVersion_: number;
+  private consentLanguage_: string;
+  private gvl_: GVL;
+
+
+  // automagically set when created, updated and gvl set
+  private created_: Date;
+  private lastUpdated_: Date;
+  private vendorListVersion_: number;
 
   /**
    * The TCF designates certain Features as special, that is, a CMP must afford
@@ -611,7 +619,7 @@ class TCModel {
    *
    * @return {void}
    */
-  private updated(): void {
+  public updated(): void {
 
     this.lastUpdated = new Date();
 

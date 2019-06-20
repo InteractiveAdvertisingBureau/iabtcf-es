@@ -323,3 +323,64 @@ runDescribe('version', (): void => {
   shouldBeNotOk(1.1);
 
 });
+
+runDescribe('isValid()', (): void => {
+
+  // eslint-disable-next-line
+  const vendorlistJson = require('../dev/vendorlist.json');
+  const gvl: GVL = new GVL(vendorlistJson);
+
+
+  it('should be valid if everything is set', (): void => {
+
+    const tcModel = new TCModel(gvl);
+
+    tcModel.cmpId = 23;
+    tcModel.cmpVersion = 1;
+    tcModel.consentLanguage = 'en';
+
+    expect(tcModel.isValid()).to.be.true;
+
+  });
+  const makeInvalidTest = (key: string): void => {
+
+    it(`should be invalid if ${key} is not set`, (): void => {
+
+      const tcModel = new TCModel();
+
+      if (key !== 'gvl') {
+
+        tcModel.gvl = gvl;
+
+      }
+
+      if (key !== 'cmpId') {
+
+        tcModel.cmpId = 23;
+
+      }
+      if (key !== 'cmpVersion') {
+
+        tcModel.cmpVersion = 1;
+
+      }
+      if (key !== 'consentLanguage') {
+
+        tcModel.consentLanguage = 'en';
+
+      }
+
+      expect(tcModel.isValid()).to.be.false;
+
+    });
+
+  };
+
+  [
+    'cmpId',
+    'cmpVersion',
+    'consentLanguage',
+    'gvl',
+  ].forEach(makeInvalidTest);
+
+});
