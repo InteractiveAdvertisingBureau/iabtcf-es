@@ -1,12 +1,12 @@
 {
   "name": "@iabtcf/cmpapi",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "Ensures other in-page digital marketing technologies have access to CMP transparency and consent information for the iab. Transparency and Consent Framework (TCF).",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://github.com/chrispaterson/iabtcf-es",
   "license": {
-     "type": "Apache-2.0",
-     "url": "https://opensource.org/licenses/apache2.0.php"
+    "type": "Apache-2.0",
+    "url": "https://opensource.org/licenses/apache2.0.php"
   },
   "directories": {
     "src": "src",
