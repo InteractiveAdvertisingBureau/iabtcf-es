@@ -1,16 +1,29 @@
 import {Json} from './Json';
 import {GVLError} from './errors/GVLError';
-import {Feature, Purpose, Vendor, Stack, GVLMap, GVLSchema} from './model/GVLSchema';
+import {
+  Feature,
+  Purpose,
+  Vendor,
+  Stack,
+  GVLMap,
+  GVLSchema,
+  ByPurposeVendorMap,
+  ByFeatureVendorMap,
+  BySpecialFeatureVendorMap,
+}
+  from './model/GVLSchema';
 
-type VersionOrObject = string | number | object;
+export type VersionOrObject = string | number | object;
+type PurposeOrFeature = 'purpose' | 'feature';
+type PORFSubType = 'consent' | 'legInt' | 'flexible' | 'features' | 'specialFeatures';
 
 /**
- *  TODO: Want a way to group vendors by keys, like purposes they use under legal basis
- *          * return all vendors who have purpose under [legalbasis]
- *  TODO: way to pass in a whitelist of vendors
+ * class with utilities for managing the global vendor list.  Will use JSON to
+ * fetch the vendor list from specified url and will serialize it into this
+ * object and provide accessors.  Provides ways to group vendors on the list by
+ * purpose and feature.
  */
-
-class GVL implements GVLSchema {
+class GVL {
 
   /**
    * @static
@@ -71,6 +84,10 @@ class GVL implements GVLSchema {
    */
   public tcfPolicyVersion: number;
 
+  /**
+   * @param {string | Date} lastUpdated - the date in which the vendor list
+   * json file  was last updated.
+   */
   public lastUpdated: string | Date;
 
   /**
@@ -96,12 +113,27 @@ class GVL implements GVLSchema {
   /**
    * @param {GVLMap<Vendor>} a collection of [[Vendor]]s
    */
-  public vendors: GVLMap<Vendor>;
+  private vendors_: GVLMap<Vendor>;
 
   /**
    * @param {GVLMap<Vendor>} a collection of [[Vendor]]. Used as a backup if a whitelist is sets
    */
-  private backupVendors: GVLMap<Vendor>;
+  private fullVendorList: GVLMap<Vendor>;
+
+  /**
+   * @param {ByPurposeVendorMap} vendors by purpose
+   */
+  private byPurposeVendorMap: ByPurposeVendorMap;
+
+  /**
+   * @param {ByFeatureVendorMap} vendors by feature
+   */
+  private byFeatureVendorMap: ByFeatureVendorMap;
+
+  /**
+   * @param {BySpecialFeatureVendorMap} vendors by special feature
+   */
+  private bySpecialFeatureVendorMap: BySpecialFeatureVendorMap;
 
   /**
    * @param {GVLMap<Stack>} a collection of [[Stack]]s
@@ -196,26 +228,159 @@ class GVL implements GVLSchema {
     this.specialPurposes = gvlObject.specialPurposes;
     this.features = gvlObject.features;
     this.specialFeatures = gvlObject.specialFeatures;
-    this.vendors = gvlObject.vendors;
+    this.vendors_ = gvlObject.vendors;
+    this.fullVendorList = gvlObject.vendors;
+    this.mapVendors();
     this.stacks = gvlObject.stacks;
+
+  }
+
+  private mapVendors(): void {
+
+    // create new instances of the maps
+    this.byPurposeVendorMap = {};
+    this.byFeatureVendorMap = {};
+    this.bySpecialFeatureVendorMap = {};
+
+    // initializes data structure for purpose map
+    Object.keys(this.purposes).forEach((purposeId: string): void => {
+
+      this.byPurposeVendorMap[purposeId] = {
+        legInt: new Set<number>(),
+        consent: new Set<number>(),
+        flexible: new Set<number>(),
+      };
+
+    });
+
+    // initializes data structure for feature map
+    Object.keys(this.features).forEach((featureId: string): void => {
+
+      this.byFeatureVendorMap[featureId] = {
+        features: new Set<number>(),
+      };
+
+    });
+
+    // initializes data structure for feature map
+    Object.keys(this.specialFeatures).forEach((featureId: string): void => {
+
+      this.bySpecialFeatureVendorMap[featureId] = {
+        features: new Set<number>(),
+      };
+
+    });
+
+    // assigns vendor ids to their respective maps
+    Object.keys(this.vendors_).forEach((vendorId: string): void => {
+
+      const vendor: Vendor = this.vendors_[vendorId];
+      const numVendorId: number = parseInt(vendorId, 10);
+
+      vendor.purposeIds.forEach((purposeId: number): void => {
+
+        const purpGroup = this.byPurposeVendorMap[purposeId + ''];
+
+        purpGroup.consent.add(numVendorId);
+
+      });
+
+      vendor.legIntPurposeIds.forEach((purposeId: number): void => {
+
+        this.byPurposeVendorMap[purposeId + ''].legInt.add(numVendorId);
+
+      });
+
+      // could not be there
+      if (vendor.flexiblePurposeIds) {
+
+        vendor.flexiblePurposeIds.forEach((purposeId: number): void => {
+
+          this.byPurposeVendorMap[purposeId + ''].flexible.add(numVendorId);
+
+        });
+
+      }
+
+      vendor.featureIds.forEach((featureId: number): void => {
+
+        this.byFeatureVendorMap[featureId + ''].features.add(numVendorId);
+
+      });
+
+      vendor.specialFeatureIds.forEach((featureId: number): void => {
+
+        this.bySpecialFeatureVendorMap[featureId + ''].features.add(numVendorId);
+
+      });
+
+    });
+
+  }
+
+  private getFilteredVendors(purposeOrFeature: PurposeOrFeature, id: number, subType: PORFSubType): GVLMap<Vendor> {
+
+    const properPurposeOrFeature: string = purposeOrFeature.charAt(0).toUpperCase() + purposeOrFeature.slice(1);
+    const mySet: Set<number> = this['by' + properPurposeOrFeature + 'VendorMap'][id + ''][subType];
+    const retr: GVLMap<Vendor> = {};
+
+    mySet.forEach((vendorId: number): void => {
+
+      retr[vendorId + ''] = this.vendors[vendorId + ''];
+
+    });
+
+    return retr;
+
+  }
+
+  public getVendorsWithConsentPurpose(purposeId: number): GVLMap<Vendor> {
+
+    return this.getFilteredVendors('purpose', purposeId, 'consent');
+
+  }
+  public getVendorsWithLegIntPurpose(purposeId: number): GVLMap<Vendor> {
+
+    return this.getFilteredVendors('purpose', purposeId, 'legInt');
+
+  }
+  public getVendorsWithFlexiblePurpose(purposeId: number): GVLMap<Vendor> {
+
+    return this.getFilteredVendors('purpose', purposeId, 'flexible');
+
+  }
+  public getVendorsWithFeature(featureId: number): GVLMap<Vendor> {
+
+    return this.getFilteredVendors('feature', featureId, 'features');
+
+  }
+  public getVendorsWithSpecialFeature(featureId: number): GVLMap<Vendor> {
+
+    return this.getFilteredVendors('feature', featureId, 'specialFeatures');
+
+  }
+
+  public get vendors(): GVLMap<Vendor> {
+
+    return this.vendors_;
 
   }
 
   public setWhiteList(ids: number[]): void {
 
-    this.backupVendors = this.vendors;
-    this.vendors = {};
+    this.vendors_ = {};
     ids.forEach((id: number): void => {
 
       const strId = id + '';
 
-      if (this.backupVendors[strId]) {
+      if (this.fullVendorList[strId]) {
 
-        this.vendors[strId] = this.backupVendors[strId];
+        this.vendors[strId] = this.fullVendorList[strId];
 
       }
 
     });
+    this.mapVendors();
 
   }
 

@@ -5,8 +5,8 @@
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://github.com/chrispaterson/iabtcf-es",
   "license": {
-    "type": "MIT",
-    "url": "https://www.opensource.org/licenses/mit-license.php"
+     "type": "Apache-2.0",
+     "url": "https://opensource.org/licenses/apache2.0.php"
   },
   "directories": {
     "src": "src",

@@ -54,4 +54,22 @@ export interface GVLSchema {
   vendors: GVLMap<Vendor>;
   stacks: GVLMap<Stack>;
 };
+export interface ByPurposeVendorMap {
+  [purposeId: string]: {
+    legInt: Set<number>;
+    consent: Set<number>;
+    flexible: Set<number>;
+  };
+}
 
+export interface ByFeatureVendorMap {
+  [featureId: string]: {
+    features: Set<number>;
+  };
+}
+
+export interface BySpecialFeatureVendorMap {
+  [featureId: string]: {
+    features: Set<number>;
+  };
+}
