@@ -384,3 +384,91 @@ runDescribe('isValid()', (): void => {
   ].forEach(makeInvalidTest);
 
 });
+
+const runSetAllAndUnsetAll = (): void => {
+
+  // eslint-disable-next-line
+  const vendorlistJson = require('../dev/vendorlist.json');
+  const gvl: GVL = new GVL(vendorlistJson);
+  const loopGVLMap = (gvlKey: string, cb ): void => {
+
+    for (const id in gvl[gvlKey]) {
+
+      if (gvl[gvlKey].hasOwnProperty(id)) {
+
+        cb(parseInt(id, 10));
+
+      }
+
+    }
+
+  };
+
+  const setUnSetAlls = {
+    vendorConsents: {gvlKey: 'vendors'},
+    vendorLegitimateInterest: {gvlKey: 'vendors'},
+    purposeConsents: {gvlKey: 'purposes'},
+    purposeLITransparency: {gvlKey: 'purposes'},
+    specialFeatureOptIns: {gvlKey: 'specialFeatures'},
+  };
+
+  for (const vectorName in setUnSetAlls) {
+
+    if (setUnSetAlls.hasOwnProperty(vectorName)) {
+
+      const endOfFunctionName = 'All' + vectorName.charAt(0).toUpperCase() + vectorName.slice(1);
+      const setFunctionName = 'set' + endOfFunctionName;
+      const unsetFunctionName = 'unset' + endOfFunctionName;
+
+      runDescribe(setFunctionName + '()', (): void => {
+
+        it('should set all values', (): void => {
+
+          const tcModel = new TCModel(gvl);
+
+          loopGVLMap(setUnSetAlls[vectorName].gvlKey, (id: number): void => {
+
+            expect(tcModel[vectorName].has(id)).to.be.false;
+
+          });
+          tcModel[setFunctionName]();
+          loopGVLMap(setUnSetAlls[vectorName].gvlKey, (id: number): void => {
+
+            expect(tcModel[vectorName].has(id)).to.be.true;
+
+          });
+
+        });
+
+      });
+      runDescribe(unsetFunctionName + '()', (): void => {
+
+        it('should unset all values', (): void => {
+
+          const tcModel = new TCModel(gvl);
+
+          tcModel[setFunctionName]();
+          loopGVLMap(setUnSetAlls[vectorName], (id: number): void => {
+
+            expect(tcModel[vectorName].has(id)).to.be.true;
+
+          });
+
+          tcModel[unsetFunctionName]();
+          loopGVLMap(setUnSetAlls[vectorName], (id: number): void => {
+
+            expect(tcModel[vectorName].has(id)).to.be.false;
+
+          });
+
+        });
+
+      });
+
+    }
+
+  }
+
+};
+
+runSetAllAndUnsetAll();

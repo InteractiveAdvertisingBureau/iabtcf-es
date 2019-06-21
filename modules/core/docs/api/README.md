@@ -59,7 +59,7 @@
 
 **Ƭ TCModelPropType**: *`number` \| `Date` \| `string` \| `boolean` \| [Vector](classes/vector.md)*
 
-*Defined in [tcstring/encoders/SpecificEncoder.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/tcstring/encoders/SpecificEncoder.ts#L3)*
+*Defined in [tcstring/encoders/SpecificEncoder.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/tcstring/encoders/SpecificEncoder.ts#L3)*
 
 ___
 <a id="versionorobject"></a>
@@ -68,7 +68,7 @@ ___
 
 **Ƭ VersionOrObject**: *`string` \| `number` \| `object`*
 
-*Defined in [GVL.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L5)*
+*Defined in [GVL.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/GVL.ts#L5)*
 
 ___
 <a id="idorids"></a>
@@ -77,7 +77,7 @@ ___
 
 **Ƭ idOrIds**: *`number` \| `number`[]*
 
-*Defined in [model/Vector.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/model/Vector.ts#L3)*
+*Defined in [model/Vector.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/model/Vector.ts#L3)*
 
 ___
 

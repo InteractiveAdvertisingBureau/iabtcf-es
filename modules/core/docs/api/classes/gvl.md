@@ -41,6 +41,10 @@ TODO: way to pass in a whitelist of vendors
 * [latestFilename](gvl.md#latestfilename)
 * [versionedFilename](gvl.md#versionedfilename)
 
+### Methods
+
+* [setWhiteList](gvl.md#setwhitelist)
+
 ---
 
 ## Constructors
@@ -51,7 +55,7 @@ TODO: way to pass in a whitelist of vendors
 
 ⊕ **new GVL**(versionOrObject?: *[VersionOrObject](../#versionorobject)*): [GVL](gvl.md)
 
-*Defined in [GVL.ts:104](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L104)*
+*Defined in [GVL.ts:109](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/GVL.ts#L109)*
 
 **Parameters:**
 
@@ -73,7 +77,7 @@ ___
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[features](../interfaces/gvlschema.md#features)*
 
-*Defined in [GVL.ts:89](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L89)*
+*Defined in [GVL.ts:89](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/GVL.ts#L89)*
 
 *__param__*: collection of [Feature](../interfaces/feature.md)s
 
@@ -86,7 +90,7 @@ ___
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[gvlSpecificationVersion](../interfaces/gvlschema.md#gvlspecificationversion)*
 
-*Defined in [GVL.ts:55](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L55)*
+*Defined in [GVL.ts:55](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/GVL.ts#L55)*
 
 *__param__*: schema version for the GVL that is used
 
@@ -99,7 +103,7 @@ ___
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[lastUpdated](../interfaces/gvlschema.md#lastupdated)*
 
-*Defined in [GVL.ts:74](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L74)*
+*Defined in [GVL.ts:74](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/GVL.ts#L74)*
 
 ___
 <a id="purposes"></a>
@@ -110,7 +114,7 @@ ___
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[purposes](../interfaces/gvlschema.md#purposes)*
 
-*Defined in [GVL.ts:79](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L79)*
+*Defined in [GVL.ts:79](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/GVL.ts#L79)*
 
 *__param__*: collection of [Purpose](../interfaces/purpose.md)s
 
@@ -121,7 +125,7 @@ ___
 
 **● readyPromise**: *`Promise`<`void` \| [GVLError](gvlerror.md)>*
 
-*Defined in [GVL.ts:50](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L50)*
+*Defined in [GVL.ts:50](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/GVL.ts#L50)*
 
 *__param__*: when this GVL object is populated with the data from the [GVLSchema](../interfaces/gvlschema.md) or rejected if there is an error
 
@@ -134,7 +138,7 @@ ___
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[specialFeatures](../interfaces/gvlschema.md#specialfeatures)*
 
-*Defined in [GVL.ts:94](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L94)*
+*Defined in [GVL.ts:94](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/GVL.ts#L94)*
 
 *__param__*: collection of [Feature](../interfaces/feature.md)s
 
@@ -147,7 +151,7 @@ ___
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[specialPurposes](../interfaces/gvlschema.md#specialpurposes)*
 
-*Defined in [GVL.ts:84](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L84)*
+*Defined in [GVL.ts:84](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/GVL.ts#L84)*
 
 *__param__*: collection of [Purpose](../interfaces/purpose.md)s
 
@@ -160,7 +164,7 @@ ___
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[stacks](../interfaces/gvlschema.md#stacks)*
 
-*Defined in [GVL.ts:104](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L104)*
+*Defined in [GVL.ts:109](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/GVL.ts#L109)*
 
 *__param__*: collection of [Stack](../interfaces/stack.md)s
 
@@ -173,7 +177,7 @@ ___
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[tcfPolicyVersion](../interfaces/gvlschema.md#tcfpolicyversion)*
 
-*Defined in [GVL.ts:72](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L72)*
+*Defined in [GVL.ts:72](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/GVL.ts#L72)*
 
 *__param__*: The TCF MO will increment this value whenever a GVL change (such as adding a new Purpose or Feature or a change in Purpose wording) legally invalidates existing TC Strings and requires CMPs to re-establish transparency and consent from users. If the policy version number in the latest GVL is different from the value in your TC String, then you need to re-establish transparency and consent for that user. A version 1 format TC String is considered to have a version value of 1.
 
@@ -186,7 +190,7 @@ ___
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[vendorListVersion](../interfaces/gvlschema.md#vendorlistversion)*
 
-*Defined in [GVL.ts:60](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L60)*
+*Defined in [GVL.ts:60](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/GVL.ts#L60)*
 
 *__param__*: with each published file change
 
@@ -199,7 +203,7 @@ ___
 
 *Implementation of [GVLSchema](../interfaces/gvlschema.md).[vendors](../interfaces/gvlschema.md#vendors)*
 
-*Defined in [GVL.ts:99](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L99)*
+*Defined in [GVL.ts:99](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/GVL.ts#L99)*
 
 *__param__*: collection of [Vendor](../interfaces/vendor.md)s
 
@@ -210,7 +214,7 @@ ___
 
 **● baseUrl**: *`string`*
 
-*Defined in [GVL.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L21)*
+*Defined in [GVL.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/GVL.ts#L21)*
 
 *__static__*: 
 
@@ -223,7 +227,7 @@ ___
 
 **● latestFilename**: *`string`* = "vendor-list.json"
 
-*Defined in [GVL.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L28)*
+*Defined in [GVL.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/GVL.ts#L28)*
 
 *__static__*: 
 
@@ -236,7 +240,7 @@ ___
 
 **● versionedFilename**: *`string`* = "archives/vendor-list-v[VERSION].json"
 
-*Defined in [GVL.ts:44](https://github.com/chrispaterson/iabtcf-es/blob/a3a6d97/modules/core/src/GVL.ts#L44)*
+*Defined in [GVL.ts:44](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/GVL.ts#L44)*
 
 *__static__*: 
 
@@ -248,6 +252,26 @@ eg.
 GVL.baseUrl = "http://www.mydomain.com/iabcmp/";
 GVL.versionedFilename = "vendorlist?getVersion=[VERSION]";
 ```
+
+___
+
+## Methods
+
+<a id="setwhitelist"></a>
+
+###  setWhiteList
+
+▸ **setWhiteList**(ids: *`number`[]*): `void`
+
+*Defined in [GVL.ts:204](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/GVL.ts#L204)*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| ids | `number`[] |
+
+**Returns:** `void`
 
 ___
 
