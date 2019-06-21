@@ -35,7 +35,7 @@ Vector class is like a Set except it keeps track of a max id
 
 ⊕ **new Vector**(ids?: *[idOrIds](../#idorids)*): [Vector](vector.md)
 
-*Defined in [model/Vector.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/model/Vector.ts#L14)*
+*Defined in [model/Vector.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/model/Vector.ts#L14)*
 
 constructor
 
@@ -57,7 +57,7 @@ ___
 
 **get maxId**(): `number`
 
-*Defined in [model/Vector.ts:37](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/model/Vector.ts#L37)*
+*Defined in [model/Vector.ts:37](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/model/Vector.ts#L37)*
 
 maxId
 
@@ -74,7 +74,7 @@ ___
 
 ▸ **forEach**(callback: *`function`*): `void`
 
-*Defined in [model/Vector.ts:134](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/model/Vector.ts#L134)*
+*Defined in [model/Vector.ts:134](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/model/Vector.ts#L134)*
 
 forEach - to traverse from id=1 to id=maxId in a sequential non-sparse manner
 
@@ -95,7 +95,7 @@ ___
 
 ▸ **has**(id: *`number`*): `boolean`
 
-*Defined in [model/Vector.ts:49](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/model/Vector.ts#L49)*
+*Defined in [model/Vector.ts:49](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/model/Vector.ts#L49)*
 
 get
 
@@ -115,7 +115,7 @@ ___
 
 ▸ **set**(id: *[idOrIds](../#idorids)*): `void`
 
-*Defined in [model/Vector.ts:100](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/model/Vector.ts#L100)*
+*Defined in [model/Vector.ts:100](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/model/Vector.ts#L100)*
 
 set - sets an id assumed to be a truthy value by its presence
 
@@ -134,7 +134,7 @@ ___
 
 ▸ **unset**(id: *[idOrIds](../#idorids)*): `void`
 
-*Defined in [model/Vector.ts:63](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/model/Vector.ts#L63)*
+*Defined in [model/Vector.ts:63](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/model/Vector.ts#L63)*
 
 unset
 

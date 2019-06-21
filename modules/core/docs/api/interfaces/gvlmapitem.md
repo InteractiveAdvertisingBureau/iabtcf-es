@@ -31,7 +31,7 @@
 
 **● id**: *`number`*
 
-*Defined in [model/GVLSchema.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/model/GVLSchema.ts#L2)*
+*Defined in [model/GVLSchema.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/model/GVLSchema.ts#L2)*
 
 ___
 <a id="name"></a>
@@ -40,7 +40,7 @@ ___
 
 **● name**: *`string`*
 
-*Defined in [model/GVLSchema.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/17f4ef4/modules/core/src/model/GVLSchema.ts#L3)*
+*Defined in [model/GVLSchema.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/model/GVLSchema.ts#L3)*
 
 ___
 
