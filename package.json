@@ -4,6 +4,7 @@
   "private":true,
   "scripts": {
     "test": "lerna run test",
+    "deploy":"lerna publish from-package",
     "build": "lerna run build"
   },
   "keywords": [
