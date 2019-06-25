@@ -212,7 +212,7 @@ class GVL {
 
       }
 
-      url += this.addTrailingSlashMaybe(url);
+      url = this.addTrailingSlashMaybe(url);
 
       if (versionOrVendorList as number > 0) {
 
@@ -285,7 +285,7 @@ class GVL {
 
         }
 
-        url += this.addTrailingSlashMaybe(url);
+        url = this.addTrailingSlashMaybe(url);
 
         // load version specified
         url += GVL.langTranslationFilename.replace('[LANG]', lang);
