@@ -26,7 +26,7 @@ import {
   VendorList,
 } from './model/VendorList';
 
-export type VersionOrObject = string | number | object;
+export type VersionOrVendorList = string | number | VendorList;
 type PurposeOrFeature = 'purpose' | 'feature';
 type PurposeSubType = 'consent' | 'legInt' | 'flexible';
 
@@ -182,21 +182,22 @@ class GVL {
 
 
   /**
-   * @param {VersionOrObject} [versionOrObject] - can be either the
-   * Json object that is the GVL or a version number represented as a string or
+   * @param {VersionOrVendorList} [versionOrVendorList] - can be either a
+   * [[VendorList]] object  or a version number represented as a string or
    * number to download.  If nothing is passed the latest version of the GVL
    * will be loaded
    */
-  public constructor( versionOrObject?: VersionOrObject ) {
+  public constructor( versionOrVendorList?: VersionOrVendorList ) {
 
     // should have been configured before and instance was created and will persist through the app
     let url = GVL.baseUrl;
 
     this.lang_ = this.DEFAULT_LANGUAGE;
 
-    if (typeof versionOrObject === 'object') {
+    if (this.isVendorList(versionOrVendorList as VendorList)) {
 
-      this.deserialize(versionOrObject as VendorList);
+      this.deserialize(versionOrVendorList as VendorList);
+
       this.readyPromise = new Promise((resolve: Function): void => {
 
         resolve();
@@ -213,10 +214,10 @@ class GVL {
 
       url += this.addTrailingSlashMaybe(url);
 
-      if (versionOrObject as number > 0) {
+      if (versionOrVendorList as number > 0) {
 
         // load version specified
-        url += GVL.versionedFilename.replace('[VERSION]', versionOrObject + '');
+        url += GVL.versionedFilename.replace('[VERSION]', versionOrVendorList + '');
         this.getJson(url);
 
       } else {
@@ -318,7 +319,7 @@ class GVL {
   }
   private isVendorList(gvlObject: GVLBase): gvlObject is VendorList {
 
-    return (gvlObject as VendorList).vendors !== undefined;
+    return gvlObject !== undefined && (gvlObject as VendorList).vendors !== undefined;
 
   }
 
@@ -353,6 +354,7 @@ class GVL {
 
     // create new instances of the maps
     this.byPurposeVendorMap = {};
+    this.bySpecialPurposeVendorMap = {};
     this.byFeatureVendorMap = {};
     this.bySpecialFeatureVendorMap = {};
 

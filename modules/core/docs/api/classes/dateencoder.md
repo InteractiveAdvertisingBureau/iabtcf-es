@@ -26,7 +26,7 @@
 
 ▸ **encode**(value: *`Date`*, numBits: *`number`*): `string`
 
-*Defined in [tcstring/encoders/DateEncoder.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/6f277fe/modules/core/src/tcstring/encoders/DateEncoder.ts#L6)*
+*Defined in [tcstring/encoders/DateEncoder.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/c3b1466/modules/core/src/tcstring/encoders/DateEncoder.ts#L6)*
 
 **Parameters:**
 

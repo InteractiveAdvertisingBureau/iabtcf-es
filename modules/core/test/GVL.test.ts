@@ -25,7 +25,12 @@ describe('GVL', (): void => {
 
   };
 
-  beforeEach(XMLHttpTestTools.beforeEach);
+  beforeEach((): void => {
+
+    GVL.baseUrl = '';
+    XMLHttpTestTools.beforeEach();
+
+  });
   afterEach(XMLHttpTestTools.afterEach);
 
   it('Should fail to build without setting baseUrl', (): void => {
@@ -71,7 +76,7 @@ describe('GVL', (): void => {
 
   });
 
-  it('should whitelist a group of vendors', (): void => {
+  it('should narrow a group of vendors', (): void => {
 
 
     if (Object.keys(vendorlistJson.vendors).length > 1) {
@@ -79,7 +84,7 @@ describe('GVL', (): void => {
       const gvl: GVL = new GVL(vendorlistJson);
       const onlyVendorId: string = Object.keys(vendorlistJson.vendors)[0];
 
-      gvl.setWhiteList([parseInt(onlyVendorId, 10)]);
+      gvl.narrowVendorsTo([parseInt(onlyVendorId, 10)]);
       expect(gvl.vendors[onlyVendorId]).to.deep.equal(vendorlistJson.vendors[onlyVendorId]);
       expect(gvl.vendors[Object.keys(vendorlistJson.vendors)[1]]).to.be.undefined;
 

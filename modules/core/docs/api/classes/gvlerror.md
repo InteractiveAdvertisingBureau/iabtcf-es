@@ -35,7 +35,7 @@ class for General GVL Errors
 
 ⊕ **new GVLError**(msg: *`string`*): [GVLError](gvlerror.md)
 
-*Defined in [errors/GVLError.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/6f277fe/modules/core/src/errors/GVLError.ts#L6)*
+*Defined in [errors/GVLError.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/c3b1466/modules/core/src/errors/GVLError.ts#L6)*
 
 constructor - constructs a GVLError
 
