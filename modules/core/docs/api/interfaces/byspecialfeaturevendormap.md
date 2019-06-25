@@ -8,10 +8,7 @@
 
 ## Indexable
 
-\[featureId: `string`\]:&nbsp;`object`
-
- features: `Set`<`number`>
-
+\[featureId: `string`\]:&nbsp;`Set`<`number`>
 ## Index
 
 ---

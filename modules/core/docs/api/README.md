@@ -37,19 +37,21 @@
 * [ByFeatureVendorMap](interfaces/byfeaturevendormap.md)
 * [ByPurposeVendorMap](interfaces/bypurposevendormap.md)
 * [BySpecialFeatureVendorMap](interfaces/byspecialfeaturevendormap.md)
+* [BySpecialPurposeVendorMap](interfaces/byspecialpurposevendormap.md)
 * [Feature](interfaces/feature.md)
+* [GVLBase](interfaces/gvlbase.md)
 * [GVLMap](interfaces/gvlmap.md)
 * [GVLMapItem](interfaces/gvlmapitem.md)
-* [GVLSchema](interfaces/gvlschema.md)
 * [Purpose](interfaces/purpose.md)
 * [SpecificEncoder](interfaces/specificencoder.md)
 * [Stack](interfaces/stack.md)
 * [Vendor](interfaces/vendor.md)
+* [VendorList](interfaces/vendorlist.md)
 
 ### Type aliases
 
-* [PORFSubType](#porfsubtype)
 * [PurposeOrFeature](#purposeorfeature)
+* [PurposeSubType](#purposesubtype)
 * [TCModelPropType](#tcmodelproptype)
 * [VersionOrObject](#versionorobject)
 * [idOrIds](#idorids)
@@ -58,22 +60,22 @@
 
 ## Type aliases
 
-<a id="porfsubtype"></a>
-
-###  PORFSubType
-
-**Ƭ PORFSubType**: *"consent" \| "legInt" \| "flexible" \| "features" \| "specialFeatures"*
-
-*Defined in [GVL.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L18)*
-
-___
 <a id="purposeorfeature"></a>
 
 ###  PurposeOrFeature
 
 **Ƭ PurposeOrFeature**: *"purpose" \| "feature"*
 
-*Defined in [GVL.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L17)*
+*Defined in [GVL.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L28)*
+
+___
+<a id="purposesubtype"></a>
+
+###  PurposeSubType
+
+**Ƭ PurposeSubType**: *"consent" \| "legInt" \| "flexible"*
+
+*Defined in [GVL.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L29)*
 
 ___
 <a id="tcmodelproptype"></a>
@@ -82,7 +84,7 @@ ___
 
 **Ƭ TCModelPropType**: *`number` \| `Date` \| `string` \| `boolean` \| [Vector](classes/vector.md)*
 
-*Defined in [tcstring/encoders/SpecificEncoder.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/tcstring/encoders/SpecificEncoder.ts#L3)*
+*Defined in [tcstring/encoders/SpecificEncoder.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/tcstring/encoders/SpecificEncoder.ts#L3)*
 
 ___
 <a id="versionorobject"></a>
@@ -91,7 +93,7 @@ ___
 
 **Ƭ VersionOrObject**: *`string` \| `number` \| `object`*
 
-*Defined in [GVL.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L16)*
+*Defined in [GVL.ts:27](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L27)*
 
 ___
 <a id="idorids"></a>
@@ -100,7 +102,7 @@ ___
 
 **Ƭ idOrIds**: *`number` \| `number`[]*
 
-*Defined in [model/Vector.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/model/Vector.ts#L3)*
+*Defined in [model/Vector.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/Vector.ts#L3)*
 
 ___
 

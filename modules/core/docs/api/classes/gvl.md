@@ -27,21 +27,25 @@ class with utilities for managing the global vendor list. Will use JSON to fetch
 * [tcfPolicyVersion](gvl.md#tcfpolicyversion)
 * [vendorListVersion](gvl.md#vendorlistversion)
 * [baseUrl](gvl.md#baseurl)
+* [langTranslationFilename](gvl.md#langtranslationfilename)
 * [latestFilename](gvl.md#latestfilename)
 * [versionedFilename](gvl.md#versionedfilename)
 
 ### Accessors
 
+* [language](gvl.md#language)
 * [vendors](gvl.md#vendors)
 
 ### Methods
 
+* [changeLanguage](gvl.md#changelanguage)
 * [getVendorsWithConsentPurpose](gvl.md#getvendorswithconsentpurpose)
 * [getVendorsWithFeature](gvl.md#getvendorswithfeature)
 * [getVendorsWithFlexiblePurpose](gvl.md#getvendorswithflexiblepurpose)
 * [getVendorsWithLegIntPurpose](gvl.md#getvendorswithlegintpurpose)
 * [getVendorsWithSpecialFeature](gvl.md#getvendorswithspecialfeature)
-* [setWhiteList](gvl.md#setwhitelist)
+* [getVendorsWithSpecialPurpose](gvl.md#getvendorswithspecialpurpose)
+* [narrowVendorsTo](gvl.md#narrowvendorsto)
 
 ---
 
@@ -53,7 +57,7 @@ class with utilities for managing the global vendor list. Will use JSON to fetch
 
 ⊕ **new GVL**(versionOrObject?: *[VersionOrObject](../#versionorobject)*): [GVL](gvl.md)
 
-*Defined in [GVL.ts:141](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L141)*
+*Defined in [GVL.ts:179](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L179)*
 
 **Parameters:**
 
@@ -73,7 +77,7 @@ ___
 
 **● features**: *[GVLMap](../interfaces/gvlmap.md)<[Feature](../interfaces/feature.md)>*
 
-*Defined in [GVL.ts:106](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L106)*
+*Defined in [GVL.ts:135](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L135)*
 
 *__param__*: collection of [Feature](../interfaces/feature.md)s
 
@@ -84,7 +88,7 @@ ___
 
 **● gvlSpecificationVersion**: *`number`*
 
-*Defined in [GVL.ts:68](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L68)*
+*Defined in [GVL.ts:97](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L97)*
 
 *__param__*: schema version for the GVL that is used
 
@@ -95,7 +99,7 @@ ___
 
 **● lastUpdated**: *`string` \| `Date`*
 
-*Defined in [GVL.ts:91](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L91)*
+*Defined in [GVL.ts:120](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L120)*
 
 *__param__*: the date in which the vendor list json file was last updated.
 
@@ -106,7 +110,7 @@ ___
 
 **● purposes**: *[GVLMap](../interfaces/gvlmap.md)<[Purpose](../interfaces/purpose.md)>*
 
-*Defined in [GVL.ts:96](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L96)*
+*Defined in [GVL.ts:125](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L125)*
 
 *__param__*: collection of [Purpose](../interfaces/purpose.md)s
 
@@ -117,9 +121,9 @@ ___
 
 **● readyPromise**: *`Promise`<`void` \| [GVLError](gvlerror.md)>*
 
-*Defined in [GVL.ts:63](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L63)*
+*Defined in [GVL.ts:92](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L92)*
 
-*__param__*: when this GVL object is populated with the data from the [GVLSchema](../interfaces/gvlschema.md) or rejected if there is an error
+*__param__*: when this GVL object is populated with the data or rejected if there is an error
 
 ___
 <a id="specialfeatures"></a>
@@ -128,7 +132,7 @@ ___
 
 **● specialFeatures**: *[GVLMap](../interfaces/gvlmap.md)<[Feature](../interfaces/feature.md)>*
 
-*Defined in [GVL.ts:111](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L111)*
+*Defined in [GVL.ts:140](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L140)*
 
 *__param__*: collection of [Feature](../interfaces/feature.md)s
 
@@ -139,7 +143,7 @@ ___
 
 **● specialPurposes**: *[GVLMap](../interfaces/gvlmap.md)<[Purpose](../interfaces/purpose.md)>*
 
-*Defined in [GVL.ts:101](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L101)*
+*Defined in [GVL.ts:130](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L130)*
 
 *__param__*: collection of [Purpose](../interfaces/purpose.md)s
 
@@ -150,7 +154,7 @@ ___
 
 **● stacks**: *[GVLMap](../interfaces/gvlmap.md)<[Stack](../interfaces/stack.md)>*
 
-*Defined in [GVL.ts:141](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L141)*
+*Defined in [GVL.ts:175](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L175)*
 
 *__param__*: collection of [Stack](../interfaces/stack.md)s
 
@@ -161,7 +165,7 @@ ___
 
 **● tcfPolicyVersion**: *`number`*
 
-*Defined in [GVL.ts:85](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L85)*
+*Defined in [GVL.ts:114](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L114)*
 
 *__param__*: The TCF MO will increment this value whenever a GVL change (such as adding a new Purpose or Feature or a change in Purpose wording) legally invalidates existing TC Strings and requires CMPs to re-establish transparency and consent from users. If the policy version number in the latest GVL is different from the value in your TC String, then you need to re-establish transparency and consent for that user. A version 1 format TC String is considered to have a version value of 1.
 
@@ -172,7 +176,7 @@ ___
 
 **● vendorListVersion**: *`number`*
 
-*Defined in [GVL.ts:73](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L73)*
+*Defined in [GVL.ts:102](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L102)*
 
 *__param__*: with each published file change
 
@@ -183,11 +187,29 @@ ___
 
 **● baseUrl**: *`string`*
 
-*Defined in [GVL.ts:34](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L34)*
+*Defined in [GVL.ts:45](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L45)*
 
 *__static__*: 
 
 *__param__*: the base url to load the vendor-list.json from. This is broken out from the filename because it follows a different scheme for latest file vs versioned files.
+
+___
+<a id="langtranslationfilename"></a>
+
+### `<Static>` langTranslationFilename
+
+**● langTranslationFilename**: *`string`* = "purposes-[LANG].json"
+
+*Defined in [GVL.ts:86](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L86)*
+
+*__param__*: Translations of the names and descriptions for Purposes, Special Purposes, Features, and Special Features to non-English languages are contained in a file where attributes containing English content (except vendor declaration information) are translated. The iab publishes one following the scheme below where the LANG is the iso639-1 language code. For a list of available translations [please go here](https://register.consensu.org/Translation).
+
+eg.
+
+```javascript
+GVL.baseUrl = "http://www.mydomain.com/iabcmp/";
+GVL.langTranslationFilename = "purposes?getPurposes=[LANG]";
+```
 
 ___
 <a id="latestfilename"></a>
@@ -196,7 +218,7 @@ ___
 
 **● latestFilename**: *`string`* = "vendor-list.json"
 
-*Defined in [GVL.ts:41](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L41)*
+*Defined in [GVL.ts:52](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L52)*
 
 *__static__*: 
 
@@ -209,7 +231,7 @@ ___
 
 **● versionedFilename**: *`string`* = "archives/vendor-list-v[VERSION].json"
 
-*Defined in [GVL.ts:57](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L57)*
+*Defined in [GVL.ts:69](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L69)*
 
 *__static__*: 
 
@@ -226,13 +248,24 @@ ___
 
 ## Accessors
 
+<a id="language"></a>
+
+###  language
+
+**get language**(): `string`
+
+*Defined in [GVL.ts:312](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L312)*
+
+**Returns:** `string`
+
+___
 <a id="vendors"></a>
 
 ###  vendors
 
 **get vendors**(): [GVLMap](../interfaces/gvlmap.md)<[Vendor](../interfaces/vendor.md)>
 
-*Defined in [GVL.ts:363](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L363)*
+*Defined in [GVL.ts:534](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L534)*
 
 **Returns:** [GVLMap](../interfaces/gvlmap.md)<[Vendor](../interfaces/vendor.md)>
 
@@ -240,21 +273,44 @@ ___
 
 ## Methods
 
+<a id="changelanguage"></a>
+
+###  changeLanguage
+
+▸ **changeLanguage**(lang: *`string`*): `Promise`<`void` \| [GVLError](gvlerror.md)>
+
+*Defined in [GVL.ts:271](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L271)*
+
+changeLanguage - retrieves the purpose language translation and sets the internal language variable
+
+**Parameters:**
+
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| lang | `string` |  ISO 639-1 langauge code to change language to |
+
+**Returns:** `Promise`<`void` \| [GVLError](gvlerror.md)>
+*   returns the `readyPromise` and resolves when this GVL is populated with the data from the language file.
+
+___
 <a id="getvendorswithconsentpurpose"></a>
 
 ###  getVendorsWithConsentPurpose
 
 ▸ **getVendorsWithConsentPurpose**(purposeId: *`number`*): [GVLMap](../interfaces/gvlmap.md)<[Vendor](../interfaces/vendor.md)>
 
-*Defined in [GVL.ts:337](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L337)*
+*Defined in [GVL.ts:468](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L468)*
+
+getVendorsWithConsentPurpose
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| purposeId | `number` |
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| purposeId | `number` |  \- |
 
 **Returns:** [GVLMap](../interfaces/gvlmap.md)<[Vendor](../interfaces/vendor.md)>
+*   list of vendors that have declared the consent purpose id
 
 ___
 <a id="getvendorswithfeature"></a>
@@ -263,15 +319,18 @@ ___
 
 ▸ **getVendorsWithFeature**(featureId: *`number`*): [GVLMap](../interfaces/gvlmap.md)<[Vendor](../interfaces/vendor.md)>
 
-*Defined in [GVL.ts:352](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L352)*
+*Defined in [GVL.ts:516](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L516)*
+
+getVendorsWithFeature
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| featureId | `number` |
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| featureId | `number` |  \- |
 
 **Returns:** [GVLMap](../interfaces/gvlmap.md)<[Vendor](../interfaces/vendor.md)>
+*   list of vendors that have declared the feature id
 
 ___
 <a id="getvendorswithflexiblepurpose"></a>
@@ -280,15 +339,18 @@ ___
 
 ▸ **getVendorsWithFlexiblePurpose**(purposeId: *`number`*): [GVLMap](../interfaces/gvlmap.md)<[Vendor](../interfaces/vendor.md)>
 
-*Defined in [GVL.ts:347](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L347)*
+*Defined in [GVL.ts:492](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L492)*
+
+getVendorsWithFlexiblePurpose
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| purposeId | `number` |
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| purposeId | `number` |  \- |
 
 **Returns:** [GVLMap](../interfaces/gvlmap.md)<[Vendor](../interfaces/vendor.md)>
+*   list of vendors that have declared the flexible purpose id
 
 ___
 <a id="getvendorswithlegintpurpose"></a>
@@ -297,47 +359,75 @@ ___
 
 ▸ **getVendorsWithLegIntPurpose**(purposeId: *`number`*): [GVLMap](../interfaces/gvlmap.md)<[Vendor](../interfaces/vendor.md)>
 
-*Defined in [GVL.ts:342](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L342)*
+*Defined in [GVL.ts:480](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L480)*
+
+getVendorsWithLegIntPurpose
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| purposeId | `number` |
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| purposeId | `number` |  \- |
 
 **Returns:** [GVLMap](../interfaces/gvlmap.md)<[Vendor](../interfaces/vendor.md)>
+*   list of vendors that have declared the legInt (Legitimate Interest) purpose id
 
 ___
 <a id="getvendorswithspecialfeature"></a>
 
 ###  getVendorsWithSpecialFeature
 
-▸ **getVendorsWithSpecialFeature**(featureId: *`number`*): [GVLMap](../interfaces/gvlmap.md)<[Vendor](../interfaces/vendor.md)>
+▸ **getVendorsWithSpecialFeature**(specialFeatureId: *`number`*): [GVLMap](../interfaces/gvlmap.md)<[Vendor](../interfaces/vendor.md)>
 
-*Defined in [GVL.ts:357](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L357)*
+*Defined in [GVL.ts:528](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L528)*
+
+getVendorsWithSpecialFeature
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| featureId | `number` |
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| specialFeatureId | `number` |  \- |
 
 **Returns:** [GVLMap](../interfaces/gvlmap.md)<[Vendor](../interfaces/vendor.md)>
+*   list of vendors that have declared the special feature id
 
 ___
-<a id="setwhitelist"></a>
+<a id="getvendorswithspecialpurpose"></a>
 
-###  setWhiteList
+###  getVendorsWithSpecialPurpose
 
-▸ **setWhiteList**(ids: *`number`[]*): `void`
+▸ **getVendorsWithSpecialPurpose**(specialPurposeId: *`number`*): [GVLMap](../interfaces/gvlmap.md)<[Vendor](../interfaces/vendor.md)>
 
-*Defined in [GVL.ts:369](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/GVL.ts#L369)*
+*Defined in [GVL.ts:504](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L504)*
+
+getVendorsWithSpecialPurpose
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| ids | `number`[] |
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| specialPurposeId | `number` |  \- |
+
+**Returns:** [GVLMap](../interfaces/gvlmap.md)<[Vendor](../interfaces/vendor.md)>
+*   list of vendors that have declared the special purpose id
+
+___
+<a id="narrowvendorsto"></a>
+
+###  narrowVendorsTo
+
+▸ **narrowVendorsTo**(vendorIds: *`number`[]*): `void`
+
+*Defined in [GVL.ts:546](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/GVL.ts#L546)*
+
+narrowVendorsTo - narrows vendors represented in this GVL to the list of ids passed in
+
+**Parameters:**
+
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| vendorIds | `number`[] |  list of ids to narrow this GVL to |
 
 **Returns:** `void`
 

@@ -2,7 +2,7 @@ import {Vector} from './model/Vector';
 // import {PurposeRestriction} from './model/PurposeRestriction';
 import {GVL} from './GVL';
 import {TCModelError} from './errors/TCModelError';
-import {GVLMap, GVLMapItem} from './model/GVLSchema';
+import {GVLMap, GVLMapItem} from './model/GVLBase';
 
 class TCModel {
 

@@ -25,6 +25,7 @@ export interface Vendor extends GVLMapItem {
   purposeIds: number[];
   legIntPurposeIds: number[];
   flexiblePurposeIds?: number[];
+  specialPurposeIds: number[];
   featureIds: number[];
   specialFeatureIds: number[];
   policyUrl: string;
@@ -42,7 +43,8 @@ export interface Stack extends GVLMapItem {
 export interface GVLMap<T> {
   [id: string]: T;
 }
-export interface GVLSchema {
+
+export interface GVLBase {
   gvlSpecificationVersion: number;
   vendorListVersion: number;
   tcfPolicyVersion: number;
@@ -51,25 +53,5 @@ export interface GVLSchema {
   specialPurposes: GVLMap<Purpose>;
   features: GVLMap<Feature>;
   specialFeatures: GVLMap<Feature>;
-  vendors: GVLMap<Vendor>;
   stacks: GVLMap<Stack>;
-};
-export interface ByPurposeVendorMap {
-  [purposeId: string]: {
-    legInt: Set<number>;
-    consent: Set<number>;
-    flexible: Set<number>;
-  };
-}
-
-export interface ByFeatureVendorMap {
-  [featureId: string]: {
-    features: Set<number>;
-  };
-}
-
-export interface BySpecialFeatureVendorMap {
-  [featureId: string]: {
-    features: Set<number>;
-  };
 }

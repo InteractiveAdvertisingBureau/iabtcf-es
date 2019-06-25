@@ -22,6 +22,7 @@
 * [policyUrl](vendor.md#policyurl)
 * [purposeIds](vendor.md#purposeids)
 * [specialFeatureIds](vendor.md#specialfeatureids)
+* [specialPurposeIds](vendor.md#specialpurposeids)
 
 ---
 
@@ -33,7 +34,7 @@
 
 **● deletedDate**: *`Date` \| `string`*
 
-*Defined in [model/GVLSchema.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/model/GVLSchema.ts#L31)*
+*Defined in [model/GVLBase.ts:32](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L32)*
 
 ___
 <a id="featureids"></a>
@@ -42,7 +43,7 @@ ___
 
 **● featureIds**: *`number`[]*
 
-*Defined in [model/GVLSchema.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/model/GVLSchema.ts#L28)*
+*Defined in [model/GVLBase.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L29)*
 
 ___
 <a id="flexiblepurposeids"></a>
@@ -51,7 +52,7 @@ ___
 
 **● flexiblePurposeIds**: *`number`[]*
 
-*Defined in [model/GVLSchema.ts:27](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/model/GVLSchema.ts#L27)*
+*Defined in [model/GVLBase.ts:27](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L27)*
 
 ___
 <a id="id"></a>
@@ -62,7 +63,7 @@ ___
 
 *Inherited from [GVLMapItem](gvlmapitem.md).[id](gvlmapitem.md#id)*
 
-*Defined in [model/GVLSchema.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/model/GVLSchema.ts#L2)*
+*Defined in [model/GVLBase.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L2)*
 
 ___
 <a id="legintpurposeids"></a>
@@ -71,7 +72,7 @@ ___
 
 **● legIntPurposeIds**: *`number`[]*
 
-*Defined in [model/GVLSchema.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/model/GVLSchema.ts#L26)*
+*Defined in [model/GVLBase.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L26)*
 
 ___
 <a id="name"></a>
@@ -82,7 +83,7 @@ ___
 
 *Inherited from [GVLMapItem](gvlmapitem.md).[name](gvlmapitem.md#name)*
 
-*Defined in [model/GVLSchema.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/model/GVLSchema.ts#L3)*
+*Defined in [model/GVLBase.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L3)*
 
 ___
 <a id="overflow"></a>
@@ -91,7 +92,7 @@ ___
 
 **● overflow**: *`undefined` \| `object`*
 
-*Defined in [model/GVLSchema.ts:32](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/model/GVLSchema.ts#L32)*
+*Defined in [model/GVLBase.ts:33](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L33)*
 
 ___
 <a id="policyurl"></a>
@@ -100,7 +101,7 @@ ___
 
 **● policyUrl**: *`string`*
 
-*Defined in [model/GVLSchema.ts:30](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/model/GVLSchema.ts#L30)*
+*Defined in [model/GVLBase.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L31)*
 
 ___
 <a id="purposeids"></a>
@@ -109,7 +110,7 @@ ___
 
 **● purposeIds**: *`number`[]*
 
-*Defined in [model/GVLSchema.ts:25](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/model/GVLSchema.ts#L25)*
+*Defined in [model/GVLBase.ts:25](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L25)*
 
 ___
 <a id="specialfeatureids"></a>
@@ -118,7 +119,16 @@ ___
 
 **● specialFeatureIds**: *`number`[]*
 
-*Defined in [model/GVLSchema.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/b06c04d/modules/core/src/model/GVLSchema.ts#L29)*
+*Defined in [model/GVLBase.ts:30](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L30)*
+
+___
+<a id="specialpurposeids"></a>
+
+###  specialPurposeIds
+
+**● specialPurposeIds**: *`number`[]*
+
+*Defined in [model/GVLBase.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L28)*
 
 ___
 

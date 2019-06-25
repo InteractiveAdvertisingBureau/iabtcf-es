@@ -1,21 +1,32 @@
 import {Json} from './Json';
 import {GVLError} from './errors/GVLError';
+
 import {
-  Feature,
+  GVLBase,
+  GVLMap,
   Purpose,
+  Feature,
   Vendor,
   Stack,
-  GVLMap,
-  GVLSchema,
+} from './model/GVLBase';
+
+import {
   ByPurposeVendorMap,
+  BySpecialPurposeVendorMap,
   ByFeatureVendorMap,
   BySpecialFeatureVendorMap,
-}
-  from './model/GVLSchema';
+} from './model/GVLMaps';
+
+/**
+ * TODO: make map to cache language translations under language so if a
+ * language is loaded twice it won't go and get it more than once
+ */
+
+import {VendorList} from './model/VendorList';
 
 export type VersionOrObject = string | number | object;
 type PurposeOrFeature = 'purpose' | 'feature';
-type PORFSubType = 'consent' | 'legInt' | 'flexible' | 'features' | 'specialFeatures';
+type PurposeSubType = 'consent' | 'legInt' | 'flexible';
 
 /**
  * class with utilities for managing the global vendor list.  Will use JSON to
@@ -40,6 +51,7 @@ class GVL {
    */
   public static latestFilename: string = 'vendor-list.json';
 
+
   /**
    * @static
    * @param {string} - the versioned name is assumed to be
@@ -57,8 +69,25 @@ class GVL {
   public static versionedFilename: string = 'archives/vendor-list-v[VERSION].json';
 
   /**
+   * @param {string} - Translations of the names and descriptions for Purposes,
+   * Special Purposes, Features, and Special Features to non-English languages
+   * are contained in a file where attributes containing English content
+   * (except vendor declaration information) are translated.  The iab publishes
+   * one following the scheme below where the LANG is the iso639-1 language
+   * code.  For a list of available translations
+   * [please go here](https://register.consensu.org/Translation).
+   *
+   * eg.
+   * ```javascript
+   * GVL.baseUrl = "http://www.mydomain.com/iabcmp/";
+   * GVL.langTranslationFilename = "purposes?getPurposes=[LANG]";
+   * ```
+   */
+  public static langTranslationFilename: string = 'purposes-[LANG].json';
+
+  /**
    * @param {Promise} resolved when this GVL object is populated with the data
-   * from the [[GVLSchema]] or rejected if there is an error
+   * or rejected if there is an error
    */
   public readyPromise: Promise<void | GVLError>;
 
@@ -126,6 +155,11 @@ class GVL {
   private byPurposeVendorMap: ByPurposeVendorMap;
 
   /**
+   * @param {BySpecialPurposeVendorMap} vendors by special purpose
+   */
+  private bySpecialPurposeVendorMap: BySpecialPurposeVendorMap;
+
+  /**
    * @param {ByFeatureVendorMap} vendors by feature
    */
   private byFeatureVendorMap: ByFeatureVendorMap;
@@ -140,6 +174,11 @@ class GVL {
    */
   public stacks: GVLMap<Stack>;
 
+  private readonly DEFAULT_LANGUAGE: string = 'en';
+
+  private lang_: string;
+
+
   /**
    * @param {VersionOrObject} [versionOrObject] - can be either the
    * Json object that is the GVL or a version number represented as a string or
@@ -151,9 +190,11 @@ class GVL {
     // should have been configured before and instance was created and will persist through the app
     let url = GVL.baseUrl;
 
+    this.lang_ = this.DEFAULT_LANGUAGE;
+
     if (typeof versionOrObject === 'object') {
 
-      this.deserialize(versionOrObject as GVLSchema);
+      this.deserialize(versionOrObject as VendorList);
       this.readyPromise = new Promise((resolve: Function): void => {
 
         resolve();
@@ -168,38 +209,44 @@ class GVL {
 
       }
 
-      // if a trailing slash was forgotten
-      if (url[url.length - 1] !== '/') {
-
-        url += '/';
-
-      }
+      url += this.addTrailingSlashMaybe(url);
 
       if (versionOrObject as number > 0) {
 
         // load version specified
         url += GVL.versionedFilename.replace('[VERSION]', versionOrObject + '');
-        this.getGVL(url);
+        this.getJson(url);
 
       } else {
 
         // whatever it is (or isn't)... it doesn't matter we'll just get the latest
         url += GVL.latestFilename;
-        this.getGVL(url);
+        this.getJson(url);
 
       }
 
     }
 
   }
+  private addTrailingSlashMaybe(url: string): string {
 
-  private getGVL(url: string): void {
+    // if a trailing slash was forgotten
+    if (url[url.length - 1] !== '/') {
+
+      url += '/';
+
+    }
+    return url;
+
+  }
+
+  private getJson(url: string): void {
 
     this.readyPromise = new Promise((resolve: Function, reject: Function): void => {
 
       Json.fetch(url).then((response: object): void => {
 
-        this.deserialize(response as GVLSchema);
+        this.deserialize(response as VendorList);
         resolve();
 
       })
@@ -213,7 +260,67 @@ class GVL {
 
   }
 
-  private deserialize(gvlObject: GVLSchema): void {
+  /**
+   * changeLanguage - retrieves the purpose language translation and sets the
+   * internal language variable
+   *
+   * @param {string} lang - ISO 639-1 langauge code to change language to
+   * @return {Promise<void | GVLError>} - returns the `readyPromise` and
+   * resolves when this GVL is populated with the data from the language file.
+   */
+  public changeLanguage(lang: string): Promise<void | GVLError> {
+
+    if (/^([A-z]){2}$/.test(lang)) {
+
+      if (lang !== this.lang_) {
+
+        let url = GVL.baseUrl;
+
+        if (!url) {
+
+          throw new GVLError('must specify GVL.baseUrl before changing the language');
+
+        }
+
+        url += this.addTrailingSlashMaybe(url);
+
+        // load version specified
+        url += GVL.langTranslationFilename.replace('[LANG]', lang);
+        this.getJson(url);
+
+      } else {
+
+        // didn't actually have to change anything...
+        this.readyPromise = new Promise((resolve: Function): void => {
+
+          resolve();
+
+        });
+
+      }
+      this.lang_ = lang;
+
+      return this.readyPromise;
+
+    } else {
+
+      throw new GVLError('invalid language');
+
+    }
+
+  }
+  public get language(): string {
+
+    return this.lang_;
+
+  }
+  private isVendorList(gvlObject: GVLBase): gvlObject is VendorList {
+
+    return (gvlObject as VendorList).vendors !== undefined;
+
+  }
+
+  private deserialize(gvlObject: GVLBase): void {
 
     this.gvlSpecificationVersion = gvlObject.gvlSpecificationVersion;
     this.vendorListVersion = gvlObject.vendorListVersion;
@@ -228,10 +335,15 @@ class GVL {
     this.specialPurposes = gvlObject.specialPurposes;
     this.features = gvlObject.features;
     this.specialFeatures = gvlObject.specialFeatures;
-    this.vendors_ = gvlObject.vendors;
-    this.fullVendorList = gvlObject.vendors;
-    this.mapVendors();
     this.stacks = gvlObject.stacks;
+
+    if (this.isVendorList(gvlObject)) {
+
+      this.vendors_ = gvlObject.vendors;
+      this.fullVendorList = gvlObject.vendors;
+      this.mapVendors();
+
+    }
 
   }
 
@@ -253,21 +365,24 @@ class GVL {
 
     });
 
+    // initializes data structure for special purpose map
+    Object.keys(this.specialPurposes).forEach((purposeId: string): void => {
+
+      this.bySpecialPurposeVendorMap[purposeId] = new Set<number>();
+
+    });
+
     // initializes data structure for feature map
     Object.keys(this.features).forEach((featureId: string): void => {
 
-      this.byFeatureVendorMap[featureId] = {
-        features: new Set<number>(),
-      };
+      this.byFeatureVendorMap[featureId] = new Set<number>();
 
     });
 
     // initializes data structure for feature map
     Object.keys(this.specialFeatures).forEach((featureId: string): void => {
 
-      this.bySpecialFeatureVendorMap[featureId] = {
-        features: new Set<number>(),
-      };
+      this.bySpecialFeatureVendorMap[featureId] = new Set<number>();
 
     });
 
@@ -304,13 +419,13 @@ class GVL {
 
       vendor.featureIds.forEach((featureId: number): void => {
 
-        this.byFeatureVendorMap[featureId + ''].features.add(numVendorId);
+        this.byFeatureVendorMap[featureId + ''].add(numVendorId);
 
       });
 
       vendor.specialFeatureIds.forEach((featureId: number): void => {
 
-        this.bySpecialFeatureVendorMap[featureId + ''].features.add(numVendorId);
+        this.bySpecialFeatureVendorMap[featureId + ''].add(numVendorId);
 
       });
 
@@ -318,13 +433,23 @@ class GVL {
 
   }
 
-  private getFilteredVendors(purposeOrFeature: PurposeOrFeature, id: number, subType: PORFSubType): GVLMap<Vendor> {
+  private getFilteredVendors(purposeOrFeature: PurposeOrFeature, id: number, subType?: PurposeSubType): GVLMap<Vendor> {
 
     const properPurposeOrFeature: string = purposeOrFeature.charAt(0).toUpperCase() + purposeOrFeature.slice(1);
-    const mySet: Set<number> = this['by' + properPurposeOrFeature + 'VendorMap'][id + ''][subType];
+    let vendorSet: Set<number>;
     const retr: GVLMap<Vendor> = {};
 
-    mySet.forEach((vendorId: number): void => {
+    if (purposeOrFeature === 'purpose' && subType) {
+
+      vendorSet = this['by' + properPurposeOrFeature + 'VendorMap'][id + ''][subType];
+
+    } else {
+
+      vendorSet = this['by' + properPurposeOrFeature + 'VendorMap'][id + ''];
+
+    }
+
+    vendorSet.forEach((vendorId: number): void => {
 
       retr[vendorId + ''] = this.vendors[vendorId + ''];
 
@@ -334,29 +459,75 @@ class GVL {
 
   }
 
+  /**
+   * getVendorsWithConsentPurpose
+   *
+   * @param {number} purposeId
+   * @return {GVLMap<Vendor>} - list of vendors that have declared the consent purpose id
+   */
   public getVendorsWithConsentPurpose(purposeId: number): GVLMap<Vendor> {
 
     return this.getFilteredVendors('purpose', purposeId, 'consent');
 
   }
+
+  /**
+   * getVendorsWithLegIntPurpose
+   *
+   * @param {number} purposeId
+   * @return {GVLMap<Vendor>} - list of vendors that have declared the legInt (Legitimate Interest) purpose id
+   */
   public getVendorsWithLegIntPurpose(purposeId: number): GVLMap<Vendor> {
 
     return this.getFilteredVendors('purpose', purposeId, 'legInt');
 
   }
+
+  /**
+   * getVendorsWithFlexiblePurpose
+   *
+   * @param {number} purposeId
+   * @return {GVLMap<Vendor>} - list of vendors that have declared the flexible purpose id
+   */
   public getVendorsWithFlexiblePurpose(purposeId: number): GVLMap<Vendor> {
 
     return this.getFilteredVendors('purpose', purposeId, 'flexible');
 
   }
-  public getVendorsWithFeature(featureId: number): GVLMap<Vendor> {
 
-    return this.getFilteredVendors('feature', featureId, 'features');
+  /**
+   * getVendorsWithSpecialPurpose
+   *
+   * @param {number} specialPurposeId
+   * @return {GVLMap<Vendor>} - list of vendors that have declared the special purpose id
+   */
+  public getVendorsWithSpecialPurpose(specialPurposeId: number): GVLMap<Vendor> {
+
+    return this.getFilteredVendors('purpose', specialPurposeId, 'flexible');
 
   }
-  public getVendorsWithSpecialFeature(featureId: number): GVLMap<Vendor> {
 
-    return this.getFilteredVendors('feature', featureId, 'specialFeatures');
+  /**
+   * getVendorsWithFeature
+   *
+   * @param {number} featureId
+   * @return {GVLMap<Vendor>} - list of vendors that have declared the feature id
+   */
+  public getVendorsWithFeature(featureId: number): GVLMap<Vendor> {
+
+    return this.getFilteredVendors('feature', featureId);
+
+  }
+
+  /**
+   * getVendorsWithSpecialFeature
+   *
+   * @param {number} specialFeatureId
+   * @return {GVLMap<Vendor>} - list of vendors that have declared the special feature id
+   */
+  public getVendorsWithSpecialFeature(specialFeatureId: number): GVLMap<Vendor> {
+
+    return this.getFilteredVendors('feature', specialFeatureId);
 
   }
 
@@ -366,10 +537,16 @@ class GVL {
 
   }
 
-  public setWhiteList(ids: number[]): void {
+  /**
+   * narrowVendorsTo - narrows vendors represented in this GVL to the list of ids passed in
+   *
+   * @param {number[]} vendorIds - list of ids to narrow this GVL to
+   * @return {void}
+   */
+  public narrowVendorsTo(vendorIds: number[]): void {
 
     this.vendors_ = {};
-    ids.forEach((id: number): void => {
+    vendorIds.forEach((id: number): void => {
 
       const strId = id + '';
 
