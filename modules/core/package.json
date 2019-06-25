@@ -16,8 +16,8 @@
   "scripts": {
     "docs": "typedoc --ignoreCompilerErrors --tsconfig ./tsconfig.json  src",
     "karma": "karma start",
-    "prepack": "rm -r lib ; npm run build",
-    "build": "tsc",
+    "prepack": "npm run build",
+    "build": "rm -r lib ; tsc",
     "test": "mocha -r ts-node/register -r jsdom-global/register \"./test/**/*.{ts,tsx}\""
   },
   "devDependencies": {

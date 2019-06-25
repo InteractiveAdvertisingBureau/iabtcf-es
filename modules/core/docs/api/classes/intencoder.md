@@ -26,7 +26,7 @@
 
 ▸ **encode**(value: *`any`*, numBits: *`any`*): `string`
 
-*Defined in [tcstring/encoders/IntEncoder.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/tcstring/encoders/IntEncoder.ts#L6)*
+*Defined in [tcstring/encoders/IntEncoder.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/6f277fe/modules/core/src/tcstring/encoders/IntEncoder.ts#L6)*
 
 **Parameters:**
 

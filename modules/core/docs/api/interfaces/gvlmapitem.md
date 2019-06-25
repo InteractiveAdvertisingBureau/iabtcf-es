@@ -10,9 +10,9 @@
 
 ↳  [Purpose](purpose.md)
 
-↳  [Vendor](vendor.md)
-
 ↳  [Stack](stack.md)
+
+↳  [Vendor](vendor.md)
 
 ## Index
 
@@ -31,7 +31,7 @@
 
 **● id**: *`number`*
 
-*Defined in [model/GVLBase.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L2)*
+*Defined in [model/GVLBase.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/6f277fe/modules/core/src/model/GVLBase.ts#L6)*
 
 ___
 <a id="name"></a>
@@ -40,7 +40,7 @@ ___
 
 **● name**: *`string`*
 
-*Defined in [model/GVLBase.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L3)*
+*Defined in [model/GVLBase.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/6f277fe/modules/core/src/model/GVLBase.ts#L7)*
 
 ___
 

@@ -35,7 +35,7 @@
 
 *Inherited from [GVLBase](gvlbase.md).[features](gvlbase.md#features)*
 
-*Defined in [model/GVLBase.ts:54](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L54)*
+*Defined in [model/GVLBase.ts:43](https://github.com/chrispaterson/iabtcf-es/blob/6f277fe/modules/core/src/model/GVLBase.ts#L43)*
 
 ___
 <a id="gvlspecificationversion"></a>
@@ -46,7 +46,7 @@ ___
 
 *Inherited from [GVLBase](gvlbase.md).[gvlSpecificationVersion](gvlbase.md#gvlspecificationversion)*
 
-*Defined in [model/GVLBase.ts:48](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L48)*
+*Defined in [model/GVLBase.ts:37](https://github.com/chrispaterson/iabtcf-es/blob/6f277fe/modules/core/src/model/GVLBase.ts#L37)*
 
 ___
 <a id="lastupdated"></a>
@@ -57,7 +57,7 @@ ___
 
 *Inherited from [GVLBase](gvlbase.md).[lastUpdated](gvlbase.md#lastupdated)*
 
-*Defined in [model/GVLBase.ts:51](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L51)*
+*Defined in [model/GVLBase.ts:40](https://github.com/chrispaterson/iabtcf-es/blob/6f277fe/modules/core/src/model/GVLBase.ts#L40)*
 
 ___
 <a id="purposes"></a>
@@ -68,7 +68,7 @@ ___
 
 *Inherited from [GVLBase](gvlbase.md).[purposes](gvlbase.md#purposes)*
 
-*Defined in [model/GVLBase.ts:52](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L52)*
+*Defined in [model/GVLBase.ts:41](https://github.com/chrispaterson/iabtcf-es/blob/6f277fe/modules/core/src/model/GVLBase.ts#L41)*
 
 ___
 <a id="specialfeatures"></a>
@@ -79,7 +79,7 @@ ___
 
 *Inherited from [GVLBase](gvlbase.md).[specialFeatures](gvlbase.md#specialfeatures)*
 
-*Defined in [model/GVLBase.ts:55](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L55)*
+*Defined in [model/GVLBase.ts:44](https://github.com/chrispaterson/iabtcf-es/blob/6f277fe/modules/core/src/model/GVLBase.ts#L44)*
 
 ___
 <a id="specialpurposes"></a>
@@ -90,7 +90,7 @@ ___
 
 *Inherited from [GVLBase](gvlbase.md).[specialPurposes](gvlbase.md#specialpurposes)*
 
-*Defined in [model/GVLBase.ts:53](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L53)*
+*Defined in [model/GVLBase.ts:42](https://github.com/chrispaterson/iabtcf-es/blob/6f277fe/modules/core/src/model/GVLBase.ts#L42)*
 
 ___
 <a id="stacks"></a>
@@ -101,7 +101,7 @@ ___
 
 *Inherited from [GVLBase](gvlbase.md).[stacks](gvlbase.md#stacks)*
 
-*Defined in [model/GVLBase.ts:56](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L56)*
+*Defined in [model/GVLBase.ts:45](https://github.com/chrispaterson/iabtcf-es/blob/6f277fe/modules/core/src/model/GVLBase.ts#L45)*
 
 ___
 <a id="tcfpolicyversion"></a>
@@ -112,7 +112,7 @@ ___
 
 *Inherited from [GVLBase](gvlbase.md).[tcfPolicyVersion](gvlbase.md#tcfpolicyversion)*
 
-*Defined in [model/GVLBase.ts:50](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L50)*
+*Defined in [model/GVLBase.ts:39](https://github.com/chrispaterson/iabtcf-es/blob/6f277fe/modules/core/src/model/GVLBase.ts#L39)*
 
 ___
 <a id="vendorlistversion"></a>
@@ -123,7 +123,7 @@ ___
 
 *Inherited from [GVLBase](gvlbase.md).[vendorListVersion](gvlbase.md#vendorlistversion)*
 
-*Defined in [model/GVLBase.ts:49](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/GVLBase.ts#L49)*
+*Defined in [model/GVLBase.ts:38](https://github.com/chrispaterson/iabtcf-es/blob/6f277fe/modules/core/src/model/GVLBase.ts#L38)*
 
 ___
 <a id="vendors"></a>
@@ -132,7 +132,7 @@ ___
 
 **● vendors**: *[GVLMap](gvlmap.md)<[Vendor](vendor.md)>*
 
-*Defined in [model/VendorList.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/model/VendorList.ts#L4)*
+*Defined in [model/VendorList.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/6f277fe/modules/core/src/model/VendorList.ts#L18)*
 
 ___
 

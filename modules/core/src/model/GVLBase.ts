@@ -1,11 +1,17 @@
+export interface GVLMap<T> {
+  [id: string]: T;
+}
+
 export interface GVLMapItem {
   id: number;
   name: string;
 }
+
 export interface Feature extends GVLMapItem {
   description: string;
   descriptionLegal: string;
 };
+
 export interface Purpose extends GVLMapItem {
   description: string;
   descriptionLegal: string;
@@ -21,27 +27,10 @@ export interface Purpose extends GVLMapItem {
   rightToObject?: boolean;
 };
 
-export interface Vendor extends GVLMapItem {
-  purposeIds: number[];
-  legIntPurposeIds: number[];
-  flexiblePurposeIds?: number[];
-  specialPurposeIds: number[];
-  featureIds: number[];
-  specialFeatureIds: number[];
-  policyUrl: string;
-  deletedDate?: Date | string;
-  overflow?: {
-    httpGetLimit: 32 | 128;
-  };
-};
-
 export interface Stack extends GVLMapItem {
   purposes: number[];
   specialPurposes: number[];
   description: string;
-}
-export interface GVLMap<T> {
-  [id: string]: T;
 }
 
 export interface GVLBase {

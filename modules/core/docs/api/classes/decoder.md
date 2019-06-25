@@ -22,7 +22,7 @@
 
 ▸ **decode**(encodedString: *`string`*): [TCModel](tcmodel.md)
 
-*Defined in [tcstring/Decoder.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/581b3d4/modules/core/src/tcstring/Decoder.ts#L9)*
+*Defined in [tcstring/Decoder.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/6f277fe/modules/core/src/tcstring/Decoder.ts#L9)*
 
 **Parameters:**
 

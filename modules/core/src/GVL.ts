@@ -6,7 +6,6 @@ import {
   GVLMap,
   Purpose,
   Feature,
-  Vendor,
   Stack,
 } from './model/GVLBase';
 
@@ -22,7 +21,10 @@ import {
  * language is loaded twice it won't go and get it more than once
  */
 
-import {VendorList} from './model/VendorList';
+import {
+  Vendor,
+  VendorList,
+} from './model/VendorList';
 
 export type VersionOrObject = string | number | object;
 type PurposeOrFeature = 'purpose' | 'feature';
