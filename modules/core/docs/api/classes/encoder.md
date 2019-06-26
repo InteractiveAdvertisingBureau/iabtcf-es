@@ -22,7 +22,7 @@
 
 ▸ **encode**(tcModel: *[TCModel](tcmodel.md)*): `string`
 
-*Defined in [tcstring/Encoder.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/c3b1466/modules/core/src/tcstring/Encoder.ts#L15)*
+*Defined in [tcstring/Encoder.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/1a74f01/modules/core/src/tcstring/Encoder.ts#L15)*
 
 **Parameters:**
 

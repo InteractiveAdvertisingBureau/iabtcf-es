@@ -82,10 +82,10 @@ class GVL {
    * eg.
    * ```javascript
    * GVL.baseUrl = "http://www.mydomain.com/iabcmp/";
-   * GVL.langTranslationFilename = "purposes?getPurposes=[LANG]";
+   * GVL.languageFilename = "purposes?getPurposes=[LANG]";
    * ```
    */
-  public static langTranslationFilename: string = 'purposes-[LANG].json';
+  public static languageFilename: string = 'purposes-[LANG].json';
 
   /**
    * @param {Promise} resolved when this GVL object is populated with the data
@@ -243,7 +243,7 @@ class GVL {
 
   }
 
-  private getJson(url: string): void {
+  private getJson(url: string): Promise<void | Error> {
 
     this.readyPromise = new Promise((resolve: Function, reject: Function): void => {
 
@@ -260,6 +260,7 @@ class GVL {
         });
 
     });
+    return this.readyPromise;
 
   }
 
@@ -273,43 +274,54 @@ class GVL {
    */
   public changeLanguage(lang: string): Promise<void | GVLError> {
 
-    if (/^([A-z]){2}$/.test(lang)) {
+    return new Promise((resolve: Function, reject: Function): void => {
 
-      if (lang !== this.lang_) {
+      if (/^([A-z]){2}$/.test(lang)) {
 
-        let url = GVL.baseUrl;
+        lang = lang.toLowerCase();
 
-        if (!url) {
+        if (lang !== this.lang_) {
 
-          throw new GVLError('must specify GVL.baseUrl before changing the language');
+          let url = GVL.baseUrl;
 
-        }
+          if (!url) {
 
-        url = this.addTrailingSlashMaybe(url);
+            throw new GVLError('must specify GVL.baseUrl before changing the language');
 
-        // load version specified
-        url += GVL.langTranslationFilename.replace('[LANG]', lang);
-        this.getJson(url);
+          }
 
-      } else {
+          url = this.addTrailingSlashMaybe(url);
 
-        // didn't actually have to change anything...
-        this.readyPromise = new Promise((resolve: Function): void => {
+          // load version specified
+          url += GVL.languageFilename.replace('[LANG]', lang);
+
+          // hooks onto readyPromise
+          this.getJson(url).then((): void => {
+
+            resolve();
+
+          })
+            .catch((err): void => {
+
+              reject(new GVLError('unable to load language: ' + err.message));
+
+            });
+
+        } else {
 
           resolve();
 
-        });
+        }
+        this.lang_ = lang;
+
+
+      } else {
+
+        throw new GVLError('invalid language');
 
       }
-      this.lang_ = lang;
 
-      return this.readyPromise;
-
-    } else {
-
-      throw new GVLError('invalid language');
-
-    }
+    });
 
   }
   public get language(): string {
@@ -437,7 +449,12 @@ class GVL {
 
   }
 
-  private getFilteredVendors(purposeOrFeature: PurposeOrFeature, id: number, subType?: PurposeSubType): GVLMap<Vendor> {
+  private getFilteredVendors(
+    purposeOrFeature: PurposeOrFeature,
+    id: number,
+    subType?: PurposeSubType,
+    special?: boolean
+  ): GVLMap<Vendor> {
 
     const properPurposeOrFeature: string = purposeOrFeature.charAt(0).toUpperCase() + purposeOrFeature.slice(1);
     let vendorSet: Set<number>;
@@ -449,7 +466,7 @@ class GVL {
 
     } else {
 
-      vendorSet = this['by' + properPurposeOrFeature + 'VendorMap'][id + ''];
+      vendorSet = this['by' + (special ? 'Special' : '' ) + properPurposeOrFeature + 'VendorMap'][id + ''];
 
     }
 
@@ -507,7 +524,7 @@ class GVL {
    */
   public getVendorsWithSpecialPurpose(specialPurposeId: number): GVLMap<Vendor> {
 
-    return this.getFilteredVendors('purpose', specialPurposeId, 'flexible');
+    return this.getFilteredVendors('purpose', specialPurposeId, undefined, true);
 
   }
 
@@ -531,7 +548,7 @@ class GVL {
    */
   public getVendorsWithSpecialFeature(specialFeatureId: number): GVLMap<Vendor> {
 
-    return this.getFilteredVendors('feature', specialFeatureId);
+    return this.getFilteredVendors('feature', specialFeatureId, undefined, true);
 
   }
 
