@@ -1,6 +1,6 @@
 import {SpecificDecoder} from './SpecificDecoder';
 import {VectorEncodingTypeEnum} from '../VectorEncodingTypeEnum';
-import {DecodingError} from '../../errors/DecodingError';
+import {DecodingError} from '../../errors';
 import {IntDecoder} from './IntDecoder';
 import {BooleanDecoder} from './BooleanDecoder';
 import {BitLength} from '../../model/BitLength';

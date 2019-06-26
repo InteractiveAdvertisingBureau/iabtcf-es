@@ -1,6 +1,5 @@
 import {TCModel, TCModelPropType} from './TCModel';
-import {EncodingError} from './errors/EncodingError';
-import {DecodingError} from './errors/DecodingError';
+import {EncodingError, DecodingError} from './errors';
 import {Encodings} from './tcstring/Encodings';
 import {BitLength} from './model/BitLength';
 import {WebSafeBase64} from './tcstring/WebSafeBase64';

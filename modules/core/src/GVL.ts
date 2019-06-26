@@ -1,5 +1,5 @@
 import {Json} from './Json';
-import {GVLError} from './errors/GVLError';
+import {GVLError} from './errors';
 
 import {
   GVLBase,

@@ -1,7 +1,7 @@
 import {Vector} from './model/Vector';
 // import {PurposeRestriction} from './model/PurposeRestriction';
 import {GVL} from './GVL';
-import {TCModelError} from './errors/TCModelError';
+import {TCModelError} from './errors';
 import {GVLMap, GVLMapItem} from './model/GVLBase';
 
 export type TCModelPropType = number | Date | string | boolean | Vector;

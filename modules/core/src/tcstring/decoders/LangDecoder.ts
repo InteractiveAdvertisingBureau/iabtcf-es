@@ -1,6 +1,6 @@
 import {IntDecoder} from './IntDecoder';
 import {SpecificDecoder} from './SpecificDecoder';
-import {DecodingError} from '../../errors/DecodingError';
+import {DecodingError} from '../../errors';
 
 class LangDecoder implements SpecificDecoder {
 

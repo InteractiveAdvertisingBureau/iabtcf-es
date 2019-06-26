@@ -1,4 +1,4 @@
-import {TCModelError} from '../errors/TCModelError';
+import {TCModelError} from '../errors';
 import {PurposeRestrictionTypeEnum} from './enum/PurposeRestrictionTypeEnum';
 
 class PurposeRestriction {
