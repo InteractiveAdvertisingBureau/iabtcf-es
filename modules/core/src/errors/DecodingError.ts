@@ -13,7 +13,7 @@ class DecodingError extends Error {
    */
   public constructor(msg: string) {
 
-    super('Decoding Error: ' + msg);
+    super(msg);
     this.name = 'DecodingError';
 
   }

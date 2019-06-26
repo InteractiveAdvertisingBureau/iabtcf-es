@@ -1,6 +1,4 @@
-import {Vector} from '../../model/Vector';
-
-export type TCModelPropType = number | Date | string | boolean | Vector;
+import {TCModelPropType} from '../../TCModel';
 
 export interface SpecificEncoder {
 

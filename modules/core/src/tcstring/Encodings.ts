@@ -1,4 +1,5 @@
 import * as encoders from './encoders';
+import * as decoders from './decoders';
 
 class Encodings {
 
@@ -69,7 +70,27 @@ class Encodings {
 
   };
 
+  public static readonly decoders: object = {
+    version: decoders.IntDecoder,
+    created: decoders.DateDecoder,
+    lastUpdated: decoders.DateDecoder,
+    cmpId: decoders.IntDecoder,
+    cmpVersion: decoders.IntDecoder,
+    consentScreen: decoders.IntDecoder,
+    consentLanguage: decoders.LangDecoder,
+    vendorListVersion: decoders.IntDecoder,
+    policyVersion: decoders.IntDecoder,
+    isServiceSpecific: decoders.BooleanDecoder,
+    useNonStandardStacks: decoders.BooleanDecoder,
+    specialFeatureOptIns: decoders.FixedVectorDecoder,
+    purposeConsents: decoders.FixedVectorDecoder,
+    purposeLITransparency: decoders.FixedVectorDecoder,
+    vendorConsents: decoders.VendorVectorDecoder,
+    vendorLegitimateInterest: decoders.VendorVectorDecoder,
+    //    publisherRestrictions: PublisherRestrictionsDecoder,
+
+  };
+
 }
 
 export {Encodings};
-export {SpecificEncoder, TCModelPropType} from './encoders';

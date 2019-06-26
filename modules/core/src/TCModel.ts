@@ -4,7 +4,9 @@ import {GVL} from './GVL';
 import {TCModelError} from './errors/TCModelError';
 import {GVLMap, GVLMapItem} from './model/GVLBase';
 
-class TCModel {
+export type TCModelPropType = number | Date | string | boolean | Vector;
+
+export class TCModel {
 
   private static readonly MAX_ENCODING_VERSION: number = 2;
 
@@ -650,5 +652,3 @@ class TCModel {
 
 
 }
-
-export {TCModel};
