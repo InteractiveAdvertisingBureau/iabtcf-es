@@ -3,6 +3,7 @@ import {VectorEncodingTypeEnum} from '../VectorEncodingTypeEnum';
 import {DecodingError} from '../../errors';
 import {IntDecoder} from './IntDecoder';
 import {BooleanDecoder} from './BooleanDecoder';
+import {FixedVectorDecoder} from './FixedVectorDecoder';
 import {BitLength} from '../../model/BitLength';
 import {Vector} from '../../model/Vector';
 
@@ -19,7 +20,7 @@ export class VendorVectorDecoder implements SpecificDecoder {
 
     const intDecoder: IntDecoder = new IntDecoder();
     const boolDecoder: BooleanDecoder = new BooleanDecoder();
-    const vector: Vector = new Vector();
+    let vector: Vector;
     let index = 0;
 
     const maxId: number = intDecoder.decode(value.slice(index, BitLength.maxId));
@@ -38,6 +39,7 @@ export class VendorVectorDecoder implements SpecificDecoder {
       const defaultValue: boolean = boolDecoder.decode(value.slice(index, 1));
 
       index += 1;
+      vector = new Vector();
 
       // if default is true we need to set all the values and unset the ones listed in the ranges
       if (defaultValue) {
@@ -128,15 +130,9 @@ export class VendorVectorDecoder implements SpecificDecoder {
 
       }
 
-      for (let i = 0; i < bitField.length; i++) {
+      const fvDec: FixedVectorDecoder = new FixedVectorDecoder();
 
-        if (boolDecoder.decode(bitField[i])) {
-
-          vector.set(i + 1);
-
-        }
-
-      }
+      vector = fvDec.decode(bitField);
 
     }
 
