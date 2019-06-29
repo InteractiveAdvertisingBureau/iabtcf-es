@@ -25,7 +25,7 @@
 
 ▸ **decode**(str: *`string`*): `string`
 
-*Defined in tcstring/Base64Url.ts:106*
+*Defined in [tcstring/Base64Url.ts:106](https://github.com/chrispaterson/iabtcf-es/blob/af1d026/modules/core/src/tcstring/Base64Url.ts#L106)*
 
 **Parameters:**
 
@@ -42,7 +42,7 @@ ___
 
 ▸ **encode**(str: *`string`*): `string`
 
-*Defined in tcstring/Base64Url.ts:72*
+*Defined in [tcstring/Base64Url.ts:72](https://github.com/chrispaterson/iabtcf-es/blob/af1d026/modules/core/src/tcstring/Base64Url.ts#L72)*
 
 **Parameters:**
 
@@ -59,7 +59,7 @@ ___
 
 ▸ **isValid**(str: *`string`*): `boolean`
 
-*Defined in tcstring/Base64Url.ts:138*
+*Defined in [tcstring/Base64Url.ts:138](https://github.com/chrispaterson/iabtcf-es/blob/af1d026/modules/core/src/tcstring/Base64Url.ts#L138)*
 
 **Parameters:**
 
@@ -76,7 +76,7 @@ ___
 
 ▸ **pad**(str: *`string`*): `string`
 
-*Defined in tcstring/Base64Url.ts:152*
+*Defined in [tcstring/Base64Url.ts:152](https://github.com/chrispaterson/iabtcf-es/blob/af1d026/modules/core/src/tcstring/Base64Url.ts#L152)*
 
 pad - because base-n encoding requires that bits occupy Log2(n) sized buckets, padding to the right will happen to the original string.
 
