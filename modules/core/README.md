@@ -4,7 +4,7 @@ Ensures consistent encoding and decoding of TC Signals for the iab. Transparency
 
  * [Installation](#installation)
  * [Usage](#usage)
- * [API Documentation](docs/api/README.md)
+ * [API Documentation](docs/api/README.md#iabtcfcore---api-documentation)
 
 ## Installation
 
