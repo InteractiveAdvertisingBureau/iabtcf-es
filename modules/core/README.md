@@ -4,7 +4,7 @@ Ensures consistent encoding and decoding of TC Signals for the iab. Transparency
 
  * [Installation](#installation)
  * [Usage](#usage)
- * [API Documentation](#api-documentation)
+ * [API Documentation](docs/api/README.md)
 
 ## Installation
 
@@ -59,11 +59,3 @@ gvl.readPromise.then(() => {
 *see:* [TCModel](docs/api/classes/tcmodel.md), [GVL](docs/api/classes/gvl.md), and [TCString](docs/api/classes/tcstring.md)
 
 ### Using the TCModel as a stateful UI Model
-
-## API Documentation
-
- * [TCModel](docs/api/classes/tcmodel.md)
- * [GVL](docs/api/classes/gvl.md)
- * [TCString](docs/api/classes/tcstring.md)
-
-[index](docs/api/README.md)
