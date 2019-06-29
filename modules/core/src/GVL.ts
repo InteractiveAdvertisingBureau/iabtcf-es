@@ -176,7 +176,7 @@ class GVL {
    */
   public stacks: GVLMap<Stack>;
 
-  private readonly DEFAULT_LANGUAGE: string = 'en';
+  public readonly DEFAULT_LANGUAGE: string = 'en';
 
   private lang_: string;
 

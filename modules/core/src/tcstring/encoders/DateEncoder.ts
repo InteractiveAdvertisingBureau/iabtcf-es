@@ -1,15 +1,14 @@
 import {IntEncoder} from './IntEncoder';
 import {SpecificEncoder} from './SpecificEncoder';
 
-class DateEncoder implements SpecificEncoder {
+export class DateEncoder implements SpecificEncoder {
 
-  public encode(value: Date, numBits: number): string {
+  public encode(date: Date, numBits: number): string {
 
     const intEncoder: IntEncoder = new IntEncoder();
 
-    return intEncoder.encode(Math.round(value.getTime()/100), numBits);
+    return intEncoder.encode(Math.round(date.getTime()/100), numBits);
 
   }
 
 }
-export {DateEncoder};

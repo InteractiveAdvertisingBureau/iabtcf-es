@@ -10,27 +10,31 @@
 
 ### Classes
 
+* [Base64Url](classes/base64url.md)
 * [BitLength](classes/bitlength.md)
+* [BooleanDecoder](classes/booleandecoder.md)
 * [BooleanEncoder](classes/booleanencoder.md)
+* [DateDecoder](classes/datedecoder.md)
 * [DateEncoder](classes/dateencoder.md)
-* [Decoder](classes/decoder.md)
 * [DecodingError](classes/decodingerror.md)
-* [Encoder](classes/encoder.md)
 * [EncodingError](classes/encodingerror.md)
 * [Encodings](classes/encodings.md)
+* [FixedVectorDecoder](classes/fixedvectordecoder.md)
 * [FixedVectorEncoder](classes/fixedvectorencoder.md)
 * [GVL](classes/gvl.md)
 * [GVLError](classes/gvlerror.md)
+* [IntDecoder](classes/intdecoder.md)
 * [IntEncoder](classes/intencoder.md)
 * [Json](classes/json.md)
+* [LangDecoder](classes/langdecoder.md)
 * [LangEncoder](classes/langencoder.md)
 * [PurposeRestriction](classes/purposerestriction.md)
 * [TCModel](classes/tcmodel.md)
 * [TCModelError](classes/tcmodelerror.md)
 * [TCString](classes/tcstring.md)
 * [Vector](classes/vector.md)
+* [VendorVectorDecoder](classes/vendorvectordecoder.md)
 * [VendorVectorEncoder](classes/vendorvectorencoder.md)
-* [WebSafeBase64](classes/websafebase64.md)
 
 ### Interfaces
 
@@ -43,8 +47,10 @@
 * [GVLMap](interfaces/gvlmap.md)
 * [GVLMapItem](interfaces/gvlmapitem.md)
 * [Purpose](interfaces/purpose.md)
+* [SpecificDecoder](interfaces/specificdecoder.md)
 * [SpecificEncoder](interfaces/specificencoder.md)
 * [Stack](interfaces/stack.md)
+* [VariableLengthSpecificDecoder](interfaces/variablelengthspecificdecoder.md)
 * [Vendor](interfaces/vendor.md)
 * [VendorList](interfaces/vendorlist.md)
 
@@ -66,7 +72,7 @@
 
 **Ƭ PurposeOrFeature**: *"purpose" \| "feature"*
 
-*Defined in [GVL.ts:30](https://github.com/chrispaterson/iabtcf-es/blob/1a74f01/modules/core/src/GVL.ts#L30)*
+*Defined in [GVL.ts:30](https://github.com/chrispaterson/iabtcf-es/blob/4d845e2/modules/core/src/GVL.ts#L30)*
 
 ___
 <a id="purposesubtype"></a>
@@ -75,7 +81,7 @@ ___
 
 **Ƭ PurposeSubType**: *"consent" \| "legInt" \| "flexible"*
 
-*Defined in [GVL.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/1a74f01/modules/core/src/GVL.ts#L31)*
+*Defined in [GVL.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/4d845e2/modules/core/src/GVL.ts#L31)*
 
 ___
 <a id="tcmodelproptype"></a>
@@ -84,7 +90,7 @@ ___
 
 **Ƭ TCModelPropType**: *`number` \| `Date` \| `string` \| `boolean` \| [Vector](classes/vector.md)*
 
-*Defined in [tcstring/encoders/SpecificEncoder.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/1a74f01/modules/core/src/tcstring/encoders/SpecificEncoder.ts#L3)*
+*Defined in [TCModel.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/4d845e2/modules/core/src/TCModel.ts#L7)*
 
 ___
 <a id="versionorvendorlist"></a>
@@ -93,7 +99,7 @@ ___
 
 **Ƭ VersionOrVendorList**: *`string` \| `number` \| [VendorList](interfaces/vendorlist.md)*
 
-*Defined in [GVL.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/1a74f01/modules/core/src/GVL.ts#L29)*
+*Defined in [GVL.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/4d845e2/modules/core/src/GVL.ts#L29)*
 
 ___
 <a id="idorids"></a>
@@ -102,7 +108,7 @@ ___
 
 **Ƭ idOrIds**: *`number` \| `number`[]*
 
-*Defined in [model/Vector.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/1a74f01/modules/core/src/model/Vector.ts#L3)*
+*Defined in [model/Vector.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/4d845e2/modules/core/src/model/Vector.ts#L3)*
 
 ___
 

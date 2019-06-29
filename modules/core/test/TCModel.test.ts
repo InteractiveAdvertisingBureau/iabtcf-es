@@ -76,8 +76,8 @@ const testDate = (fieldName: string): void => {
 
       tcModel[fieldName] = testDate;
 
-      expect((tcModel[fieldName] as Date).getTime(), 'should be rounded to deciseconds')
-        .to.equal(Math.round(testDate.getTime()/100));
+      expect((tcModel[fieldName] as Date).getTime())
+        .to.equal(Math.round(testDate.getTime()));
 
     });
 
@@ -234,7 +234,7 @@ runDescribe('consentLanguage', (): void => {
 
       }).not.to.throw();
 
-      expect(tcModel.consentLanguage).to.equal(value);
+      expect(tcModel.consentLanguage).to.equal(value.toUpperCase());
 
     });
 
@@ -337,7 +337,6 @@ runDescribe('isValid()', (): void => {
 
     tcModel.cmpId = 23;
     tcModel.cmpVersion = 1;
-    tcModel.consentLanguage = 'en';
 
     expect(tcModel.isValid()).to.be.true;
 
@@ -364,11 +363,6 @@ runDescribe('isValid()', (): void => {
         tcModel.cmpVersion = 1;
 
       }
-      if (key !== 'consentLanguage') {
-
-        tcModel.consentLanguage = 'en';
-
-      }
 
       expect(tcModel.isValid()).to.be.false;
 
@@ -379,7 +373,6 @@ runDescribe('isValid()', (): void => {
   [
     'cmpId',
     'cmpVersion',
-    'consentLanguage',
     'gvl',
   ].forEach(makeInvalidTest);
 

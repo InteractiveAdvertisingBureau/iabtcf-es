@@ -109,6 +109,7 @@ export class TCModel {
 
     }
     this.created = new Date();
+    this.updated();
 
   }
 
@@ -124,7 +125,7 @@ export class TCModel {
       this.gvl_ = gvl;
       this.vendorListVersion_ = gvl.vendorListVersion;
       this.policyVersion_ = gvl.tcfPolicyVersion;
-
+      this.consentLanguage = gvl.language;
 
     } else {
 
@@ -152,7 +153,7 @@ export class TCModel {
    */
   public set created(date: Date) {
 
-    this.created_ = new Date(Math.round(date.getTime()/100));
+    this.created_ = date;
 
   }
 
@@ -173,7 +174,7 @@ export class TCModel {
    * */
   public set lastUpdated(date: Date) {
 
-    this.lastUpdated_ = new Date(Math.round(date.getTime()/100));
+    this.lastUpdated_ = date;
 
   }
 
@@ -199,7 +200,6 @@ export class TCModel {
 
 
       this.cmpId_ = integer;
-      this.updated();
 
     } else {
 
@@ -228,7 +228,6 @@ export class TCModel {
     if (this.isIntAbove(integer, -1)) {
 
       this.cmpVersion_ = integer;
-      this.updated();
 
     } else {
 
@@ -260,7 +259,6 @@ export class TCModel {
     if (this.isIntAbove(integer, -1)) {
 
       this.consentScreen_ = integer;
-      this.updated();
 
     } else {
 
@@ -291,8 +289,7 @@ export class TCModel {
 
     if (/^([A-z]){2}$/.test(lang)) {
 
-      this.consentLanguage_ = lang;
-      this.updated();
+      this.consentLanguage_ = lang.toUpperCase();
 
     } else {
 
@@ -313,12 +310,46 @@ export class TCModel {
   }
 
   /**
+   * @param {number} num - the global vendor list version for this TCModel
+   */
+  public set vendorListVersion(num: number) {
+
+    if (Number.isInteger(num) && num > 0) {
+
+      this.vendorListVersion_ = num;
+
+    } else {
+
+      throw new TCModelError('vendorListVersion', num);
+
+    }
+
+  }
+
+  /**
    * @return {number} - the global vendor list version this TCModel is
    * constructed with
    */
   public get vendorListVersion(): number {
 
     return this.vendorListVersion_;
+
+  }
+
+  /**
+   * @param {number} num - the policyVersion for this TCModel
+   */
+  public set policyVersion(num: number) {
+
+    if (Number.isInteger(num) && num > 1) {
+
+      this.policyVersion_ = num;
+
+    } else {
+
+      throw new TCModelError('policyVersion', num);
+
+    }
 
   }
 
@@ -339,7 +370,6 @@ export class TCModel {
     if (Number.isInteger(num) && num <= TCModel.MAX_ENCODING_VERSION && num > 0) {
 
       this.version_ = num;
-      this.updated();
 
     } else {
 
@@ -372,7 +402,6 @@ export class TCModel {
   public set isServiceSpecific(bool: boolean) {
 
     this.isServiceSpecific_ = bool;
-    this.updated();
 
   };
 
@@ -401,7 +430,6 @@ export class TCModel {
   public set useNonStandardStacks(bool: boolean) {
 
     this.useNonStandardStacks_ = bool;
-    this.updated();
 
   };
 
@@ -599,6 +627,48 @@ export class TCModel {
   public unsetAllSpecialFeatureOptIns(): void {
 
     this.unsetAllOnVector(this.gvl.specialFeatures, this.specialFeatureOptIns);
+
+  }
+
+  /**
+   * setAll - calls:
+   * ```
+    setAllVendorConsents();
+    setAllPurposeLITransparency();
+    setAllSpecialFeatureOptIns();
+    setAllPurposeConsents();
+    setAllVendorLegitimateInterest();
+   * ```
+   * @return {void}
+   */
+  public setAll(): void {
+
+    this.setAllVendorConsents();
+    this.setAllPurposeLITransparency();
+    this.setAllSpecialFeatureOptIns();
+    this.setAllPurposeConsents();
+    this.setAllVendorLegitimateInterest();
+
+  }
+
+  /**
+   * unsetAll - calls:
+   * ```
+    unsetAllVendorConsents();
+    unsetAllPurposeLITransparency();
+    unsetAllSpecialFeatureOptIns();
+    unsetAllPurposeConsents();
+    unsetAllVendorLegitimateInterest();
+   * ```
+   * @return {void}
+   */
+  public unsetAll(): void {
+
+    this.unsetAllVendorConsents();
+    this.unsetAllPurposeLITransparency();
+    this.unsetAllSpecialFeatureOptIns();
+    this.unsetAllPurposeConsents();
+    this.unsetAllVendorLegitimateInterest();
 
   }
 

@@ -24,15 +24,15 @@
 
 ###  encode
 
-▸ **encode**(value: *`Date`*, numBits: *`number`*): `string`
+▸ **encode**(date: *`Date`*, numBits: *`number`*): `string`
 
-*Defined in [tcstring/encoders/DateEncoder.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/1a74f01/modules/core/src/tcstring/encoders/DateEncoder.ts#L6)*
+*Defined in [tcstring/encoders/DateEncoder.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/4d845e2/modules/core/src/tcstring/encoders/DateEncoder.ts#L6)*
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| value | `Date` |
+| date | `Date` |
 | numBits | `number` |
 
 **Returns:** `string`

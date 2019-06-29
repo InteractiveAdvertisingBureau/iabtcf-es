@@ -6,3 +6,4 @@ export * from './VendorVectorDecoder';
 export * from './FixedVectorDecoder';
 // export * from './PublisherRestrictionsDecoder';
 export * from './SpecificDecoder';
+export * from './VariableLengthSpecificDecoder';

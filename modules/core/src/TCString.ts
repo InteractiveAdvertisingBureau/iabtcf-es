@@ -1,10 +1,10 @@
 import {TCModel, TCModelPropType} from './TCModel';
 import {EncodingError, DecodingError} from './errors';
 import {Encodings} from './tcstring/Encodings';
-import {BitLength} from './model/BitLength';
-import {WebSafeBase64} from './tcstring/WebSafeBase64';
+import {BitLength} from './tcstring/BitLength';
+import {Base64Url} from './tcstring/Base64Url';
 import {SpecificEncoder} from './tcstring/encoders';
-import {SpecificDecoder} from './tcstring/decoders';
+import {SpecificDecoder, VariableLengthSpecificDecoder} from './tcstring/decoders';
 import crc from 'crc';
 
 /**
@@ -30,9 +30,11 @@ class TCString {
     const encoding: readonly string[] = Encodings.order[tcModel.version - 1];
     const bitString: string[] = [''];
     let bStringIdx = 0;
+    let bitSum = 0;
 
     encoding.forEach((key: string): void => {
 
+      bitSum += BitLength[key];
       if (key === 'checksum') {
 
         bitString.push('');
@@ -61,10 +63,14 @@ class TCString {
 
     });
 
-
+    /**
+     * Pad the remainder of the bitString with with zeros to so that it is a
+     * valid base64-able bitfield
+     */
+    bitString[2] += '0'.repeat(6-(bitSum % 6));
     bitString[1] = this.makeChecksum(bitString[2]);
 
-    return WebSafeBase64.encode(bitString.join(''));
+    return Base64Url.encode(bitString.join(''));
 
 
   }
@@ -72,23 +78,28 @@ class TCString {
   /**
    * Decodes a string into a TCModel
    *
-   * @param {string} encodedString - web-safe base64 encoded Transparency and Consent String to decode
+   * @param {string} encodedString - web-safe base64 encoded Transparency and
+   * Consent String to decode
    * @return {TCModel} - Returns populated TCModel
    */
   public static decode(encodedString: string): TCModel {
 
     const tcModel = new TCModel();
     const encoding: readonly string[] = Encodings.order[tcModel.version - 1];
-    const bitString = WebSafeBase64.decode(encodedString);
+    const bitString = Base64Url.decode(encodedString);
     let bStringIdx = 0;
-    let checksum = '';
 
     encoding.forEach((key: string): void => {
 
+      let vLengthBits = 0;
+
       if (key === 'checksum') {
 
-        checksum = bitString.slice(bStringIdx, BitLength[key]);
-        if (this.makeChecksum(bitString.slice(1 + BitLength.checksum)) !== checksum) {
+        // compare encoded checksum with what we've got
+        const theirChecksum = bitString.substr(bStringIdx, BitLength[key]);
+        const ourChecksum = this.makeChecksum(bitString.substr(bStringIdx + BitLength.checksum));
+
+        if (ourChecksum !== theirChecksum) {
 
           throw new DecodingError('Checksum does not match');
 
@@ -98,11 +109,34 @@ class TCString {
 
         const decoder: SpecificDecoder = new Encodings.decoders[key]();
 
-        tcModel[key] = decoder.decode(bitString.slice(bStringIdx, BitLength[key]));
+        tcModel[key] = decoder.decode(bitString.substr(bStringIdx, BitLength[key]));
+
+        /**
+         * if it has no entry in the BitLength map, then it is a variable
+         * length encoding
+         */
+        if (!BitLength[key]) {
+
+          vLengthBits = (decoder as VariableLengthSpecificDecoder).getBitLength();
+
+        }
+
 
       }
 
-      bStringIdx += BitLength[key];
+      /**
+       * vLengthBits can only be set from a variable length decoder otherwise
+       * it's 0
+       */
+      if (vLengthBits || BitLength[key]) {
+
+        bStringIdx += (vLengthBits) ? vLengthBits : BitLength[key];
+
+      } else {
+
+        throw new DecodingError('Something went wrong...');
+
+      }
 
     });
 

@@ -10,13 +10,11 @@ describe('DateDecoder', (): void => {
     const dateDecoder: DateDecoder = new DateDecoder();
     const dateEncoder: DateEncoder = new DateEncoder();
     const date: Date = new Date();
-
     const encoded = dateEncoder.encode(date, 36);
     const decoded = dateDecoder.decode(encoded);
+    const expected = Math.round(date.getTime()/100)*100;
 
-    const expected = new Date(Math.round(date.getTime()/100)*100);
-
-    expect(decoded.getTime()).to.equal(expected.getTime());
+    expect(decoded.getTime()).to.equal(expected);
 
   });
 

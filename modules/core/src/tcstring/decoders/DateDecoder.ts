@@ -1,15 +1,17 @@
 import {IntDecoder} from './IntDecoder';
 import {SpecificDecoder} from './SpecificDecoder';
 
-class DateDecoder implements SpecificDecoder {
+export class DateDecoder implements SpecificDecoder {
 
-  public decode(value: string): Date {
+  public decode(bitString: string): Date {
 
     const intDecoder: IntDecoder = new IntDecoder();
+    const date: Date = new Date();
 
-    return new Date(intDecoder.decode(value) * 100);
+    date.setTime(intDecoder.decode(bitString) * 100);
+
+    return date;
 
   }
 
 }
-export {DateDecoder};

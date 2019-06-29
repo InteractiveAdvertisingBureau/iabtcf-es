@@ -2,7 +2,7 @@ import {SpecificEncoder} from './SpecificEncoder';
 import {VectorEncodingTypeEnum} from '../VectorEncodingTypeEnum';
 import {IntEncoder} from './IntEncoder';
 import {BooleanEncoder} from './BooleanEncoder';
-import {BitLength} from '../../model/BitLength';
+import {BitLength} from '../BitLength';
 import {Vector} from '../../model/Vector';
 
 export class VendorVectorEncoder implements SpecificEncoder {

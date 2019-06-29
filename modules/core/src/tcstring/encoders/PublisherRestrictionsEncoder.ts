@@ -1,6 +1,6 @@
 /*
 import {SpecificEncoder} from './SpecificEncoder';
-import {BitLength} from '../../model/BitLength';
+import {BitLength} from '../BitLength';
 import {IntEncoder} from './IntEncoder';
 import {BooleanEncoder} from './BooleanEncoder';
 import {Vector} from '../../model/Vector';

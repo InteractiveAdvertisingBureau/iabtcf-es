@@ -22,7 +22,7 @@
 
 **● order**: *`readonly`*
 
-*Defined in [tcstring/Encodings.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/1a74f01/modules/core/src/tcstring/Encodings.ts#L12)*
+*Defined in [tcstring/Encodings.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/4d845e2/modules/core/src/tcstring/Encodings.ts#L13)*
 
 The outer array describes index is encoding version - 1 (since it's zero-based) and the inner array is the string representation of the BITS static above ordered by "IAB Tech Lab - Consent string and vendor list formats v2"
 
