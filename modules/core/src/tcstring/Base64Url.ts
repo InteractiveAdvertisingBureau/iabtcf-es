@@ -1,7 +1,41 @@
+/**
+ * This class exists because all base64 encoding libraries that I have seen
+ * including the browser-based atob() and btoa() are for encoding 8 bit string
+ * characters into base64.  Secondly, there is no url safe option.  So if we
+ * were to encode the arbitrary bit string, we would first need to create a
+ * byte array and then run it through the standard base64 encoder.  After that,
+ * to make it url safe we would have to search through the resulting string and
+ * replace the unsafe ‘+’ and ‘/‘ characters with a string.replace method which
+ * is an additional overhead of O(2n) complexity.  All opensource
+ * implementations I have seen follow this approach to creating url-safe base
+ * 64 encoded strings.  Granted a native implementation of the btoa() would
+ * leverage the native browser code, which is always faster than executing the
+ * interpreted javascript layer but there are quite a few manipulations that
+ * have to happen pre and post process that I think it warrants a custom
+ * implementation.
+ *
+ * Some things to note:
+ *
+ * 1. Because this base64 encoder is encoding an arbitrary number of bits
+ * most likely there will be some trailing zeros added to the end of the string
+ * in order to pad to the full 6-bit bucket.  This then makes the encoding
+ * "unstable" in that the string bitfield will not be exactly equal to the
+ * inputted value when decoded.
+ *
+ * 2. Because we are not encoding bytes to 6 bits the standard padding
+ * characters defined by
+ * [RFC4648](https://tools.ietf.org/html/rfc4648#section-3.2) are omitted on
+ * this implementation.  The checksum should be the solution for determining
+ * string integreity.
+ */
 export class Base64Url {
 
+  /**
+   * Our 64 character set.  Notable is that the last two are web safe and not
+   * the traditional +/ that are used in standard base64 encoding
+   */
   private static DICT: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
-  private static BASIS: number = 6;
+
   private static REVERSE_DICT: object = {
     'A': 0,
     'B': 1,
@@ -69,7 +103,28 @@ export class Base64Url {
     '_': 63,
   }
 
+  /**
+   * log2(64) = 6
+   */
+  private static BASIS: number = 6;
+
+  /**
+   * encodes an arbitrary-length bitfield string into base64url
+   *
+   * @static
+   * @param {string} str - arbitrary-length bitfield string to be encoded to base64url
+   * @return {string} - base64url encoded result
+   */
   public static encode(str: string): string {
+
+    /**
+     * should only be 0 or 1
+     */
+    if (!/^[0-1]+$/.test(str)) {
+
+      throw new Error('Invalid Base64url Encoding');
+
+    }
 
     const len: number = str.length;
     let retr = '';
@@ -103,16 +158,26 @@ export class Base64Url {
 
   }
 
+  /**
+   * decodes a base64url encoded bitfield string
+   *
+   * @static
+   * @param {string} str - base64url encoded bitfield string to be decoded
+   * @return {string} - bitfield string
+   */
   public static decode(str: string): string {
 
-    if (!this.isValid(str)) {
+    /**
+     * should contain only characters from the base64url set
+     */
+    if (!/^[A-Za-z0-9\-_]+$/.test(str)) {
 
-      throw new Error('Invalid Base64 Encoding');
+      throw new Error('Invalid Base64url Encoding');
 
     }
 
     const len: number = str.length;
-    let bitString = '';
+    let bitField = '';
 
     for (let i = 0; i < len; i ++) {
 
@@ -126,32 +191,12 @@ export class Base64Url {
        */
       const pad = '0'.repeat(this.BASIS - strBits.length);
 
-      bitString += pad + strBits;
+      bitField += pad + strBits;
 
     }
 
 
-    return bitString;
-
-  }
-
-  public static isValid(str: string): boolean {
-
-    return /^[A-Za-z0-9\-_]+$/.test(str);
-
-  }
-
-  /**
-   * pad - because base-n encoding requires that bits occupy Log2(n) sized
-   * buckets, padding to the right will happen to the original string.
-   *
-   * @static
-   * @param {string} str - input bit string
-   * @return {string} - string padded to the base64Url encoded correct length
-   */
-  public static pad(str: string): string {
-
-    return str + '0'.repeat(this.BASIS-(str.length % this.BASIS));
+    return bitField;
 
   }
 

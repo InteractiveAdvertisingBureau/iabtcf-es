@@ -29,7 +29,7 @@ describe('Base64Url', (): void => {
        * put as many '0's in the front as the remainder of the length divided
        * by 6 bits
        */
-      const expected = Base64Url.pad(input);
+      const expected = input + '0'.repeat(6-(input.length % 6));
 
       expect(decoded).to.equal(expected);
 

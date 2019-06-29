@@ -28,7 +28,7 @@ class TCString {
 
     }
     const encoding: readonly string[] = Encodings.order[tcModel.version - 1];
-    const bitString: string[] = [''];
+    const bitField: string[] = [''];
     let bStringIdx = 0;
     let bitSum = 0;
 
@@ -37,9 +37,9 @@ class TCString {
       bitSum += BitLength[key];
       if (key === 'checksum') {
 
-        bitString.push('');
+        bitField.push('');
         bStringIdx += 2;
-        bitString[bStringIdx] = '';
+        bitField[bStringIdx] = '';
 
       } else {
 
@@ -50,7 +50,7 @@ class TCString {
 
         try {
 
-          bitString[bStringIdx] += encoder.encode(value, numBits);
+          bitField[bStringIdx] += encoder.encode(value, numBits);
 
         } catch (err) {
 
@@ -64,13 +64,13 @@ class TCString {
     });
 
     /**
-     * Pad the remainder of the bitString with with zeros to so that it is a
+     * Pad the remainder of the bitField with with zeros to so that it is a
      * valid base64-able bitfield
      */
-    bitString[2] += '0'.repeat(6-(bitSum % 6));
-    bitString[1] = this.makeChecksum(bitString[2]);
+    bitField[2] += '0'.repeat(6-(bitSum % 6));
+    bitField[1] = this.makeChecksum(bitField[2]);
 
-    return Base64Url.encode(bitString.join(''));
+    return Base64Url.encode(bitField.join(''));
 
 
   }
@@ -86,7 +86,7 @@ class TCString {
 
     const tcModel = new TCModel();
     const encoding: readonly string[] = Encodings.order[tcModel.version - 1];
-    const bitString = Base64Url.decode(encodedString);
+    const bitField = Base64Url.decode(encodedString);
     let bStringIdx = 0;
 
     encoding.forEach((key: string): void => {
@@ -96,8 +96,8 @@ class TCString {
       if (key === 'checksum') {
 
         // compare encoded checksum with what we've got
-        const theirChecksum = bitString.substr(bStringIdx, BitLength[key]);
-        const ourChecksum = this.makeChecksum(bitString.substr(bStringIdx + BitLength.checksum));
+        const theirChecksum = bitField.substr(bStringIdx, BitLength[key]);
+        const ourChecksum = this.makeChecksum(bitField.substr(bStringIdx + BitLength.checksum));
 
         if (ourChecksum !== theirChecksum) {
 
@@ -109,7 +109,7 @@ class TCString {
 
         const decoder: SpecificDecoder = new Encodings.decoders[key]();
 
-        tcModel[key] = decoder.decode(bitString.substr(bStringIdx, BitLength[key]));
+        tcModel[key] = decoder.decode(bitField.substr(bStringIdx, BitLength[key]));
 
         /**
          * if it has no entry in the BitLength map, then it is a variable

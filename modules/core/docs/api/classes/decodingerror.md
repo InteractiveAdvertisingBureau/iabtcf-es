@@ -35,7 +35,7 @@ class for decoding errors
 
 ⊕ **new DecodingError**(msg: *`string`*): [DecodingError](decodingerror.md)
 
-*Defined in [errors/DecodingError.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/af1d026/modules/core/src/errors/DecodingError.ts#L6)*
+*Defined in [errors/DecodingError.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/4f7901f/modules/core/src/errors/DecodingError.ts#L6)*
 
 constructor - constructs an DecodingError
 

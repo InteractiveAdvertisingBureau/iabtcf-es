@@ -3,7 +3,6 @@ import {TCString} from '../src/TCString';
 import {TCModel} from '../src/TCModel';
 import {GVL} from '../src/GVL';
 import {Encodings} from '../src/tcstring/Encodings';
-import {Base64Url} from '../src/tcstring/Base64Url';
 
 describe('TCString', (): void => {
 
@@ -32,7 +31,6 @@ describe('TCString', (): void => {
     expect(encodeIt).not.to.throw();
 
     expect(encoded).to.not.equal('');
-    expect(Base64Url.isValid(encoded)).to.be.true;
 
   });
 

@@ -28,7 +28,7 @@
 
 **● description**: *`string`*
 
-*Defined in [model/GVLBase.ts:33](https://github.com/chrispaterson/iabtcf-es/blob/af1d026/modules/core/src/model/GVLBase.ts#L33)*
+*Defined in [model/GVLBase.ts:33](https://github.com/chrispaterson/iabtcf-es/blob/4f7901f/modules/core/src/model/GVLBase.ts#L33)*
 
 ___
 <a id="id"></a>
@@ -39,7 +39,7 @@ ___
 
 *Inherited from [GVLMapItem](gvlmapitem.md).[id](gvlmapitem.md#id)*
 
-*Defined in [model/GVLBase.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/af1d026/modules/core/src/model/GVLBase.ts#L6)*
+*Defined in [model/GVLBase.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/4f7901f/modules/core/src/model/GVLBase.ts#L6)*
 
 ___
 <a id="name"></a>
@@ -50,7 +50,7 @@ ___
 
 *Inherited from [GVLMapItem](gvlmapitem.md).[name](gvlmapitem.md#name)*
 
-*Defined in [model/GVLBase.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/af1d026/modules/core/src/model/GVLBase.ts#L7)*
+*Defined in [model/GVLBase.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/4f7901f/modules/core/src/model/GVLBase.ts#L7)*
 
 ___
 <a id="purposes"></a>
@@ -59,7 +59,7 @@ ___
 
 **● purposes**: *`number`[]*
 
-*Defined in [model/GVLBase.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/af1d026/modules/core/src/model/GVLBase.ts#L31)*
+*Defined in [model/GVLBase.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/4f7901f/modules/core/src/model/GVLBase.ts#L31)*
 
 ___
 <a id="specialpurposes"></a>
@@ -68,7 +68,7 @@ ___
 
 **● specialPurposes**: *`number`[]*
 
-*Defined in [model/GVLBase.ts:32](https://github.com/chrispaterson/iabtcf-es/blob/af1d026/modules/core/src/model/GVLBase.ts#L32)*
+*Defined in [model/GVLBase.ts:32](https://github.com/chrispaterson/iabtcf-es/blob/4f7901f/modules/core/src/model/GVLBase.ts#L32)*
 
 ___
 
