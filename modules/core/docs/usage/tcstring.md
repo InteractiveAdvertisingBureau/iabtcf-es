@@ -1,8 +1,10 @@
-# `@iabtcf/core` - Usage
----
+[@iabtcf/core - Usage Documentation](README.md) > [TCString](tcstring.md)
 
-## TCString
-### Decode
+# TCString
+
+[TCString API Documentation]('../api/classes/tcstring.md')
+
+### Decode a TCString
 
 ```typescript
 import {TCString, TCModel} from '@iabtcf/core';
@@ -10,9 +12,13 @@ import {TCString, TCModel} from '@iabtcf/core';
 const myTCModel = TCString.decode(encodedTCString);
 
 ```
-*returns:* [TCModel](../api/classes/tcmodel.md)
+*returns:* `TCModel`
 
-### Build
+[TCModel API Dcoumentation](../api/classes/tcmodel.md)
+
+[TCModel Usage Dcoumentation](tcmodel.md)
+
+### Create a TCString
 
 ```typescript
 import {TCString, TCModel, GVL} from '@iabtcf/core';
@@ -40,3 +46,15 @@ gvl.readPromise.then(() => {
   comsole.log(TCString.encode(tcModel));
 });
 ```
+
+`TCModel`
+
+[TCModel API Dcoumentation](../api/classes/tcmodel.md)
+
+[TCModel Usage Dcoumentation](tcmodel.md)
+
+`GVL`
+
+[GVL API Dcoumentation](../api/classes/gvl.md)
+
+[GVL Usage Dcoumentation](gvl.md)

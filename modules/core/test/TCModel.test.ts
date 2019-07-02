@@ -31,14 +31,14 @@ const testInt = (fieldName: string, lowestValue: number): void => {
   };
   const shouldBeNotOk = (valueToTest: number): void => {
 
-    it(`should not allow cmpId to be ${valueToTest}`, (): void => {
+    it(`should not allow ${fieldName} to be ${valueToTest}`, (): void => {
 
       const tcModel = new TCModel();
 
       try {
 
         tcModel[fieldName] = valueToTest;
-        expect.fail(`${fieldName} ${valueToTest} should have thrown an error`);
+        expect.fail(`${fieldName}=${valueToTest} should have thrown an error`);
 
       } catch (error) {
 
@@ -84,6 +84,7 @@ const testDate = (fieldName: string): void => {
   });
 
 };
+
 const testBoolean = (fieldName: string): void => {
 
   runDescribe(fieldName, (): void => {
@@ -103,6 +104,7 @@ const testBoolean = (fieldName: string): void => {
   });
 
 };
+
 const testInstanceOf = <T>(fieldName: string, theInstanceOf: {new (): T}): void => {
 
   const instanceName = theInstanceOf.name;
