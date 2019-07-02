@@ -34,6 +34,9 @@ tcModel.vendorConsents.unset(7);
 // don't give vendor 3, 5, 9 consent
 tcModel.vendorConsents.unset([3,5,9]);
 
+// actually give 5 consent
+tcModel.vendorConsents.set(7);
+
 ```
 `GVL`
 
