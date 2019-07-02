@@ -18,8 +18,12 @@ tcModel.cmpVersion = //{myCMPVersion}
 // to encode you will need to use a version of the GVL (global vendor list)
 GVL.baseUrl = 'http://mycompany.com/cmp/gvl';
 
-// we now have a TCString assigned with a GVL which will set vendorListVersion, tcfPolicyVersion and consentLanguage
 tcModel.gvl = new GVL();
+
+/**
+ * we now have a TCString assigned with a GVL which will set vendorListVersion,
+ * tcfPolicyVersion and consentLanguage
+ */
 
 // give all vendors consent
 tcModel.setAllVendorConsents();
@@ -31,3 +35,8 @@ tcModel.vendorConsents.unset(7);
 tcModel.vendorConsents.unset([3,5,9]);
 
 ```
+`GVL`
+
+[GVL API Dcoumentation](../api/classes/gvl.md)
+
+[GVL Usage Dcoumentation](gvl.md)
