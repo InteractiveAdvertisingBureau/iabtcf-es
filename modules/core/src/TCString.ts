@@ -5,7 +5,7 @@ import {BitLength} from './tcstring/BitLength';
 import {Base64Url} from './tcstring/Base64Url';
 import {SpecificEncoder} from './tcstring/encoders';
 import {SpecificDecoder, VariableLengthSpecificDecoder} from './tcstring/decoders';
-import crc from 'crc';
+import {Checksum} from './tcstring/Checksum';
 
 /**
  * Main class for encoding and decoding a
@@ -35,6 +35,7 @@ class TCString {
     encoding.forEach((key: string): void => {
 
       bitSum += BitLength[key];
+
       if (key === 'checksum') {
 
         bitField.push('');
@@ -68,10 +69,14 @@ class TCString {
      * valid base64-able bitfield
      */
     bitField[2] += '0'.repeat(6-(bitSum % 6));
-    bitField[1] = this.makeChecksum(bitField[2]);
 
+    /**
+     * insert the checksum into the middle of the bitField array
+     */
+    bitField[1] = Checksum.create(bitField[2], BitLength.checksum);
+
+    // encode the joined string and return
     return Base64Url.encode(bitField.join(''));
-
 
   }
 
@@ -96,8 +101,8 @@ class TCString {
       if (key === 'checksum') {
 
         // compare encoded checksum with what we've got
-        const theirChecksum = bitField.substr(bStringIdx, BitLength[key]);
-        const ourChecksum = this.makeChecksum(bitField.substr(bStringIdx + BitLength.checksum));
+        const theirChecksum = bitField.substr(bStringIdx, BitLength.checksum);
+        const ourChecksum = Checksum.create(bitField.substr(bStringIdx + BitLength.checksum), BitLength.checksum);
 
         if (ourChecksum !== theirChecksum) {
 
@@ -142,15 +147,6 @@ class TCString {
 
 
     return tcModel;
-
-  }
-
-  private static makeChecksum(bits: string): string {
-
-    // I'm not totally sure this is right
-    const checksum = crc.crc16(bits).toString(2);
-
-    return '0'.repeat(BitLength.checksum - checksum.length) + checksum;
 
   }
 

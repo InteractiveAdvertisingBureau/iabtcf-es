@@ -92,6 +92,10 @@ export class TCModel {
    * const hasConsent = tcModel.vendorLegitimateInterest.get(2222);
    * ```
    */
+  /**
+   * TODO: add an event for when something is added because we need to force
+   * service specific if any publisher restrictions are created
+   */
   // public publisherRestrictions: Vectorn;
 
   /**

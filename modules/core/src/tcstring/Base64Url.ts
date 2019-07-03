@@ -122,7 +122,7 @@ export class Base64Url {
      */
     if (!/^[0-1]+$/.test(str)) {
 
-      throw new Error('Invalid Base64url Encoding');
+      throw new Error('Invalid bitField');
 
     }
 

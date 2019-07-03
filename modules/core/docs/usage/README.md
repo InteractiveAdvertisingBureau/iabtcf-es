@@ -2,6 +2,8 @@
 
 ## Usage
 
+When working with the @iabtcf/core library there are three primary classes that you will be dealing with.  They are outlined below.
+
 [TCString](tcstring.md)
 * Encodes and decodes a transport or storage ready url-safe base64 encoded TCString from a TCModel.  Decodes a url-safe base64 encoded TCString and populates a TCModel. Includes a checksum encoder and checker.
 
