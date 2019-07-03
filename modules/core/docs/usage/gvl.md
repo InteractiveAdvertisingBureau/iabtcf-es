@@ -2,9 +2,9 @@
 
 # GVL
 
-* [GVL API Documentation]('../api/classes/gvl.md')
-* [Autoload latest vendor-list.json]('#autoload-latest-vendor-list.json')
-* [Autoload specific vendor-list.json]('#autoload-specific-vendor-list.json')
+* [GVL API Documentation](../api/classes/gvl.md)
+* [Autoload latest vendor-list.json](#autoload-latest-vendor-list.json)
+* [Autoload specific vendor-list.json](#autoload-specific-vendor-list.json)
 * [Pass vendor-list.json object](#pass-vendor-list.json-object)
 * [Change GVL Language](#change-gvl-language)
 * [Get only vendors with a specific feature or purpose under legal basis](#get-only-vendors-with-a-specific-feature-or-purpose-under-legal-basis)
@@ -72,7 +72,7 @@ gvl.readyPomise.then(() => {
 });
 ```
 
-**changing version name scheme**
+**Changing version name scheme**
 ```javascript
 import {GVL} from '@iabtcf/core';
 
@@ -106,7 +106,7 @@ const gvl = new GVL(gvljson);
 ### Change GVL Language
 All vendorlists are published by default as english.  There are alternate languages that the iab publishes which are essetnailly a vendor list without the vendors.  `GVL.baseUrl` must be set for langauges changes.  To load an alternate you simply call `gvl.changeLanguage(/**language*/);` langauge is the iso639-1 two-letter langauge code. [For the full list of iab provided language translations click here](https://register.consensu.org/Translation). If desired the `GVL.languageFilename` may be set if `purposes-[LANG].json` is not used.
 
-**default filename load**
+**Default filename load**
 ```javascript
 import {GVL} from '@iabtcf/core';
 
@@ -123,7 +123,7 @@ gvl.changeLanguage('fr').then(() => {
 });
 ```
 
-**changing filename load**
+**Changing filename load**
 ```javascript
 import {GVL} from '@iabtcf/core';
 
@@ -152,7 +152,7 @@ A CMP UI may want to group vendors by what purpose they use under what legal bas
 * `getVendorsWithSpecialFeature(featureId)`
 * `getVendorsWithSpecialPurpose(purposId)`
 
-All 6 grouping methods return a [GVLMap]('../api/interfaces/gvlmap.md')<[Vendor]('../api/interfaces/vendor.md')> object
+All 6 grouping methods return a [GVLMap](../api/interfaces/gvlmap.md)<[Vendor](../api/interfaces/vendor.md)> object
 
 ```javascript
 import {GVL} from '@iabtcf/core';
@@ -173,6 +173,25 @@ gvl.readyPomise.then(() => {
 });
 
 ```
-
-
 ### Narrow the list of vendors
+If loading a CMP would like to show a subset of the Vendor List a filter may be passed to only work with those vendors on the list.
+
+```javascript
+import {GVL} from '@iabtcf/core';
+
+// only needs to be set once per application as this is a static variable
+GVL.baseUrl = 'http://cmp.mysupercoolcmp.com/cmp/';
+
+// loads 'http://cmp.mysupercoolcmp.com/cmp/vendor-list.json'
+const gvl = new GVL();
+
+gvl.readyPomise.then(() => {
+
+  const vendorMap = gvl.getVendorsWithConsentPurpose(1);
+
+  // logs all vendor ids who have specified they require consent for purpose 1
+  Object.keys(vendorMap).forEach(console.log);
+
+});
+
+```

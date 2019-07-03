@@ -4,7 +4,7 @@
 
 This class is intended to be used as a stateful model to model the TCF Data.
 
-[TCModel API Documentation]('../api/classes/tcmodel.md')
+[TCModel API Documentation](../api/classes/tcmodel.md)
 
 ```javascript
 import {TCModel, GVL} from '@iabtcf/core';
