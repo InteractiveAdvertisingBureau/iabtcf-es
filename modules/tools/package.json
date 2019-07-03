@@ -1,6 +1,6 @@
 {
   "name": "@iabtcf/tools",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.4",
   "private": true,
   "description": "Provides easy web-based tools to help developers visually and interactively understand each aspect of the iab. Transparency and Consent Framework (TCF).",
   "scripts": {
