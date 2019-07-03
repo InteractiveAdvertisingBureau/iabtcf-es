@@ -582,7 +582,6 @@ class GVL {
 
   }
 
-
 }
 
 export {GVL};

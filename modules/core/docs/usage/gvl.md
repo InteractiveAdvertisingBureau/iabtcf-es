@@ -187,10 +187,15 @@ const gvl = new GVL();
 
 gvl.readyPomise.then(() => {
 
-  const vendorMap = gvl.getVendorsWithConsentPurpose(1);
+  // now this gvl instance only has these 3 vendors
+  gvl.narrowVendorsTo([1,2,3]);
 
-  // logs all vendor ids who have specified they require consent for purpose 1
-  Object.keys(vendorMap).forEach(console.log);
+  // will only show the Vendor objects for 1, 2, and 3
+  console.log(gvl.vendors);
+
+  // will only return the vendors within the narrowed vendor list
+  const vendorsWithLegInt2 = gvl.getVendorsWithLegIntPurpose(2);
+
 
 });
 
