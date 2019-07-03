@@ -47,6 +47,15 @@ gvl.readPromise.then(() => {
 });
 ```
 
+### Decode a TCString
+
+```typescript
+import {TCString, TCModel} from '@iabtcf/core';
+
+const tcModel = TCString.decode(encodedString);
+
+```
+
 `TCModel`
 
 [TCModel API Dcoumentation](../api/classes/tcmodel.md)

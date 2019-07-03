@@ -15,7 +15,7 @@ The `GVL` class provides two ways to instantiate. Either by passing in a vendor-
 ### Autoload latest vendor-list.json
 Autoloading a vendor-list.json will accept into the constructor a vendor list version number or if nothing or "LATEST" is passed it will load the latest version of the vendor list.  NOTE.  You must set the `GVL.baseUrl` parameter before instantiating a GVL instance. If desired the `GVL.latestFilename` may be set if `vendor-list.json` is not used.
 
-** Loading default filename **
+**Loading default filename**
 ```javascript
 import {GVL} from '@iabtcf/core';
 
@@ -32,7 +32,7 @@ gvl.readyPomise.then(() => {
 });
 ```
 
-** Loading with custom filename **
+**Loading with custom filename**
 ```javascript
 import {GVL} from '@iabtcf/core';
 
@@ -55,7 +55,7 @@ gvl.readyPomise.then(() => {
 Autoloading a specific version requires that you both set the `GVL.baseUrl` static variable and pass into the constructor the version number you wish to load.  Optionally if your filename has a version other than `vendor-list-v[VERSION].json` you may set a different filename with version as `GVL.versionedFilename = 'vendorlist[VERSION].json';` and the token `[version]` will be replaced with the version number you pass into the constructor.
 
 
-** Loading default filename for version **
+**Loading default filename for version**
 ```javascript
 import {GVL} from '@iabtcf/core';
 
@@ -72,7 +72,7 @@ gvl.readyPomise.then(() => {
 });
 ```
 
-** changing version name scheme **
+**changing version name scheme**
 ```javascript
 import {GVL} from '@iabtcf/core';
 
@@ -106,7 +106,7 @@ const gvl = new GVL(gvljson);
 ### Change GVL Language
 All vendorlists are published by default as english.  There are alternate languages that the iab publishes which are essetnailly a vendor list without the vendors.  `GVL.baseUrl` must be set for langauges changes.  To load an alternate you simply call `gvl.changeLanguage(/**language*/);` langauge is the iso639-1 two-letter langauge code. [For the full list of iab provided language translations click here](https://register.consensu.org/Translation). If desired the `GVL.languageFilename` may be set if `purposes-[LANG].json` is not used.
 
-** default filename load **
+**default filename load**
 ```javascript
 import {GVL} from '@iabtcf/core';
 
@@ -123,7 +123,7 @@ gvl.changeLanguage('fr').then(() => {
 });
 ```
 
-** changing filename load **
+**changing filename load**
 ```javascript
 import {GVL} from '@iabtcf/core';
 
@@ -153,6 +153,26 @@ A CMP UI may want to group vendors by what purpose they use under what legal bas
 * `getVendorsWithSpecialPurpose(purposId)`
 
 All 6 grouping methods return a [GVLMap]('../api/interfaces/gvlmap.md')<[Vendor]('../api/interfaces/vendor.md')> object
+
+```javascript
+import {GVL} from '@iabtcf/core';
+
+// only needs to be set once per application as this is a static variable
+GVL.baseUrl = 'http://cmp.mysupercoolcmp.com/cmp/';
+
+// loads 'http://cmp.mysupercoolcmp.com/cmp/vendor-list.json'
+const gvl = new GVL();
+
+gvl.readyPomise.then(() => {
+
+  const vendorMap = gvl.getVendorsWithConsentPurpose(1);
+
+  // logs all vendor ids who have specified they require consent for purpose 1
+  Object.keys(vendorMap).forEach(console.log);
+
+});
+
+```
 
 
 ### Narrow the list of vendors
