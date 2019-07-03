@@ -7,7 +7,7 @@ This class exists because all base64 encoding libraries that I have seen includi
 Some things to note:
 
 1.  Because this base64 encoder is encoding an arbitrary number of bits most likely there will be some trailing zeros added to the end of the string in order to pad to the full 6-bit bucket. This then makes the encoding "unstable" in that the string bitfield will not be exactly equal to the inputted value when decoded.
-
+    
 2.  Because we are not encoding bytes to 6 bits the standard padding characters defined by [RFC4648](https://tools.ietf.org/html/rfc4648#section-3.2) are omitted on this implementation. The checksum should be the solution for determining string integreity.
 
 ## Hierarchy
@@ -31,11 +31,11 @@ Some things to note:
 
 ▸ **decode**(str: *`string`*): `string`
 
-*Defined in [tcstring/Base64Url.ts:168](https://github.com/chrispaterson/iabtcf-es/blob/4f7901f/modules/core/src/tcstring/Base64Url.ts#L168)*
+*Defined in [tcstring/Base64Url.ts:168](https://github.com/chrispaterson/iabtcf-es/blob/b152fcc/modules/core/src/tcstring/Base64Url.ts#L168)*
 
 decodes a base64url encoded bitfield string
 
-*__static__*:
+*__static__*: 
 
 **Parameters:**
 
@@ -53,11 +53,11 @@ ___
 
 ▸ **encode**(str: *`string`*): `string`
 
-*Defined in [tcstring/Base64Url.ts:118](https://github.com/chrispaterson/iabtcf-es/blob/4f7901f/modules/core/src/tcstring/Base64Url.ts#L118)*
+*Defined in [tcstring/Base64Url.ts:118](https://github.com/chrispaterson/iabtcf-es/blob/b152fcc/modules/core/src/tcstring/Base64Url.ts#L118)*
 
 encodes an arbitrary-length bitfield string into base64url
 
-*__static__*:
+*__static__*: 
 
 **Parameters:**
 
@@ -69,3 +69,4 @@ encodes an arbitrary-length bitfield string into base64url
 *   base64url encoded result
 
 ___
+

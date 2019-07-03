@@ -22,7 +22,7 @@
 
 ▸ **fetch**(jsonURL: *`string`*, sendCookies?: *`boolean`*, timeout?: *`number`*): `Promise`<`object`>
 
-*Defined in [Json.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/4f7901f/modules/core/src/Json.ts#L9)*
+*Defined in [Json.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/b152fcc/modules/core/src/Json.ts#L9)*
 
 **Parameters:**
 
