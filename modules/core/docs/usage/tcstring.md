@@ -2,7 +2,7 @@
 
 # TCString
 
-[TCString API Documentation]('../api/classes/tcstring.md')
+[TCString API Documentation](../api/classes/tcstring.md)
 
 ### Decode a TCString
 
