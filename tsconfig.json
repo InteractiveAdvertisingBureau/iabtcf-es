@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "moduleResolution": "node",
-    "experimentalDecorators":true,
-    "removeComments": false,
+    "removeComments": true,
+    "downlevelIteration": true,
     "noImplicitAny": false,
     "esModuleInterop": true,
     "preserveConstEnums": true,

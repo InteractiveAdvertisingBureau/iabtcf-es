@@ -94,9 +94,9 @@ export class TCModel {
    */
   /**
    * TODO: add an event for when something is added because we need to force
-   * service specific if any publisher restrictions are created
+   * service specific if any purpose restrictions are created
    */
-  // public publisherRestrictions: Vectorn;
+  public purposeRestrictions: Vector = new Vector();
 
   /**
    * Constructs the TCModel. Passing a [[GVL]] is optional when constructing

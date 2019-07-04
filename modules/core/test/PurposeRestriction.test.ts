@@ -92,3 +92,21 @@ runDescribe('restrictionType', (): void => {
   });
 
 });
+runDescribe('constructor', (): void => {
+
+
+  it('should set and get a restrictionType and purposeId through the constructor', (): void => {
+
+    const purposeId = 2;
+
+    PurposeRestriction.availablePurposeIds.add(purposeId);
+
+    const purposeRestriction = new PurposeRestriction(purposeId, PurposeRestrictionTypeEnum.NOT_ALLOWED);
+
+    expect(purposeRestriction.isValid()).to.be.true;
+    expect(purposeRestriction.purposeId).to.equal(purposeId);
+    expect(purposeRestriction.restrictionType).to.equal(PurposeRestrictionTypeEnum.NOT_ALLOWED);
+
+  });
+
+});

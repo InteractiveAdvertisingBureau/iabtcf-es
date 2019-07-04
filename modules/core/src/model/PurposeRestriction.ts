@@ -1,11 +1,35 @@
 import {TCModelError} from '../errors';
 import {PurposeRestrictionTypeEnum} from './enum/PurposeRestrictionTypeEnum';
 
-class PurposeRestriction {
+export class PurposeRestriction {
 
   public static availablePurposeIds: Set<number> = new Set();
   private purposeId_: number;
   public restrictionType: PurposeRestrictionTypeEnum;
+
+  /**
+   * constructor
+   *
+   * @param {number} purposeId? - may optionally pass the purposeId into the
+   * constructor
+   * @param {PurposeRestrictionTypeEnum} restrictionType? - may
+   * optionally pass the restrictionType into the constructor
+   * @return {undefined}
+   */
+  public constructor(purposeId?: number, restrictionType?: PurposeRestrictionTypeEnum) {
+
+    if (purposeId !== undefined) {
+
+      this.purposeId = purposeId;
+
+    }
+    if (restrictionType !== undefined) {
+
+      this.restrictionType = restrictionType;
+
+    }
+
+  }
 
   /**
    * @return {number} The purpose Id associated with a publisher
@@ -49,4 +73,3 @@ class PurposeRestriction {
   }
 
 }
-export {PurposeRestriction};

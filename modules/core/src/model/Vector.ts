@@ -1,10 +1,10 @@
 import {TCModelError} from '../errors';
 
 type idOrIds = number | number[];
+
 /**
  * Vector class is like a Set except it keeps track of a max id
  */
-
 class Vector {
 
   private maxId_: number = 0;
