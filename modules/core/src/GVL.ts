@@ -36,7 +36,7 @@ type PurposeSubType = 'consent' | 'legInt' | 'flexible';
  * object and provide accessors.  Provides ways to group vendors on the list by
  * purpose and feature.
  */
-class GVL {
+export class GVL {
 
   /**
    * @static
@@ -583,5 +583,3 @@ class GVL {
   }
 
 }
-
-export {GVL};

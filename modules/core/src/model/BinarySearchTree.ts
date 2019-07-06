@@ -6,9 +6,16 @@ interface TreeNode {
 }
 export class BinarySearchTree {
 
-  private root: TreeNode;
+  private root: TreeNodeOrNull = null;;
 
-  public insert(value: number): void {
+  public isEmpty(): boolean {
+
+    // if root is undefined or null thne by definition this is empty
+    return !(this.root);
+
+  }
+
+  public add(value: number): void {
 
     // create new node object
     const node: TreeNode = {
@@ -17,16 +24,16 @@ export class BinarySearchTree {
       right: null,
     };
 
-    // used as a pointer to the node we need
     let current;
 
-    // Special case, no items in the tree yet: ie. we're root
-    if (this.root === null) {
+    // first item?
+    if (this.isEmpty()) {
 
       this.root = node;
 
     } else {
 
+      // start at the root
       current = this.root;
 
       // infinite loop, figure out where to put it
@@ -44,38 +51,47 @@ export class BinarySearchTree {
             // our work is done here
             break;
 
-            // if there's something there already, we'll reset the
-            // pointer and wait for the next loop to do something
-            // aka keep traversing
 
           } else {
 
+            /**
+             * if there's something there already, we'll reset the pointer and
+             * wait for the next loop to do something ie. keep traversing
+             */
             current = current.left;
 
           }
 
-          // if the value is greater than our current value; go right
 
         } else if (value > current.value) {
 
-          // if the right slot is open, we can insert there
+          // if the value is greater than our current value; go right
           if (current.right === null) {
 
+            // there's nothing to the right, so put it here
             current.right = node;
             break;
 
-            // otherwise, we need to keep looping
 
           } else {
+
+            /**
+             * if there's something there already, we'll reset the pointer and
+             * wait for the next loop to do something ie. keep traversing
+             */
 
             current = current.right;
 
           }
 
-          // They're equal meaning it's the same value, (no duplicates allowed in a BST)
-          // We'll just ignore it and be done
 
         } else {
+
+          /**
+           * If it's neither greater than the right or less than the right then
+           * it is equal to the current nodes value.  In that case we won't do
+           * anything with it because we will only insert unique values.
+           */
 
           break;
 
@@ -86,65 +102,164 @@ export class BinarySearchTree {
     }
 
   }
-  public delete(value: number): void {
 
-    // first flag for finding
-    let found = false;
+  /**
+   * performs Morris in-order traversal
+   * @return {number[]} sorted array
+   */
+  public get(): number[] {
 
-    // we start at the root, so the parent is null
-    let parent: TreeNodeOrNull = null;
-
-    // start at the root
+    const retr: number[] = [];
     let current: TreeNodeOrNull = this.root;
 
-    // Make sure there's a node to search
-    while (!found && current) {
+    while (current) {
 
-      // if the value is less than the current node's; go left
-      if (value < current.value) {
+      if (!current.left) {
 
-        // set our parent to the current value
-        parent = current;
-
-        // set our current to the left value
-        current = current.left;
-
-        // if the value is greater than the current node's; go right
-
-      } else if (value > current.value) {
-
-        // set our parent to the current value
-        parent = current;
-
-        // set current to the right value
+        retr.push(current.value);
         current = current.right;
-
-        // if it's equal, then we've found it
 
       } else {
 
-        // when found is set to true, we'll break
-        found = true;
+        let subCurrent: TreeNodeOrNull = current.left;
 
-        // if not a parent then this is the root node
-        if (parent === null) {
+        while (subCurrent.right && subCurrent.right !== current) {
 
-          // delete root node!  ahhhhh!!
+          subCurrent = subCurrent.right;
+
+        }
+        if (!subCurrent.right) {
+
+          subCurrent.right = current;
+          current = current.left;
+
         } else {
 
-          if (parent.right && parent.right.value === value) {
-
-            parent.right = (current.left !== null) ? current.left : current.right;
-
-          } else if (parent.left && parent.left.value === value) {
-
-            parent.left = (current.right !== null) ? current.right : current.left;
-
-          }
+          subCurrent.right = null;
+          retr.push(current.value);
+          current = current.right;
 
         }
 
       }
+
+    }
+
+    return retr;
+
+  }
+
+  public remove(value: number, current: TreeNodeOrNull = this.root ): void {
+
+    // we start at the root, so the parent is null
+    let parent: TreeNode;
+    let parentSide: string;
+
+    while (current) {
+
+      // set our parent to the current value
+      parent = current;
+      parentSide = 'left';
+
+      if (current === this.root) {
+
+        // we have to handle the root more specially
+
+        if (value === current.value) {
+          // delete root
+
+        }
+
+      } else if (value < current.value) {
+
+        // value is less than current value, so go left
+        current = current.left;
+
+
+      } else if (value > current.value) {
+
+        // value is greater than current value, so go right
+        current = current.right;
+        parentSide = 'right';
+
+
+      } else {
+
+        /**
+           * if it's neither greater than or less than, then it's equal so BINGO!
+           * we've found it
+           *
+           * If we have children, we've got to figure out what to do with
+           * them once we are no longer around...  Woah, code is like real
+           * life...
+           *
+           * There are three cases we care about when it comes to this removal
+           * process:
+           *
+           * 1. No children -- If not children we just delete an do nothing
+           * else, no harm no foul.
+           *
+           * 2. One child -- Just link the parent's link to current to the
+           * child.
+           *
+           * 3. Two children --  Find the minimum value from the right subtree
+           * replace us with the minimum value and of course remove that
+           * minimum value from the right stubtree
+           */
+
+        if (!current.left && !current.right) {
+
+          // case 1 there are no children easy peasy lemon squeezy
+
+          parent[parentSide] = null;
+
+        } else if (!current.left) {
+
+          // no left side only right, so link right
+
+          parent[parentSide] = current.right;
+
+        } else if (!current.right) {
+
+          // no right side only left, so link left
+
+          parent[parentSide] = current.left;
+
+        } else {
+
+          /**
+           * case 3 just like real life, if you delete a parent the more kids
+           * that parent has the more complicated things get... in this case we
+           * have two children.  We're gonna have to figure out who goes where.
+           */
+          let subCurrent: TreeNodeOrNull = current.right;
+          let subParent = current;
+          let min = current.value;
+
+          while (subCurrent) {
+
+            min = subCurrent.value;
+
+            if (subCurrent.left) {
+
+              subParent = subCurrent;
+              subCurrent = subCurrent.left;
+
+            } else {
+
+              current.value = min;
+              subParent.left = null;
+              subCurrent = null;
+
+            }
+
+          }
+          current = null;
+
+        }
+
+      }
+
 
     }
 

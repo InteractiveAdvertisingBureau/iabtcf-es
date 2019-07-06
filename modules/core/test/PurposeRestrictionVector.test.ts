@@ -1,3 +1,4 @@
+/*
 import {expect} from 'chai';
 import {PurposeRestriction} from '../src/model/PurposeRestriction';
 import {PurposeRestrictionTypeEnum} from '../src/model/enum/PurposeRestrictionTypeEnum';
@@ -42,3 +43,4 @@ describe('PurposeRestrictionVector', (): void => {
   });
 
 });
+*/
