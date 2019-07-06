@@ -18,7 +18,7 @@
     "karma": "karma start",
     "prepack": "npm run build",
     "build": "rm -r lib ; tsc",
-    "test": "mocha -r ts-node/register -r jsdom-global/register \"./test/**/*.{ts,tsx}\""
+    "test": "mocha -r ts-node/register -r jsdom-global/register \"./test/*.{ts,tsx}\""
   },
   "devDependencies": {
     "@types/sinon": "^7.0.13",

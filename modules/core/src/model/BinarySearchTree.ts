@@ -274,7 +274,7 @@ export class BinarySearchTree {
            * minimum value from the right stubtree
            */
 
-        if (parent) {
+        if (current !== this.root && parent) {
 
           if (!current.left && !current.right) {
 

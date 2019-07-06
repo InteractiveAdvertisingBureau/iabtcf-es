@@ -1,7 +1,8 @@
 import {expect} from 'chai';
-import {PurposeRestriction} from '../src/model/PurposeRestriction';
-import {PurposeRestrictionTypeEnum} from '../src/model/enum/PurposeRestrictionTypeEnum';
+import {PurposeRestriction} from '../../src/model/PurposeRestriction';
+import {PurposeRestrictionTypeEnum} from '../../src/model/enum/PurposeRestrictionTypeEnum';
 
+export function():void {
 const runDescribe = (fieldName: string, handler: () => void): void => {
 
   describe(`PurposeRestriction->${fieldName}`, handler);
@@ -110,3 +111,4 @@ runDescribe('constructor', (): void => {
   });
 
 });
+}
