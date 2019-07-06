@@ -1,7 +1,7 @@
 import {PurposeRestriction} from './PurposeRestriction';
 import {BinarySearchTree} from './BinarySearchTree';
 interface PRMap {
-  [hash: string]: number[];
+  [hash: string]: BinarySearchTree;
 }
 export class PurposeRestrictionVector {
 
@@ -12,9 +12,9 @@ export class PurposeRestrictionVector {
    */
   private map: PRMap = {};;
   private hashSeparator: string = '-';
-  private makeHash(purposeId: number, restrictionType: number): string {
+  private makeHash(purposeRestriction: PurposeRestriction): string {
 
-    return `${purposeId}${this.hashSeparator}${restrictionType}`;
+    return `${purposeRestriction.purposeId}${this.hashSeparator}${purposeRestriction.restrictionType}`;
 
   }
   private unHash(hash: string): PurposeRestriction {
@@ -36,135 +36,81 @@ export class PurposeRestrictionVector {
 
   public add(vendorId: number, purposeRestriction: PurposeRestriction): void {
 
-    const hash: string = this.makeHash(purposeRestriction.purposeId, purposeRestriction.restrictionType);
+    const hash: string = this.makeHash(purposeRestriction);
 
-    if (this.has(hash)) {
+    if (!this.has(hash)) {
 
-      const ids: number[] | undefined = this.map[hash] || [];
+      this.map[hash] = new BinarySearchTree();
 
-      this.insert(vendorId, ids);
-
-    } else {
-
-      // first one
-      this.map[hash] = [vendorId];
 
     }
+    this.map[hash].add(vendorId);
 
   }
   public getVendors(purposeRestriction: PurposeRestriction): number[] {
 
-    const hash: string = this.makeHash(purposeRestriction.purposeId, purposeRestriction.restrictionType);
+    const hash: string = this.makeHash(purposeRestriction);
 
-    if (this.has(hash)) {
-
-      return this.map[hash] || [];
-
-    } else {
-
-      return [];
-
-    }
+    return this.has(hash) ? this.map[hash].get() : [];
 
   }
-  /*
   public getRestriction(vendorId: number): PurposeRestriction[] {
 
     const retr: PurposeRestriction[] = [];
+    const hashes: string[] = Object.keys(this.map);
 
-    for (const item of this.map.entries()) {
 
-      if (item[1].includes(vendorId)) {
+    hashes.forEach((hash: string): void => {
 
-        retr.push(this.unHash(item[0]));
+      const bst: BinarySearchTree = this.map[hash];
+
+      if (bst.contains(vendorId)) {
+
+        retr.push(this.unHash(hash));
 
       }
 
-    }
+    });
 
     return retr;
 
   }
-  */
+  public getMax(purposeRestriction: PurposeRestriction): number | undefined {
+
+    const hash: string = this.makeHash(purposeRestriction);
+    const bst: BinarySearchTree = this.map[hash];
+
+    return bst ? bst.max() : undefined;
+
+  }
+  public getMin(purposeRestriction: PurposeRestriction): number | undefined {
+
+    const hash: string = this.makeHash(purposeRestriction);
+    const bst: BinarySearchTree = this.map[hash];
+
+    return bst ? bst.min() : undefined;
+
+  }
   public forEach(purposeRestriction: PurposeRestriction, callback: (vendorId: number) => {}): void {
 
-    const hash: string = this.makeHash(purposeRestriction.purposeId, purposeRestriction.restrictionType);
-    const ids: number[] = this.map[hash] || [];
+    const hash: string = this.makeHash(purposeRestriction);
+    const ids: number[] = this.map[hash].get() || [];
 
     ids.forEach(callback);
 
   }
 
-  // 29, [33];
-  private insert(value: number, arr: number[]): void {
-
-    let left = 0; // 0
-    let right = arr.length - 1; // 1
-
-    while (left <= right) {
-
-      const mid = Math.round((left + right)/2);// 0
-
-      if (arr.length === 0) {
-
-        arr.push(value);
-        break;
-
-      }
-      if (arr[left] > value) {
-
-        arr.splice(left, 0, value);
-        break;
-
-      }
-      if (arr[right] < value) {
-
-        arr.splice(right + 1, 0, value);
-        break;
-
-      }
-
-      if (arr[mid] === value) { // 33
-
-        /**
-         * this value exists already in the array -- so no insert
-         */
-        break;
-
-      } else if (arr[mid] < value) {
-
-        left = mid + 1;
-
-      } else {
-
-        right = mid - 1;
-
-      }
-
-
-    }
-
-  }
-
   public remove(vendorId: number, purposeRestriction: PurposeRestriction): void {
 
-    const hash: string = this.makeHash(purposeRestriction.purposeId, purposeRestriction.restrictionType);
+    const hash: string = this.makeHash(purposeRestriction);
+    const bst: BinarySearchTree = this.map[hash];
 
-    if (this.has(hash)) {
+    if (bst) {
 
-      const ids: number[] | undefined = this.map[hash] || [];
+      bst.remove(vendorId);
 
-      for (let i = 0; i < ids.length; i ++) {
-
-        if (vendorId === ids[i]) {
-
-          ids.splice(i, 1);
-          break;
-
-        }
-
-      }
-      if (!ids || ids.length === 0) {
+      // if it's empty let's delete the key so it doesn't show up empty
+      if (bst.isEmpty()) {
 
         delete this.map[hash];
 
