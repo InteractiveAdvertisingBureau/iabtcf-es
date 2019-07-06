@@ -1,4 +1,5 @@
 import {PurposeRestriction} from './PurposeRestriction';
+import {BinarySearchTree} from './BinarySearchTree';
 interface PRMap {
   [hash: string]: number[];
 }

@@ -149,34 +149,101 @@ export class BinarySearchTree {
 
   }
 
-  public remove(value: number, current: TreeNodeOrNull = this.root ): void {
+  public contains(value: number): boolean {
 
-    // we start at the root, so the parent is null
-    let parent: TreeNode;
-    let parentSide: string;
+    let retr = false;
+    let current: TreeNodeOrNull = this.root;
 
     while (current) {
 
-      // set our parent to the current value
-      parent = current;
-      parentSide = 'left';
+      if (current.value === value) {
 
-      if (current === this.root) {
+        retr = true;
+        break;
 
-        // we have to handle the root more specially
+      } else if (value > current.value) {
 
-        if (value === current.value) {
-          // delete root
-
-        }
+        current = current.right;
 
       } else if (value < current.value) {
 
+        current = current.left;
+
+      }
+
+    }
+    return retr;
+
+  }
+
+  public min(current: TreeNodeOrNull = this.root): number {
+
+    let retr;
+
+    while (current) {
+
+      if (current.left) {
+
+        current =current.left;
+
+      } else {
+
+        retr = current.value;
+        current = null;
+
+      }
+
+    }
+    return retr;
+
+  }
+
+  public max(current: TreeNodeOrNull = this.root): number {
+
+    let retr;
+
+    while (current) {
+
+      if (current.right) {
+
+        current =current.right;
+
+      } else {
+
+        retr = current.value;
+        current = null;
+
+      }
+
+    }
+    return retr;
+
+  }
+
+  public remove(value: number, current: TreeNodeOrNull = this.root ): void {
+
+    // we start at the root, so the parent is null
+    let parent: TreeNodeOrNull = null;
+    let parentSide = 'left';
+
+    while (current) {
+
+
+      if (value < current.value) {
+
+
+        // set our parent to the current value
+        parent = current;
+
         // value is less than current value, so go left
         current = current.left;
+        parentSide = 'left';
 
 
       } else if (value > current.value) {
+
+        // set our parent to the current value
+        parent = current;
 
         // value is greater than current value, so go right
         current = current.right;
@@ -207,56 +274,67 @@ export class BinarySearchTree {
            * minimum value from the right stubtree
            */
 
-        if (!current.left && !current.right) {
+        if (parent) {
 
-          // case 1 there are no children easy peasy lemon squeezy
+          if (!current.left && !current.right) {
 
-          parent[parentSide] = null;
+            // case 1 there are no children easy peasy lemon squeezy
+            parent[parentSide] = null;
 
-        } else if (!current.left) {
+          } else if (!current.left) {
 
-          // no left side only right, so link right
+            // no left side only right, so link right
+            parent[parentSide] = current.right;
 
-          parent[parentSide] = current.right;
+          } else if (!current.right) {
 
-        } else if (!current.right) {
+            // no right side only left, so link left
+            parent[parentSide] = current.left;
 
-          // no right side only left, so link left
+          } else {
 
-          parent[parentSide] = current.left;
-
-        } else {
-
-          /**
+            /**
            * case 3 just like real life, if you delete a parent the more kids
            * that parent has the more complicated things get... in this case we
            * have two children.  We're gonna have to figure out who goes where.
            */
-          let subCurrent: TreeNodeOrNull = current.right;
-          let subParent = current;
-          let min = current.value;
 
-          while (subCurrent) {
+            const minVal = this.min(current.right);
 
-            min = subCurrent.value;
-
-            if (subCurrent.left) {
-
-              subParent = subCurrent;
-              subCurrent = subCurrent.left;
-
-            } else {
-
-              current.value = min;
-              subParent.left = null;
-              subCurrent = null;
-
-            }
+            this.remove(minVal, current.right);
+            current.value = minVal;
 
           }
-          current = null;
+
+        } else {
+
+          // assert that it exists because typescript is unhappy
+          const theRoot: TreeNode = this.root as TreeNode;
+
+          // no parent, must be root
+          if (!theRoot.left && !theRoot.right) {
+
+            this.root = null;
+
+          } else if (!theRoot.left) {
+
+            this.root = theRoot.right;
+
+          } else if (!theRoot.right) {
+
+            this.root = theRoot.left;
+
+          } else {
+
+            const minVal = this.min(current.right);
+
+            this.remove(minVal, theRoot.right);
+            theRoot.value = minVal;
+
+          }
 
         }
+        current = null;
 
       }
 
