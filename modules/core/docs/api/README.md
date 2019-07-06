@@ -11,6 +11,7 @@
 ### Classes
 
 * [Base64Url](classes/base64url.md)
+* [BinarySearchTree](classes/binarysearchtree.md)
 * [BitLength](classes/bitlength.md)
 * [BooleanDecoder](classes/booleandecoder.md)
 * [BooleanEncoder](classes/booleanencoder.md)
@@ -30,6 +31,7 @@
 * [LangDecoder](classes/langdecoder.md)
 * [LangEncoder](classes/langencoder.md)
 * [PurposeRestriction](classes/purposerestriction.md)
+* [PurposeRestrictionVector](classes/purposerestrictionvector.md)
 * [TCModel](classes/tcmodel.md)
 * [TCModelError](classes/tcmodelerror.md)
 * [TCString](classes/tcstring.md)
@@ -47,10 +49,12 @@
 * [GVLBase](interfaces/gvlbase.md)
 * [GVLMap](interfaces/gvlmap.md)
 * [GVLMapItem](interfaces/gvlmapitem.md)
+* [PRMap](interfaces/prmap.md)
 * [Purpose](interfaces/purpose.md)
 * [SpecificDecoder](interfaces/specificdecoder.md)
 * [SpecificEncoder](interfaces/specificencoder.md)
 * [Stack](interfaces/stack.md)
+* [TreeNode](interfaces/treenode.md)
 * [VariableLengthSpecificDecoder](interfaces/variablelengthspecificdecoder.md)
 * [Vendor](interfaces/vendor.md)
 * [VendorList](interfaces/vendorlist.md)
@@ -60,6 +64,7 @@
 * [PurposeOrFeature](#purposeorfeature)
 * [PurposeSubType](#purposesubtype)
 * [TCModelPropType](#tcmodelproptype)
+* [TreeNodeOrNull](#treenodeornull)
 * [VersionOrVendorList](#versionorvendorlist)
 * [idOrIds](#idorids)
 
@@ -73,7 +78,7 @@
 
 **Ƭ PurposeOrFeature**: *"purpose" \| "feature"*
 
-*Defined in [GVL.ts:30](https://github.com/chrispaterson/iabtcf-es/blob/b152fcc/modules/core/src/GVL.ts#L30)*
+*Defined in [GVL.ts:30](https://github.com/chrispaterson/iabtcf-es/blob/aea9b2e/modules/core/src/GVL.ts#L30)*
 
 ___
 <a id="purposesubtype"></a>
@@ -82,7 +87,7 @@ ___
 
 **Ƭ PurposeSubType**: *"consent" \| "legInt" \| "flexible"*
 
-*Defined in [GVL.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/b152fcc/modules/core/src/GVL.ts#L31)*
+*Defined in [GVL.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/aea9b2e/modules/core/src/GVL.ts#L31)*
 
 ___
 <a id="tcmodelproptype"></a>
@@ -91,7 +96,16 @@ ___
 
 **Ƭ TCModelPropType**: *`number` \| `Date` \| `string` \| `boolean` \| [Vector](classes/vector.md)*
 
-*Defined in [TCModel.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/b152fcc/modules/core/src/TCModel.ts#L7)*
+*Defined in [TCModel.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/aea9b2e/modules/core/src/TCModel.ts#L7)*
+
+___
+<a id="treenodeornull"></a>
+
+###  TreeNodeOrNull
+
+**Ƭ TreeNodeOrNull**: *[TreeNode](interfaces/treenode.md) \| `null`*
+
+*Defined in [model/BinarySearchTree.ts:1](https://github.com/chrispaterson/iabtcf-es/blob/aea9b2e/modules/core/src/model/BinarySearchTree.ts#L1)*
 
 ___
 <a id="versionorvendorlist"></a>
@@ -100,7 +114,7 @@ ___
 
 **Ƭ VersionOrVendorList**: *`string` \| `number` \| [VendorList](interfaces/vendorlist.md)*
 
-*Defined in [GVL.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/b152fcc/modules/core/src/GVL.ts#L29)*
+*Defined in [GVL.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/aea9b2e/modules/core/src/GVL.ts#L29)*
 
 ___
 <a id="idorids"></a>
@@ -109,7 +123,7 @@ ___
 
 **Ƭ idOrIds**: *`number` \| `number`[]*
 
-*Defined in [model/Vector.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/b152fcc/modules/core/src/model/Vector.ts#L3)*
+*Defined in [model/Vector.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/aea9b2e/modules/core/src/model/Vector.ts#L3)*
 
 ___
 

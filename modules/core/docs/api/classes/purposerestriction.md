@@ -8,6 +8,10 @@
 
 ## Index
 
+### Constructors
+
+* [constructor](purposerestriction.md#constructor)
+
 ### Properties
 
 * [restrictionType](purposerestriction.md#restrictiontype)
@@ -24,6 +28,29 @@
 
 ---
 
+## Constructors
+
+<a id="constructor"></a>
+
+###  constructor
+
+⊕ **new PurposeRestriction**(purposeId?: *`undefined` \| `number`*, restrictionType?: *[PurposeRestrictionTypeEnum](../enums/purposerestrictiontypeenum.md)*): [PurposeRestriction](purposerestriction.md)
+
+*Defined in [model/PurposeRestriction.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/aea9b2e/modules/core/src/model/PurposeRestriction.ts#L8)*
+
+constructor
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| `Optional` purposeId | `undefined` \| `number` |
+| `Optional` restrictionType | [PurposeRestrictionTypeEnum](../enums/purposerestrictiontypeenum.md) |
+
+**Returns:** [PurposeRestriction](purposerestriction.md)
+
+___
+
 ## Properties
 
 <a id="restrictiontype"></a>
@@ -32,7 +59,7 @@
 
 **● restrictionType**: *[PurposeRestrictionTypeEnum](../enums/purposerestrictiontypeenum.md)*
 
-*Defined in [model/PurposeRestriction.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/b152fcc/modules/core/src/model/PurposeRestriction.ts#L8)*
+*Defined in [model/PurposeRestriction.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/aea9b2e/modules/core/src/model/PurposeRestriction.ts#L8)*
 
 ___
 <a id="availablepurposeids"></a>
@@ -41,7 +68,7 @@ ___
 
 **● availablePurposeIds**: *`Set`<`number`>* =  new Set()
 
-*Defined in [model/PurposeRestriction.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/b152fcc/modules/core/src/model/PurposeRestriction.ts#L6)*
+*Defined in [model/PurposeRestriction.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/aea9b2e/modules/core/src/model/PurposeRestriction.ts#L6)*
 
 ___
 
@@ -55,12 +82,12 @@ ___
 
 **set purposeId**(idNum: *`number`*): `void`
 
-*Defined in [model/PurposeRestriction.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/b152fcc/modules/core/src/model/PurposeRestriction.ts#L15)*
+*Defined in [model/PurposeRestriction.ts:39](https://github.com/chrispaterson/iabtcf-es/blob/aea9b2e/modules/core/src/model/PurposeRestriction.ts#L39)*
 
 **Returns:** `number`
 The purpose Id associated with a publisher purpose-by-vendor restriction that resulted in a different consent or LI status than the consent or LI purposes allowed lists.
 
-*Defined in [model/PurposeRestriction.ts:25](https://github.com/chrispaterson/iabtcf-es/blob/b152fcc/modules/core/src/model/PurposeRestriction.ts#L25)*
+*Defined in [model/PurposeRestriction.ts:49](https://github.com/chrispaterson/iabtcf-es/blob/aea9b2e/modules/core/src/model/PurposeRestriction.ts#L49)*
 
 **Parameters:**
 
@@ -81,7 +108,7 @@ ___
 
 ▸ **isSameAs**(otherPR: *[PurposeRestriction](purposerestriction.md)*): `boolean`
 
-*Defined in [model/PurposeRestriction.ts:44](https://github.com/chrispaterson/iabtcf-es/blob/b152fcc/modules/core/src/model/PurposeRestriction.ts#L44)*
+*Defined in [model/PurposeRestriction.ts:68](https://github.com/chrispaterson/iabtcf-es/blob/aea9b2e/modules/core/src/model/PurposeRestriction.ts#L68)*
 
 **Parameters:**
 
@@ -98,7 +125,7 @@ ___
 
 ▸ **isValid**(): `boolean`
 
-*Defined in [model/PurposeRestriction.ts:39](https://github.com/chrispaterson/iabtcf-es/blob/b152fcc/modules/core/src/model/PurposeRestriction.ts#L39)*
+*Defined in [model/PurposeRestriction.ts:63](https://github.com/chrispaterson/iabtcf-es/blob/aea9b2e/modules/core/src/model/PurposeRestriction.ts#L63)*
 
 **Returns:** `boolean`
 
