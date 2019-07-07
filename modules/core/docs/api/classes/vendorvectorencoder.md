@@ -30,7 +30,7 @@
 
 **● RANGE_DEFAULT**: *`boolean`* = false
 
-*Defined in [tcstring/encoders/VendorVectorEncoder.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/aea9b2e/modules/core/src/tcstring/encoders/VendorVectorEncoder.ts#L10)*
+*Defined in [tcstring/encoders/VendorVectorEncoder.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/b3164e6/modules/core/src/tcstring/encoders/VendorVectorEncoder.ts#L10)*
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 ▸ **encode**(vector: *[Vector](vector.md)*): `string`
 
-*Defined in [tcstring/encoders/VendorVectorEncoder.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/aea9b2e/modules/core/src/tcstring/encoders/VendorVectorEncoder.ts#L17)*
+*Defined in [tcstring/encoders/VendorVectorEncoder.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/b3164e6/modules/core/src/tcstring/encoders/VendorVectorEncoder.ts#L17)*
 
 **Parameters:**
 

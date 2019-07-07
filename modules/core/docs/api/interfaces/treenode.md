@@ -22,18 +22,18 @@
 
 ###  left
 
-**● left**: *[TreeNodeOrNull](../#treenodeornull)*
+**● left**: *[TreeNodeMaybe](../#treenodemaybe)*
 
-*Defined in [model/BinarySearchTree.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/aea9b2e/modules/core/src/model/BinarySearchTree.ts#L5)*
+*Defined in [model/BinarySearchTree.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/b3164e6/modules/core/src/model/BinarySearchTree.ts#L5)*
 
 ___
 <a id="right"></a>
 
 ###  right
 
-**● right**: *[TreeNodeOrNull](../#treenodeornull)*
+**● right**: *[TreeNodeMaybe](../#treenodemaybe)*
 
-*Defined in [model/BinarySearchTree.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/aea9b2e/modules/core/src/model/BinarySearchTree.ts#L4)*
+*Defined in [model/BinarySearchTree.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/b3164e6/modules/core/src/model/BinarySearchTree.ts#L4)*
 
 ___
 <a id="value"></a>
@@ -42,7 +42,7 @@ ___
 
 **● value**: *`number`*
 
-*Defined in [model/BinarySearchTree.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/aea9b2e/modules/core/src/model/BinarySearchTree.ts#L3)*
+*Defined in [model/BinarySearchTree.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/b3164e6/modules/core/src/model/BinarySearchTree.ts#L3)*
 
 ___
 

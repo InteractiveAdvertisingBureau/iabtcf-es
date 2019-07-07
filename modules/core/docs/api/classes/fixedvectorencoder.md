@@ -26,7 +26,7 @@
 
 ▸ **encode**(vector: *[Vector](vector.md)*, numBits: *`number`*): `string`
 
-*Defined in [tcstring/encoders/FixedVectorEncoder.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/aea9b2e/modules/core/src/tcstring/encoders/FixedVectorEncoder.ts#L7)*
+*Defined in [tcstring/encoders/FixedVectorEncoder.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/b3164e6/modules/core/src/tcstring/encoders/FixedVectorEncoder.ts#L7)*
 
 **Parameters:**
 

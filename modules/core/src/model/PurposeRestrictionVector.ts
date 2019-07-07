@@ -1,8 +1,5 @@
 import {PurposeRestriction} from './PurposeRestriction';
 import {BinarySearchTree} from './BinarySearchTree';
-interface PRMap {
-  [hash: string]: BinarySearchTree;
-}
 export class PurposeRestrictionVector {
 
   /**
@@ -10,7 +7,7 @@ export class PurposeRestrictionVector {
    * restriction type.  The number array will be the ordered vendor ids that
    * are restricted
    */
-  private map: PRMap = {};;
+  private map: Map<string, BinarySearchTree> = new Map<string, BinarySearchTree>();
   private hashSeparator: string = '-';
   private makeHash(purposeRestriction: PurposeRestriction): string {
 
@@ -30,7 +27,7 @@ export class PurposeRestrictionVector {
   }
   private has(hash: string): boolean {
 
-    return (this.map[hash] !== undefined);
+    return this.map.has(hash);
 
   }
 
@@ -40,29 +37,25 @@ export class PurposeRestrictionVector {
 
     if (!this.has(hash)) {
 
-      this.map[hash] = new BinarySearchTree();
+      this.map.set(hash, new BinarySearchTree());
 
 
     }
-    this.map[hash].add(vendorId);
+    (this.map.get(hash) as BinarySearchTree).add(vendorId);
 
   }
   public getVendors(purposeRestriction: PurposeRestriction): number[] {
 
     const hash: string = this.makeHash(purposeRestriction);
 
-    return this.has(hash) ? this.map[hash].get() : [];
+    return this.has(hash) ? (this.map.get(hash) as BinarySearchTree).get() : [];
 
   }
   public getRestriction(vendorId: number): PurposeRestriction[] {
 
     const retr: PurposeRestriction[] = [];
-    const hashes: string[] = Object.keys(this.map);
 
-
-    hashes.forEach((hash: string): void => {
-
-      const bst: BinarySearchTree = this.map[hash];
+    this.map.forEach((bst: BinarySearchTree, hash: string): void => {
 
       if (bst.contains(vendorId)) {
 
@@ -75,18 +68,18 @@ export class PurposeRestrictionVector {
     return retr;
 
   }
-  public getMax(purposeRestriction: PurposeRestriction): number | undefined {
+  public getMaxVendor(purposeRestriction: PurposeRestriction): number | undefined {
 
     const hash: string = this.makeHash(purposeRestriction);
-    const bst: BinarySearchTree = this.map[hash];
+    const bst: BinarySearchTree | undefined = this.map.get(hash);
 
     return bst ? bst.max() : undefined;
 
   }
-  public getMin(purposeRestriction: PurposeRestriction): number | undefined {
+  public getMinVendor(purposeRestriction: PurposeRestriction): number | undefined {
 
     const hash: string = this.makeHash(purposeRestriction);
-    const bst: BinarySearchTree = this.map[hash];
+    const bst: BinarySearchTree | undefined = this.map.get(hash);
 
     return bst ? bst.min() : undefined;
 
@@ -94,7 +87,7 @@ export class PurposeRestrictionVector {
   public forEach(purposeRestriction: PurposeRestriction, callback: (vendorId: number) => {}): void {
 
     const hash: string = this.makeHash(purposeRestriction);
-    const ids: number[] = this.map[hash].get() || [];
+    const ids: number[] = (this.map.get(hash) as BinarySearchTree).get() || [];
 
     ids.forEach(callback);
 
@@ -103,7 +96,7 @@ export class PurposeRestrictionVector {
   public remove(vendorId: number, purposeRestriction: PurposeRestriction): void {
 
     const hash: string = this.makeHash(purposeRestriction);
-    const bst: BinarySearchTree = this.map[hash];
+    const bst: BinarySearchTree | undefined = this.map.get(hash);
 
     if (bst) {
 
@@ -112,7 +105,7 @@ export class PurposeRestrictionVector {
       // if it's empty let's delete the key so it doesn't show up empty
       if (bst.isEmpty()) {
 
-        delete this.map[hash];
+        this.map.delete(hash);
 
       }
 

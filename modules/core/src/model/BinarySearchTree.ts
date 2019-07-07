@@ -1,12 +1,12 @@
-type TreeNodeOrNull = TreeNode | null;
+type TreeNodeMaybe = TreeNode | null;
 interface TreeNode {
   value: number;
-  right: TreeNodeOrNull;
-  left: TreeNodeOrNull;
+  right: TreeNodeMaybe;
+  left: TreeNodeMaybe;
 }
 export class BinarySearchTree {
 
-  private root: TreeNodeOrNull = null;;
+  private root: TreeNodeMaybe = null;;
 
   public isEmpty(): boolean {
 
@@ -110,41 +110,48 @@ export class BinarySearchTree {
   public get(): number[] {
 
     const retr: number[] = [];
-    let current: TreeNodeOrNull = this.root;
+    let current: TreeNodeMaybe = this.root;
 
     while (current) {
 
       if (!current.left) {
 
-        retr.push(current.value);
-        current = current.right;
+        retr.push(current.value); // if there is no left child, visit current node
+        current = current.right; // then we go the right branch
 
       } else {
 
-        let subCurrent: TreeNodeOrNull = current.left;
+        // find the right most leaf of root.left node.
+        let pre: TreeNodeMaybe = current.left;
 
-        while (subCurrent.right && subCurrent.right !== current) {
+        // when pre.right == null, it means we go to the right most leaf
+        // when pre.right == current, it means the right most leaf has been visited in the last round
+        while (pre.right && pre.right != current) {
 
-          subCurrent = subCurrent.right;
+          pre = pre.right;
 
         }
-        if (!subCurrent.right) {
+        // this means the pre.right has been set, it's time to go to current node
+        if (pre.right == current) {
 
-          subCurrent.right = current;
-          current = current.left;
+          pre.right = null;
+
+          // means the current node is pointed by left right most child
+          // the left branch has been visited, it's time to push the current node
+          retr.push(current.value);
+          current = current.right;
 
         } else {
 
-          subCurrent.right = null;
-          retr.push(current.value);
-          current = current.right;
+          // the fist time to visit the pre node, make its right child point to current node
+          pre.right = current;
+          current = current.left;
 
         }
 
       }
 
     }
-
     return retr;
 
   }
@@ -152,7 +159,7 @@ export class BinarySearchTree {
   public contains(value: number): boolean {
 
     let retr = false;
-    let current: TreeNodeOrNull = this.root;
+    let current: TreeNodeMaybe = this.root;
 
     while (current) {
 
@@ -176,7 +183,7 @@ export class BinarySearchTree {
 
   }
 
-  public min(current: TreeNodeOrNull = this.root): number {
+  public min(current: TreeNodeMaybe = this.root): number {
 
     let retr;
 
@@ -198,7 +205,7 @@ export class BinarySearchTree {
 
   }
 
-  public max(current: TreeNodeOrNull = this.root): number {
+  public max(current: TreeNodeMaybe = this.root): number {
 
     let retr;
 
@@ -220,10 +227,10 @@ export class BinarySearchTree {
 
   }
 
-  public remove(value: number, current: TreeNodeOrNull = this.root ): void {
+  public remove(value: number, current: TreeNodeMaybe = this.root ): void {
 
     // we start at the root, so the parent is null
-    let parent: TreeNodeOrNull = null;
+    let parent: TreeNodeMaybe = null;
     let parentSide = 'left';
 
     while (current) {
@@ -231,14 +238,12 @@ export class BinarySearchTree {
 
       if (value < current.value) {
 
-
         // set our parent to the current value
         parent = current;
 
         // value is less than current value, so go left
         current = current.left;
         parentSide = 'left';
-
 
       } else if (value > current.value) {
 
@@ -248,7 +253,6 @@ export class BinarySearchTree {
         // value is greater than current value, so go right
         current = current.right;
         parentSide = 'right';
-
 
       } else {
 
@@ -274,66 +278,61 @@ export class BinarySearchTree {
            * minimum value from the right stubtree
            */
 
-        if (current !== this.root && parent) {
+        if (!current.left && !current.right) {
 
-          if (!current.left && !current.right) {
+          // case 1 there are no children easy peasy lemon squeezy
+          if (parent) {
 
-            // case 1 there are no children easy peasy lemon squeezy
             parent[parentSide] = null;
 
-          } else if (!current.left) {
+          } else {
 
-            // no left side only right, so link right
+            this.root = null;
+
+          }
+
+        } else if (!current.left) {
+
+          // no left side only right, so link right
+          if (parent) {
+
             parent[parentSide] = current.right;
 
-          } else if (!current.right) {
+          } else {
 
-            // no right side only left, so link left
+            this.root = current.right;
+
+          }
+
+        } else if (!current.right) {
+
+          // no right side only left, so link left
+          if (parent) {
+
             parent[parentSide] = current.left;
 
           } else {
 
-            /**
-           * case 3 just like real life, if you delete a parent the more kids
-           * that parent has the more complicated things get... in this case we
-           * have two children.  We're gonna have to figure out who goes where.
-           */
-
-            const minVal = this.min(current.right);
-
-            this.remove(minVal, current.right);
-            current.value = minVal;
+            this.root = current.left;
 
           }
 
         } else {
 
-          // assert that it exists because typescript is unhappy
-          const theRoot: TreeNode = this.root as TreeNode;
+          /**
+           * case 3 just like real life, if you delete a parent the more kids
+           * that parent has the more complicated things get... in this case we
+           * have two children.  We're gonna have to figure out who goes where.
+           */
 
-          // no parent, must be root
-          if (!theRoot.left && !theRoot.right) {
+          const minVal = this.min(current.right);
 
-            this.root = null;
-
-          } else if (!theRoot.left) {
-
-            this.root = theRoot.right;
-
-          } else if (!theRoot.right) {
-
-            this.root = theRoot.left;
-
-          } else {
-
-            const minVal = this.min(current.right);
-
-            this.remove(minVal, theRoot.right);
-            theRoot.value = minVal;
-
-          }
+          // little bit of recursion...
+          this.remove(minVal, current.right);
+          current.value = minVal;
 
         }
+
         current = null;
 
       }

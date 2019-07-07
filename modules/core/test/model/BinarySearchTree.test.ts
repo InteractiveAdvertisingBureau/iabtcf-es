@@ -64,6 +64,46 @@ export function run(): void {
 
     });
 
+    it('should handle non sequential numbers', (): void => {
+
+      const bst: BinarySearchTree = new BinarySearchTree();
+      const randAr: number[] = [5, 9, 7, 2, 3];
+
+      randAr.forEach((num: number): void => {
+
+        bst.add(num);
+
+      });
+
+      const expected: number[] = randAr.sort();
+      const actual: number[] = bst.get();
+
+      expect(actual).to.deep.equal(expected);
+
+    });
+
+    it('should not insert duplicates', (): void => {
+
+      const bst: BinarySearchTree = new BinarySearchTree();
+      const randAr: number[] = [1, 2, 2, 3];
+
+      randAr.forEach((num: number): void => {
+
+        bst.add(num);
+
+      });
+
+      // de-dupe the array
+      const arSet: Set<number> = new Set<number>(randAr);
+      // convert back to array and sort it
+      const expected: number[] = Array.from(arSet).sort();
+      const actual: number[] = bst.get();
+
+      expect(actual).to.deep.equal(expected);
+
+    });
+
+
     for (let i = 0; i < 12; i++) {
 
       const numItems = Math.pow(2, i);
