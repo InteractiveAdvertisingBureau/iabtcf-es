@@ -19,7 +19,7 @@
 
 **FIELD**:  = 0
 
-*Defined in [tcstring/VectorEncodingTypeEnum.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/b3164e6/modules/core/src/tcstring/VectorEncodingTypeEnum.ts#L2)*
+*Defined in [tcstring/VectorEncodingTypeEnum.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/7542805/modules/core/src/tcstring/VectorEncodingTypeEnum.ts#L2)*
 
 ___
 <a id="range"></a>
@@ -28,7 +28,7 @@ ___
 
 **RANGE**:  = 1
 
-*Defined in [tcstring/VectorEncodingTypeEnum.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/b3164e6/modules/core/src/tcstring/VectorEncodingTypeEnum.ts#L3)*
+*Defined in [tcstring/VectorEncodingTypeEnum.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/7542805/modules/core/src/tcstring/VectorEncodingTypeEnum.ts#L3)*
 
 ___
 

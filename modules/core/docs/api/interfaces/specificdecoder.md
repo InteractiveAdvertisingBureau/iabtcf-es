@@ -32,7 +32,7 @@
 
 ▸ **decode**(value: *`string`*): [TCModelPropType](../#tcmodelproptype)
 
-*Defined in [tcstring/decoders/SpecificDecoder.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/b3164e6/modules/core/src/tcstring/decoders/SpecificDecoder.ts#L5)*
+*Defined in [tcstring/decoders/SpecificDecoder.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/7542805/modules/core/src/tcstring/decoders/SpecificDecoder.ts#L5)*
 
 **Parameters:**
 

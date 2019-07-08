@@ -31,7 +31,7 @@ Some things to note:
 
 ▸ **decode**(str: *`string`*): `string`
 
-*Defined in [tcstring/Base64Url.ts:168](https://github.com/chrispaterson/iabtcf-es/blob/b3164e6/modules/core/src/tcstring/Base64Url.ts#L168)*
+*Defined in [tcstring/Base64Url.ts:168](https://github.com/chrispaterson/iabtcf-es/blob/7542805/modules/core/src/tcstring/Base64Url.ts#L168)*
 
 decodes a base64url encoded bitfield string
 
@@ -53,7 +53,7 @@ ___
 
 ▸ **encode**(str: *`string`*): `string`
 
-*Defined in [tcstring/Base64Url.ts:118](https://github.com/chrispaterson/iabtcf-es/blob/b3164e6/modules/core/src/tcstring/Base64Url.ts#L118)*
+*Defined in [tcstring/Base64Url.ts:118](https://github.com/chrispaterson/iabtcf-es/blob/7542805/modules/core/src/tcstring/Base64Url.ts#L118)*
 
 encodes an arbitrary-length bitfield string into base64url
 

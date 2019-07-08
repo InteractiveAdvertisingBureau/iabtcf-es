@@ -1,22 +1,24 @@
 import {TCModelError} from '../errors';
-import {PurposeRestrictionTypeEnum} from './enum/PurposeRestrictionTypeEnum';
+import {RestrictionType} from './RestrictionType';
 
 export class PurposeRestriction {
 
   public static availablePurposeIds: Set<number> = new Set();
+  public static hashSeparator: string = '-';
+
   private purposeId_: number;
-  public restrictionType: PurposeRestrictionTypeEnum;
+  public restrictionType: RestrictionType;
 
   /**
    * constructor
    *
    * @param {number} purposeId? - may optionally pass the purposeId into the
    * constructor
-   * @param {PurposeRestrictionTypeEnum} restrictionType? - may
+   * @param {RestrictionType} restrictionType? - may
    * optionally pass the restrictionType into the constructor
    * @return {undefined}
    */
-  public constructor(purposeId?: number, restrictionType?: PurposeRestrictionTypeEnum) {
+  public constructor(purposeId?: number, restrictionType?: RestrictionType) {
 
     if (purposeId !== undefined) {
 
@@ -28,6 +30,33 @@ export class PurposeRestriction {
       this.restrictionType = restrictionType;
 
     }
+
+  }
+  public static unHash(hash: string): PurposeRestriction {
+
+    const splitUp: string[] = hash.split(this.hashSeparator);
+    const purpRestriction: PurposeRestriction = new PurposeRestriction();
+
+    if (splitUp.length !== 2) {
+
+      throw new TCModelError('hash', hash);
+
+    }
+
+    purpRestriction.purposeId = parseInt(splitUp[0], 10);
+    purpRestriction.restrictionType = parseInt(splitUp[1], 10);
+
+    return purpRestriction;
+
+  }
+  public get hash(): string {
+
+    if (!this.isValid()) {
+
+      throw new Error('cannot hash invalid PurposeRestriction');
+
+    }
+    return `${this.purposeId}${PurposeRestriction.hashSeparator}${this.restrictionType}`;
 
   }
 

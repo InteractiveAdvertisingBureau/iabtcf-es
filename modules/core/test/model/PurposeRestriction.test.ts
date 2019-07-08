@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {PurposeRestriction} from '../../src/model/PurposeRestriction';
-import {PurposeRestrictionTypeEnum} from '../../src/model/enum/PurposeRestrictionTypeEnum';
+import {RestrictionType} from '../../src/model/RestrictionType';
 
 export function run(): void {
 
@@ -79,14 +79,14 @@ export function run(): void {
 
         const purposeRestriction = new PurposeRestriction();
 
-        purposeRestriction.restrictionType = PurposeRestrictionTypeEnum.NOT_ALLOWED;
-        expect(purposeRestriction.restrictionType).to.equal(PurposeRestrictionTypeEnum.NOT_ALLOWED);
+        purposeRestriction.restrictionType = RestrictionType.NOT_ALLOWED;
+        expect(purposeRestriction.restrictionType).to.equal(RestrictionType.NOT_ALLOWED);
 
-        purposeRestriction.restrictionType = PurposeRestrictionTypeEnum.REQUIRE_CONSENT;
-        expect(purposeRestriction.restrictionType).to.equal(PurposeRestrictionTypeEnum.REQUIRE_CONSENT);
+        purposeRestriction.restrictionType = RestrictionType.REQUIRE_CONSENT;
+        expect(purposeRestriction.restrictionType).to.equal(RestrictionType.REQUIRE_CONSENT);
 
-        purposeRestriction.restrictionType = PurposeRestrictionTypeEnum.REQUIRE_LI;
-        expect(purposeRestriction.restrictionType).to.equal(PurposeRestrictionTypeEnum.REQUIRE_LI);
+        purposeRestriction.restrictionType = RestrictionType.REQUIRE_LI;
+        expect(purposeRestriction.restrictionType).to.equal(RestrictionType.REQUIRE_LI);
 
       });
 
@@ -100,11 +100,77 @@ export function run(): void {
 
         PurposeRestriction.availablePurposeIds.add(purposeId);
 
-        const purposeRestriction = new PurposeRestriction(purposeId, PurposeRestrictionTypeEnum.NOT_ALLOWED);
+        const purposeRestriction = new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
 
         expect(purposeRestriction.isValid()).to.be.true;
         expect(purposeRestriction.purposeId).to.equal(purposeId);
-        expect(purposeRestriction.restrictionType).to.equal(PurposeRestrictionTypeEnum.NOT_ALLOWED);
+        expect(purposeRestriction.restrictionType).to.equal(RestrictionType.NOT_ALLOWED);
+
+      });
+
+    });
+
+    describe('hashing', (): void => {
+
+      it('should produce a hash', (): void => {
+
+        const purposeId = 2;
+
+        PurposeRestriction.availablePurposeIds.add(purposeId);
+
+        const purposeRestriction = new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
+        const expected = `${purposeId}${PurposeRestriction.hashSeparator}${RestrictionType.NOT_ALLOWED}`;
+
+        expect(purposeRestriction.hash).to.equal(expected);
+
+      });
+
+      it('should error if it\'s invalid', (): void => {
+
+        const purposeId = 2;
+
+        PurposeRestriction.availablePurposeIds.add(purposeId);
+
+        const purposeRestriction = new PurposeRestriction(purposeId);
+        let hash = '';
+
+        expect((): void => {
+
+          hash = purposeRestriction.hash;
+
+        }).to.throw();
+
+        expect(hash).to.be.empty;
+
+      });
+
+      it('should unHash properly', (): void => {
+
+        const purposeId = 2;
+
+        PurposeRestriction.availablePurposeIds.add(purposeId);
+
+        const purposeRestriction = new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
+        const hash = `${purposeId}${PurposeRestriction.hashSeparator}${RestrictionType.NOT_ALLOWED}`;
+
+        expect(purposeRestriction.isSameAs(PurposeRestriction.unHash(hash))).to.be.true;
+
+      });
+
+      it('unHash should throw an error with an improper hash', (): void => {
+
+        const purposeId = 2;
+
+        PurposeRestriction.availablePurposeIds.add(purposeId);
+
+        const hash = `${purposeId}${RestrictionType.NOT_ALLOWED}`;
+
+        expect((): void => {
+
+          // eslint-disable-next-line
+          const unhashed: PurposeRestriction = PurposeRestriction.unHash(hash);
+
+        }).to.throw();
 
       });
 
