@@ -118,5 +118,10 @@ export class PurposeRestrictionVector {
     return this.map.size === 0;
 
   };
+  public get numRestrictions(): number {
+
+    return this.map.size;
+
+  }
 
 }

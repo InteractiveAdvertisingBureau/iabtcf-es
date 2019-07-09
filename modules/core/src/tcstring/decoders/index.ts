@@ -4,6 +4,6 @@ export * from './BooleanDecoder';
 export * from './DateDecoder';
 export * from './VendorVectorDecoder';
 export * from './FixedVectorDecoder';
-// export * from './PublisherRestrictionsDecoder';
+export * from './PurposeRestrictionsDecoder';
 export * from './SpecificDecoder';
 export * from './VariableLengthSpecificDecoder';

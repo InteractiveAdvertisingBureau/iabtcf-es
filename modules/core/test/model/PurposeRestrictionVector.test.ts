@@ -99,6 +99,7 @@ export function run(): void {
 
       // may not be in the same order
       expect(result).to.deep.equal(Array.from(restrictions).sort());
+      expect(result.length).to.equal(restrictions.size);
 
 
     });

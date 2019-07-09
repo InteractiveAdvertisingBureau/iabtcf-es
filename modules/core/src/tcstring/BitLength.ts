@@ -21,6 +21,7 @@ class BitLength {
   public static readonly maxId: number = 16;
   public static readonly purposeRestrictionId: number = 6;
   public static readonly purposeRestrictionType: number = 2;
+  public static readonly purposeRestrictionNumRestrictions: number = 12;
 
 }
 

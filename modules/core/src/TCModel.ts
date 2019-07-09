@@ -1,10 +1,10 @@
 import {Vector} from './model/Vector';
-// import {PurposeRestriction} from './model/PurposeRestriction';
+import {PurposeRestrictionVector} from './model/PurposeRestrictionVector';
 import {GVL} from './GVL';
 import {TCModelError} from './errors';
 import {GVLMap, GVLMapItem} from './model/GVLBase';
 
-export type TCModelPropType = number | Date | string | boolean | Vector;
+export type TCModelPropType = number | Date | string | boolean | Vector | PurposeRestrictionVector;
 
 export class TCModel {
 
@@ -16,6 +16,8 @@ export class TCModel {
   private policyVersion_: number = 2;
   private isServiceSpecific_: boolean = false;
   private useNonStandardStacks_: boolean = false;
+  private purposeOneDisclosure_: boolean = false;
+  private publisherCountryCode_: string = 'AA';
 
 
   // needs some settin' (no default)
@@ -23,7 +25,6 @@ export class TCModel {
   private cmpVersion_: number;
   private consentLanguage_: string;
   private gvl_: GVL;
-
 
   // automagically set when created, updated and gvl set
   private created_: Date;
@@ -92,11 +93,7 @@ export class TCModel {
    * const hasConsent = tcModel.vendorLegitimateInterest.get(2222);
    * ```
    */
-  /**
-   * TODO: add an event for when something is added because we need to force
-   * service specific if any purpose restrictions are created
-   */
-  public purposeRestrictions: Vector = new Vector();
+  public readonly purposeRestrictions: PurposeRestrictionVector = new PurposeRestrictionVector();
 
   /**
    * Constructs the TCModel. Passing a [[GVL]] is optional when constructing
@@ -302,6 +299,7 @@ export class TCModel {
     }
 
   }
+
   /**
    * @return {string} - lowercase [two-letter ISO 639-1 language
    * code](http://www.loc.gov/standards/iso639-2/php/code_list.php) in which
@@ -310,6 +308,37 @@ export class TCModel {
   public get consentLanguage(): string {
 
     return this.consentLanguage_;
+
+  }
+
+  /**
+   * @return {string} - uppercase [two-letter ISO 3166-1 alpha-2 country
+   * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the publisher,
+   * determined by the CMP-settings of the publisher.
+   */
+  public get publisherCountryCode(): string {
+
+    return this.publisherCountryCode_;
+
+  }
+
+  /**
+   * @param {string} countryCode - uppercase [two-letter ISO 3166-1 alpha-2 country
+   * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the publisher,
+   * determined by the CMP-settings of the publisher.
+   * @return {undefined}
+   */
+  public set publisherCountryCode(countryCode: string) {
+
+    if (/^([A-z]){2}$/.test(countryCode)) {
+
+      this.publisherCountryCode_ = countryCode.toUpperCase();
+
+    } else {
+
+      throw new TCModelError('publisherCountryCode', countryCode);
+
+    }
 
   }
 
@@ -451,6 +480,38 @@ export class TCModel {
 
   };
 
+  /**
+   * @param {boolean} bool - `false` There is no special Purpose 1 status.
+   * Purpose 1 was disclosed normally (consent) as expected by Policy.  `true`
+   * Purpose 1 not disclosed at all. CMPs use PublisherCC to indicate the
+   * publisher’s country of establishment to help Vendors determine whether the
+   * vendor requires Purpose 1 consent. In global scope TC strings, this field
+   * must always have a value of `false`. When a CMP encounters a global scope
+   * string with `purposeOneDisclosure=true` then that string should be
+   * considered invalid and the CMP must re-establish transparency and consent.
+   */
+  public set purposeOneDisclosure(bool: boolean) {
+
+    this.purposeOneDisclosure_ = bool;
+
+  };
+
+  /**
+   * @return {boolean} bool - `false` There is no special Purpose 1 status.
+   * Purpose 1 was disclosed normally (consent) as expected by Policy.  `true`
+   * Purpose 1 not disclosed at all. CMPs use PublisherCC to indicate the
+   * publisher’s country of establishment to help Vendors determine whether the
+   * vendor requires Purpose 1 consent. In global scope TC strings, this field
+   * must always have a value of `false`. When a CMP encounters a global scope
+   * string with `purposeOneDisclosure=true` then that string should be
+   * considered invalid and the CMP must re-establish transparency and consent.
+   */
+  public get purposeOneDisclosure(): boolean {
+
+    return this.purposeOneDisclosure_;
+
+  };
+
   // This is a type check I need it to be an 'any'
   // eslint-disable-next-line
   private isGVLMapItem(obj: any): obj is GVLMapItem {
@@ -460,9 +521,9 @@ export class TCModel {
   }
 
   /**
-   * setAllOnVector - sets all items on the vector
+   * sets all items on the vector
    *
-   * @param {GVLMap<T>} gvlMap - this will be one of the maps defined in the [[GVLMap]]
+   * @param {GVLMap} gvlMap - this will be one of the maps defined in the [[GVLMap]]
    * @param {Vector)} vector - vector to affect
    * @return {void}
    */
@@ -494,7 +555,7 @@ export class TCModel {
   /**
    * unsetAllOnVector - unsets all items on the vector
    *
-   * @param {GVLMap<T>} gvlMap - this will be one of the maps defined in the [[GVLMap]]
+   * @param {GVLMap} gvlMap - this will be one of the maps defined in the [[GVLMap]]
    * @param {Vector)} vector - vector to affect
    * @return {void}
    */
@@ -714,6 +775,8 @@ export class TCModel {
       && this.cmpId !== undefined
       && this.cmpVersion !== undefined
       && this.consentLanguage !== undefined
+      && this.publisherCountryCode !== undefined
+      && this.purposeOneDisclosure !== undefined
       && this.consentScreen !== undefined
       && this.created !== undefined
       && this.gvl !== undefined

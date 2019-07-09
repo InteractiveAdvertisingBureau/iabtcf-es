@@ -1,7 +1,7 @@
 import * as encoders from './encoders';
 import * as decoders from './decoders';
 
-class Encodings {
+export class Encodings {
 
   /**
    * The outer array describes index is encoding version - 1 (since it's
@@ -43,9 +43,11 @@ class Encodings {
       'specialFeatureOptIns',
       'purposeConsents',
       'purposeLITransparency',
+      'purposeOneDisclosure',
+      'publisherCountryCode',
       'vendorConsents',
       'vendorLegitimateInterest',
-      //      'publisherRestrictions',
+      'purposeRestrictions',
     ],
   ];
 
@@ -64,10 +66,11 @@ class Encodings {
     specialFeatureOptIns: encoders.FixedVectorEncoder,
     purposeConsents: encoders.FixedVectorEncoder,
     purposeLITransparency: encoders.FixedVectorEncoder,
+    purposeOneDisclosure: encoders.BooleanEncoder,
+    publisherCountryCode: encoders.LangEncoder,
     vendorConsents: encoders.VendorVectorEncoder,
     vendorLegitimateInterest: encoders.VendorVectorEncoder,
-    //    publisherRestrictions: PublisherRestrictionsEncoder,
-
+    purposeRestrictions: encoders.PurposeRestrictionsEncoder,
   };
 
   public static readonly decoders: object = {
@@ -85,12 +88,11 @@ class Encodings {
     specialFeatureOptIns: decoders.FixedVectorDecoder,
     purposeConsents: decoders.FixedVectorDecoder,
     purposeLITransparency: decoders.FixedVectorDecoder,
+    purposeOneDisclosure: decoders.BooleanDecoder,
+    publisherCountryCode: decoders.LangDecoder,
     vendorConsents: decoders.VendorVectorDecoder,
     vendorLegitimateInterest: decoders.VendorVectorDecoder,
-    //    publisherRestrictions: PublisherRestrictionsDecoder,
-
+    purposeRestrictions: decoders.PurposeRestrictionsDecoder,
   };
 
 }
-
-export {Encodings};
