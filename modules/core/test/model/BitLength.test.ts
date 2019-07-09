@@ -23,11 +23,11 @@ export function run(): void {
       expect(BitLength.purposeConsents).to.equal(24);
       expect(BitLength.purposeLITransparency).to.equal(24);
       expect(BitLength.vendorId).to.equal(16);
-      expect(BitLength.rangeEncodingNumEntries).to.equal(12);
-      expect(BitLength.rangeEncodingDefaultConsent).to.equal(1);
+      expect(BitLength.purposeId).to.equal(6);
+      expect(BitLength.numEntries).to.equal(12);
       expect(BitLength.maxId).to.equal(16);
-      expect(BitLength.purposeRestrictionId).to.equal(6);
-      expect(BitLength.purposeRestrictionType).to.equal(2);
+      expect(BitLength.restrictionType).to.equal(2);
+      expect(BitLength.numRestrictions).to.equal(12);
 
     });
 

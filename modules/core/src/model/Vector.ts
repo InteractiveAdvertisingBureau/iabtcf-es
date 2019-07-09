@@ -120,6 +120,12 @@ class Vector {
     }
 
   }
+  public empty(): void {
+
+    this.set_ = new Set<number>();
+
+  }
+
   /**
    * forEach - to traverse from id=1 to id=maxId in a sequential non-sparse manner
    *

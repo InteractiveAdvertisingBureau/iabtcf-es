@@ -16,12 +16,11 @@ class BitLength {
   public static readonly purposeConsents: number = 24;
   public static readonly purposeLITransparency: number = 24;
   public static readonly vendorId: number = 16;
-  public static readonly rangeEncodingNumEntries: number = 12;
-  public static readonly rangeEncodingDefaultConsent: number = 1;
+  public static readonly purposeId: number = 6;
+  public static readonly numEntries: number = 12;
   public static readonly maxId: number = 16;
-  public static readonly purposeRestrictionId: number = 6;
-  public static readonly purposeRestrictionType: number = 2;
-  public static readonly purposeRestrictionNumRestrictions: number = 12;
+  public static readonly restrictionType: number = 2;
+  public static readonly numRestrictions: number = 12;
 
 }
 

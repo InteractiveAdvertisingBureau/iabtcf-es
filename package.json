@@ -1,11 +1,13 @@
 {
   "name": "iabtcf",
-  "description":"Official compliant tool suite for implementing the iab. Transparency and Consent Framework (TCF).",
-  "private":true,
+  "description": "Official compliant tool suite for implementing the iab. Transparency and Consent Framework (TCF).",
+  "private": true,
   "scripts": {
-    "test": "lerna run test",
-    "deploy":"lerna publish from-package",
-    "build": "lerna run build"
+    "test": "nyc ./node_modules/.bin/ava -v",
+    "deploy": "lerna publish from-package",
+    "build": "lerna run build",
+    "report-coverage": "lerna run report-coverage",
+    "standard": "standard index.js"
   },
   "keywords": [
     "interactive",
@@ -44,9 +46,19 @@
     "eslint-config-google": "^0.13.0",
     "lerna": "^3.14.1",
     "mocha": "^6.1.4",
-    "nyc": "^14.1.1",
+    "nyc": "^10.0.0",
     "source-map-support": "^0.5.12",
     "ts-node": "^8.1.0",
-    "typescript": "^3.4.0"
+    "typescript": "^3.4.0",
+    "ava": "^0.16.0",
+    "co-exec": "^1.0",
+    "codecov": "^1.0.1",
+    "ghooks": "^1.2.4",
+    "standard": "^8.4.0"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run standard"
+    }
   }
 }

@@ -18,14 +18,14 @@ export class PurposeRestrictionsEncoder implements SpecificEncoder {
       const boolEnc: BooleanEncoder = new BooleanEncoder();
 
       // start with the number of restrictions
-      bitString += intEnc.encode(vector.numRestrictions, BitLength.purposeRestrictionNumRestrictions);
+      bitString += intEnc.encode(vector.numRestrictions, BitLength.numRestrictions);
 
       // create each restriction group
       vector.getAllRestrictions().forEach((purpRestriction: PurposeRestriction): void => {
 
         // every restriction group has the purposeId and the restrictionType;
-        bitString += intEnc.encode(purpRestriction.purposeId, BitLength.purposeRestrictionId);
-        bitString += intEnc.encode(purpRestriction.restrictionType, BitLength.purposeRestrictionType);
+        bitString += intEnc.encode(purpRestriction.purposeId, BitLength.purposeId);
+        bitString += intEnc.encode(purpRestriction.restrictionType, BitLength.restrictionType);
 
         // now get all the vendors under that restriction
         const vendors: number[] = vector.getVendors(purpRestriction);
@@ -79,7 +79,7 @@ export class PurposeRestrictionsEncoder implements SpecificEncoder {
          * now that  the range encoding is built, encode the number of ranges
          * and then append the range field to the bitString.
          */
-        bitString += intEnc.encode(numEntries, BitLength.rangeEncodingNumEntries);
+        bitString += intEnc.encode(numEntries, BitLength.numEntries);
         bitString += rangeField;
 
       });

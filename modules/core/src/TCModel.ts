@@ -553,45 +553,13 @@ export class TCModel {
   }
 
   /**
-   * unsetAllOnVector - unsets all items on the vector
-   *
-   * @param {GVLMap} gvlMap - this will be one of the maps defined in the [[GVLMap]]
-   * @param {Vector)} vector - vector to affect
-   * @return {void}
-   */
-  private unsetAllOnVector<T>(gvlMap: GVLMap<T>, vector: Vector): void {
-
-    if (!this.gvl) {
-
-      throw new TCModelError('unsetAll', '' + this.gvl, 'No GVL!');
-
-    }
-
-    for (const id in gvlMap) {
-
-      if (gvlMap.hasOwnProperty(id)) {
-
-        const pathItem = gvlMap[id];
-
-        if (this.isGVLMapItem(pathItem)) {
-
-          vector.unset(pathItem.id);
-
-        }
-
-      }
-
-    }
-
-  }
-
-  /**
    * setAllVendorConsents - sets all vendors on the GVL Consent (true)
    *
    * @return {void}
    */
   public setAllVendorConsents(): void {
 
+    this.vendorConsents.empty();
     this.setAllOnVector(this.gvl.vendors, this.vendorConsents);
 
   }
@@ -603,7 +571,7 @@ export class TCModel {
    */
   public unsetAllVendorConsents(): void {
 
-    this.unsetAllOnVector(this.gvl.vendors, this.vendorConsents);
+    this.vendorConsents.empty();
 
   }
 
@@ -614,6 +582,7 @@ export class TCModel {
    */
   public setAllVendorLegitimateInterest(): void {
 
+    this.vendorLegitimateInterest.empty();
     this.setAllOnVector(this.gvl.vendors, this.vendorLegitimateInterest);
 
   }
@@ -625,7 +594,7 @@ export class TCModel {
    */
   public unsetAllVendorLegitimateInterest(): void {
 
-    this.unsetAllOnVector(this.gvl.vendors, this.vendorLegitimateInterest);
+    this.vendorLegitimateInterest.empty();
 
   }
 
@@ -636,6 +605,7 @@ export class TCModel {
    */
   public setAllPurposeConsents(): void {
 
+    this.purposeConsents.empty();
     this.setAllOnVector(this.gvl.purposes, this.purposeConsents);
 
   }
@@ -647,7 +617,7 @@ export class TCModel {
    */
   public unsetAllPurposeConsents(): void {
 
-    this.unsetAllOnVector(this.gvl.purposes, this.purposeConsents);
+    this.purposeConsents.empty();
 
   }
 
@@ -658,6 +628,7 @@ export class TCModel {
    */
   public setAllPurposeLITransparency(): void {
 
+    this.purposeLITransparency.empty();
     this.setAllOnVector(this.gvl.purposes, this.purposeLITransparency);
 
   }
@@ -669,7 +640,7 @@ export class TCModel {
    */
   public unsetAllPurposeLITransparency(): void {
 
-    this.unsetAllOnVector(this.gvl.purposes, this.purposeLITransparency);
+    this.purposeLITransparency.empty();
 
   }
 
@@ -680,6 +651,7 @@ export class TCModel {
    */
   public setAllSpecialFeatureOptIns(): void {
 
+    this.specialFeatureOptIns.empty();
     this.setAllOnVector(this.gvl.specialFeatures, this.specialFeatureOptIns);
 
   }
@@ -691,7 +663,7 @@ export class TCModel {
    */
   public unsetAllSpecialFeatureOptIns(): void {
 
-    this.unsetAllOnVector(this.gvl.specialFeatures, this.specialFeatureOptIns);
+    this.specialFeatureOptIns.empty();
 
   }
 
@@ -707,6 +679,8 @@ export class TCModel {
    * @return {void}
    */
   public setAll(): void {
+
+    this.unsetAll();
 
     this.setAllVendorConsents();
     this.setAllPurposeLITransparency();

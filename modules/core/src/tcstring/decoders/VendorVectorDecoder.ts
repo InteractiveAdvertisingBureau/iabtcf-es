@@ -47,9 +47,9 @@ export class VendorVectorDecoder implements VariableLengthSpecificDecoder {
 
       }
 
-      const numEntries: number = intDecoder.decode(value.substr(this.index, BitLength.rangeEncodingNumEntries));
+      const numEntries: number = intDecoder.decode(value.substr(this.index, BitLength.numEntries));
 
-      this.index += BitLength.rangeEncodingNumEntries;
+      this.index += BitLength.numEntries;
 
       // loop through each group of entries
       for (let i = 0; i < numEntries; i ++) {

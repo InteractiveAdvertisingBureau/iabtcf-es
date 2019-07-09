@@ -65,7 +65,7 @@ export function run(): void {
       expect(result.substr(BitLength.maxId, 1)).to.equal('1');
       const range = result.substr(headerLength);
 
-      expect(range.length).to.equal(1 + BitLength.rangeEncodingNumEntries + 1 + 2* BitLength.vendorId);
+      expect(range.length).to.equal(1 + BitLength.numEntries + 1 + 2* BitLength.vendorId);
 
       let index = 0;
 
@@ -76,10 +76,10 @@ export function run(): void {
       index += 1;
 
       // should only be one entry
-      expect(range.substr(index, BitLength.rangeEncodingNumEntries))
-        .to.equal(pad('1', BitLength.rangeEncodingNumEntries));
+      expect(range.substr(index, BitLength.numEntries))
+        .to.equal(pad('1', BitLength.numEntries));
 
-      index += BitLength.rangeEncodingNumEntries;
+      index += BitLength.numEntries;
 
       // each range
 
@@ -133,7 +133,7 @@ export function run(): void {
 
       const result: string = vvEnc.encode(vector);
       const range = result.substr(headerLength);
-      const rangeLength: number = 1 + BitLength.rangeEncodingNumEntries + 2*(1 + 2* BitLength.vendorId);
+      const rangeLength: number = 1 + BitLength.numEntries + 2*(1 + 2* BitLength.vendorId);
       let index = 0;
 
       // check overall legnths
@@ -159,7 +159,7 @@ export function run(): void {
       expect(range.substr(0, 1), 'default range encoding should be 0').to.equal('0');
       index += 1;
 
-      const rangeEntries: number = BitLength.rangeEncodingNumEntries;
+      const rangeEntries: number = BitLength.numEntries;
       const expectedNumEntries: string = pad((2).toString(2), rangeEntries);
 
       expect(range.substr(index, rangeEntries), `numEntries should be ${expectedNumEntries}`)

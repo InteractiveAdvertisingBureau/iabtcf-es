@@ -101,7 +101,7 @@ export class VendorVectorEncoder implements SpecificEncoder {
     let rangeString = this.boolEnc.encode(VendorVectorEncoder.RANGE_DEFAULT);
 
     // describe the number of entries to follow
-    rangeString += this.intEncoder.encode(numEntries, BitLength.rangeEncodingNumEntries);
+    rangeString += this.intEncoder.encode(numEntries, BitLength.numEntries);
 
 
     // each range
@@ -132,7 +132,7 @@ export class VendorVectorEncoder implements SpecificEncoder {
   private rangeIsSmaller(): boolean {
 
     // the one is for the default consent value
-    let rLength = BitLength.rangeEncodingDefaultConsent + BitLength.rangeEncodingNumEntries;
+    let rLength = 1 + BitLength.numEntries;
 
     this.ranges.forEach((range: number[]): void => {
 
