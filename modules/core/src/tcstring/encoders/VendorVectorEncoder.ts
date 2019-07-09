@@ -1,5 +1,5 @@
 import {SpecificEncoder} from './SpecificEncoder';
-import {VectorEncodingTypeEnum} from '../VectorEncodingTypeEnum';
+import {VectorEncodingType} from '../VectorEncodingType';
 import {IntEncoder} from './IntEncoder';
 import {BooleanEncoder} from './BooleanEncoder';
 import {BitLength} from '../BitLength';
@@ -67,9 +67,9 @@ export class VendorVectorEncoder implements SpecificEncoder {
     });
 
 
-    const encodingType: VectorEncodingTypeEnum = this.rangeIsSmaller()
-      ? VectorEncodingTypeEnum.RANGE
-      : VectorEncodingTypeEnum.FIELD;
+    const encodingType: VectorEncodingType = this.rangeIsSmaller()
+      ? VectorEncodingType.RANGE
+      : VectorEncodingType.FIELD;
 
     // maxId
     bitString = this.intEncoder.encode(this.maxId, BitLength.maxId);
@@ -77,7 +77,7 @@ export class VendorVectorEncoder implements SpecificEncoder {
     // encoding type
     bitString += encodingType + '';
 
-    if (encodingType === VectorEncodingTypeEnum.RANGE) {
+    if (encodingType === VectorEncodingType.RANGE) {
 
       bitString += this.buildRangeEncoding();
 

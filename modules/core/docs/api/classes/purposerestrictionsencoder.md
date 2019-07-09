@@ -26,7 +26,7 @@
 
 ▸ **encode**(vector: *[PurposeRestrictionVector](purposerestrictionvector.md)*): `string`
 
-*Defined in [tcstring/encoders/PurposeRestrictionsEncoder.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/583c914/modules/core/src/tcstring/encoders/PurposeRestrictionsEncoder.ts#L10)*
+*Defined in [tcstring/encoders/PurposeRestrictionsEncoder.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/tcstring/encoders/PurposeRestrictionsEncoder.ts#L10)*
 
 **Parameters:**
 

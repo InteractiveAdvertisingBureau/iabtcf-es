@@ -29,7 +29,7 @@
 
 **● consentable**: *`undefined` \| `false` \| `true`*
 
-*Defined in [model/GVLBase.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/583c914/modules/core/src/model/GVLBase.ts#L22)*
+*Defined in [model/GVLBase.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/model/GVLBase.ts#L22)*
 
 ___
 <a id="description"></a>
@@ -38,7 +38,7 @@ ___
 
 **● description**: *`string`*
 
-*Defined in [model/GVLBase.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/583c914/modules/core/src/model/GVLBase.ts#L16)*
+*Defined in [model/GVLBase.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/model/GVLBase.ts#L16)*
 
 ___
 <a id="descriptionlegal"></a>
@@ -47,7 +47,7 @@ ___
 
 **● descriptionLegal**: *`string`*
 
-*Defined in [model/GVLBase.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/583c914/modules/core/src/model/GVLBase.ts#L17)*
+*Defined in [model/GVLBase.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/model/GVLBase.ts#L17)*
 
 ___
 <a id="id"></a>
@@ -58,7 +58,7 @@ ___
 
 *Inherited from [GVLMapItem](gvlmapitem.md).[id](gvlmapitem.md#id)*
 
-*Defined in [model/GVLBase.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/583c914/modules/core/src/model/GVLBase.ts#L6)*
+*Defined in [model/GVLBase.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/model/GVLBase.ts#L6)*
 
 ___
 <a id="name"></a>
@@ -69,7 +69,7 @@ ___
 
 *Inherited from [GVLMapItem](gvlmapitem.md).[name](gvlmapitem.md#name)*
 
-*Defined in [model/GVLBase.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/583c914/modules/core/src/model/GVLBase.ts#L7)*
+*Defined in [model/GVLBase.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/model/GVLBase.ts#L7)*
 
 ___
 <a id="righttoobject"></a>
@@ -78,7 +78,7 @@ ___
 
 **● rightToObject**: *`undefined` \| `false` \| `true`*
 
-*Defined in [model/GVLBase.ts:27](https://github.com/chrispaterson/iabtcf-es/blob/583c914/modules/core/src/model/GVLBase.ts#L27)*
+*Defined in [model/GVLBase.ts:27](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/model/GVLBase.ts#L27)*
 
 default=true false means CMPs should never afford users the means to exercise a right to object
 

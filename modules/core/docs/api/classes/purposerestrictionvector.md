@@ -34,7 +34,7 @@
 
 **get numRestrictions**(): `number`
 
-*Defined in [model/PurposeRestrictionVector.ts:121](https://github.com/chrispaterson/iabtcf-es/blob/583c914/modules/core/src/model/PurposeRestrictionVector.ts#L121)*
+*Defined in [model/PurposeRestrictionVector.ts:121](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/model/PurposeRestrictionVector.ts#L121)*
 
 **Returns:** `number`
 
@@ -48,7 +48,7 @@ ___
 
 ▸ **add**(vendorId: *`number`*, purposeRestriction: *[PurposeRestriction](purposerestriction.md)*): `void`
 
-*Defined in [model/PurposeRestrictionVector.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/583c914/modules/core/src/model/PurposeRestrictionVector.ts#L18)*
+*Defined in [model/PurposeRestrictionVector.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/model/PurposeRestrictionVector.ts#L18)*
 
 **Parameters:**
 
@@ -66,7 +66,7 @@ ___
 
 ▸ **forEach**(purposeRestriction: *[PurposeRestriction](purposerestriction.md)*, callback: *`function`*): `void`
 
-*Defined in [model/PurposeRestrictionVector.ts:88](https://github.com/chrispaterson/iabtcf-es/blob/583c914/modules/core/src/model/PurposeRestrictionVector.ts#L88)*
+*Defined in [model/PurposeRestrictionVector.ts:88](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/model/PurposeRestrictionVector.ts#L88)*
 
 **Parameters:**
 
@@ -84,7 +84,7 @@ ___
 
 ▸ **getAllRestrictions**(): [PurposeRestriction](purposerestriction.md)[]
 
-*Defined in [model/PurposeRestrictionVector.ts:58](https://github.com/chrispaterson/iabtcf-es/blob/583c914/modules/core/src/model/PurposeRestrictionVector.ts#L58)*
+*Defined in [model/PurposeRestrictionVector.ts:58](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/model/PurposeRestrictionVector.ts#L58)*
 
 **Returns:** [PurposeRestriction](purposerestriction.md)[]
 
@@ -95,7 +95,7 @@ ___
 
 ▸ **getMaxVendor**(purposeRestriction: *[PurposeRestriction](purposerestriction.md)*): `number` \| `undefined`
 
-*Defined in [model/PurposeRestrictionVector.ts:72](https://github.com/chrispaterson/iabtcf-es/blob/583c914/modules/core/src/model/PurposeRestrictionVector.ts#L72)*
+*Defined in [model/PurposeRestrictionVector.ts:72](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/model/PurposeRestrictionVector.ts#L72)*
 
 **Parameters:**
 
@@ -112,7 +112,7 @@ ___
 
 ▸ **getMinVendor**(purposeRestriction: *[PurposeRestriction](purposerestriction.md)*): `number` \| `undefined`
 
-*Defined in [model/PurposeRestrictionVector.ts:80](https://github.com/chrispaterson/iabtcf-es/blob/583c914/modules/core/src/model/PurposeRestrictionVector.ts#L80)*
+*Defined in [model/PurposeRestrictionVector.ts:80](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/model/PurposeRestrictionVector.ts#L80)*
 
 **Parameters:**
 
@@ -129,7 +129,7 @@ ___
 
 ▸ **getRestrictions**(vendorId: *`number`*): [PurposeRestriction](purposerestriction.md)[]
 
-*Defined in [model/PurposeRestrictionVector.ts:40](https://github.com/chrispaterson/iabtcf-es/blob/583c914/modules/core/src/model/PurposeRestrictionVector.ts#L40)*
+*Defined in [model/PurposeRestrictionVector.ts:40](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/model/PurposeRestrictionVector.ts#L40)*
 
 **Parameters:**
 
@@ -146,7 +146,7 @@ ___
 
 ▸ **getVendors**(purposeRestriction: *[PurposeRestriction](purposerestriction.md)*): `number`[]
 
-*Defined in [model/PurposeRestrictionVector.ts:32](https://github.com/chrispaterson/iabtcf-es/blob/583c914/modules/core/src/model/PurposeRestrictionVector.ts#L32)*
+*Defined in [model/PurposeRestrictionVector.ts:32](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/model/PurposeRestrictionVector.ts#L32)*
 
 **Parameters:**
 
@@ -163,7 +163,7 @@ ___
 
 ▸ **isEmpty**(): `boolean`
 
-*Defined in [model/PurposeRestrictionVector.ts:116](https://github.com/chrispaterson/iabtcf-es/blob/583c914/modules/core/src/model/PurposeRestrictionVector.ts#L116)*
+*Defined in [model/PurposeRestrictionVector.ts:116](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/model/PurposeRestrictionVector.ts#L116)*
 
 **Returns:** `boolean`
 
@@ -174,7 +174,7 @@ ___
 
 ▸ **remove**(vendorId: *`number`*, purposeRestriction: *[PurposeRestriction](purposerestriction.md)*): `void`
 
-*Defined in [model/PurposeRestrictionVector.ts:97](https://github.com/chrispaterson/iabtcf-es/blob/583c914/modules/core/src/model/PurposeRestrictionVector.ts#L97)*
+*Defined in [model/PurposeRestrictionVector.ts:97](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/model/PurposeRestrictionVector.ts#L97)*
 
 **Parameters:**
 

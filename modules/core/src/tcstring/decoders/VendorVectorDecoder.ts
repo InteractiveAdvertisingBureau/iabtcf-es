@@ -1,5 +1,5 @@
 import {VariableLengthSpecificDecoder} from './VariableLengthSpecificDecoder';
-import {VectorEncodingTypeEnum} from '../VectorEncodingTypeEnum';
+import {VectorEncodingType} from '../VectorEncodingType';
 import {IntDecoder} from './IntDecoder';
 import {BooleanDecoder} from './BooleanDecoder';
 import {FixedVectorDecoder} from './FixedVectorDecoder';
@@ -22,14 +22,14 @@ export class VendorVectorDecoder implements VariableLengthSpecificDecoder {
 
     this.index += BitLength.maxId;
 
-    const encodingType: VectorEncodingTypeEnum = intDecoder.decode(value.charAt(this.index));
+    const encodingType: VectorEncodingType = intDecoder.decode(value.charAt(this.index));
 
     this.index += 1;
 
     /**
      * Range is handled in batches so we'll need a different decoding scheme
      */
-    if (encodingType === VectorEncodingTypeEnum.RANGE) {
+    if (encodingType === VectorEncodingType.RANGE) {
 
       const defaultValue: boolean = boolDecoder.decode(value.charAt(this.index));
 
