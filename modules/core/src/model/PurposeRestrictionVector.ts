@@ -4,8 +4,20 @@ export class PurposeRestrictionVector {
 
   /**
    * a map indexed by a string which will be a 'hash' of the purpose and
-   * restriction type.  The number array will be the ordered vendor ids that
-   * are restricted
+   * restriction type.
+   *
+   * You may be wondering, why would we use a data structure like a
+   * BinarySearchTree to store the vendors?  What's that, you don't care? Well,
+   * I'll tell you anyway!  In the event that a publisher restricts all vendor
+   * purposes in the same way and the entire GVL is showing, with the inclusion
+   * of Google there is potentially 2k+ vendors on the list.  If that is true,
+   * sorting the list so that it can be encoded properly will require O(n log
+   * n) operations.  To find a vendor to remove could be O(n log n) if the list
+   * isn't kept sorted.  With a tree we can do all operations in O(log n), for
+   * a list of 2048 vendors it will take no more than 11 operations to do
+   * anything.  An O(n log n) operation would be n times larger than that, on
+   * 2048 vendors 22,528 operations -- of course assuming that the list was
+   * sorted at the end.
    */
   private map: Map<string, BinarySearchTree> = new Map<string, BinarySearchTree>();
 
@@ -66,31 +78,6 @@ export class PurposeRestrictionVector {
     });
 
     return retr;
-
-  }
-
-  public getMaxVendor(purposeRestriction: PurposeRestriction): number | undefined {
-
-    const bst: BinarySearchTree | undefined = this.map.get(purposeRestriction.hash);
-
-    return bst ? bst.max() : undefined;
-
-  }
-
-  public getMinVendor(purposeRestriction: PurposeRestriction): number | undefined {
-
-    const bst: BinarySearchTree | undefined = this.map.get(purposeRestriction.hash);
-
-    return bst ? bst.min() : undefined;
-
-  }
-
-  public forEach(purposeRestriction: PurposeRestriction, callback: (vendorId: number) => void): void {
-
-    const bst: BinarySearchTree = (this.map.get(purposeRestriction.hash) as BinarySearchTree);
-    const ids: number[] = (bst) ? bst.get() : [];
-
-    ids.forEach(callback);
 
   }
 

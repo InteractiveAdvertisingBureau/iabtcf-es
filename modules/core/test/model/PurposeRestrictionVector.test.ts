@@ -97,6 +97,8 @@ export function run(): void {
 
       }).sort();
 
+      expect(prv.numRestrictions).to.equal(restrictions.size);
+
       // may not be in the same order
       expect(result).to.deep.equal(Array.from(restrictions).sort());
       expect(result.length).to.equal(restrictions.size);
@@ -120,80 +122,6 @@ export function run(): void {
 
       expect(purpRestriction.isSameAs(prvRestrictions[0])).to.be.true;
 
-
-    });
-
-    it('should return the maximum vendor id by purpose restriction', (): void => {
-
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-
-      const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
-      const vendors: number[] = [];
-      const numItems = 10;
-      const purposeId: number = makeRandomInt(2, 12);
-      const restrictionType: number = makeRandomInt(0, 2) as RestrictionType;
-      const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
-
-      for (let i = 0; i < numItems; i ++) {
-
-        const vendorId: number = makeRandomInt(1, 100);
-
-        vendors.push(vendorId);
-        prv.add(vendorId, purpRestriction);
-
-      }
-
-      expect(prv.getMaxVendor(purpRestriction)).to.equal(Math.max.apply(null, vendors));
-
-    });
-
-    it('should return undefined for maximum vendor function if it\'s not defined', (): void => {
-
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-
-      const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
-      const purposeId: number = makeRandomInt(2, 12);
-      const restrictionType: number = makeRandomInt(0, 2) as RestrictionType;
-      const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
-
-      expect(prv.getMaxVendor(purpRestriction)).to.be.undefined;
-
-    });
-
-    it('should return the minimum vendor id by purpose restriction', (): void => {
-
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-
-      const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
-      const vendors: number[] = [];
-      const numItems = 10;
-      const purposeId: number = makeRandomInt(2, 12);
-      const restrictionType: number = makeRandomInt(0, 2) as RestrictionType;
-      const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
-
-      for (let i = 0; i < numItems; i ++) {
-
-        const vendorId: number = makeRandomInt(1, 100);
-
-        vendors.push(vendorId);
-        prv.add(vendorId, purpRestriction);
-
-      }
-
-      expect(prv.getMinVendor(purpRestriction)).to.equal(Math.min.apply(null, vendors));
-
-    });
-
-    it('should return undefined for minimum vendor function if it\'s not defined', (): void => {
-
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-
-      const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
-      const purposeId: number = makeRandomInt(2, 12);
-      const restrictionType: number = makeRandomInt(0, 2) as RestrictionType;
-      const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
-
-      expect(prv.getMinVendor(purpRestriction)).to.be.undefined;
 
     });
 
@@ -271,68 +199,6 @@ export function run(): void {
       expect(prv.getRestrictions(vendorId)).to.be.empty;
       expect(prv.getVendors(purpRestriction)).not.to.include(vendorId);
       expect(prv.isEmpty()).to.be.true;
-
-    });
-
-    it('should forEach through all the vendors under a restriction', (): void => {
-
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-
-      const numItems = 10;
-      const vendors: number[] = [];
-      const restrictions: Set<string> = new Set<string>();
-      const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
-      const purposeId = 2;
-      const restrictionType: number = 1 as RestrictionType;
-      const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
-
-      for (let i = 0; i < numItems; i ++) {
-
-        const vendorId: number = makeRandomInt(1, 100);
-
-        restrictions.add(purpRestriction.hash);
-        vendors.push(vendorId);
-        prv.add(vendorId, purpRestriction);
-
-      }
-
-      const result: number[] = [];
-
-      prv.forEach(purpRestriction, (vendorId: number): void => {
-
-        result.push(vendorId);
-
-      });
-
-      // first de-dupe by throwing into a set and sort the result
-      const expected: number[] = Array.from(new Set<number>(vendors)).sort((a: number, b: number): number => {
-
-        return a - b;
-
-      });
-
-      expect(result).to.deep.equal(expected);
-
-    });
-
-    it('should not forEach through an empty restriction', (): void => {
-
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-
-      const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
-      const purposeId = 2;
-      const restrictionType: number = 1 as RestrictionType;
-      const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
-
-      const result: number[] = [];
-
-      prv.forEach(purpRestriction, (vendorId: number): void => {
-
-        result.push(vendorId);
-
-      });
-
-      expect(result).to.be.empty;
 
     });
 
