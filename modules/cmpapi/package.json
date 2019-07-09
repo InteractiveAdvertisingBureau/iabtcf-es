@@ -16,8 +16,7 @@
     "dist/"
   ],
   "scripts": {
-    "build": "tsc",
-    "test": "echo 'no tests'"
+    "build": "tsc"
   },
   "eslintIgnore": [
     "lib"
