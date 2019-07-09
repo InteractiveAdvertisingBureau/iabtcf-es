@@ -1,6 +1,8 @@
 sudo: false
 language: node_js
 script:
+  - npm install
+  - npm run build
   - npm test
 after_success:
   - npm run report-coverage
