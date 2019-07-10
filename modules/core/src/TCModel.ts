@@ -121,20 +121,13 @@ export class TCModel {
   /**
    * sets encoded created date.  Will auto convert to deciseconds as the encoding requires
    *
-   * @param {Date} date - in case the created date is different than when this
-   * TCModel was constructed.  This is auto set for the encoding when this
-   * object is created.
+   * @param {Date} date - This will be set automatically
    */
   public set created(date: Date) {
 
     this.created_ = date;
 
   }
-
-  /**
-   * @return {Date} - date this TCModel was created and/or the string that this
-   * TCModel was decoded from.
-   */
   public get created(): Date {
 
     return this.created_;
@@ -151,11 +144,6 @@ export class TCModel {
     this.lastUpdated_ = date;
 
   }
-
-  /**
-   * @return {Date} - date this TCModel was last updated  and/or the string
-   * that this TCModel was decoded from.
-   */
   public get lastUpdated(): Date {
 
     return this.lastUpdated_;
@@ -166,7 +154,7 @@ export class TCModel {
    * @param {number} integer - A unique ID will be assigned to each Consent
    * Manager Provider (CMP) from the iab.
    *
-   * @throws {TCModelError} if the id is not an integer greater than 1 as those are not valid.
+   * @throws {TCModelError} if the value is not an integer greater than 1 as those are not valid.
    */
   public set cmpId(integer: number) {
 
@@ -182,20 +170,20 @@ export class TCModel {
     }
 
   }
-
-  /**
-   * @return {number} - A unique ID will be assigned to each Consent Manager
-   * Provider (CMP) from the iab.
-   */
   public get cmpId(): number {
 
     return this.cmpId_;
 
   }
+
   /**
-   * @param {number} integer - Each change to an operating CMP should receive a
+   * - Each change to an operating CMP should receive a
    * new version number, for logging proof of consent. CmpVersion defined by
    * each CMP.
+   *
+   * @param {number} integer
+   *
+   * @throws {TCModelError} if the value is not an integer greater than 1 as those are not valid.
    */
   public set cmpVersion(integer: number) {
 
@@ -210,12 +198,6 @@ export class TCModel {
     }
 
   }
-
-  /**
-   * @return {number} - Each change to an operating CMP should receive a new
-   * version number, for logging proof of consent. CmpVersion defined by each
-   * CMP.
-   */
   public get cmpVersion(): number {
 
     return this.cmpVersion_;
@@ -223,11 +205,14 @@ export class TCModel {
   }
 
   /**
-   * @param {number} integer - The screen number is CMP and CmpVersion
+   * The screen number is CMP and CmpVersion
    * specific, and is for logging proof of consent.(For example, a CMP could
    * keep records so that a publisher can request information about the context
    * in which consent was gathered.)
-   * @return {undefined}
+   *
+   * @param {number} integer 
+   *
+   * @throws {TCModelError} if the value is not an integer greater than 0 as those are not valid.
    */
   public set consentScreen(integer: number) {
 
@@ -242,13 +227,6 @@ export class TCModel {
     }
 
   }
-
-  /**
-   * @return {number} - The screen number is CMP and CmpVersion specific, and
-   * is for logging proof of consent.(For example, a CMP could keep records so
-   * that a publisher can request information about the context in which
-   * consent was gathered.)
-   */
   public get consentScreen(): number {
 
     return this.consentScreen_;
@@ -259,7 +237,8 @@ export class TCModel {
    * @param {string} lang - [two-letter ISO 639-1 language
    * code](http://www.loc.gov/standards/iso639-2/php/code_list.php) in which
    * the CMP UI was presented
-   * @return {undefined}
+   *
+   * @throws {TCModelError} if the value is not a length-2 string of alpha characters
    */
   public set consentLanguage(lang: string) {
 
@@ -274,12 +253,6 @@ export class TCModel {
     }
 
   }
-
-  /**
-   * @return {string} -  [two-letter ISO 639-1 language
-   * code](http://www.loc.gov/standards/iso639-2/php/code_list.php) in which
-   * the CMP UI was presented
-   */
   public get consentLanguage(): string {
 
     return this.consentLanguage_;
@@ -287,21 +260,11 @@ export class TCModel {
   }
 
   /**
-   * @return {string} - [two-letter ISO 3166-1 alpha-2 country
-   * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the publisher,
-   * determined by the CMP-settings of the publisher.
-   */
-  public get referenceCountry(): string {
-
-    return this.referenceCountry_;
-
-  }
-
-  /**
    * @param {string} countryCode - [two-letter ISO 3166-1 alpha-2 country
    * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the publisher,
    * determined by the CMP-settings of the publisher.
-   * @return {undefined}
+   *
+   * @throws {TCModelError} if the value is not a length-2 string of alpha characters
    */
   public set referenceCountry(countryCode: string) {
 
@@ -316,9 +279,19 @@ export class TCModel {
     }
 
   }
+  public get referenceCountry(): string {
+
+    return this.referenceCountry_;
+
+  }
 
   /**
+   * Version of the GVL used to create this TCModel. Global
+   * Vendor List versions will be released periodically.
+   *
    * @param {number} integer
+   *
+   * @throws {TCModelError} if the value is not an integer greater than 0 as those are not valid.
    */
   public set vendorListVersion(integer: number) {
 
@@ -334,11 +307,6 @@ export class TCModel {
     }
 
   }
-
-  /**
-   * @return {number} - Version of the GVL used to create this TCModel. Global
-   * Vendor List versions will be released periodically.
-   */
   public get vendorListVersion(): number {
 
     return this.vendorListVersion_;
@@ -346,8 +314,18 @@ export class TCModel {
   }
 
   /**
+   * From the corresponding field in the GVL that was
+   * used for obtaining consent. A new policy version invalidates existing
+   * strings and requires CMPs to re-establish transparency and consent from
+   * users.
+   *
+   * If a TCF policy version number is different from the one from the latest
+   * GVL, the CMP must re-establish transparency and consent.
+   *
    * @param {number} num - You do not need to set this.  This comes
    * directly from the [[GVL]].     
+   *
+   * @throws {TCModelError} if the value is not an integer greater than 1 as those are not valid.
    */
   public set policyVersion(num: number) {
 
@@ -362,17 +340,6 @@ export class TCModel {
     }
 
   }
-
-  /**
-   * @return {number} - From the corresponding field in the GVL that was
-   * used for obtaining consent. A new policy version invalidates existing
-   * strings and requires CMPs to re-establish transparency and consent from
-   * users.
-   *
-   * If a TCF policy version number is different from the one from the latest
-   * GVL, the CMP must re-establish transparency and consent.
-
-   */
   public get policyVersion(): number {
 
     return this.policyVersion_;
@@ -380,9 +347,13 @@ export class TCModel {
   }
 
   /**
-   * @param {number} num - Incremented when TC String format changes. Indicates
+   * Incremented when TC String format changes. Indicates
    * what encoding format the TCString will follow v1 or v2.  v1 fields will
-   * omit fields.   
+   * omit fields.
+   *
+   * @param {number} num
+   *
+   * @throws {TCModelError} if the value is not either 1 or 2
    */
   public set version(num: number) {
 
@@ -397,16 +368,11 @@ export class TCModel {
     }
 
   }
-
-  /**
-   * @return {number}   
-   */
   public get version(): number {
 
     return this.version_;
 
   }
-
 
   /**
    * Whether the signals encoded in this TC String were from site-specific
@@ -424,10 +390,6 @@ export class TCModel {
     this.isServiceSpecific_ = bool;
 
   };
-
-  /**
-   * @return {boolean} bool - value that was set
-   */
   public get isServiceSpecific(): boolean {
 
     return this.isServiceSpecific_;
@@ -440,6 +402,7 @@ export class TCModel {
    * IAB. As are titles. Descriptions are pre-set, but publishers can customize
    * them. If they do, they need to set this bit to indicate that they've
    * customized descriptions.
+   *
    * @param {boolean} bool - value to set
    */
   public set useNonStandardStacks(bool: boolean) {
@@ -447,10 +410,6 @@ export class TCModel {
     this.useNonStandardStacks_ = bool;
 
   };
-
-  /**
-   * @return {boolean} bool - value that was set
-   */
   public get useNonStandardStacks(): boolean {
 
     return this.useNonStandardStacks_;
@@ -458,7 +417,7 @@ export class TCModel {
   };
 
   /**
-   * @param {boolean} bool - `false` There is no special Purpose 1 status.
+   * `false` There is no special Purpose 1 status.
    * Purpose 1 was disclosed normally (consent) as expected by Policy.  `true`
    * Purpose 1 not disclosed at all. CMPs use PublisherCC to indicate the
    * publisher’s country of establishment to help Vendors determine whether the
@@ -466,16 +425,14 @@ export class TCModel {
    * must always have a value of `false`. When a CMP encounters a global scope
    * string with `purposeOneTreatment=true` then that string should be
    * considered invalid and the CMP must re-establish transparency and consent.
+   *
+   * @param {boolean} bool
    */
   public set purposeOneTreatment(bool: boolean) {
 
     this.purposeOneTreatment_ = bool;
 
   };
-
-  /**
-   * @return {boolean}
-   */
   public get purposeOneTreatment(): boolean {
 
     return this.purposeOneTreatment_;

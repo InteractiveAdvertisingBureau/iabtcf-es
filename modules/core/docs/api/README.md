@@ -79,7 +79,7 @@
 
 **Ƭ PurposeOrFeature**: *"purpose" \| "feature"*
 
-*Defined in [GVL.ts:30](https://github.com/chrispaterson/iabtcf-es/blob/90d8169/modules/core/src/GVL.ts#L30)*
+*Defined in [GVL.ts:30](https://github.com/chrispaterson/iabtcf-es/blob/293af9e/modules/core/src/GVL.ts#L30)*
 
 ___
 <a id="purposesubtype"></a>
@@ -88,7 +88,7 @@ ___
 
 **Ƭ PurposeSubType**: *"consent" \| "legInt" \| "flexible"*
 
-*Defined in [GVL.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/90d8169/modules/core/src/GVL.ts#L31)*
+*Defined in [GVL.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/293af9e/modules/core/src/GVL.ts#L31)*
 
 ___
 <a id="tcmodelproptype"></a>
@@ -97,7 +97,7 @@ ___
 
 **Ƭ TCModelPropType**: *`number` \| `Date` \| `string` \| `boolean` \| [Vector](classes/vector.md) \| [PurposeRestrictionVector](classes/purposerestrictionvector.md)*
 
-*Defined in [TCModel.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/90d8169/modules/core/src/TCModel.ts#L7)*
+*Defined in [TCModel.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/293af9e/modules/core/src/TCModel.ts#L7)*
 
 ___
 <a id="treenodemaybe"></a>
@@ -106,7 +106,7 @@ ___
 
 **Ƭ TreeNodeMaybe**: *[TreeNode](interfaces/treenode.md) \| `null`*
 
-*Defined in [model/BinarySearchTree.ts:1](https://github.com/chrispaterson/iabtcf-es/blob/90d8169/modules/core/src/model/BinarySearchTree.ts#L1)*
+*Defined in [model/BinarySearchTree.ts:1](https://github.com/chrispaterson/iabtcf-es/blob/293af9e/modules/core/src/model/BinarySearchTree.ts#L1)*
 
 ___
 <a id="versionorvendorlist"></a>
@@ -115,7 +115,7 @@ ___
 
 **Ƭ VersionOrVendorList**: *`string` \| `number` \| [VendorList](interfaces/vendorlist.md)*
 
-*Defined in [GVL.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/90d8169/modules/core/src/GVL.ts#L29)*
+*Defined in [GVL.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/293af9e/modules/core/src/GVL.ts#L29)*
 
 ___
 <a id="idorids"></a>
@@ -124,7 +124,7 @@ ___
 
 **Ƭ idOrIds**: *`number` \| `number`[]*
 
-*Defined in [model/Vector.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/90d8169/modules/core/src/model/Vector.ts#L3)*
+*Defined in [model/Vector.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/293af9e/modules/core/src/model/Vector.ts#L3)*
 
 ___
 

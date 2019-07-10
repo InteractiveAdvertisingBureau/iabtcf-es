@@ -29,7 +29,7 @@
 
 *Implementation of [VariableLengthSpecificDecoder](../interfaces/variablelengthspecificdecoder.md).[decode](../interfaces/variablelengthspecificdecoder.md#decode)*
 
-*Defined in [tcstring/decoders/VendorVectorDecoder.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/90d8169/modules/core/src/tcstring/decoders/VendorVectorDecoder.ts#L13)*
+*Defined in [tcstring/decoders/VendorVectorDecoder.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/293af9e/modules/core/src/tcstring/decoders/VendorVectorDecoder.ts#L13)*
 
 **Parameters:**
 
@@ -48,7 +48,7 @@ ___
 
 *Implementation of [VariableLengthSpecificDecoder](../interfaces/variablelengthspecificdecoder.md).[getBitLength](../interfaces/variablelengthspecificdecoder.md#getbitlength)*
 
-*Defined in [tcstring/decoders/VendorVectorDecoder.ts:132](https://github.com/chrispaterson/iabtcf-es/blob/90d8169/modules/core/src/tcstring/decoders/VendorVectorDecoder.ts#L132)*
+*Defined in [tcstring/decoders/VendorVectorDecoder.ts:132](https://github.com/chrispaterson/iabtcf-es/blob/293af9e/modules/core/src/tcstring/decoders/VendorVectorDecoder.ts#L132)*
 
 **Returns:** `number`
 
