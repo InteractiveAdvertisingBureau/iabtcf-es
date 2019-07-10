@@ -16,7 +16,6 @@
     "dist/"
   ],
   "scripts": {
-    "build": "tsc"
   },
   "eslintIgnore": [
     "lib"

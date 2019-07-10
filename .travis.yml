@@ -1,6 +1,7 @@
 sudo: false
 language: node_js
 script:
+  - npm run build
   - npm run coverage
 after_success:
   - npm run upload-coverage
