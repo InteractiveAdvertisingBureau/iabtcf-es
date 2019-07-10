@@ -7,6 +7,7 @@ npm-debug.log
 lerna-debug.log
 coverage
 .nyc_output
+.coveralls.yml
 
 # Editor directories and files
 .idea
