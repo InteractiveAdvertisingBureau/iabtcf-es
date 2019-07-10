@@ -77,5 +77,6 @@
     "ghooks": {
       "pre-commit": "npm run standard"
     }
-  }
+  },
+  "dependencies": {}
 }
