@@ -22,7 +22,7 @@
 
 ▸ **create**(bitField: *`string`*, returnLength?: *`number`*): `string`
 
-*Defined in [tcstring/Checksum.ts:50](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/tcstring/Checksum.ts#L50)*
+*Defined in [tcstring/Checksum.ts:50](https://github.com/chrispaterson/iabtcf-es/blob/2c1666e/modules/core/src/tcstring/Checksum.ts#L50)*
 
 create - creates a crc16 modbus checksum from a binary string.
 

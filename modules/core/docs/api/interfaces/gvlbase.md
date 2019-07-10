@@ -32,7 +32,7 @@
 
 **● features**: *[GVLMap](gvlmap.md)<[Feature](feature.md)>*
 
-*Defined in [model/GVLBase.ts:43](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/model/GVLBase.ts#L43)*
+*Defined in [model/GVLBase.ts:43](https://github.com/chrispaterson/iabtcf-es/blob/2c1666e/modules/core/src/model/GVLBase.ts#L43)*
 
 ___
 <a id="gvlspecificationversion"></a>
@@ -41,7 +41,7 @@ ___
 
 **● gvlSpecificationVersion**: *`number`*
 
-*Defined in [model/GVLBase.ts:37](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/model/GVLBase.ts#L37)*
+*Defined in [model/GVLBase.ts:37](https://github.com/chrispaterson/iabtcf-es/blob/2c1666e/modules/core/src/model/GVLBase.ts#L37)*
 
 ___
 <a id="lastupdated"></a>
@@ -50,7 +50,7 @@ ___
 
 **● lastUpdated**: *`string` \| `Date`*
 
-*Defined in [model/GVLBase.ts:40](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/model/GVLBase.ts#L40)*
+*Defined in [model/GVLBase.ts:40](https://github.com/chrispaterson/iabtcf-es/blob/2c1666e/modules/core/src/model/GVLBase.ts#L40)*
 
 ___
 <a id="purposes"></a>
@@ -59,7 +59,7 @@ ___
 
 **● purposes**: *[GVLMap](gvlmap.md)<[Purpose](purpose.md)>*
 
-*Defined in [model/GVLBase.ts:41](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/model/GVLBase.ts#L41)*
+*Defined in [model/GVLBase.ts:41](https://github.com/chrispaterson/iabtcf-es/blob/2c1666e/modules/core/src/model/GVLBase.ts#L41)*
 
 ___
 <a id="specialfeatures"></a>
@@ -68,7 +68,7 @@ ___
 
 **● specialFeatures**: *[GVLMap](gvlmap.md)<[Feature](feature.md)>*
 
-*Defined in [model/GVLBase.ts:44](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/model/GVLBase.ts#L44)*
+*Defined in [model/GVLBase.ts:44](https://github.com/chrispaterson/iabtcf-es/blob/2c1666e/modules/core/src/model/GVLBase.ts#L44)*
 
 ___
 <a id="specialpurposes"></a>
@@ -77,7 +77,7 @@ ___
 
 **● specialPurposes**: *[GVLMap](gvlmap.md)<[Purpose](purpose.md)>*
 
-*Defined in [model/GVLBase.ts:42](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/model/GVLBase.ts#L42)*
+*Defined in [model/GVLBase.ts:42](https://github.com/chrispaterson/iabtcf-es/blob/2c1666e/modules/core/src/model/GVLBase.ts#L42)*
 
 ___
 <a id="stacks"></a>
@@ -86,7 +86,7 @@ ___
 
 **● stacks**: *[GVLMap](gvlmap.md)<[Stack](stack.md)>*
 
-*Defined in [model/GVLBase.ts:45](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/model/GVLBase.ts#L45)*
+*Defined in [model/GVLBase.ts:45](https://github.com/chrispaterson/iabtcf-es/blob/2c1666e/modules/core/src/model/GVLBase.ts#L45)*
 
 ___
 <a id="tcfpolicyversion"></a>
@@ -95,7 +95,7 @@ ___
 
 **● tcfPolicyVersion**: *`number`*
 
-*Defined in [model/GVLBase.ts:39](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/model/GVLBase.ts#L39)*
+*Defined in [model/GVLBase.ts:39](https://github.com/chrispaterson/iabtcf-es/blob/2c1666e/modules/core/src/model/GVLBase.ts#L39)*
 
 ___
 <a id="vendorlistversion"></a>
@@ -104,7 +104,7 @@ ___
 
 **● vendorListVersion**: *`number`*
 
-*Defined in [model/GVLBase.ts:38](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/model/GVLBase.ts#L38)*
+*Defined in [model/GVLBase.ts:38](https://github.com/chrispaterson/iabtcf-es/blob/2c1666e/modules/core/src/model/GVLBase.ts#L38)*
 
 ___
 

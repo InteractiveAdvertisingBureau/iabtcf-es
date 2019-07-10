@@ -28,7 +28,7 @@
 
 *Implementation of [SpecificDecoder](../interfaces/specificdecoder.md).[decode](../interfaces/specificdecoder.md#decode)*
 
-*Defined in [tcstring/decoders/FixedVectorDecoder.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/tcstring/decoders/FixedVectorDecoder.ts#L7)*
+*Defined in [tcstring/decoders/FixedVectorDecoder.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/2c1666e/modules/core/src/tcstring/decoders/FixedVectorDecoder.ts#L7)*
 
 **Parameters:**
 

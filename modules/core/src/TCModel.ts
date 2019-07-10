@@ -55,28 +55,14 @@ export class TCModel {
 
   /**
    * Each [[Vendor]] is keyed by id. Their consent value is stored as boolean.
-   *
-   * ```javascript
-   * // to set
-   * tcModel.vendorConsents.set(2222, true);
-   *
-   * // to get
-   * const hasConsent = tcModel.vendorConsents.get(2222);
-   * ```
+   * see: [[Vector]]
    */
   public readonly vendorConsents: Vector = new Vector();
 
   /**
    * Each [[Vendor]] is keyed by id. Whether their Legitimate Interest
    * Disclosures have been established is stored as boolean.
-   *
-   * ```javascript
-   * // to set
-   * tcModel.vendorLegitimateInterest.set(2222, true);
-   *
-   * // to get
-   * const hasConsent = tcModel.vendorLegitimateInterest.get(2222);
-   * ```
+   * see: [[Vector]]
    */
   public readonly vendorLegitimateInterest: Vector = new Vector();
 
