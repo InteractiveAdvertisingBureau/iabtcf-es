@@ -177,7 +177,7 @@ export class TCModel {
   }
 
   /**
-   * - Each change to an operating CMP should receive a
+   * Each change to an operating CMP should receive a
    * new version number, for logging proof of consent. CmpVersion defined by
    * each CMP.
    *
