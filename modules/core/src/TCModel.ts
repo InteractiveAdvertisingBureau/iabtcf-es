@@ -318,18 +318,18 @@ export class TCModel {
   }
 
   /**
-   * @param {number} num - Version of the GVL used to create this TCModel. Global
-   * Vendor List versions will be released periodically.
+   * @param {number} integer
    */
-  public set vendorListVersion(num: number) {
+  public set vendorListVersion(integer: number) {
 
-    if (this.isIntAbove(num, 0)) {
+    if (this.isIntAbove(integer, 0)) {
 
-      this.vendorListVersion_ = num;
+      // TODO: Auto update the GVL?
+      this.vendorListVersion_ = integer;
 
     } else {
 
-      throw new TCModelError('vendorListVersion', num);
+      throw new TCModelError('vendorListVersion', integer);
 
     }
 
@@ -347,13 +347,7 @@ export class TCModel {
 
   /**
    * @param {number} num - You do not need to set this.  This comes
-   * directly from the [[GVL]].  From the corresponding field in the GVL that
-   * was used for obtaining consent. A new policy version invalidates existing
-   * strings and requires CMPs to re-establish transparency and consent from
-   * users.
-   *
-   * If a TCF policy version number is different from the one from the latest
-   * GVL, the CMP must re-establish transparency and consent.
+   * directly from the [[GVL]].     
    */
   public set policyVersion(num: number) {
 
@@ -405,9 +399,7 @@ export class TCModel {
   }
 
   /**
-   * @return {number} - Incremented when TC String format changes. Indicates
-   * what encoding format the TCString will follow v1 or v2.  v1 fields will
-   * omit fields.
+   * @return {number}   
    */
   public get version(): number {
 
@@ -418,10 +410,11 @@ export class TCModel {
 
   /**
    * Whether the signals encoded in this TC String were from site-specific
-   * storage (True) versus ‘global’ consensu.org shared storage (False). A
+   * storage `true` versus ‘global’ consensu.org shared storage `false`. A
    * string intended to be stored in global/shared scope but the CMP is unable
    * to store due to a user agent not accepting third-party cookies would be
-   * considered site-specific (True).
+   * considered site-specific `true`.
+   *
    * @param {boolean} bool - value to set. Some changes to other fields in this
    * model will automatically change this value like adding publisher
    * restrictions.
@@ -433,11 +426,6 @@ export class TCModel {
   };
 
   /**
-   * Whether the signals encoded in this TC String were from site-specific
-   * storage (True) versus ‘global’ consensu.org shared storage (False). A
-   * string intended to be stored in global/shared scope but the CMP is unable
-   * to store due to a user agent not accepting third-party cookies would be
-   * considered site-specific (True).
    * @return {boolean} bool - value that was set
    */
   public get isServiceSpecific(): boolean {
@@ -461,11 +449,6 @@ export class TCModel {
   };
 
   /**
-   * Non-standard stacks means that a CMP is using publisher-customized stack
-   * descriptions. Stacks (in terms of purposes in a stack) are pre-set by the
-   * IAB. As are titles. Descriptions are pre-set, but publishers can customize
-   * them. If they do, they need to set this bit to indicate that they've
-   * customized descriptions.
    * @return {boolean} bool - value that was set
    */
   public get useNonStandardStacks(): boolean {
@@ -491,14 +474,7 @@ export class TCModel {
   };
 
   /**
-   * @return {boolean} bool - `false` There is no special Purpose 1 status.
-   * Purpose 1 was disclosed normally (consent) as expected by Policy.  `true`
-   * Purpose 1 not disclosed at all. CMPs use PublisherCC to indicate the
-   * publisher’s country of establishment to help Vendors determine whether the
-   * vendor requires Purpose 1 consent. In global scope TC strings, this field
-   * must always have a value of `false`. When a CMP encounters a global scope
-   * string with `purposeOneTreatment=true` then that string should be
-   * considered invalid and the CMP must re-establish transparency and consent.
+   * @return {boolean}
    */
   public get purposeOneTreatment(): boolean {
 
