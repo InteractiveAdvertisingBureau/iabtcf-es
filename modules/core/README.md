@@ -1,6 +1,6 @@
 # `@iabtcf/core`
 
-[![NPM version](https://img.shields.io/npm/v/iabtcf-es.svg?style=flat-square)](https://www.npmjs.com/package/iabtcf-es)
+[![NPM version](https://img.shields.io/npm/v/@iabtcf/core.svg?style=flat-square)](https://www.npmjs.com/package/@iabtcf/core)
 [![Build](https://travis-ci.org/chrispaterson/iabtcf-es.svg?branch=master)](https://travis-ci.org/chrispaterson/iabtcf-es)
 ---
 Ensures consistent encoding and decoding of TC Signals for the iab. Transparency and Consent Framework (TCF).
