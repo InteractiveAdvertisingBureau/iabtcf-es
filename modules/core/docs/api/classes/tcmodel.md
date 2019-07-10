@@ -14,9 +14,9 @@
 
 ### Properties
 
+* [publisherRestrictions](tcmodel.md#publisherrestrictions)
 * [purposeConsents](tcmodel.md#purposeconsents)
 * [purposeLITransparency](tcmodel.md#purposelitransparency)
-* [purposeRestrictions](tcmodel.md#purposerestrictions)
 * [specialFeatureOptIns](tcmodel.md#specialfeatureoptins)
 * [vendorConsents](tcmodel.md#vendorconsents)
 * [vendorLegitimateInterest](tcmodel.md#vendorlegitimateinterest)
@@ -32,8 +32,8 @@
 * [isServiceSpecific](tcmodel.md#isservicespecific)
 * [lastUpdated](tcmodel.md#lastupdated)
 * [policyVersion](tcmodel.md#policyversion)
-* [publisherCountryCode](tcmodel.md#publishercountrycode)
-* [purposeOneDisclosure](tcmodel.md#purposeonedisclosure)
+* [purposeOneTreatment](tcmodel.md#purposeonetreatment)
+* [referenceCountry](tcmodel.md#referencecountry)
 * [useNonStandardStacks](tcmodel.md#usenonstandardstacks)
 * [vendorListVersion](tcmodel.md#vendorlistversion)
 * [version](tcmodel.md#version)
@@ -65,7 +65,7 @@
 
 ⊕ **new TCModel**(gvl?: *[GVL](gvl.md)*): [TCModel](tcmodel.md)
 
-*Defined in [TCModel.ts:96](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L96)*
+*Defined in [TCModel.ts:83](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L83)*
 
 Constructs the TCModel. Passing a [GVL](gvl.md) is optional when constructing as this TCModel may be constructed from decoding an existing encoded TCString.
 
@@ -81,13 +81,22 @@ ___
 
 ## Properties
 
+<a id="publisherrestrictions"></a>
+
+###  publisherRestrictions
+
+**● publisherRestrictions**: *[PurposeRestrictionVector](purposerestrictionvector.md)* =  new PurposeRestrictionVector()
+
+*Defined in [TCModel.ts:83](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L83)*
+
+___
 <a id="purposeconsents"></a>
 
 ###  purposeConsents
 
 **● purposeConsents**: *[Vector](vector.md)* =  new Vector()
 
-*Defined in [TCModel.ts:47](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L47)*
+*Defined in [TCModel.ts:47](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L47)*
 
 Renamed from `PurposesAllowed` in TCF v1.1 The user’s consent value for each Purpose established on the legal basis of consent. Purposes are published in the Global Vendor List (see. [GVL](gvl.md)).
 
@@ -98,29 +107,9 @@ ___
 
 **● purposeLITransparency**: *[Vector](vector.md)* =  new Vector()
 
-*Defined in [TCModel.ts:54](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L54)*
+*Defined in [TCModel.ts:54](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L54)*
 
 The user’s permission for each Purpose established on the legal basis of legitimate interest. If the user has exercised right-to-object for a purpose, the corresponding bit for that purpose should be set to false.
-
-___
-<a id="purposerestrictions"></a>
-
-###  purposeRestrictions
-
-**● purposeRestrictions**: *[PurposeRestrictionVector](purposerestrictionvector.md)* =  new PurposeRestrictionVector()
-
-*Defined in [TCModel.ts:96](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L96)*
-
-Each [Vendor](../interfaces/vendor.md) is keyed by id. The value stored is a [PurposeRestriction](purposerestriction.md) object.
-
-```javascript
-// to set
-const purposeRestriction = new PurposeRestriction();
-tcModel.vendorLegitimateInterest.set(2222, true);
-
-// to get
-const hasConsent = tcModel.vendorLegitimateInterest.get(2222);
-```
 
 ___
 <a id="specialfeatureoptins"></a>
@@ -129,7 +118,7 @@ ___
 
 **● specialFeatureOptIns**: *[Vector](vector.md)* =  new Vector()
 
-*Defined in [TCModel.ts:40](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L40)*
+*Defined in [TCModel.ts:40](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L40)*
 
 The TCF designates certain Features as special, that is, a CMP must afford the user a means to opt in to their use. These Special Features are published and numbered in the GVL separately from normal Features. Provides for up to 12 special features.
 
@@ -140,7 +129,7 @@ ___
 
 **● vendorConsents**: *[Vector](vector.md)* =  new Vector()
 
-*Defined in [TCModel.ts:67](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L67)*
+*Defined in [TCModel.ts:67](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L67)*
 
 Each [Vendor](../interfaces/vendor.md) is keyed by id. Their consent value is stored as boolean.
 
@@ -159,7 +148,7 @@ ___
 
 **● vendorLegitimateInterest**: *[Vector](vector.md)* =  new Vector()
 
-*Defined in [TCModel.ts:81](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L81)*
+*Defined in [TCModel.ts:81](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L81)*
 
 Each [Vendor](../interfaces/vendor.md) is keyed by id. Whether their Legitimate Interest Disclosures have been established is stored as boolean.
 
@@ -183,12 +172,12 @@ ___
 
 **set cmpId**(integer: *`number`*): `void`
 
-*Defined in [TCModel.ts:217](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L217)*
+*Defined in [TCModel.ts:204](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L204)*
 
 **Returns:** `number`
 *   A unique ID will be assigned to each Consent Manager Provider (CMP) from the iab.
 
-*Defined in [TCModel.ts:198](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L198)*
+*Defined in [TCModel.ts:185](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L185)*
 
 *__throws__*: {TCModelError} if the id is not an integer greater than 1 as those are not valid.
 
@@ -210,12 +199,12 @@ ___
 
 **set cmpVersion**(integer: *`number`*): `void`
 
-*Defined in [TCModel.ts:246](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L246)*
+*Defined in [TCModel.ts:233](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L233)*
 
 **Returns:** `number`
 *   Each change to an operating CMP should receive a new version number, for logging proof of consent. CmpVersion defined by each CMP.
 
-*Defined in [TCModel.ts:227](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L227)*
+*Defined in [TCModel.ts:214](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L214)*
 
 **Parameters:**
 
@@ -235,18 +224,18 @@ ___
 
 **set consentLanguage**(lang: *`string`*): `void`
 
-*Defined in [TCModel.ts:308](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L308)*
+*Defined in [TCModel.ts:297](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L297)*
 
 **Returns:** `string`
-*   lowercase [two-letter ISO 639-1 language code](http://www.loc.gov/standards/iso639-2/php/code_list.php) in which the CMP UI was presented
+*   [two-letter ISO 639-1 language code](http://www.loc.gov/standards/iso639-2/php/code_list.php) in which the CMP UI was presented
 
-*Defined in [TCModel.ts:289](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L289)*
+*Defined in [TCModel.ts:278](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L278)*
 
 **Parameters:**
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| lang | `string` |  lowercase [two-letter ISO 639-1 language code](http://www.loc.gov/standards/iso639-2/php/code_list.php) in which the CMP UI was presented |
+| lang | `string` |  [two-letter ISO 639-1 language code](http://www.loc.gov/standards/iso639-2/php/code_list.php) in which the CMP UI was presented |
 
 **Returns:** `void`
 
@@ -259,18 +248,18 @@ ___
 
 **set consentScreen**(integer: *`number`*): `void`
 
-*Defined in [TCModel.ts:277](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L277)*
+*Defined in [TCModel.ts:266](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L266)*
 
 **Returns:** `number`
-*   Each change to an operating CMP should receive a new version number, for logging proof of consent. CmpVersion defined by each CMP.
+*   The screen number is CMP and CmpVersion specific, and is for logging proof of consent.(For example, a CMP could keep records so that a publisher can request information about the context in which consent was gathered.)
 
-*Defined in [TCModel.ts:258](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L258)*
+*Defined in [TCModel.ts:246](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L246)*
 
 **Parameters:**
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| integer | `number` |  Each change to an operating CMP should receive a new version number, for logging proof of consent. CmpVersion defined by each CMP. |
+| integer | `number` |  The screen number is CMP and CmpVersion specific, and is for logging proof of consent.(For example, a CMP could keep records so that a publisher can request information about the context in which consent was gathered.) |
 
 **Returns:** `void`
 
@@ -283,14 +272,14 @@ ___
 
 **set created**(date: *`Date`*): `void`
 
-*Defined in [TCModel.ts:165](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L165)*
+*Defined in [TCModel.ts:152](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L152)*
 
 sets encoded created date. Will auto convert to deciseconds as the encoding requires
 
 **Returns:** `Date`
 *   date this TCModel was created and/or the string that this TCModel was decoded from.
 
-*Defined in [TCModel.ts:155](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L155)*
+*Defined in [TCModel.ts:142](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L142)*
 
 sets encoded created date. Will auto convert to deciseconds as the encoding requires
 
@@ -312,14 +301,14 @@ ___
 
 **set gvl**(gvl: *[GVL](gvl.md)*): `void`
 
-*Defined in [TCModel.ts:142](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L142)*
+*Defined in [TCModel.ts:129](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L129)*
 
 sets the [GVL](gvl.md) with side effects of also setting the `vendorListVersion` and `policyVersion`
 
 **Returns:** [GVL](gvl.md)
 the gvl instance set on this TCModel instance
 
-*Defined in [TCModel.ts:122](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L122)*
+*Defined in [TCModel.ts:109](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L109)*
 
 sets the [GVL](gvl.md) with side effects of also setting the `vendorListVersion` and `policyVersion`
 
@@ -343,14 +332,14 @@ ___
 
 **set isServiceSpecific**(bool: *`boolean`*): `void`
 
-*Defined in [TCModel.ts:449](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L449)*
+*Defined in [TCModel.ts:457](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L457)*
 
 Whether the signals encoded in this TC String were from site-specific storage (True) versus ‘global’ consensu.org shared storage (False). A string intended to be stored in global/shared scope but the CMP is unable to store due to a user agent not accepting third-party cookies would be considered site-specific (True).
 
 **Returns:** `boolean`
 bool - value that was set
 
-*Defined in [TCModel.ts:435](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L435)*
+*Defined in [TCModel.ts:443](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L443)*
 
 Whether the signals encoded in this TC String were from site-specific storage (True) versus ‘global’ consensu.org shared storage (False). A string intended to be stored in global/shared scope but the CMP is unable to store due to a user agent not accepting third-party cookies would be considered site-specific (True).
 
@@ -358,7 +347,7 @@ Whether the signals encoded in this TC String were from site-specific storage (T
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| bool | `boolean` |  value to set |
+| bool | `boolean` |  value to set. Some changes to other fields in this model will automatically change this value like adding publisher restrictions. |
 
 **Returns:** `void`
 bool - value that was set
@@ -372,14 +361,14 @@ ___
 
 **set lastUpdated**(date: *`Date`*): `void`
 
-*Defined in [TCModel.ts:186](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L186)*
+*Defined in [TCModel.ts:173](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L173)*
 
 sets encoded last updated date. Will auto convert to deciseconds as the encoding requires
 
 **Returns:** `Date`
 *   date this TCModel was last updated and/or the string that this TCModel was decoded from.
 
-*Defined in [TCModel.ts:176](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L176)*
+*Defined in [TCModel.ts:163](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L163)*
 
 sets encoded last updated date. Will auto convert to deciseconds as the encoding requires
 
@@ -401,70 +390,74 @@ ___
 
 **set policyVersion**(num: *`number`*): `void`
 
-*Defined in [TCModel.ts:392](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L392)*
+*Defined in [TCModel.ts:396](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L396)*
 
 **Returns:** `number`
-*   the policyVersion this TCModel is constructed with
+*   From the corresponding field in the GVL that was used for obtaining consent. A new policy version invalidates existing strings and requires CMPs to re-establish transparency and consent from users.
 
-*Defined in [TCModel.ts:375](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L375)*
+If a TCF policy version number is different from the one from the latest GVL, the CMP must re-establish transparency and consent.
 
-**Parameters:**
-
-| Name | Type | Description |
-| ------ | ------ | ------ |
-| num | `number` |  the policyVersion for this TCModel |
-
-**Returns:** `void`
-*   the policyVersion this TCModel is constructed with
-
-___
-<a id="publishercountrycode"></a>
-
-###  publisherCountryCode
-
-**get publisherCountryCode**(): `string`
-
-**set publisherCountryCode**(countryCode: *`string`*): `void`
-
-*Defined in [TCModel.ts:319](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L319)*
-
-**Returns:** `string`
-*   uppercase [two-letter ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the publisher, determined by the CMP-settings of the publisher.
-
-*Defined in [TCModel.ts:331](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L331)*
+*Defined in [TCModel.ts:372](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L372)*
 
 **Parameters:**
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| countryCode | `string` |  uppercase [two-letter ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the publisher, determined by the CMP-settings of the publisher. |
+| num | `number` |  You do not need to set this. This comes directly from the [GVL](gvl.md). From the corresponding field in the GVL that was used for obtaining consent. A new policy version invalidates existing strings and requires CMPs to re-establish transparency and consent from users.<br><br>If a TCF policy version number is different from the one from the latest GVL, the CMP must re-establish transparency and consent. |
 
 **Returns:** `void`
+*   From the corresponding field in the GVL that was used for obtaining consent. A new policy version invalidates existing strings and requires CMPs to re-establish transparency and consent from users.
+
+If a TCF policy version number is different from the one from the latest GVL, the CMP must re-establish transparency and consent.
 
 ___
-<a id="purposeonedisclosure"></a>
+<a id="purposeonetreatment"></a>
 
-###  purposeOneDisclosure
+###  purposeOneTreatment
 
-**get purposeOneDisclosure**(): `boolean`
+**get purposeOneTreatment**(): `boolean`
 
-**set purposeOneDisclosure**(bool: *`boolean`*): `void`
+**set purposeOneTreatment**(bool: *`boolean`*): `void`
 
-*Defined in [TCModel.ts:509](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L509)*
+*Defined in [TCModel.ts:517](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L517)*
 
 **Returns:** `boolean`
-bool - `false` There is no special Purpose 1 status. Purpose 1 was disclosed normally (consent) as expected by Policy. `true` Purpose 1 not disclosed at all. CMPs use PublisherCC to indicate the publisher’s country of establishment to help Vendors determine whether the vendor requires Purpose 1 consent. In global scope TC strings, this field must always have a value of `false`. When a CMP encounters a global scope string with `purposeOneDisclosure=true` then that string should be considered invalid and the CMP must re-establish transparency and consent.
+bool - `false` There is no special Purpose 1 status. Purpose 1 was disclosed normally (consent) as expected by Policy. `true` Purpose 1 not disclosed at all. CMPs use PublisherCC to indicate the publisher’s country of establishment to help Vendors determine whether the vendor requires Purpose 1 consent. In global scope TC strings, this field must always have a value of `false`. When a CMP encounters a global scope string with `purposeOneTreatment=true` then that string should be considered invalid and the CMP must re-establish transparency and consent.
 
-*Defined in [TCModel.ts:493](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L493)*
+*Defined in [TCModel.ts:501](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L501)*
 
 **Parameters:**
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| bool | `boolean` |  \`false\` There is no special Purpose 1 status. Purpose 1 was disclosed normally (consent) as expected by Policy. \`true\` Purpose 1 not disclosed at all. CMPs use PublisherCC to indicate the publisher’s country of establishment to help Vendors determine whether the vendor requires Purpose 1 consent. In global scope TC strings, this field must always have a value of \`false\`. When a CMP encounters a global scope string with \`purposeOneDisclosure=true\` then that string should be considered invalid and the CMP must re-establish transparency and consent. |
+| bool | `boolean` |  \`false\` There is no special Purpose 1 status. Purpose 1 was disclosed normally (consent) as expected by Policy. \`true\` Purpose 1 not disclosed at all. CMPs use PublisherCC to indicate the publisher’s country of establishment to help Vendors determine whether the vendor requires Purpose 1 consent. In global scope TC strings, this field must always have a value of \`false\`. When a CMP encounters a global scope string with \`purposeOneTreatment=true\` then that string should be considered invalid and the CMP must re-establish transparency and consent. |
 
 **Returns:** `void`
-bool - `false` There is no special Purpose 1 status. Purpose 1 was disclosed normally (consent) as expected by Policy. `true` Purpose 1 not disclosed at all. CMPs use PublisherCC to indicate the publisher’s country of establishment to help Vendors determine whether the vendor requires Purpose 1 consent. In global scope TC strings, this field must always have a value of `false`. When a CMP encounters a global scope string with `purposeOneDisclosure=true` then that string should be considered invalid and the CMP must re-establish transparency and consent.
+bool - `false` There is no special Purpose 1 status. Purpose 1 was disclosed normally (consent) as expected by Policy. `true` Purpose 1 not disclosed at all. CMPs use PublisherCC to indicate the publisher’s country of establishment to help Vendors determine whether the vendor requires Purpose 1 consent. In global scope TC strings, this field must always have a value of `false`. When a CMP encounters a global scope string with `purposeOneTreatment=true` then that string should be considered invalid and the CMP must re-establish transparency and consent.
+
+___
+<a id="referencecountry"></a>
+
+###  referenceCountry
+
+**get referenceCountry**(): `string`
+
+**set referenceCountry**(countryCode: *`string`*): `void`
+
+*Defined in [TCModel.ts:308](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L308)*
+
+**Returns:** `string`
+*   [two-letter ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the publisher, determined by the CMP-settings of the publisher.
+
+*Defined in [TCModel.ts:320](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L320)*
+
+**Parameters:**
+
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| countryCode | `string` |  [two-letter ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the publisher, determined by the CMP-settings of the publisher. |
+
+**Returns:** `void`
 
 ___
 <a id="usenonstandardstacks"></a>
@@ -475,14 +468,14 @@ ___
 
 **set useNonStandardStacks**(bool: *`boolean`*): `void`
 
-*Defined in [TCModel.ts:477](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L477)*
+*Defined in [TCModel.ts:485](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L485)*
 
 Non-standard stacks means that a CMP is using publisher-customized stack descriptions. Stacks (in terms of purposes in a stack) are pre-set by the IAB. As are titles. Descriptions are pre-set, but publishers can customize them. If they do, they need to set this bit to indicate that they've customized descriptions.
 
 **Returns:** `boolean`
 bool - value that was set
 
-*Defined in [TCModel.ts:463](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L463)*
+*Defined in [TCModel.ts:471](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L471)*
 
 Non-standard stacks means that a CMP is using publisher-customized stack descriptions. Stacks (in terms of purposes in a stack) are pre-set by the IAB. As are titles. Descriptions are pre-set, but publishers can customize them. If they do, they need to set this bit to indicate that they've customized descriptions.
 
@@ -504,21 +497,21 @@ ___
 
 **set vendorListVersion**(num: *`number`*): `void`
 
-*Defined in [TCModel.ts:366](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L366)*
+*Defined in [TCModel.ts:356](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L356)*
 
 **Returns:** `number`
-*   the global vendor list version this TCModel is constructed with
+*   Version of the GVL used to create this TCModel. Global Vendor List versions will be released periodically.
 
-*Defined in [TCModel.ts:348](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L348)*
+*Defined in [TCModel.ts:338](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L338)*
 
 **Parameters:**
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| num | `number` |  the global vendor list version for this TCModel |
+| num | `number` |  Version of the GVL used to create this TCModel. Global Vendor List versions will be released periodically. |
 
 **Returns:** `void`
-*   the global vendor list version this TCModel is constructed with
+*   Version of the GVL used to create this TCModel. Global Vendor List versions will be released periodically.
 
 ___
 <a id="version"></a>
@@ -529,18 +522,18 @@ ___
 
 **set version**(num: *`number`*): `void`
 
-*Defined in [TCModel.ts:420](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L420)*
+*Defined in [TCModel.ts:426](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L426)*
 
 **Returns:** `number`
 *   Incremented when TC String format changes. Indicates what encoding format the TCString will follow v1 or v2. v1 fields will omit fields.
 
-*Defined in [TCModel.ts:401](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L401)*
+*Defined in [TCModel.ts:407](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L407)*
 
 **Parameters:**
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| num | `number` |  indicates what version a TCString should be encoded as |
+| num | `number` |  Incremented when TC String format changes. Indicates what encoding format the TCString will follow v1 or v2. v1 fields will omit fields. |
 
 **Returns:** `void`
 *   Incremented when TC String format changes. Indicates what encoding format the TCString will follow v1 or v2. v1 fields will omit fields.
@@ -555,7 +548,7 @@ ___
 
 ▸ **isValid**(): `boolean`
 
-*Defined in [TCModel.ts:771](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L771)*
+*Defined in [TCModel.ts:752](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L752)*
 
 isValid - returns whether all fields have a value
 
@@ -568,7 +561,7 @@ ___
 
 ▸ **setAll**(): `void`
 
-*Defined in [TCModel.ts:709](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L709)*
+*Defined in [TCModel.ts:681](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L681)*
 
 setAll - calls:
 
@@ -589,7 +582,7 @@ ___
 
 ▸ **setAllPurposeConsents**(): `void`
 
-*Defined in [TCModel.ts:637](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L637)*
+*Defined in [TCModel.ts:606](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L606)*
 
 setAllPurposeConsents - sets all purposes on the GVL Consent (true)
 
@@ -602,7 +595,7 @@ ___
 
 ▸ **setAllPurposeLITransparency**(): `void`
 
-*Defined in [TCModel.ts:659](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L659)*
+*Defined in [TCModel.ts:629](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L629)*
 
 setAllPurposeLITransparency - sets all purposes on the GVL LI Transparency (true)
 
@@ -615,7 +608,7 @@ ___
 
 ▸ **setAllSpecialFeatureOptIns**(): `void`
 
-*Defined in [TCModel.ts:681](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L681)*
+*Defined in [TCModel.ts:652](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L652)*
 
 setAllSpecialFeatureOptIns - sets all special featuresOptins on the GVL (true)
 
@@ -628,7 +621,7 @@ ___
 
 ▸ **setAllVendorConsents**(): `void`
 
-*Defined in [TCModel.ts:593](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L593)*
+*Defined in [TCModel.ts:560](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L560)*
 
 setAllVendorConsents - sets all vendors on the GVL Consent (true)
 
@@ -641,7 +634,7 @@ ___
 
 ▸ **setAllVendorLegitimateInterest**(): `void`
 
-*Defined in [TCModel.ts:615](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L615)*
+*Defined in [TCModel.ts:583](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L583)*
 
 setAllVendorLegitimateInterest - sets all vendors on the GVL LegitimateInterest (true)
 
@@ -654,7 +647,7 @@ ___
 
 ▸ **unsetAll**(): `void`
 
-*Defined in [TCModel.ts:730](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L730)*
+*Defined in [TCModel.ts:704](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L704)*
 
 unsetAll - calls:
 
@@ -675,7 +668,7 @@ ___
 
 ▸ **unsetAllPurposeConsents**(): `void`
 
-*Defined in [TCModel.ts:648](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L648)*
+*Defined in [TCModel.ts:618](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L618)*
 
 unsetAllPurposeConsents - unsets all purposes on the GVL Consent (false)
 
@@ -688,7 +681,7 @@ ___
 
 ▸ **unsetAllPurposeLITransparency**(): `void`
 
-*Defined in [TCModel.ts:670](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L670)*
+*Defined in [TCModel.ts:641](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L641)*
 
 unsetAllPurposeLITransparency - unsets all purposes on the GVL LI Transparency (false)
 
@@ -701,7 +694,7 @@ ___
 
 ▸ **unsetAllSpecialFeatureOptIns**(): `void`
 
-*Defined in [TCModel.ts:692](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L692)*
+*Defined in [TCModel.ts:664](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L664)*
 
 unsetAllSpecialFeatureOptIns - unsets all special featuresOptins on the GVL (true)
 
@@ -714,7 +707,7 @@ ___
 
 ▸ **unsetAllVendorConsents**(): `void`
 
-*Defined in [TCModel.ts:604](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L604)*
+*Defined in [TCModel.ts:572](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L572)*
 
 unsetAllVendorConsents - unsets all vendors on the GVL Consent (false)
 
@@ -727,7 +720,7 @@ ___
 
 ▸ **unsetAllVendorLegitimateInterest**(): `void`
 
-*Defined in [TCModel.ts:626](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L626)*
+*Defined in [TCModel.ts:595](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L595)*
 
 unsetAllVendorLegitimateInterest - unsets all vendors on the GVL LegitimateInterest (false)
 
@@ -740,7 +733,7 @@ ___
 
 ▸ **updated**(): `void`
 
-*Defined in [TCModel.ts:759](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/TCModel.ts#L759)*
+*Defined in [TCModel.ts:741](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/TCModel.ts#L741)*
 
 updated - updates the lastUpdatedDate with a 'now' timestamp
 

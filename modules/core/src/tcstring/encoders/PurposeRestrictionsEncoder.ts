@@ -5,6 +5,12 @@ import {BitLength} from '../BitLength';
 import {PurposeRestrictionVector} from '../../model/PurposeRestrictionVector';
 import {PurposeRestriction} from '../../model/PurposeRestriction';
 
+/**
+ * TODO: Must check to see if vendor has flexible purposes first 
+ * TODO: if the RestrctionType is NOT_ALLOWED it doesn't matter if the vendor
+ * has a flexible purpose
+ */
+
 export class PurposeRestrictionsEncoder implements SpecificEncoder {
 
   public encode(vector: PurposeRestrictionVector): string {

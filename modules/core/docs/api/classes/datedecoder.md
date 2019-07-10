@@ -28,7 +28,7 @@
 
 *Implementation of [SpecificDecoder](../interfaces/specificdecoder.md).[decode](../interfaces/specificdecoder.md#decode)*
 
-*Defined in [tcstring/decoders/DateDecoder.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/tcstring/decoders/DateDecoder.ts#L6)*
+*Defined in [tcstring/decoders/DateDecoder.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/tcstring/decoders/DateDecoder.ts#L6)*
 
 **Parameters:**
 

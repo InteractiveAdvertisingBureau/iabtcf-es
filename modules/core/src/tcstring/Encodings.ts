@@ -43,11 +43,11 @@ export class Encodings {
       'specialFeatureOptIns',
       'purposeConsents',
       'purposeLITransparency',
-      'purposeOneDisclosure',
-      'publisherCountryCode',
+      'purposeOneTreatment',
+      'referenceCountry',
       'vendorConsents',
       'vendorLegitimateInterest',
-      'purposeRestrictions',
+      'publisherRestrictions',
     ],
   ];
 
@@ -66,11 +66,11 @@ export class Encodings {
     specialFeatureOptIns: encoders.FixedVectorEncoder,
     purposeConsents: encoders.FixedVectorEncoder,
     purposeLITransparency: encoders.FixedVectorEncoder,
-    purposeOneDisclosure: encoders.BooleanEncoder,
-    publisherCountryCode: encoders.LangEncoder,
+    purposeOneTreatment: encoders.BooleanEncoder,
+    referenceCountry: encoders.LangEncoder,
     vendorConsents: encoders.VendorVectorEncoder,
     vendorLegitimateInterest: encoders.VendorVectorEncoder,
-    purposeRestrictions: encoders.PurposeRestrictionsEncoder,
+    publisherRestrictions: encoders.PurposeRestrictionsEncoder,
   };
 
   public static readonly decoders: object = {
@@ -88,11 +88,11 @@ export class Encodings {
     specialFeatureOptIns: decoders.FixedVectorDecoder,
     purposeConsents: decoders.FixedVectorDecoder,
     purposeLITransparency: decoders.FixedVectorDecoder,
-    purposeOneDisclosure: decoders.BooleanDecoder,
-    publisherCountryCode: decoders.LangDecoder,
+    purposeOneTreatment: decoders.BooleanDecoder,
+    referenceCountry: decoders.LangDecoder,
     vendorConsents: decoders.VendorVectorDecoder,
     vendorLegitimateInterest: decoders.VendorVectorDecoder,
-    purposeRestrictions: decoders.PurposeRestrictionsDecoder,
+    publisherRestrictions: decoders.PurposeRestrictionsDecoder,
   };
 
 }

@@ -2,6 +2,8 @@
 
 # Class: PurposeRestrictionsEncoder
 
+TODO: Must check to see if vendor has flexible purposes first TODO: if the RestrctionType is NOT\_ALLOWED it doesn't matter if the vendor has a flexible purpose
+
 ## Hierarchy
 
 **PurposeRestrictionsEncoder**
@@ -26,7 +28,7 @@
 
 ▸ **encode**(vector: *[PurposeRestrictionVector](purposerestrictionvector.md)*): `string`
 
-*Defined in [tcstring/encoders/PurposeRestrictionsEncoder.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/3c9246f/modules/core/src/tcstring/encoders/PurposeRestrictionsEncoder.ts#L10)*
+*Defined in [tcstring/encoders/PurposeRestrictionsEncoder.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/9d52060/modules/core/src/tcstring/encoders/PurposeRestrictionsEncoder.ts#L16)*
 
 **Parameters:**
 

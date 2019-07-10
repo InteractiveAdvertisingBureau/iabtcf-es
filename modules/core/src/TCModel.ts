@@ -16,8 +16,8 @@ export class TCModel {
   private policyVersion_: number = 2;
   private isServiceSpecific_: boolean = false;
   private useNonStandardStacks_: boolean = false;
-  private purposeOneDisclosure_: boolean = false;
-  private publisherCountryCode_: string = 'AA';
+  private purposeOneTreatment_: boolean = false;
+  private referenceCountry_: string = 'AA';
 
 
   // needs some settin' (no default)
@@ -80,20 +80,7 @@ export class TCModel {
    */
   public readonly vendorLegitimateInterest: Vector = new Vector();
 
-  /**
-   * Each [[Vendor]] is keyed by id. The value stored is a
-   * [[PurposeRestriction]] object.
-   *
-   * ```javascript
-   * // to set
-   * const purposeRestriction = new PurposeRestriction();
-   * tcModel.vendorLegitimateInterest.set(2222, true);
-   *
-   * // to get
-   * const hasConsent = tcModel.vendorLegitimateInterest.get(2222);
-   * ```
-   */
-  public readonly purposeRestrictions: PurposeRestrictionVector = new PurposeRestrictionVector();
+  public readonly publisherRestrictions: PurposeRestrictionVector = new PurposeRestrictionVector();
 
   /**
    * Constructs the TCModel. Passing a [[GVL]] is optional when constructing
@@ -250,9 +237,10 @@ export class TCModel {
   }
 
   /**
-   * @param {number} integer - Each change to an operating CMP should receive a
-   * new version number, for logging proof of consent. CmpVersion defined by
-   * each CMP.
+   * @param {number} integer - The screen number is CMP and CmpVersion
+   * specific, and is for logging proof of consent.(For example, a CMP could
+   * keep records so that a publisher can request information about the context
+   * in which consent was gathered.)
    * @return {undefined}
    */
   public set consentScreen(integer: number) {
@@ -270,9 +258,10 @@ export class TCModel {
   }
 
   /**
-   * @return {number} - Each change to an operating CMP should receive a new
-   * version number, for logging proof of consent. CmpVersion defined by each
-   * CMP.
+   * @return {number} - The screen number is CMP and CmpVersion specific, and
+   * is for logging proof of consent.(For example, a CMP could keep records so
+   * that a publisher can request information about the context in which
+   * consent was gathered.)
    */
   public get consentScreen(): number {
 
@@ -281,7 +270,7 @@ export class TCModel {
   }
 
   /**
-   * @param {string} lang - lowercase [two-letter ISO 639-1 language
+   * @param {string} lang - [two-letter ISO 639-1 language
    * code](http://www.loc.gov/standards/iso639-2/php/code_list.php) in which
    * the CMP UI was presented
    * @return {undefined}
@@ -301,7 +290,7 @@ export class TCModel {
   }
 
   /**
-   * @return {string} - lowercase [two-letter ISO 639-1 language
+   * @return {string} -  [two-letter ISO 639-1 language
    * code](http://www.loc.gov/standards/iso639-2/php/code_list.php) in which
    * the CMP UI was presented
    */
@@ -312,42 +301,43 @@ export class TCModel {
   }
 
   /**
-   * @return {string} - uppercase [two-letter ISO 3166-1 alpha-2 country
+   * @return {string} - [two-letter ISO 3166-1 alpha-2 country
    * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the publisher,
    * determined by the CMP-settings of the publisher.
    */
-  public get publisherCountryCode(): string {
+  public get referenceCountry(): string {
 
-    return this.publisherCountryCode_;
+    return this.referenceCountry_;
 
   }
 
   /**
-   * @param {string} countryCode - uppercase [two-letter ISO 3166-1 alpha-2 country
+   * @param {string} countryCode - [two-letter ISO 3166-1 alpha-2 country
    * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the publisher,
    * determined by the CMP-settings of the publisher.
    * @return {undefined}
    */
-  public set publisherCountryCode(countryCode: string) {
+  public set referenceCountry(countryCode: string) {
 
     if (/^([A-z]){2}$/.test(countryCode)) {
 
-      this.publisherCountryCode_ = countryCode.toUpperCase();
+      this.referenceCountry_ = countryCode.toUpperCase();
 
     } else {
 
-      throw new TCModelError('publisherCountryCode', countryCode);
+      throw new TCModelError('referenceCountry', countryCode);
 
     }
 
   }
 
   /**
-   * @param {number} num - the global vendor list version for this TCModel
+   * @param {number} num - Version of the GVL used to create this TCModel. Global
+   * Vendor List versions will be released periodically.
    */
   public set vendorListVersion(num: number) {
 
-    if (Number.isInteger(num) && num > 0) {
+    if (this.isIntAbove(num, 0)) {
 
       this.vendorListVersion_ = num;
 
@@ -360,8 +350,8 @@ export class TCModel {
   }
 
   /**
-   * @return {number} - the global vendor list version this TCModel is
-   * constructed with
+   * @return {number} - Version of the GVL used to create this TCModel. Global
+   * Vendor List versions will be released periodically.
    */
   public get vendorListVersion(): number {
 
@@ -370,11 +360,18 @@ export class TCModel {
   }
 
   /**
-   * @param {number} num - the policyVersion for this TCModel
+   * @param {number} num - You do not need to set this.  This comes
+   * directly from the [[GVL]].  From the corresponding field in the GVL that
+   * was used for obtaining consent. A new policy version invalidates existing
+   * strings and requires CMPs to re-establish transparency and consent from
+   * users.
+   *
+   * If a TCF policy version number is different from the one from the latest
+   * GVL, the CMP must re-establish transparency and consent.
    */
   public set policyVersion(num: number) {
 
-    if (Number.isInteger(num) && num > 1) {
+    if (this.isIntAbove(num, 1)) {
 
       this.policyVersion_ = num;
 
@@ -387,7 +384,14 @@ export class TCModel {
   }
 
   /**
-   * @return {number} - the policyVersion this TCModel is constructed with
+   * @return {number} - From the corresponding field in the GVL that was
+   * used for obtaining consent. A new policy version invalidates existing
+   * strings and requires CMPs to re-establish transparency and consent from
+   * users.
+   *
+   * If a TCF policy version number is different from the one from the latest
+   * GVL, the CMP must re-establish transparency and consent.
+
    */
   public get policyVersion(): number {
 
@@ -396,11 +400,13 @@ export class TCModel {
   }
 
   /**
-   * @param {number} num - indicates what version a TCString should be encoded as
+   * @param {number} num - Incremented when TC String format changes. Indicates
+   * what encoding format the TCString will follow v1 or v2.  v1 fields will
+   * omit fields.   
    */
   public set version(num: number) {
 
-    if (Number.isInteger(num) && num <= TCModel.MAX_ENCODING_VERSION && num > 0) {
+    if (this.isIntAbove(num, 0) && num <= TCModel.MAX_ENCODING_VERSION) {
 
       this.version_ = num;
 
@@ -430,7 +436,9 @@ export class TCModel {
    * string intended to be stored in global/shared scope but the CMP is unable
    * to store due to a user agent not accepting third-party cookies would be
    * considered site-specific (True).
-   * @param {boolean} bool - value to set
+   * @param {boolean} bool - value to set. Some changes to other fields in this
+   * model will automatically change this value like adding publisher
+   * restrictions.
    */
   public set isServiceSpecific(bool: boolean) {
 
@@ -487,12 +495,12 @@ export class TCModel {
    * publisher’s country of establishment to help Vendors determine whether the
    * vendor requires Purpose 1 consent. In global scope TC strings, this field
    * must always have a value of `false`. When a CMP encounters a global scope
-   * string with `purposeOneDisclosure=true` then that string should be
+   * string with `purposeOneTreatment=true` then that string should be
    * considered invalid and the CMP must re-establish transparency and consent.
    */
-  public set purposeOneDisclosure(bool: boolean) {
+  public set purposeOneTreatment(bool: boolean) {
 
-    this.purposeOneDisclosure_ = bool;
+    this.purposeOneTreatment_ = bool;
 
   };
 
@@ -503,22 +511,14 @@ export class TCModel {
    * publisher’s country of establishment to help Vendors determine whether the
    * vendor requires Purpose 1 consent. In global scope TC strings, this field
    * must always have a value of `false`. When a CMP encounters a global scope
-   * string with `purposeOneDisclosure=true` then that string should be
+   * string with `purposeOneTreatment=true` then that string should be
    * considered invalid and the CMP must re-establish transparency and consent.
    */
-  public get purposeOneDisclosure(): boolean {
+  public get purposeOneTreatment(): boolean {
 
-    return this.purposeOneDisclosure_;
+    return this.purposeOneTreatment_;
 
   };
-
-  // This is a type check I need it to be an 'any'
-  // eslint-disable-next-line
-  private isGVLMapItem(obj: any): obj is GVLMapItem {
-
-    return typeof obj.id === 'number';
-
-  }
 
   /**
    * sets all items on the vector
@@ -725,6 +725,14 @@ export class TCModel {
 
   }
 
+  // This is a type check I need it to be an 'any'
+  // eslint-disable-next-line
+  private isGVLMapItem(obj: any): obj is GVLMapItem {
+
+    return typeof obj.id === 'number' && typeof obj.name === 'string';
+
+  }
+
   /**
    * updated - updates the lastUpdatedDate with a 'now' timestamp
    *
@@ -735,7 +743,6 @@ export class TCModel {
     this.lastUpdated = new Date();
 
   }
-
 
   /**
    * isValid - returns whether all fields have a value
@@ -749,8 +756,8 @@ export class TCModel {
       && this.cmpId !== undefined
       && this.cmpVersion !== undefined
       && this.consentLanguage !== undefined
-      && this.publisherCountryCode !== undefined
-      && this.purposeOneDisclosure !== undefined
+      && this.referenceCountry !== undefined
+      && this.purposeOneTreatment !== undefined
       && this.consentScreen !== undefined
       && this.created !== undefined
       && this.gvl !== undefined
