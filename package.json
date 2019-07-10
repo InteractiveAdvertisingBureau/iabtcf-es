@@ -14,7 +14,7 @@
     "deploy": "lerna publish from-package",
     "build": "lerna run build",
     "coverage": "nyc --reporter=lcov npm run test",
-    "travis-coverage": "npm run coverage && node bin/coveralls.js < coverage/lcov.info",
+    "upload-coverage": "node bin/coveralls.js < coverage/lcov.info",
     "standard": "standard index.js"
   },
   "nyc": {
