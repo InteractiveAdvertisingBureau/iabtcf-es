@@ -31,7 +31,7 @@
 
 *Inherited from [SpecificDecoder](specificdecoder.md).[decode](specificdecoder.md#decode)*
 
-*Defined in [tcstring/decoders/SpecificDecoder.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/293af9e/modules/core/src/tcstring/decoders/SpecificDecoder.ts#L5)*
+*Defined in decoders/SpecificDecoder.ts:5*
 
 **Parameters:**
 
@@ -48,7 +48,7 @@ ___
 
 ▸ **getBitLength**(): `number`
 
-*Defined in [tcstring/decoders/VariableLengthSpecificDecoder.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/293af9e/modules/core/src/tcstring/decoders/VariableLengthSpecificDecoder.ts#L4)*
+*Defined in decoders/VariableLengthSpecificDecoder.ts:4*
 
 **Returns:** `number`
 

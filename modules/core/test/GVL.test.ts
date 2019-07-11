@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import * as sinon from 'sinon';
 import {GVL} from '../src/GVL';
-import {GVLMap} from '../src/model/GVLBase';
-import {Vendor} from '../src/model/VendorList';
+import {Vendor, GVLMap} from '../src/model/gvl';
 import {XMLHttpTestTools} from './support/XMLHttpTestTools';
 
 // eslint-disable-next-line

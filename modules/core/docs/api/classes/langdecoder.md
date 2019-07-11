@@ -28,7 +28,7 @@
 
 *Implementation of [SpecificDecoder](../interfaces/specificdecoder.md).[decode](../interfaces/specificdecoder.md#decode)*
 
-*Defined in [tcstring/decoders/LangDecoder.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/293af9e/modules/core/src/tcstring/decoders/LangDecoder.ts#L7)*
+*Defined in decoders/LangDecoder.ts:7*
 
 **Parameters:**
 

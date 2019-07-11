@@ -27,7 +27,7 @@
 
 **● description**: *`string`*
 
-*Defined in [model/GVLBase.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/293af9e/modules/core/src/model/GVLBase.ts#L11)*
+*Defined in model/gvl/Feature.ts:3*
 
 ___
 <a id="descriptionlegal"></a>
@@ -36,7 +36,7 @@ ___
 
 **● descriptionLegal**: *`string`*
 
-*Defined in [model/GVLBase.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/293af9e/modules/core/src/model/GVLBase.ts#L12)*
+*Defined in model/gvl/Feature.ts:4*
 
 ___
 <a id="id"></a>
@@ -47,7 +47,7 @@ ___
 
 *Inherited from [GVLMapItem](gvlmapitem.md).[id](gvlmapitem.md#id)*
 
-*Defined in [model/GVLBase.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/293af9e/modules/core/src/model/GVLBase.ts#L6)*
+*Defined in model/gvl/GVLMapItem.ts:2*
 
 ___
 <a id="name"></a>
@@ -58,7 +58,7 @@ ___
 
 *Inherited from [GVLMapItem](gvlmapitem.md).[name](gvlmapitem.md#name)*
 
-*Defined in [model/GVLBase.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/293af9e/modules/core/src/model/GVLBase.ts#L7)*
+*Defined in model/gvl/GVLMapItem.ts:3*
 
 ___
 

@@ -1,8 +1,8 @@
-import {Vector} from './model/Vector';
-import {PurposeRestrictionVector} from './model/PurposeRestrictionVector';
-import {GVL} from './GVL';
+import {Vector} from './model/structures/Vector';
+import {PurposeRestrictionVector} from './model/structures/PurposeRestrictionVector';
 import {TCModelError} from './errors';
-import {GVLMap, GVLMapItem} from './model/GVLBase';
+import {GVL} from './GVL';
+import {GVLMap, GVLMapItem} from './model/gvl';
 
 export type TCModelPropType = number | Date | string | boolean | Vector | PurposeRestrictionVector;
 

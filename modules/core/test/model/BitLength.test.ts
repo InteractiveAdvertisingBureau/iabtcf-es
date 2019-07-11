@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {BitLength} from '../../src/tcstring/BitLength';
+import {BitLength} from '../../src/model/BitLength';
 
 export function run(): void {
 

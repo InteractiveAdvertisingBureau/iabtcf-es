@@ -28,7 +28,7 @@ TODO: Must check to see if vendor has flexible purposes first TODO: if the Restr
 
 ▸ **encode**(vector: *[PurposeRestrictionVector](purposerestrictionvector.md)*): `string`
 
-*Defined in [tcstring/encoders/PurposeRestrictionsEncoder.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/293af9e/modules/core/src/tcstring/encoders/PurposeRestrictionsEncoder.ts#L16)*
+*Defined in encoders/PurposeRestrictionsEncoder.ts:16*
 
 **Parameters:**
 

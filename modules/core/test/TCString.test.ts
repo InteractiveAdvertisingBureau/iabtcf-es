@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TCString} from '../src/TCString';
 import {TCModel} from '../src/TCModel';
 import {GVL} from '../src/GVL';
-import {Encodings} from '../src/tcstring/Encodings';
+import {Encodings} from '../src/model/Encodings';
 
 describe('TCString', (): void => {
 

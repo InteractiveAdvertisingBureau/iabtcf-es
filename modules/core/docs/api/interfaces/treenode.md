@@ -24,7 +24,7 @@
 
 **● left**: *[TreeNodeMaybe](../#treenodemaybe)*
 
-*Defined in [model/BinarySearchTree.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/293af9e/modules/core/src/model/BinarySearchTree.ts#L5)*
+*Defined in model/structures/BinarySearchTree.ts:5*
 
 ___
 <a id="right"></a>
@@ -33,7 +33,7 @@ ___
 
 **● right**: *[TreeNodeMaybe](../#treenodemaybe)*
 
-*Defined in [model/BinarySearchTree.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/293af9e/modules/core/src/model/BinarySearchTree.ts#L4)*
+*Defined in model/structures/BinarySearchTree.ts:4*
 
 ___
 <a id="value"></a>
@@ -42,7 +42,7 @@ ___
 
 **● value**: *`number`*
 
-*Defined in [model/BinarySearchTree.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/293af9e/modules/core/src/model/BinarySearchTree.ts#L3)*
+*Defined in model/structures/BinarySearchTree.ts:3*
 
 ___
 

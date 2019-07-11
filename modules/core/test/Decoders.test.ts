@@ -1,9 +1,9 @@
-import * as bool from './decoder/BooleanDecoder.test';
-import * as date from './decoder/DateDecoder.test';
-import * as fvd from './decoder/FixedVectorDecoder.test';
-import * as int from './decoder/IntDecoder.test';
-import * as lang from './decoder/LangDecoder.test';
-import * as vvd from './decoder/VendorVectorDecoder.test';
+import * as bool from './decoders/BooleanDecoder.test';
+import * as date from './decoders/DateDecoder.test';
+import * as fvd from './decoders/FixedVectorDecoder.test';
+import * as int from './decoders/IntDecoder.test';
+import * as lang from './decoders/LangDecoder.test';
+import * as vvd from './decoders/VendorVectorDecoder.test';
 
 describe('Decoders', (): void => {
 

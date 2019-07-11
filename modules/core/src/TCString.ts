@@ -1,17 +1,17 @@
 import {TCModel, TCModelPropType} from './TCModel';
 import {EncodingError, DecodingError} from './errors';
-import {Encodings} from './tcstring/Encodings';
-import {BitLength} from './tcstring/BitLength';
-import {Base64Url} from './tcstring/Base64Url';
-import {SpecificEncoder} from './tcstring/encoders';
-import {SpecificDecoder, VariableLengthSpecificDecoder} from './tcstring/decoders';
-import {Checksum} from './tcstring/Checksum';
+import {Encodings} from './model/Encodings';
+import {BitLength} from './model/BitLength';
+import {Base64Url} from './Base64Url';
+import {SpecificEncoder} from './encoders';
+import {SpecificDecoder, VariableLengthSpecificDecoder} from './decoders';
+import {Checksum} from './Checksum';
 
 /**
  * Main class for encoding and decoding a
  * TCF Transparency and Consent String
  */
-class TCString {
+export class TCString {
 
   /**
    *  encodes a model into a TCString
@@ -151,5 +151,3 @@ class TCString {
   }
 
 }
-
-export {TCString};

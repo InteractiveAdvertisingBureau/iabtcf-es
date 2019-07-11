@@ -1,4 +1,4 @@
-class Json {
+export class Json {
 
   /**
    * @param {string} jsonURL - full path to the json
@@ -72,4 +72,3 @@ class Json {
   }
 
 }
-export {Json};

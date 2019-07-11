@@ -6,25 +6,17 @@ import {
   GVLMap,
   Purpose,
   Feature,
+  IDSetMap,
   Stack,
-} from './model/GVLBase';
-
-import {
+  Vendor,
+  VendorList,
   ByPurposeVendorMap,
-  BySpecialPurposeVendorMap,
-  ByFeatureVendorMap,
-  BySpecialFeatureVendorMap,
-} from './model/GVLMaps';
+} from './model/gvl';
 
 /**
  * TODO: make map to cache language translations under language so if a
  * language is loaded twice it won't go and get it more than once
  */
-
-import {
-  Vendor,
-  VendorList,
-} from './model/VendorList';
 
 export type VersionOrVendorList = string | number | VendorList;
 type PurposeOrFeature = 'purpose' | 'feature';
@@ -157,19 +149,19 @@ export class GVL {
   private byPurposeVendorMap: ByPurposeVendorMap;
 
   /**
-   * @param {BySpecialPurposeVendorMap} vendors by special purpose
+   * @param {IDSetMap} vendors by special purpose
    */
-  private bySpecialPurposeVendorMap: BySpecialPurposeVendorMap;
+  private bySpecialPurposeVendorMap: IDSetMap;
 
   /**
-   * @param {ByFeatureVendorMap} vendors by feature
+   * @param {IDSetMap} vendors by feature
    */
-  private byFeatureVendorMap: ByFeatureVendorMap;
+  private byFeatureVendorMap: IDSetMap;
 
   /**
-   * @param {BySpecialFeatureVendorMap} vendors by special feature
+   * @param {IDSetMap} vendors by special feature
    */
-  private bySpecialFeatureVendorMap: BySpecialFeatureVendorMap;
+  private bySpecialFeatureVendorMap: IDSetMap;
 
   /**
    * @param {GVLMap<Stack>} a collection of [[Stack]]s

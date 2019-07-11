@@ -1,10 +1,10 @@
-import * as bool from './encoder/BooleanEncoder.test';
-import * as date from './encoder/DateEncoder.test';
-import * as fvd from './encoder/FixedVectorEncoder.test';
-import * as int from './encoder/IntEncoder.test';
-import * as lang from './encoder/LangEncoder.test';
-import * as vve from './encoder/VendorVectorEncoder.test';
-import * as pre from './encoder/PurposeRestrictionsEncoder.test';
+import * as bool from './encoders/BooleanEncoder.test';
+import * as date from './encoders/DateEncoder.test';
+import * as fvd from './encoders/FixedVectorEncoder.test';
+import * as int from './encoders/IntEncoder.test';
+import * as lang from './encoders/LangEncoder.test';
+import * as vve from './encoders/VendorVectorEncoder.test';
+import * as pre from './encoders/PurposeRestrictionsEncoder.test';
 
 describe('Encoders', (): void => {
 
