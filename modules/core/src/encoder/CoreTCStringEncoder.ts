@@ -40,7 +40,11 @@ export class CoreTCStringEncoder implements Encoder<TCModel> {
      * Pad the remainder of the bitField with with zeros to so that it is a
      * valid base64-able bitfield
      */
-    bitField += '0'.repeat(6-(bitSum % 6));
+    if (bitField.length % 6 !== 0) {
+
+      bitField += '0'.repeat(6-(bitSum % 6));
+
+    }
 
     // base64url encode the string and return
     return Base64Url.encode(bitField);
@@ -71,7 +75,7 @@ export class CoreTCStringEncoder implements Encoder<TCModel> {
       }
 
       /**
-       * vLengthBits can only be set from a variable length encodeencoder otherwise
+       * vLengthBits can only be set from a variable length encoder otherwise
        * it's 0
        */
       if (vLengthBits || BitLength[key]) {
