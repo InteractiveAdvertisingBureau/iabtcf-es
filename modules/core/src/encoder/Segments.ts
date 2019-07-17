@@ -1,6 +1,6 @@
 import {CoreTCStringEncoder} from './CoreTCStringEncoder';
 
-export class SegmentSequence {
+export class Segments {
 
   public static readonly '1': object[] = [
     CoreTCStringEncoder,

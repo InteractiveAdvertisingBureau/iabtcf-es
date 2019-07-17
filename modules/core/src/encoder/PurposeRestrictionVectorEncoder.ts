@@ -1,7 +1,7 @@
 import {Encoder} from './Encoder';
 import {IntEncoder} from './IntEncoder';
 import {BooleanEncoder} from './BooleanEncoder';
-import {BitLength} from '../model/BitLength';
+import {BitLength} from './BitLength';
 import {PurposeRestrictionVector} from '../model/PurposeRestrictionVector';
 import {PurposeRestriction} from '../model/PurposeRestriction';
 

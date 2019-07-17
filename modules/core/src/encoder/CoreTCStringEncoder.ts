@@ -3,7 +3,7 @@ import {Base64Url} from '../Base64Url';
 import {EncodingError, DecodingError} from '../errors';
 import {EncoderMap} from './EncoderMap';
 import {TCModel, TCModelPropType} from '../TCModel';
-import {BitLength} from '../model/BitLength';
+import {BitLength} from './BitLength';
 import {CoreFieldSequence} from './CoreFieldSequence';
 
 export class CoreTCStringEncoder implements Encoder<TCModel> {
@@ -19,7 +19,6 @@ export class CoreTCStringEncoder implements Encoder<TCModel> {
       bitSum += BitLength[key];
 
       const value: TCModelPropType = tcModel[key];
-
       const numBits: number = BitLength[key];
       const encoder: Encoder<TCModelPropType> = new EncoderMap[key]() as Encoder<TCModelPropType>;
 
@@ -50,41 +49,30 @@ export class CoreTCStringEncoder implements Encoder<TCModel> {
     return Base64Url.encode(bitField);
 
   }
-  public decode(encodedString: string): TCModel {
+  public decode(encodedString: string, tcModel: TCModel): TCModel {
 
-    const tcModel = new TCModel();
     const encoding: string[] = CoreFieldSequence[tcModel.version.toString()];
     const bitField = Base64Url.decode(encodedString);
     let bStringIdx = 0;
 
     encoding.forEach((key: string): void => {
 
-      let vLengthBits = 0;
       const encoder: Encoder<TCModelPropType> = new EncoderMap[key]() as Encoder<TCModelPropType>;
 
       tcModel[key] = encoder.decode(bitField.substr(bStringIdx, BitLength[key]));
 
-      /**
-       * if it has no entry in the BitLength map, then it is a variable
-       * length encoding
-       */
-      if (!BitLength[key] && encoder.getBitLength) {
 
-        vLengthBits = encoder.getBitLength();
+      if (BitLength[key]) {
 
-      }
+        bStringIdx += BitLength[key];
 
-      /**
-       * vLengthBits can only be set from a variable length encoder otherwise
-       * it's 0
-       */
-      if (vLengthBits || BitLength[key]) {
+      } else if (encoder.getBitLength) {
 
-        bStringIdx += (vLengthBits) ? vLengthBits : BitLength[key];
+        bStringIdx += encoder.getBitLength();
 
       } else {
 
-        throw new DecodingError('Something went wrong...');
+        throw new DecodingError('Indeterminate bit length');
 
       }
 
