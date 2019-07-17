@@ -118,7 +118,7 @@ export function run(): void {
 
       prv.add(vendorId, purpRestriction);
 
-      const prvRestrictions: PurposeRestriction[] = prv.getRestrictions(vendorId);
+      const prvRestrictions: PurposeRestriction[] = prv.getRestriction(vendorId);
 
       expect(purpRestriction.isSameAs(prvRestrictions[0])).to.be.true;
 
@@ -150,12 +150,12 @@ export function run(): void {
       // select random one
       const targetVendor: number = vendors[Math.floor(Math.random() * vendors.length - 1)];
 
-      expect(prv.getRestrictions(targetVendor)).not.to.be.empty;
+      expect(prv.getRestriction(targetVendor)).not.to.be.empty;
       expect(prv.getVendors(purpRestriction)).to.include(targetVendor);
 
       prv.remove(targetVendor, purpRestriction);
 
-      expect(prv.getRestrictions(targetVendor)).to.be.empty;
+      expect(prv.getRestriction(targetVendor)).to.be.empty;
       expect(prv.getVendors(purpRestriction)).not.to.include(targetVendor);
 
     });
@@ -190,13 +190,13 @@ export function run(): void {
 
       prv.add(vendorId, purpRestriction);
 
-      expect(prv.getRestrictions(vendorId)).not.to.be.empty;
+      expect(prv.getRestriction(vendorId)).not.to.be.empty;
       expect(prv.getVendors(purpRestriction)).to.include(vendorId);
       expect(prv.isEmpty()).to.be.false;
 
       prv.remove(vendorId, purpRestriction);
 
-      expect(prv.getRestrictions(vendorId)).to.be.empty;
+      expect(prv.getRestriction(vendorId)).to.be.empty;
       expect(prv.getVendors(purpRestriction)).not.to.include(vendorId);
       expect(prv.isEmpty()).to.be.true;
 
