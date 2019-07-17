@@ -38,171 +38,342 @@
 
 ### `<Static>` cmpId
 
-**● cmpId**: *`Record`<`string`, `any`>* =  IntEncoder
+**● cmpId**: *`object`* =  IntEncoder
 
-*Defined in [model/encodings/EncoderMap.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/EncoderMap.ts#L19)*
+*Defined in [encoder/EncoderMap.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L22)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`number`>
+
+*Defined in [encoder/EncoderMap.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L22)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<`number`>
 
 ___
 <a id="cmpversion"></a>
 
 ### `<Static>` cmpVersion
 
-**● cmpVersion**: *`Record`<`string`, `any`>* =  IntEncoder
+**● cmpVersion**: *`object`* =  IntEncoder
 
-*Defined in [model/encodings/EncoderMap.ts:20](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/EncoderMap.ts#L20)*
+*Defined in [encoder/EncoderMap.ts:23](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L23)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`number`>
+
+*Defined in [encoder/EncoderMap.ts:23](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L23)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<`number`>
 
 ___
 <a id="consentlanguage"></a>
 
 ### `<Static>` consentLanguage
 
-**● consentLanguage**: *`Record`<`string`, `any`>* =  LangEncoder
+**● consentLanguage**: *`object`* =  LangEncoder
 
-*Defined in [model/encodings/EncoderMap.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/EncoderMap.ts#L22)*
+*Defined in [encoder/EncoderMap.ts:25](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L25)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`string`>
+
+*Defined in [encoder/EncoderMap.ts:25](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L25)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<`string`>
 
 ___
 <a id="consentscreen"></a>
 
 ### `<Static>` consentScreen
 
-**● consentScreen**: *`Record`<`string`, `any`>* =  IntEncoder
+**● consentScreen**: *`object`* =  IntEncoder
 
-*Defined in [model/encodings/EncoderMap.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/EncoderMap.ts#L21)*
+*Defined in [encoder/EncoderMap.ts:24](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L24)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`number`>
+
+*Defined in [encoder/EncoderMap.ts:24](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L24)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<`number`>
 
 ___
 <a id="created"></a>
 
 ### `<Static>` created
 
-**● created**: *`Record`<`string`, `any`>* =  DateEncoder
+**● created**: *`object`* =  DateEncoder
 
-*Defined in [model/encodings/EncoderMap.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/EncoderMap.ts#L17)*
+*Defined in [encoder/EncoderMap.ts:20](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L20)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`Date`>
+
+*Defined in [encoder/EncoderMap.ts:20](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L20)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<`Date`>
 
 ___
 <a id="isservicespecific"></a>
 
 ### `<Static>` isServiceSpecific
 
-**● isServiceSpecific**: *`Record`<`string`, `any`>* =  BooleanEncoder
+**● isServiceSpecific**: *`object`* =  BooleanEncoder
 
-*Defined in [model/encodings/EncoderMap.ts:25](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/EncoderMap.ts#L25)*
+*Defined in [encoder/EncoderMap.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L28)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`boolean`>
+
+*Defined in [encoder/EncoderMap.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L28)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<`boolean`>
 
 ___
 <a id="lastupdated"></a>
 
 ### `<Static>` lastUpdated
 
-**● lastUpdated**: *`Record`<`string`, `any`>* =  DateEncoder
+**● lastUpdated**: *`object`* =  DateEncoder
 
-*Defined in [model/encodings/EncoderMap.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/EncoderMap.ts#L18)*
+*Defined in [encoder/EncoderMap.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L21)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`Date`>
+
+*Defined in [encoder/EncoderMap.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L21)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<`Date`>
 
 ___
 <a id="policyversion"></a>
 
 ### `<Static>` policyVersion
 
-**● policyVersion**: *`Record`<`string`, `any`>* =  IntEncoder
+**● policyVersion**: *`object`* =  IntEncoder
 
-*Defined in [model/encodings/EncoderMap.ts:24](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/EncoderMap.ts#L24)*
+*Defined in [encoder/EncoderMap.ts:27](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L27)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`number`>
+
+*Defined in [encoder/EncoderMap.ts:27](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L27)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<`number`>
 
 ___
 <a id="publisherrestrictions"></a>
 
 ### `<Static>` publisherRestrictions
 
-**● publisherRestrictions**: *`Record`<`string`, `any`>* =  PurposeRestrictionVectorEncoder
+**● publisherRestrictions**: *`object`* =  PurposeRestrictionVectorEncoder
 
-*Defined in [model/encodings/EncoderMap.ts:34](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/EncoderMap.ts#L34)*
+*Defined in [encoder/EncoderMap.ts:37](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L37)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<[PurposeRestrictionVector](purposerestrictionvector.md)>
+
+*Defined in [encoder/EncoderMap.ts:37](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L37)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<[PurposeRestrictionVector](purposerestrictionvector.md)>
 
 ___
 <a id="purposeconsents"></a>
 
 ### `<Static>` purposeConsents
 
-**● purposeConsents**: *`Record`<`string`, `any`>* =  FixedVectorEncoder
+**● purposeConsents**: *`object`* =  FixedVectorEncoder
 
-*Defined in [model/encodings/EncoderMap.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/EncoderMap.ts#L28)*
+*Defined in [encoder/EncoderMap.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L31)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
+
+*Defined in [encoder/EncoderMap.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L31)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
 
 ___
 <a id="purposelitransparency"></a>
 
 ### `<Static>` purposeLITransparency
 
-**● purposeLITransparency**: *`Record`<`string`, `any`>* =  FixedVectorEncoder
+**● purposeLITransparency**: *`object`* =  FixedVectorEncoder
 
-*Defined in [model/encodings/EncoderMap.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/EncoderMap.ts#L29)*
+*Defined in [encoder/EncoderMap.ts:32](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L32)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
+
+*Defined in [encoder/EncoderMap.ts:32](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L32)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
 
 ___
 <a id="purposeonetreatment"></a>
 
 ### `<Static>` purposeOneTreatment
 
-**● purposeOneTreatment**: *`Record`<`string`, `any`>* =  BooleanEncoder
+**● purposeOneTreatment**: *`object`* =  BooleanEncoder
 
-*Defined in [model/encodings/EncoderMap.ts:30](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/EncoderMap.ts#L30)*
+*Defined in [encoder/EncoderMap.ts:33](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L33)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`boolean`>
+
+*Defined in [encoder/EncoderMap.ts:33](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L33)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<`boolean`>
 
 ___
 <a id="referencecountry"></a>
 
 ### `<Static>` referenceCountry
 
-**● referenceCountry**: *`Record`<`string`, `any`>* =  LangEncoder
+**● referenceCountry**: *`object`* =  LangEncoder
 
-*Defined in [model/encodings/EncoderMap.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/EncoderMap.ts#L31)*
+*Defined in [encoder/EncoderMap.ts:34](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L34)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`string`>
+
+*Defined in [encoder/EncoderMap.ts:34](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L34)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<`string`>
 
 ___
 <a id="specialfeatureoptins"></a>
 
 ### `<Static>` specialFeatureOptIns
 
-**● specialFeatureOptIns**: *`Record`<`string`, `any`>* =  FixedVectorEncoder
+**● specialFeatureOptIns**: *`object`* =  FixedVectorEncoder
 
-*Defined in [model/encodings/EncoderMap.ts:27](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/EncoderMap.ts#L27)*
+*Defined in [encoder/EncoderMap.ts:30](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L30)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
+
+*Defined in [encoder/EncoderMap.ts:30](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L30)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
 
 ___
 <a id="usenonstandardstacks"></a>
 
 ### `<Static>` useNonStandardStacks
 
-**● useNonStandardStacks**: *`Record`<`string`, `any`>* =  BooleanEncoder
+**● useNonStandardStacks**: *`object`* =  BooleanEncoder
 
-*Defined in [model/encodings/EncoderMap.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/EncoderMap.ts#L26)*
+*Defined in [encoder/EncoderMap.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L29)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`boolean`>
+
+*Defined in [encoder/EncoderMap.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L29)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<`boolean`>
 
 ___
 <a id="vendorconsents"></a>
 
 ### `<Static>` vendorConsents
 
-**● vendorConsents**: *`Record`<`string`, `any`>* =  VendorVectorEncoder
+**● vendorConsents**: *`object`* =  VendorVectorEncoder
 
-*Defined in [model/encodings/EncoderMap.ts:32](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/EncoderMap.ts#L32)*
+*Defined in [encoder/EncoderMap.ts:35](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L35)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
+
+*Defined in [encoder/EncoderMap.ts:35](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L35)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
 
 ___
 <a id="vendorlegitimateinterest"></a>
 
 ### `<Static>` vendorLegitimateInterest
 
-**● vendorLegitimateInterest**: *`Record`<`string`, `any`>* =  VendorVectorEncoder
+**● vendorLegitimateInterest**: *`object`* =  VendorVectorEncoder
 
-*Defined in [model/encodings/EncoderMap.ts:33](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/EncoderMap.ts#L33)*
+*Defined in [encoder/EncoderMap.ts:36](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L36)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
+
+*Defined in [encoder/EncoderMap.ts:36](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L36)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
 
 ___
 <a id="vendorlistversion"></a>
 
 ### `<Static>` vendorListVersion
 
-**● vendorListVersion**: *`Record`<`string`, `any`>* =  IntEncoder
+**● vendorListVersion**: *`object`* =  IntEncoder
 
-*Defined in [model/encodings/EncoderMap.ts:23](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/EncoderMap.ts#L23)*
+*Defined in [encoder/EncoderMap.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L26)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`number`>
+
+*Defined in [encoder/EncoderMap.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L26)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<`number`>
 
 ___
 <a id="version"></a>
 
 ### `<Static>` version
 
-**● version**: *`Record`<`string`, `any`>* =  IntEncoder
+**● version**: *`object`* =  IntEncoder
 
-*Defined in [model/encodings/EncoderMap.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/EncoderMap.ts#L16)*
+*Defined in [encoder/EncoderMap.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L19)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`number`>
+
+*Defined in [encoder/EncoderMap.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/EncoderMap.ts#L19)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<`number`>
 
 ___
 

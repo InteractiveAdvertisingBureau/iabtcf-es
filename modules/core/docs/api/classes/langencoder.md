@@ -29,7 +29,7 @@
 
 *Implementation of [Encoder](../interfaces/encoder.md).[decode](../interfaces/encoder.md#decode)*
 
-*Defined in [encoder/LangEncoder.ts:38](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/encoder/LangEncoder.ts#L38)*
+*Defined in [encoder/LangEncoder.ts:38](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/LangEncoder.ts#L38)*
 
 **Parameters:**
 
@@ -46,7 +46,7 @@ ___
 
 ▸ **encode**(value: *`string`*, numBits: *`number`*): `string`
 
-*Defined in [encoder/LangEncoder.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/encoder/LangEncoder.ts#L8)*
+*Defined in [encoder/LangEncoder.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/LangEncoder.ts#L8)*
 
 **Parameters:**
 

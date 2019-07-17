@@ -29,7 +29,7 @@
 
 *Implementation of [Encoder](../interfaces/encoder.md).[decode](../interfaces/encoder.md#decode)*
 
-*Defined in [encoder/BooleanEncoder.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/encoder/BooleanEncoder.ts#L11)*
+*Defined in [encoder/BooleanEncoder.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/BooleanEncoder.ts#L11)*
 
 **Parameters:**
 
@@ -46,7 +46,7 @@ ___
 
 ▸ **encode**(value: *`boolean`*): `string`
 
-*Defined in [encoder/BooleanEncoder.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/encoder/BooleanEncoder.ts#L5)*
+*Defined in [encoder/BooleanEncoder.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/BooleanEncoder.ts#L5)*
 
 **Parameters:**
 
