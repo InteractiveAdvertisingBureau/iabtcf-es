@@ -262,6 +262,7 @@ export class VendorVectorEncoder implements Encoder<Vector> {
 
       const single = (range.length === 1);
 
+      rLength += 1; // for the SingleOrRange bit
       rLength += BitLength.vendorId;
       rLength += (single) ? 0 : BitLength.vendorId;
 
