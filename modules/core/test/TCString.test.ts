@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {TCString} from '../src/TCString';
 import {TCModel} from '../src/TCModel';
 import {GVL} from '../src/GVL';
-import {Encodings} from '../src/model/Encodings';
 
+/*
 describe('TCString', (): void => {
 
   // eslint-disable-next-line
@@ -33,7 +33,6 @@ describe('TCString', (): void => {
     expect(encoded).to.not.equal('');
 
   });
-  /*
 
   it('TCModel->String->TCModel and should be equal', (): void => {
 
@@ -87,6 +86,7 @@ describe('TCString', (): void => {
 
 
   });
-  */
 
 });
+  */
+

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Vector} from '../../src/model/structures/Vector';
+import {Vector} from '../../src/model/Vector';
 
 export function run(): void {
 

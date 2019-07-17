@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {BinarySearchTree} from '../../src/model/structures/BinarySearchTree';
+import {BinarySearchTree} from '../../src/model/BinarySearchTree';
 
 export function run(): void {
 

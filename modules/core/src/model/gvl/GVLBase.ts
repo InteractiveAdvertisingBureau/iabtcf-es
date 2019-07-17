@@ -1,4 +1,4 @@
-import {GVLMap} from './GVLMap';
+import {IntMap} from '../IntMap';
 import {Feature} from './Feature';
 import {Purpose} from './Purpose';
 import {Stack} from './Stack';
@@ -9,9 +9,9 @@ export interface GVLBase {
   vendorListVersion: number;
   tcfPolicyVersion: number;
   lastUpdated: string | Date;
-  purposes: GVLMap<Purpose>;
-  specialPurposes: GVLMap<Purpose>;
-  features: GVLMap<Feature>;
-  specialFeatures: GVLMap<Feature>;
-  stacks: GVLMap<Stack>;
+  purposes: IntMap<Purpose>;
+  specialPurposes: IntMap<Purpose>;
+  features: IntMap<Feature>;
+  specialFeatures: IntMap<Feature>;
+  stacks: IntMap<Stack>;
 }

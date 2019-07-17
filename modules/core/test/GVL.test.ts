@@ -1,7 +1,8 @@
 import {expect} from 'chai';
 import * as sinon from 'sinon';
 import {GVL} from '../src/GVL';
-import {Vendor, GVLMap} from '../src/model/gvl';
+import {Vendor} from '../src/model/gvl';
+import {IntMap}  from '../src/model/IntMap';
 import {XMLHttpTestTools} from './support/XMLHttpTestTools';
 
 // eslint-disable-next-line
@@ -329,7 +330,7 @@ describe('GVL', (): void => {
 
         }
         const gvlMethodName: string = 'getVendorsWith' + specialOrSubType + cappedPORF;
-        const gvlMap: GVLMap<Vendor>
+        const gvlMap: IntMap<Vendor>
           = gvl[gvlMethodName](intId);
 
         Object.keys(vendorlistJson.vendors).forEach((vendorId: string): void => {

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {PurposeRestriction} from '../../src/model/structures/PurposeRestriction';
+import {PurposeRestriction} from '../../src/model/PurposeRestriction';
 import {RestrictionType} from '../../src/model/RestrictionType';
 
 export function run(): void {

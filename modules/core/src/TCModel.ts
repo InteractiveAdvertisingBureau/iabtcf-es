@@ -1,8 +1,9 @@
-import {Vector} from './model/structures/Vector';
-import {PurposeRestrictionVector} from './model/structures/PurposeRestrictionVector';
+import {Vector} from './model/Vector';
+import {PurposeRestrictionVector} from './model/PurposeRestrictionVector';
 import {TCModelError} from './errors';
 import {GVL} from './GVL';
-import {GVLMap, GVLMapItem} from './model/gvl';
+import {GVLMapItem} from './model/gvl';
+import {IntMap} from './model/IntMap';
 
 export type TCModelPropType = number | Date | string | boolean | Vector | PurposeRestrictionVector;
 
@@ -210,7 +211,7 @@ export class TCModel {
    * keep records so that a publisher can request information about the context
    * in which consent was gathered.)
    *
-   * @param {number} integer 
+   * @param {number} integer
    *
    * @throws {TCModelError} if the value is not an integer greater than 0 as those are not valid.
    */
@@ -323,7 +324,7 @@ export class TCModel {
    * GVL, the CMP must re-establish transparency and consent.
    *
    * @param {number} num - You do not need to set this.  This comes
-   * directly from the [[GVL]].     
+   * directly from the [[GVL]].
    *
    * @throws {TCModelError} if the value is not an integer greater than 1 as those are not valid.
    */
@@ -442,11 +443,11 @@ export class TCModel {
   /**
    * sets all items on the vector
    *
-   * @param {GVLMap} gvlMap - this will be one of the maps defined in the [[GVLMap]]
+   * @param {IntMap} gvlMap - this will be one of the maps defined in the [[IntMap]]
    * @param {Vector)} vector - vector to affect
    * @return {void}
    */
-  private setAllOnVector<T>(gvlMap: GVLMap<T>, vector: Vector): void {
+  private setAllOnVector<T>(gvlMap: IntMap<T>, vector: Vector): void {
 
     if (!this.gvl) {
 

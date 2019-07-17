@@ -19,6 +19,7 @@
     "prepack": "npm run build",
     "build": "rm -r lib ; tsc",
     "test": "mocha './test/*.ts'",
+    "lint": "eslint ./src/**/*.ts",
     "report-coverage": "nyc --reporter=lcov npm run test"
   },
   "devDependencies": {
@@ -86,5 +87,6 @@
     "url": "https://github.com/chrispaterson/iabtcf-es.git",
     "directory": "modules/core"
   },
-  "gitHead": "1cc7fc723d8cbfa784dde27ce7bb95100107b750"
+  "gitHead": "1cc7fc723d8cbfa784dde27ce7bb95100107b750",
+  "dependencies": {}
 }

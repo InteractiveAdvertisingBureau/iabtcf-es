@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {PurposeRestriction} from '../../src/model/structures/PurposeRestriction';
+import {PurposeRestriction} from '../../src/model/PurposeRestriction';
 import {RestrictionType} from '../../src/model/RestrictionType';
-import {PurposeRestrictionVector} from '../../src/model/structures/PurposeRestrictionVector';
+import {PurposeRestrictionVector} from '../../src/model/PurposeRestrictionVector';
 import {makeRandomInt} from '../support/makeRandomInt';
 
 export function run(): void {

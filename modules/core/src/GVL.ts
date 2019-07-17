@@ -3,7 +3,6 @@ import {GVLError} from './errors';
 
 import {
   GVLBase,
-  GVLMap,
   Purpose,
   Feature,
   IDSetMap,
@@ -13,6 +12,7 @@ import {
   ByPurposeVendorMap,
 } from './model/gvl';
 
+import {IntMap} from './model/IntMap';
 /**
  * TODO: make map to cache language translations under language so if a
  * language is loaded twice it won't go and get it more than once
@@ -114,34 +114,34 @@ export class GVL {
   public lastUpdated: string | Date;
 
   /**
-   * @param {GVLMap<Purpose>} a collection of [[Purpose]]s
+   * @param {IntMap<Purpose>} a collection of [[Purpose]]s
    */
-  public purposes: GVLMap<Purpose>;
+  public purposes: IntMap<Purpose>;
 
   /**
-   * @param {GVLMap<Purpose>} a collection of [[Purpose]]s
+   * @param {IntMap<Purpose>} a collection of [[Purpose]]s
    */
-  public specialPurposes: GVLMap<Purpose>;
+  public specialPurposes: IntMap<Purpose>;
 
   /**
-   * @param {GVLMap<Feature>} a collection of [[Feature]]s
+   * @param {IntMap<Feature>} a collection of [[Feature]]s
    */
-  public features: GVLMap<Feature>;
+  public features: IntMap<Feature>;
 
   /**
-   * @param {GVLMap<Feature>} a collection of [[Feature]]s
+   * @param {IntMap<Feature>} a collection of [[Feature]]s
    */
-  public specialFeatures: GVLMap<Feature>;
+  public specialFeatures: IntMap<Feature>;
 
   /**
-   * @param {GVLMap<Vendor>} a collection of [[Vendor]]s
+   * @param {IntMap<Vendor>} a collection of [[Vendor]]s
    */
-  private vendors_: GVLMap<Vendor>;
+  private vendors_: IntMap<Vendor>;
 
   /**
-   * @param {GVLMap<Vendor>} a collection of [[Vendor]]. Used as a backup if a whitelist is sets
+   * @param {IntMap<Vendor>} a collection of [[Vendor]]. Used as a backup if a whitelist is sets
    */
-  private fullVendorList: GVLMap<Vendor>;
+  private fullVendorList: IntMap<Vendor>;
 
   /**
    * @param {ByPurposeVendorMap} vendors by purpose
@@ -164,9 +164,9 @@ export class GVL {
   private bySpecialFeatureVendorMap: IDSetMap;
 
   /**
-   * @param {GVLMap<Stack>} a collection of [[Stack]]s
+   * @param {IntMap<Stack>} a collection of [[Stack]]s
    */
-  public stacks: GVLMap<Stack>;
+  public stacks: IntMap<Stack>;
 
   public readonly DEFAULT_LANGUAGE: string = 'en';
 
@@ -446,11 +446,11 @@ export class GVL {
     id: number,
     subType?: PurposeSubType,
     special?: boolean
-  ): GVLMap<Vendor> {
+  ): IntMap<Vendor> {
 
     const properPurposeOrFeature: string = purposeOrFeature.charAt(0).toUpperCase() + purposeOrFeature.slice(1);
     let vendorSet: Set<number>;
-    const retr: GVLMap<Vendor> = {};
+    const retr: IntMap<Vendor> = {};
 
     if (purposeOrFeature === 'purpose' && subType) {
 
@@ -476,9 +476,9 @@ export class GVL {
    * getVendorsWithConsentPurpose
    *
    * @param {number} purposeId
-   * @return {GVLMap<Vendor>} - list of vendors that have declared the consent purpose id
+   * @return {IntMap<Vendor>} - list of vendors that have declared the consent purpose id
    */
-  public getVendorsWithConsentPurpose(purposeId: number): GVLMap<Vendor> {
+  public getVendorsWithConsentPurpose(purposeId: number): IntMap<Vendor> {
 
     return this.getFilteredVendors('purpose', purposeId, 'consent');
 
@@ -488,9 +488,9 @@ export class GVL {
    * getVendorsWithLegIntPurpose
    *
    * @param {number} purposeId
-   * @return {GVLMap<Vendor>} - list of vendors that have declared the legInt (Legitimate Interest) purpose id
+   * @return {IntMap<Vendor>} - list of vendors that have declared the legInt (Legitimate Interest) purpose id
    */
-  public getVendorsWithLegIntPurpose(purposeId: number): GVLMap<Vendor> {
+  public getVendorsWithLegIntPurpose(purposeId: number): IntMap<Vendor> {
 
     return this.getFilteredVendors('purpose', purposeId, 'legInt');
 
@@ -500,9 +500,9 @@ export class GVL {
    * getVendorsWithFlexiblePurpose
    *
    * @param {number} purposeId
-   * @return {GVLMap<Vendor>} - list of vendors that have declared the flexible purpose id
+   * @return {IntMap<Vendor>} - list of vendors that have declared the flexible purpose id
    */
-  public getVendorsWithFlexiblePurpose(purposeId: number): GVLMap<Vendor> {
+  public getVendorsWithFlexiblePurpose(purposeId: number): IntMap<Vendor> {
 
     return this.getFilteredVendors('purpose', purposeId, 'flexible');
 
@@ -512,9 +512,9 @@ export class GVL {
    * getVendorsWithSpecialPurpose
    *
    * @param {number} specialPurposeId
-   * @return {GVLMap<Vendor>} - list of vendors that have declared the special purpose id
+   * @return {IntMap<Vendor>} - list of vendors that have declared the special purpose id
    */
-  public getVendorsWithSpecialPurpose(specialPurposeId: number): GVLMap<Vendor> {
+  public getVendorsWithSpecialPurpose(specialPurposeId: number): IntMap<Vendor> {
 
     return this.getFilteredVendors('purpose', specialPurposeId, undefined, true);
 
@@ -524,9 +524,9 @@ export class GVL {
    * getVendorsWithFeature
    *
    * @param {number} featureId
-   * @return {GVLMap<Vendor>} - list of vendors that have declared the feature id
+   * @return {IntMap<Vendor>} - list of vendors that have declared the feature id
    */
-  public getVendorsWithFeature(featureId: number): GVLMap<Vendor> {
+  public getVendorsWithFeature(featureId: number): IntMap<Vendor> {
 
     return this.getFilteredVendors('feature', featureId);
 
@@ -536,15 +536,15 @@ export class GVL {
    * getVendorsWithSpecialFeature
    *
    * @param {number} specialFeatureId
-   * @return {GVLMap<Vendor>} - list of vendors that have declared the special feature id
+   * @return {IntMap<Vendor>} - list of vendors that have declared the special feature id
    */
-  public getVendorsWithSpecialFeature(specialFeatureId: number): GVLMap<Vendor> {
+  public getVendorsWithSpecialFeature(specialFeatureId: number): IntMap<Vendor> {
 
     return this.getFilteredVendors('feature', specialFeatureId, undefined, true);
 
   }
 
-  public get vendors(): GVLMap<Vendor> {
+  public get vendors(): IntMap<Vendor> {
 
     return this.vendors_;
 

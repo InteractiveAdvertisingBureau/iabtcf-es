@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {TCModel} from '../src/TCModel';
 
-import {Vector} from '../src/model/structures/Vector';
+import {Vector} from '../src/model/Vector';
 import {GVL} from '../src/GVL';
 
 describe('TCModel', (): void => {
