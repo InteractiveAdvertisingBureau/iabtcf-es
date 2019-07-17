@@ -1,4 +1,15 @@
 #!/bin/sh
 
 # Add issue number
-echo "#$(echo $BRANCH_NAME | cut -d'/' -f2) $(cat $1)" > $1
+BRANCH_NAME=$(git branch 2>/dev/null | grep -e ^* | tr -d ' *')
+BRANCH_TYPE=$(echo $BRANCH_NAME | cut -d'/' -f1)
+
+# Only has an issue id if it's a feature or bugfix
+if [[ $BRANCH_TYPE == "feature" || $BRANCH_TYPE == "bugfix" ]]; then
+
+
+  # issue will be after branch type separated by /
+  ISSUE=$(echo $BRANCH_NAME | cut -d'/' -f2)
+  echo "$BRANCH_TYPE #$(echo $ISSUE) $(cat $1)" > $1
+
+fi
