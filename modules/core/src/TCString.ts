@@ -1,11 +1,12 @@
 import {Encoder} from './encoder/Encoder';
+import {SegmentSequence} from './encoder/SegmentSequence';
 import {TCModel} from './TCModel';
 
 /**
  * Main class for encoding and decoding a
  * TCF Transparency and Consent String
  */
-export class TCString implements Encoder<TCModel>{
+export class TCString implements Encoder<TCModel> {
 
   /**
    *  encodes a model into a TCString
@@ -16,8 +17,19 @@ export class TCString implements Encoder<TCModel>{
    */
   public encode(tcModel: TCModel): string {
 
+    const segments: object[] = SegmentSequence[tcModel.version.toString()];
+    let retrString = '';
 
-    return '';
+    for (let i = 0; i < segments.length; i ++) {
+
+      const segmentEncoder: Encoder<TCModel> = segments[i] as Encoder<TCModel>;
+
+      retrString += segmentEncoder.encode(tcModel) + (i !== segments.length - 1) ? '.' : '';
+
+    }
+
+    return retrString;
+
   }
 
   /**
@@ -27,9 +39,9 @@ export class TCString implements Encoder<TCModel>{
    * Consent String to decode
    * @return {TCModel} - Returns populated TCModel
    */
-  public decode(value: string): TCModel {
+  public decode(encodedString: string): TCModel {
 
-    const tcModel:TCModel = new TCModel();
+    const tcModel: TCModel = new TCModel();
 
     return tcModel;
 
