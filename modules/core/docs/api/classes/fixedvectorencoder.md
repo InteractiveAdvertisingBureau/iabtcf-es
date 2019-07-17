@@ -8,31 +8,51 @@
 
 ## Implements
 
-* [SpecificEncoder](../interfaces/specificencoder.md)
+* [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
 
 ## Index
 
 ### Methods
 
+* [decode](fixedvectorencoder.md#decode)
 * [encode](fixedvectorencoder.md#encode)
 
 ---
 
 ## Methods
 
-<a id="encode"></a>
+<a id="decode"></a>
 
-###  encode
+###  decode
 
-▸ **encode**(vector: *[Vector](vector.md)*, numBits: *`number`*): `string`
+▸ **decode**(value: *`string`*): [Vector](vector.md)
 
-*Defined in encoders/FixedVectorEncoder.ts:7*
+*Implementation of [Encoder](../interfaces/encoder.md).[decode](../interfaces/encoder.md#decode)*
+
+*Defined in [encoder/FixedVectorEncoder.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/encoder/FixedVectorEncoder.ts#L22)*
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| vector | [Vector](vector.md) |
+| value | `string` |
+
+**Returns:** [Vector](vector.md)
+
+___
+<a id="encode"></a>
+
+###  encode
+
+▸ **encode**(value: *[Vector](vector.md)*, numBits: *`number`*): `string`
+
+*Defined in [encoder/FixedVectorEncoder.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/encoder/FixedVectorEncoder.ts#L7)*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| value | [Vector](vector.md) |
 | numBits | `number` |
 
 **Returns:** `string`

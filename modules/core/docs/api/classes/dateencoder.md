@@ -8,31 +8,51 @@
 
 ## Implements
 
-* [SpecificEncoder](../interfaces/specificencoder.md)
+* [Encoder](../interfaces/encoder.md)<`Date`>
 
 ## Index
 
 ### Methods
 
+* [decode](dateencoder.md#decode)
 * [encode](dateencoder.md#encode)
 
 ---
 
 ## Methods
 
-<a id="encode"></a>
+<a id="decode"></a>
 
-###  encode
+###  decode
 
-▸ **encode**(date: *`Date`*, numBits: *`number`*): `string`
+▸ **decode**(value: *`string`*): `Date`
 
-*Defined in encoders/DateEncoder.ts:6*
+*Implementation of [Encoder](../interfaces/encoder.md).[decode](../interfaces/encoder.md#decode)*
+
+*Defined in [encoder/DateEncoder.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/encoder/DateEncoder.ts#L14)*
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| date | `Date` |
+| value | `string` |
+
+**Returns:** `Date`
+
+___
+<a id="encode"></a>
+
+###  encode
+
+▸ **encode**(value: *`Date`*, numBits: *`number`*): `string`
+
+*Defined in [encoder/DateEncoder.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/encoder/DateEncoder.ts#L6)*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| value | `Date` |
 | numBits | `number` |
 
 **Returns:** `string`

@@ -1,0 +1,218 @@
+[@iabtcf/core - API Documentation](../README.md) > [Fields](../classes/fields.md)
+
+# Class: Fields
+
+## Hierarchy
+
+**Fields**
+
+## Index
+
+### Properties
+
+* [checksum](fields.md#checksum)
+* [cmpId](fields.md#cmpid)
+* [cmpVersion](fields.md#cmpversion)
+* [consentLanguage](fields.md#consentlanguage)
+* [consentScreen](fields.md#consentscreen)
+* [created](fields.md#created)
+* [isServiceSpecific](fields.md#isservicespecific)
+* [lastUpdated](fields.md#lastupdated)
+* [policyVersion](fields.md#policyversion)
+* [publisherRestrictions](fields.md#publisherrestrictions)
+* [purposeConsents](fields.md#purposeconsents)
+* [purposeLITransparency](fields.md#purposelitransparency)
+* [purposeOneTreatment](fields.md#purposeonetreatment)
+* [referenceCountry](fields.md#referencecountry)
+* [specialFeatureOptIns](fields.md#specialfeatureoptins)
+* [useNonStandardStacks](fields.md#usenonstandardstacks)
+* [vendorConsents](fields.md#vendorconsents)
+* [vendorLegitimateInterest](fields.md#vendorlegitimateinterest)
+* [vendorListVersion](fields.md#vendorlistversion)
+* [version](fields.md#version)
+
+---
+
+## Properties
+
+<a id="checksum"></a>
+
+### `<Static>` checksum
+
+**● checksum**: *`string`* = "checksum"
+
+*Defined in [model/encodings/Fields.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L3)*
+
+___
+<a id="cmpid"></a>
+
+### `<Static>` cmpId
+
+**● cmpId**: *`string`* = "cmpId"
+
+*Defined in [model/encodings/Fields.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L6)*
+
+___
+<a id="cmpversion"></a>
+
+### `<Static>` cmpVersion
+
+**● cmpVersion**: *`string`* = "cmpVersion"
+
+*Defined in [model/encodings/Fields.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L7)*
+
+___
+<a id="consentlanguage"></a>
+
+### `<Static>` consentLanguage
+
+**● consentLanguage**: *`string`* = "consentLanguage"
+
+*Defined in [model/encodings/Fields.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L9)*
+
+___
+<a id="consentscreen"></a>
+
+### `<Static>` consentScreen
+
+**● consentScreen**: *`string`* = "consentScreen"
+
+*Defined in [model/encodings/Fields.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L8)*
+
+___
+<a id="created"></a>
+
+### `<Static>` created
+
+**● created**: *`string`* = "created"
+
+*Defined in [model/encodings/Fields.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L4)*
+
+___
+<a id="isservicespecific"></a>
+
+### `<Static>` isServiceSpecific
+
+**● isServiceSpecific**: *`string`* = "isServiceSpecific"
+
+*Defined in [model/encodings/Fields.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L12)*
+
+___
+<a id="lastupdated"></a>
+
+### `<Static>` lastUpdated
+
+**● lastUpdated**: *`string`* = "lastUpdated"
+
+*Defined in [model/encodings/Fields.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L5)*
+
+___
+<a id="policyversion"></a>
+
+### `<Static>` policyVersion
+
+**● policyVersion**: *`string`* = "policyVersion"
+
+*Defined in [model/encodings/Fields.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L11)*
+
+___
+<a id="publisherrestrictions"></a>
+
+### `<Static>` publisherRestrictions
+
+**● publisherRestrictions**: *`string`* = "publisherRestrictions"
+
+*Defined in [model/encodings/Fields.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L21)*
+
+___
+<a id="purposeconsents"></a>
+
+### `<Static>` purposeConsents
+
+**● purposeConsents**: *`string`* = "purposeConsents"
+
+*Defined in [model/encodings/Fields.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L15)*
+
+___
+<a id="purposelitransparency"></a>
+
+### `<Static>` purposeLITransparency
+
+**● purposeLITransparency**: *`string`* = "purposeLITransparency"
+
+*Defined in [model/encodings/Fields.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L16)*
+
+___
+<a id="purposeonetreatment"></a>
+
+### `<Static>` purposeOneTreatment
+
+**● purposeOneTreatment**: *`string`* = "purposeOneTreatment"
+
+*Defined in [model/encodings/Fields.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L17)*
+
+___
+<a id="referencecountry"></a>
+
+### `<Static>` referenceCountry
+
+**● referenceCountry**: *`string`* = "referenceCountry"
+
+*Defined in [model/encodings/Fields.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L18)*
+
+___
+<a id="specialfeatureoptins"></a>
+
+### `<Static>` specialFeatureOptIns
+
+**● specialFeatureOptIns**: *`string`* = "specialFeatureOptIns"
+
+*Defined in [model/encodings/Fields.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L14)*
+
+___
+<a id="usenonstandardstacks"></a>
+
+### `<Static>` useNonStandardStacks
+
+**● useNonStandardStacks**: *`string`* = "useNonStandardStacks"
+
+*Defined in [model/encodings/Fields.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L13)*
+
+___
+<a id="vendorconsents"></a>
+
+### `<Static>` vendorConsents
+
+**● vendorConsents**: *`string`* = "vendorConsents"
+
+*Defined in [model/encodings/Fields.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L19)*
+
+___
+<a id="vendorlegitimateinterest"></a>
+
+### `<Static>` vendorLegitimateInterest
+
+**● vendorLegitimateInterest**: *`string`* = "vendorLegitimateInterest"
+
+*Defined in [model/encodings/Fields.ts:20](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L20)*
+
+___
+<a id="vendorlistversion"></a>
+
+### `<Static>` vendorListVersion
+
+**● vendorListVersion**: *`string`* = "vendorListVersion"
+
+*Defined in [model/encodings/Fields.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L10)*
+
+___
+<a id="version"></a>
+
+### `<Static>` version
+
+**● version**: *`string`* = "version"
+
+*Defined in [model/encodings/Fields.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/model/encodings/Fields.ts#L2)*
+
+___
+

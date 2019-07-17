@@ -8,7 +8,7 @@
 
 ## Implements
 
-* [SpecificEncoder](../interfaces/specificencoder.md)
+* [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
 
 ## Index
 
@@ -18,6 +18,7 @@
 
 ### Methods
 
+* [decode](vendorvectorencoder.md#decode)
 * [encode](vendorvectorencoder.md#encode)
 
 ---
@@ -30,25 +31,44 @@
 
 **● RANGE_DEFAULT**: *`boolean`* = false
 
-*Defined in encoders/VendorVectorEncoder.ts:10*
+*Defined in [encoder/VendorVectorEncoder.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/encoder/VendorVectorEncoder.ts#L11)*
 
 ___
 
 ## Methods
 
-<a id="encode"></a>
+<a id="decode"></a>
 
-###  encode
+###  decode
 
-▸ **encode**(vector: *[Vector](vector.md)*): `string`
+▸ **decode**(value: *`string`*): [Vector](vector.md)
 
-*Defined in encoders/VendorVectorEncoder.ts:17*
+*Implementation of [Encoder](../interfaces/encoder.md).[decode](../interfaces/encoder.md#decode)*
+
+*Defined in [encoder/VendorVectorEncoder.ts:99](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/encoder/VendorVectorEncoder.ts#L99)*
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| vector | [Vector](vector.md) |
+| value | `string` |
+
+**Returns:** [Vector](vector.md)
+
+___
+<a id="encode"></a>
+
+###  encode
+
+▸ **encode**(value: *[Vector](vector.md)*): `string`
+
+*Defined in [encoder/VendorVectorEncoder.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/encoder/VendorVectorEncoder.ts#L19)*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| value | [Vector](vector.md) |
 
 **Returns:** `string`
 

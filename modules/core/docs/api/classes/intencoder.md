@@ -8,32 +8,52 @@
 
 ## Implements
 
-* [SpecificEncoder](../interfaces/specificencoder.md)
+* [Encoder](../interfaces/encoder.md)<`number`>
 
 ## Index
 
 ### Methods
 
+* [decode](intencoder.md#decode)
 * [encode](intencoder.md#encode)
 
 ---
 
 ## Methods
 
-<a id="encode"></a>
+<a id="decode"></a>
 
-###  encode
+###  decode
 
-▸ **encode**(value: *`any`*, numBits: *`any`*): `string`
+▸ **decode**(value: *`string`*): `number`
 
-*Defined in encoders/IntEncoder.ts:6*
+*Implementation of [Encoder](../interfaces/encoder.md).[decode](../interfaces/encoder.md#decode)*
+
+*Defined in [encoder/IntEncoder.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/encoder/IntEncoder.ts#L28)*
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| value | `any` |
-| numBits | `any` |
+| value | `string` |
+
+**Returns:** `number`
+
+___
+<a id="encode"></a>
+
+###  encode
+
+▸ **encode**(value: *`number`*, numBits: *`number`*): `string`
+
+*Defined in [encoder/IntEncoder.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/fa69024/modules/core/src/encoder/IntEncoder.ts#L6)*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| value | `number` |
+| numBits | `number` |
 
 **Returns:** `string`
 
