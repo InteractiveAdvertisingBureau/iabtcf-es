@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Add issue number
+echo "$(echo $BRANCH_NAME | cut -d'/' -f2) $(cat $1)" > $1
