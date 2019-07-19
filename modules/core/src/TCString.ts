@@ -1,7 +1,7 @@
 import {Encoder} from './encoder/Encoder';
 import {BitLength} from './encoder/BitLength';
 import {IntEncoder} from './encoder/IntEncoder';
-import {Segments} from './encoder/Segments';
+import {SegmentEncoders} from './encoder/SegmentEncoders';
 import {TCModel} from './TCModel';
 
 /**
@@ -20,12 +20,15 @@ export class TCString implements Encoder<TCModel> {
   public encode(tcModel: TCModel): string {
 
     let retrString = '';
+    const segmentEncoders: object[] = SegmentEncoders[tcModel.version.toString()];
 
-    this.forEachSegment(tcModel.version, (segmentEncoder: Encoder<TCModel>, isLast: boolean): void => {
+    for (let i = 0; i < segmentEncoders.length; i ++) {
 
-      retrString += segmentEncoder.encode(tcModel) + (!isLast) ? '.' : '';
+      const segmentEncoder: Encoder<TCModel> = segmentEncoders[i] as Encoder<TCModel>;
 
-    });
+      retrString += segmentEncoder.encode(tcModel) + (i !== segmentEncoders.length - 1) ? '.' : '';
+
+    }
 
     return retrString;
 
@@ -43,25 +46,9 @@ export class TCString implements Encoder<TCModel> {
     const tcModel: TCModel = new TCModel();
     const intEnc: IntEncoder = new IntEncoder();
     const version: number = intEnc.decode(encodedString.substr(0, BitLength.version));
-
-    this.forEachSegment(version, (segmentEncoder: Encoder<TCModel>, isLast: boolean): void => {
-    });
+    const segmentStrings: string[] = encodedString.split('.');
 
     return tcModel;
-
-  }
-
-  private forEachSegment(version: number, callback: (encoder: Encoder<TCModel>, isLast: boolean) => void): void {
-
-    const segments: object[] = Segments[version.toString()];
-
-    for (let i = 0; i < segments.length; i ++) {
-
-      const segmentEncoder: Encoder<TCModel> = segments[i] as Encoder<TCModel>;
-
-      callback(segmentEncoder, i === segments.length - 1);
-
-    }
 
   }
 
