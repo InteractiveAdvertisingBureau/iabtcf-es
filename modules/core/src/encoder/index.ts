@@ -15,3 +15,4 @@ export * from './VendorVectorEncoder';
 export * from './SegmentType';
 export * from './TCModelEncoder';
 export * from './SegmentSequence';
+export * from './VectorEncodingType';

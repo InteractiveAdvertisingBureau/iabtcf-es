@@ -1,5 +1,7 @@
-import {Vector} from '../model/Vector';
-import {PurposeRestrictionVector} from '../model/PurposeRestrictionVector';
+import {
+  Vector,
+  PurposeRestrictionVector,
+} from '../model';
 
 import {
 

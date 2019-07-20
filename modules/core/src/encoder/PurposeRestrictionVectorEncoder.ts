@@ -1,9 +1,18 @@
-import {Encoder} from './Encoder';
-import {IntEncoder} from './IntEncoder';
-import {BooleanEncoder} from './BooleanEncoder';
-import {BitLength} from './BitLength';
-import {PurposeRestrictionVector} from '../model/PurposeRestrictionVector';
-import {PurposeRestriction} from '../model/PurposeRestriction';
+import {
+
+  Encoder,
+  IntEncoder,
+  BooleanEncoder,
+  BitLength,
+
+} from '.';
+
+import {
+
+  PurposeRestrictionVector,
+  PurposeRestriction,
+
+} from '../model';
 
 export class PurposeRestrictionVectorEncoder implements Encoder<PurposeRestrictionVector> {
 

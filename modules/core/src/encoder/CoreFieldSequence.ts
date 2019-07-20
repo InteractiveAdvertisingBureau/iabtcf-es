@@ -1,4 +1,4 @@
-import {Fields} from './Fields';
+import {Fields} from '.';
 
 export class CoreFieldSequence {
 
@@ -32,7 +32,7 @@ export class CoreFieldSequence {
     Fields.purposeConsents,
     Fields.purposeLITransparency,
     Fields.purposeOneTreatment,
-    Fields.referenceCountry,
+    Fields.publisherCountryCode,
     Fields.vendorConsents,
     Fields.vendorLegitimateInterest,
     Fields.publisherRestrictions,

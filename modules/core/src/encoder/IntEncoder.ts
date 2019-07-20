@@ -1,4 +1,4 @@
-import {Encoder} from './Encoder';
+import {Encoder} from '.';
 import {EncodingError} from '../errors';
 
 export class IntEncoder implements Encoder<number> {

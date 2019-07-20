@@ -1,4 +1,4 @@
-import {Encoder} from './Encoder';
+import {Encoder} from '.';
 import {TCModel} from '../TCModel';
 
 export interface TCModelEncoder {

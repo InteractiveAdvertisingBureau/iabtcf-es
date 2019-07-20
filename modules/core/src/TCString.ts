@@ -29,14 +29,12 @@ export class TCString implements Encoder<TCModel> {
   public encode(tcModel: TCModel): string {
 
     let retrString = '';
-    const version: string = tcModel.version.toString();
-    const segmentEncMap: Map<number, TCModelEncoder> = SegmentEncoderMap[version];
-    const segmentOrder: number[] = SegmentSequence[version];
-    const len: number = segmentOrder.length;
+    const segmentSequence: number[] = SegmentSequence[tcModel.version.toString()];
+    const len: number = segmentSequence.length;
 
     for (let i = 0; i < len; i ++) {
 
-      const segEncClass: TCModelEncoder = segmentEncMap.get(i) as TCModelEncoder;
+      const segEncClass: TCModelEncoder = SegmentEncoderMap[segmentSequence[i]];
       const segEnc: Encoder<TCModel> = new segEncClass();
 
       retrString += segEnc.encode(tcModel) + (i < len - 1) ? '.' : '';

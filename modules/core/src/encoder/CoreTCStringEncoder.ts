@@ -1,10 +1,15 @@
-import {Encoder} from './Encoder';
-import {Base64Url} from '../Base64Url';
+import {
+
+  Encoder,
+  EncoderMap,
+  BitLength,
+  CoreFieldSequence,
+
+} from '.';
+
+import {Base64Url} from '../';
 import {EncodingError, DecodingError} from '../errors';
-import {EncoderMap} from './EncoderMap';
-import {TCModel, TCModelPropType} from '../TCModel';
-import {BitLength} from './BitLength';
-import {CoreFieldSequence} from './CoreFieldSequence';
+import {TCModel, TCModelPropType} from '../';
 
 export class CoreTCStringEncoder implements Encoder<TCModel> {
 

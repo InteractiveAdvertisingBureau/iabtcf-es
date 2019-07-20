@@ -1,5 +1,8 @@
 class BitLength {
 
+  public static readonly anyBoolean: number = 1;
+  public static readonly singleOrRange: number = 1;
+  public static readonly encodingType: number = 1;
   public static readonly version: number = 6;
   public static readonly checksum: number = 18;
   public static readonly created: number = 36;

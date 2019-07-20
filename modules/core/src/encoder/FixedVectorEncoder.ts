@@ -1,6 +1,9 @@
-import {Encoder} from './Encoder';
-import {BooleanEncoder} from './BooleanEncoder';
-import {Vector} from '../model/Vector';
+import {
+  Encoder,
+  BooleanEncoder,
+} from '.';
+
+import {Vector} from '../model';
 
 export class FixedVectorEncoder implements Encoder<Vector> {
 

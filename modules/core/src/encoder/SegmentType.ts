@@ -6,8 +6,8 @@
  * 3 = PublisherTC
  */
 export enum SegmentType {
-  CORE = 0,
-  OOB_DISCLOSED = 1,
-  OOB_WHITELIST = 2,
-  PUBLISHER = 3,
+  CORE = 'core',
+  OOB_DISCLOSED = 'oobDisclosed',
+  OOB_WHITELIST = 'oobWhitelist',
+  PUBLISHER = 'publisherTC',
 };

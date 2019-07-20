@@ -1,5 +1,8 @@
-import {PurposeRestriction} from './PurposeRestriction';
-import {BinarySearchTree} from './BinarySearchTree';
+import {
+  PurposeRestriction,
+  BinarySearchTree,
+} from '.';
+
 export class PurposeRestrictionVector {
 
   /**

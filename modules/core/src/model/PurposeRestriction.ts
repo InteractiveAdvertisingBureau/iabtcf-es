@@ -1,5 +1,5 @@
 import {TCModelError} from '../errors';
-import {RestrictionType} from './RestrictionType';
+import {RestrictionType} from '.';
 
 export class PurposeRestriction {
 
