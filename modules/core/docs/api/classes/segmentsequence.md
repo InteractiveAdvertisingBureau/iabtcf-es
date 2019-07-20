@@ -21,22 +21,25 @@
 
 ### `<Static>` 1
 
-**● 1**: *`object`[]* =  [
-    CoreTCStringEncoder,
+**● 1**: *`number`[]* =  [
+    SegmentType.CORE,
   ]
 
-*Defined in [encoder/SegmentSequence.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/SegmentSequence.ts#L5)*
+*Defined in encoder/SegmentSequence.ts:9*
 
 ___
 <a id="2"></a>
 
 ### `<Static>` 2
 
-**● 2**: *`object`[]* =  [
-    CoreTCStringEncoder,
+**● 2**: *`number`[]* =  [
+    SegmentType.CORE,
+    SegmentType.PUBLISHER,
+    SegmentType.OOB_DISCLOSED,
+    SegmentType.OOB_WHITELIST,
   ]
 
-*Defined in [encoder/SegmentSequence.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/SegmentSequence.ts#L9)*
+*Defined in encoder/SegmentSequence.ts:12*
 
 ___
 

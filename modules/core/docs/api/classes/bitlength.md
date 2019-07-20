@@ -26,6 +26,7 @@
 * [purposeId](bitlength.md#purposeid)
 * [purposeLITransparency](bitlength.md#purposelitransparency)
 * [restrictionType](bitlength.md#restrictiontype)
+* [segmentType](bitlength.md#segmenttype)
 * [specialFeatureOptIns](bitlength.md#specialfeatureoptins)
 * [useNonStandardStacks](bitlength.md#usenonstandardstacks)
 * [vendorId](bitlength.md#vendorid)
@@ -42,7 +43,7 @@
 
 **● checksum**: *`number`* = 18
 
-*Defined in [model/BitLength.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L4)*
+*Defined in [encoder/BitLength.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L4)*
 
 ___
 <a id="cmpid"></a>
@@ -51,7 +52,7 @@ ___
 
 **● cmpId**: *`number`* = 12
 
-*Defined in [model/BitLength.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L7)*
+*Defined in [encoder/BitLength.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L7)*
 
 ___
 <a id="cmpversion"></a>
@@ -60,7 +61,7 @@ ___
 
 **● cmpVersion**: *`number`* = 12
 
-*Defined in [model/BitLength.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L8)*
+*Defined in [encoder/BitLength.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L8)*
 
 ___
 <a id="consentlanguage"></a>
@@ -69,7 +70,7 @@ ___
 
 **● consentLanguage**: *`number`* = 12
 
-*Defined in [model/BitLength.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L10)*
+*Defined in [encoder/BitLength.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L10)*
 
 ___
 <a id="consentscreen"></a>
@@ -78,7 +79,7 @@ ___
 
 **● consentScreen**: *`number`* = 6
 
-*Defined in [model/BitLength.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L9)*
+*Defined in [encoder/BitLength.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L9)*
 
 ___
 <a id="created"></a>
@@ -87,7 +88,7 @@ ___
 
 **● created**: *`number`* = 36
 
-*Defined in [model/BitLength.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L5)*
+*Defined in [encoder/BitLength.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L5)*
 
 ___
 <a id="isservicespecific"></a>
@@ -96,7 +97,7 @@ ___
 
 **● isServiceSpecific**: *`number`* = 1
 
-*Defined in [model/BitLength.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L13)*
+*Defined in [encoder/BitLength.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L13)*
 
 ___
 <a id="lastupdated"></a>
@@ -105,7 +106,7 @@ ___
 
 **● lastUpdated**: *`number`* = 36
 
-*Defined in [model/BitLength.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L6)*
+*Defined in [encoder/BitLength.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L6)*
 
 ___
 <a id="maxid"></a>
@@ -114,7 +115,7 @@ ___
 
 **● maxId**: *`number`* = 16
 
-*Defined in [model/BitLength.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L21)*
+*Defined in [encoder/BitLength.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L21)*
 
 ___
 <a id="numentries"></a>
@@ -123,7 +124,7 @@ ___
 
 **● numEntries**: *`number`* = 12
 
-*Defined in [model/BitLength.ts:20](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L20)*
+*Defined in [encoder/BitLength.ts:20](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L20)*
 
 ___
 <a id="numrestrictions"></a>
@@ -132,7 +133,7 @@ ___
 
 **● numRestrictions**: *`number`* = 12
 
-*Defined in [model/BitLength.ts:23](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L23)*
+*Defined in [encoder/BitLength.ts:23](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L23)*
 
 ___
 <a id="policyversion"></a>
@@ -141,7 +142,7 @@ ___
 
 **● policyVersion**: *`number`* = 6
 
-*Defined in [model/BitLength.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L12)*
+*Defined in [encoder/BitLength.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L12)*
 
 ___
 <a id="purposeconsents"></a>
@@ -150,7 +151,7 @@ ___
 
 **● purposeConsents**: *`number`* = 24
 
-*Defined in [model/BitLength.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L16)*
+*Defined in [encoder/BitLength.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L16)*
 
 ___
 <a id="purposeid"></a>
@@ -159,7 +160,7 @@ ___
 
 **● purposeId**: *`number`* = 6
 
-*Defined in [model/BitLength.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L19)*
+*Defined in [encoder/BitLength.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L19)*
 
 ___
 <a id="purposelitransparency"></a>
@@ -168,7 +169,7 @@ ___
 
 **● purposeLITransparency**: *`number`* = 24
 
-*Defined in [model/BitLength.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L17)*
+*Defined in [encoder/BitLength.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L17)*
 
 ___
 <a id="restrictiontype"></a>
@@ -177,7 +178,16 @@ ___
 
 **● restrictionType**: *`number`* = 2
 
-*Defined in [model/BitLength.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L22)*
+*Defined in [encoder/BitLength.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L22)*
+
+___
+<a id="segmenttype"></a>
+
+### `<Static>` segmentType
+
+**● segmentType**: *`number`* = 3
+
+*Defined in [encoder/BitLength.ts:24](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L24)*
 
 ___
 <a id="specialfeatureoptins"></a>
@@ -186,7 +196,7 @@ ___
 
 **● specialFeatureOptIns**: *`number`* = 12
 
-*Defined in [model/BitLength.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L15)*
+*Defined in [encoder/BitLength.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L15)*
 
 ___
 <a id="usenonstandardstacks"></a>
@@ -195,7 +205,7 @@ ___
 
 **● useNonStandardStacks**: *`number`* = 1
 
-*Defined in [model/BitLength.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L14)*
+*Defined in [encoder/BitLength.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L14)*
 
 ___
 <a id="vendorid"></a>
@@ -204,7 +214,7 @@ ___
 
 **● vendorId**: *`number`* = 16
 
-*Defined in [model/BitLength.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L18)*
+*Defined in [encoder/BitLength.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L18)*
 
 ___
 <a id="vendorlistversion"></a>
@@ -213,7 +223,7 @@ ___
 
 **● vendorListVersion**: *`number`* = 12
 
-*Defined in [model/BitLength.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L11)*
+*Defined in [encoder/BitLength.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L11)*
 
 ___
 <a id="version"></a>
@@ -222,7 +232,7 @@ ___
 
 **● version**: *`number`* = 6
 
-*Defined in [model/BitLength.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/BitLength.ts#L3)*
+*Defined in [encoder/BitLength.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/BitLength.ts#L3)*
 
 ___
 

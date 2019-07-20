@@ -34,7 +34,7 @@
     Fields.vendorConsents,
   ]
 
-*Defined in [encoder/CoreFieldSequence.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/CoreFieldSequence.ts#L5)*
+*Defined in [encoder/CoreFieldSequence.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/CoreFieldSequence.ts#L5)*
 
 ___
 <a id="2"></a>
@@ -64,7 +64,7 @@ ___
     Fields.publisherRestrictions,
   ]
 
-*Defined in [encoder/CoreFieldSequence.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/CoreFieldSequence.ts#L18)*
+*Defined in [encoder/CoreFieldSequence.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/CoreFieldSequence.ts#L18)*
 
 ___
 

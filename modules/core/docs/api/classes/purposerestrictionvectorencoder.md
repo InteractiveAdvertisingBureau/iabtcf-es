@@ -27,9 +27,7 @@
 
 ▸ **decode**(value: *`string`*): [PurposeRestrictionVector](purposerestrictionvector.md)
 
-*Implementation of [Encoder](../interfaces/encoder.md).[decode](../interfaces/encoder.md#decode)*
-
-*Defined in [encoder/PurposeRestrictionVectorEncoder.ts:99](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/PurposeRestrictionVectorEncoder.ts#L99)*
+*Defined in [encoder/PurposeRestrictionVectorEncoder.ts:99](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/PurposeRestrictionVectorEncoder.ts#L99)*
 
 **Parameters:**
 
@@ -46,7 +44,7 @@ ___
 
 ▸ **encode**(value: *[PurposeRestrictionVector](purposerestrictionvector.md)*): `string`
 
-*Defined in [encoder/PurposeRestrictionVectorEncoder.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/PurposeRestrictionVectorEncoder.ts#L16)*
+*Defined in [encoder/PurposeRestrictionVectorEncoder.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/PurposeRestrictionVectorEncoder.ts#L16)*
 
 TODO: Must check to see if vendor has flexible purposes first TODO: if the RestrctionType is NOT\_ALLOWED it doesn't matter if the vendor has a flexible purpose
 

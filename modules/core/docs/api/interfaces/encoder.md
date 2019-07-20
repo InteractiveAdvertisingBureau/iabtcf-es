@@ -36,15 +36,16 @@
 
 ###  decode
 
-▸ **decode**(value: *`string`*): `T`
+▸ **decode**(value: *`string`*, target?: *[T]()*): `T`
 
-*Defined in [encoder/Encoder.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/Encoder.ts#L3)*
+*Defined in [encoder/Encoder.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/Encoder.ts#L3)*
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
 | value | `string` |
+| `Optional` target | [T]() |
 
 **Returns:** `T`
 
@@ -55,7 +56,7 @@ ___
 
 ▸ **encode**(value: *`T`*, numBits?: *`undefined` \| `number`*): `string`
 
-*Defined in [encoder/Encoder.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/Encoder.ts#L2)*
+*Defined in [encoder/Encoder.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/Encoder.ts#L2)*
 
 **Parameters:**
 
@@ -73,7 +74,7 @@ ___
 
 ▸ **getBitLength**(): `number`
 
-*Defined in [encoder/Encoder.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/Encoder.ts#L4)*
+*Defined in [encoder/Encoder.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/Encoder.ts#L4)*
 
 **Returns:** `number`
 

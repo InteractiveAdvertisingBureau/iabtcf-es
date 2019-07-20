@@ -49,6 +49,7 @@ export class CoreTCStringEncoder implements Encoder<TCModel> {
     return Base64Url.encode(bitField);
 
   }
+
   public decode(encodedString: string, tcModel: TCModel): TCModel {
 
     const encoding: string[] = CoreFieldSequence[tcModel.version.toString()];

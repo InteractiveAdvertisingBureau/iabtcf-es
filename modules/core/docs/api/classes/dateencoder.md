@@ -27,9 +27,7 @@
 
 ▸ **decode**(value: *`string`*): `Date`
 
-*Implementation of [Encoder](../interfaces/encoder.md).[decode](../interfaces/encoder.md#decode)*
-
-*Defined in [encoder/DateEncoder.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/DateEncoder.ts#L14)*
+*Defined in [encoder/DateEncoder.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/DateEncoder.ts#L14)*
 
 **Parameters:**
 
@@ -46,7 +44,7 @@ ___
 
 ▸ **encode**(value: *`Date`*, numBits: *`number`*): `string`
 
-*Defined in [encoder/DateEncoder.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/DateEncoder.ts#L6)*
+*Defined in [encoder/DateEncoder.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/DateEncoder.ts#L6)*
 
 **Parameters:**
 

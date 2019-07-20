@@ -1,13 +1,23 @@
 import {
 
-  Encoder,
   CoreTCStringEncoder,
+  SegmentType,
+  TCModelEncoder,
 
 } from './';
-import {TCModel} from '../TCModel';
 
 export class SegmentEncoderMap {
 
-  public static readonly core: { new(): Encoder<TCModel> } = CoreTCStringEncoder;
+  public static readonly '1': Map<number, TCModelEncoder> = new Map([
+
+    [SegmentType.CORE, CoreTCStringEncoder],
+
+  ]);
+
+  public static readonly '2': Map<number, TCModelEncoder> = new Map([
+
+    [SegmentType.CORE, CoreTCStringEncoder],
+
+  ]);
 
 }

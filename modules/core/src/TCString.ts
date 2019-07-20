@@ -1,7 +1,16 @@
-import {Encoder} from './encoder/Encoder';
-import {BitLength} from './encoder/BitLength';
-import {IntEncoder} from './encoder/IntEncoder';
-import {SegmentEncoders} from './encoder/SegmentEncoders';
+import {
+
+  Encoder,
+  BitLength,
+  IntEncoder,
+  SegmentEncoderMap,
+  SegmentSequence,
+  TCModelEncoder,
+
+} from './encoder';
+
+import {DecodingError} from './errors';
+
 import {TCModel} from './TCModel';
 
 /**
@@ -20,13 +29,17 @@ export class TCString implements Encoder<TCModel> {
   public encode(tcModel: TCModel): string {
 
     let retrString = '';
-    const segmentEncoders: object[] = SegmentEncoders[tcModel.version.toString()];
+    const version: string = tcModel.version.toString();
+    const segmentEncMap: Map<number, TCModelEncoder> = SegmentEncoderMap[version];
+    const segmentOrder: number[] = SegmentSequence[version];
+    const len: number = segmentOrder.length;
 
-    for (let i = 0; i < segmentEncoders.length; i ++) {
+    for (let i = 0; i < len; i ++) {
 
-      const segmentEncoder: Encoder<TCModel> = segmentEncoders[i] as Encoder<TCModel>;
+      const segEncClass: TCModelEncoder = segmentEncMap.get(i) as TCModelEncoder;
+      const segEnc: Encoder<TCModel> = new segEncClass();
 
-      retrString += segmentEncoder.encode(tcModel) + (i !== segmentEncoders.length - 1) ? '.' : '';
+      retrString += segEnc.encode(tcModel) + (i < len - 1) ? '.' : '';
 
     }
 
@@ -45,8 +58,39 @@ export class TCString implements Encoder<TCModel> {
 
     const tcModel: TCModel = new TCModel();
     const intEnc: IntEncoder = new IntEncoder();
-    const version: number = intEnc.decode(encodedString.substr(0, BitLength.version));
-    const segmentStrings: string[] = encodedString.split('.');
+    const version: string = intEnc.decode(encodedString.substr(0, BitLength.version)).toString();
+    const segmentEncMap: Map<number, TCModelEncoder> = SegmentEncoderMap[version];
+    const segments: string[] = encodedString.split('.');
+    const len: number = segments.length;
+
+    for (let i = 0; i < len; i ++) {
+
+      let segEncClass: TCModelEncoder;
+      const segment: string = segments[i];
+
+      // fist is always core
+      if ( i === 0 ) {
+
+        segEncClass = segmentEncMap.get(i) as TCModelEncoder;
+
+      } else {
+
+        const segType: number = intEnc.decode(segment.substr(0, BitLength.segmentType));
+
+        if (!segmentEncMap.has(segType)) {
+
+          throw new DecodingError(`Unknown Segment Type: ${segType}`);
+
+        }
+        segEncClass = segmentEncMap.get(segType) as TCModelEncoder;
+
+      }
+
+      const segEnc: Encoder<TCModel> = new segEncClass();
+
+      segEnc.decode(segment, tcModel);
+
+    }
 
     return tcModel;
 
