@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {BitLength} from '../../src/encoder/BitLength';
+import {BitLength} from '../../src/encoder';
 
 export function run(): void {
 
@@ -7,6 +7,10 @@ export function run(): void {
 
     it('should have these values', (): void => {
 
+      expect(BitLength.anyBoolean).to.equal(1);
+      expect(BitLength.singleOrRange).to.equal(1);
+      expect(BitLength.encodingType).to.equal(1);
+      expect(BitLength.segmentType).to.equal(3);
       expect(BitLength.version).to.equal(6);
       expect(BitLength.checksum).to.equal(18);
       expect(BitLength.created).to.equal(36);

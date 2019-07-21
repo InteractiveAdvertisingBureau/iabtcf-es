@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = (config): void => {
 
   config.set({
@@ -10,7 +11,7 @@ module.exports = (config): void => {
       '**/*.ts': 'karma-typescript', // *.tsx for React Jsx
     },
     reporters: ['progress', 'karma-typescript'],
-    browsers: ['Chrome'],
+    browsers: ['ChromeHeadless'],
   });
 
 };

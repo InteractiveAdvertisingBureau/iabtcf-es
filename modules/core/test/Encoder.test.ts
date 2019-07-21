@@ -6,6 +6,7 @@ import * as lang from './encoder/LangEncoder.test';
 import * as fixedVector from './encoder/FixedVectorEncoder.test';
 import * as vendorVector from './encoder/VendorVectorEncoder.test';
 import * as purposeRestrictions from './encoder/PurposeRestrictionVectorEncoder.test';
+import * as coreFieldSequence from './encoder/CoreFieldSequence.test';
 
 describe('Encoder', (): void => {
 
@@ -21,5 +22,8 @@ describe('Encoder', (): void => {
   fixedVector.run();
   vendorVector.run();
   purposeRestrictions.run();
+
+  // others
+  coreFieldSequence.run();
 
 });

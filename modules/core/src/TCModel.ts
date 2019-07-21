@@ -7,13 +7,14 @@ import {
   Vector,
   PurposeRestrictionVector,
   IntMap,
+  TCFields,
 
 } from './model';
 
 
 export type TCModelPropType = number | Date | string | boolean | Vector | PurposeRestrictionVector;
 
-export class TCModel {
+export class TCModel implements TCFields {
 
   private static readonly MAX_ENCODING_VERSION: number = 2;
 

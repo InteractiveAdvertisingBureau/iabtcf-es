@@ -1,31 +1,45 @@
 import {
 
+  CoreFieldSequence,
   Encoder,
   EncoderMap,
   BitLength,
-  CoreFieldSequence,
 
 } from '.';
 
-import {Base64Url} from '../';
-import {EncodingError, DecodingError} from '../errors';
-import {TCModel, TCModelPropType} from '../';
+import {
+
+  EncodingError,
+  DecodingError,
+
+} from '../errors';
+
+import {
+
+  TCModel,
+  TCModelPropType,
+  Base64Url,
+
+} from '..';
 
 export class CoreTCStringEncoder implements Encoder<TCModel> {
 
+  private encMap: EncoderMap = new EncoderMap();
+  private coreFieldSequence: CoreFieldSequence = new CoreFieldSequence();
+
   public encode(tcModel: TCModel): string {
 
-    const encoding: string[] = CoreFieldSequence[tcModel.version.toString()];
+    const encodeSequence: string[] = this.coreFieldSequence[tcModel.version.toString()];
     let bitField = '';
     let bitSum = 0;
 
-    encoding.forEach((key: string): void => {
+    encodeSequence.forEach((key: string): void => {
 
       bitSum += BitLength[key];
 
       const value: TCModelPropType = tcModel[key];
       const numBits: number = BitLength[key];
-      const encoder: Encoder<TCModelPropType> = new EncoderMap[key]() as Encoder<TCModelPropType>;
+      const encoder: Encoder<TCModelPropType> = new this.encMap[key]() as Encoder<TCModelPropType>;
 
       try {
 
@@ -57,13 +71,13 @@ export class CoreTCStringEncoder implements Encoder<TCModel> {
 
   public decode(encodedString: string, tcModel: TCModel): TCModel {
 
-    const encoding: string[] = CoreFieldSequence[tcModel.version.toString()];
+    const encodeSequence: string[] = this.coreFieldSequence[tcModel.version.toString()];
     const bitField = Base64Url.decode(encodedString);
     let bStringIdx = 0;
 
-    encoding.forEach((key: string): void => {
+    encodeSequence.forEach((key: string): void => {
 
-      const encoder: Encoder<TCModelPropType> = new EncoderMap[key]() as Encoder<TCModelPropType>;
+      const encoder: Encoder<TCModelPropType> = new this.encMap[key]() as Encoder<TCModelPropType>;
 
       tcModel[key] = encoder.decode(bitField.substr(bStringIdx, BitLength[key]));
 

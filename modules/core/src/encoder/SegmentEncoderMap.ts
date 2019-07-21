@@ -7,6 +7,6 @@ import {
 
 export class SegmentEncoderMap {
 
-  public static readonly core: TCModelEncoder = CoreTCStringEncoder;
+  public readonly core: TCModelEncoder = CoreTCStringEncoder;
 
 }

@@ -1,5 +1,5 @@
 import {Encoder} from '.';
-import {TCModel} from '../TCModel';
+import {TCModel} from '..';
 
 export interface TCModelEncoder {
   new(): Encoder<TCModel>;

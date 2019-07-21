@@ -10,7 +10,6 @@ import {
 } from './encoder';
 
 import {DecodingError} from './errors';
-
 import {TCModel} from './TCModel';
 
 /**
@@ -18,6 +17,8 @@ import {TCModel} from './TCModel';
  * TCF Transparency and Consent String
  */
 export class TCString implements Encoder<TCModel> {
+
+  private segmentSequence: SegmentSequence = new SegmentSequence();
 
   /**
    *  encodes a model into a TCString
@@ -29,13 +30,14 @@ export class TCString implements Encoder<TCModel> {
   public encode(tcModel: TCModel): string {
 
     let retrString = '';
-    const segmentSequence: number[] = SegmentSequence[tcModel.version.toString()];
-    const len: number = segmentSequence.length;
+    const sequence: number[] = this.segmentSequence[tcModel.version.toString()];
+    const len: number = sequence.length;
+    const segEncMap: SegmentEncoderMap = new SegmentEncoderMap();
 
     for (let i = 0; i < len; i ++) {
 
-      const segEncClass: TCModelEncoder = SegmentEncoderMap[segmentSequence[i]];
-      const segEnc: Encoder<TCModel> = new segEncClass();
+      const encoder: TCModelEncoder = segEncMap[sequence[i]];
+      const segEnc: Encoder<TCModel> = new encoder();
 
       retrString += segEnc.encode(tcModel) + (i < len - 1) ? '.' : '';
 

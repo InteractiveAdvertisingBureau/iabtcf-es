@@ -1,8 +1,12 @@
 import {expect} from 'chai';
-import {VendorVectorEncoder} from '../../src/encoder/VendorVectorEncoder';
-import {Vector} from '../../src/model/Vector';
-import {VectorEncodingType} from '../../src/model/VectorEncodingType';
-import {BitLength} from '../../src/encoder/BitLength';
+
+import {
+  VendorVectorEncoder,
+  VectorEncodingType,
+  BitLength,
+} from '../../src/encoder';
+
+import {Vector} from '../../src/model';
 
 export function run(): void {
 
