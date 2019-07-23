@@ -16,6 +16,7 @@ import {
 
 export class PurposeRestrictionVectorEncoder implements Encoder<PurposeRestrictionVector> {
 
+  private bitLength: number = 0;
   /**
    * TODO: Must check to see if vendor has flexible purposes first
    * TODO: if the RestrctionType is NOT_ALLOWED it doesn't matter if the vendor
@@ -101,7 +102,14 @@ export class PurposeRestrictionVectorEncoder implements Encoder<PurposeRestricti
 
     }
 
+    this.bitLength = bitString.length;
     return bitString;
+
+  }
+
+  public getBitLength(): number {
+
+    return this.bitLength;
 
   }
 

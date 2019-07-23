@@ -29,7 +29,7 @@
 
 **● consentable**: *`undefined` \| `false` \| `true`*
 
-*Defined in [model/gvl/Purpose.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/model/gvl/Purpose.ts#L10)*
+*Defined in [model/gvl/Purpose.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/Purpose.ts#L10)*
 
 ___
 <a id="description"></a>
@@ -38,7 +38,7 @@ ___
 
 **● description**: *`string`*
 
-*Defined in [model/gvl/Purpose.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/model/gvl/Purpose.ts#L4)*
+*Defined in [model/gvl/Purpose.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/Purpose.ts#L4)*
 
 ___
 <a id="descriptionlegal"></a>
@@ -47,7 +47,7 @@ ___
 
 **● descriptionLegal**: *`string`*
 
-*Defined in [model/gvl/Purpose.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/model/gvl/Purpose.ts#L5)*
+*Defined in [model/gvl/Purpose.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/Purpose.ts#L5)*
 
 ___
 <a id="id"></a>
@@ -58,7 +58,7 @@ ___
 
 *Inherited from [GVLMapItem](gvlmapitem.md).[id](gvlmapitem.md#id)*
 
-*Defined in [model/gvl/GVLMapItem.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/model/gvl/GVLMapItem.ts#L2)*
+*Defined in [model/gvl/GVLMapItem.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/GVLMapItem.ts#L2)*
 
 ___
 <a id="name"></a>
@@ -69,7 +69,7 @@ ___
 
 *Inherited from [GVLMapItem](gvlmapitem.md).[name](gvlmapitem.md#name)*
 
-*Defined in [model/gvl/GVLMapItem.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/model/gvl/GVLMapItem.ts#L3)*
+*Defined in [model/gvl/GVLMapItem.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/GVLMapItem.ts#L3)*
 
 ___
 <a id="righttoobject"></a>
@@ -78,7 +78,7 @@ ___
 
 **● rightToObject**: *`undefined` \| `false` \| `true`*
 
-*Defined in [model/gvl/Purpose.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/model/gvl/Purpose.ts#L15)*
+*Defined in [model/gvl/Purpose.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/Purpose.ts#L15)*
 
 default=true false means CMPs should never afford users the means to exercise a right to object
 

@@ -10,37 +10,49 @@
 
 ### Properties
 
-* [1](segmentencodermap.md#1)
-* [2](segmentencodermap.md#2)
+* [core](segmentencodermap.md#core)
+* [oobVendorsDisclosed](segmentencodermap.md#oobvendorsdisclosed)
+* [oobWhitelist](segmentencodermap.md#oobwhitelist)
+* [publisherTC](segmentencodermap.md#publishertc)
 
 ---
 
 ## Properties
 
-<a id="1"></a>
+<a id="core"></a>
 
-### `<Static>` 1
+###  core
 
-**● 1**: *`Map`<`number`, [TCModelEncoder](../interfaces/tcmodelencoder.md)>* =  new Map([
+**● core**: *[CoreTCStringEncoder](coretcstringencoder.md)* =  CoreTCStringEncoder
 
-    [SegmentType.CORE, CoreTCStringEncoder],
-
-  ])
-
-*Defined in [encoder/SegmentEncoderMap.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/SegmentEncoderMap.ts#L11)*
+*Defined in [encoder/SegmentEncoderMap.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/SegmentEncoderMap.ts#L9)*
 
 ___
-<a id="2"></a>
+<a id="oobvendorsdisclosed"></a>
 
-### `<Static>` 2
+###  oobVendorsDisclosed
 
-**● 2**: *`Map`<`number`, [TCModelEncoder](../interfaces/tcmodelencoder.md)>* =  new Map([
+**● oobVendorsDisclosed**: *[CoreTCStringEncoder](coretcstringencoder.md)* =  CoreTCStringEncoder
 
-    [SegmentType.CORE, CoreTCStringEncoder],
+*Defined in [encoder/SegmentEncoderMap.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/SegmentEncoderMap.ts#L10)*
 
-  ])
+___
+<a id="oobwhitelist"></a>
 
-*Defined in [encoder/SegmentEncoderMap.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/SegmentEncoderMap.ts#L17)*
+###  oobWhitelist
+
+**● oobWhitelist**: *[CoreTCStringEncoder](coretcstringencoder.md)* =  CoreTCStringEncoder
+
+*Defined in [encoder/SegmentEncoderMap.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/SegmentEncoderMap.ts#L11)*
+
+___
+<a id="publishertc"></a>
+
+###  publisherTC
+
+**● publisherTC**: *[CoreTCStringEncoder](coretcstringencoder.md)* =  CoreTCStringEncoder
+
+*Defined in [encoder/SegmentEncoderMap.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/SegmentEncoderMap.ts#L12)*
 
 ___
 

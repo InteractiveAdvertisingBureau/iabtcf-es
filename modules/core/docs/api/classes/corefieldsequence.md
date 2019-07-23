@@ -6,6 +6,10 @@
 
 **CoreFieldSequence**
 
+## Implements
+
+* [VersionMap](../interfaces/versionmap.md)
+
 ## Index
 
 ### Properties
@@ -19,7 +23,7 @@
 
 <a id="1"></a>
 
-### `<Static>` 1
+###  1
 
 **● 1**: *`string`[]* =  [
     Fields.version,
@@ -34,16 +38,17 @@
     Fields.vendorConsents,
   ]
 
-*Defined in [encoder/CoreFieldSequence.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/CoreFieldSequence.ts#L5)*
+*Implementation of [VersionMap](../interfaces/versionmap.md).[1](../interfaces/versionmap.md#1)*
+
+*Defined in [encoder/CoreFieldSequence.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/CoreFieldSequence.ts#L10)*
 
 ___
 <a id="2"></a>
 
-### `<Static>` 2
+###  2
 
 **● 2**: *`string`[]* =  [
     Fields.version,
-    Fields.checksum,
     Fields.created,
     Fields.lastUpdated,
     Fields.cmpId,
@@ -58,13 +63,15 @@ ___
     Fields.purposeConsents,
     Fields.purposeLITransparency,
     Fields.purposeOneTreatment,
-    Fields.referenceCountry,
+    Fields.publisherCountryCode,
     Fields.vendorConsents,
     Fields.vendorLegitimateInterest,
     Fields.publisherRestrictions,
   ]
 
-*Defined in [encoder/CoreFieldSequence.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/CoreFieldSequence.ts#L18)*
+*Implementation of [VersionMap](../interfaces/versionmap.md).[2](../interfaces/versionmap.md#2)*
+
+*Defined in [encoder/CoreFieldSequence.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/CoreFieldSequence.ts#L22)*
 
 ___
 

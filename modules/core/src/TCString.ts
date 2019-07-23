@@ -4,12 +4,10 @@ import {
   BitLength,
   IntEncoder,
   SegmentEncoderMap,
-  SegmentSequence,
-  TCModelEncoder,
-
+  SegmentType,
+  Base64Url,
 } from './encoder';
 
-import {DecodingError} from './errors';
 import {TCModel} from './TCModel';
 
 /**
@@ -17,8 +15,6 @@ import {TCModel} from './TCModel';
  * TCF Transparency and Consent String
  */
 export class TCString implements Encoder<TCModel> {
-
-  private segmentSequence: SegmentSequence = new SegmentSequence();
 
   /**
    *  encodes a model into a TCString
@@ -30,16 +26,20 @@ export class TCString implements Encoder<TCModel> {
   public encode(tcModel: TCModel): string {
 
     let retrString = '';
-    const sequence: number[] = this.segmentSequence[tcModel.version.toString()];
-    const len: number = sequence.length;
     const segEncMap: SegmentEncoderMap = new SegmentEncoderMap();
+    const len = SegmentType.numTypes;
 
     for (let i = 0; i < len; i ++) {
 
-      const encoder: TCModelEncoder = segEncMap[sequence[i]];
-      const segEnc: Encoder<TCModel> = new encoder();
+      const encoder: Encoder<TCModel> = new segEncMap[SegmentType[i.toString()]]();
+      const dotOrNot: string = (i < len - 1) ? '.' : '';
+      const encoded: string = encoder.encode(tcModel);
 
-      retrString += segEnc.encode(tcModel) + (i < len - 1) ? '.' : '';
+      if (encoded) {
+
+        retrString += encoded + dotOrNot;
+
+      }
 
     }
 
@@ -56,39 +56,34 @@ export class TCString implements Encoder<TCModel> {
    */
   public decode(encodedString: string): TCModel {
 
+    const base64Url: Base64Url = new Base64Url();
     const tcModel: TCModel = new TCModel();
     const intEnc: IntEncoder = new IntEncoder();
-    const version: string = intEnc.decode(encodedString.substr(0, BitLength.version)).toString();
-    const segmentEncMap: Map<number, TCModelEncoder> = SegmentEncoderMap[version];
     const segments: string[] = encodedString.split('.');
+    const segMap: SegmentEncoderMap = new SegmentEncoderMap();
     const len: number = segments.length;
 
     for (let i = 0; i < len; i ++) {
 
-      let segEncClass: TCModelEncoder;
       const segment: string = segments[i];
+      let encoder: Encoder<TCModel>;
 
       // fist is always core
       if ( i === 0 ) {
 
-        segEncClass = segmentEncMap.get(i) as TCModelEncoder;
+        encoder = new segMap.core();
 
       } else {
 
-        const segType: number = intEnc.decode(segment.substr(0, BitLength.segmentType));
+        // first char will contain 6 bits, we only need the first 3
+        const segTypeBits: string = base64Url.decode(segment.charAt(0));
+        const segType: string = intEnc.decode(segTypeBits.substr(0, BitLength.segmentType)).toString();
 
-        if (!segmentEncMap.has(segType)) {
-
-          throw new DecodingError(`Unknown Segment Type: ${segType}`);
-
-        }
-        segEncClass = segmentEncMap.get(segType) as TCModelEncoder;
+        encoder = new segMap[SegmentType[segType]]();
 
       }
 
-      const segEnc: Encoder<TCModel> = new segEncClass();
-
-      segEnc.decode(segment, tcModel);
+      encoder.decode(segment, tcModel);
 
     }
 

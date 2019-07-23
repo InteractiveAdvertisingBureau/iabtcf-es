@@ -1,11 +1,12 @@
 import {
 
-  CoreFieldSequence,
   Encoder,
   EncoderMap,
   BitLength,
+  Base64Url,
 
 } from '.';
+import {CoreFieldSequence} from './CoreFieldSequence';
 
 import {
 
@@ -18,24 +19,20 @@ import {
 
   TCModel,
   TCModelPropType,
-  Base64Url,
 
 } from '..';
 
 export class CoreTCStringEncoder implements Encoder<TCModel> {
 
   private encMap: EncoderMap = new EncoderMap();
-  private coreFieldSequence: CoreFieldSequence = new CoreFieldSequence();
 
   public encode(tcModel: TCModel): string {
 
-    const encodeSequence: string[] = this.coreFieldSequence[tcModel.version.toString()];
+    const coreFieldSequence: CoreFieldSequence = new CoreFieldSequence();
+    const encodeSequence: string[] = coreFieldSequence[tcModel.version.toString()];
     let bitField = '';
-    let bitSum = 0;
 
     encodeSequence.forEach((key: string): void => {
-
-      bitSum += BitLength[key];
 
       const value: TCModelPropType = tcModel[key];
       const numBits: number = BitLength[key];
@@ -60,19 +57,23 @@ export class CoreTCStringEncoder implements Encoder<TCModel> {
      */
     if (bitField.length % 6 !== 0) {
 
-      bitField += '0'.repeat(6-(bitSum % 6));
+      bitField += '0'.repeat(6-(bitField.length % 6));
 
     }
 
+    const base64Url: Base64Url = new Base64Url();
+
     // base64url encode the string and return
-    return Base64Url.encode(bitField);
+    return base64Url.encode(bitField);
 
   }
 
   public decode(encodedString: string, tcModel: TCModel): TCModel {
 
-    const encodeSequence: string[] = this.coreFieldSequence[tcModel.version.toString()];
-    const bitField = Base64Url.decode(encodedString);
+    const coreFieldSequence: CoreFieldSequence = new CoreFieldSequence();
+    const encodeSequence: string[] = coreFieldSequence[tcModel.version.toString()];
+    const base64Url: Base64Url = new Base64Url();
+    const bitField = base64Url.decode(encodedString);
     let bStringIdx = 0;
 
     encodeSequence.forEach((key: string): void => {
@@ -81,18 +82,17 @@ export class CoreTCStringEncoder implements Encoder<TCModel> {
 
       tcModel[key] = encoder.decode(bitField.substr(bStringIdx, BitLength[key]));
 
-
       if (BitLength[key]) {
 
         bStringIdx += BitLength[key];
 
-      } else if (encoder.getBitLength) {
+      } else if (typeof encoder.getBitLength === 'function') {
 
         bStringIdx += encoder.getBitLength();
 
       } else {
 
-        throw new DecodingError('Indeterminate bit length');
+        throw new DecodingError(`Indeterminate bit length for ${key}`);
 
       }
 

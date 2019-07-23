@@ -6,6 +6,10 @@
 
 **EncoderMap**
 
+## Implements
+
+* [TCFields](../interfaces/tcfields.md)
+
 ## Index
 
 ### Properties
@@ -18,11 +22,11 @@
 * [isServiceSpecific](encodermap.md#isservicespecific)
 * [lastUpdated](encodermap.md#lastupdated)
 * [policyVersion](encodermap.md#policyversion)
+* [publisherCountryCode](encodermap.md#publishercountrycode)
 * [publisherRestrictions](encodermap.md#publisherrestrictions)
 * [purposeConsents](encodermap.md#purposeconsents)
 * [purposeLITransparency](encodermap.md#purposelitransparency)
 * [purposeOneTreatment](encodermap.md#purposeonetreatment)
-* [referenceCountry](encodermap.md#referencecountry)
 * [specialFeatureOptIns](encodermap.md#specialfeatureoptins)
 * [useNonStandardStacks](encodermap.md#usenonstandardstacks)
 * [vendorConsents](encodermap.md#vendorconsents)
@@ -36,342 +40,380 @@
 
 <a id="cmpid"></a>
 
-### `<Static>` cmpId
+###  cmpId
 
 **● cmpId**: *`object`* =  IntEncoder
 
-*Defined in [encoder/EncoderMap.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L22)*
+*Implementation of [TCFields](../interfaces/tcfields.md).[cmpId](../interfaces/tcfields.md#cmpid)*
+
+*Defined in [encoder/EncoderMap.ts:23](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L23)*
 
 #### Type declaration
 
  constructor : function
 ⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`number`>
 
-*Defined in [encoder/EncoderMap.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L22)*
+*Defined in [encoder/EncoderMap.ts:23](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L23)*
 
 **Returns:** [Encoder](../interfaces/encoder.md)<`number`>
 
 ___
 <a id="cmpversion"></a>
 
-### `<Static>` cmpVersion
+###  cmpVersion
 
 **● cmpVersion**: *`object`* =  IntEncoder
 
-*Defined in [encoder/EncoderMap.ts:23](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L23)*
+*Implementation of [TCFields](../interfaces/tcfields.md).[cmpVersion](../interfaces/tcfields.md#cmpversion)*
+
+*Defined in [encoder/EncoderMap.ts:24](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L24)*
 
 #### Type declaration
 
  constructor : function
 ⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`number`>
 
-*Defined in [encoder/EncoderMap.ts:23](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L23)*
+*Defined in [encoder/EncoderMap.ts:24](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L24)*
 
 **Returns:** [Encoder](../interfaces/encoder.md)<`number`>
 
 ___
 <a id="consentlanguage"></a>
 
-### `<Static>` consentLanguage
+###  consentLanguage
 
 **● consentLanguage**: *`object`* =  LangEncoder
 
-*Defined in [encoder/EncoderMap.ts:25](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L25)*
+*Implementation of [TCFields](../interfaces/tcfields.md).[consentLanguage](../interfaces/tcfields.md#consentlanguage)*
+
+*Defined in [encoder/EncoderMap.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L26)*
 
 #### Type declaration
 
  constructor : function
 ⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`string`>
 
-*Defined in [encoder/EncoderMap.ts:25](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L25)*
+*Defined in [encoder/EncoderMap.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L26)*
 
 **Returns:** [Encoder](../interfaces/encoder.md)<`string`>
 
 ___
 <a id="consentscreen"></a>
 
-### `<Static>` consentScreen
+###  consentScreen
 
 **● consentScreen**: *`object`* =  IntEncoder
 
-*Defined in [encoder/EncoderMap.ts:24](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L24)*
+*Implementation of [TCFields](../interfaces/tcfields.md).[consentScreen](../interfaces/tcfields.md#consentscreen)*
+
+*Defined in [encoder/EncoderMap.ts:25](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L25)*
 
 #### Type declaration
 
  constructor : function
 ⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`number`>
 
-*Defined in [encoder/EncoderMap.ts:24](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L24)*
+*Defined in [encoder/EncoderMap.ts:25](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L25)*
 
 **Returns:** [Encoder](../interfaces/encoder.md)<`number`>
 
 ___
 <a id="created"></a>
 
-### `<Static>` created
+###  created
 
 **● created**: *`object`* =  DateEncoder
 
-*Defined in [encoder/EncoderMap.ts:20](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L20)*
+*Implementation of [TCFields](../interfaces/tcfields.md).[created](../interfaces/tcfields.md#created)*
+
+*Defined in [encoder/EncoderMap.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L21)*
 
 #### Type declaration
 
  constructor : function
 ⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`Date`>
 
-*Defined in [encoder/EncoderMap.ts:20](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L20)*
+*Defined in [encoder/EncoderMap.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L21)*
 
 **Returns:** [Encoder](../interfaces/encoder.md)<`Date`>
 
 ___
 <a id="isservicespecific"></a>
 
-### `<Static>` isServiceSpecific
+###  isServiceSpecific
 
 **● isServiceSpecific**: *`object`* =  BooleanEncoder
 
-*Defined in [encoder/EncoderMap.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L28)*
+*Implementation of [TCFields](../interfaces/tcfields.md).[isServiceSpecific](../interfaces/tcfields.md#isservicespecific)*
+
+*Defined in [encoder/EncoderMap.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L29)*
 
 #### Type declaration
 
  constructor : function
 ⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`boolean`>
 
-*Defined in [encoder/EncoderMap.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L28)*
+*Defined in [encoder/EncoderMap.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L29)*
 
 **Returns:** [Encoder](../interfaces/encoder.md)<`boolean`>
 
 ___
 <a id="lastupdated"></a>
 
-### `<Static>` lastUpdated
+###  lastUpdated
 
 **● lastUpdated**: *`object`* =  DateEncoder
 
-*Defined in [encoder/EncoderMap.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L21)*
+*Implementation of [TCFields](../interfaces/tcfields.md).[lastUpdated](../interfaces/tcfields.md#lastupdated)*
+
+*Defined in [encoder/EncoderMap.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L22)*
 
 #### Type declaration
 
  constructor : function
 ⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`Date`>
 
-*Defined in [encoder/EncoderMap.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L21)*
+*Defined in [encoder/EncoderMap.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L22)*
 
 **Returns:** [Encoder](../interfaces/encoder.md)<`Date`>
 
 ___
 <a id="policyversion"></a>
 
-### `<Static>` policyVersion
+###  policyVersion
 
 **● policyVersion**: *`object`* =  IntEncoder
 
-*Defined in [encoder/EncoderMap.ts:27](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L27)*
+*Implementation of [TCFields](../interfaces/tcfields.md).[policyVersion](../interfaces/tcfields.md#policyversion)*
+
+*Defined in [encoder/EncoderMap.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L28)*
 
 #### Type declaration
 
  constructor : function
 ⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`number`>
 
-*Defined in [encoder/EncoderMap.ts:27](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L27)*
+*Defined in [encoder/EncoderMap.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L28)*
 
 **Returns:** [Encoder](../interfaces/encoder.md)<`number`>
 
 ___
-<a id="publisherrestrictions"></a>
+<a id="publishercountrycode"></a>
 
-### `<Static>` publisherRestrictions
+###  publisherCountryCode
 
-**● publisherRestrictions**: *`object`* =  PurposeRestrictionVectorEncoder
+**● publisherCountryCode**: *`object`* =  LangEncoder
 
-*Defined in [encoder/EncoderMap.ts:37](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L37)*
+*Implementation of [TCFields](../interfaces/tcfields.md).[publisherCountryCode](../interfaces/tcfields.md#publishercountrycode)*
 
-#### Type declaration
-
- constructor : function
-⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<[PurposeRestrictionVector](purposerestrictionvector.md)>
-
-*Defined in [encoder/EncoderMap.ts:37](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L37)*
-
-**Returns:** [Encoder](../interfaces/encoder.md)<[PurposeRestrictionVector](purposerestrictionvector.md)>
-
-___
-<a id="purposeconsents"></a>
-
-### `<Static>` purposeConsents
-
-**● purposeConsents**: *`object`* =  FixedVectorEncoder
-
-*Defined in [encoder/EncoderMap.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L31)*
-
-#### Type declaration
-
- constructor : function
-⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
-
-*Defined in [encoder/EncoderMap.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L31)*
-
-**Returns:** [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
-
-___
-<a id="purposelitransparency"></a>
-
-### `<Static>` purposeLITransparency
-
-**● purposeLITransparency**: *`object`* =  FixedVectorEncoder
-
-*Defined in [encoder/EncoderMap.ts:32](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L32)*
-
-#### Type declaration
-
- constructor : function
-⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
-
-*Defined in [encoder/EncoderMap.ts:32](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L32)*
-
-**Returns:** [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
-
-___
-<a id="purposeonetreatment"></a>
-
-### `<Static>` purposeOneTreatment
-
-**● purposeOneTreatment**: *`object`* =  BooleanEncoder
-
-*Defined in [encoder/EncoderMap.ts:33](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L33)*
-
-#### Type declaration
-
- constructor : function
-⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`boolean`>
-
-*Defined in [encoder/EncoderMap.ts:33](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L33)*
-
-**Returns:** [Encoder](../interfaces/encoder.md)<`boolean`>
-
-___
-<a id="referencecountry"></a>
-
-### `<Static>` referenceCountry
-
-**● referenceCountry**: *`object`* =  LangEncoder
-
-*Defined in [encoder/EncoderMap.ts:34](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L34)*
+*Defined in [encoder/EncoderMap.ts:35](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L35)*
 
 #### Type declaration
 
  constructor : function
 ⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`string`>
 
-*Defined in [encoder/EncoderMap.ts:34](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L34)*
+*Defined in [encoder/EncoderMap.ts:35](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L35)*
 
 **Returns:** [Encoder](../interfaces/encoder.md)<`string`>
 
 ___
-<a id="specialfeatureoptins"></a>
+<a id="publisherrestrictions"></a>
 
-### `<Static>` specialFeatureOptIns
+###  publisherRestrictions
 
-**● specialFeatureOptIns**: *`object`* =  FixedVectorEncoder
+**● publisherRestrictions**: *`object`* =  PurposeRestrictionVectorEncoder
 
-*Defined in [encoder/EncoderMap.ts:30](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L30)*
+*Implementation of [TCFields](../interfaces/tcfields.md).[publisherRestrictions](../interfaces/tcfields.md#publisherrestrictions)*
+
+*Defined in [encoder/EncoderMap.ts:38](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L38)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<[PurposeRestrictionVector](purposerestrictionvector.md)>
+
+*Defined in [encoder/EncoderMap.ts:38](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L38)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<[PurposeRestrictionVector](purposerestrictionvector.md)>
+
+___
+<a id="purposeconsents"></a>
+
+###  purposeConsents
+
+**● purposeConsents**: *`object`* =  FixedVectorEncoder
+
+*Implementation of [TCFields](../interfaces/tcfields.md).[purposeConsents](../interfaces/tcfields.md#purposeconsents)*
+
+*Defined in [encoder/EncoderMap.ts:32](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L32)*
 
 #### Type declaration
 
  constructor : function
 ⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
 
-*Defined in [encoder/EncoderMap.ts:30](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L30)*
+*Defined in [encoder/EncoderMap.ts:32](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L32)*
 
 **Returns:** [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
 
 ___
-<a id="usenonstandardstacks"></a>
+<a id="purposelitransparency"></a>
 
-### `<Static>` useNonStandardStacks
+###  purposeLITransparency
 
-**● useNonStandardStacks**: *`object`* =  BooleanEncoder
+**● purposeLITransparency**: *`object`* =  FixedVectorEncoder
 
-*Defined in [encoder/EncoderMap.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L29)*
+*Implementation of [TCFields](../interfaces/tcfields.md).[purposeLITransparency](../interfaces/tcfields.md#purposelitransparency)*
+
+*Defined in [encoder/EncoderMap.ts:33](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L33)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
+
+*Defined in [encoder/EncoderMap.ts:33](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L33)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
+
+___
+<a id="purposeonetreatment"></a>
+
+###  purposeOneTreatment
+
+**● purposeOneTreatment**: *`object`* =  BooleanEncoder
+
+*Implementation of [TCFields](../interfaces/tcfields.md).[purposeOneTreatment](../interfaces/tcfields.md#purposeonetreatment)*
+
+*Defined in [encoder/EncoderMap.ts:34](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L34)*
 
 #### Type declaration
 
  constructor : function
 ⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`boolean`>
 
-*Defined in [encoder/EncoderMap.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L29)*
+*Defined in [encoder/EncoderMap.ts:34](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L34)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<`boolean`>
+
+___
+<a id="specialfeatureoptins"></a>
+
+###  specialFeatureOptIns
+
+**● specialFeatureOptIns**: *`object`* =  FixedVectorEncoder
+
+*Implementation of [TCFields](../interfaces/tcfields.md).[specialFeatureOptIns](../interfaces/tcfields.md#specialfeatureoptins)*
+
+*Defined in [encoder/EncoderMap.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L31)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
+
+*Defined in [encoder/EncoderMap.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L31)*
+
+**Returns:** [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
+
+___
+<a id="usenonstandardstacks"></a>
+
+###  useNonStandardStacks
+
+**● useNonStandardStacks**: *`object`* =  BooleanEncoder
+
+*Implementation of [TCFields](../interfaces/tcfields.md).[useNonStandardStacks](../interfaces/tcfields.md#usenonstandardstacks)*
+
+*Defined in [encoder/EncoderMap.ts:30](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L30)*
+
+#### Type declaration
+
+ constructor : function
+⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`boolean`>
+
+*Defined in [encoder/EncoderMap.ts:30](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L30)*
 
 **Returns:** [Encoder](../interfaces/encoder.md)<`boolean`>
 
 ___
 <a id="vendorconsents"></a>
 
-### `<Static>` vendorConsents
+###  vendorConsents
 
 **● vendorConsents**: *`object`* =  VendorVectorEncoder
 
-*Defined in [encoder/EncoderMap.ts:35](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L35)*
+*Implementation of [TCFields](../interfaces/tcfields.md).[vendorConsents](../interfaces/tcfields.md#vendorconsents)*
+
+*Defined in [encoder/EncoderMap.ts:36](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L36)*
 
 #### Type declaration
 
  constructor : function
 ⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
 
-*Defined in [encoder/EncoderMap.ts:35](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L35)*
+*Defined in [encoder/EncoderMap.ts:36](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L36)*
 
 **Returns:** [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
 
 ___
 <a id="vendorlegitimateinterest"></a>
 
-### `<Static>` vendorLegitimateInterest
+###  vendorLegitimateInterest
 
 **● vendorLegitimateInterest**: *`object`* =  VendorVectorEncoder
 
-*Defined in [encoder/EncoderMap.ts:36](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L36)*
+*Implementation of [TCFields](../interfaces/tcfields.md).[vendorLegitimateInterest](../interfaces/tcfields.md#vendorlegitimateinterest)*
+
+*Defined in [encoder/EncoderMap.ts:37](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L37)*
 
 #### Type declaration
 
  constructor : function
 ⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
 
-*Defined in [encoder/EncoderMap.ts:36](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L36)*
+*Defined in [encoder/EncoderMap.ts:37](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L37)*
 
 **Returns:** [Encoder](../interfaces/encoder.md)<[Vector](vector.md)>
 
 ___
 <a id="vendorlistversion"></a>
 
-### `<Static>` vendorListVersion
+###  vendorListVersion
 
 **● vendorListVersion**: *`object`* =  IntEncoder
 
-*Defined in [encoder/EncoderMap.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L26)*
+*Implementation of [TCFields](../interfaces/tcfields.md).[vendorListVersion](../interfaces/tcfields.md#vendorlistversion)*
+
+*Defined in [encoder/EncoderMap.ts:27](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L27)*
 
 #### Type declaration
 
  constructor : function
 ⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`number`>
 
-*Defined in [encoder/EncoderMap.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L26)*
+*Defined in [encoder/EncoderMap.ts:27](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L27)*
 
 **Returns:** [Encoder](../interfaces/encoder.md)<`number`>
 
 ___
 <a id="version"></a>
 
-### `<Static>` version
+###  version
 
 **● version**: *`object`* =  IntEncoder
 
-*Defined in [encoder/EncoderMap.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L19)*
+*Implementation of [TCFields](../interfaces/tcfields.md).[version](../interfaces/tcfields.md#version)*
+
+*Defined in [encoder/EncoderMap.ts:20](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L20)*
 
 #### Type declaration
 
  constructor : function
 ⊕ **new __type**(): [Encoder](../interfaces/encoder.md)<`number`>
 
-*Defined in [encoder/EncoderMap.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/EncoderMap.ts#L19)*
+*Defined in [encoder/EncoderMap.ts:20](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/EncoderMap.ts#L20)*
 
 **Returns:** [Encoder](../interfaces/encoder.md)<`number`>
 

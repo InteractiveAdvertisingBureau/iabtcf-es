@@ -27,7 +27,7 @@
 
 ▸ **decode**(value: *`string`*): [Vector](vector.md)
 
-*Defined in [encoder/FixedVectorEncoder.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/FixedVectorEncoder.ts#L22)*
+*Defined in [encoder/FixedVectorEncoder.ts:25](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/FixedVectorEncoder.ts#L25)*
 
 **Parameters:**
 
@@ -44,7 +44,7 @@ ___
 
 ▸ **encode**(value: *[Vector](vector.md)*, numBits: *`number`*): `string`
 
-*Defined in [encoder/FixedVectorEncoder.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/FixedVectorEncoder.ts#L7)*
+*Defined in [encoder/FixedVectorEncoder.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/FixedVectorEncoder.ts#L10)*
 
 **Parameters:**
 

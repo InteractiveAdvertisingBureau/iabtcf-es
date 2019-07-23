@@ -15,6 +15,8 @@ class BitLength {
   public static readonly policyVersion: number = 6;
   public static readonly isServiceSpecific: number = 1;
   public static readonly useNonStandardStacks: number = 1;
+  public static readonly purposeOneTreatment: number = 1;
+  public static readonly publisherCountryCode: number = 12;
   public static readonly specialFeatureOptIns: number = 12;
   public static readonly purposeConsents: number = 24;
   public static readonly purposeLITransparency: number = 24;

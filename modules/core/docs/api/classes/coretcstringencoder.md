@@ -27,7 +27,9 @@
 
 ▸ **decode**(encodedString: *`string`*, tcModel: *[TCModel](tcmodel.md)*): [TCModel](tcmodel.md)
 
-*Defined in [encoder/CoreTCStringEncoder.ts:53](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/CoreTCStringEncoder.ts#L53)*
+*Implementation of [Encoder](../interfaces/encoder.md).[decode](../interfaces/encoder.md#decode)*
+
+*Defined in [encoder/CoreTCStringEncoder.ts:71](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/CoreTCStringEncoder.ts#L71)*
 
 **Parameters:**
 
@@ -45,7 +47,7 @@ ___
 
 ▸ **encode**(tcModel: *[TCModel](tcmodel.md)*): `string`
 
-*Defined in [encoder/CoreTCStringEncoder.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/encoder/CoreTCStringEncoder.ts#L11)*
+*Defined in [encoder/CoreTCStringEncoder.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/CoreTCStringEncoder.ts#L29)*
 
 **Parameters:**
 

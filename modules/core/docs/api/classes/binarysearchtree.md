@@ -28,7 +28,7 @@
 
 ▸ **add**(value: *`number`*): `void`
 
-*Defined in [model/BinarySearchTree.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/model/BinarySearchTree.ts#L18)*
+*Defined in [model/BinarySearchTree.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/BinarySearchTree.ts#L18)*
 
 **Parameters:**
 
@@ -45,7 +45,7 @@ ___
 
 ▸ **contains**(value: *`number`*): `boolean`
 
-*Defined in [model/BinarySearchTree.ts:159](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/model/BinarySearchTree.ts#L159)*
+*Defined in [model/BinarySearchTree.ts:159](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/BinarySearchTree.ts#L159)*
 
 **Parameters:**
 
@@ -62,7 +62,7 @@ ___
 
 ▸ **get**(): `number`[]
 
-*Defined in [model/BinarySearchTree.ts:110](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/model/BinarySearchTree.ts#L110)*
+*Defined in [model/BinarySearchTree.ts:110](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/BinarySearchTree.ts#L110)*
 
 performs Morris in-order traversal
 
@@ -76,7 +76,7 @@ ___
 
 ▸ **isEmpty**(): `boolean`
 
-*Defined in [model/BinarySearchTree.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/model/BinarySearchTree.ts#L11)*
+*Defined in [model/BinarySearchTree.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/BinarySearchTree.ts#L11)*
 
 **Returns:** `boolean`
 
@@ -87,7 +87,7 @@ ___
 
 ▸ **max**(current?: *[TreeNodeMaybe](../#treenodemaybe)*): `number`
 
-*Defined in [model/BinarySearchTree.ts:208](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/model/BinarySearchTree.ts#L208)*
+*Defined in [model/BinarySearchTree.ts:208](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/BinarySearchTree.ts#L208)*
 
 **Parameters:**
 
@@ -104,7 +104,7 @@ ___
 
 ▸ **min**(current?: *[TreeNodeMaybe](../#treenodemaybe)*): `number`
 
-*Defined in [model/BinarySearchTree.ts:186](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/model/BinarySearchTree.ts#L186)*
+*Defined in [model/BinarySearchTree.ts:186](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/BinarySearchTree.ts#L186)*
 
 **Parameters:**
 
@@ -121,7 +121,7 @@ ___
 
 ▸ **remove**(value: *`number`*, current?: *[TreeNodeMaybe](../#treenodemaybe)*): `void`
 
-*Defined in [model/BinarySearchTree.ts:230](https://github.com/chrispaterson/iabtcf-es/blob/1e10023/modules/core/src/model/BinarySearchTree.ts#L230)*
+*Defined in [model/BinarySearchTree.ts:230](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/BinarySearchTree.ts#L230)*
 
 **Parameters:**
 

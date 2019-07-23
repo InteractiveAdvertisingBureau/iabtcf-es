@@ -7,6 +7,7 @@ import * as fixedVector from './encoder/FixedVectorEncoder.test';
 import * as vendorVector from './encoder/VendorVectorEncoder.test';
 import * as purposeRestrictions from './encoder/PurposeRestrictionVectorEncoder.test';
 import * as coreFieldSequence from './encoder/CoreFieldSequence.test';
+import * as base64 from './encoder/Base64Url.test';
 
 describe('Encoder', (): void => {
 
@@ -25,5 +26,6 @@ describe('Encoder', (): void => {
 
   // others
   coreFieldSequence.run();
+  base64.run();
 
 });

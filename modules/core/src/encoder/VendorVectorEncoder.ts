@@ -19,6 +19,7 @@ export class VendorVectorEncoder implements Encoder<Vector> {
   private ranges: number[][];
   private maxId: number;
   private index: number;
+  private bitLength: number = 0;
 
   public encode(value: Vector): string {
 
@@ -86,6 +87,7 @@ export class VendorVectorEncoder implements Encoder<Vector> {
 
     // clean up
     this.ranges = [];
+    this.bitLength = retrString.length;
 
     return retrString;
 
@@ -209,6 +211,12 @@ export class VendorVectorEncoder implements Encoder<Vector> {
 
     return vector;
 
+
+  }
+
+  public getBitLength(): number {
+
+    return this.bitLength;
 
   }
 
