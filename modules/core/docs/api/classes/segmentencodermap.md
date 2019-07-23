@@ -25,16 +25,16 @@
 
 **● core**: *[CoreTCStringEncoder](coretcstringencoder.md)* =  CoreTCStringEncoder
 
-*Defined in [encoder/SegmentEncoderMap.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/SegmentEncoderMap.ts#L9)*
+*Defined in [encoder/SegmentEncoderMap.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/SegmentEncoderMap.ts#L10)*
 
 ___
 <a id="oobvendorsdisclosed"></a>
 
 ###  oobVendorsDisclosed
 
-**● oobVendorsDisclosed**: *[CoreTCStringEncoder](coretcstringencoder.md)* =  CoreTCStringEncoder
+**● oobVendorsDisclosed**: *[VendorsDisclosedEncoder](vendorsdisclosedencoder.md)* =  VendorsDisclosedEncoder
 
-*Defined in [encoder/SegmentEncoderMap.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/SegmentEncoderMap.ts#L10)*
+*Defined in [encoder/SegmentEncoderMap.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/SegmentEncoderMap.ts#L11)*
 
 ___
 <a id="oobwhitelist"></a>
@@ -43,7 +43,7 @@ ___
 
 **● oobWhitelist**: *[CoreTCStringEncoder](coretcstringencoder.md)* =  CoreTCStringEncoder
 
-*Defined in [encoder/SegmentEncoderMap.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/SegmentEncoderMap.ts#L11)*
+*Defined in [encoder/SegmentEncoderMap.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/SegmentEncoderMap.ts#L12)*
 
 ___
 <a id="publishertc"></a>
@@ -52,7 +52,7 @@ ___
 
 **● publisherTC**: *[CoreTCStringEncoder](coretcstringencoder.md)* =  CoreTCStringEncoder
 
-*Defined in [encoder/SegmentEncoderMap.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/SegmentEncoderMap.ts#L12)*
+*Defined in [encoder/SegmentEncoderMap.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/SegmentEncoderMap.ts#L13)*
 
 ___
 

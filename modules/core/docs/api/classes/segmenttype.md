@@ -28,7 +28,7 @@
 
 **● 0**: *`string`* = "core"
 
-*Defined in [encoder/SegmentType.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/SegmentType.ts#L9)*
+*Defined in [encoder/SegmentType.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/SegmentType.ts#L9)*
 
 ___
 <a id="1"></a>
@@ -37,7 +37,7 @@ ___
 
 **● 1**: *`string`* = "oobVendorsDisclosed"
 
-*Defined in [encoder/SegmentType.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/SegmentType.ts#L10)*
+*Defined in [encoder/SegmentType.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/SegmentType.ts#L10)*
 
 ___
 <a id="2"></a>
@@ -46,7 +46,7 @@ ___
 
 **● 2**: *`string`* = "oobWhitelist"
 
-*Defined in [encoder/SegmentType.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/SegmentType.ts#L11)*
+*Defined in [encoder/SegmentType.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/SegmentType.ts#L11)*
 
 ___
 <a id="3"></a>
@@ -55,16 +55,16 @@ ___
 
 **● 3**: *`string`* = "publisherTC"
 
-*Defined in [encoder/SegmentType.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/SegmentType.ts#L12)*
+*Defined in [encoder/SegmentType.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/SegmentType.ts#L12)*
 
 ___
 <a id="numtypes"></a>
 
 ### `<Static>` numTypes
 
-**● numTypes**: *`number`* = 1
+**● numTypes**: *`number`* = 2
 
-*Defined in [encoder/SegmentType.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/SegmentType.ts#L15)*
+*Defined in [encoder/SegmentType.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/SegmentType.ts#L15)*
 
 ___
 

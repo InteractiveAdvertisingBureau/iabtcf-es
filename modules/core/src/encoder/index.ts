@@ -16,3 +16,4 @@ export * from './SegmentType';
 export * from './VectorEncodingType';
 export * from './VersionMap';
 export * from './Base64Url';
+export * from './VendorsDisclosedEncoder';

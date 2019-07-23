@@ -19,5 +19,6 @@ export class Fields {
   public static readonly vendorConsents: string = 'vendorConsents';
   public static readonly vendorLegitimateInterest: string = 'vendorLegitimateInterest';
   public static readonly publisherRestrictions: string = 'publisherRestrictions';
+  public static readonly oobVendorsDisclosed: string = 'oobVendorsDisclosed';
 
 }

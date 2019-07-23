@@ -1,4 +1,4 @@
-class BitLength {
+export class BitLength {
 
   public static readonly anyBoolean: number = 1;
   public static readonly singleOrRange: number = 1;
@@ -29,5 +29,3 @@ class BitLength {
   public static readonly segmentType: number = 3;
 
 }
-
-export {BitLength};

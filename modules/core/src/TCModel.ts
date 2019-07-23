@@ -74,6 +74,18 @@ export class TCModel implements TCFields {
    */
   public readonly vendorLegitimateInterest: Vector = new Vector();
 
+  /**
+   * The value included for disclosed vendors signals which vendors have been
+   * disclosed to the user in the interface surfaced by the CMP. This section
+   * content is required when writing a TC string to the global (consensu)
+   * scope. When a CMP has read from and is updating a TC string from the
+   * global consensu.org storage, the CMP MUST retain the existing disclosure
+   * information and only add information for vendors that it has disclosed
+   * that had not been disclosed by other CMPs in prior interactions with this
+   * device/user agent.
+   */
+  public readonly vendorsDisclosed: Vector = new Vector();
+
   public readonly publisherRestrictions: PurposeRestrictionVector = new PurposeRestrictionVector();
 
   /**
@@ -504,6 +516,29 @@ export class TCModel implements TCFields {
   }
 
   /**
+   * setAllVendorsDisclosed - sets all vendors on the GVL Consent (true)
+   *
+   * @return {void}
+   */
+  public setAllVendorsDisclosed(): void {
+
+    this.vendorsDisclosed.empty();
+    this.setAllOnVector(this.gvl.vendors, this.vendorsDisclosed);
+
+  }
+
+  /**
+   * unsetAllVendorsDisclosed - unsets all vendors on the GVL Consent (false)
+   *
+   * @return {void}
+   */
+  public unsetAllVendorsDisclosed(): void {
+
+    this.vendorsDisclosed.empty();
+
+  }
+
+  /**
    * setAllVendorLegitimateInterest - sets all vendors on the GVL LegitimateInterest (true)
    *
    * @return {void}
@@ -603,18 +638,18 @@ export class TCModel implements TCFields {
     setAllSpecialFeatureOptIns();
     setAllPurposeConsents();
     setAllVendorLegitimateInterest();
+    setAllVendorsDisclosed();
    * ```
    * @return {void}
    */
   public setAll(): void {
-
-    this.unsetAll();
 
     this.setAllVendorConsents();
     this.setAllPurposeLITransparency();
     this.setAllSpecialFeatureOptIns();
     this.setAllPurposeConsents();
     this.setAllVendorLegitimateInterest();
+    this.setAllVendorsDisclosed();
 
   }
 
@@ -626,6 +661,7 @@ export class TCModel implements TCFields {
     unsetAllSpecialFeatureOptIns();
     unsetAllPurposeConsents();
     unsetAllVendorLegitimateInterest();
+    unsetAllVendorsDisclosed();
    * ```
    * @return {void}
    */
@@ -636,6 +672,7 @@ export class TCModel implements TCFields {
     this.unsetAllSpecialFeatureOptIns();
     this.unsetAllPurposeConsents();
     this.unsetAllVendorLegitimateInterest();
+    this.unsetAllVendorsDisclosed();
 
   }
 

@@ -28,7 +28,7 @@
 
 **● description**: *`string`*
 
-*Defined in [model/gvl/Stack.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/Stack.ts#L6)*
+*Defined in [model/gvl/Stack.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/model/gvl/Stack.ts#L6)*
 
 ___
 <a id="id"></a>
@@ -39,7 +39,7 @@ ___
 
 *Inherited from [GVLMapItem](gvlmapitem.md).[id](gvlmapitem.md#id)*
 
-*Defined in [model/gvl/GVLMapItem.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/GVLMapItem.ts#L2)*
+*Defined in [model/gvl/GVLMapItem.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/model/gvl/GVLMapItem.ts#L2)*
 
 ___
 <a id="name"></a>
@@ -50,7 +50,7 @@ ___
 
 *Inherited from [GVLMapItem](gvlmapitem.md).[name](gvlmapitem.md#name)*
 
-*Defined in [model/gvl/GVLMapItem.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/GVLMapItem.ts#L3)*
+*Defined in [model/gvl/GVLMapItem.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/model/gvl/GVLMapItem.ts#L3)*
 
 ___
 <a id="purposes"></a>
@@ -59,7 +59,7 @@ ___
 
 **● purposes**: *`number`[]*
 
-*Defined in [model/gvl/Stack.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/Stack.ts#L4)*
+*Defined in [model/gvl/Stack.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/model/gvl/Stack.ts#L4)*
 
 ___
 <a id="specialpurposes"></a>
@@ -68,7 +68,7 @@ ___
 
 **● specialPurposes**: *`number`[]*
 
-*Defined in [model/gvl/Stack.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/Stack.ts#L5)*
+*Defined in [model/gvl/Stack.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/model/gvl/Stack.ts#L5)*
 
 ___
 

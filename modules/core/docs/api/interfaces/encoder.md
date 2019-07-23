@@ -20,6 +20,7 @@
 * [PurposeRestrictionVectorEncoder](../classes/purposerestrictionvectorencoder.md)
 * [TCString](../classes/tcstring.md)
 * [VendorVectorEncoder](../classes/vendorvectorencoder.md)
+* [VendorsDisclosedEncoder](../classes/vendorsdisclosedencoder.md)
 
 ## Index
 
@@ -39,7 +40,7 @@
 
 ▸ **decode**(value: *`string`*, target?: *[T]()*): `T`
 
-*Defined in [encoder/Encoder.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/Encoder.ts#L3)*
+*Defined in [encoder/Encoder.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Encoder.ts#L3)*
 
 **Parameters:**
 
@@ -57,7 +58,7 @@ ___
 
 ▸ **encode**(value: *`T`*, numBits?: *`undefined` \| `number`*): `string`
 
-*Defined in [encoder/Encoder.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/Encoder.ts#L2)*
+*Defined in [encoder/Encoder.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Encoder.ts#L2)*
 
 **Parameters:**
 
@@ -75,7 +76,7 @@ ___
 
 ▸ **getBitLength**(): `number`
 
-*Defined in [encoder/Encoder.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/Encoder.ts#L4)*
+*Defined in [encoder/Encoder.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Encoder.ts#L4)*
 
 **Returns:** `number`
 

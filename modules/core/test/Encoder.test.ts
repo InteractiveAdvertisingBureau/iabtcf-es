@@ -8,21 +8,38 @@ import * as vendorVector from './encoder/VendorVectorEncoder.test';
 import * as purposeRestrictions from './encoder/PurposeRestrictionVectorEncoder.test';
 import * as coreFieldSequence from './encoder/CoreFieldSequence.test';
 import * as base64 from './encoder/Base64Url.test';
+import * as coreTC from './encoder/CoreTCStringEncoder.test';
+import * as vendorsDisclosed from './encoder/VendorsDisclosedEncoder.test';
 
 describe('Encoder', (): void => {
 
   bitLength.run();
 
   // more primitive types
-  bool.run();
-  date.run();
-  int.run();
-  lang.run();
+  describe('Typed Encoders', (): void => {
+
+    bool.run();
+    date.run();
+    int.run();
+    lang.run();
+
+  });
 
   // vector-based types
-  fixedVector.run();
-  vendorVector.run();
-  purposeRestrictions.run();
+  describe('Vector Encoders', (): void => {
+
+    fixedVector.run();
+    vendorVector.run();
+    purposeRestrictions.run();
+
+  });
+  describe('Segment Encoders', (): void => {
+
+    coreTC.run();
+    vendorsDisclosed.run();
+
+  });
+
 
   // others
   coreFieldSequence.run();

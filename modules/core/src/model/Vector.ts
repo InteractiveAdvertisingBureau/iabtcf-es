@@ -147,5 +147,11 @@ class Vector {
 
   }
 
+  public get size(): number {
+
+    return this.set_.size;
+
+  }
+
 }
 export {Vector};

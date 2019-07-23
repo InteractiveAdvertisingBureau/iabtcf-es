@@ -37,5 +37,6 @@ export class EncoderMap implements TCFields {
   public readonly vendorLegitimateInterest: { new(): Encoder<Vector> } = VendorVectorEncoder;
   public readonly publisherRestrictions: { new(): Encoder<PurposeRestrictionVector> }
   = PurposeRestrictionVectorEncoder;
+  public readonly vendorsDisclosed: { new(): Encoder<Vector> } = VendorVectorEncoder;
 
 }

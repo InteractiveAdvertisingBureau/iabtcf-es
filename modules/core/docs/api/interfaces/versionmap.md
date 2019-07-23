@@ -27,7 +27,7 @@
 
 **● 1**: *`string`[]*
 
-*Defined in [encoder/VersionMap.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/VersionMap.ts#L2)*
+*Defined in [encoder/VersionMap.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/VersionMap.ts#L2)*
 
 ___
 <a id="2"></a>
@@ -36,7 +36,7 @@ ___
 
 **● 2**: *`string`[]*
 
-*Defined in [encoder/VersionMap.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/VersionMap.ts#L3)*
+*Defined in [encoder/VersionMap.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/VersionMap.ts#L3)*
 
 ___
 
