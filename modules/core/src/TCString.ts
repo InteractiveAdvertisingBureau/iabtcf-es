@@ -1,5 +1,13 @@
-import {Encoder} from './encoder/Encoder';
-import {SegmentSequence} from './encoder/SegmentSequence';
+import {
+
+  Encoder,
+  BitLength,
+  IntEncoder,
+  SegmentEncoderMap,
+  SegmentType,
+  Base64Url,
+} from './encoder';
+
 import {TCModel} from './TCModel';
 
 /**
@@ -17,14 +25,21 @@ export class TCString implements Encoder<TCModel> {
    */
   public encode(tcModel: TCModel): string {
 
-    const segments: object[] = SegmentSequence[tcModel.version.toString()];
     let retrString = '';
+    const segEncMap: SegmentEncoderMap = new SegmentEncoderMap();
+    const len = SegmentType.numTypes;
 
-    for (let i = 0; i < segments.length; i ++) {
+    for (let i = 0; i < len; i ++) {
 
-      const segmentEncoder: Encoder<TCModel> = segments[i] as Encoder<TCModel>;
+      const encoder: Encoder<TCModel> = new segEncMap[SegmentType[i.toString()]]();
+      const dotOrNot: string = (i < len - 1) ? '.' : '';
+      const encoded: string = encoder.encode(tcModel);
 
-      retrString += segmentEncoder.encode(tcModel) + (i !== segments.length - 1) ? '.' : '';
+      if (encoded) {
+
+        retrString += encoded + dotOrNot;
+
+      }
 
     }
 
@@ -41,7 +56,36 @@ export class TCString implements Encoder<TCModel> {
    */
   public decode(encodedString: string): TCModel {
 
+    const base64Url: Base64Url = new Base64Url();
     const tcModel: TCModel = new TCModel();
+    const intEnc: IntEncoder = new IntEncoder();
+    const segments: string[] = encodedString.split('.');
+    const segMap: SegmentEncoderMap = new SegmentEncoderMap();
+    const len: number = segments.length;
+
+    for (let i = 0; i < len; i ++) {
+
+      const segment: string = segments[i];
+      let encoder: Encoder<TCModel>;
+
+      // fist is always core
+      if ( i === 0 ) {
+
+        encoder = new segMap.core();
+
+      } else {
+
+        // first char will contain 6 bits, we only need the first 3
+        const segTypeBits: string = base64Url.decode(segment.charAt(0));
+        const segType: string = intEnc.decode(segTypeBits.substr(0, BitLength.segmentType)).toString();
+
+        encoder = new segMap[SegmentType[segType]]();
+
+      }
+
+      encoder.decode(segment, tcModel);
+
+    }
 
     return tcModel;
 

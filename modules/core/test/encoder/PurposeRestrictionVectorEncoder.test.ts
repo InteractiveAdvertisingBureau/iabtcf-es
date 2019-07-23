@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 
-import {IntEncoder} from '../src/encoder/IntEncoder';
-import {PurposeRestrictionVectorEncoder} from '../src/encoder/PurposeRestrictionVectorEncoder';
-import {PurposeRestrictionVector} from '../src/model/PurposeRestrictionVector';
-import {PurposeRestriction} from '../src/model/PurposeRestriction';
-import {RestrictionType} from '../src/model/RestrictionType';
-import {BitLength} from '../src/model/BitLength';
+import {IntEncoder} from '../../src/encoder/IntEncoder';
+import {PurposeRestrictionVectorEncoder} from '../../src/encoder/PurposeRestrictionVectorEncoder';
+import {PurposeRestrictionVector} from '../../src/model/PurposeRestrictionVector';
+import {PurposeRestriction} from '../../src/model/PurposeRestriction';
+import {RestrictionType} from '../../src/model/RestrictionType';
+import {BitLength} from '../../src/encoder/BitLength';
 
 const makePurposesAvailable = (purposes: number[]): void => {
 

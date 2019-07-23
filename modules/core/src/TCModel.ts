@@ -1,13 +1,20 @@
-import {Vector} from './model/Vector';
-import {PurposeRestrictionVector} from './model/PurposeRestrictionVector';
 import {TCModelError} from './errors';
 import {GVL} from './GVL';
 import {GVLMapItem} from './model/gvl';
-import {IntMap} from './model/IntMap';
+
+import {
+
+  Vector,
+  PurposeRestrictionVector,
+  IntMap,
+  TCFields,
+
+} from './model';
+
 
 export type TCModelPropType = number | Date | string | boolean | Vector | PurposeRestrictionVector;
 
-export class TCModel {
+export class TCModel implements TCFields {
 
   private static readonly MAX_ENCODING_VERSION: number = 2;
 
@@ -18,7 +25,7 @@ export class TCModel {
   private isServiceSpecific_: boolean = false;
   private useNonStandardStacks_: boolean = false;
   private purposeOneTreatment_: boolean = false;
-  private referenceCountry_: string = 'AA';
+  private publisherCountryCode_: string = 'AA';
 
 
   // needs some settin' (no default)
@@ -83,6 +90,7 @@ export class TCModel {
       this.gvl = gvl;
 
     }
+
     this.created = new Date();
     this.updated();
 
@@ -267,22 +275,22 @@ export class TCModel {
    *
    * @throws {TCModelError} if the value is not a length-2 string of alpha characters
    */
-  public set referenceCountry(countryCode: string) {
+  public set publisherCountryCode(countryCode: string) {
 
     if (/^([A-z]){2}$/.test(countryCode)) {
 
-      this.referenceCountry_ = countryCode.toUpperCase();
+      this.publisherCountryCode_ = countryCode.toUpperCase();
 
     } else {
 
-      throw new TCModelError('referenceCountry', countryCode);
+      throw new TCModelError('publisherCountryCode', countryCode);
 
     }
 
   }
-  public get referenceCountry(): string {
+  public get publisherCountryCode(): string {
 
-    return this.referenceCountry_;
+    return this.publisherCountryCode_;
 
   }
 
@@ -676,7 +684,7 @@ export class TCModel {
       && this.cmpId !== undefined
       && this.cmpVersion !== undefined
       && this.consentLanguage !== undefined
-      && this.referenceCountry !== undefined
+      && this.publisherCountryCode !== undefined
       && this.purposeOneTreatment !== undefined
       && this.consentScreen !== undefined
       && this.created !== undefined

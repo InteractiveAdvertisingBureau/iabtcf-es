@@ -29,9 +29,7 @@ Main class for encoding and decoding a TCF Transparency and Consent String
 
 ▸ **decode**(encodedString: *`string`*): [TCModel](tcmodel.md)
 
-*Implementation of [Encoder](../interfaces/encoder.md).[decode](../interfaces/encoder.md#decode)*
-
-*Defined in [TCString.ts:42](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/TCString.ts#L42)*
+*Defined in [TCString.ts:57](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/TCString.ts#L57)*
 
 Decodes a string into a TCModel
 
@@ -51,7 +49,7 @@ ___
 
 ▸ **encode**(tcModel: *[TCModel](tcmodel.md)*): `string`
 
-*Defined in [TCString.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/TCString.ts#L18)*
+*Defined in [TCString.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/TCString.ts#L26)*
 
 encodes a model into a TCString
 

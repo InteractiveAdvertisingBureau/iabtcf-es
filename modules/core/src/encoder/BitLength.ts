@@ -1,5 +1,8 @@
 class BitLength {
 
+  public static readonly anyBoolean: number = 1;
+  public static readonly singleOrRange: number = 1;
+  public static readonly encodingType: number = 1;
   public static readonly version: number = 6;
   public static readonly checksum: number = 18;
   public static readonly created: number = 36;
@@ -12,6 +15,8 @@ class BitLength {
   public static readonly policyVersion: number = 6;
   public static readonly isServiceSpecific: number = 1;
   public static readonly useNonStandardStacks: number = 1;
+  public static readonly purposeOneTreatment: number = 1;
+  public static readonly publisherCountryCode: number = 12;
   public static readonly specialFeatureOptIns: number = 12;
   public static readonly purposeConsents: number = 24;
   public static readonly purposeLITransparency: number = 24;
@@ -21,6 +26,7 @@ class BitLength {
   public static readonly maxId: number = 16;
   public static readonly restrictionType: number = 2;
   public static readonly numRestrictions: number = 12;
+  public static readonly segmentType: number = 3;
 
 }
 

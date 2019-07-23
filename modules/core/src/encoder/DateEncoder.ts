@@ -1,5 +1,7 @@
-import {Encoder} from './Encoder';
-import {IntEncoder} from './IntEncoder';
+import {
+  Encoder,
+  IntEncoder,
+} from '.';
 
 export class DateEncoder implements Encoder<Date> {
 

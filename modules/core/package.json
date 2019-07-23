@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "docs": "typedoc --ignoreCompilerErrors --tsconfig ./tsconfig.json  src",
-    "karma": "karma start",
+    "karma": "karma start && echo 'to debug:  http://localhost:9876/debug.html'",
     "prepack": "npm run build",
     "build": "rm -r lib ; tsc",
     "test": "mocha './test/*.ts'",

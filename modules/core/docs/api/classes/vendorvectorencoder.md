@@ -20,6 +20,7 @@
 
 * [decode](vendorvectorencoder.md#decode)
 * [encode](vendorvectorencoder.md#encode)
+* [getBitLength](vendorvectorencoder.md#getbitlength)
 
 ---
 
@@ -31,7 +32,7 @@
 
 **● RANGE_DEFAULT**: *`boolean`* = false
 
-*Defined in [encoder/VendorVectorEncoder.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/VendorVectorEncoder.ts#L11)*
+*Defined in [encoder/VendorVectorEncoder.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/VendorVectorEncoder.ts#L16)*
 
 ___
 
@@ -43,9 +44,7 @@ ___
 
 ▸ **decode**(value: *`string`*): [Vector](vector.md)
 
-*Implementation of [Encoder](../interfaces/encoder.md).[decode](../interfaces/encoder.md#decode)*
-
-*Defined in [encoder/VendorVectorEncoder.ts:99](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/VendorVectorEncoder.ts#L99)*
+*Defined in [encoder/VendorVectorEncoder.ts:97](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/VendorVectorEncoder.ts#L97)*
 
 **Parameters:**
 
@@ -62,7 +61,7 @@ ___
 
 ▸ **encode**(value: *[Vector](vector.md)*): `string`
 
-*Defined in [encoder/VendorVectorEncoder.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/VendorVectorEncoder.ts#L19)*
+*Defined in [encoder/VendorVectorEncoder.ts:24](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/VendorVectorEncoder.ts#L24)*
 
 **Parameters:**
 
@@ -71,6 +70,19 @@ ___
 | value | [Vector](vector.md) |
 
 **Returns:** `string`
+
+___
+<a id="getbitlength"></a>
+
+###  getBitLength
+
+▸ **getBitLength**(): `number`
+
+*Implementation of [Encoder](../interfaces/encoder.md).[getBitLength](../interfaces/encoder.md#getbitlength)*
+
+*Defined in [encoder/VendorVectorEncoder.ts:217](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/VendorVectorEncoder.ts#L217)*
+
+**Returns:** `number`
 
 ___
 

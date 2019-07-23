@@ -1,27 +1,42 @@
-import {Encoder} from './Encoder';
-import {Base64Url} from '../Base64Url';
-import {EncodingError, DecodingError} from '../errors';
-import {EncoderMap} from './EncoderMap';
-import {TCModel, TCModelPropType} from '../TCModel';
-import {BitLength} from '../model/BitLength';
+import {
+
+  Encoder,
+  EncoderMap,
+  BitLength,
+  Base64Url,
+
+} from '.';
 import {CoreFieldSequence} from './CoreFieldSequence';
+
+import {
+
+  EncodingError,
+  DecodingError,
+
+} from '../errors';
+
+import {
+
+  TCModel,
+  TCModelPropType,
+
+} from '..';
 
 export class CoreTCStringEncoder implements Encoder<TCModel> {
 
+  private encMap: EncoderMap = new EncoderMap();
+
   public encode(tcModel: TCModel): string {
 
-    const encoding: string[] = CoreFieldSequence[tcModel.version.toString()];
+    const coreFieldSequence: CoreFieldSequence = new CoreFieldSequence();
+    const encodeSequence: string[] = coreFieldSequence[tcModel.version.toString()];
     let bitField = '';
-    let bitSum = 0;
 
-    encoding.forEach((key: string): void => {
-
-      bitSum += BitLength[key];
+    encodeSequence.forEach((key: string): void => {
 
       const value: TCModelPropType = tcModel[key];
-
       const numBits: number = BitLength[key];
-      const encoder: Encoder<TCModelPropType> = new EncoderMap[key]() as Encoder<TCModelPropType>;
+      const encoder: Encoder<TCModelPropType> = new this.encMap[key]() as Encoder<TCModelPropType>;
 
       try {
 
@@ -42,49 +57,42 @@ export class CoreTCStringEncoder implements Encoder<TCModel> {
      */
     if (bitField.length % 6 !== 0) {
 
-      bitField += '0'.repeat(6-(bitSum % 6));
+      bitField += '0'.repeat(6-(bitField.length % 6));
 
     }
 
+    const base64Url: Base64Url = new Base64Url();
+
     // base64url encode the string and return
-    return Base64Url.encode(bitField);
+    return base64Url.encode(bitField);
 
   }
-  public decode(encodedString: string): TCModel {
 
-    const tcModel = new TCModel();
-    const encoding: string[] = CoreFieldSequence[tcModel.version.toString()];
-    const bitField = Base64Url.decode(encodedString);
+  public decode(encodedString: string, tcModel: TCModel): TCModel {
+
+    const coreFieldSequence: CoreFieldSequence = new CoreFieldSequence();
+    const encodeSequence: string[] = coreFieldSequence[tcModel.version.toString()];
+    const base64Url: Base64Url = new Base64Url();
+    const bitField = base64Url.decode(encodedString);
     let bStringIdx = 0;
 
-    encoding.forEach((key: string): void => {
+    encodeSequence.forEach((key: string): void => {
 
-      let vLengthBits = 0;
-      const encoder: Encoder<TCModelPropType> = new EncoderMap[key]() as Encoder<TCModelPropType>;
+      const encoder: Encoder<TCModelPropType> = new this.encMap[key]() as Encoder<TCModelPropType>;
 
       tcModel[key] = encoder.decode(bitField.substr(bStringIdx, BitLength[key]));
 
-      /**
-       * if it has no entry in the BitLength map, then it is a variable
-       * length encoding
-       */
-      if (!BitLength[key] && encoder.getBitLength) {
+      if (BitLength[key]) {
 
-        vLengthBits = encoder.getBitLength();
+        bStringIdx += BitLength[key];
 
-      }
+      } else if (typeof encoder.getBitLength === 'function') {
 
-      /**
-       * vLengthBits can only be set from a variable length encoder otherwise
-       * it's 0
-       */
-      if (vLengthBits || BitLength[key]) {
-
-        bStringIdx += (vLengthBits) ? vLengthBits : BitLength[key];
+        bStringIdx += encoder.getBitLength();
 
       } else {
 
-        throw new DecodingError('Something went wrong...');
+        throw new DecodingError(`Indeterminate bit length for ${key}`);
 
       }
 

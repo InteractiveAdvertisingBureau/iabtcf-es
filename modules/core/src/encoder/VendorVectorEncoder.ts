@@ -1,30 +1,35 @@
-import {Encoder} from './Encoder';
-import {Vector} from '../model/Vector';
-import {IntEncoder} from './IntEncoder';
-import {BooleanEncoder} from './BooleanEncoder';
-import {FixedVectorEncoder} from './FixedVectorEncoder';
-import {VectorEncodingType} from '../model/VectorEncodingType';
-import {BitLength} from '../model/BitLength';
+import {Vector} from '../model';
+
+import {
+
+  Encoder,
+  IntEncoder,
+  BooleanEncoder,
+  FixedVectorEncoder,
+  VectorEncodingType,
+  BitLength,
+
+} from '.';
 
 export class VendorVectorEncoder implements Encoder<Vector> {
 
   public static readonly RANGE_DEFAULT: boolean = false;
   private intEncoder: IntEncoder = new IntEncoder();
   private boolEnc: BooleanEncoder = new BooleanEncoder();
-  private bitString: string;
   private ranges: number[][];
   private maxId: number;
   private index: number;
+  private bitLength: number = 0;
 
   public encode(value: Vector): string {
 
     let range: number[] = [];
-    let bitString = '';
-
-    this.ranges = [];
-    this.maxId = value.maxId;
-
     let bitField = '';
+    let retrString = this.intEncoder.encode(value.maxId, BitLength.maxId);
+
+    this.maxId = value.maxId;
+    this.ranges = [];
+
 
     value.forEach((curValue: boolean, i): void => {
 
@@ -68,30 +73,23 @@ export class VendorVectorEncoder implements Encoder<Vector> {
 
     });
 
+    if (this.rangeIsSmaller()) {
 
-    const encodingType: VectorEncodingType = this.rangeIsSmaller()
-      ? VectorEncodingType.RANGE
-      : VectorEncodingType.FIELD;
-
-    // maxId
-    bitString = this.intEncoder.encode(this.maxId, BitLength.maxId);
-
-    // encoding type
-    bitString += encodingType + '';
-
-    if (encodingType === VectorEncodingType.RANGE) {
-
-      bitString += this.buildRangeEncoding();
+      retrString += VectorEncodingType.RANGE + '';
+      retrString += this.buildRangeEncoding();
 
     } else {
 
-      bitString += bitField;
+      retrString += VectorEncodingType.FIELD + '';
+      retrString += bitField;
 
     }
 
+    // clean up
     this.ranges = [];
+    this.bitLength = retrString.length;
 
-    return bitString;
+    return retrString;
 
 
   }
@@ -110,7 +108,7 @@ export class VendorVectorEncoder implements Encoder<Vector> {
 
     const encodingType: VectorEncodingType = intEncoder.decode(value.charAt(this.index));
 
-    this.index += 1;
+    this.index += BitLength.encodingType;
 
     /**
      * Range is handled in batches so we'll need a different decoding scheme
@@ -119,13 +117,13 @@ export class VendorVectorEncoder implements Encoder<Vector> {
 
       const defaultValue: boolean = boolEncoder.decode(value.charAt(this.index));
 
-      this.index += 1;
+      this.index += BitLength.encodingType;
       vector = new Vector();
 
       // if default is true we need to set all the values and unset the ones listed in the ranges
       if (defaultValue) {
 
-        for (let i =1; i <= maxId; i ++) {
+        for (let i = 1; i <= maxId; i ++) {
 
           vector.set(i);
 
@@ -143,7 +141,7 @@ export class VendorVectorEncoder implements Encoder<Vector> {
         // Ranges can represent a single id or a range of ids.
         const isIdRange: boolean = boolEncoder.decode(value.charAt(this.index));
 
-        this.index += 1;
+        this.index += BitLength.singleOrRange;
 
         /**
          * regardless of whether or not it's a single entry or range, the next
@@ -216,6 +214,12 @@ export class VendorVectorEncoder implements Encoder<Vector> {
 
   }
 
+  public getBitLength(): number {
+
+    return this.bitLength;
+
+  }
+
   private buildRangeEncoding(): string {
 
     const numEntries = this.ranges.length;
@@ -255,15 +259,20 @@ export class VendorVectorEncoder implements Encoder<Vector> {
 
   private rangeIsSmaller(): boolean {
 
-    // the one is for the default consent value
-    let rLength = 1 + BitLength.numEntries;
+    // the boolean value is for the default consent value
+    let rLength = BitLength.anyBoolean + BitLength.numEntries;
 
     this.ranges.forEach((range: number[]): void => {
 
       const single = (range.length === 1);
 
+      rLength += BitLength.singleOrRange;
       rLength += BitLength.vendorId;
-      rLength += (single) ? 0 : BitLength.vendorId;
+      if (!single) {
+
+        rLength += BitLength.vendorId;
+
+      }
 
     });
 

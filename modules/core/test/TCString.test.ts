@@ -1,9 +1,11 @@
 import {expect} from 'chai';
-import {TCString} from '../src/TCString';
-import {TCModel} from '../src/TCModel';
-import {GVL} from '../src/GVL';
+import {CoreFieldSequence} from '../src/encoder';
+import {
+  TCString,
+  TCModel,
+  GVL,
+} from '../src';
 
-/*
 describe('TCString', (): void => {
 
   // eslint-disable-next-line
@@ -13,6 +15,7 @@ describe('TCString', (): void => {
   it('should encode into a string', (): void => {
 
     const tcModel: TCModel = new TCModel(gvl);
+    const tcString: TCString = new TCString();
     let encoded = '';
 
     tcModel.cmpId = 23;
@@ -21,22 +24,24 @@ describe('TCString', (): void => {
     // full consent!
     tcModel.setAll();
 
+
     const encodeIt = (): void => {
 
-      encoded = TCString.encode(tcModel);
+      encoded = tcString.encode(tcModel);
 
     };
 
     expect(tcModel.isValid(), 'input model is valid').to.be.true;
-    expect(encodeIt).not.to.throw();
 
-    expect(encoded).to.not.equal('');
+    expect(encodeIt, 'encode should not throw an error').not.to.throw();
+    expect(encoded, 'decode should not throw an error').to.not.equal('');
 
   });
 
   it('TCModel->String->TCModel and should be equal', (): void => {
 
     const tcModel: TCModel = new TCModel(gvl);
+    const tcString: TCString = new TCString();
     let encoded = '';
 
     tcModel.cmpId = 23;
@@ -47,12 +52,12 @@ describe('TCString', (): void => {
 
     const encodeIt = (): void => {
 
-      encoded = TCString.encode(tcModel);
+      encoded = tcString.encode(tcModel);
 
     };
     const decodeIt = (): TCModel => {
 
-      return TCString.decode(encoded);
+      return tcString.decode(encoded);
 
     };
 
@@ -62,9 +67,11 @@ describe('TCString', (): void => {
     expect(decodeIt).not.to.throw();
 
     encodeIt();
-    const decodedModel: TCModel = decodeIt();
 
-    Encodings.order[1].forEach((key: string): void => {
+    const decodedModel: TCModel = decodeIt();
+    const coreFieldSequence: CoreFieldSequence = new CoreFieldSequence();
+
+    coreFieldSequence['2'].forEach((key: string): void => {
 
       // the same in every way :-)
       // except dates
@@ -88,5 +95,3 @@ describe('TCString', (): void => {
   });
 
 });
-  */
-

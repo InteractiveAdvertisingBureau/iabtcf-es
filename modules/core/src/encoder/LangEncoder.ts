@@ -1,7 +1,12 @@
-import {Encoder} from './Encoder';
-import {DecodingError} from '../errors';
-import {IntEncoder} from './IntEncoder';
-import {EncodingError} from '../errors';
+import {
+  Encoder,
+  IntEncoder,
+} from '.';
+
+import {
+  DecodingError,
+  EncodingError,
+} from '../errors';
 
 export class LangEncoder implements Encoder<string> {
 

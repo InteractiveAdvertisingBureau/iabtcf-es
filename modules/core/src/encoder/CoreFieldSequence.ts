@@ -1,8 +1,13 @@
-import {Fields} from './Fields';
+import {
 
-export class CoreFieldSequence {
+  Fields,
+  VersionMap,
 
-  public static readonly'1': string[] = [
+} from '.';
+
+export class CoreFieldSequence implements VersionMap {
+
+  public readonly '1': string[] = [
     Fields.version,
     Fields.created,
     Fields.lastUpdated,
@@ -14,10 +19,8 @@ export class CoreFieldSequence {
     Fields.purposeConsents,
     Fields.vendorConsents,
   ];
-
-  public static readonly '2': string[] = [
+  public readonly '2': string[] = [
     Fields.version,
-    Fields.checksum,
     Fields.created,
     Fields.lastUpdated,
     Fields.cmpId,
@@ -32,10 +35,10 @@ export class CoreFieldSequence {
     Fields.purposeConsents,
     Fields.purposeLITransparency,
     Fields.purposeOneTreatment,
-    Fields.referenceCountry,
+    Fields.publisherCountryCode,
     Fields.vendorConsents,
     Fields.vendorLegitimateInterest,
     Fields.publisherRestrictions,
-  ]
+  ];
 
 }

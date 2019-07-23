@@ -28,15 +28,17 @@
  * this implementation.  The checksum should be the solution for determining
  * string integreity.
  */
-export class Base64Url {
+
+import {Encoder} from '.';
+export class Base64Url implements Encoder<string> {
 
   /**
    * Our 64 character set.  Notable is that the last two are web safe and not
    * the traditional +/ that are used in standard base64 encoding
    */
-  private static DICT: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+  private DICT: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 
-  private static REVERSE_DICT: object = {
+  private REVERSE_DICT: object = {
     'A': 0,
     'B': 1,
     'C': 2,
@@ -106,7 +108,7 @@ export class Base64Url {
   /**
    * log2(64) = 6
    */
-  private static BASIS: number = 6;
+  private BASIS: number = 6;
 
   /**
    * encodes an arbitrary-length bitfield string into base64url
@@ -115,7 +117,7 @@ export class Base64Url {
    * @param {string} str - arbitrary-length bitfield string to be encoded to base64url
    * @return {string} - base64url encoded result
    */
-  public static encode(str: string): string {
+  public encode(str: string): string {
 
     /**
      * should only be 0 or 1
@@ -165,7 +167,7 @@ export class Base64Url {
    * @param {string} str - base64url encoded bitfield string to be decoded
    * @return {string} - bitfield string
    */
-  public static decode(str: string): string {
+  public decode(str: string): string {
 
     /**
      * should contain only characters from the base64url set

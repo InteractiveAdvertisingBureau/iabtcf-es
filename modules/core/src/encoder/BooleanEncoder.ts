@@ -1,4 +1,4 @@
-import {Encoder} from './Encoder';
+import {Encoder} from '.';
 
 export class BooleanEncoder implements Encoder<boolean> {
 

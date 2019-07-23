@@ -25,17 +25,18 @@
 
 ###  decode
 
-▸ **decode**(encodedString: *`string`*): [TCModel](tcmodel.md)
+▸ **decode**(encodedString: *`string`*, tcModel: *[TCModel](tcmodel.md)*): [TCModel](tcmodel.md)
 
 *Implementation of [Encoder](../interfaces/encoder.md).[decode](../interfaces/encoder.md#decode)*
 
-*Defined in [encoder/CoreTCStringEncoder.ts:49](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/CoreTCStringEncoder.ts#L49)*
+*Defined in [encoder/CoreTCStringEncoder.ts:71](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/CoreTCStringEncoder.ts#L71)*
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
 | encodedString | `string` |
+| tcModel | [TCModel](tcmodel.md) |
 
 **Returns:** [TCModel](tcmodel.md)
 
@@ -46,7 +47,7 @@ ___
 
 ▸ **encode**(tcModel: *[TCModel](tcmodel.md)*): `string`
 
-*Defined in [encoder/CoreTCStringEncoder.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/encoder/CoreTCStringEncoder.ts#L11)*
+*Defined in [encoder/CoreTCStringEncoder.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/encoder/CoreTCStringEncoder.ts#L29)*
 
 **Parameters:**
 

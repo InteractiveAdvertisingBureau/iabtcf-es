@@ -1,12 +1,22 @@
-import {Encoder} from './Encoder';
-import {IntEncoder} from './IntEncoder';
-import {BooleanEncoder} from './BooleanEncoder';
-import {BitLength} from '../model/BitLength';
-import {PurposeRestrictionVector} from '../model/PurposeRestrictionVector';
-import {PurposeRestriction} from '../model/PurposeRestriction';
+import {
+
+  Encoder,
+  IntEncoder,
+  BooleanEncoder,
+  BitLength,
+
+} from '.';
+
+import {
+
+  PurposeRestrictionVector,
+  PurposeRestriction,
+
+} from '../model';
 
 export class PurposeRestrictionVectorEncoder implements Encoder<PurposeRestrictionVector> {
 
+  private bitLength: number = 0;
   /**
    * TODO: Must check to see if vendor has flexible purposes first
    * TODO: if the RestrctionType is NOT_ALLOWED it doesn't matter if the vendor
@@ -92,7 +102,14 @@ export class PurposeRestrictionVectorEncoder implements Encoder<PurposeRestricti
 
     }
 
+    this.bitLength = bitString.length;
     return bitString;
+
+  }
+
+  public getBitLength(): number {
+
+    return this.bitLength;
 
   }
 

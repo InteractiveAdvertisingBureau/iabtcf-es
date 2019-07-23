@@ -34,7 +34,7 @@
 
 **● deletedDate**: *`Date` \| `string`*
 
-*Defined in [model/gvl/Vendor.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/gvl/Vendor.ts#L10)*
+*Defined in [model/gvl/Vendor.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/Vendor.ts#L10)*
 
 ___
 <a id="featureids"></a>
@@ -43,7 +43,7 @@ ___
 
 **● featureIds**: *`number`[]*
 
-*Defined in [model/gvl/Vendor.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/gvl/Vendor.ts#L7)*
+*Defined in [model/gvl/Vendor.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/Vendor.ts#L7)*
 
 ___
 <a id="flexiblepurposeids"></a>
@@ -52,7 +52,7 @@ ___
 
 **● flexiblePurposeIds**: *`number`[]*
 
-*Defined in [model/gvl/Vendor.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/gvl/Vendor.ts#L5)*
+*Defined in [model/gvl/Vendor.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/Vendor.ts#L5)*
 
 ___
 <a id="id"></a>
@@ -63,7 +63,7 @@ ___
 
 *Inherited from [GVLMapItem](gvlmapitem.md).[id](gvlmapitem.md#id)*
 
-*Defined in [model/gvl/GVLMapItem.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/gvl/GVLMapItem.ts#L2)*
+*Defined in [model/gvl/GVLMapItem.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/GVLMapItem.ts#L2)*
 
 ___
 <a id="legintpurposeids"></a>
@@ -72,7 +72,7 @@ ___
 
 **● legIntPurposeIds**: *`number`[]*
 
-*Defined in [model/gvl/Vendor.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/gvl/Vendor.ts#L4)*
+*Defined in [model/gvl/Vendor.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/Vendor.ts#L4)*
 
 ___
 <a id="name"></a>
@@ -83,7 +83,7 @@ ___
 
 *Inherited from [GVLMapItem](gvlmapitem.md).[name](gvlmapitem.md#name)*
 
-*Defined in [model/gvl/GVLMapItem.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/gvl/GVLMapItem.ts#L3)*
+*Defined in [model/gvl/GVLMapItem.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/GVLMapItem.ts#L3)*
 
 ___
 <a id="overflow"></a>
@@ -92,7 +92,7 @@ ___
 
 **● overflow**: *`undefined` \| `object`*
 
-*Defined in [model/gvl/Vendor.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/gvl/Vendor.ts#L11)*
+*Defined in [model/gvl/Vendor.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/Vendor.ts#L11)*
 
 ___
 <a id="policyurl"></a>
@@ -101,7 +101,7 @@ ___
 
 **● policyUrl**: *`string`*
 
-*Defined in [model/gvl/Vendor.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/gvl/Vendor.ts#L9)*
+*Defined in [model/gvl/Vendor.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/Vendor.ts#L9)*
 
 ___
 <a id="purposeids"></a>
@@ -110,7 +110,7 @@ ___
 
 **● purposeIds**: *`number`[]*
 
-*Defined in [model/gvl/Vendor.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/gvl/Vendor.ts#L3)*
+*Defined in [model/gvl/Vendor.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/Vendor.ts#L3)*
 
 ___
 <a id="specialfeatureids"></a>
@@ -119,7 +119,7 @@ ___
 
 **● specialFeatureIds**: *`number`[]*
 
-*Defined in [model/gvl/Vendor.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/gvl/Vendor.ts#L8)*
+*Defined in [model/gvl/Vendor.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/Vendor.ts#L8)*
 
 ___
 <a id="specialpurposeids"></a>
@@ -128,7 +128,7 @@ ___
 
 **● specialPurposeIds**: *`number`[]*
 
-*Defined in [model/gvl/Vendor.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/ffdba84/modules/core/src/model/gvl/Vendor.ts#L6)*
+*Defined in [model/gvl/Vendor.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/a5d32bd/modules/core/src/model/gvl/Vendor.ts#L6)*
 
 ___
 
