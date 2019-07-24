@@ -10,6 +10,7 @@ import * as coreFieldSequence from './encoder/CoreFieldSequence.test';
 import * as base64 from './encoder/Base64Url.test';
 import * as coreTC from './encoder/CoreTCStringEncoder.test';
 import * as vendorsDisclosed from './encoder/VendorsDisclosedEncoder.test';
+import * as vendorsAllowed from './encoder/VendorsAllowedEncoder.test';
 
 describe('Encoder', (): void => {
 
@@ -37,6 +38,7 @@ describe('Encoder', (): void => {
 
     coreTC.run();
     vendorsDisclosed.run();
+    vendorsAllowed.run();
 
   });
 

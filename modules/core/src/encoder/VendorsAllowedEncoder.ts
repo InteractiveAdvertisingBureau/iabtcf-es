@@ -18,7 +18,7 @@ import {
 
 import {Vector} from '../model';
 
-export class VendorsDisclosedEncoder implements Encoder<TCModel> {
+export class VendorsAllowedEncoder implements Encoder<TCModel> {
 
   private encMap: EncoderMap = new EncoderMap();
   private base64Url: Base64Url = new Base64Url();
@@ -26,13 +26,13 @@ export class VendorsDisclosedEncoder implements Encoder<TCModel> {
   public encode(tcModel: TCModel): string {
 
     const intEnc: IntEncoder = new IntEncoder();
-    const encoder: Encoder<TCModelPropType> = new this.encMap.vendorsDisclosed() as Encoder<TCModelPropType>;
+    const encoder: Encoder<TCModelPropType> = new this.encMap.vendorsAllowed() as Encoder<TCModelPropType>;
 
     // first encode the segment type
-    let bits: string = intEnc.encode(SegmentType.vendorsDisclosed, BitLength.segmentType);
+    let bits: string = intEnc.encode(SegmentType.vendorsAllowed, BitLength.segmentType);
 
     // add the vector bits
-    bits += encoder.encode(tcModel.vendorsDisclosed);
+    bits += encoder.encode(tcModel.vendorsAllowed);
 
     return this.base64Url.encode(bits);
 
@@ -44,14 +44,14 @@ export class VendorsDisclosedEncoder implements Encoder<TCModel> {
 
     // the first n bits are the type we don't actually care about them
     bits = bits.substr(BitLength.segmentType);
-    const encoder: Encoder<TCModelPropType> = new this.encMap.vendorsDisclosed() as Encoder<TCModelPropType>;
+    const encoder: Encoder<TCModelPropType> = new this.encMap.vendorsAllowed() as Encoder<TCModelPropType>;
     const vector: Vector = encoder.decode(bits) as Vector;
 
     vector.forEach((isSet: boolean, vendorId: number): void => {
 
       if (isSet) {
 
-        tcModel.vendorsDisclosed.set(vendorId);
+        tcModel.vendorsAllowed.set(vendorId);
 
       }
 

@@ -1,10 +1,10 @@
-[@iabtcf/core - API Documentation](../README.md) > [VendorsDisclosedEncoder](../classes/vendorsdisclosedencoder.md)
+[@iabtcf/core - API Documentation](../README.md) > [VendorsAllowedEncoder](../classes/vendorsallowedencoder.md)
 
-# Class: VendorsDisclosedEncoder
+# Class: VendorsAllowedEncoder
 
 ## Hierarchy
 
-**VendorsDisclosedEncoder**
+**VendorsAllowedEncoder**
 
 ## Implements
 
@@ -14,8 +14,8 @@
 
 ### Methods
 
-* [decode](vendorsdisclosedencoder.md#decode)
-* [encode](vendorsdisclosedencoder.md#encode)
+* [decode](vendorsallowedencoder.md#decode)
+* [encode](vendorsallowedencoder.md#encode)
 
 ---
 
@@ -27,7 +27,7 @@
 
 ▸ **decode**(encodedString: *`string`*, tcModel: *[TCModel](tcmodel.md)*): [TCModel](tcmodel.md)
 
-*Defined in [encoder/VendorsDisclosedEncoder.ts:41](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/VendorsDisclosedEncoder.ts#L41)*
+*Defined in encoder/VendorsAllowedEncoder.ts:41*
 
 **Parameters:**
 
@@ -45,7 +45,7 @@ ___
 
 ▸ **encode**(tcModel: *[TCModel](tcmodel.md)*): `string`
 
-*Defined in [encoder/VendorsDisclosedEncoder.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/VendorsDisclosedEncoder.ts#L26)*
+*Defined in encoder/VendorsAllowedEncoder.ts:26*
 
 **Parameters:**
 

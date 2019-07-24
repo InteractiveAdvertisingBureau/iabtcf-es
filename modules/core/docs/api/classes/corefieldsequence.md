@@ -40,7 +40,7 @@
 
 *Implementation of [VersionMap](../interfaces/versionmap.md).[1](../interfaces/versionmap.md#1)*
 
-*Defined in [encoder/CoreFieldSequence.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/CoreFieldSequence.ts#L10)*
+*Defined in [encoder/CoreFieldSequence.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/CoreFieldSequence.ts#L6)*
 
 ___
 <a id="2"></a>
@@ -71,7 +71,7 @@ ___
 
 *Implementation of [VersionMap](../interfaces/versionmap.md).[2](../interfaces/versionmap.md#2)*
 
-*Defined in [encoder/CoreFieldSequence.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/CoreFieldSequence.ts#L22)*
+*Defined in [encoder/CoreFieldSequence.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/CoreFieldSequence.ts#L18)*
 
 ___
 

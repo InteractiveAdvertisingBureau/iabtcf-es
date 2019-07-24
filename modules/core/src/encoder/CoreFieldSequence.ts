@@ -1,9 +1,5 @@
-import {
-
-  Fields,
-  VersionMap,
-
-} from '.';
+import {VersionMap} from '.';
+import {Fields} from '../model';
 
 export class CoreFieldSequence implements VersionMap {
 

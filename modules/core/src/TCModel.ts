@@ -86,6 +86,11 @@ export class TCModel implements TCFields {
    */
   public readonly vendorsDisclosed: Vector = new Vector();
 
+  /**
+   * Signals which vendors the publisher permits to use OOB legal bases.
+   */
+  public readonly vendorsAllowed: Vector = new Vector();
+
   public readonly publisherRestrictions: PurposeRestrictionVector = new PurposeRestrictionVector();
 
   /**

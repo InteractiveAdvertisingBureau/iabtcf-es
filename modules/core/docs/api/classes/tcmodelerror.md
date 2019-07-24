@@ -35,7 +35,7 @@ class for decoding errors
 
 ⊕ **new TCModelError**(fieldName: *`string`*, passedValue: *`any`*, msg?: *`string`*): [TCModelError](tcmodelerror.md)
 
-*Defined in [errors/TCModelError.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/errors/TCModelError.ts#L6)*
+*Defined in [errors/TCModelError.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/errors/TCModelError.ts#L6)*
 
 constructor - constructs an TCModelError
 

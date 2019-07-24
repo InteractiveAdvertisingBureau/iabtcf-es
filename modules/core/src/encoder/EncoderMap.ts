@@ -1,42 +1,38 @@
-import {
-  Vector,
-  PurposeRestrictionVector,
-  TCFields,
-} from '../model';
+import {TCFields} from '../model';
 
 import {
-  Encoder,
-  IntEncoder,
-  DateEncoder,
-  LangEncoder,
   BooleanEncoder,
+  DateEncoder,
   FixedVectorEncoder,
-  VendorVectorEncoder,
+  IntEncoder,
+  LangEncoder,
   PurposeRestrictionVectorEncoder,
+  VendorVectorEncoder,
 } from '.';
 
 export class EncoderMap implements TCFields {
 
-  public readonly version: { new(): Encoder<number> } = IntEncoder;
-  public readonly created: { new(): Encoder<Date> } = DateEncoder;
-  public readonly lastUpdated: { new(): Encoder<Date> } = DateEncoder;
-  public readonly cmpId: { new(): Encoder<number> } = IntEncoder;
-  public readonly cmpVersion: { new(): Encoder<number> } = IntEncoder;
-  public readonly consentScreen: { new(): Encoder<number> } = IntEncoder;
-  public readonly consentLanguage: { new(): Encoder<string> } = LangEncoder;
-  public readonly vendorListVersion: { new(): Encoder<number> } = IntEncoder;
-  public readonly policyVersion: { new(): Encoder<number> } = IntEncoder;
-  public readonly isServiceSpecific: { new(): Encoder<boolean> } = BooleanEncoder;
-  public readonly useNonStandardStacks: { new(): Encoder<boolean> } = BooleanEncoder;
-  public readonly specialFeatureOptIns: { new(): Encoder<Vector> } = FixedVectorEncoder;
-  public readonly purposeConsents: { new(): Encoder<Vector> } = FixedVectorEncoder;
-  public readonly purposeLITransparency: { new(): Encoder<Vector> } = FixedVectorEncoder;
-  public readonly purposeOneTreatment: { new(): Encoder<boolean> } = BooleanEncoder;
-  public readonly publisherCountryCode: { new(): Encoder<string> } = LangEncoder;
-  public readonly vendorConsents: { new(): Encoder<Vector> } = VendorVectorEncoder;
-  public readonly vendorLegitimateInterest: { new(): Encoder<Vector> } = VendorVectorEncoder;
-  public readonly publisherRestrictions: { new(): Encoder<PurposeRestrictionVector> }
+  public readonly version: typeof IntEncoder = IntEncoder;
+  public readonly created: typeof DateEncoder = DateEncoder;
+  public readonly lastUpdated: typeof DateEncoder = DateEncoder;
+  public readonly cmpId: typeof IntEncoder = IntEncoder;
+  public readonly cmpVersion: typeof IntEncoder = IntEncoder;
+  public readonly consentScreen: typeof IntEncoder = IntEncoder;
+  public readonly consentLanguage: typeof LangEncoder = LangEncoder;
+  public readonly vendorListVersion: typeof IntEncoder = IntEncoder;
+  public readonly policyVersion: typeof IntEncoder = IntEncoder;
+  public readonly isServiceSpecific: typeof BooleanEncoder = BooleanEncoder;
+  public readonly useNonStandardStacks: typeof BooleanEncoder = BooleanEncoder;
+  public readonly specialFeatureOptIns: typeof FixedVectorEncoder = FixedVectorEncoder;
+  public readonly purposeConsents: typeof FixedVectorEncoder = FixedVectorEncoder;
+  public readonly purposeLITransparency: typeof FixedVectorEncoder = FixedVectorEncoder;
+  public readonly purposeOneTreatment: typeof BooleanEncoder = BooleanEncoder;
+  public readonly publisherCountryCode: typeof LangEncoder = LangEncoder;
+  public readonly vendorConsents: typeof VendorVectorEncoder = VendorVectorEncoder;
+  public readonly vendorLegitimateInterest: typeof VendorVectorEncoder = VendorVectorEncoder;
+  public readonly publisherRestrictions: typeof PurposeRestrictionVectorEncoder
   = PurposeRestrictionVectorEncoder;
-  public readonly vendorsDisclosed: { new(): Encoder<Vector> } = VendorVectorEncoder;
+  public readonly vendorsDisclosed: typeof VendorVectorEncoder = VendorVectorEncoder;
+  public readonly vendorsAllowed: typeof VendorVectorEncoder = VendorVectorEncoder;
 
 }

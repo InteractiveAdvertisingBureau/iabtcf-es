@@ -1,3 +1,8 @@
+/**
+ * I need this interface to have type flexibility so I'm disabling eslint...
+ * Don't know if there is a better way to achieve this...
+ */
+
 /* eslint-disable */
 export interface TCFields {
 
@@ -20,5 +25,7 @@ export interface TCFields {
   vendorConsents: any;
   vendorLegitimateInterest: any;
   publisherRestrictions: any;
+  vendorsDisclosed: any;
+  vendorsAllowed: any;
 
 }

@@ -27,7 +27,7 @@
 
 ▸ **decode**(value: *`string`*): `boolean`
 
-*Defined in [encoder/BooleanEncoder.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/BooleanEncoder.ts#L11)*
+*Defined in [encoder/BooleanEncoder.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/BooleanEncoder.ts#L11)*
 
 **Parameters:**
 
@@ -44,7 +44,7 @@ ___
 
 ▸ **encode**(value: *`boolean`*): `string`
 
-*Defined in [encoder/BooleanEncoder.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/BooleanEncoder.ts#L5)*
+*Defined in [encoder/BooleanEncoder.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/BooleanEncoder.ts#L5)*
 
 **Parameters:**
 

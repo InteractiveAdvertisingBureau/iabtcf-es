@@ -17,7 +17,6 @@
 * [created](fields.md#created)
 * [isServiceSpecific](fields.md#isservicespecific)
 * [lastUpdated](fields.md#lastupdated)
-* [oobVendorsDisclosed](fields.md#oobvendorsdisclosed)
 * [policyVersion](fields.md#policyversion)
 * [publisherCountryCode](fields.md#publishercountrycode)
 * [publisherRestrictions](fields.md#publisherrestrictions)
@@ -29,6 +28,8 @@
 * [vendorConsents](fields.md#vendorconsents)
 * [vendorLegitimateInterest](fields.md#vendorlegitimateinterest)
 * [vendorListVersion](fields.md#vendorlistversion)
+* [vendorsAllowed](fields.md#vendorsallowed)
+* [vendorsDisclosed](fields.md#vendorsdisclosed)
 * [version](fields.md#version)
 
 ---
@@ -41,7 +42,7 @@
 
 **● cmpId**: *`string`* = "cmpId"
 
-*Defined in [encoder/Fields.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L6)*
+*Defined in model/Fields.ts:6*
 
 ___
 <a id="cmpversion"></a>
@@ -50,7 +51,7 @@ ___
 
 **● cmpVersion**: *`string`* = "cmpVersion"
 
-*Defined in [encoder/Fields.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L7)*
+*Defined in model/Fields.ts:7*
 
 ___
 <a id="consentlanguage"></a>
@@ -59,7 +60,7 @@ ___
 
 **● consentLanguage**: *`string`* = "consentLanguage"
 
-*Defined in [encoder/Fields.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L9)*
+*Defined in model/Fields.ts:9*
 
 ___
 <a id="consentscreen"></a>
@@ -68,7 +69,7 @@ ___
 
 **● consentScreen**: *`string`* = "consentScreen"
 
-*Defined in [encoder/Fields.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L8)*
+*Defined in model/Fields.ts:8*
 
 ___
 <a id="created"></a>
@@ -77,7 +78,7 @@ ___
 
 **● created**: *`string`* = "created"
 
-*Defined in [encoder/Fields.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L4)*
+*Defined in model/Fields.ts:4*
 
 ___
 <a id="isservicespecific"></a>
@@ -86,7 +87,7 @@ ___
 
 **● isServiceSpecific**: *`string`* = "isServiceSpecific"
 
-*Defined in [encoder/Fields.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L12)*
+*Defined in model/Fields.ts:12*
 
 ___
 <a id="lastupdated"></a>
@@ -95,16 +96,7 @@ ___
 
 **● lastUpdated**: *`string`* = "lastUpdated"
 
-*Defined in [encoder/Fields.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L5)*
-
-___
-<a id="oobvendorsdisclosed"></a>
-
-### `<Static>` oobVendorsDisclosed
-
-**● oobVendorsDisclosed**: *`string`* = "oobVendorsDisclosed"
-
-*Defined in [encoder/Fields.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L22)*
+*Defined in model/Fields.ts:5*
 
 ___
 <a id="policyversion"></a>
@@ -113,7 +105,7 @@ ___
 
 **● policyVersion**: *`string`* = "policyVersion"
 
-*Defined in [encoder/Fields.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L11)*
+*Defined in model/Fields.ts:11*
 
 ___
 <a id="publishercountrycode"></a>
@@ -122,7 +114,7 @@ ___
 
 **● publisherCountryCode**: *`string`* = "publisherCountryCode"
 
-*Defined in [encoder/Fields.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L18)*
+*Defined in model/Fields.ts:18*
 
 ___
 <a id="publisherrestrictions"></a>
@@ -131,7 +123,7 @@ ___
 
 **● publisherRestrictions**: *`string`* = "publisherRestrictions"
 
-*Defined in [encoder/Fields.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L21)*
+*Defined in model/Fields.ts:21*
 
 ___
 <a id="purposeconsents"></a>
@@ -140,7 +132,7 @@ ___
 
 **● purposeConsents**: *`string`* = "purposeConsents"
 
-*Defined in [encoder/Fields.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L15)*
+*Defined in model/Fields.ts:15*
 
 ___
 <a id="purposelitransparency"></a>
@@ -149,7 +141,7 @@ ___
 
 **● purposeLITransparency**: *`string`* = "purposeLITransparency"
 
-*Defined in [encoder/Fields.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L16)*
+*Defined in model/Fields.ts:16*
 
 ___
 <a id="purposeonetreatment"></a>
@@ -158,7 +150,7 @@ ___
 
 **● purposeOneTreatment**: *`string`* = "purposeOneTreatment"
 
-*Defined in [encoder/Fields.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L17)*
+*Defined in model/Fields.ts:17*
 
 ___
 <a id="specialfeatureoptins"></a>
@@ -167,7 +159,7 @@ ___
 
 **● specialFeatureOptIns**: *`string`* = "specialFeatureOptIns"
 
-*Defined in [encoder/Fields.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L14)*
+*Defined in model/Fields.ts:14*
 
 ___
 <a id="usenonstandardstacks"></a>
@@ -176,7 +168,7 @@ ___
 
 **● useNonStandardStacks**: *`string`* = "useNonStandardStacks"
 
-*Defined in [encoder/Fields.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L13)*
+*Defined in model/Fields.ts:13*
 
 ___
 <a id="vendorconsents"></a>
@@ -185,7 +177,7 @@ ___
 
 **● vendorConsents**: *`string`* = "vendorConsents"
 
-*Defined in [encoder/Fields.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L19)*
+*Defined in model/Fields.ts:19*
 
 ___
 <a id="vendorlegitimateinterest"></a>
@@ -194,7 +186,7 @@ ___
 
 **● vendorLegitimateInterest**: *`string`* = "vendorLegitimateInterest"
 
-*Defined in [encoder/Fields.ts:20](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L20)*
+*Defined in model/Fields.ts:20*
 
 ___
 <a id="vendorlistversion"></a>
@@ -203,7 +195,25 @@ ___
 
 **● vendorListVersion**: *`string`* = "vendorListVersion"
 
-*Defined in [encoder/Fields.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L10)*
+*Defined in model/Fields.ts:10*
+
+___
+<a id="vendorsallowed"></a>
+
+### `<Static>` vendorsAllowed
+
+**● vendorsAllowed**: *`string`* = "vendorsAllowed"
+
+*Defined in model/Fields.ts:23*
+
+___
+<a id="vendorsdisclosed"></a>
+
+### `<Static>` vendorsDisclosed
+
+**● vendorsDisclosed**: *`string`* = "vendorsDisclosed"
+
+*Defined in model/Fields.ts:22*
 
 ___
 <a id="version"></a>
@@ -212,7 +222,7 @@ ___
 
 **● version**: *`string`* = "version"
 
-*Defined in [encoder/Fields.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/bc68839/modules/core/src/encoder/Fields.ts#L3)*
+*Defined in model/Fields.ts:3*
 
 ___
 
