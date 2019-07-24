@@ -21,13 +21,13 @@ export function run(): void {
 
   describe('PurposeRestrictionVectorEncoder', (): void => {
 
-    it('should return an empty string for an empty PurposeRestrictionVector', (): void => {
+    it(`should return ${BitLength.numRestrictions} 0's for an empty PurposeRestrictionVector`, (): void => {
 
       const prVector: PurposeRestrictionVector = new PurposeRestrictionVector();
       const pre: PurposeRestrictionVectorEncoder = new PurposeRestrictionVectorEncoder();
       const encoded: string = pre.encode(prVector);
 
-      expect(encoded).to.equal('');
+      expect(encoded).to.equal('0'.repeat(BitLength.numRestrictions));
 
     });
 

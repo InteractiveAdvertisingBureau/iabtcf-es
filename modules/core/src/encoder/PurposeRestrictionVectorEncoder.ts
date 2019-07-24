@@ -25,16 +25,14 @@ export class PurposeRestrictionVectorEncoder implements Encoder<PurposeRestricti
 
   public encode(value: PurposeRestrictionVector): string {
 
-    let bitString = '';
+    const intEnc: IntEncoder = new IntEncoder();
+    // start with the number of restrictions
+    let bitString = intEnc.encode(value.numRestrictions, BitLength.numRestrictions);
 
     // if the vector is empty we'll just return an empty string, this vector is not required
     if (!value.isEmpty()) {
 
-      const intEnc: IntEncoder = new IntEncoder();
       const boolEnc: BooleanEncoder = new BooleanEncoder();
-
-      // start with the number of restrictions
-      bitString += intEnc.encode(value.numRestrictions, BitLength.numRestrictions);
 
       // create each restriction group
       value.getAllRestrictions().forEach((purpRestriction: PurposeRestriction): void => {
