@@ -12,11 +12,12 @@
 
 * [Base64Url](../classes/base64url.md)
 * [BooleanEncoder](../classes/booleanencoder.md)
-* [CoreTCStringEncoder](../classes/coretcstringencoder.md)
+* [CoreTCEncoder](../classes/coretcencoder.md)
 * [DateEncoder](../classes/dateencoder.md)
 * [FixedVectorEncoder](../classes/fixedvectorencoder.md)
 * [IntEncoder](../classes/intencoder.md)
 * [LangEncoder](../classes/langencoder.md)
+* [PublisherTCEncoder](../classes/publishertcencoder.md)
 * [PurposeRestrictionVectorEncoder](../classes/purposerestrictionvectorencoder.md)
 * [TCString](../classes/tcstring.md)
 * [VendorVectorEncoder](../classes/vendorvectorencoder.md)
@@ -41,7 +42,7 @@
 
 ▸ **decode**(value: *`string`*, target?: *[T]()*): `T`
 
-*Defined in [encoder/Encoder.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/Encoder.ts#L3)*
+*Defined in [encoder/Encoder.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/42cb912/modules/core/src/encoder/Encoder.ts#L3)*
 
 **Parameters:**
 
@@ -59,7 +60,7 @@ ___
 
 ▸ **encode**(value: *`T`*, numBits?: *`undefined` \| `number`*): `string`
 
-*Defined in [encoder/Encoder.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/Encoder.ts#L2)*
+*Defined in [encoder/Encoder.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/42cb912/modules/core/src/encoder/Encoder.ts#L2)*
 
 **Parameters:**
 
@@ -77,7 +78,7 @@ ___
 
 ▸ **getBitLength**(): `number`
 
-*Defined in [encoder/Encoder.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/Encoder.ts#L4)*
+*Defined in [encoder/Encoder.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/42cb912/modules/core/src/encoder/Encoder.ts#L4)*
 
 **Returns:** `number`
 

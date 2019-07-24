@@ -1,6 +1,11 @@
 import {TCModelError} from './errors';
 import {GVL} from './GVL';
-import {GVLMapItem} from './model/gvl';
+import {
+
+  GVLMapItem,
+  Purpose,
+
+} from './model/gvl';
 
 import {
 
@@ -26,6 +31,7 @@ export class TCModel implements TCFields {
   private useNonStandardStacks_: boolean = false;
   private purposeOneTreatment_: boolean = false;
   private publisherCountryCode_: string = 'AA';
+  private supportOOB_: boolean = false;
 
 
   // needs some settin' (no default)
@@ -55,15 +61,49 @@ export class TCModel implements TCFields {
   public readonly purposeConsents: Vector = new Vector();
 
   /**
+   * The user’s consent value for each Purpose established on the legal basis
+   * of consent, for the publisher.  Purposes are published in the Global
+   * Vendor List.
+   */
+  public readonly publisherConsents: Vector = new Vector();
+
+  /**
    * The user’s permission for each Purpose established on the legal basis of
    * legitimate interest. If the user has exercised right-to-object for a
-   * purpose, the corresponding bit for that purpose should be set to false.
+   * purpose.
    */
   public readonly purposeLITransparency: Vector = new Vector();
 
   /**
-   * Each [[Vendor]] is keyed by id. Their consent value is stored as boolean.
-   * see: [[Vector]]
+   * The user’s permission for each Purpose established on the legal basis of
+   * legitimate interest.  If the user has exercised right-to-object for a
+   * purpose.
+   */
+  public readonly publisherLITransparency: Vector = new Vector();
+
+  /**
+   * set by a publisher if they wish to collect consent and LI Transparency for
+   * purposes outside of the TCF
+   */
+  public customPurposes: IntMap<Purpose>;
+
+  /**
+   * The user’s consent value for each Purpose established on the legal basis
+   * of consent, for the publisher.  Purposes are published in the Global
+   * Vendor List.
+   */
+  public readonly publisherCustomConsents: Vector = new Vector();
+
+  /**
+   * The user’s permission for each Purpose established on the legal basis of
+   * legitimate interest.  If the user has exercised right-to-object for a
+   * purpose that is established in the publisher's custom purposes.
+   */
+  public readonly publisherCustomLITransparency: Vector = new Vector();
+
+  /**
+   * Each [[Vendor]] is keyed by id. Their consent value is true if it is in
+   * the Vector
    */
   public readonly vendorConsents: Vector = new Vector();
 
@@ -443,6 +483,23 @@ export class TCModel implements TCFields {
   };
 
   /**
+   * Whether or not this publisher supports out-of-band legal basis default is
+   * `true`
+   *
+   * @param {boolean} bool - value to set
+   */
+  public set supportOOB(bool: boolean) {
+
+    this.supportOOB_ = bool;
+
+  };
+  public get supportOOB(): boolean {
+
+    return this.supportOOB_;
+
+  };
+
+  /**
    * `false` There is no special Purpose 1 status.
    * Purpose 1 was disclosed normally (consent) as expected by Policy.  `true`
    * Purpose 1 not disclosed at all. CMPs use PublisherCC to indicate the
@@ -678,6 +735,42 @@ export class TCModel implements TCFields {
     this.unsetAllPurposeConsents();
     this.unsetAllVendorLegitimateInterest();
     this.unsetAllVendorsDisclosed();
+
+  }
+
+  public get numCustomPurposes(): number {
+
+    let len = 0;
+
+    if (this.customPurposes) {
+
+      len = Object.keys(this.customPurposes).length;
+
+    }
+    return len;
+
+  }
+  public set numCustomPurposes(num: number) {
+
+    if (!this.customPurposes) {
+
+      this.customPurposes = {};
+
+      for (let i = 0; i < num; i++) {
+
+        const id: string = (i + 1).toString();
+        const purpose: Purpose = {
+          id: i+1,
+          name: `publisher purpose ${id}`,
+          description: `publisher purpose description${id}`,
+          descriptionLegal: `publisher purpose legal description ${id}`,
+        };
+
+        this.customPurposes[id] = purpose;
+
+      }
+
+    }
 
   }
 

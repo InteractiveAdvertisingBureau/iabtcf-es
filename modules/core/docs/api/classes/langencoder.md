@@ -27,7 +27,7 @@
 
 ▸ **decode**(value: *`string`*): `string`
 
-*Defined in [encoder/LangEncoder.ts:43](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/LangEncoder.ts#L43)*
+*Defined in [encoder/LangEncoder.ts:43](https://github.com/chrispaterson/iabtcf-es/blob/42cb912/modules/core/src/encoder/LangEncoder.ts#L43)*
 
 **Parameters:**
 
@@ -44,7 +44,7 @@ ___
 
 ▸ **encode**(value: *`string`*, numBits: *`number`*): `string`
 
-*Defined in [encoder/LangEncoder.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/LangEncoder.ts#L13)*
+*Defined in [encoder/LangEncoder.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/42cb912/modules/core/src/encoder/LangEncoder.ts#L13)*
 
 **Parameters:**
 

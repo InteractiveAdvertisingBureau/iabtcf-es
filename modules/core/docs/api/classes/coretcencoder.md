@@ -1,10 +1,10 @@
-[@iabtcf/core - API Documentation](../README.md) > [CoreTCStringEncoder](../classes/coretcstringencoder.md)
+[@iabtcf/core - API Documentation](../README.md) > [CoreTCEncoder](../classes/coretcencoder.md)
 
-# Class: CoreTCStringEncoder
+# Class: CoreTCEncoder
 
 ## Hierarchy
 
-**CoreTCStringEncoder**
+**CoreTCEncoder**
 
 ## Implements
 
@@ -14,8 +14,8 @@
 
 ### Methods
 
-* [decode](coretcstringencoder.md#decode)
-* [encode](coretcstringencoder.md#encode)
+* [decode](coretcencoder.md#decode)
+* [encode](coretcencoder.md#encode)
 
 ---
 
@@ -29,7 +29,7 @@
 
 *Implementation of [Encoder](../interfaces/encoder.md).[decode](../interfaces/encoder.md#decode)*
 
-*Defined in [encoder/CoreTCStringEncoder.ts:71](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/CoreTCStringEncoder.ts#L71)*
+*Defined in encoder/CoreTCEncoder.ts:45*
 
 **Parameters:**
 
@@ -47,7 +47,7 @@ ___
 
 ▸ **encode**(tcModel: *[TCModel](tcmodel.md)*): `string`
 
-*Defined in [encoder/CoreTCStringEncoder.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/CoreTCStringEncoder.ts#L29)*
+*Defined in encoder/CoreTCEncoder.ts:22*
 
 **Parameters:**
 

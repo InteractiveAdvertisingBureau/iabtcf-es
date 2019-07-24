@@ -10,19 +10,12 @@ import {CoreFieldSequence} from './CoreFieldSequence';
 
 import {
 
-  EncodingError,
-  DecodingError,
-
-} from '../errors';
-
-import {
-
   TCModel,
   TCModelPropType,
 
 } from '..';
 
-export class CoreTCStringEncoder implements Encoder<TCModel> {
+export class CoreTCEncoder implements Encoder<TCModel> {
 
   private encMap: EncoderMap = new EncoderMap();
 
@@ -38,28 +31,9 @@ export class CoreTCStringEncoder implements Encoder<TCModel> {
       const numBits: number = BitLength[key];
       const encoder: Encoder<TCModelPropType> = new this.encMap[key]() as Encoder<TCModelPropType>;
 
-      try {
-
-        bitField += encoder.encode(value, numBits);
-
-      } catch (err) {
-
-        throw new EncodingError(`Unable to encode ${key}: ${err.message}`);
-
-      }
-
+      bitField += encoder.encode(value, numBits);
 
     });
-
-    /**
-     * Pad the remainder of the bitField with with zeros to so that it is a
-     * valid base64-able bitfield
-     */
-    if (bitField.length % 6 !== 0) {
-
-      bitField += '0'.repeat(6-(bitField.length % 6));
-
-    }
 
     const base64Url: Base64Url = new Base64Url();
 
@@ -90,14 +64,9 @@ export class CoreTCStringEncoder implements Encoder<TCModel> {
 
         bStringIdx += encoder.getBitLength();
 
-      } else {
-
-        throw new DecodingError(`Indeterminate bit length for ${key}`);
-
       }
 
     });
-
 
     return tcModel;
 

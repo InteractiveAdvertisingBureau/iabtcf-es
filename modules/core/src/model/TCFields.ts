@@ -27,5 +27,10 @@ export interface TCFields {
   publisherRestrictions: any;
   vendorsDisclosed: any;
   vendorsAllowed: any;
+  publisherConsents: any;
+  publisherLITransparency:any;
+  numCustomPurposes:any;
+  publisherCustomConsents:any;
+  publisherCustomLITransparency:any;
 
 }

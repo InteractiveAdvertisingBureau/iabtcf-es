@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import * as sinon from 'sinon';
 import {GVL} from '../src/GVL';
 import {Vendor} from '../src/model/gvl';
-import {IntMap}  from '../src/model/IntMap';
+import {IntMap} from '../src/model/IntMap';
 import {XMLHttpTestTools} from './support/XMLHttpTestTools';
 
 // eslint-disable-next-line
@@ -37,7 +37,7 @@ describe('GVL', (): void => {
   });
   afterEach(XMLHttpTestTools.afterEach);
 
-  it('Should fail to build without setting baseUrl', (): void => {
+  it('should fail to build without setting baseUrl', (): void => {
 
     // calls constructor
     expect((): void => {
@@ -48,7 +48,7 @@ describe('GVL', (): void => {
 
   });
 
-  it('Should propogate all values with passed in json', (): void => {
+  it('should propogate all values with passed in json', (): void => {
 
     const gvl: GVL = new GVL(vendorlistJson);
 
@@ -57,7 +57,7 @@ describe('GVL', (): void => {
 
   });
 
-  it('Should get latest GVL if nothing is passed to the constructor', (done): void => {
+  it('should get latest GVL if nothing is passed to the constructor', (done): void => {
 
     GVL.baseUrl = 'http://sweetcmp.com';
 
@@ -80,7 +80,7 @@ describe('GVL', (): void => {
 
   });
 
-  it('Should get versioned GVL if version number is passed', (done): void => {
+  it('should get versioned GVL if version number is passed', (done): void => {
 
     GVL.baseUrl = 'http://sweetcmp.com';
 
@@ -104,7 +104,7 @@ describe('GVL', (): void => {
 
   });
 
-  it('Should get versioned GVL if version number as string is passed', (done): void => {
+  it('should get versioned GVL if version number as string is passed', (done): void => {
 
     GVL.baseUrl = 'http://sweetcmp.com';
 
@@ -124,6 +124,7 @@ describe('GVL', (): void => {
       done();
 
     });
+
     req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(vendorlistJson));
 
   });

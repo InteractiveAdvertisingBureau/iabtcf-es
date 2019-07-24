@@ -16,7 +16,6 @@ export class SegmentType {
   public static readonly vendorsAllowed: number = 2;
   public static readonly publisherTC: number = 3;
 
-  // TODO: for now 3 until we build the other encoders
-  public static readonly numTypes: number = 3;
+  public static readonly numTypes: number = 4;
 
 };

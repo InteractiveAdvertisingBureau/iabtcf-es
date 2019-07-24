@@ -1,10 +1,10 @@
-[@iabtcf/core - API Documentation](../README.md) > [VendorsAllowedEncoder](../classes/vendorsallowedencoder.md)
+[@iabtcf/core - API Documentation](../README.md) > [PublisherTCEncoder](../classes/publishertcencoder.md)
 
-# Class: VendorsAllowedEncoder
+# Class: PublisherTCEncoder
 
 ## Hierarchy
 
-**VendorsAllowedEncoder**
+**PublisherTCEncoder**
 
 ## Implements
 
@@ -14,8 +14,8 @@
 
 ### Methods
 
-* [decode](vendorsallowedencoder.md#decode)
-* [encode](vendorsallowedencoder.md#encode)
+* [decode](publishertcencoder.md#decode)
+* [encode](publishertcencoder.md#encode)
 
 ---
 
@@ -27,7 +27,7 @@
 
 ▸ **decode**(encodedString: *`string`*, tcModel: *[TCModel](tcmodel.md)*): [TCModel](tcmodel.md)
 
-*Defined in [encoder/VendorsAllowedEncoder.ts:41](https://github.com/chrispaterson/iabtcf-es/blob/42cb912/modules/core/src/encoder/VendorsAllowedEncoder.ts#L41)*
+*Defined in [encoder/PublisherTCEncoder.ts:46](https://github.com/chrispaterson/iabtcf-es/blob/42cb912/modules/core/src/encoder/PublisherTCEncoder.ts#L46)*
 
 **Parameters:**
 
@@ -45,7 +45,7 @@ ___
 
 ▸ **encode**(tcModel: *[TCModel](tcmodel.md)*): `string`
 
-*Defined in [encoder/VendorsAllowedEncoder.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/42cb912/modules/core/src/encoder/VendorsAllowedEncoder.ts#L26)*
+*Defined in [encoder/PublisherTCEncoder.ts:23](https://github.com/chrispaterson/iabtcf-es/blob/42cb912/modules/core/src/encoder/PublisherTCEncoder.ts#L23)*
 
 **Parameters:**
 

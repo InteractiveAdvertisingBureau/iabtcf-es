@@ -28,7 +28,7 @@
 
 ▸ **decode**(value: *`string`*): [PurposeRestrictionVector](purposerestrictionvector.md)
 
-*Defined in [encoder/PurposeRestrictionVectorEncoder.ts:116](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/PurposeRestrictionVectorEncoder.ts#L116)*
+*Defined in [encoder/PurposeRestrictionVectorEncoder.ts:116](https://github.com/chrispaterson/iabtcf-es/blob/42cb912/modules/core/src/encoder/PurposeRestrictionVectorEncoder.ts#L116)*
 
 **Parameters:**
 
@@ -45,7 +45,7 @@ ___
 
 ▸ **encode**(value: *[PurposeRestrictionVector](purposerestrictionvector.md)*): `string`
 
-*Defined in [encoder/PurposeRestrictionVectorEncoder.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/PurposeRestrictionVectorEncoder.ts#L26)*
+*Defined in [encoder/PurposeRestrictionVectorEncoder.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/42cb912/modules/core/src/encoder/PurposeRestrictionVectorEncoder.ts#L26)*
 
 TODO: Must check to see if vendor has flexible purposes first TODO: if the RestrctionType is NOT\_ALLOWED it doesn't matter if the vendor has a flexible purpose
 
@@ -66,7 +66,7 @@ ___
 
 *Implementation of [Encoder](../interfaces/encoder.md).[getBitLength](../interfaces/encoder.md#getbitlength)*
 
-*Defined in [encoder/PurposeRestrictionVectorEncoder.ts:110](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/PurposeRestrictionVectorEncoder.ts#L110)*
+*Defined in [encoder/PurposeRestrictionVectorEncoder.ts:110](https://github.com/chrispaterson/iabtcf-es/blob/42cb912/modules/core/src/encoder/PurposeRestrictionVectorEncoder.ts#L110)*
 
 **Returns:** `number`
 

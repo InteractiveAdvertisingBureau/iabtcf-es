@@ -17,6 +17,7 @@ export function run(): void {
       });
 
     });
+
     it('should set a single id using the set method', (): void => {
 
       const vector: Vector = new Vector();
@@ -43,6 +44,23 @@ export function run(): void {
       });
 
     });
+
+    it('should throw an error if a non positive integer is passed to the set method', (): void => {
+
+      const vector: Vector = new Vector();
+      const id = -2;
+
+      expect((): void => {
+
+        vector.set(id);
+
+      }).to.throw();
+
+      expect(vector.has(id)).not.to.be.true;
+      expect(vector.maxId).not.to.equal(id);
+
+    });
+
     it('should unset a single id using the unset method', (): void => {
 
       const vector: Vector = new Vector();

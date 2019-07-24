@@ -34,5 +34,10 @@ export class EncoderMap implements TCFields {
   = PurposeRestrictionVectorEncoder;
   public readonly vendorsDisclosed: typeof VendorVectorEncoder = VendorVectorEncoder;
   public readonly vendorsAllowed: typeof VendorVectorEncoder = VendorVectorEncoder;
+  public readonly publisherConsents: typeof FixedVectorEncoder = FixedVectorEncoder;
+  public readonly publisherLITransparency: typeof FixedVectorEncoder = FixedVectorEncoder;
+  public readonly numCustomPurposes: typeof IntEncoder = IntEncoder;
+  public readonly publisherCustomConsents: typeof FixedVectorEncoder = FixedVectorEncoder;
+  public readonly publisherCustomLITransparency: typeof FixedVectorEncoder = FixedVectorEncoder;
 
 }

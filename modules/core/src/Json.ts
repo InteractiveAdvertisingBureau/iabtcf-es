@@ -13,24 +13,23 @@ export class Json {
       const req: XMLHttpRequest = new XMLHttpRequest();
       const onLoad: (evt: Event) => void = (): void => {
 
-        if (req.readyState == 4 ) {
+        // is the response done
+        if (req.readyState == XMLHttpRequest.DONE ) {
 
-          // anything that is not in the two hundreds is an error
-          if (req.status >= 200 && req.status < 300) {
+          /**
+           * anything that is not in the two hundreds is an error and if the
+           * responseText is null that means it failed
+           */
+          if (req.status >= 200
+            && req.status < 300
+            && req.responseType === 'json'
+            && req.response) {
 
-            if (req.responseText === '') {
-
-              reject(new Error('JSON response empty'));
-
-            } else {
-
-              resolve(req.response);
-
-            }
+            resolve(req.response);
 
           } else {
 
-            reject(new Error('HTTP Error ' + req.status));
+            reject(new Error(`JSON Error Status: ${req.status} responeType: ${req.responseType} (should be json)`));
 
           }
 
@@ -55,8 +54,6 @@ export class Json {
 
       req.responseType = 'json';
       req.withCredentials = sendCookies;
-      req.timeout = timeout;
-      req.ontimeout = onTimeout;
 
 
       req.addEventListener('load', onLoad);
@@ -65,6 +62,11 @@ export class Json {
 
 
       req.open('GET', jsonURL, true);
+
+      // IE has a problem if this is before the open
+      req.timeout = timeout;
+      req.ontimeout = onTimeout;
+
       req.send(null);
 
     });

@@ -23,18 +23,18 @@
 
 ###  core
 
-**● core**: *[CoreTCStringEncoder](coretcstringencoder.md)* =  CoreTCStringEncoder
+**● core**: *[CoreTCEncoder](coretcencoder.md)* =  CoreTCEncoder
 
-*Defined in [encoder/SegmentEncoderMap.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/SegmentEncoderMap.ts#L11)*
+*Defined in [encoder/SegmentEncoderMap.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/42cb912/modules/core/src/encoder/SegmentEncoderMap.ts#L12)*
 
 ___
 <a id="publishertc"></a>
 
 ###  publisherTC
 
-**● publisherTC**: *[CoreTCStringEncoder](coretcstringencoder.md)* =  CoreTCStringEncoder
+**● publisherTC**: *[PublisherTCEncoder](publishertcencoder.md)* =  PublisherTCEncoder
 
-*Defined in [encoder/SegmentEncoderMap.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/SegmentEncoderMap.ts#L14)*
+*Defined in [encoder/SegmentEncoderMap.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/42cb912/modules/core/src/encoder/SegmentEncoderMap.ts#L15)*
 
 ___
 <a id="vendorsallowed"></a>
@@ -43,7 +43,7 @@ ___
 
 **● vendorsAllowed**: *[VendorsAllowedEncoder](vendorsallowedencoder.md)* =  VendorsAllowedEncoder
 
-*Defined in [encoder/SegmentEncoderMap.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/SegmentEncoderMap.ts#L13)*
+*Defined in [encoder/SegmentEncoderMap.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/42cb912/modules/core/src/encoder/SegmentEncoderMap.ts#L14)*
 
 ___
 <a id="vendorsdisclosed"></a>
@@ -52,7 +52,7 @@ ___
 
 **● vendorsDisclosed**: *[VendorsDisclosedEncoder](vendorsdisclosedencoder.md)* =  VendorsDisclosedEncoder
 
-*Defined in [encoder/SegmentEncoderMap.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/8981cba/modules/core/src/encoder/SegmentEncoderMap.ts#L12)*
+*Defined in [encoder/SegmentEncoderMap.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/42cb912/modules/core/src/encoder/SegmentEncoderMap.ts#L13)*
 
 ___
 

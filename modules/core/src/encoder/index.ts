@@ -1,7 +1,7 @@
 export * from './BitLength';
 export * from './BooleanEncoder';
 export * from './CoreFieldSequence';
-export * from './CoreTCStringEncoder';
+export * from './CoreTCEncoder';
 export * from './DateEncoder';
 export * from './Encoder';
 export * from './EncoderMap';
@@ -17,3 +17,5 @@ export * from './VersionMap';
 export * from './Base64Url';
 export * from './VendorsDisclosedEncoder';
 export * from './VendorsAllowedEncoder';
+export * from './PublisherTCEncoder';
+export * from './PublisherFieldSequence';

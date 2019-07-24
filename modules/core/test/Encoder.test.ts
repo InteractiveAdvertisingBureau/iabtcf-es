@@ -8,9 +8,10 @@ import * as vendorVector from './encoder/VendorVectorEncoder.test';
 import * as purposeRestrictions from './encoder/PurposeRestrictionVectorEncoder.test';
 import * as coreFieldSequence from './encoder/CoreFieldSequence.test';
 import * as base64 from './encoder/Base64Url.test';
-import * as coreTC from './encoder/CoreTCStringEncoder.test';
+import * as coreTC from './encoder/CoreTCEncoder.test';
 import * as vendorsDisclosed from './encoder/VendorsDisclosedEncoder.test';
 import * as vendorsAllowed from './encoder/VendorsAllowedEncoder.test';
+import * as publisherTC from './encoder/PublisherTCEncoder.test';
 
 describe('Encoder', (): void => {
 
@@ -39,6 +40,7 @@ describe('Encoder', (): void => {
     coreTC.run();
     vendorsDisclosed.run();
     vendorsAllowed.run();
+    publisherTC.run();
 
   });
 

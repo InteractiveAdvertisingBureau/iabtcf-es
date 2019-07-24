@@ -1,16 +1,17 @@
 import {
 
-  CoreTCStringEncoder,
+  CoreTCEncoder,
   VendorsAllowedEncoder,
   VendorsDisclosedEncoder,
+  PublisherTCEncoder,
 
 } from '.';
 
 export class SegmentEncoderMap {
 
-  public readonly core: typeof CoreTCStringEncoder = CoreTCStringEncoder;
+  public readonly core: typeof CoreTCEncoder = CoreTCEncoder
   public readonly vendorsDisclosed: typeof VendorsDisclosedEncoder = VendorsDisclosedEncoder;
   public readonly vendorsAllowed: typeof VendorsAllowedEncoder = VendorsAllowedEncoder ;
-  public readonly publisherTC: typeof CoreTCStringEncoder = CoreTCStringEncoder;
+  public readonly publisherTC: typeof PublisherTCEncoder = PublisherTCEncoder;
 
 }

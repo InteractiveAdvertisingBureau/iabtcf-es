@@ -128,6 +128,16 @@ export class Base64Url implements Encoder<string> {
 
     }
 
+    /**
+     * Pad the remainder of the bitField with with zeros to so that it is a
+     * valid base64-able bitfield
+     */
+    if (str.length % this.BASIS !== 0) {
+
+      str += '0'.repeat(this.BASIS-(str.length % this.BASIS));
+
+    }
+
     const len: number = str.length;
     let retr = '';
 

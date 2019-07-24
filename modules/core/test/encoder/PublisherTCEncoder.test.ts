@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {
-  CoreFieldSequence,
-  CoreTCStringEncoder,
+  PublisherFieldSequence,
+  PublisherTCEncoder,
 } from '../../src/encoder';
 import {
   TCModel,
@@ -9,7 +9,7 @@ import {
 } from '../../src';
 export function run(): void {
 
-  describe('CoreTCStringEncoder', (): void => {
+  describe('PublisherTCEncoder', (): void => {
 
     // eslint-disable-next-line
     const vendorlistJson = require('../../dev/vendorlist.json');
@@ -18,7 +18,7 @@ export function run(): void {
     it('should encode into a string', (): void => {
 
       const tcModel: TCModel = new TCModel(gvl);
-      const encoder: CoreTCStringEncoder = new CoreTCStringEncoder();
+      const encoder: PublisherTCEncoder = new PublisherTCEncoder();
       let encoded = '';
 
       tcModel.cmpId = 23;
@@ -44,7 +44,7 @@ export function run(): void {
     it('TCModel->String->TCModel and should be equal', (): void => {
 
       const tcModel: TCModel = new TCModel(gvl);
-      const encoder: CoreTCStringEncoder = new CoreTCStringEncoder();
+      const encoder: PublisherTCEncoder = new PublisherTCEncoder();
       const decodedModel: TCModel = new TCModel();
       let encoded = '';
 
@@ -72,7 +72,7 @@ export function run(): void {
 
       encodeIt();
 
-      const coreFieldSequence: CoreFieldSequence = new CoreFieldSequence();
+      const coreFieldSequence: PublisherFieldSequence = new PublisherFieldSequence();
 
       coreFieldSequence['2'].forEach((key: string): void => {
 

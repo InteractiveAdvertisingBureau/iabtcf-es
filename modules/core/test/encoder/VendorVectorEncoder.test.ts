@@ -306,14 +306,8 @@ export function run(): void {
 
         for (let i = 0; i < numVendors; i ++) {
 
-          // putta gap in dere
-          // eslint-disable-next-line
-      if (i !== 49) {
-
-            vector.set(i + 1);
-
-          }
-          if (i !== 51) {
+          // should give us a single entry on id 52
+          if (i !== 50 && i !== 52) {
 
             vector.set(i + 1);
 
@@ -328,6 +322,37 @@ export function run(): void {
         vector.forEach((value: boolean, id: number): void => {
 
           expect(decodedVector.has(id)).to.equal(value);
+
+        });
+
+      });
+
+      it('should decode a range with true as default value and a single id range', (): void => {
+
+        const vector: Vector = new Vector();
+        const numVendors = 100;
+
+        for (let i = 0; i < numVendors; i ++) {
+
+          // should give us a single entry on id 52
+          if (i !== 50 && i !== 52) {
+
+            vector.set(i + 1);
+
+          }
+
+        }
+
+        const vve: VendorVectorEncoder = new VendorVectorEncoder();
+        let encoded = vve.encode(vector);
+        const index = BitLength.maxId + 1;
+
+        encoded = encoded.substr(0, index) + '1' + encoded.substr(index + 1);
+        const decodedVector = vve.decode(encoded);
+
+        vector.forEach((value: boolean, id: number): void => {
+
+          expect(decodedVector.has(id)).to.equal(!value);
 
         });
 

@@ -89,8 +89,6 @@ describe('Json->fetch', (): void => {
   });
 
   /**
-   // this one SUCKS!!
-
   it('should error if it times out', (done: () => void): void => {
 
     Json.fetch('blah', false, 5)
@@ -111,13 +109,8 @@ describe('Json->fetch', (): void => {
 
     expect(req.method).to.equal('GET');
 
-    req.autoRespond = (ms: number): void => {
-
-      done();
-      debugger;
-
-    };
-
+// this doesn't exist even though the type deff is there and it's in the docs
+    req.autoRespond(2005);
 
   });
   */

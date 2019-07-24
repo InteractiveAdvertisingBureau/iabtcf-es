@@ -21,5 +21,10 @@ export class Fields {
   public static readonly publisherRestrictions: string = 'publisherRestrictions';
   public static readonly vendorsDisclosed: string = 'vendorsDisclosed';
   public static readonly vendorsAllowed: string = 'vendorsAllowed';
+  public static readonly publisherConsents: string = 'publisherConsents';
+  public static readonly publisherLITransparency: string = 'publisherLITransparency';
+  public static readonly numCustomPurposes: string = 'numCustomPurposes';
+  public static readonly publisherCustomConsents: string = 'publisherCustomConsents';
+  public static readonly publisherCustomLITransparency: string = 'publisherLITransparency';
 
 }
