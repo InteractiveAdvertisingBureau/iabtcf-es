@@ -27,7 +27,7 @@
 
 ▸ **decode**(str: *`string`*): `string`
 
-*Defined in [encoder/Base64Url.ts:180](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/encoder/Base64Url.ts#L180)*
+*Defined in [encoder/Base64Url.ts:180](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/encoder/Base64Url.ts#L180)*
 
 decodes a base64url encoded bitfield string
 
@@ -49,7 +49,7 @@ ___
 
 ▸ **encode**(str: *`string`*): `string`
 
-*Defined in [encoder/Base64Url.ts:120](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/encoder/Base64Url.ts#L120)*
+*Defined in [encoder/Base64Url.ts:120](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/encoder/Base64Url.ts#L120)*
 
 encodes an arbitrary-length bitfield string into base64url
 

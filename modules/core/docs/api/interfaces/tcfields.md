@@ -54,7 +54,7 @@ I need this interface to have type flexibility so I'm disabling eslint... Don't 
 
 **● cmpId**: *`any`*
 
-*Defined in [model/TCFields.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L12)*
+*Defined in [model/TCFields.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L12)*
 
 ___
 <a id="cmpversion"></a>
@@ -63,7 +63,7 @@ ___
 
 **● cmpVersion**: *`any`*
 
-*Defined in [model/TCFields.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L13)*
+*Defined in [model/TCFields.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L13)*
 
 ___
 <a id="consentlanguage"></a>
@@ -72,7 +72,7 @@ ___
 
 **● consentLanguage**: *`any`*
 
-*Defined in [model/TCFields.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L15)*
+*Defined in [model/TCFields.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L15)*
 
 ___
 <a id="consentscreen"></a>
@@ -81,7 +81,7 @@ ___
 
 **● consentScreen**: *`any`*
 
-*Defined in [model/TCFields.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L14)*
+*Defined in [model/TCFields.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L14)*
 
 ___
 <a id="created"></a>
@@ -90,7 +90,7 @@ ___
 
 **● created**: *`any`*
 
-*Defined in [model/TCFields.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L10)*
+*Defined in [model/TCFields.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L10)*
 
 ___
 <a id="isservicespecific"></a>
@@ -99,7 +99,7 @@ ___
 
 **● isServiceSpecific**: *`any`*
 
-*Defined in [model/TCFields.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L18)*
+*Defined in [model/TCFields.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L18)*
 
 ___
 <a id="lastupdated"></a>
@@ -108,7 +108,7 @@ ___
 
 **● lastUpdated**: *`any`*
 
-*Defined in [model/TCFields.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L11)*
+*Defined in [model/TCFields.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L11)*
 
 ___
 <a id="numcustompurposes"></a>
@@ -117,7 +117,7 @@ ___
 
 **● numCustomPurposes**: *`any`*
 
-*Defined in [model/TCFields.ts:32](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L32)*
+*Defined in [model/TCFields.ts:32](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L32)*
 
 ___
 <a id="policyversion"></a>
@@ -126,7 +126,7 @@ ___
 
 **● policyVersion**: *`any`*
 
-*Defined in [model/TCFields.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L17)*
+*Defined in [model/TCFields.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L17)*
 
 ___
 <a id="publisherconsents"></a>
@@ -135,7 +135,7 @@ ___
 
 **● publisherConsents**: *`any`*
 
-*Defined in [model/TCFields.ts:30](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L30)*
+*Defined in [model/TCFields.ts:30](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L30)*
 
 ___
 <a id="publishercountrycode"></a>
@@ -144,7 +144,7 @@ ___
 
 **● publisherCountryCode**: *`any`*
 
-*Defined in [model/TCFields.ts:24](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L24)*
+*Defined in [model/TCFields.ts:24](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L24)*
 
 ___
 <a id="publishercustomconsents"></a>
@@ -153,7 +153,7 @@ ___
 
 **● publisherCustomConsents**: *`any`*
 
-*Defined in [model/TCFields.ts:33](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L33)*
+*Defined in [model/TCFields.ts:33](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L33)*
 
 ___
 <a id="publishercustomlitransparency"></a>
@@ -162,7 +162,7 @@ ___
 
 **● publisherCustomLITransparency**: *`any`*
 
-*Defined in [model/TCFields.ts:34](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L34)*
+*Defined in [model/TCFields.ts:34](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L34)*
 
 ___
 <a id="publisherlitransparency"></a>
@@ -171,7 +171,7 @@ ___
 
 **● publisherLITransparency**: *`any`*
 
-*Defined in [model/TCFields.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L31)*
+*Defined in [model/TCFields.ts:31](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L31)*
 
 ___
 <a id="publisherrestrictions"></a>
@@ -180,7 +180,7 @@ ___
 
 **● publisherRestrictions**: *`any`*
 
-*Defined in [model/TCFields.ts:27](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L27)*
+*Defined in [model/TCFields.ts:27](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L27)*
 
 ___
 <a id="purposeconsents"></a>
@@ -189,7 +189,7 @@ ___
 
 **● purposeConsents**: *`any`*
 
-*Defined in [model/TCFields.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L21)*
+*Defined in [model/TCFields.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L21)*
 
 ___
 <a id="purposelitransparency"></a>
@@ -198,7 +198,7 @@ ___
 
 **● purposeLITransparency**: *`any`*
 
-*Defined in [model/TCFields.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L22)*
+*Defined in [model/TCFields.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L22)*
 
 ___
 <a id="purposeonetreatment"></a>
@@ -207,7 +207,7 @@ ___
 
 **● purposeOneTreatment**: *`any`*
 
-*Defined in [model/TCFields.ts:23](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L23)*
+*Defined in [model/TCFields.ts:23](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L23)*
 
 ___
 <a id="specialfeatureoptins"></a>
@@ -216,7 +216,7 @@ ___
 
 **● specialFeatureOptIns**: *`any`*
 
-*Defined in [model/TCFields.ts:20](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L20)*
+*Defined in [model/TCFields.ts:20](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L20)*
 
 ___
 <a id="usenonstandardstacks"></a>
@@ -225,7 +225,7 @@ ___
 
 **● useNonStandardStacks**: *`any`*
 
-*Defined in [model/TCFields.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L19)*
+*Defined in [model/TCFields.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L19)*
 
 ___
 <a id="vendorconsents"></a>
@@ -234,7 +234,7 @@ ___
 
 **● vendorConsents**: *`any`*
 
-*Defined in [model/TCFields.ts:25](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L25)*
+*Defined in [model/TCFields.ts:25](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L25)*
 
 ___
 <a id="vendorlegitimateinterest"></a>
@@ -243,7 +243,7 @@ ___
 
 **● vendorLegitimateInterest**: *`any`*
 
-*Defined in [model/TCFields.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L26)*
+*Defined in [model/TCFields.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L26)*
 
 ___
 <a id="vendorlistversion"></a>
@@ -252,7 +252,7 @@ ___
 
 **● vendorListVersion**: *`any`*
 
-*Defined in [model/TCFields.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L16)*
+*Defined in [model/TCFields.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L16)*
 
 ___
 <a id="vendorsallowed"></a>
@@ -261,7 +261,7 @@ ___
 
 **● vendorsAllowed**: *`any`*
 
-*Defined in [model/TCFields.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L29)*
+*Defined in [model/TCFields.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L29)*
 
 ___
 <a id="vendorsdisclosed"></a>
@@ -270,7 +270,7 @@ ___
 
 **● vendorsDisclosed**: *`any`*
 
-*Defined in [model/TCFields.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L28)*
+*Defined in [model/TCFields.ts:28](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L28)*
 
 ___
 <a id="version"></a>
@@ -279,7 +279,7 @@ ___
 
 **● version**: *`any`*
 
-*Defined in [model/TCFields.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/model/TCFields.ts#L9)*
+*Defined in [model/TCFields.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/model/TCFields.ts#L9)*
 
 ___
 

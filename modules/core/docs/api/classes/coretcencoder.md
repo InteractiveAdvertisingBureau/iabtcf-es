@@ -29,7 +29,7 @@
 
 *Implementation of [Encoder](../interfaces/encoder.md).[decode](../interfaces/encoder.md#decode)*
 
-*Defined in [encoder/CoreTCEncoder.ts:45](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/encoder/CoreTCEncoder.ts#L45)*
+*Defined in [encoder/CoreTCEncoder.ts:45](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/encoder/CoreTCEncoder.ts#L45)*
 
 **Parameters:**
 
@@ -47,7 +47,7 @@ ___
 
 ▸ **encode**(tcModel: *[TCModel](tcmodel.md)*): `string`
 
-*Defined in [encoder/CoreTCEncoder.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/c2fc731/modules/core/src/encoder/CoreTCEncoder.ts#L22)*
+*Defined in [encoder/CoreTCEncoder.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/encoder/CoreTCEncoder.ts#L22)*
 
 **Parameters:**
 
