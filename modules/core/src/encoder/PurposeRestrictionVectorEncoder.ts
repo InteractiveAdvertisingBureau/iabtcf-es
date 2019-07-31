@@ -17,11 +17,6 @@ import {
 export class PurposeRestrictionVectorEncoder implements Encoder<PurposeRestrictionVector> {
 
   private bitLength: number = 0;
-  /**
-   * TODO: Must check to see if vendor has flexible purposes first
-   * TODO: if the RestrctionType is NOT_ALLOWED it doesn't matter if the vendor
-   * has a flexible purpose
-   */
 
   public encode(value: PurposeRestrictionVector): string {
 
@@ -44,6 +39,7 @@ export class PurposeRestrictionVectorEncoder implements Encoder<PurposeRestricti
         // now get all the vendors under that restriction
         const vendors: number[] = value.getVendors(purpRestriction);
         const len: number = vendors.length;
+
         /**
          * numEntries comes first so we will have to keep a counter and the do
          * the encoding at the end

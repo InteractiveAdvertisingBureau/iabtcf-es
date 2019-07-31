@@ -30,6 +30,7 @@ export function run(): void {
 
       expect(prv.isEmpty()).to.be.true;
 
+
     });
     it('should store vendors by purpose restriction in order', (): void => {
 
@@ -184,7 +185,7 @@ export function run(): void {
 
       const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
       const purposeId = 2;
-      const restrictionType: number = 1 as RestrictionType;
+      const restrictionType: number = RestrictionType.REQUIRE_CONSENT;
       const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
       const vendorId: number = makeRandomInt(1, 100);
 
@@ -198,6 +199,84 @@ export function run(): void {
 
       expect(prv.getRestriction(vendorId)).to.be.empty;
       expect(prv.getVendors(purpRestriction)).not.to.include(vendorId);
+      expect(prv.isEmpty()).to.be.true;
+
+    });
+
+    it('should set restriction type 0 on vendor regardless of flexible legal basis', (): void => {
+
+      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+
+      const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
+      const purposeId = 2;
+      const restrictionType: number = RestrictionType.NOT_ALLOWED;
+      const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
+      // eslint-disable-next-line
+      const vendorlistJson = require('../../dev/vendorlist.json');
+      const vendorIds = Object.keys(vendorlistJson.vendors);
+      let chosenVendorId = 0;
+
+      vendorIds.forEach((id: string): void => {
+
+        if (!vendorlistJson.vendors[id].flexiblePurposeIds.includes(purposeId)) {
+
+          chosenVendorId = vendorlistJson.vendors[id].id;
+
+        }
+
+      });
+
+      prv.gvl = vendorlistJson;
+
+      if (!chosenVendorId) {
+
+        throw new Error('No sutable vendor was found without a flexible purpose id for ' + purposeId);
+
+      }
+
+      prv.add(chosenVendorId, purpRestriction);
+
+      expect(prv.getRestriction(chosenVendorId)).not.to.be.empty;
+      expect(prv.getVendors(purpRestriction)).to.include(chosenVendorId);
+      expect(prv.isEmpty()).to.be.false;
+
+    });
+
+    it('should not set restriction type 1 on vendor if no flexible legal basis for vendor', (): void => {
+
+      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+
+      const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
+      const purposeId = 2;
+      const restrictionType: number = RestrictionType.REQUIRE_CONSENT;
+      const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
+      // eslint-disable-next-line
+      const vendorlistJson = require('../../dev/vendorlist.json');
+      const vendorIds = Object.keys(vendorlistJson.vendors);
+      let chosenVendorId = 0;
+
+      vendorIds.forEach((id: string): void => {
+
+        if (!vendorlistJson.vendors[id].flexiblePurposeIds.includes(purposeId)
+          && vendorlistJson.vendors[id].legIntPurposeIds.includes(purposeId)) {
+
+          chosenVendorId = vendorlistJson.vendors[id].id;
+
+        }
+
+      });
+
+      if (!chosenVendorId) {
+
+        throw new Error('No sutable vendor was found with a flexible and legInt purpose id for ' + purposeId);
+
+      }
+
+      prv.gvl = vendorlistJson;
+      prv.add(chosenVendorId, purpRestriction);
+
+      expect(prv.getRestriction(chosenVendorId)).to.be.empty;
+      expect(prv.getVendors(purpRestriction)).not.to.include(chosenVendorId);
       expect(prv.isEmpty()).to.be.true;
 
     });

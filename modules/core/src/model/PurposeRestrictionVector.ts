@@ -1,7 +1,13 @@
 import {
+
   PurposeRestriction,
   BinarySearchTree,
+  RestrictionType,
+
 } from '.';
+
+import {GVL} from '..';
+import {Vendor} from './gvl';
 
 export class PurposeRestrictionVector {
 
@@ -9,20 +15,10 @@ export class PurposeRestrictionVector {
    * a map indexed by a string which will be a 'hash' of the purpose and
    * restriction type.
    *
-   * You may be wondering, why would we use a data structure like a
-   * BinarySearchTree to store the vendors?  What's that, you don't care? Well,
-   * I'll tell you anyway!  In the event that a publisher restricts all vendor
-   * purposes in the same way and the entire GVL is showing, with the inclusion
-   * of Google there is potentially 2k+ vendors on the list.  If that is true,
-   * sorting the list so that it can be encoded properly will require O(n log
-   * n) operations.  To find a vendor to remove could be O(n log n) if the list
-   * isn't kept sorted.  With a tree we can do all operations in O(log n), for
-   * a list of 2048 vendors it will take no more than 11 operations to do
-   * anything.  An O(n log n) operation would be n times larger than that, on
-   * 2048 vendors 22,528 operations -- of course assuming that the list was
-   * sorted at the end.
+   * Using a BST to keep vendors in a sorted order for encoding later
    */
   private map: Map<string, BinarySearchTree> = new Map<string, BinarySearchTree>();
+  private gvl_: GVL;
 
   private has(hash: string): boolean {
 
@@ -30,17 +26,83 @@ export class PurposeRestrictionVector {
 
   }
 
-  public add(vendorId: number, purposeRestriction: PurposeRestriction): void {
+  private isOkToHave(restrictionType: RestrictionType, purposeId: number, vendorId: number): boolean {
 
-    const hash: string = purposeRestriction.hash;
+    const vIDStr: string = vendorId.toString();
 
-    if (!this.has(hash)) {
+    /**
+     * without a gvl set, there's no way to know...
+     */
+    if (this.gvl) {
 
-      this.map.set(hash, new BinarySearchTree());
+      if (this.gvl.vendors && this.gvl.vendors[vIDStr]) {
 
+        const vendor: Vendor = this.gvl.vendors[vIDStr];
+
+        if (vendor.flexiblePurposeIds) {
+
+          switch (restrictionType) {
+
+            case RestrictionType.NOT_ALLOWED:
+              return (vendor.legIntPurposeIds.includes(purposeId) || vendor.purposeIds.includes(purposeId));
+
+            case RestrictionType.REQUIRE_CONSENT:
+              return (vendor.flexiblePurposeIds.includes(purposeId) && vendor.legIntPurposeIds.includes(purposeId));
+
+            case RestrictionType.REQUIRE_LI:
+              return (vendor.flexiblePurposeIds.includes(purposeId) && vendor.purposeIds.includes(purposeId));
+
+          }
+
+          // if we made it here, they passed something strange for the
+          // restriction type so we ain't gonna add it
+          return false;
+
+        } else if (restrictionType === RestrictionType.NOT_ALLOWED) {
+
+          /**
+           * if it's "not allowed" we don't care about flexible basis but if
+           * they don't even list it, no reason to encode the value so we check
+           * both arrays to see if it exists
+           */
+          return (vendor.legIntPurposeIds.includes(purposeId) || vendor.purposeIds.includes(purposeId));
+
+        }
+
+      } else {
+
+        // this vendor doesn't exist
+        return false;
+
+      }
+
+    } else {
+
+      return true;
 
     }
-    (this.map.get(hash) as BinarySearchTree).add(vendorId);
+
+    // not necessary but typescript complains
+    return false;
+
+  }
+
+  public add(vendorId: number, purposeRestriction: PurposeRestriction): void {
+
+
+    if (this.isOkToHave(purposeRestriction.restrictionType, purposeRestriction.purposeId, vendorId)) {
+
+      const hash: string = purposeRestriction.hash;
+
+      if (!this.has(hash)) {
+
+        this.map.set(hash, new BinarySearchTree());
+
+
+      }
+      (this.map.get(hash) as BinarySearchTree).add(vendorId);
+
+    }
 
   }
 
@@ -103,11 +165,65 @@ export class PurposeRestrictionVector {
     }
 
   }
+
+  /**
+   * Essential for being able to determine whether we can actually set a
+   * purpose restriction since they have to have a flexible legal basis
+   *
+   * @param {GVL} value - the GVL instance
+   */
+  public set gvl(value: GVL) {
+
+    if (!this.gvl_) {
+
+      this.gvl_ = value;
+
+      /**
+       * if we have restrictions set before the gvl is set then we'll have to
+       * go through and remove some if they're not valid
+       */
+      if (this.numRestrictions) {
+
+        this.map.forEach((bst: BinarySearchTree, hash: string): void => {
+
+          const purposeRestriction: PurposeRestriction = PurposeRestriction.unHash(hash);
+          const vendors: number[] = bst.get();
+
+          vendors.forEach((vendorId: number): void => {
+
+            if (!this.isOkToHave(purposeRestriction.restrictionType, purposeRestriction.purposeId, vendorId)) {
+
+              bst.remove(vendorId);
+
+            }
+
+          });
+
+        });
+
+      }
+
+    }
+
+  }
+
+  public get gvl(): GVL {
+
+    return this.gvl_;
+
+  }
+
   public isEmpty(): boolean {
 
     return this.map.size === 0;
 
   };
+  public isValid(): boolean {
+
+    return this.gvl_ !== undefined;
+
+  }
+
   public get numRestrictions(): number {
 
     return this.map.size;

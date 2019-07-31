@@ -47,20 +47,48 @@ export function run(): void {
 
       }
 
-      const pre: PurposeRestrictionVectorEncoder = new PurposeRestrictionVectorEncoder();
-      const encoded: string = pre.encode(prVector);
+      /**
+       * ORDER:
+       * num pub restrictions
+       * purposeId
+       * restrictionType
+       * numEntries
+       * ----
+       * singleOrRange
+       * startVendorId
+       * endVendorId (may not be there)
+       */
+      const prve: PurposeRestrictionVectorEncoder = new PurposeRestrictionVectorEncoder();
+      const encoded: string = prve.encode(prVector);
       const intEnc: IntEncoder = new IntEncoder();
       let index = 0;
 
       expect(encoded).not.to.be.empty;
 
-      const numEntries: number = intEnc.decode(encoded.substr(index, BitLength.numRestrictions));
+      // num restrictions
+      const numRestrictions: number = intEnc.decode(encoded.substr(index, BitLength.numRestrictions));
 
+      expect(numRestrictions).to.equal(prVector.numRestrictions);
       index += BitLength.numRestrictions;
 
-      expect(numEntries).to.equal(prVector.numRestrictions);
-
+      // purposeId
       const purpId: number = intEnc.decode(encoded.substr(index, BitLength.purposeId));
+
+      expect(purpId).to.equal(purposeId);
+      index += BitLength.purposeId;
+
+      // restrictionType
+      const restrictionType: number = intEnc.decode(encoded.substr(index, BitLength.restrictionType));
+
+      expect(restrictionType).to.equal(RestrictionType.NOT_ALLOWED);
+      index += BitLength.restrictionType;
+
+      // numEntries
+      const numEntries: number = intEnc.decode(encoded.substr(index, BitLength.numEntries));
+
+      expect(numEntries).to.equal(2);
+      index += BitLength.numEntries;
+
 
     });
 
