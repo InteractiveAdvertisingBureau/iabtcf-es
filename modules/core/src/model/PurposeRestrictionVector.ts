@@ -76,14 +76,10 @@ export class PurposeRestrictionVector {
 
       }
 
-    } else {
-
-      return true;
-
     }
 
-    // not necessary but typescript complains
-    return false;
+    // if the gvl isn't defined, we can't do anything until later
+    return true;
 
   }
 
