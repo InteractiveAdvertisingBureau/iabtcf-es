@@ -1,6 +1,6 @@
 {
   "name": "@iabtcf/core",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "description": "Ensures consistent encoding and decoding of TC Signals for the iab. Transparency and Consent Framework (TCF).",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://github.com/chrispaterson/iabtcf-es",
@@ -87,6 +87,5 @@
     "url": "https://github.com/chrispaterson/iabtcf-es.git",
     "directory": "modules/core"
   },
-  "gitHead": "1cc7fc723d8cbfa784dde27ce7bb95100107b750",
-  "dependencies": {}
+  "gitHead": "1cc7fc723d8cbfa784dde27ce7bb95100107b750"
 }
