@@ -4,7 +4,7 @@ import {Purpose} from './Purpose';
 import {Stack} from './Stack';
 
 
-export interface GVLBase {
+export interface Declarations {
   gvlSpecificationVersion: number;
   vendorListVersion: number;
   tcfPolicyVersion: number;

@@ -1,6 +1,6 @@
 export * from './ByPurposeVendorMap';
 export * from './Feature';
-export * from './GVLBase';
+export * from './Declarations';
 export * from './GVLMapItem';
 export * from './GVLMaps';
 export * from './IDSetMap';

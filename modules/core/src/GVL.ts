@@ -2,7 +2,7 @@ import {Json} from './Json';
 import {GVLError} from './errors';
 
 import {
-  GVLBase,
+  Declarations,
   Purpose,
   Feature,
   IDSetMap,
@@ -28,7 +28,7 @@ type PurposeSubType = 'consent' | 'legInt' | 'flexible';
  * object and provide accessors.  Provides ways to group vendors on the list by
  * purpose and feature.
  */
-export class GVL {
+export class GVL implements VendorList, Declarations {
 
   /**
    * @static
@@ -186,9 +186,9 @@ export class GVL {
 
     this.lang_ = this.DEFAULT_LANGUAGE;
 
-    if (this.isVendorList(versionOrVendorList as VendorList)) {
+    if (this.isVendorList(versionOrVendorList as GVL)) {
 
-      this.deserialize(versionOrVendorList as VendorList);
+      this.deserialize(versionOrVendorList as GVL);
 
       this.readyPromise = new Promise((resolve: Function): void => {
 
@@ -241,7 +241,7 @@ export class GVL {
 
       Json.fetch(url).then((response: object): void => {
 
-        this.deserialize(response as VendorList);
+        this.deserialize(response as GVL);
         resolve();
 
       })
@@ -321,13 +321,13 @@ export class GVL {
     return this.lang_;
 
   }
-  private isVendorList(gvlObject: GVLBase): gvlObject is VendorList {
+  private isVendorList(gvlObject: object): gvlObject is VendorList {
 
     return gvlObject !== undefined && (gvlObject as VendorList).vendors !== undefined;
 
   }
 
-  private deserialize(gvlObject: GVLBase): void {
+  private deserialize(gvlObject: GVL): void {
 
     this.gvlSpecificationVersion = gvlObject.gvlSpecificationVersion;
     this.vendorListVersion = gvlObject.vendorListVersion;
