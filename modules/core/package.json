@@ -9,7 +9,7 @@
     "url": "https://opensource.org/licenses/apache2.0.php"
   },
   "main": "lib/index.js",
-  "types": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "lib/**/*"
   ],
