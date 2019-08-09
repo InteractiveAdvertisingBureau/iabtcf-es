@@ -5,16 +5,20 @@ import {
   Ping,
 } from './model';
 
-export type tcDataCallback = (tcData: TCData, sucess: boolean) => void;
+export type tcDataCallback = (tcData: TCData, success: boolean) => void;
+export type iatcDataCallback = (iatcData: InAppTCData, success: boolean) => void;
+export type pingCallback = (pingReturn: Ping) => void;
+export type Callback = tcDataCallback | iatcDataCallback | pingCallback;
+
 export class API {
 
   public tcModel: TCModel;
 
   public getTCData: (callback: tcDataCallback, vendors: number[]) => {
   }
-  public getInAppTCData: (callback: (inAppTCData: InAppTCData, sucess: boolean) => void) => {
+  public getInAppTCData: (callback: iatcDataCallback) => {
   }
-  public ping: (callback: (pingReturn: Ping) => void) => {
+  public ping: (callback: pingCallback) => {
   }
   public addEventListener: (callback: tcDataCallback) => {
   }
