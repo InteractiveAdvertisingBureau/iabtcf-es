@@ -8,14 +8,11 @@
     "type": "Apache-2.0",
     "url": "https://opensource.org/licenses/apache2.0.php"
   },
-  "directories": {
-    "src": "src",
-    "test": "test"
-  },
   "files": [
     "dist/"
   ],
-  "scripts": {},
+  "scripts": {
+  },
   "eslintIgnore": [
     "lib"
   ],
