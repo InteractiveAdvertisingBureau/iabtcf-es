@@ -27,7 +27,7 @@
 
 ▸ **decode**(encodedString: *`string`*, tcModel: *[TCModel](tcmodel.md)*): [TCModel](tcmodel.md)
 
-*Defined in [encoder/VendorsAllowedEncoder.ts:41](https://github.com/chrispaterson/iabtcf-es/blob/5dac6b3/modules/core/src/encoder/VendorsAllowedEncoder.ts#L41)*
+*Defined in [encoder/VendorsAllowedEncoder.ts:41](https://github.com/chrispaterson/iabtcf-es/blob/2c7676b/modules/core/src/encoder/VendorsAllowedEncoder.ts#L41)*
 
 **Parameters:**
 
@@ -45,7 +45,7 @@ ___
 
 ▸ **encode**(tcModel: *[TCModel](tcmodel.md)*): `string`
 
-*Defined in [encoder/VendorsAllowedEncoder.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/5dac6b3/modules/core/src/encoder/VendorsAllowedEncoder.ts#L26)*
+*Defined in [encoder/VendorsAllowedEncoder.ts:26](https://github.com/chrispaterson/iabtcf-es/blob/2c7676b/modules/core/src/encoder/VendorsAllowedEncoder.ts#L26)*
 
 **Parameters:**
 

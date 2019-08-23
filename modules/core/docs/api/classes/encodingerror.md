@@ -35,7 +35,7 @@ class for encoding errors
 
 ⊕ **new EncodingError**(msg: *`string`*): [EncodingError](encodingerror.md)
 
-*Defined in [errors/EncodingError.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/5dac6b3/modules/core/src/errors/EncodingError.ts#L6)*
+*Defined in [errors/EncodingError.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/2c7676b/modules/core/src/errors/EncodingError.ts#L6)*
 
 constructor - constructs an EncodingError
 

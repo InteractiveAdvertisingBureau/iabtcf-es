@@ -1,10 +1,15 @@
 [@iabtcf/core - Usage Documentation](README.md) > [TCString](tcstring.md)
 
+## Table of Contents
+
+- [Decode](#decode-an-iab-tc-string)
+- [Encode](#encode-an-iab-tc-string)
+
 # TCString
 
 [TCString API Documentation](../api/classes/tcstring.md)
 
-### Decode a TCString
+### Decode an IAB TC String
 
 ```typescript
 import {TCString, TCModel} from '@iabtcf/core';
@@ -18,7 +23,7 @@ const myTCModel = TCString.decode(encodedTCString);
 
 [TCModel Usage Dcoumentation](tcmodel.md)
 
-### Create a TCString
+### Encode an IAB TC String
 
 ```typescript
 import {TCString, TCModel, GVL} from '@iabtcf/core';
@@ -45,15 +50,6 @@ gvl.readPromise.then(() => {
    */
   comsole.log(TCString.encode(tcModel));
 });
-```
-
-### Decode a TCString
-
-```typescript
-import {TCString, TCModel} from '@iabtcf/core';
-
-const tcModel = TCString.decode(encodedString);
-
 ```
 
 `TCModel`

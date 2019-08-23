@@ -1,2 +1,2 @@
 export * from './CmpApi';
-export * from './APIS';
+export * from './model/';
