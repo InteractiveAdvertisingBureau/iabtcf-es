@@ -5,9 +5,10 @@
  * @readonly
  * @enum {string}
  */
-export default Object.freeze({
-  STUB: 'stubCMP',
-  LOADING: 'loading',
-  LOADED: 'loaded',
-  ERROR: 'error',
-});
+
+export enum CmpStatus{
+  STUB = 'stubCMP',
+  LOADING = 'loading',
+  LOADED = 'loaded',
+  ERROR = 'error',
+};

@@ -12,7 +12,7 @@
     "test": "mocha './modules/**/test/*.ts'",
     "bootstrap": "lerna bootstrap",
     "deploy": "lerna publish from-package",
-    "build": "cd ./modules/core/ && npm run build",
+    "build": "cd ./modules/core/ && npm run build && cd ../cmpapi && npm run build",
     "coverage": "nyc --reporter=lcov npm run test",
     "upload-coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "standard": "standard index.js"

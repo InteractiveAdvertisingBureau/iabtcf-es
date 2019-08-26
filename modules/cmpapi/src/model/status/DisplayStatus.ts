@@ -5,8 +5,9 @@
  * @readonly
  * @enum {string}
  */
-export default Object.freeze({
-  VISIBLE: 'visible',
-  HIDDEN: 'hidden',
-  DISABLED: 'disabled',
-});
+
+export enum DisplayStatus {
+  VISIBLE = 'visible',
+  HIDDEN = 'hidden',
+  DISABLED = 'disabled',
+};

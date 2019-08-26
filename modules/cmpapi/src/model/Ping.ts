@@ -1,12 +1,11 @@
-export class Ping {
+import {
+  CmpStatus,
+  DisplayStatus,
+} from './status';
 
-  /**
-   * true - the user or Publisher is determined to be within the
-   * jurisdiction of the GDPR
-   * false - the user or Publisher is determined NOT to be within the
-   * jurisdiction of the GDPR
-   */
-  public gdprApplies: boolean;
+import {Return} from './Return';
+
+export class Ping extends Return {
 
   /**
    * true - CMP main script is loaded
@@ -17,29 +16,17 @@ export class Ping {
   /**
    * see Ping Status Codes in following table
    */
-  public cmpStatus: string;
+  public cmpStatus: CmpStatus;
 
   /**
    * see Ping Status Codes in following table
    */
-  public displayStatus: string;
+  public displayStatus: DisplayStatus;
 
   /**
-   * version of the CMP API that is supported; e.g. “2.0”
+   * version of the CMP API that is supported; e.g. “2”
    */
   public apiVersion: string;
-
-  /**
-   * CMPs own/internal version that is currently running
-   * undefined if still the stub
-   */
-  public cmpVersion: number;
-
-  /**
-   * IAB Assidned CMP ID
-   * undefined if still the stub
-   */
-  public cmpId: number;
 
   /**
    * Version of the GVL currently loaded by the CMP
@@ -47,10 +34,5 @@ export class Ping {
    */
   public gvlVersion: number;
 
-  /**
-   * number of the supported TCF version
-   * undefined if still the stub
-   */
-  public tcfPolicyVersion: number;
 
 }
