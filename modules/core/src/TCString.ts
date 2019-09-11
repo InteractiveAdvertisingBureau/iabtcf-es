@@ -68,7 +68,7 @@ export class TCString implements Encoder<TCModel> {
       const segment: string = segments[i];
       let encoder: Encoder<TCModel>;
 
-      // fist is always core
+      // first is always core
       if ( i === 0 ) {
 
         encoder = new segMap.core();
@@ -76,9 +76,10 @@ export class TCString implements Encoder<TCModel> {
       } else {
 
         // first char will contain 6 bits, we only need the first 3
-        const segTypeBits: string = base64Url.decode(segment.charAt(0));
-        const segType: string = intEnc.decode(segTypeBits.substr(0, BitLength.segmentType)).toString();
-
+        const firstCharBits: string = base64Url.decode(segment.charAt(0));
+        const segTypeBits: string = firstCharBits.substr(0, BitLength.segmentType);
+        const segType: string = intEnc.decode(segTypeBits).toString();
+        
         encoder = new segMap[SegmentType[segType]]();
 
       }

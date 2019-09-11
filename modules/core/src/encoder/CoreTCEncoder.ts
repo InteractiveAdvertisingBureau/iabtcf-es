@@ -31,7 +31,12 @@ export class CoreTCEncoder implements Encoder<TCModel> {
       const numBits: number = BitLength[key];
       const encoder: Encoder<TCModelPropType> = new this.encMap[key]() as Encoder<TCModelPropType>;
 
-      bitField += encoder.encode(value, numBits);
+      try {
+        bitField += encoder.encode(value, numBits);
+      } catch (err) {
+        err.message = `Error while trying to encode '${key}': ${err.message}`;
+        throw err;
+      }
 
     });
 
@@ -53,8 +58,8 @@ export class CoreTCEncoder implements Encoder<TCModel> {
     encodeSequence.forEach((key: string): void => {
 
       const encoder: Encoder<TCModelPropType> = new this.encMap[key]() as Encoder<TCModelPropType>;
-
-      tcModel[key] = encoder.decode(bitField.substr(bStringIdx, BitLength[key]));
+      const bits = bitField.substr(bStringIdx, BitLength[key]);
+      tcModel[key] = encoder.decode(bits);
 
       if (BitLength[key]) {
 
