@@ -400,7 +400,7 @@ export class GVL implements VendorList, Declarations {
       const vendor: Vendor = this.vendors_[vendorId];
       const numVendorId: number = parseInt(vendorId, 10);
 
-      vendor.purposeIds.forEach((purposeId: number): void => {
+      vendor.purposes.forEach((purposeId: number): void => {
 
         const purpGroup = this.byPurposeVendorMap[purposeId + ''];
 
@@ -408,16 +408,22 @@ export class GVL implements VendorList, Declarations {
 
       });
 
-      vendor.legIntPurposeIds.forEach((purposeId: number): void => {
+      vendor.specialPurposes.forEach((purposeId: number): void => {
+
+        this.bySpecialPurposeVendorMap[purposeId + ''].add(numVendorId);
+
+      });
+
+      vendor.legIntPurposes.forEach((purposeId: number): void => {
 
         this.byPurposeVendorMap[purposeId + ''].legInt.add(numVendorId);
 
       });
 
       // could not be there
-      if (vendor.flexiblePurposeIds) {
+      if (vendor.flexiblePurposes) {
 
-        vendor.flexiblePurposeIds.forEach((purposeId: number): void => {
+        vendor.flexiblePurposes.forEach((purposeId: number): void => {
 
           this.byPurposeVendorMap[purposeId + ''].flexible.add(numVendorId);
 
@@ -425,13 +431,13 @@ export class GVL implements VendorList, Declarations {
 
       }
 
-      vendor.featureIds.forEach((featureId: number): void => {
+      vendor.features.forEach((featureId: number): void => {
 
         this.byFeatureVendorMap[featureId + ''].add(numVendorId);
 
       });
 
-      vendor.specialFeatureIds.forEach((featureId: number): void => {
+      vendor.specialFeatures.forEach((featureId: number): void => {
 
         this.bySpecialFeatureVendorMap[featureId + ''].add(numVendorId);
 

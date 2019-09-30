@@ -218,7 +218,7 @@ export function run(): void {
 
       vendorIds.forEach((id: string): void => {
 
-        if (!vendorlistJson.vendors[id].flexiblePurposeIds.includes(purposeId)) {
+        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId)) {
 
           chosenVendorId = vendorlistJson.vendors[id].id;
 
@@ -257,8 +257,8 @@ export function run(): void {
 
       vendorIds.forEach((id: string): void => {
 
-        if (!vendorlistJson.vendors[id].flexiblePurposeIds.includes(purposeId)
-          && vendorlistJson.vendors[id].legIntPurposeIds.includes(purposeId)) {
+        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId)
+          && vendorlistJson.vendors[id].legIntPurposes.includes(purposeId)) {
 
           chosenVendorId = vendorlistJson.vendors[id].id;
 
@@ -296,8 +296,8 @@ export function run(): void {
 
       vendorIds.forEach((id: string): void => {
 
-        if (!vendorlistJson.vendors[id].flexiblePurposeIds.includes(purposeId)
-          && vendorlistJson.vendors[id].purposeIds.includes(purposeId)) {
+        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId)
+          && vendorlistJson.vendors[id].purposes.includes(purposeId)) {
 
           chosenVendorId = vendorlistJson.vendors[id].id;
 
@@ -336,8 +336,8 @@ export function run(): void {
 
       vendorIds.forEach((id: string): void => {
 
-        if (!vendorlistJson.vendors[id].flexiblePurposeIds.includes(purposeId)
-          && vendorlistJson.vendors[id].legIntPurposeIds.includes(purposeId)) {
+        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId)
+          && vendorlistJson.vendors[id].legIntPurposes.includes(purposeId)) {
 
           chosenVendorId = vendorlistJson.vendors[id].id;
 
