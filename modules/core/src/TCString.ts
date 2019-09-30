@@ -76,10 +76,10 @@ export class TCString implements Encoder<TCModel> {
       } else {
 
         // first char will contain 6 bits, we only need the first 3
-        const firstCharBits: string = base64Url.decode(segment.charAt(0));
-        const segTypeBits: string = firstCharBits.substr(0, BitLength.segmentType);
+        const firstChar: string = base64Url.decode(segment.charAt(0));
+        const segTypeBits: string = firstChar.substr(0, BitLength.segmentType);
         const segType: string = intEnc.decode(segTypeBits).toString();
-        
+
         encoder = new segMap[SegmentType[segType]]();
 
       }

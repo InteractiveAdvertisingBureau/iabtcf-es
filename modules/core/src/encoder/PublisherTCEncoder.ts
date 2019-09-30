@@ -27,7 +27,7 @@ export class PublisherTCEncoder implements Encoder<TCModel> {
     const intEnc: IntEncoder = new IntEncoder();
     const pubFieldSequence: PublisherFieldSequence = new PublisherFieldSequence();
     const encodeSequence: string[] = pubFieldSequence[tcModel.version.toString()];
-    
+
     // first encode the segment type
     let bitField: string = intEnc.encode(SegmentType.publisherTC, BitLength.segmentType);
 

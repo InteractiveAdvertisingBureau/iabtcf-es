@@ -6,7 +6,9 @@ import {
   Base64Url,
 
 } from '.';
+
 import {CoreFieldSequence} from './CoreFieldSequence';
+import {EncodingError} from '../errors';
 
 import {
 
@@ -14,6 +16,7 @@ import {
   TCModelPropType,
 
 } from '..';
+
 
 export class CoreTCEncoder implements Encoder<TCModel> {
 
@@ -32,10 +35,13 @@ export class CoreTCEncoder implements Encoder<TCModel> {
       const encoder: Encoder<TCModelPropType> = new this.encMap[key]() as Encoder<TCModelPropType>;
 
       try {
+
         bitField += encoder.encode(value, numBits);
+
       } catch (err) {
-        err.message = `Error while trying to encode '${key}': ${err.message}`;
-        throw err;
+
+        throw new EncodingError(`Error while trying to encode core '${key}': ${err.message}`);
+
       }
 
     });
@@ -59,6 +65,7 @@ export class CoreTCEncoder implements Encoder<TCModel> {
 
       const encoder: Encoder<TCModelPropType> = new this.encMap[key]() as Encoder<TCModelPropType>;
       const bits = bitField.substr(bStringIdx, BitLength[key]);
+
       tcModel[key] = encoder.decode(bits);
 
       if (BitLength[key]) {
