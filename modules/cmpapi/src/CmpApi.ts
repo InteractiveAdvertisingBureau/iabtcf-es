@@ -224,13 +224,13 @@ export class CmpApi {
    * Public-facing CMP API commands
    */
 
-  public getTCData(callback: TCDataCallback, vendors: number[]): void{
+  public getTCData(callback: TCDataCallback, vendors?: number[]): void{
 
     const builder: TCDataBuilder = new TCDataBuilder();
 
     if (builder.isBuildable()) {
 
-      callback(builder.build(), true);
+      callback(builder.build(vendors), true);
 
     } else {
 

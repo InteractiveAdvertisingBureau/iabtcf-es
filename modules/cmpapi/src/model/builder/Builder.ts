@@ -4,6 +4,6 @@ import {
 
 export interface Builder {
 
-  build: () => Return;
+  build: (vendors?: number[]) => Return;
   isBuildable: () => boolean;
 };

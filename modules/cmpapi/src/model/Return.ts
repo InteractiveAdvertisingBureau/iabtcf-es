@@ -1,4 +1,4 @@
-export type BoolInt = 0 | 1 | undefined;
+import {BoolInt} from './BoolInt';
 
 export class Return {
 
