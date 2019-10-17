@@ -25,6 +25,7 @@ export class PurposeRestriction {
       this.purposeId = purposeId;
 
     }
+
     if (restrictionType !== undefined) {
 
       this.restrictionType = restrictionType;
@@ -56,6 +57,7 @@ export class PurposeRestriction {
       throw new Error('cannot hash invalid PurposeRestriction');
 
     }
+
     return `${this.purposeId}${PurposeRestriction.hashSeparator}${this.restrictionType}`;
 
   }

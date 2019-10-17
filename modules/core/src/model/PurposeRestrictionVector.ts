@@ -85,7 +85,6 @@ export class PurposeRestrictionVector {
 
   public add(vendorId: number, purposeRestriction: PurposeRestriction): void {
 
-
     if (this.isOkToHave(purposeRestriction.restrictionType, purposeRestriction.purposeId, vendorId)) {
 
       const hash: string = purposeRestriction.hash;
@@ -94,8 +93,8 @@ export class PurposeRestrictionVector {
 
         this.map.set(hash, new BinarySearchTree());
 
-
       }
+
       (this.map.get(hash) as BinarySearchTree).add(vendorId);
 
     }
