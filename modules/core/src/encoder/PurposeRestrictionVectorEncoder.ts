@@ -18,6 +18,7 @@ export class PurposeRestrictionVectorEncoder implements Encoder<PurposeRestricti
 
   private bitLength: number = 0;
   private intEnc: IntEncoder = new IntEncoder();
+  private boolEnc: BooleanEncoder = new BooleanEncoder();
 
   public encode(value: PurposeRestrictionVector): string {
 
@@ -26,8 +27,6 @@ export class PurposeRestrictionVectorEncoder implements Encoder<PurposeRestricti
 
     // if the vector is empty we'll just return a string with just the numRestricitons being 0
     if (!value.isEmpty()) {
-
-      const boolEnc: BooleanEncoder = new BooleanEncoder();
 
       // create each restriction group
       value.getAllRestrictions().forEach((purpRestriction: PurposeRestriction): void => {
@@ -69,7 +68,7 @@ export class PurposeRestrictionVectorEncoder implements Encoder<PurposeRestricti
             const isRange = !(vendorId === startId);
 
             // 0 means single 1 means range
-            rangeField += boolEnc.encode(isRange);
+            rangeField += this.boolEnc.encode(isRange);
             rangeField += this.intEnc.encode(startId, BitLength.vendorId);
 
             if (isRange) {
@@ -115,6 +114,44 @@ export class PurposeRestrictionVectorEncoder implements Encoder<PurposeRestricti
     index += BitLength.maxId;
 
     for (let i = 0; i < numRestrictions; i++) {
+
+      // First is purpose ID
+      const purposeId = this.intEnc.decode(value.substr(index, BitLength.purposeId));
+      index += BitLength.purposeId;
+      // Second Restriction Type
+      const restrictionType = this.intEnc.decode(value.substr(index, BitLength.restrictionType));
+      index += BitLength.restrictionType;
+
+      const purposeRestriction: PurposeRestriction = new PurposeRestriction(purposeId, restrictionType);
+      // Num Entries (number of vendors)
+      const numEntries: number = this.intEnc.decode(value.substr(index, BitLength.numEntries));
+      index += BitLength.numEntries;
+
+      for (let j = 0; j < numEntries; j++) {
+
+        const isARange: boolean = this.boolEnc.decode(value.substr(index, BitLength.anyBoolean));
+        const startOrOnlyVendorId: number = this.intEnc.decode(value.substr(index, BitLength.vendorId));
+        index += BitLength.vendorId;
+
+        if (isARange) {
+
+          const endVendorId: number = this.intEnc.decode(value.substr(index, BitLength.vendorId));
+          index += BitLength.vendorId;
+
+          for ( let k: number = startOrOnlyVendorId; k < startOrOnlyVendorId + endVendorId; k++) {
+
+            vector.add(k, purposeRestriction);
+
+          }
+
+        } else {
+
+          vector.add(startOrOnlyVendorId, purposeRestriction);
+
+        }
+
+      }
+
     }
 
     return vector;
