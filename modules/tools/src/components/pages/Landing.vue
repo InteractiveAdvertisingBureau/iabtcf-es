@@ -5,6 +5,11 @@
     <h4>Resources</h4>
     <ul>
       <li>
+        <a href="https://github.com/chrispaterson/iabtcf-es">
+          TCF Code Library Github
+        </a>
+      </li>
+      <li>
         <a href="https://iabtechlab.com/">iab. Tech Lab</a>
       </li>
       <li>
@@ -16,4 +21,16 @@
   </div>
 </template>
 
-<script src="./Landing.vue.ts"></script>
+<script lang="ts">
+import {Component, Vue} from 'vue-property-decorator';
+import PageHead from './PageHead.vue';
+
+// eslint-disable-next-line
+@Component({
+  components: {
+    PageHead,
+  },
+})
+export default class Landing extends Vue {
+}
+</script>

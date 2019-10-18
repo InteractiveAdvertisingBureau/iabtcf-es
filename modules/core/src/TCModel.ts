@@ -162,11 +162,15 @@ export class TCModel implements TCFields {
 
     if (this.gvl_ === undefined) {
 
-      this.gvl_ = gvl;
-      this.vendorListVersion_ = gvl.vendorListVersion;
-      this.policyVersion_ = gvl.tcfPolicyVersion;
-      this.consentLanguage = gvl.language;
-      this.publisherRestrictions.gvl = gvl;
+      gvl.readyPromise.then((): void => {
+
+        this.gvl_ = gvl;
+        this.vendorListVersion_ = gvl.vendorListVersion;
+        this.policyVersion_ = gvl.tcfPolicyVersion;
+        this.consentLanguage = gvl.language;
+        this.publisherRestrictions.gvl = gvl;
+
+      });
 
     } else {
 
