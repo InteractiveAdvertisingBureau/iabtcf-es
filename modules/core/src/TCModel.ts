@@ -162,13 +162,17 @@ export class TCModel implements TCFields {
 
     if (this.gvl_ === undefined) {
 
+      /**
+       * Set the reference but wait to se the other values for when the data populates
+       */
+      this.gvl_ = gvl;
+      this.publisherRestrictions.gvl = gvl;
+
       gvl.readyPromise.then((): void => {
 
-        this.gvl_ = gvl;
         this.vendorListVersion_ = gvl.vendorListVersion;
         this.policyVersion_ = gvl.tcfPolicyVersion;
         this.consentLanguage = gvl.language;
-        this.publisherRestrictions.gvl = gvl;
 
       });
 
@@ -366,14 +370,30 @@ export class TCModel implements TCFields {
    */
   public set vendorListVersion(integer: number) {
 
+    let isError = false;
+    let errMsg = '';
+
     if (this.isIntAbove(integer, 0)) {
 
-      // TODO: Auto update the GVL?
-      this.vendorListVersion_ = integer;
+      if (!this.gvl) {
+
+        this.vendorListVersion_ = integer;
+
+      } else {
+
+        isError = true;
+        errMsg = 'cannot changed value when gvl is set';
+
+      }
 
     } else {
 
-      throw new TCModelError('vendorListVersion', integer);
+      isError = true;
+
+    }
+    if (isError) {
+
+      throw new TCModelError('vendorListVersion', integer, errMsg);
 
     }
 

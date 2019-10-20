@@ -13,10 +13,10 @@ export function run(): void {
   describe('VendorsDisclosedEncoder', (): void => {
 
     // eslint-disable-next-line
-    const vendorlistJson = require('../../dev/vendorlist.json');
+    const vendorlistJson = require('../../dev/vendor-list.json');
     const gvl: GVL = new GVL(vendorlistJson);
 
-    it('should encode into a string', (): void => {
+    it('should encode into a string', (done: () => void): void => {
 
       const tcModel: TCModel = new TCModel(gvl);
       const encoder: VendorsDisclosedEncoder = new VendorsDisclosedEncoder();
@@ -34,14 +34,21 @@ export function run(): void {
 
       };
 
-      expect(tcModel.isValid(), 'input model is valid').to.be.true;
+      expect(tcModel.gvl).to.equal(gvl);
+      tcModel.gvl.readyPromise.then((): void => {
 
-      expect(encodeIt, 'encode should not throw an error').not.to.throw();
-      expect(encoded, 'shold not be empty').to.not.equal('');
+        expect(tcModel.isValid(), 'input model is valid').to.be.true;
+
+        expect(encodeIt, 'encode should not throw an error').not.to.throw();
+        expect(encoded, 'shold not be empty').to.not.equal('');
+
+        done();
+
+      });
 
     });
 
-    it('TCModel->String->TCModel and should be equal', (): void => {
+    it('TCModel->String->TCModel and should be equal', (done: () => void): void => {
 
       const tcModel: TCModel = new TCModel(gvl);
       const encoder: VendorsDisclosedEncoder = new VendorsDisclosedEncoder();
@@ -65,12 +72,18 @@ export function run(): void {
 
       };
 
-      expect(tcModel.isValid(), 'input model is valid').to.be.true;
+      expect(tcModel.gvl).to.equal(gvl);
+      tcModel.gvl.readyPromise.then((): void => {
 
-      expect(encodeIt).not.to.throw();
-      expect(decodeIt).not.to.throw();
+        expect(tcModel.isValid(), 'input model is valid').to.be.true;
 
-      expect(decodedModel.vendorsDisclosed.size).to.equal(tcModel.vendorsDisclosed.size);
+        expect(encodeIt).not.to.throw();
+        expect(decodeIt).not.to.throw();
+
+        expect(decodedModel.vendorsDisclosed.size).to.equal(tcModel.vendorsDisclosed.size);
+        done();
+
+      });
 
     });
 

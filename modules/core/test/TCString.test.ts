@@ -1,35 +1,24 @@
 import {expect} from 'chai';
-import {CoreFieldSequence} from '../src/encoder';
 import {
   TCString,
   TCModel,
   GVL,
 } from '../src';
 
-type MinimalModelOptions = {
-  versions?: Number
+interface MinimalModelOptions {
+  versions?: number;
 }
 
-const doEncode = (options = {}) => {
+const getMinimalModel = (customOptions: MinimalModelOptions = {}): TCModel => {
 
-  const tcString = new TCString();
-  const model = getMinimalModel(options);
-  return tcString.encode(model);
-
-}
-
-const truncDate = (date: Date) => Math.round(date.getTime() / 100) * 100;
-
-const getMinimalModel = (customOptions: MinimalModelOptions = {}) => {
   const options = {
     version: 2,
-    ...customOptions
+    ...customOptions,
   };
 
-  const vendorlistJson = require('../dev/vendorlist.json');
-  const gvl: GVL = new GVL(vendorlistJson);
-  
-  const model = new TCModel(gvl);
+  const vendorlistJson = require('../dev/vendor-list.json'); // eslint-disable-line
+  const model = new TCModel(new GVL(vendorlistJson));
+
   model.cmpId = 123;
   model.cmpVersion = 1;
   model.consentLanguage = 'en';
@@ -38,15 +27,41 @@ const getMinimalModel = (customOptions: MinimalModelOptions = {}) => {
 
 };
 
-const compareModels = (actual: TCModel, expected: TCModel) => {
-  
-  const compareProp = (propName: string, transform = _ => _) => {
-    
+const doEncode = (options = {}): Promise<string> => {
+
+  const model = getMinimalModel(options);
+
+  return new Promise((resolve: (string) => void): void => {
+
+    model.gvl.readyPromise.then((): void => {
+
+      const tcString = new TCString();
+
+      resolve(tcString.encode(model));
+
+    });
+
+  });
+
+};
+
+const truncDate = (date: Date): number => {
+
+  return Math.round(date.getTime() / 100) * 100;
+
+};
+
+
+const compareModels = (actual: TCModel, expected: TCModel): void => {
+
+  const compareProp = (propName: string, transform = (_): void => _): void => {
+
     const actualValue = transform(actual[propName]);
     const expectedValue = transform(expected[propName]);
+
     expect(actualValue, `Error while comparing '${propName}'`).to.eq(expectedValue);
 
-  }
+  };
 
   compareProp('cmpId');
   compareProp('cmpVersion');
@@ -58,46 +73,47 @@ const compareModels = (actual: TCModel, expected: TCModel) => {
   compareProp('useNonStandardStacks');
   compareProp('version');
 
-}
+};
 
 describe('TCString', (): void => {
 
   describe('.encode(tcModel)', (): void => {
-    
+
     it('does not throw if a valid TCModel is passed', (): void => {
-      
+
       expect(doEncode).not.to.throw();
 
     });
 
-    it('returns a string with 4 segments when TCModel version is 2', () => {
+    it('returns a string with 4 segments when TCModel version is 2', (done: () => void): void => {
 
-      const encodedString = doEncode();
+      doEncode().then((encodedString): void => {
 
-      expect(encodedString.split('.')).to.be.lengthOf(4);
+        expect(encodedString.split('.')).to.be.lengthOf(4);
+        done();
 
-    });
-
-    xit('WIP: currently fails. returns a string with only 1 segment when tCModel version is 1', () => {
-
-      const encodedString = doEncode({ version: 1 });
-
-      expect(encodedString.split('.')).to.be.lengthOf(1);
+      });
 
     });
 
   });
 
-  describe('.decode(encodedString)', () => {
+  describe('.decode(encodedString)', (): void => {
 
-    it('returns an equivalent model if encoded and decoded', () => {
+    it('returns an equivalent model if encoded and decoded', (done: () => void): void => {
 
       const tcString = new TCString();
       const model = getMinimalModel();
-      const encodedString = tcString.encode(model);
-      const decodedModel = tcString.decode(encodedString);
-      
-      compareModels(decodedModel, model);
+
+      model.gvl.readyPromise.then((): void => {
+
+        const encodedString = tcString.encode(model);
+        const decodedModel = tcString.decode(encodedString);
+
+        compareModels(decodedModel, model);
+        done();
+
+      });
 
     });
 

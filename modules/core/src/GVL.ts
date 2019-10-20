@@ -189,12 +189,7 @@ export class GVL implements VendorList, Declarations {
     if (this.isVendorList(versionOrVendorList as GVL)) {
 
       this.deserialize(versionOrVendorList as GVL);
-
-      this.readyPromise = new Promise((resolve: Function): void => {
-
-        resolve();
-
-      });
+      this.readyPromise = Promise.resolve();
 
     } else {
 

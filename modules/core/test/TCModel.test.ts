@@ -109,7 +109,7 @@ describe('TCModel', (): void => {
     describe(fieldName, (): void => {
 
       // eslint-disable-next-line
-    const vendorlistJson = require('../dev/vendorlist.json');
+    const vendorlistJson = require('../dev/vendor-list.json');
       const gvl: GVL = new GVL(vendorlistJson);
 
       it(`should create an instance of ${instanceName} as ${fieldName} on init`, (): void => {
@@ -150,10 +150,10 @@ describe('TCModel', (): void => {
 
   });
 
-  it('should construct a TCModel with a GVL argument', (): void => {
+  it('should construct a TCModel with a GVL argument', (done: () => void): void => {
 
     // eslint-disable-next-line
-    const vendorlistJson = require('../dev/vendorlist.json');
+    const vendorlistJson = require('../dev/vendor-list.json');
     const gvl: GVL = new GVL(vendorlistJson);
 
     expect((): void => {
@@ -166,19 +166,25 @@ describe('TCModel', (): void => {
 
     const tcModel = new TCModel(gvl);
 
-    expect(tcModel.policyVersion, 'policyVersion should be picked up from gvl')
-      .to.equal(gvl.tcfPolicyVersion);
-    expect(tcModel.vendorListVersion, 'vendorListVersion should be picked up from gvl')
-      .to.equal(gvl.vendorListVersion);
-    expect(tcModel.gvl, 'should save and make accessible the gvl')
-      .to.equal(gvl);
+    expect(tcModel.gvl).to.equal(gvl);
+    tcModel.gvl.readyPromise.then((): void => {
+
+      expect(tcModel.policyVersion, 'policyVersion should be picked up from gvl')
+        .to.equal(gvl.tcfPolicyVersion);
+      expect(tcModel.vendorListVersion, 'vendorListVersion should be picked up from gvl')
+        .to.equal(gvl.vendorListVersion);
+      expect(tcModel.gvl, 'should save and make accessible the gvl')
+        .to.equal(gvl);
+      done();
+
+    });
 
   });
 
   it('should throw an error if gvl is attempted to be set more than once', (): void => {
 
     // eslint-disable-next-line
-    const vendorlistJson = require('../dev/vendorlist.json');
+    const vendorlistJson = require('../dev/vendor-list.json');
     const gvl: GVL = new GVL(vendorlistJson);
 
     expect((): void => {
@@ -324,18 +330,24 @@ describe('TCModel', (): void => {
   describe('isValid()', (): void => {
 
     // eslint-disable-next-line
-  const vendorlistJson = require('../dev/vendorlist.json');
+  const vendorlistJson = require('../dev/vendor-list.json');
     const gvl: GVL = new GVL(vendorlistJson);
 
 
-    it('should be valid if everything is set', (): void => {
+    it('should be valid if everything is set', (done: () => void ): void => {
 
       const tcModel = new TCModel(gvl);
 
       tcModel.cmpId = 23;
       tcModel.cmpVersion = 1;
 
-      expect(tcModel.isValid()).to.be.true;
+      expect(tcModel.gvl).to.equal(gvl);
+      tcModel.gvl.readyPromise.then((): void => {
+
+        expect(tcModel.isValid()).to.be.true;
+        done();
+
+      });
 
     });
     const makeInvalidTest = (key: string): void => {
@@ -378,7 +390,7 @@ describe('TCModel', (): void => {
   const runSetAllAndUnsetAll = (): void => {
 
     // eslint-disable-next-line
-  const vendorlistJson = require('../dev/vendorlist.json');
+  const vendorlistJson = require('../dev/vendor-list.json');
     const gvl: GVL = new GVL(vendorlistJson);
     const loopGVLMap = (gvlKey: string, cb ): void => {
 
