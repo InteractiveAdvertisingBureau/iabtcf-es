@@ -34,7 +34,7 @@
 
 **● features**: *[IntMap](intmap.md)<[Feature](feature.md)>*
 
-*Defined in [model/gvl/Declarations.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/2c7676b/modules/core/src/model/gvl/Declarations.ts#L14)*
+*Defined in [model/gvl/Declarations.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/model/gvl/Declarations.ts#L14)*
 
 ___
 <a id="gvlspecificationversion"></a>
@@ -43,7 +43,7 @@ ___
 
 **● gvlSpecificationVersion**: *`number`*
 
-*Defined in [model/gvl/Declarations.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/2c7676b/modules/core/src/model/gvl/Declarations.ts#L8)*
+*Defined in [model/gvl/Declarations.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/model/gvl/Declarations.ts#L8)*
 
 ___
 <a id="lastupdated"></a>
@@ -52,7 +52,7 @@ ___
 
 **● lastUpdated**: *`string` \| `Date`*
 
-*Defined in [model/gvl/Declarations.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/2c7676b/modules/core/src/model/gvl/Declarations.ts#L11)*
+*Defined in [model/gvl/Declarations.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/model/gvl/Declarations.ts#L11)*
 
 ___
 <a id="purposes"></a>
@@ -61,7 +61,7 @@ ___
 
 **● purposes**: *[IntMap](intmap.md)<[Purpose](purpose.md)>*
 
-*Defined in [model/gvl/Declarations.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/2c7676b/modules/core/src/model/gvl/Declarations.ts#L12)*
+*Defined in [model/gvl/Declarations.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/model/gvl/Declarations.ts#L12)*
 
 ___
 <a id="specialfeatures"></a>
@@ -70,7 +70,7 @@ ___
 
 **● specialFeatures**: *[IntMap](intmap.md)<[Feature](feature.md)>*
 
-*Defined in [model/gvl/Declarations.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/2c7676b/modules/core/src/model/gvl/Declarations.ts#L15)*
+*Defined in [model/gvl/Declarations.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/model/gvl/Declarations.ts#L15)*
 
 ___
 <a id="specialpurposes"></a>
@@ -79,7 +79,7 @@ ___
 
 **● specialPurposes**: *[IntMap](intmap.md)<[Purpose](purpose.md)>*
 
-*Defined in [model/gvl/Declarations.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/2c7676b/modules/core/src/model/gvl/Declarations.ts#L13)*
+*Defined in [model/gvl/Declarations.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/model/gvl/Declarations.ts#L13)*
 
 ___
 <a id="stacks"></a>
@@ -88,7 +88,7 @@ ___
 
 **● stacks**: *[IntMap](intmap.md)<[Stack](stack.md)>*
 
-*Defined in [model/gvl/Declarations.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/2c7676b/modules/core/src/model/gvl/Declarations.ts#L16)*
+*Defined in [model/gvl/Declarations.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/model/gvl/Declarations.ts#L16)*
 
 ___
 <a id="tcfpolicyversion"></a>
@@ -97,7 +97,7 @@ ___
 
 **● tcfPolicyVersion**: *`number`*
 
-*Defined in [model/gvl/Declarations.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/2c7676b/modules/core/src/model/gvl/Declarations.ts#L10)*
+*Defined in [model/gvl/Declarations.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/model/gvl/Declarations.ts#L10)*
 
 ___
 <a id="vendorlistversion"></a>
@@ -106,7 +106,7 @@ ___
 
 **● vendorListVersion**: *`number`*
 
-*Defined in [model/gvl/Declarations.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/2c7676b/modules/core/src/model/gvl/Declarations.ts#L9)*
+*Defined in [model/gvl/Declarations.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/model/gvl/Declarations.ts#L9)*
 
 ___
 

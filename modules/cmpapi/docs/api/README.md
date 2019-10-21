@@ -47,7 +47,7 @@
 
 **Ƭ ArgSet**: *[`string`, `number`, [Callback](#callback), [Param](#param)]*
 
-*Defined in [Types.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/Types.ts#L8)*
+*Defined in [Types.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/Types.ts#L8)*
 
 ___
 <a id="boolint"></a>
@@ -56,7 +56,7 @@ ___
 
 **Ƭ BoolInt**: *`0` \| `1` \| `undefined`*
 
-*Defined in [model/Return.ts:1](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/Return.ts#L1)*
+*Defined in [model/BoolInt.ts:1](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/BoolInt.ts#L1)*
 
 ___
 <a id="callback"></a>
@@ -65,7 +65,7 @@ ___
 
 **Ƭ Callback**: *[TCDataCallback](#tcdatacallback) \| [IATCDataCallback](#iatcdatacallback) \| [PingCallback](#pingcallback)*
 
-*Defined in [Types.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/Types.ts#L12)*
+*Defined in [Types.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/Types.ts#L12)*
 
 ___
 <a id="iatcdatacallback"></a>
@@ -74,7 +74,7 @@ ___
 
 **Ƭ IATCDataCallback**: *`function`*
 
-*Defined in [Types.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/Types.ts#L10)*
+*Defined in [Types.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/Types.ts#L10)*
 
 #### Type declaration
 ▸(IATCData: *[InAppTCData](classes/inapptcdata.md)*, success: *`boolean`*): `void`
@@ -95,7 +95,7 @@ ___
 
 **Ƭ Numberish**: *`number` \| `string`*
 
-*Defined in [CmpApi.ts:33](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/CmpApi.ts#L33)*
+*Defined in [CmpApi.ts:33](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L33)*
 
 ___
 <a id="param"></a>
@@ -104,7 +104,7 @@ ___
 
 **Ƭ Param**: *`number`[] \| [Callback](#callback) \| `number` \| `string`*
 
-*Defined in [Types.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/Types.ts#L7)*
+*Defined in [Types.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/Types.ts#L7)*
 
 ___
 <a id="pingcallback"></a>
@@ -113,7 +113,7 @@ ___
 
 **Ƭ PingCallback**: *`function`*
 
-*Defined in [Types.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/Types.ts#L11)*
+*Defined in [Types.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/Types.ts#L11)*
 
 #### Type declaration
 ▸(pingReturn: *[Ping](classes/ping.md)*): `void`
@@ -133,7 +133,7 @@ ___
 
 **Ƭ TCDataCallback**: *`function`*
 
-*Defined in [Types.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/Types.ts#L9)*
+*Defined in [Types.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/Types.ts#L9)*
 
 #### Type declaration
 ▸(tcData: *[TCData](classes/tcdata.md)*, success: *`boolean`*): `void`

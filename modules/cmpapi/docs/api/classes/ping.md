@@ -32,7 +32,7 @@
 
 **● apiVersion**: *`string`*
 
-*Defined in [model/Ping.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/Ping.ts#L29)*
+*Defined in [model/Ping.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/Ping.ts#L29)*
 
 version of the CMP API that is supported; e.g. “2”
 
@@ -45,7 +45,7 @@ ___
 
 *Inherited from [Return](return.md).[cmpId](return.md#cmpid)*
 
-*Defined in [model/Return.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/Return.ts#L5)*
+*Defined in [model/Return.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/Return.ts#L5)*
 
 ___
 <a id="cmploaded"></a>
@@ -54,7 +54,7 @@ ___
 
 **● cmpLoaded**: *`boolean`*
 
-*Defined in [model/Ping.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/Ping.ts#L14)*
+*Defined in [model/Ping.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/Ping.ts#L14)*
 
 true - CMP main script is loaded false - still running stub
 
@@ -65,7 +65,7 @@ ___
 
 **● cmpStatus**: *[CmpStatus](../enums/cmpstatus.md)*
 
-*Defined in [model/Ping.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/Ping.ts#L19)*
+*Defined in [model/Ping.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/Ping.ts#L19)*
 
 see Ping Status Codes in following table
 
@@ -78,7 +78,7 @@ ___
 
 *Inherited from [Return](return.md).[cmpVersion](return.md#cmpversion)*
 
-*Defined in [model/Return.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/Return.ts#L6)*
+*Defined in [model/Return.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/Return.ts#L6)*
 
 ___
 <a id="displaystatus"></a>
@@ -87,7 +87,7 @@ ___
 
 **● displayStatus**: *[DisplayStatus](../enums/displaystatus.md)*
 
-*Defined in [model/Ping.ts:24](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/Ping.ts#L24)*
+*Defined in [model/Ping.ts:24](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/Ping.ts#L24)*
 
 see Ping Status Codes in following table
 
@@ -100,7 +100,7 @@ ___
 
 *Inherited from [Return](return.md).[gdprApplies](return.md#gdprapplies)*
 
-*Defined in [model/Return.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/Return.ts#L7)*
+*Defined in [model/Return.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/Return.ts#L7)*
 
 ___
 <a id="gvlversion"></a>
@@ -109,7 +109,7 @@ ___
 
 **● gvlVersion**: *`number`*
 
-*Defined in [model/Ping.ts:35](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/Ping.ts#L35)*
+*Defined in [model/Ping.ts:35](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/Ping.ts#L35)*
 
 Version of the GVL currently loaded by the CMP undefined if still the stub
 
@@ -122,7 +122,7 @@ ___
 
 *Inherited from [Return](return.md).[tcfPolicyVersion](return.md#tcfpolicyversion)*
 
-*Defined in [model/Return.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/Return.ts#L8)*
+*Defined in [model/Return.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/Return.ts#L8)*
 
 ___
 

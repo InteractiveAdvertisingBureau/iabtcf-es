@@ -34,7 +34,7 @@
 
 ⊕ **new CmpApi**(): [CmpApi](cmpapi.md)
 
-*Defined in [CmpApi.ts:52](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/CmpApi.ts#L52)*
+*Defined in [CmpApi.ts:52](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L52)*
 
 **Returns:** [CmpApi](cmpapi.md)
 
@@ -48,7 +48,7 @@ ___
 
 ▸ **addEventListener**(callback: *[TCDataCallback](../#tcdatacallback)*): `void`
 
-*Defined in [CmpApi.ts:272](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/CmpApi.ts#L272)*
+*Defined in [CmpApi.ts:272](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L272)*
 
 **Parameters:**
 
@@ -65,7 +65,7 @@ ___
 
 ▸ **getInAppTCData**(callback: *[IATCDataCallback](../#iatcdatacallback)*): `void`
 
-*Defined in [CmpApi.ts:242](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/CmpApi.ts#L242)*
+*Defined in [CmpApi.ts:242](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L242)*
 
 **Parameters:**
 
@@ -80,9 +80,9 @@ ___
 
 ###  getTCData
 
-▸ **getTCData**(callback: *[TCDataCallback](../#tcdatacallback)*, vendors: *`number`[]*): `void`
+▸ **getTCData**(callback: *[TCDataCallback](../#tcdatacallback)*, vendors?: *`number`[]*): `void`
 
-*Defined in [CmpApi.ts:227](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/CmpApi.ts#L227)*
+*Defined in [CmpApi.ts:227](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L227)*
 
 Public-facing CMP API commands
 
@@ -91,7 +91,7 @@ Public-facing CMP API commands
 | Name | Type |
 | ------ | ------ |
 | callback | [TCDataCallback](../#tcdatacallback) |
-| vendors | `number`[] |
+| `Optional` vendors | `number`[] |
 
 **Returns:** `void`
 
@@ -102,7 +102,7 @@ ___
 
 ▸ **ping**(callback: *[PingCallback](../#pingcallback)*): `void`
 
-*Defined in [CmpApi.ts:257](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/CmpApi.ts#L257)*
+*Defined in [CmpApi.ts:257](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L257)*
 
 **Parameters:**
 
@@ -119,7 +119,7 @@ ___
 
 ▸ **removeventListener**(callback: *[TCDataCallback](../#tcdatacallback)*, registeredCallback: *[TCDataCallback](../#tcdatacallback)*): `void`
 
-*Defined in [CmpApi.ts:287](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/CmpApi.ts#L287)*
+*Defined in [CmpApi.ts:287](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L287)*
 
 **Parameters:**
 
@@ -137,7 +137,7 @@ ___
 
 ▸ **setCmpStatus**(cmpStatus: *[CmpStatus](../enums/cmpstatus.md)*): `void`
 
-*Defined in [CmpApi.ts:211](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/CmpApi.ts#L211)*
+*Defined in [CmpApi.ts:211](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L211)*
 
 **Parameters:**
 
@@ -154,7 +154,7 @@ ___
 
 ▸ **setDisplayStatus**(displayStatus: *[DisplayStatus](../enums/displaystatus.md)*): `void`
 
-*Defined in [CmpApi.ts:217](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/CmpApi.ts#L217)*
+*Defined in [CmpApi.ts:217](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L217)*
 
 **Parameters:**
 
@@ -171,7 +171,7 @@ ___
 
 ▸ **setGdprApplies**(applies: *`boolean`*): `void`
 
-*Defined in [CmpApi.ts:205](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/CmpApi.ts#L205)*
+*Defined in [CmpApi.ts:205](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L205)*
 
 **Parameters:**
 
@@ -188,7 +188,7 @@ ___
 
 ▸ **setTCModel**(tcm: *`TCModel`*, eventStatus: *[EventStatus](../enums/eventstatus.md)*): `void`
 
-*Defined in [CmpApi.ts:198](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/CmpApi.ts#L198)*
+*Defined in [CmpApi.ts:198](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L198)*
 
 **Parameters:**
 

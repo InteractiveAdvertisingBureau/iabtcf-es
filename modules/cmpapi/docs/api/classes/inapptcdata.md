@@ -39,7 +39,7 @@
 
 *Inherited from [Return](return.md).[cmpId](return.md#cmpid)*
 
-*Defined in [model/Return.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/Return.ts#L5)*
+*Defined in [model/Return.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/Return.ts#L5)*
 
 ___
 <a id="cmpversion"></a>
@@ -50,7 +50,7 @@ ___
 
 *Inherited from [Return](return.md).[cmpVersion](return.md#cmpversion)*
 
-*Defined in [model/Return.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/Return.ts#L6)*
+*Defined in [model/Return.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/Return.ts#L6)*
 
 ___
 <a id="eventstatus"></a>
@@ -59,7 +59,7 @@ ___
 
 **● eventStatus**: *`string`*
 
-*Defined in [model/InAppTCData.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/InAppTCData.ts#L13)*
+*Defined in [model/InAppTCData.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/InAppTCData.ts#L13)*
 
 ___
 <a id="gdprapplies"></a>
@@ -70,7 +70,7 @@ ___
 
 *Inherited from [Return](return.md).[gdprApplies](return.md#gdprapplies)*
 
-*Defined in [model/Return.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/Return.ts#L7)*
+*Defined in [model/Return.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/Return.ts#L7)*
 
 ___
 <a id="outofband"></a>
@@ -79,7 +79,7 @@ ___
 
 **● outOfBand**: *`object`*
 
-*Defined in [model/InAppTCData.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/InAppTCData.ts#L17)*
+*Defined in [model/InAppTCData.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/InAppTCData.ts#L17)*
 
 #### Type declaration
 
@@ -94,7 +94,7 @@ ___
 
 **● publisher**: *`object`*
 
-*Defined in [model/InAppTCData.ts:36](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/InAppTCData.ts#L36)*
+*Defined in [model/InAppTCData.ts:36](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/InAppTCData.ts#L36)*
 
 #### Type declaration
 
@@ -121,7 +121,7 @@ ___
 
 **● publisherCC**: *`string`*
 
-*Defined in [model/InAppTCData.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/InAppTCData.ts#L15)*
+*Defined in [model/InAppTCData.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/InAppTCData.ts#L15)*
 
 ___
 <a id="purpose"></a>
@@ -130,7 +130,7 @@ ___
 
 **● purpose**: *`object`*
 
-*Defined in [model/InAppTCData.ts:23](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/InAppTCData.ts#L23)*
+*Defined in [model/InAppTCData.ts:23](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/InAppTCData.ts#L23)*
 
 #### Type declaration
 
@@ -145,7 +145,7 @@ ___
 
 **● purposeOneTreatment**: *[BoolInt](../#boolint)*
 
-*Defined in [model/InAppTCData.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/InAppTCData.ts#L16)*
+*Defined in [model/InAppTCData.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/InAppTCData.ts#L16)*
 
 ___
 <a id="speicalfeatureoptins"></a>
@@ -154,7 +154,7 @@ ___
 
 **● speicalFeatureOptins**: *[StringBoolVector](../interfaces/stringboolvector.md)*
 
-*Defined in [model/InAppTCData.ts:35](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/InAppTCData.ts#L35)*
+*Defined in [model/InAppTCData.ts:35](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/InAppTCData.ts#L35)*
 
 ___
 <a id="tcstring"></a>
@@ -163,7 +163,7 @@ ___
 
 **● tcString**: *`string`*
 
-*Defined in [model/InAppTCData.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/InAppTCData.ts#L12)*
+*Defined in [model/InAppTCData.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/InAppTCData.ts#L12)*
 
 ___
 <a id="tcfpolicyversion"></a>
@@ -174,7 +174,7 @@ ___
 
 *Inherited from [Return](return.md).[tcfPolicyVersion](return.md#tcfpolicyversion)*
 
-*Defined in [model/Return.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/Return.ts#L8)*
+*Defined in [model/Return.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/Return.ts#L8)*
 
 ___
 <a id="usenonstandardstacks"></a>
@@ -183,7 +183,7 @@ ___
 
 **● useNonStandardStacks**: *[BoolInt](../#boolint)*
 
-*Defined in [model/InAppTCData.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/InAppTCData.ts#L14)*
+*Defined in [model/InAppTCData.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/InAppTCData.ts#L14)*
 
 ___
 <a id="vendor"></a>
@@ -192,7 +192,7 @@ ___
 
 **● vendor**: *`object`*
 
-*Defined in [model/InAppTCData.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/InAppTCData.ts#L29)*
+*Defined in [model/InAppTCData.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/InAppTCData.ts#L29)*
 
 #### Type declaration
 

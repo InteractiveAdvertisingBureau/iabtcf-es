@@ -12,6 +12,10 @@
 
 ## Index
 
+### Properties
+
+* [tcModel](inapptcdatabuilder.md#tcmodel)
+
 ### Methods
 
 * [build](inapptcdatabuilder.md#build)
@@ -19,15 +23,33 @@
 
 ---
 
+## Properties
+
+<a id="tcmodel"></a>
+
+###  tcModel
+
+**● tcModel**: *`TCModel`*
+
+*Defined in [model/builder/InAppTCDataBuilder.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/builder/InAppTCDataBuilder.ts#L15)*
+
+___
+
 ## Methods
 
 <a id="build"></a>
 
 ###  build
 
-▸ **build**(): [InAppTCData](inapptcdata.md)
+▸ **build**(vendors?: *`number`[]*): [InAppTCData](inapptcdata.md)
 
-*Defined in [model/builder/InAppTCDataBuilder.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/builder/InAppTCDataBuilder.ts#L9)*
+*Defined in [model/builder/InAppTCDataBuilder.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/builder/InAppTCDataBuilder.ts#L17)*
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| `Optional` vendors | `number`[] |
 
 **Returns:** [InAppTCData](inapptcdata.md)
 
@@ -38,7 +60,7 @@ ___
 
 ▸ **isBuildable**(): `boolean`
 
-*Defined in [model/builder/InAppTCDataBuilder.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/builder/InAppTCDataBuilder.ts#L17)*
+*Defined in [model/builder/InAppTCDataBuilder.ts:29](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/builder/InAppTCDataBuilder.ts#L29)*
 
 **Returns:** `boolean`
 

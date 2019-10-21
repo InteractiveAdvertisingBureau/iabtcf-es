@@ -29,10 +29,16 @@
 
 **● build**: *`function`*
 
-*Defined in [model/builder/Builder.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/builder/Builder.ts#L7)*
+*Defined in [model/builder/Builder.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/builder/Builder.ts#L7)*
 
 #### Type declaration
-▸(): [Return](../classes/return.md)
+▸(vendors?: *`number`[]*): [Return](../classes/return.md)
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| `Optional` vendors | `number`[] |
 
 **Returns:** [Return](../classes/return.md)
 
@@ -43,7 +49,7 @@ ___
 
 **● isBuildable**: *`function`*
 
-*Defined in [model/builder/Builder.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/builder/Builder.ts#L8)*
+*Defined in [model/builder/Builder.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/builder/Builder.ts#L8)*
 
 #### Type declaration
 ▸(): `boolean`

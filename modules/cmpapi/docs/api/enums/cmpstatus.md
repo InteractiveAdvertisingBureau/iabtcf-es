@@ -27,7 +27,7 @@ An enum representing all the possible statuses for the cmpStatus returned throug
 
 **ERROR**:  = "error"
 
-*Defined in [model/status/CmpStatus.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/status/CmpStatus.ts#L13)*
+*Defined in [model/status/CmpStatus.ts:13](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/status/CmpStatus.ts#L13)*
 
 ___
 <a id="loaded"></a>
@@ -36,7 +36,7 @@ ___
 
 **LOADED**:  = "loaded"
 
-*Defined in [model/status/CmpStatus.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/status/CmpStatus.ts#L12)*
+*Defined in [model/status/CmpStatus.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/status/CmpStatus.ts#L12)*
 
 ___
 <a id="loading"></a>
@@ -45,7 +45,7 @@ ___
 
 **LOADING**:  = "loading"
 
-*Defined in [model/status/CmpStatus.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/status/CmpStatus.ts#L11)*
+*Defined in [model/status/CmpStatus.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/status/CmpStatus.ts#L11)*
 
 ___
 <a id="stub"></a>
@@ -54,7 +54,7 @@ ___
 
 **STUB**:  = "stubCMP"
 
-*Defined in [model/status/CmpStatus.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/status/CmpStatus.ts#L10)*
+*Defined in [model/status/CmpStatus.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/status/CmpStatus.ts#L10)*
 
 ___
 

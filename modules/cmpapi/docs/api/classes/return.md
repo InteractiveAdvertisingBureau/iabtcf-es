@@ -31,7 +31,7 @@
 
 **● cmpId**: *`number`*
 
-*Defined in [model/Return.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/Return.ts#L5)*
+*Defined in [model/Return.ts:5](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/Return.ts#L5)*
 
 ___
 <a id="cmpversion"></a>
@@ -40,7 +40,7 @@ ___
 
 **● cmpVersion**: *`number`*
 
-*Defined in [model/Return.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/Return.ts#L6)*
+*Defined in [model/Return.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/Return.ts#L6)*
 
 ___
 <a id="gdprapplies"></a>
@@ -49,7 +49,7 @@ ___
 
 **● gdprApplies**: *`boolean` \| [BoolInt](../#boolint)*
 
-*Defined in [model/Return.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/Return.ts#L7)*
+*Defined in [model/Return.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/Return.ts#L7)*
 
 ___
 <a id="tcfpolicyversion"></a>
@@ -58,7 +58,7 @@ ___
 
 **● tcfPolicyVersion**: *`number`*
 
-*Defined in [model/Return.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/Return.ts#L8)*
+*Defined in [model/Return.ts:8](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/Return.ts#L8)*
 
 ___
 

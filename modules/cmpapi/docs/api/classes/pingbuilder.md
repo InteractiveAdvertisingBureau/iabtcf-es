@@ -27,7 +27,7 @@
 
 ▸ **build**(): [Ping](ping.md)
 
-*Defined in [model/builder/PingBuilder.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/builder/PingBuilder.ts#L9)*
+*Defined in [model/builder/PingBuilder.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/builder/PingBuilder.ts#L9)*
 
 **Returns:** [Ping](ping.md)
 
@@ -38,7 +38,7 @@ ___
 
 ▸ **isBuildable**(): `boolean`
 
-*Defined in [model/builder/PingBuilder.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/cff81a9/modules/cmpapi/src/model/builder/PingBuilder.ts#L17)*
+*Defined in [model/builder/PingBuilder.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/model/builder/PingBuilder.ts#L17)*
 
 **Returns:** `boolean`
 
