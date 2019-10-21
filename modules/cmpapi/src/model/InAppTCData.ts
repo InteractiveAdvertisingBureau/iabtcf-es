@@ -1,7 +1,10 @@
 import {
   Return,
-  BoolInt,
 } from './Return';
+
+import {
+  BoolInt,
+} from './BoolInt';
 
 export interface StringBoolVector {
   [id: string]: string;
