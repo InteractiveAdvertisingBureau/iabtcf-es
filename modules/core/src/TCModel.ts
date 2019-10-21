@@ -382,7 +382,7 @@ export class TCModel implements TCFields {
       } else {
 
         isError = true;
-        errMsg = 'cannot changed value when gvl is set';
+        errMsg = 'cannot change value when gvl is alredy set';
 
       }
 
