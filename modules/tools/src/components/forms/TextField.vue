@@ -1,12 +1,12 @@
 <template>
   <b-input-group >
     <b-form-group
-      :id="valueName"
-      :description="description"
-      :label="label"
-      :label-for="valueName"
+      :id="formField.valueName"
+      :description="formField.description || ''"
+      :label="formField.label"
+      :label-for="formField.valueName"
     >
-    <b-form-input :id="valueName" v-model="tcModel[valueName]" trim></b-form-input>
+    <b-form-input :id="formField.valueName" v-model="tcModel[formField.valueName]" trim></b-form-input>
     </b-form-group>
   </b-input-group>
 </template>
@@ -14,17 +14,14 @@
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import {TCModel} from '@iabtcf/core';
+import FormField from './FormField';
 
 @Component
 
 export default class extends Vue {
 
   @Prop()
-  public valueName: string;
-  @Prop()
-  public label: string;
-  @Prop()
-  public description: string;
+  public formField: FormField;
   @Prop()
   public tcModel: TCModel;
 

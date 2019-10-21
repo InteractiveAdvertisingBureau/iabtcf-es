@@ -12,7 +12,7 @@
     "strictPropertyInitialization": false,
     "pretty": true,
     "forceConsistentCasingInFileNames": true,
-    "target": "ES6",
+    "target": "esnext",
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true

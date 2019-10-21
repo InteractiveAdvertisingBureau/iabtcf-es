@@ -1,53 +1,15 @@
 <template>
-  <div>
+  <b-container fluid>
     <PageHead title="Encode a TCString"></PageHead>
-    <div>
-      <H3>{{encodedTCString}}</H3>
-    </div>
     <form>
       <b-card bg-variant="light" class="b-card">
-        <textfield
-           valueName="cmpId"
-           label="CMP ID"
-           description="iab. assigned CMP ID"
+        <textfield v-for="formField, i in formFields"
+           :formField="formField"
            :tcModel="tcModel"
+           :key='i'
         />
-        <textfield
-           valueName="cmpVersion"
-           label="CMP Version"
-           description="Integer version of CMP (eg. 2)"
-           :tcModel="tcModel"
-        />
-        <textfield
-           valueName="policyVersion"
-           label="Policy Version"
-           description="TCF Policy Version Number"
-           :tcModel="tcModel"
-        />
-        <textfield
-           valueName="vendorListVersion"
-           label="VendorList Version"
-           description="TC String GVL Version"
-           :tcModel="tcModel"
-        />
-        <textfield
-           valueName="consentLanguage"
-           label="Consent Language"
-           description="Two-letter ISO639-1 Code"
-           :tcModel="tcModel"
-        />
-        <textfield
-           valueName="consentScreen"
-           label="Consent Screen"
-           description="CMP Consent Screen"
-           :tcModel="tcModel"
-        />
-        <textfield
-           valueName="publisherCountryCode"
-           label="Publisher Country Code"
-           description="ISO 3166-1 alpha-2 code"
-           :tcModel="tcModel"
-        />
+      </b-card>
+      <b-card bg-variant="light" class="b-card">
         <datefield
            valueName="created"
            label="Created Date"
@@ -60,6 +22,8 @@
            description="Date when this TC String was last updated"
            :tcModel="tcModel"
         />
+      </b-card>
+      <b-card bg-variant="light" class="b-card">
         <checkboxboolean
            valueName="isServiceSpecific"
            label="Is Service Specific"
@@ -82,16 +46,17 @@
          />
       </b-card>
     </form>
-  </div>
+  </b-container>
 </template>
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
 import PageHead from './PageHead.vue';
 import {TCModel, GVL, TCString} from '@iabtcf/core';
-import TextField from '../forms/TextField';
-import DateField from '../forms/DateField';
-import CheckboxBoolean from '../forms/CheckboxBoolean';
+import TextField from '../forms/TextField.vue';
+import DateField from '../forms/DateField.vue';
+import CheckboxBoolean from '../forms/CheckboxBoolean.vue';
+import FormField from '../forms/FormField';
 
 @Component({
   components: {
@@ -106,6 +71,12 @@ export default class extends Vue {
   private tcModel: TCModel;
   private tcString: TCString;
   private encodedTCString: string;
+  private updateOrNo: {key: boolean} = {
+
+    key: false,
+
+  };
+  private formFields: FormField[];
 
   public constructor() {
 
@@ -113,28 +84,76 @@ export default class extends Vue {
 
     this.tcString = new TCString();
     this.encodedTCString = '';
+    this.formFields = [
+      {
+        label: 'CMP ID',
+        identifier: 'cmpId',
+        description: 'iab. assigned CMP ID',
+      },
+      {
+        label: 'CMP Version',
+        identifier: 'cmpVersion',
+        description: 'Integer version of CMP (eg. 2)',
+      },
+      {
+        label: 'TCF Policy Version',
+        identifier: 'policyVersion',
+        updater: this.updateOrNo,
+      },
+      {
+        label: 'Vendor List Version',
+        identifier: 'vendorListVersion',
+        updater: this.updateOrNo,
+      },
+      {
+        label: 'Consent Language',
+        identifier: 'consentLanguage',
+        description: 'Two-letter ISO639-1 Code',
+        updater: this.updateOrNo,
+      },
+      {
+        label: 'Consent Screen',
+        identifier: 'consentScreen',
+      },
+      {
+        label: 'Publisher Country Code',
+        identifier: 'publisherCountryCode',
+      },
+    ];
 
     GVL.baseUrl = document.location.origin;
     this.tcModel = new TCModel(new GVL());
-    this.tcModel.cmpVersion = 2;
+    this.tcModel.cmpVersion = 1 + Math.round(Math.random() * 40);
     this.tcModel.policyVersion = 2;
-    this.tcModel.cmpId = 23;
-    this.tcModel.consentScreen = 1;
+    this.tcModel.cmpId = 1 + Math.round(Math.random() * 100);
+    this.tcModel.consentScreen = 1 + Math.round(Math.random() * 5);
     this.tcModel.publisherCountryCode = 'US';
 
     this.tcModel.gvl.readyPromise.then((): void => {
 
       this.encodeTCString();
+      this.update();
 
     });
 
   }
 
+  private render(): void {
+
+    this.update();
+
+  }
+
+  private update(): void {
+
+    this.updateOrNo.key = !this.updateOrNo.key;
+
+  }
   private encodeTCString(): void {
 
     try {
 
-      this.tcString = this.tcString.encode(this.tcModel);
+      this.encodedTCString = this.tcString.encode(this.tcModel);
 
     } catch (err) {
 
