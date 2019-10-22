@@ -1,6 +1,7 @@
 sudo: false
 language: node_js
 script:
+  - npm install
   - cd modules/core/
   - npm link
   - cd ../tools/
