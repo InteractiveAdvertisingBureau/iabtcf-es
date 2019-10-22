@@ -2,11 +2,18 @@
   <b-container fluid>
     <PageHead title="Encode a TCString"></PageHead>
     <form>
+     <b-form-input
+       class="tcstring-input"
+       v-model="encodedTCString"
+       @click="selectContents"
+       readonly
+       />
       <b-card bg-variant="light" class="b-card">
-        <textfield v-for="formField, i in formFields"
+        <textfield v-for="formField in formFields"
            :formField="formField"
            :tcModel="tcModel"
-           :key='i'
+           :key="formField.identifier"
+           v-on:update="encodeTCString"
         />
       </b-card>
       <b-card bg-variant="light" class="b-card">
@@ -15,34 +22,38 @@
            label="Created Date"
            description="Date when this TC String was created"
            :tcModel="tcModel"
+           v-on:update="encodeTCString"
         />
         <datefield
            valueName="lastUpdated"
            label="Last Updated Date"
            description="Date when this TC String was last updated"
            :tcModel="tcModel"
+           v-on:update="encodeTCString"
         />
-      </b-card>
-      <b-card bg-variant="light" class="b-card">
         <checkboxboolean
            valueName="isServiceSpecific"
            label="Is Service Specific"
            :tcModel="tcModel"
+           v-on:update="encodeTCString"
          />
         <checkboxboolean
            valueName="purposeOneTreatment"
            label="Purpose One Treatment"
            :tcModel="tcModel"
+           v-on:update="encodeTCString"
          />
         <checkboxboolean
            valueName="supportOOB"
            label="Support OOB Signaling"
            :tcModel="tcModel"
+           v-on:update="encodeTCString"
          />
         <checkboxboolean
            valueName="useNonStandardStacks"
            label="Publisher Uses Non-Standard Stacks"
            :tcModel="tcModel"
+           v-on:update="encodeTCString"
          />
       </b-card>
     </form>
@@ -98,18 +109,15 @@ export default class extends Vue {
       {
         label: 'TCF Policy Version',
         identifier: 'policyVersion',
-        updater: this.updateOrNo,
       },
       {
         label: 'Vendor List Version',
         identifier: 'vendorListVersion',
-        updater: this.updateOrNo,
       },
       {
         label: 'Consent Language',
         identifier: 'consentLanguage',
         description: 'Two-letter ISO639-1 Code',
-        updater: this.updateOrNo,
       },
       {
         label: 'Consent Screen',
@@ -132,23 +140,17 @@ export default class extends Vue {
     this.tcModel.gvl.readyPromise.then((): void => {
 
       this.encodeTCString();
-      this.update();
 
     });
 
   }
 
-  private render(): void {
+  private selectContents(e: Event): void {
 
-    this.update();
-
-  }
-
-  private update(): void {
-
-    this.updateOrNo.key = !this.updateOrNo.key;
+    console.log(e);
 
   }
+
   private encodeTCString(): void {
 
     try {
@@ -157,7 +159,7 @@ export default class extends Vue {
 
     } catch (err) {
 
-      console.log(`error: ${err}`);
+      this.encodedTCString = 'ERROR... ' + err;
 
     }
 

@@ -5,6 +5,7 @@
       :description="description"
       :label="label"
       :label-for="valueName"
+      @input="$emit('update')"
     >
       <datepicker v-model="tcModel[valueName]" />
     </b-form-group>

@@ -1,9 +1,6 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "importHelpers": true,
-    "experimentalDecorators": true,
-    "sourceMap": true,
     "types": [
       "webpack-env"
     ],
@@ -16,13 +13,7 @@
   },
   "include": [
     "src/**/*.ts",
-    "src/**/*.tsx",
     "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx",
-    "tests/node_modules/@iabtcf/core/lib/*.*"
-  ],
-  "exclude": [
-    "node_modules"
+    "tests/**/*.ts"
   ]
 }

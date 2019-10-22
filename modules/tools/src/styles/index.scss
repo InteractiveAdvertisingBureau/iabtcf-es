@@ -9,6 +9,7 @@ $subtle-background-color: #fcfcff;
 $separator-color: #ccc;
 $subtle-separator-color: #eee;
 $borders: 1px solid;
+$standard-space: 10px;
 
 .tools-app {
   font-family: monospace;
@@ -59,14 +60,23 @@ h1 {
 
 .nav-groups {
   margin-top: 30px;
-  padding-left: 10px;
+  padding-left: $standard-space;
 }
 
 .section,
 .home-link {
   border-bottom: $borders $subtle-separator-color;
 }
+
 .b-card {
-  margin: 10px;
+  margin: $standard-space;
   float: left;
+}
+
+.tcstring-input {
+  margin: $standard-space $standard-space;
+}
+
+*:focus {
+    outline: none;
 }

@@ -1,12 +1,12 @@
 <template>
   <b-input-group >
     <b-form-group
-      :id="formField.valueName"
+      :id="formField.identifier"
       :description="formField.description || ''"
       :label="formField.label"
-      :label-for="formField.valueName"
+      :label-for="formField.identifier"
     >
-    <b-form-input :id="formField.valueName" v-model="tcModel[formField.valueName]" trim></b-form-input>
+    <b-form-input :id="formField.identifier" v-model.lazy="tcModel[formField.identifier]" trim></b-form-input>
     </b-form-group>
   </b-input-group>
 </template>

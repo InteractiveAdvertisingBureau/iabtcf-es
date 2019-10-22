@@ -4,8 +4,8 @@
       :id="valueName"
       :name="valueName"
       v-model="tcModel[valueName]"
+      @input="$emit('update')"
       switch
-      size="lg"
     >
     {{label}}
     </b-form-checkbox>

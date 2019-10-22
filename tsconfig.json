@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "moduleResolution": "node",
+    "experimentalDecorators": true,
     "removeComments": true,
     "downlevelIteration": true,
     "noImplicitAny": false,
@@ -12,7 +13,7 @@
     "strictPropertyInitialization": false,
     "pretty": true,
     "forceConsistentCasingInFileNames": true,
-    "target": "esnext",
+    "target": "ES6",
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true
