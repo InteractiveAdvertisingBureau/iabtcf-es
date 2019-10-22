@@ -12,11 +12,20 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/indent': ['error', 2],
-    'max-len': ['error', {'code': 120}],
+    'max-len': ['error', {
+      'ignoreUrls': true,
+      'ignoreStrings': true,
+      'ignoreTemplateLiterals': true,
+      'ignoreRegExpLiterals': true,
+      'code': 120
+    }],
+    'no-multiple-empty-lines':['error', {'max':1, 'maxEOF':0, 'maxBOF':0}],
     'require-jsdoc': [0],
+    'semi': ['error', 'always'],
     'padded-blocks': ['error', 'always'],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    '@typescript-eslint/indent': ['error', 2],
     'indent': [
       'error', 2, {
         'ArrayExpression': 'first',
@@ -28,8 +37,9 @@ module.exports = {
     ],
     'padding-line-between-statements': [
       'error',
-      {'blankLine': 'always', 'prev': ['const', 'let', 'var'], 'next': '*'},
       {'blankLine': 'any', 'prev': ['const', 'let', 'var'], 'next': ['const', 'let', 'var']},
+      {'blankLine': 'always', 'prev': 'block-like',  'next': '*'},
+      {'blankLine': 'always', 'prev': '*',  'next': 'block-like'},
     ],
     'new-cap': 'off',
   },
