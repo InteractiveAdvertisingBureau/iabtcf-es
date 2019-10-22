@@ -9,7 +9,7 @@
     "url": "https://opensource.org/licenses/apache2.0.php"
   },
   "scripts": {
-    "install": "npm run bootstrap",
+    "install": "lerna exec -- npm install && npm run bootstrap",
     "test": "mocha './modules/**/test/*.ts'",
     "bootstrap": "lerna bootstrap --force-local",
     "deploy": "lerna publish from-package",
