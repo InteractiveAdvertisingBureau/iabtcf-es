@@ -15,12 +15,12 @@
   ],
   "scripts": {
     "docs": "typedoc --ignoreCompilerErrors --tsconfig ./tsconfig.json  src",
-    "prepack": "npm run build",
+    "prepare": "npm run build",
     "build": "rm -r lib ; tsc",
     "test": "mocha './test/*.ts'",
     "debug": "ndb npm test",
     "lint": "eslint ./src/**/*.ts",
-    "report-coverage": "nyc --reporter=lcov npm run test"
+    "report-coverage": ""
   },
   "dependencies": {
     "@iabtcf/core": "^1.0.0-alpha.9"

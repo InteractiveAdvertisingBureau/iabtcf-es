@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "docs": "typedoc --ignoreCompilerErrors --tsconfig ./tsconfig.json  src",
-    "prepack": "npm run build",
+    "prepare": "npm run build",
     "build": "rm -r lib ; tsc",
     "test": "mocha -b './test/*.ts'",
     "debug": "ndb npm test",

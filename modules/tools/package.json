@@ -15,8 +15,10 @@
   },
   "scripts": {
     "start": "vue-cli-service serve",
+    "prepare": "npm run build",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "report-coverage": ""
   },
   "dependencies": {
     "@iabtcf/core": "^1.0.0-alpha.9",
