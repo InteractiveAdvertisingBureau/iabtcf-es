@@ -1,11 +1,19 @@
 import {Encoder} from '.';
 import {EncodingError} from '../errors';
 
-export class IntEncoder implements Encoder<number> {
+export class IntEncoder implements Encoder<number | string> {
 
-  public encode(value: number, numBits: number): string {
+  public encode(value: number | string, numBits: number): string {
 
-    let bitString = value.toString(2);
+    let bitString;
+
+    if (typeof value === 'string') {
+
+      value = parseInt(value, 10);
+
+    }
+
+    bitString = value.toString(2);
 
     if (bitString.length > numBits || value < 0) {
 

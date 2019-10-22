@@ -16,7 +16,6 @@ import {
 
 } from './model';
 
-
 export type TCModelPropType = number | Date | string | boolean | Vector | PurposeRestrictionVector;
 
 export class TCModel implements TCFields {
@@ -25,25 +24,24 @@ export class TCModel implements TCFields {
 
   // Defaults
   private version_: number = TCModel.MAX_ENCODING_VERSION;
-  private consentScreen_: number = 0;
-  private policyVersion_: number = 2;
+  private consentScreen_: number | string = 0;
+  private policyVersion_: number | string = 2;
   private isServiceSpecific_: boolean = false;
   private useNonStandardStacks_: boolean = false;
   private purposeOneTreatment_: boolean = false;
   private publisherCountryCode_: string = 'AA';
   private supportOOB_: boolean = false;
 
-
   // needs some settin' (no default)
-  private cmpId_: number;
-  private cmpVersion_: number;
+  private cmpId_: number | string;
+  private cmpVersion_: number | string;
   private consentLanguage_: string;
   private gvl_: GVL;
 
   // automagically set when created, updated and gvl set
   private created_: Date;
   private lastUpdated_: Date;
-  private vendorListVersion_: number;
+  private vendorListVersion_: number | string;
 
   /**
    * The TCF designates certain Features as special, that is, a CMP must afford
@@ -231,10 +229,9 @@ export class TCModel implements TCFields {
    *
    * @throws {TCModelError} if the value is not an integer greater than 1 as those are not valid.
    */
-  public set cmpId(integer: number) {
+  public set cmpId(integer: number | string) {
 
     if (this.isIntAbove(integer, 1)) {
-
 
       this.cmpId_ = integer;
 
@@ -245,7 +242,7 @@ export class TCModel implements TCFields {
     }
 
   }
-  public get cmpId(): number {
+  public get cmpId(): number | string {
 
     return this.cmpId_;
 
@@ -260,7 +257,7 @@ export class TCModel implements TCFields {
    *
    * @throws {TCModelError} if the value is not an integer greater than 1 as those are not valid.
    */
-  public set cmpVersion(integer: number) {
+  public set cmpVersion(integer: number | string) {
 
     if (this.isIntAbove(integer, -1)) {
 
@@ -273,7 +270,7 @@ export class TCModel implements TCFields {
     }
 
   }
-  public get cmpVersion(): number {
+  public get cmpVersion(): number | string {
 
     return this.cmpVersion_;
 
@@ -289,7 +286,7 @@ export class TCModel implements TCFields {
    *
    * @throws {TCModelError} if the value is not an integer greater than 0 as those are not valid.
    */
-  public set consentScreen(integer: number) {
+  public set consentScreen(integer: number | string) {
 
     if (this.isIntAbove(integer, -1)) {
 
@@ -302,7 +299,7 @@ export class TCModel implements TCFields {
     }
 
   }
-  public get consentScreen(): number {
+  public get consentScreen(): number | string {
 
     return this.consentScreen_;
 
@@ -368,7 +365,7 @@ export class TCModel implements TCFields {
    *
    * @throws {TCModelError} if the value is not an integer greater than 0 as those are not valid.
    */
-  public set vendorListVersion(integer: number) {
+  public set vendorListVersion(integer: number | string) {
 
     let isError = false;
     let errMsg = '';
@@ -391,6 +388,7 @@ export class TCModel implements TCFields {
       isError = true;
 
     }
+
     if (isError) {
 
       throw new TCModelError('vendorListVersion', integer, errMsg);
@@ -398,7 +396,8 @@ export class TCModel implements TCFields {
     }
 
   }
-  public get vendorListVersion(): number {
+
+  public get vendorListVersion(): number | string {
 
     return this.vendorListVersion_;
 
@@ -418,7 +417,7 @@ export class TCModel implements TCFields {
    *
    * @throws {TCModelError} if the value is not an integer greater than 1 as those are not valid.
    */
-  public set policyVersion(num: number) {
+  public set policyVersion(num: number | string) {
 
     if (this.isIntAbove(num, 1)) {
 
@@ -431,7 +430,7 @@ export class TCModel implements TCFields {
     }
 
   }
-  public get policyVersion(): number {
+  public get policyVersion(): number | string {
 
     return this.policyVersion_;
 
@@ -561,6 +560,7 @@ export class TCModel implements TCFields {
       throw new TCModelError('setAll', '' + this.gvl, 'No GVL!');
 
     }
+
     for (const id in gvlMap) {
 
       if (gvlMap.hasOwnProperty(id)) {
@@ -772,6 +772,7 @@ export class TCModel implements TCFields {
       len = Object.keys(this.customPurposes).length;
 
     }
+
     return len;
 
   }
@@ -803,11 +804,17 @@ export class TCModel implements TCFields {
    * isIntAbove - private method for validating that a passed in value is both
    * an int and above a certain number
    *
-   * @param {number} possibleInt - value to check
+   * @param {number | string} possibleInt - value to check
    * @param {number} above - the lower limit
    * @return{boolean} - wehther or not `possibleInt` is both an int and above `above` number
    */
-  private isIntAbove(possibleInt: number, above: number): boolean {
+  private isIntAbove(possibleInt: number | string, above: number): boolean {
+
+    if (typeof possibleInt === 'string') {
+
+      possibleInt = parseInt(possibleInt, 10);
+
+    }
 
     return (Number.isInteger(possibleInt) && possibleInt > above);
 
@@ -855,6 +862,5 @@ export class TCModel implements TCFields {
       && this.version !== undefined);
 
   }
-
 
 }
