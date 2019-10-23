@@ -2,18 +2,16 @@
   <b-container fluid>
     <PageHead title="Encode a TCString"></PageHead>
     <form>
-     <b-form-input
-       class="tcstring-input"
-       v-model="encodedTCString"
-       @click="selectContents"
-       readonly
-       />
+      <tcstringinput
+        :tcstring=encodedTCString
+      />
       <b-card bg-variant="light" class="b-card">
-        <textfield v-for="formField in formFields"
-           :formField="formField"
-           :tcModel="tcModel"
-           :key="formField.identifier"
-           v-on:update="encodeTCString"
+        <textfield
+           v-for="formField in formFields"
+             :formField="formField"
+             :vModel="tcModel[formField.identifier]"
+             :key="formField.identifier"
+             v-on:update="update"
         />
       </b-card>
       <b-card bg-variant="light" class="b-card">
@@ -22,39 +20,50 @@
            label="Created Date"
            description="Date when this TC String was created"
            :tcModel="tcModel"
-           v-on:update="encodeTCString"
+           v-on:update="update"
         />
         <datefield
            valueName="lastUpdated"
            label="Last Updated Date"
            description="Date when this TC String was last updated"
            :tcModel="tcModel"
-           v-on:update="encodeTCString"
+           v-on:update="update"
         />
+
+        <checkboxboolean
+           v-for="field in boolFields"
+             :valueName="field.fieldName"
+             :label="field.label"
+             :vModel="tcModel[field.fieldName]"
+             :key="field.fieldName"
+             v-on:update="update"
+         />
+        <!--
         <checkboxboolean
            valueName="isServiceSpecific"
            label="Is Service Specific"
            :tcModel="tcModel"
-           v-on:update="encodeTCString"
+           v-on:update="update"
          />
         <checkboxboolean
            valueName="purposeOneTreatment"
            label="Purpose One Treatment"
            :tcModel="tcModel"
-           v-on:update="encodeTCString"
+           v-on:update="update"
          />
         <checkboxboolean
            valueName="supportOOB"
            label="Support OOB Signaling"
            :tcModel="tcModel"
-           v-on:update="encodeTCString"
+           v-on:update="update"
          />
         <checkboxboolean
            valueName="useNonStandardStacks"
            label="Publisher Uses Non-Standard Stacks"
            :tcModel="tcModel"
-           v-on:update="encodeTCString"
+           v-on:update="update"
          />
+        -->
       </b-card>
     </form>
   </b-container>
@@ -67,6 +76,7 @@ import {TCModel, GVL, TCString} from '@iabtcf/core';
 import TextField from '../forms/TextField.vue';
 import DateField from '../forms/DateField.vue';
 import CheckboxBoolean from '../forms/CheckboxBoolean.vue';
+import TCStringInput from '../forms/TCStringInput.vue';
 import FormField from '../forms/FormField';
 
 @Component({
@@ -74,6 +84,7 @@ import FormField from '../forms/FormField';
     PageHead,
     'textfield': TextField,
     'datefield': DateField,
+    'tcstringinput': TCStringInput,
     'checkboxboolean': CheckboxBoolean,
   },
 })
@@ -81,13 +92,13 @@ export default class extends Vue {
 
   private tcModel: TCModel;
   private tcString: TCString;
-  private encodedTCString: string;
-  private updateOrNo: {key: boolean} = {
-
-    key: false,
-
-  };
   private formFields: FormField[];
+  private boolFields: {fieldName: string; label: string}[] = [
+    {fieldName: 'isServiceSpecific', label: 'Is Service Specific'},
+    {fieldName: 'purposeOneTreatment', label: 'Special Purpose One Treatment'},
+    {fieldName: 'supportOOB', label: 'Supports OOB'},
+    {fieldName: 'useNonStandardStacks', label: 'Publisher Uses Non-Standard Stacks'},
+  ];
 
   public constructor() {
 
@@ -137,21 +148,11 @@ export default class extends Vue {
     this.tcModel.consentScreen = 1 + Math.round(Math.random() * 5);
     this.tcModel.publisherCountryCode = 'US';
 
-    this.tcModel.gvl.readyPromise.then((): void => {
-
-      this.encodeTCString();
-
-    });
+    this.tcModel.gvl.readyPromise.then(this.update);
 
   }
 
-  private selectContents(e: Event): void {
-
-    console.log(e);
-
-  }
-
-  private encodeTCString(): void {
+  private update(): void {
 
     try {
 

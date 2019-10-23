@@ -6,14 +6,13 @@
       :label="formField.label"
       :label-for="formField.identifier"
     >
-    <b-form-input :id="formField.identifier" v-model.lazy="tcModel[formField.identifier]" trim></b-form-input>
+    <b-form-input :id="formField.identifier" v-model="vModel" trim></b-form-input>
     </b-form-group>
   </b-input-group>
 </template>
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import {TCModel} from '@iabtcf/core';
 import FormField from './FormField';
 
 @Component
@@ -23,7 +22,7 @@ export default class extends Vue {
   @Prop()
   public formField: FormField;
   @Prop()
-  public tcModel: TCModel;
+  public vModel: string | number;
 
   public constructor() {
 

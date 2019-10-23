@@ -3,7 +3,7 @@
     <b-form-checkbox
       :id="valueName"
       :name="valueName"
-      v-model="tcModel[valueName]"
+      v-model="vModel"
       @input="$emit('update')"
       switch
     >
@@ -14,7 +14,6 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import {TCModel} from '@iabtcf/core';
 
 @Component
 
@@ -25,7 +24,7 @@ export default class extends Vue {
   @Prop()
   public label: string;
   @Prop()
-  public tcModel: TCModel;
+  public vModel: boolean;
 
   public constructor() {
 
