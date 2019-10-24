@@ -3,8 +3,7 @@
     <b-form-checkbox
       :id="valueName"
       :name="valueName"
-      v-model="vModel"
-      @input="$emit('update')"
+      @input="changeValue"
       switch
     >
     {{label}}
@@ -23,12 +22,16 @@ export default class extends Vue {
   public valueName: string;
   @Prop()
   public label: string;
-  @Prop()
-  public vModel: boolean;
 
   public constructor() {
 
     super();
+
+  }
+
+  private changeValue(newVal: boolean): void {
+
+    this.$emit('update', newVal);
 
   }
 

@@ -1,5 +1,6 @@
 import {VueConstructor} from 'vue';
-class LinkModel {
+
+export class LinkModel {
 
   private title: string;
   private link: string;
@@ -8,7 +9,7 @@ class LinkModel {
   public constructor(title: string, component: VueConstructor) {
 
     this.title = title;
-    this.link = component.name || '';
+    this.link = title.toLowerCase().replace(' ', '-');
     this.component = component;
 
   }
@@ -29,4 +30,3 @@ class LinkModel {
   }
 
 }
-export {LinkModel};

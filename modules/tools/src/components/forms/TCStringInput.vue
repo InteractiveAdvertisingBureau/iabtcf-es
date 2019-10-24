@@ -1,7 +1,7 @@
 <template>
      <b-form-input
        class="tcstring-input"
-       v-model="tcstring"
+       v-model="value"
        @click="selectContents"
        readonly
        />
@@ -14,11 +14,15 @@ import {Component, Prop, Vue} from 'vue-property-decorator';
 export default class extends Vue {
 
   @Prop()
-  public tcstring: string = '';
+  public value: string = '';
 
   private selectContents(e: MouseEvent): void {
 
-    e.target.select();
+    if (e && e.target) {
+
+      (e.target as HTMLInputElement).select();
+
+    }
 
   }
 

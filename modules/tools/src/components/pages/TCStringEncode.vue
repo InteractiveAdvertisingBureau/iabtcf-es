@@ -3,15 +3,15 @@
     <PageHead title="Encode a TCString"></PageHead>
     <form>
       <tcstringinput
-        :tcstring=encodedTCString
+        v-model=encodedTCString
       />
       <b-card bg-variant="light" class="b-card">
         <textfield
            v-for="formField in formFields"
              :formField="formField"
-             :vModel="tcModel[formField.identifier]"
+             :value="tcModel[formField.identifier]"
              :key="formField.identifier"
-             v-on:update="update"
+             @update="update(formField.identifier, $event)"
         />
       </b-card>
       <b-card bg-variant="light" class="b-card">
@@ -34,36 +34,10 @@
            v-for="field in boolFields"
              :valueName="field.fieldName"
              :label="field.label"
-             :vModel="tcModel[field.fieldName]"
+             v-model="tcModel[field.fieldName]"
              :key="field.fieldName"
-             v-on:update="update"
+             @update="update(field.fieldName, $event)"
          />
-        <!--
-        <checkboxboolean
-           valueName="isServiceSpecific"
-           label="Is Service Specific"
-           :tcModel="tcModel"
-           v-on:update="update"
-         />
-        <checkboxboolean
-           valueName="purposeOneTreatment"
-           label="Purpose One Treatment"
-           :tcModel="tcModel"
-           v-on:update="update"
-         />
-        <checkboxboolean
-           valueName="supportOOB"
-           label="Support OOB Signaling"
-           :tcModel="tcModel"
-           v-on:update="update"
-         />
-        <checkboxboolean
-           valueName="useNonStandardStacks"
-           label="Publisher Uses Non-Standard Stacks"
-           :tcModel="tcModel"
-           v-on:update="update"
-         />
-        -->
       </b-card>
     </form>
   </b-container>
@@ -93,6 +67,7 @@ export default class extends Vue {
   private tcModel: TCModel;
   private tcString: TCString;
   private formFields: FormField[];
+  private encodedTCString: string;
   private boolFields: {fieldName: string; label: string}[] = [
     {fieldName: 'isServiceSpecific', label: 'Is Service Specific'},
     {fieldName: 'purposeOneTreatment', label: 'Special Purpose One Treatment'},
@@ -148,14 +123,17 @@ export default class extends Vue {
     this.tcModel.consentScreen = 1 + Math.round(Math.random() * 5);
     this.tcModel.publisherCountryCode = 'US';
 
-    this.tcModel.gvl.readyPromise.then(this.update);
+    this.tcModel.gvl.readyPromise.then((): void => {
+
+    });
 
   }
 
-  private update(): void {
+  private update(fieldName: string, value: string | boolean | number): void {
 
     try {
 
+      this.tcModel[fieldName] = value;
       this.encodedTCString = this.tcString.encode(this.tcModel);
 
     } catch (err) {

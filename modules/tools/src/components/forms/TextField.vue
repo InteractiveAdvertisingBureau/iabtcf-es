@@ -6,7 +6,11 @@
       :label="formField.label"
       :label-for="formField.identifier"
     >
-    <b-form-input :id="formField.identifier" v-model="vModel" trim></b-form-input>
+    <b-form-input
+      :id="formField.identifier"
+      @input="changeValue"
+      v-model="text"
+      trim />
     </b-form-group>
   </b-input-group>
 </template>
@@ -22,11 +26,21 @@ export default class extends Vue {
   @Prop()
   public formField: FormField;
   @Prop()
-  public vModel: string | number;
+  public value: string | number;
+
+  private text: string | number = '';
 
   public constructor() {
 
     super();
+
+    this.text = this.value;
+
+  }
+
+  private changeValue(newVal: boolean): void {
+
+    this.$emit('update', newVal);
 
   }
 
