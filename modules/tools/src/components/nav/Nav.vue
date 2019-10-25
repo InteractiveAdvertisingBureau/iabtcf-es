@@ -1,6 +1,7 @@
 <template>
-  <div class="nav">
+  <div class="nav col-md-1">
     <div class="nav-groups">
+      <router-link to="/"><img id="home-logo-link" src="https://iabtechlab.com/wp-content/uploads/2016/07/IAB_Tech_Lab.png"/></router-link>
       <p class="home-link">
         <router-link to="/">Home</router-link>
       </p>

@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid>
+  <div>
     <PageHead title="Encode a TCString"></PageHead>
     <form>
       <tcstringinput
@@ -42,7 +42,7 @@
          />
       </b-card>
     </form>
-  </b-container>
+  </div>
 </template>
 
 <script lang="ts">

@@ -1,20 +1,19 @@
 
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import 'node_modules/bootstrap-vue/src/index';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
-$link-color: #da70d6;
-$link-hover-color: #f0f;
-$mutted-title-color: #555;
-$subtle-background-color: #fcfcff;
+$link-color: #3f3f3f;
+$link-hover-color: #dd3333;
+$muted-title-color: #555;
+$subtle-background-color: #FFFFFF;
 $separator-color: #ccc;
-$subtle-separator-color: #eee;
+$subtle-separator-color: #f3f3f3;
 $borders: 1px solid;
 $standard-space: 10px;
 
 .tools-app {
-  font-family: monospace;
-  margin: 0;
-  padding: 0;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .page {
@@ -29,11 +28,16 @@ a {
 
   &:hover {
     color: $link-hover-color;
+  text-decoration: none;
   }
 }
 
 h1 {
-  color: $mutted-title-color;
+  color: $muted-title-color;
+}
+h6 {
+  font-family: Arial;
+  font-weight: bolder;
 }
 
 .fade-enter-active,
@@ -49,13 +53,8 @@ h1 {
 }
 
 .nav {
-  background: $subtle-background-color;
-  border-right: $borders $separator-color;
-  display: block;
   float: left;
   height: 100vh;
-  margin-top: 0;
-  width: 150px;
 }
 
 .nav-groups {
@@ -65,16 +64,23 @@ h1 {
 
 .section,
 .home-link {
+  margin-top: $standard-space;
   border-bottom: $borders $subtle-separator-color;
+}
+#home-logo-link {
+  max-width: 60px;
+  height: 40px;
+  margin-bottom: $standard-space;
 }
 
 .b-card {
-  margin: $standard-space;
+  margin: $standard-space $standard-space $standard-space 0;
   float: left;
 }
 
 .tcstring-input {
-  margin: $standard-space $standard-space;
+
+  margin: $standard-space 0 $standard-space 0;
 }
 
 *:focus {

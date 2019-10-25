@@ -1,15 +1,19 @@
 <template>
-  <div class="tools-app">
-    <Nav />
-    <div class="page">
-      <transition
-        name="fade"
-        mode="out-in"
-      >
-        <router-view />
-      </transition>
-    </div>
-  </div>
+  <b-container fluid>
+    <b-row>
+      <div class="tools-app">
+        <Nav />
+        <div class="page">
+          <transition
+            name="fade"
+            mode="out-in"
+          >
+            <router-view />
+          </transition>
+        </div>
+      </div>
+    </b-row>
+  </b-container>
 </template>
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
