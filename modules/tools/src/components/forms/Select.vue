@@ -15,13 +15,13 @@
 <script lang="ts">
 import {Component, Prop} from 'vue-property-decorator';
 import {FormComponent} from './FormComponent';
-import {FormField} from './FormField';
+import FormField from './FormField';
 
 @Component
 
 export default class extends FormComponent {
 
-  @Prop
+  @Prop()
   public options: FormField[];
 
   private selected: string;

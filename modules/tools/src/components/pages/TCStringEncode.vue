@@ -127,13 +127,12 @@ export default class extends Vue {
 
   private get languages(): FormField[] {
 
-    return [{'BG': 'BG'}, {'CS': 'CS'}, {'DA': 'DA'}, {'DE': 'DE'}, {'EL': 'EL'}, {'ES': 'ES'}, {'ET': 'ET'}, {'FI': 'FI'}, {'FR': 'FR'}, {'GA': 'GA'}, {'HR': 'HR'}, {'HU': 'HU'}, {'IT': 'IT'}, {'LT': 'LT'}, {'LV': 'LV'}, {'MT': 'MT'}, {'NL': 'NL'}, {'PL': 'PL'}, {'PT': 'PT'}, {'RO': 'RO'}, {'SK': 'SK'}, {'SL': 'SL'}, {'SV': 'SV'}];
+    return [{value: 'BG', text: 'BG'}, {value: 'CS', text: 'CS'}, {value: 'DA', text: 'DA'}, {value: 'DE', text: 'DE'}, {value: 'EL', text: 'EL'}, {value: 'ES', text: 'ES'}, {value: 'ET', text: 'ET'}, {value: 'FI', text: 'FI'}, {value: 'FR', text: 'FR'}, {value: 'GA', text: 'GA'}, {value: 'HR', text: 'HR'}, {value: 'HU', text: 'HU'}, {value: 'IT', text: 'IT'}, {value: 'LT', text: 'LT'}, {value: 'LV', text: 'LV'}, {value: 'MT', text: 'MT'}, {value: 'NL', text: 'NL'}, {value: 'PL', text: 'PL'}, {value: 'PT', text: 'PT'}, {value: 'RO', text: 'RO'}, {value: 'SK', text: 'SK'}, {value: 'SL', text: 'SL'}, {value: 'SV', text: 'SV'}];
 
   }
   private get countries(): FormField[] {
 
-    return {
-    };
+    return [];
 
   }
 
