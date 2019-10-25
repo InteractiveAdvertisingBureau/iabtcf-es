@@ -35,13 +35,13 @@ export class TCModel implements TCFields {
   // needs some settin' (no default)
   private cmpId_: number | string;
   private cmpVersion_: number | string;
-  private consentLanguage_: string;
+  private consentLanguage_: string = 'EN';
   private gvl_: GVL;
 
   // automagically set when created, updated and gvl set
   private created_: Date;
   private lastUpdated_: Date;
-  private vendorListVersion_: number | string;
+  private vendorListVersion_: number | string = 0;
 
   /**
    * The TCF designates certain Features as special, that is, a CMP must afford
@@ -201,6 +201,7 @@ export class TCModel implements TCFields {
     this.created_ = date;
 
   }
+
   public get created(): Date {
 
     return this.created_;
@@ -217,6 +218,7 @@ export class TCModel implements TCFields {
     this.lastUpdated_ = date;
 
   }
+
   public get lastUpdated(): Date {
 
     return this.lastUpdated_;
@@ -242,6 +244,7 @@ export class TCModel implements TCFields {
     }
 
   }
+
   public get cmpId(): number | string {
 
     return this.cmpId_;

@@ -45,7 +45,6 @@ export class GVL implements VendorList, Declarations {
    */
   public static latestFilename: string = 'vendor-list.json';
 
-
   /**
    * @static
    * @param {string} - the versioned name is assumed to be
@@ -172,7 +171,6 @@ export class GVL implements VendorList, Declarations {
 
   private lang_: string;
 
-
   /**
    * @param {VersionOrVendorList} [versionOrVendorList] - can be either a
    * [[VendorList]] object  or a version number represented as a string or
@@ -226,6 +224,7 @@ export class GVL implements VendorList, Declarations {
       url += '/';
 
     }
+
     return url;
 
   }
@@ -299,8 +298,8 @@ export class GVL implements VendorList, Declarations {
           resolve();
 
         }
-        this.lang_ = lang;
 
+        this.lang_ = lang;
 
       } else {
 
@@ -328,11 +327,13 @@ export class GVL implements VendorList, Declarations {
     this.vendorListVersion = gvlObject.vendorListVersion;
     this.tcfPolicyVersion = gvlObject.tcfPolicyVersion;
     this.lastUpdated = gvlObject.lastUpdated;
+
     if (typeof this.lastUpdated === 'string') {
 
       this.lastUpdated = new Date(this.lastUpdated);
 
     }
+
     this.purposes = gvlObject.purposes;
     this.specialPurposes = gvlObject.specialPurposes;
     this.features = gvlObject.features;

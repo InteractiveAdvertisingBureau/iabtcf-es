@@ -8,12 +8,14 @@
       <b-card bg-variant="light" class="b-card">
         <textfield
            v-for="formField in formFields"
-             :formField="formField"
-             :value="tcModel[formField.identifier]"
-             :key="formField.identifier"
-             @update="update(formField.identifier, $event)"
+             :label="formField.text"
+             :tcModel="tcModel"
+             :id="formField.value"
+             :key="formField.value"
+             @update="update"
         />
       </b-card>
+
       <b-card bg-variant="light" class="b-card">
         <datefield
            valueName="created"
@@ -32,11 +34,11 @@
 
         <checkboxboolean
            v-for="field in boolFields"
-             :valueName="field.fieldName"
-             :label="field.label"
-             v-model="tcModel[field.fieldName]"
-             :key="field.fieldName"
-             @update="update(field.fieldName, $event)"
+             :id="field.value"
+             :label="field.text"
+             :tcModel="tcModel"
+             :key="field.value"
+             @update="update"
          />
       </b-card>
     </form>
@@ -66,13 +68,21 @@ export default class extends Vue {
 
   private tcModel: TCModel;
   private tcString: TCString;
-  private formFields: FormField[];
-  private encodedTCString: string;
-  private boolFields: {fieldName: string; label: string}[] = [
-    {fieldName: 'isServiceSpecific', label: 'Is Service Specific'},
-    {fieldName: 'purposeOneTreatment', label: 'Special Purpose One Treatment'},
-    {fieldName: 'supportOOB', label: 'Supports OOB'},
-    {fieldName: 'useNonStandardStacks', label: 'Publisher Uses Non-Standard Stacks'},
+  private encodedTCString: string = '';
+  private formFields: FormField[] = [
+    {value: 'cmpId', text: 'CMP ID'},
+    {value: 'cmpVersion', text: 'CMP Version'},
+    {value: 'policyVersion', text: 'TCF Policy Version'},
+    {value: 'vendorListVersion', text: 'Vendor List Version'},
+    {value: 'consentScreen', text: 'Consent Screen'},
+    {value: 'consentLanguage', text: 'Consent Language'},
+    {value: 'publisherCountryCode', text: 'Publisher Country Code'},
+  ];
+  private boolFields: FormField[] = [
+    {value: 'isServiceSpecific', text: 'Is Service Specific'},
+    {value: 'purposeOneTreatment', text: 'Special Purpose One Treatment'},
+    {value: 'supportOOB', text: 'Supports OOB'},
+    {value: 'useNonStandardStacks', text: 'Publisher Uses Non-Standard Stacks'},
   ];
 
   public constructor() {
@@ -80,40 +90,6 @@ export default class extends Vue {
     super();
 
     this.tcString = new TCString();
-    this.encodedTCString = '';
-    this.formFields = [
-      {
-        label: 'CMP ID',
-        identifier: 'cmpId',
-        description: 'iab. assigned CMP ID',
-      },
-      {
-        label: 'CMP Version',
-        identifier: 'cmpVersion',
-        description: 'Integer version of CMP (eg. 2)',
-      },
-      {
-        label: 'TCF Policy Version',
-        identifier: 'policyVersion',
-      },
-      {
-        label: 'Vendor List Version',
-        identifier: 'vendorListVersion',
-      },
-      {
-        label: 'Consent Language',
-        identifier: 'consentLanguage',
-        description: 'Two-letter ISO639-1 Code',
-      },
-      {
-        label: 'Consent Screen',
-        identifier: 'consentScreen',
-      },
-      {
-        label: 'Publisher Country Code',
-        identifier: 'publisherCountryCode',
-      },
-    ];
 
     GVL.baseUrl = document.location.origin;
     this.tcModel = new TCModel(new GVL());
@@ -123,17 +99,22 @@ export default class extends Vue {
     this.tcModel.consentScreen = 1 + Math.round(Math.random() * 5);
     this.tcModel.publisherCountryCode = 'US';
 
+  }
+
+  private mounted(): void {
+
     this.tcModel.gvl.readyPromise.then((): void => {
+
+      this.encodedTCString = this.tcString.encode(this.tcModel);
 
     });
 
   }
 
-  private update(fieldName: string, value: string | boolean | number): void {
+  private update(): void {
 
     try {
 
-      this.tcModel[fieldName] = value;
       this.encodedTCString = this.tcString.encode(this.tcModel);
 
     } catch (err) {
@@ -141,6 +122,18 @@ export default class extends Vue {
       this.encodedTCString = 'ERROR... ' + err;
 
     }
+
+  }
+
+  private get languages(): FormField[] {
+
+    return [{'BG': 'BG'}, {'CS': 'CS'}, {'DA': 'DA'}, {'DE': 'DE'}, {'EL': 'EL'}, {'ES': 'ES'}, {'ET': 'ET'}, {'FI': 'FI'}, {'FR': 'FR'}, {'GA': 'GA'}, {'HR': 'HR'}, {'HU': 'HU'}, {'IT': 'IT'}, {'LT': 'LT'}, {'LV': 'LV'}, {'MT': 'MT'}, {'NL': 'NL'}, {'PL': 'PL'}, {'PT': 'PT'}, {'RO': 'RO'}, {'SK': 'SK'}, {'SL': 'SL'}, {'SV': 'SV'}];
+
+  }
+  private get countries(): FormField[] {
+
+    return {
+    };
 
   }
 

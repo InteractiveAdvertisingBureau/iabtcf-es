@@ -1,20 +1,18 @@
 <template>
   <b-input-group >
     <b-form-group
-      :id="valueName"
-      :description="description"
+      :id="label"
       :label="label"
-      :label-for="valueName"
-      @input="$emit('update')"
+      @input="changeValue"
     >
-      <datepicker v-model="tcModel[valueName]" />
+      <datepicker v-model="tcModel[id]" />
     </b-form-group>
   </b-input-group>
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator';
-import {TCModel} from '@iabtcf/core';
+import {Component} from 'vue-property-decorator';
+import {FormComponent} from './FormComponent';
 import DatePicker from 'vuejs-datepicker';
 
 @Component({
@@ -23,22 +21,7 @@ import DatePicker from 'vuejs-datepicker';
   },
 })
 
-export default class extends Vue {
-
-  @Prop()
-  public valueName: string;
-  @Prop()
-  public label: string;
-  @Prop()
-  public description: string;
-  @Prop()
-  public tcModel: TCModel;
-
-  public constructor() {
-
-    super();
-
-  }
+export default class extends FormComponent {
 
 }
 </script>
