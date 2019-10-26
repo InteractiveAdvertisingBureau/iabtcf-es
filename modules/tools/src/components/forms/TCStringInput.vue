@@ -3,7 +3,7 @@
        class="tcstring-input"
        v-model="tcstring"
        @click="selectContents"
-       readonly
+       plaintext
        />
 </template>
 <script lang="ts">

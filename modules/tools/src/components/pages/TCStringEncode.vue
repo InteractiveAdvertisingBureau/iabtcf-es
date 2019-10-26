@@ -73,6 +73,13 @@
                @update="update"
               />
             <big-form-select
+              label="Vendor Legitimate Interest"
+               :tcModel="tcModel"
+               :options="vendors"
+               id="vendorLegitimateInterest"
+               @update="update"
+              />
+            <big-form-select
               label="OOB Vendors Allowed"
                :tcModel="tcModel"
                :options="vendors"
@@ -84,13 +91,6 @@
                :tcModel="tcModel"
                :options="vendors"
                id="vendorsDisclosed"
-               @update="update"
-              />
-            <big-form-select
-              label="Vendor Legitimate Interest"
-               :tcModel="tcModel"
-               :options="vendors"
-               id="vendorLegitimateInterest"
                @update="update"
               />
           </b-card>
@@ -127,7 +127,6 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import PageHead from './PageHead.vue';
 import {TCModel, GVL, TCString, Vendor, Purpose, Feature} from '@iabtcf/core';
 import TextField from '../forms/TextField.vue';
 import DateField from '../forms/DateField.vue';
@@ -139,9 +138,10 @@ import BigFormSelect from '../forms/BigFormSelect.vue';
 import Languages from '../../model/Languages';
 import Countries from '../../model/Countries';
 
+GVL.baseUrl = document.location.origin;
+
 @Component({
   components: {
-    PageHead,
     'text-field': TextField,
     'date-field': DateField,
     'tc-string-input': TCStringInput,
@@ -152,8 +152,8 @@ import Countries from '../../model/Countries';
 })
 export default class extends Vue {
 
-  private tcModel: TCModel;
-  private tcString: TCString;
+  private tcModel: TCModel = new TCModel(new GVL());
+  private tcString: TCString = new TCString();
   private vendors_: FormField[] = [];
   private purposes_: FormField[] = [];
   private specialFeatures_: FormField[] = [];
@@ -176,10 +176,6 @@ export default class extends Vue {
 
     super();
 
-    this.tcString = new TCString();
-
-    GVL.baseUrl = document.location.origin;
-    this.tcModel = new TCModel(new GVL());
     this.tcModel.cmpVersion = 1 + Math.round(Math.random() * 40);
     this.tcModel.policyVersion = 2;
     this.tcModel.cmpId = 1 + Math.round(Math.random() * 100);
@@ -191,8 +187,6 @@ export default class extends Vue {
   private mounted(): void {
 
     this.tcModel.gvl.readyPromise.then((): void => {
-
-      this.encodedTCString = this.tcString.encode(this.tcModel);
 
       const vendors = this.tcModel.gvl.vendors;
 
@@ -241,6 +235,8 @@ export default class extends Vue {
         }
 
       }
+
+      this.encodedTCString = this.tcString.encode(this.tcModel);
 
     });
 

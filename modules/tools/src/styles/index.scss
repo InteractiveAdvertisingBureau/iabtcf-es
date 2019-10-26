@@ -10,7 +10,7 @@ $subtle-background-color: #FFFFFF;
 $separator-color: #ccc;
 $subtle-separator-color: #f3f3f3;
 $borders: 1px solid;
-$standard-space: 20px;
+$standard-space: 10px;
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -34,6 +34,8 @@ h6 {
   font-weight: bolder;
 }
 
+.tcstring-input {
+}
 .fade-enter-active,
 .fade-leave-active {
   transition-duration: .15s;
@@ -49,4 +51,7 @@ h6 {
 #home-logo-link {
   max-width: 60px;
   height: 40px;
+}
+input:focus {
+    outline:none;
 }
