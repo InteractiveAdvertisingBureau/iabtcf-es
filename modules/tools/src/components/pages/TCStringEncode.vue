@@ -73,6 +73,20 @@
                @update="update"
               />
             <big-form-select
+              label="OOB Vendors Allowed"
+               :tcModel="tcModel"
+               :options="vendors"
+               id="vendorsAllowed"
+               @update="update"
+              />
+            <big-form-select
+              label="OOB Vendors Disclosed"
+               :tcModel="tcModel"
+               :options="vendors"
+               id="vendorsDisclosed"
+               @update="update"
+              />
+            <big-form-select
               label="Vendor Legitimate Interest"
                :tcModel="tcModel"
                :options="vendors"
@@ -120,8 +134,8 @@ import DateField from '../forms/DateField.vue';
 import CheckboxBoolean from '../forms/CheckboxBoolean.vue';
 import TCStringInput from '../forms/TCStringInput.vue';
 import FormField from '../forms/FormField';
-import FormSelect from '../forms/FormSelect';
-import BigFormSelect from '../forms/BigFormSelect';
+import FormSelect from '../forms/FormSelect.vue';
+import BigFormSelect from '../forms/BigFormSelect.vue';
 import Languages from '../../model/Languages';
 import Countries from '../../model/Countries';
 
@@ -182,7 +196,7 @@ export default class extends Vue {
 
       const vendors = this.tcModel.gvl.vendors;
 
-      for (const id: string in vendors) {
+      for (const id in vendors) {
 
         if (vendors.hasOwnProperty(id)) {
 
@@ -198,7 +212,7 @@ export default class extends Vue {
 
       const purposes = this.tcModel.gvl.purposes;
 
-      for (const id: string in purposes) {
+      for (const id in purposes) {
 
         if (purposes.hasOwnProperty(id)) {
 
@@ -214,7 +228,7 @@ export default class extends Vue {
 
       const specialFeatures = this.tcModel.gvl.specialFeatures;
 
-      for (const id: string in specialFeatures) {
+      for (const id in specialFeatures) {
 
         if (specialFeatures.hasOwnProperty(id)) {
 
