@@ -25,7 +25,7 @@ export class EncoderMap implements TCFields {
   public readonly useNonStandardStacks: typeof BooleanEncoder = BooleanEncoder;
   public readonly specialFeatureOptIns: typeof FixedVectorEncoder = FixedVectorEncoder;
   public readonly purposeConsents: typeof FixedVectorEncoder = FixedVectorEncoder;
-  public readonly purposeLITransparency: typeof FixedVectorEncoder = FixedVectorEncoder;
+  public readonly purposeLegitimateInterest: typeof FixedVectorEncoder = FixedVectorEncoder;
   public readonly purposeOneTreatment: typeof BooleanEncoder = BooleanEncoder;
   public readonly publisherCountryCode: typeof LangEncoder = LangEncoder;
   public readonly vendorConsents: typeof VendorVectorEncoder = VendorVectorEncoder;

@@ -1,14 +1,19 @@
 <template>
   <b-input-group >
     <b-form-group
+      :label-for="id"
       :label="label"
     >
     <b-form-select
+      id="id"
       v-model="selected"
       :options="options"
+      multiple
+      :select-size="size"
       @input="changeValue"
-      size="sm"
       class="mt-3" />
+
+    </b-form-group>
   </b-input-group>
 </template>
 
@@ -21,10 +26,19 @@ import FormField from './FormField';
 
 export default class extends FormComponent {
 
+  private readonly MAX_SIZE: number = 10;
+
   @Prop()
   public options: FormField[];
 
-  private selected: string;
+  private selected: string[] = [];
+  private size: number = 0;
+
+  private mounted(): void {
+
+    this.size = Math.min(this.options.length, 10);
+
+  }
 
 }
 </script>

@@ -1,17 +1,19 @@
 <template>
   <b-container fluid>
     <b-row>
-      <div class="tools-app">
+      <b-col cols="12">
         <Nav />
-        <div class="page">
-          <transition
-            name="fade"
-            mode="out-in"
-          >
-            <router-view />
-          </transition>
-        </div>
-      </div>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col cols="12">
+        <transition
+          name="fade"
+          mode="out-in"
+        >
+          <router-view />
+        </transition>
+      </b-col>
     </b-row>
   </b-container>
 </template>

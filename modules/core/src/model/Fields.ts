@@ -13,7 +13,7 @@ export class Fields {
   public static readonly useNonStandardStacks: string = 'useNonStandardStacks';
   public static readonly specialFeatureOptIns: string = 'specialFeatureOptIns';
   public static readonly purposeConsents: string = 'purposeConsents';
-  public static readonly purposeLITransparency: string = 'purposeLITransparency';
+  public static readonly purposeLegitimateInterest: string = 'purposeLegitimateInterest';
   public static readonly purposeOneTreatment: string = 'purposeOneTreatment';
   public static readonly publisherCountryCode: string = 'publisherCountryCode';
   public static readonly vendorConsents: string = 'vendorConsents';

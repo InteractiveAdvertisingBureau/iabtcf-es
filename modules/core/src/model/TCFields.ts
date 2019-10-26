@@ -19,7 +19,7 @@ export interface TCFields {
   useNonStandardStacks: any;
   specialFeatureOptIns: any;
   purposeConsents: any;
-  purposeLITransparency: any;
+  purposeLegitimateInterest: any;
   purposeOneTreatment: any;
   publisherCountryCode: any;
   vendorConsents: any;

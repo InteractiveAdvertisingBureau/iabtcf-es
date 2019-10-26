@@ -12,9 +12,20 @@ export class FormComponent extends Vue {
   @Prop()
   public label: string;
 
-  protected changeValue(newVal: boolean | string | number): void {
+  protected changeValue(newVal: boolean | string | number | string[] | Date): void {
 
-    if (this.tcModel[this.id] !== newVal) {
+    if (Array.isArray(newVal)) {
+
+      // this would be a vector
+
+      const newIDs = newVal.map((id: string): number => parseInt(id, 10));
+
+      this.tcModel[this.id].empty();
+      this.tcModel[this.id].set(newIDs);
+
+    } else if (this.tcModel[this.id] !== newVal) {
+
+      // this is a single value
 
       this.tcModel[this.id] = newVal;
 

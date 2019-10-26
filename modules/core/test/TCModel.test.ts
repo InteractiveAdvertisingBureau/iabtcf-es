@@ -215,7 +215,7 @@ describe('TCModel', (): void => {
   testBoolean('useNonStandardStacks');
 
   testInstanceOf('purposeConsents', Vector);
-  testInstanceOf('purposeLITransparency', Vector);
+  testInstanceOf('purposeLegitimateInterest', Vector);
 
   testInstanceOf('vendorConsents', Vector);
   testInstanceOf('vendorLegitimateInterest', Vector);
@@ -380,8 +380,6 @@ describe('TCModel', (): void => {
     };
 
     [
-      'cmpId',
-      'cmpVersion',
       'gvl',
     ].forEach(makeInvalidTest);
 
@@ -411,7 +409,7 @@ describe('TCModel', (): void => {
       vendorConsents: {gvlKey: 'vendors'},
       vendorLegitimateInterest: {gvlKey: 'vendors'},
       purposeConsents: {gvlKey: 'purposes'},
-      purposeLITransparency: {gvlKey: 'purposes'},
+      purposeLegitimateInterest: {gvlKey: 'purposes'},
       specialFeatureOptIns: {gvlKey: 'specialFeatures'},
     };
 

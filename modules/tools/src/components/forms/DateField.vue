@@ -1,11 +1,13 @@
 <template>
   <b-input-group >
     <b-form-group
-      :id="label"
+      :id="id"
       :label="label"
-      @input="changeValue"
     >
-      <datepicker v-model="tcModel[id]" />
+      <datepicker
+        v-model="tcModel[id]"
+        @input="changeValue"
+      />
     </b-form-group>
   </b-input-group>
 </template>
@@ -21,7 +23,6 @@ import DatePicker from 'vuejs-datepicker';
   },
 })
 
-export default class extends FormComponent {
+export default class extends FormComponent {}
 
-}
 </script>

@@ -9,12 +9,32 @@ import {
 } from './encoder';
 
 import {TCModel} from './TCModel';
+import {Fields} from './model';
 
 /**
  * Main class for encoding and decoding a
  * TCF Transparency and Consent String
  */
 export class TCString implements Encoder<TCModel> {
+
+  private getEncoderType(segmentName: string): string {
+
+    let retr = '';
+
+    switch (segmentName) {
+
+      case SegmentType[SegmentType.vendorsAllowed.toString()]:
+        retr = Fields.vendorsAllowed;
+        break;
+      case SegmentType[SegmentType.vendorsDisclosed.toString()]:
+        retr = Fields.vendorsDisclosed;
+        break;
+
+    }
+
+    return retr;
+
+  }
 
   /**
    *  encodes a model into a TCString
@@ -25,25 +45,24 @@ export class TCString implements Encoder<TCModel> {
    */
   public encode(tcModel: TCModel): string {
 
-    let retrString = '';
+    const stringSegments: string[] = [];
     const segEncMap: SegmentEncoderMap = new SegmentEncoderMap();
     const len = SegmentType.numTypes;
 
     for (let i = 0; i < len; i ++) {
 
       const encoder: Encoder<TCModel> = new segEncMap[SegmentType[i.toString()]]();
-      const dotOrNot: string = (i < len - 1) ? '.' : '';
-      const encoded: string = encoder.encode(tcModel);
+      const encoded: string = encoder.encode(tcModel, this.getEncoderType(SegmentType[i.toString()]));
 
       if (encoded) {
 
-        retrString += encoded + dotOrNot;
+        stringSegments.push(encoded);
 
       }
 
     }
 
-    return retrString;
+    return stringSegments.join('.');
 
   }
 
@@ -84,7 +103,7 @@ export class TCString implements Encoder<TCModel> {
 
       }
 
-      encoder.decode(segment, tcModel);
+      encoder.decode(segment, tcModel, this.getEncoderType(SegmentType[i.toString()]));
 
     }
 

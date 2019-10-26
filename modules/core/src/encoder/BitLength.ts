@@ -19,7 +19,7 @@ export class BitLength {
   public static readonly publisherCountryCode: number = 12;
   public static readonly specialFeatureOptIns: number = 12;
   public static readonly purposeConsents: number = 24;
-  public static readonly purposeLITransparency: number = 24;
+  public static readonly purposeLegitimateInterest: number = 24;
   public static readonly vendorId: number = 16;
   public static readonly purposeId: number = 6;
   public static readonly numEntries: number = 12;

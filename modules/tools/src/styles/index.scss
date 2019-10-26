@@ -10,16 +10,10 @@ $subtle-background-color: #FFFFFF;
 $separator-color: #ccc;
 $subtle-separator-color: #f3f3f3;
 $borders: 1px solid;
-$standard-space: 10px;
+$standard-space: 20px;
 
-.tools-app {
+body {
   font-family: 'Open Sans', sans-serif;
-}
-
-.page {
-  display: block;
-  float: left;
-  margin: 20px;
 }
 
 a {
@@ -31,10 +25,10 @@ a {
   text-decoration: none;
   }
 }
-
-h1 {
-  color: $muted-title-color;
+.row {
+  margin: $standard-space 0px;
 }
+
 h6 {
   font-family: Arial;
   font-weight: bolder;
@@ -52,37 +46,7 @@ h6 {
   opacity: 0;
 }
 
-.nav {
-  float: left;
-  height: 100vh;
-}
-
-.nav-groups {
-  margin-top: 30px;
-  padding-left: $standard-space;
-}
-
-.section,
-.home-link {
-  margin-top: $standard-space;
-  border-bottom: $borders $subtle-separator-color;
-}
 #home-logo-link {
   max-width: 60px;
   height: 40px;
-  margin-bottom: $standard-space;
-}
-
-.b-card {
-  margin: $standard-space $standard-space $standard-space 0;
-  float: left;
-}
-
-.tcstring-input {
-
-  margin: $standard-space 0 $standard-space 0;
-}
-
-*:focus {
-    outline: none;
 }

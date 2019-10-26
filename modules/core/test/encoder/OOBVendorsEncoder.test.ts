@@ -1,7 +1,11 @@
 import {expect} from 'chai';
 import {
-  VendorsDisclosedEncoder,
+  OOBVendorsEncoder,
 } from '../../src/encoder';
+
+import {
+  Fields,
+} from '../../src/model';
 
 import {
   TCModel,
@@ -10,7 +14,7 @@ import {
 
 export function run(): void {
 
-  describe('VendorsDisclosedEncoder', (): void => {
+  describe('OOBVendorsEncoder', (): void => {
 
     // eslint-disable-next-line
     const vendorlistJson = require('../../dev/vendor-list.json');
@@ -19,7 +23,7 @@ export function run(): void {
     it('should encode into a string', (done: () => void): void => {
 
       const tcModel: TCModel = new TCModel(gvl);
-      const encoder: VendorsDisclosedEncoder = new VendorsDisclosedEncoder();
+      const encoder: OOBVendorsEncoder = new OOBVendorsEncoder();
       let encoded = '';
 
       tcModel.cmpId = 23;
@@ -30,7 +34,7 @@ export function run(): void {
 
       const encodeIt = (): void => {
 
-        encoded = encoder.encode(tcModel);
+        encoded = encoder.encode(tcModel, Fields.vendorsAllowed);
 
       };
 
@@ -51,24 +55,29 @@ export function run(): void {
     it('TCModel->String->TCModel and should be equal', (done: () => void): void => {
 
       const tcModel: TCModel = new TCModel(gvl);
-      const encoder: VendorsDisclosedEncoder = new VendorsDisclosedEncoder();
+      const encoder: OOBVendorsEncoder = new OOBVendorsEncoder();
       const decodedModel: TCModel = new TCModel();
       let encoded = '';
 
       tcModel.cmpId = 23;
       tcModel.cmpVersion = 1;
 
-      // full consent!
       tcModel.setAll();
+
+      const strToInt: (str: string) => number = (str: string): number => parseInt(str, 10);
+      const allowedVendors: number[] = Object.keys(tcModel.gvl.getVendorsWithConsentPurpose(1)).map(strToInt);
+
+      tcModel.vendorsAllowed.set(allowedVendors);
 
       const encodeIt = (): void => {
 
-        encoded = encoder.encode(tcModel);
+        encoded = encoder.encode(tcModel, Fields.vendorsAllowed);
 
       };
+
       const decodeIt = (): void => {
 
-        encoder.decode(encoded, decodedModel);
+        encoder.decode(encoded, decodedModel, Fields.vendorsAllowed);
 
       };
 
@@ -80,7 +89,7 @@ export function run(): void {
         expect(encodeIt).not.to.throw();
         expect(decodeIt).not.to.throw();
 
-        expect(decodedModel.vendorsDisclosed.size).to.equal(tcModel.vendorsDisclosed.size);
+        expect(decodedModel.vendorsAllowed.size).to.equal(tcModel.vendorsAllowed.size);
         done();
 
       });

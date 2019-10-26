@@ -15,7 +15,6 @@ export * from './SegmentType';
 export * from './VectorEncodingType';
 export * from './VersionMap';
 export * from './Base64Url';
-export * from './VendorsDisclosedEncoder';
-export * from './VendorsAllowedEncoder';
+export * from './OOBVendorsEncoder';
 export * from './PublisherTCEncoder';
 export * from './PublisherFieldSequence';

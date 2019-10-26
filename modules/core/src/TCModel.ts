@@ -31,17 +31,17 @@ export class TCModel implements TCFields {
   private purposeOneTreatment_: boolean = false;
   private publisherCountryCode_: string = 'AA';
   private supportOOB_: boolean = false;
-
-  // needs some settin' (no default)
-  private cmpId_: number | string;
-  private cmpVersion_: number | string;
   private consentLanguage_: string = 'EN';
-  private gvl_: GVL;
+  private cmpId_: number | string = 0;
+  private cmpVersion_: number | string = 0;
+  private vendorListVersion_: number | string = 0;
 
   // automagically set when created, updated and gvl set
   private created_: Date;
   private lastUpdated_: Date;
-  private vendorListVersion_: number | string = 0;
+
+  // Member Variable for GVL
+  private gvl_: GVL;
 
   /**
    * The TCF designates certain Features as special, that is, a CMP must afford
@@ -70,7 +70,7 @@ export class TCModel implements TCFields {
    * legitimate interest. If the user has exercised right-to-object for a
    * purpose.
    */
-  public readonly purposeLITransparency: Vector = new Vector();
+  public readonly purposeLegitimateInterest: Vector = new Vector();
 
   /**
    * The user’s permission for each Purpose established on the legal basis of
@@ -675,25 +675,25 @@ export class TCModel implements TCFields {
   }
 
   /**
-   * setAllPurposeLITransparency - sets all purposes on the GVL LI Transparency (true)
+   * setAllPurposeLegitimateInterest - sets all purposes on the GVL LI Transparency (true)
    *
    * @return {void}
    */
-  public setAllPurposeLITransparency(): void {
+  public setAllPurposeLegitimateInterest(): void {
 
-    this.purposeLITransparency.empty();
-    this.setAllOnVector(this.gvl.purposes, this.purposeLITransparency);
+    this.purposeLegitimateInterest.empty();
+    this.setAllOnVector(this.gvl.purposes, this.purposeLegitimateInterest);
 
   }
 
   /**
-   * unsetAllPurposeLITransparency - unsets all purposes on the GVL LI Transparency (false)
+   * unsetAllPurposeLegitimateInterest - unsets all purposes on the GVL LI Transparency (false)
    *
    * @return {void}
    */
-  public unsetAllPurposeLITransparency(): void {
+  public unsetAllPurposeLegitimateInterest(): void {
 
-    this.purposeLITransparency.empty();
+    this.purposeLegitimateInterest.empty();
 
   }
 
@@ -724,7 +724,7 @@ export class TCModel implements TCFields {
    * setAll - calls:
    * ```
     setAllVendorConsents();
-    setAllPurposeLITransparency();
+    setAllPurposeLegitimateInterest();
     setAllSpecialFeatureOptIns();
     setAllPurposeConsents();
     setAllVendorLegitimateInterest();
@@ -735,7 +735,7 @@ export class TCModel implements TCFields {
   public setAll(): void {
 
     this.setAllVendorConsents();
-    this.setAllPurposeLITransparency();
+    this.setAllPurposeLegitimateInterest();
     this.setAllSpecialFeatureOptIns();
     this.setAllPurposeConsents();
     this.setAllVendorLegitimateInterest();
@@ -747,7 +747,7 @@ export class TCModel implements TCFields {
    * unsetAll - calls:
    * ```
     unsetAllVendorConsents();
-    unsetAllPurposeLITransparency();
+    unsetAllPurposeLegitimateInterest();
     unsetAllSpecialFeatureOptIns();
     unsetAllPurposeConsents();
     unsetAllVendorLegitimateInterest();
@@ -758,7 +758,7 @@ export class TCModel implements TCFields {
   public unsetAll(): void {
 
     this.unsetAllVendorConsents();
-    this.unsetAllPurposeLITransparency();
+    this.unsetAllPurposeLegitimateInterest();
     this.unsetAllSpecialFeatureOptIns();
     this.unsetAllPurposeConsents();
     this.unsetAllVendorLegitimateInterest();
