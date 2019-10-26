@@ -28,9 +28,9 @@ export interface TCFields {
   vendorsDisclosed: any;
   vendorsAllowed: any;
   publisherConsents: any;
-  publisherLITransparency:any;
+  publisherLegitimateInterest:any;
   numCustomPurposes:any;
   publisherCustomConsents:any;
-  publisherCustomLITransparency:any;
+  publisherCustomLegitimateInterest:any;
 
 }

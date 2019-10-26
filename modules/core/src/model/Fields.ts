@@ -22,9 +22,10 @@ export class Fields {
   public static readonly vendorsDisclosed: string = 'vendorsDisclosed';
   public static readonly vendorsAllowed: string = 'vendorsAllowed';
   public static readonly publisherConsents: string = 'publisherConsents';
-  public static readonly publisherLITransparency: string = 'publisherLITransparency';
+  public static readonly publisherLegitimateInterest: string = 'publisherLegitimateInterest';
   public static readonly numCustomPurposes: string = 'numCustomPurposes';
   public static readonly publisherCustomConsents: string = 'publisherCustomConsents';
-  public static readonly publisherCustomLITransparency: string = 'publisherLITransparency';
+  public static readonly publisherCustomLegitimateInterest: string = 'publisherCustomLegitimateInterest';
+  public static readonly supportOOB: string = 'supportOOB';
 
 }

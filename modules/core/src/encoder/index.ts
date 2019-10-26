@@ -12,6 +12,7 @@ export * from './PurposeRestrictionVectorEncoder';
 export * from './SegmentEncoderMap';
 export * from './VendorVectorEncoder';
 export * from './SegmentType';
+export * from './SegmentSequence';
 export * from './VectorEncodingType';
 export * from './VersionMap';
 export * from './Base64Url';

@@ -77,7 +77,7 @@ export function run(): void {
 
       const decodeIt = (): void => {
 
-        encoder.decode(encoded, decodedModel, Fields.vendorsAllowed);
+        encoder.decode(encoded, decodedModel);
 
       };
 

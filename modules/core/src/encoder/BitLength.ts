@@ -28,7 +28,7 @@ export class BitLength {
   public static readonly numRestrictions: number = 12;
   public static readonly segmentType: number = 3;
   public static readonly publisherPurposeConsents: number = 24;
-  public static readonly publisherLITransparency: number = 24;
+  public static readonly publisherLegitimateInterest: number = 24;
   public static readonly numCustomPurposes: number = 6;
 
 }

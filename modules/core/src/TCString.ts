@@ -4,12 +4,12 @@ import {
   BitLength,
   IntEncoder,
   SegmentEncoderMap,
+  SegmentSequence,
   SegmentType,
   Base64Url,
 } from './encoder';
 
 import {TCModel} from './TCModel';
-import {Fields} from './model';
 
 /**
  * Main class for encoding and decoding a
@@ -17,42 +17,27 @@ import {Fields} from './model';
  */
 export class TCString implements Encoder<TCModel> {
 
-  private getEncoderType(segmentName: string): string {
-
-    let retr = '';
-
-    switch (segmentName) {
-
-      case SegmentType[SegmentType.vendorsAllowed.toString()]:
-        retr = Fields.vendorsAllowed;
-        break;
-      case SegmentType[SegmentType.vendorsDisclosed.toString()]:
-        retr = Fields.vendorsDisclosed;
-        break;
-
-    }
-
-    return retr;
-
-  }
-
   /**
    *  encodes a model into a TCString
    *
-   * @type {TCModel}
    * @param {TCModel} tcModel - model to convert into encoded string
+   * @param {boolean} isForSaving = false - Defaults to false.  Whether a TC
+   * String is meant for storage (true) or meant to be handed to AdTech through
+   * the tcfapi (true).  This will modify which segments are handed back with
+   * the string.
    * @return {string} - base64url encoded Transparency and Consent String
    */
-  public encode(tcModel: TCModel): string {
+  public encode(tcModel: TCModel, isForSaving: boolean = false): string {
 
     const stringSegments: string[] = [];
     const segEncMap: SegmentEncoderMap = new SegmentEncoderMap();
-    const len = SegmentType.numTypes;
+    const segSequence: SegmentSequence = new SegmentSequence(tcModel, isForSaving);
+    const seq: string[] = segSequence[tcModel.version.toString()];
 
-    for (let i = 0; i < len; i ++) {
+    seq.forEach((segName: string): void => {
 
-      const encoder: Encoder<TCModel> = new segEncMap[SegmentType[i.toString()]]();
-      const encoded: string = encoder.encode(tcModel, this.getEncoderType(SegmentType[i.toString()]));
+      const encoder: Encoder<TCModel> = new segEncMap[segName]();
+      const encoded: string = encoder.encode(tcModel, segName);
 
       if (encoded) {
 
@@ -60,7 +45,7 @@ export class TCString implements Encoder<TCModel> {
 
       }
 
-    }
+    });
 
     return stringSegments.join('.');
 
@@ -103,7 +88,7 @@ export class TCString implements Encoder<TCModel> {
 
       }
 
-      encoder.decode(segment, tcModel, this.getEncoderType(SegmentType[i.toString()]));
+      encoder.decode(segment, tcModel);
 
     }
 

@@ -77,7 +77,7 @@ export class TCModel implements TCFields {
    * legitimate interest.  If the user has exercised right-to-object for a
    * purpose.
    */
-  public readonly publisherLITransparency: Vector = new Vector();
+  public readonly publisherLegitimateInterest: Vector = new Vector();
 
   /**
    * set by a publisher if they wish to collect consent and LI Transparency for
@@ -97,7 +97,7 @@ export class TCModel implements TCFields {
    * legitimate interest.  If the user has exercised right-to-object for a
    * purpose that is established in the publisher's custom purposes.
    */
-  public readonly publisherCustomLITransparency: Vector = new Vector();
+  public readonly publisherCustomLegitimateInterest: Vector = new Vector();
 
   /**
    * Each [[Vendor]] is keyed by id. Their consent value is true if it is in

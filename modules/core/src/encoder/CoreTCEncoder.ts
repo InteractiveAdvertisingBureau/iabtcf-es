@@ -17,7 +17,6 @@ import {
 
 } from '..';
 
-
 export class CoreTCEncoder implements Encoder<TCModel> {
 
   private encMap: EncoderMap = new EncoderMap();

@@ -4,12 +4,14 @@
  * 2 = OOB vendors allowed
  * 3 = PublisherTC
  */
+import {Segments} from '../model';
+
 export class SegmentType {
 
-  public static readonly '0': string = 'core';
-  public static readonly '1': string = 'vendorsDisclosed';
-  public static readonly '2': string = 'vendorsAllowed';
-  public static readonly '3': string = 'publisherTC';
+  public static readonly '0': string = Segments.core;
+  public static readonly '1': string = Segments.vendorsDisclosed;
+  public static readonly '2': string = Segments.vendorsAllowed;
+  public static readonly '3': string = Segments.publisherTC;
 
   public static readonly core: number = 0;
   public static readonly vendorsDisclosed: number = 1;
