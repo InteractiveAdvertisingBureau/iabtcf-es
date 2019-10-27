@@ -16,7 +16,7 @@
   "scripts": {
     "start": "vue-cli-service serve",
     "prepare": "npm run build",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build && cp -r ./vendorlist/* ../../docs/",
     "lint": "eslint ./src/**/*.ts",
     "report-coverage": ""
   },
