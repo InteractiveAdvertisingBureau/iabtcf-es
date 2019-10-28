@@ -6,7 +6,6 @@ export function run(): void {
 
   describe('PurposeRestriction', (): void => {
 
-
     describe('purposeId', (): void => {
 
       const skip = 5;
@@ -30,6 +29,7 @@ export function run(): void {
         PurposeRestriction.availablePurposeIds = new Set<number>();
 
       });
+
       const shouldBeOk: (value: number) => void = (value: number): void => {
 
         it(`should be ok with ${value}`, (): void => {
@@ -47,6 +47,7 @@ export function run(): void {
         });
 
       };
+
       const shouldBeNotOk: (value: number) => void = (value: number): void => {
 
         it(`should not be ok with ${value}`, (): void => {
@@ -92,7 +93,6 @@ export function run(): void {
 
     });
     describe('constructor', (): void => {
-
 
       it('should set and get a restrictionType and purposeId through the constructor', (): void => {
 
