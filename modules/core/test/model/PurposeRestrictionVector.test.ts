@@ -30,7 +30,6 @@ export function run(): void {
 
       expect(prv.isEmpty()).to.be.true;
 
-
     });
     it('should store vendors by purpose restriction in order', (): void => {
 
@@ -104,7 +103,6 @@ export function run(): void {
       expect(result).to.deep.equal(Array.from(restrictions).sort());
       expect(result.length).to.equal(restrictions.size);
 
-
     });
 
     it('should return the restriction set on a particular vendor', (): void => {
@@ -122,7 +120,6 @@ export function run(): void {
       const prvRestrictions: PurposeRestriction[] = prv.getRestriction(vendorId);
 
       expect(purpRestriction.isSameAs(prvRestrictions[0])).to.be.true;
-
 
     });
 
