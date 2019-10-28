@@ -1,9 +1,18 @@
 <template>
   <div>
-    <PageHead title="TCF Tools">
-    </PageHead>
-    <h4>Resources</h4>
+    <h4>TC string</h4>
     <ul>
+      <li>
+        <router-link to="encode">Encode</router-link>
+      </li>
+    </ul>
+    <h4>External Links</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/chrispaterson/iabtcf">
+          TCF Code Library Github
+        </a>
+      </li>
       <li>
         <a href="https://iabtechlab.com/">iab. Tech Lab</a>
       </li>
@@ -16,4 +25,14 @@
   </div>
 </template>
 
-<script src="./Landing.vue.ts"></script>
+<script lang="ts">
+import {Component, Vue} from 'vue-property-decorator';
+
+// eslint-disable-next-line
+@Component({
+  components: {
+  },
+})
+export default class Landing extends Vue {
+}
+</script>

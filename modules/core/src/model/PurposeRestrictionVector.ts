@@ -39,18 +39,18 @@ export class PurposeRestrictionVector {
 
         const vendor: Vendor = this.gvl.vendors[vIDStr];
 
-        if (vendor.flexiblePurposeIds) {
+        if (vendor.flexiblePurposes) {
 
           switch (restrictionType) {
 
             case RestrictionType.NOT_ALLOWED:
-              return (vendor.legIntPurposeIds.includes(purposeId) || vendor.purposeIds.includes(purposeId));
+              return (vendor.legIntPurposes.includes(purposeId) || vendor.purposes.includes(purposeId));
 
             case RestrictionType.REQUIRE_CONSENT:
-              return (vendor.flexiblePurposeIds.includes(purposeId) && vendor.legIntPurposeIds.includes(purposeId));
+              return (vendor.flexiblePurposes.includes(purposeId) && vendor.legIntPurposes.includes(purposeId));
 
             case RestrictionType.REQUIRE_LI:
-              return (vendor.flexiblePurposeIds.includes(purposeId) && vendor.purposeIds.includes(purposeId));
+              return (vendor.flexiblePurposes.includes(purposeId) && vendor.purposes.includes(purposeId));
 
           }
 
@@ -65,7 +65,7 @@ export class PurposeRestrictionVector {
            * they don't even list it, no reason to encode the value so we check
            * both arrays to see if it exists
            */
-          return (vendor.legIntPurposeIds.includes(purposeId) || vendor.purposeIds.includes(purposeId));
+          return (vendor.legIntPurposes.includes(purposeId) || vendor.purposes.includes(purposeId));
 
         }
 
@@ -85,7 +85,6 @@ export class PurposeRestrictionVector {
 
   public add(vendorId: number, purposeRestriction: PurposeRestriction): void {
 
-
     if (this.isOkToHave(purposeRestriction.restrictionType, purposeRestriction.purposeId, vendorId)) {
 
       const hash: string = purposeRestriction.hash;
@@ -94,8 +93,8 @@ export class PurposeRestrictionVector {
 
         this.map.set(hash, new BinarySearchTree());
 
-
       }
+
       (this.map.get(hash) as BinarySearchTree).add(vendorId);
 
     }

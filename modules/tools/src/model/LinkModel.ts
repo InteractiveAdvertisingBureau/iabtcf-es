@@ -1,32 +1,17 @@
 import {VueConstructor} from 'vue';
-class LinkModel {
 
-  private title: string;
-  private link: string;
-  private component: VueConstructor;
+export class LinkModel {
+
+  public title: string;
+  public path: string;
+  public component: VueConstructor;
 
   public constructor(title: string, component: VueConstructor) {
 
     this.title = title;
-    this.link = component.name || '';
+    this.path = title.toLowerCase().replace(' ', '-');
     this.component = component;
-
-  }
-  public getTitle(): string {
-
-    return this.title;
-
-  }
-  public getLink(): string {
-
-    return this.link;
-
-  }
-  public getComponent(): VueConstructor {
-
-    return this.component;
 
   }
 
 }
-export {LinkModel};

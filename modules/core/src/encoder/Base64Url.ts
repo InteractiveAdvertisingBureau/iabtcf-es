@@ -157,7 +157,6 @@ export class Base64Url implements Encoder<string> {
       // pad right
       chunk = chunk + pad;
 
-
       /**
        * convert our binary string value to an integer and index the array for
        * our character
@@ -206,7 +205,6 @@ export class Base64Url implements Encoder<string> {
       bitField += pad + strBits;
 
     }
-
 
     return bitField;
 

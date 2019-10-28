@@ -32,7 +32,7 @@
 
 **● 0**: *`string`* = "core"
 
-*Defined in [encoder/SegmentType.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/encoder/SegmentType.ts#L9)*
+*Defined in [encoder/SegmentType.ts:9](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/SegmentType.ts#L9)*
 
 ___
 <a id="1"></a>
@@ -41,7 +41,7 @@ ___
 
 **● 1**: *`string`* = "vendorsDisclosed"
 
-*Defined in [encoder/SegmentType.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/encoder/SegmentType.ts#L10)*
+*Defined in [encoder/SegmentType.ts:10](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/SegmentType.ts#L10)*
 
 ___
 <a id="2"></a>
@@ -50,7 +50,7 @@ ___
 
 **● 2**: *`string`* = "vendorsAllowed"
 
-*Defined in [encoder/SegmentType.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/encoder/SegmentType.ts#L11)*
+*Defined in [encoder/SegmentType.ts:11](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/SegmentType.ts#L11)*
 
 ___
 <a id="3"></a>
@@ -59,7 +59,7 @@ ___
 
 **● 3**: *`string`* = "publisherTC"
 
-*Defined in [encoder/SegmentType.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/encoder/SegmentType.ts#L12)*
+*Defined in [encoder/SegmentType.ts:12](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/SegmentType.ts#L12)*
 
 ___
 <a id="core"></a>
@@ -68,7 +68,7 @@ ___
 
 **● core**: *`number`* = 0
 
-*Defined in [encoder/SegmentType.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/encoder/SegmentType.ts#L14)*
+*Defined in [encoder/SegmentType.ts:14](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/SegmentType.ts#L14)*
 
 ___
 <a id="numtypes"></a>
@@ -77,7 +77,7 @@ ___
 
 **● numTypes**: *`number`* = 4
 
-*Defined in [encoder/SegmentType.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/encoder/SegmentType.ts#L19)*
+*Defined in [encoder/SegmentType.ts:19](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/SegmentType.ts#L19)*
 
 ___
 <a id="publishertc"></a>
@@ -86,7 +86,7 @@ ___
 
 **● publisherTC**: *`number`* = 3
 
-*Defined in [encoder/SegmentType.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/encoder/SegmentType.ts#L17)*
+*Defined in [encoder/SegmentType.ts:17](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/SegmentType.ts#L17)*
 
 ___
 <a id="vendorsallowed"></a>
@@ -95,7 +95,7 @@ ___
 
 **● vendorsAllowed**: *`number`* = 2
 
-*Defined in [encoder/SegmentType.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/encoder/SegmentType.ts#L16)*
+*Defined in [encoder/SegmentType.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/SegmentType.ts#L16)*
 
 ___
 <a id="vendorsdisclosed"></a>
@@ -104,7 +104,7 @@ ___
 
 **● vendorsDisclosed**: *`number`* = 1
 
-*Defined in [encoder/SegmentType.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/encoder/SegmentType.ts#L15)*
+*Defined in [encoder/SegmentType.ts:15](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/SegmentType.ts#L15)*
 
 ___
 
