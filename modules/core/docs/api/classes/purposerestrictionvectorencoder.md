@@ -28,7 +28,7 @@
 
 ▸ **decode**(value: *`string`*): [PurposeRestrictionVector](purposerestrictionvector.md)
 
-*Defined in [encoder/PurposeRestrictionVectorEncoder.ts:110](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/encoder/PurposeRestrictionVectorEncoder.ts#L110)*
+*Defined in [encoder/PurposeRestrictionVectorEncoder.ts:110](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/PurposeRestrictionVectorEncoder.ts#L110)*
 
 **Parameters:**
 
@@ -45,7 +45,7 @@ ___
 
 ▸ **encode**(value: *[PurposeRestrictionVector](purposerestrictionvector.md)*): `string`
 
-*Defined in [encoder/PurposeRestrictionVectorEncoder.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/encoder/PurposeRestrictionVectorEncoder.ts#L21)*
+*Defined in [encoder/PurposeRestrictionVectorEncoder.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/PurposeRestrictionVectorEncoder.ts#L21)*
 
 **Parameters:**
 
@@ -64,7 +64,7 @@ ___
 
 *Implementation of [Encoder](../interfaces/encoder.md).[getBitLength](../interfaces/encoder.md#getbitlength)*
 
-*Defined in [encoder/PurposeRestrictionVectorEncoder.ts:104](https://github.com/chrispaterson/iabtcf-es/blob/0ed9ac2/modules/core/src/encoder/PurposeRestrictionVectorEncoder.ts#L104)*
+*Defined in [encoder/PurposeRestrictionVectorEncoder.ts:104](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/PurposeRestrictionVectorEncoder.ts#L104)*
 
 **Returns:** `number`
 

@@ -1,10 +1,13 @@
-/* eslint-disable */
 module.exports = {
-  env: {
+  'env': {
     node: true,
   },
-  extends: [
+  'extends': [
     '../../.eslintrc.js',
     'plugin:vue/essential',
+    '@vue/typescript',
   ],
+  'parserOptions': {
+    parser: '@typescript-eslint/parser',
+  },
 };

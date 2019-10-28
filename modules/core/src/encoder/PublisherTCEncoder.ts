@@ -4,6 +4,8 @@ import {
   EncoderMap,
   BitLength,
   Base64Url,
+  IntEncoder,
+  SegmentType,
 
 } from '.';
 
@@ -22,9 +24,12 @@ export class PublisherTCEncoder implements Encoder<TCModel> {
 
   public encode(tcModel: TCModel): string {
 
+    const intEnc: IntEncoder = new IntEncoder();
     const pubFieldSequence: PublisherFieldSequence = new PublisherFieldSequence();
     const encodeSequence: string[] = pubFieldSequence[tcModel.version.toString()];
-    let bitField = '';
+
+    // first encode the segment type
+    let bitField: string = intEnc.encode(SegmentType.publisherTC, BitLength.segmentType);
 
     encodeSequence.forEach((key: string): void => {
 

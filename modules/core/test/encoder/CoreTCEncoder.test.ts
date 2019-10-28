@@ -5,15 +5,16 @@ import {
   TCModel,
   GVL,
 } from '../../src';
+
 export function run(): void {
 
   describe('CoreTCEncoder', (): void => {
 
     // eslint-disable-next-line
-    const vendorlistJson = require('../../dev/vendorlist.json');
+    const vendorlistJson = require('../../dev/vendor-list.json');
     const gvl: GVL = new GVL(vendorlistJson);
 
-    it('should encode into a string', (): void => {
+    it('should encode into a string', (done: () => void): void => {
 
       const tcModel: TCModel = new TCModel(gvl);
       const encoder: CoreTCEncoder = new CoreTCEncoder();
@@ -32,14 +33,20 @@ export function run(): void {
 
       };
 
-      expect(tcModel.isValid(), 'input model is valid').to.be.true;
+      expect(tcModel.gvl).to.equal(gvl);
+      tcModel.gvl.readyPromise.then((): void => {
 
-      expect(encodeIt, 'encode should not throw an error').not.to.throw();
-      expect(encoded, 'shold not be empty').to.not.equal('');
+        expect(tcModel.isValid(), 'input model is valid').to.be.true;
+        expect(encodeIt, 'encode should not throw an error').not.to.throw();
+        expect(encoded, 'shold not be empty').to.not.equal('');
+
+        done();
+
+      });
 
     });
 
-    it('TCModel->String->TCModel and should be equal', (): void => {
+    it('TCModel->String->TCModel and should be equal', (done: () => void): void => {
 
       const tcModel: TCModel = new TCModel(gvl);
       const encoder: CoreTCEncoder = new CoreTCEncoder();
@@ -63,36 +70,44 @@ export function run(): void {
 
       };
 
-      expect(tcModel.isValid(), 'input model is valid').to.be.true;
+      expect(tcModel.gvl).to.equal(gvl);
+      tcModel.gvl.readyPromise.then((): void => {
 
-      expect(encodeIt).not.to.throw();
-      expect(decodeIt).not.to.throw();
+        expect(tcModel.isValid(), 'input model is valid').to.be.true;
 
-      encodeIt();
+        expect(encodeIt).not.to.throw();
+        expect(decodeIt).not.to.throw();
 
-      const coreFieldSequence: CoreFieldSequence = new CoreFieldSequence();
+        encodeIt();
 
-      coreFieldSequence['2'].forEach((key: string): void => {
+        const coreFieldSequence: CoreFieldSequence = new CoreFieldSequence();
 
-        // the same in every way :-)
-        // except dates
-        if (key === 'lastUpdated' || key === 'created') {
+        coreFieldSequence['2'].forEach((key: string): void => {
 
+          // the same in every way :-)
+          // except dates
+          switch (key) {
 
-          // should round of the last two digits
-          expect(decodedModel[key].getTime(), `${key} should be equal`)
-            .to.equal(Math.round(tcModel[key].getTime()/100)*100);
+            case 'lastUpdated':
+            case 'created':
 
+              // should round of the last two digits
+              expect(decodedModel[key].getTime(), `${key} should be equal`)
+                .to.equal(Math.round(tcModel[key].getTime()/100)*100);
+              break;
+            case 'publisherRestrictions':
+              // do nothing
+              break;
+            default:
+              expect(decodedModel[key], `${key} should be equal`).to.deep.equal(tcModel[key]);
 
-        } else if (key === 'publisherRestrictions') {
-        } else {
+          }
 
-          expect(decodedModel[key], `${key} should be equal`).to.deep.equal(tcModel[key]);
+        });
 
-        }
+        done();
 
       });
-
 
     });
 

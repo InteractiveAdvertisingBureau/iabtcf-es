@@ -1,6 +1,6 @@
 /**
  * if a Vendor has declared flexible purposes (see: [[Vendor]] under
- * `flexiblePurposeIds`) on the Global Vendor List ([[GVLBase]]) a CMP may
+ * `flexiblePurposeIds`) on the Global Vendor List ([[Declarations]]) a CMP may
  * change their legal basis for processing in the encoding.
  */
 export enum RestrictionType {

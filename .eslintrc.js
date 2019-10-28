@@ -21,9 +21,11 @@ module.exports = {
     }],
     'no-multiple-empty-lines':['error', {'max':1, 'maxEOF':0, 'maxBOF':0}],
     'require-jsdoc': [0],
+    'semi': ['error', 'always'],
     'padded-blocks': ['error', 'always'],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    '@typescript-eslint/indent': ['error', 2],
     'indent': [
       'error', 2, {
         'ArrayExpression': 'first',

@@ -31,9 +31,9 @@ class SectionModel extends Map {
       links.forEach((link: LinkModel): void => {
 
         routes.push({
-          path: '/'+link.getLink(),
-          name: link.getLink(),
-          component: link.getComponent(),
+          path: '/'+link.path,
+          name: link.title,
+          component: link.component,
         });
 
       });

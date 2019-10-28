@@ -30,7 +30,6 @@ export function run(): void {
 
       expect(prv.isEmpty()).to.be.true;
 
-
     });
     it('should store vendors by purpose restriction in order', (): void => {
 
@@ -104,7 +103,6 @@ export function run(): void {
       expect(result).to.deep.equal(Array.from(restrictions).sort());
       expect(result.length).to.equal(restrictions.size);
 
-
     });
 
     it('should return the restriction set on a particular vendor', (): void => {
@@ -122,7 +120,6 @@ export function run(): void {
       const prvRestrictions: PurposeRestriction[] = prv.getRestriction(vendorId);
 
       expect(purpRestriction.isSameAs(prvRestrictions[0])).to.be.true;
-
 
     });
 
@@ -212,13 +209,13 @@ export function run(): void {
       const restrictionType: number = RestrictionType.NOT_ALLOWED;
       const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
       // eslint-disable-next-line
-      const vendorlistJson = require('../../dev/vendorlist.json');
+      const vendorlistJson = require('../../dev/purpose-restriction-vendor-list.json');
       const vendorIds = Object.keys(vendorlistJson.vendors);
       let chosenVendorId = 0;
 
       vendorIds.forEach((id: string): void => {
 
-        if (!vendorlistJson.vendors[id].flexiblePurposeIds.includes(purposeId)) {
+        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId)) {
 
           chosenVendorId = vendorlistJson.vendors[id].id;
 
@@ -251,14 +248,14 @@ export function run(): void {
       const restrictionType: number = RestrictionType.REQUIRE_CONSENT;
       const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
       // eslint-disable-next-line
-      const vendorlistJson = require('../../dev/vendorlist.json');
+      const vendorlistJson = require('../../dev/purpose-restriction-vendor-list.json');
       const vendorIds = Object.keys(vendorlistJson.vendors);
       let chosenVendorId = 0;
 
       vendorIds.forEach((id: string): void => {
 
-        if (!vendorlistJson.vendors[id].flexiblePurposeIds.includes(purposeId)
-          && vendorlistJson.vendors[id].legIntPurposeIds.includes(purposeId)) {
+        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId)
+          && vendorlistJson.vendors[id].legIntPurposes.includes(purposeId)) {
 
           chosenVendorId = vendorlistJson.vendors[id].id;
 
@@ -290,14 +287,14 @@ export function run(): void {
       const restrictionType: number = RestrictionType.REQUIRE_LI;
       const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
       // eslint-disable-next-line
-      const vendorlistJson = require('../../dev/vendorlist.json');
+      const vendorlistJson = require('../../dev/purpose-restriction-vendor-list.json');
       const vendorIds = Object.keys(vendorlistJson.vendors);
       let chosenVendorId = 0;
 
       vendorIds.forEach((id: string): void => {
 
-        if (!vendorlistJson.vendors[id].flexiblePurposeIds.includes(purposeId)
-          && vendorlistJson.vendors[id].purposeIds.includes(purposeId)) {
+        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId)
+          && vendorlistJson.vendors[id].purposes.includes(purposeId)) {
 
           chosenVendorId = vendorlistJson.vendors[id].id;
 
@@ -330,14 +327,14 @@ export function run(): void {
       const restrictionType: number = RestrictionType.NOT_ALLOWED;
       const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
       // eslint-disable-next-line
-      const vendorlistJson = require('../../dev/vendorlist.json');
+      const vendorlistJson = require('../../dev/purpose-restriction-vendor-list.json');
       const vendorIds = Object.keys(vendorlistJson.vendors);
       let chosenVendorId = 0;
 
       vendorIds.forEach((id: string): void => {
 
-        if (!vendorlistJson.vendors[id].flexiblePurposeIds.includes(purposeId)
-          && vendorlistJson.vendors[id].legIntPurposeIds.includes(purposeId)) {
+        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId)
+          && vendorlistJson.vendors[id].legIntPurposes.includes(purposeId)) {
 
           chosenVendorId = vendorlistJson.vendors[id].id;
 

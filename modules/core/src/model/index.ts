@@ -6,3 +6,4 @@ export * from './RestrictionType';
 export * from './Vector';
 export * from './TCFields';
 export * from './Fields';
+export * from './Segments';

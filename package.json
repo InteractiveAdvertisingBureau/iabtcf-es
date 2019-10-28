@@ -9,10 +9,10 @@
     "url": "https://opensource.org/licenses/apache2.0.php"
   },
   "scripts": {
-    "test": "mocha './modules/**/test/*.ts'",
+    "test": "mocha './modules/core/test/*.ts'",
     "bootstrap": "lerna bootstrap",
     "deploy": "lerna publish from-package",
-    "build": "cd ./modules/core/ && npm run build",
+    "build": "lerna run build",
     "coverage": "nyc --reporter=lcov npm run test",
     "upload-coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "standard": "standard index.js"

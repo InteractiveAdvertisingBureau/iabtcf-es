@@ -2,7 +2,7 @@ import {Json} from './Json';
 import {GVLError} from './errors';
 
 import {
-  GVLBase,
+  Declarations,
   Purpose,
   Feature,
   IDSetMap,
@@ -28,7 +28,7 @@ type PurposeSubType = 'consent' | 'legInt' | 'flexible';
  * object and provide accessors.  Provides ways to group vendors on the list by
  * purpose and feature.
  */
-export class GVL {
+export class GVL implements VendorList, Declarations {
 
   /**
    * @static
@@ -44,7 +44,6 @@ export class GVL {
    * that is what the iab uses, but it could be different... if you want
    */
   public static latestFilename: string = 'vendor-list.json';
-
 
   /**
    * @static
@@ -172,7 +171,6 @@ export class GVL {
 
   private lang_: string;
 
-
   /**
    * @param {VersionOrVendorList} [versionOrVendorList] - can be either a
    * [[VendorList]] object  or a version number represented as a string or
@@ -186,15 +184,10 @@ export class GVL {
 
     this.lang_ = this.DEFAULT_LANGUAGE;
 
-    if (this.isVendorList(versionOrVendorList as VendorList)) {
+    if (this.isVendorList(versionOrVendorList as GVL)) {
 
-      this.deserialize(versionOrVendorList as VendorList);
-
-      this.readyPromise = new Promise((resolve: Function): void => {
-
-        resolve();
-
-      });
+      this.deserialize(versionOrVendorList as GVL);
+      this.readyPromise = Promise.resolve();
 
     } else {
 
@@ -231,6 +224,7 @@ export class GVL {
       url += '/';
 
     }
+
     return url;
 
   }
@@ -241,7 +235,7 @@ export class GVL {
 
       Json.fetch(url).then((response: object): void => {
 
-        this.deserialize(response as VendorList);
+        this.deserialize(response as GVL);
         resolve();
 
       })
@@ -304,8 +298,8 @@ export class GVL {
           resolve();
 
         }
-        this.lang_ = lang;
 
+        this.lang_ = lang;
 
       } else {
 
@@ -321,23 +315,25 @@ export class GVL {
     return this.lang_;
 
   }
-  private isVendorList(gvlObject: GVLBase): gvlObject is VendorList {
+  private isVendorList(gvlObject: object): gvlObject is VendorList {
 
     return gvlObject !== undefined && (gvlObject as VendorList).vendors !== undefined;
 
   }
 
-  private deserialize(gvlObject: GVLBase): void {
+  private deserialize(gvlObject: GVL): void {
 
     this.gvlSpecificationVersion = gvlObject.gvlSpecificationVersion;
     this.vendorListVersion = gvlObject.vendorListVersion;
     this.tcfPolicyVersion = gvlObject.tcfPolicyVersion;
     this.lastUpdated = gvlObject.lastUpdated;
+
     if (typeof this.lastUpdated === 'string') {
 
       this.lastUpdated = new Date(this.lastUpdated);
 
     }
+
     this.purposes = gvlObject.purposes;
     this.specialPurposes = gvlObject.specialPurposes;
     this.features = gvlObject.features;
@@ -400,7 +396,7 @@ export class GVL {
       const vendor: Vendor = this.vendors_[vendorId];
       const numVendorId: number = parseInt(vendorId, 10);
 
-      vendor.purposeIds.forEach((purposeId: number): void => {
+      vendor.purposes.forEach((purposeId: number): void => {
 
         const purpGroup = this.byPurposeVendorMap[purposeId + ''];
 
@@ -408,16 +404,22 @@ export class GVL {
 
       });
 
-      vendor.legIntPurposeIds.forEach((purposeId: number): void => {
+      vendor.specialPurposes.forEach((purposeId: number): void => {
+
+        this.bySpecialPurposeVendorMap[purposeId + ''].add(numVendorId);
+
+      });
+
+      vendor.legIntPurposes.forEach((purposeId: number): void => {
 
         this.byPurposeVendorMap[purposeId + ''].legInt.add(numVendorId);
 
       });
 
       // could not be there
-      if (vendor.flexiblePurposeIds) {
+      if (vendor.flexiblePurposes) {
 
-        vendor.flexiblePurposeIds.forEach((purposeId: number): void => {
+        vendor.flexiblePurposes.forEach((purposeId: number): void => {
 
           this.byPurposeVendorMap[purposeId + ''].flexible.add(numVendorId);
 
@@ -425,13 +427,13 @@ export class GVL {
 
       }
 
-      vendor.featureIds.forEach((featureId: number): void => {
+      vendor.features.forEach((featureId: number): void => {
 
         this.byFeatureVendorMap[featureId + ''].add(numVendorId);
 
       });
 
-      vendor.specialFeatureIds.forEach((featureId: number): void => {
+      vendor.specialFeatures.forEach((featureId: number): void => {
 
         this.bySpecialFeatureVendorMap[featureId + ''].add(numVendorId);
 
