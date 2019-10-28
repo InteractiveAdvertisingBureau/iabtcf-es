@@ -3,7 +3,7 @@
   <b-navbar toggleable="lg" type="light" variant="faded">
     <b-navbar-brand>
           <router-link to="/">
-      <img id="home-logo-link" src="https://iabtechlab.com/wp-content/uploads/2016/07/IAB_Tech_Lab.png"/>
+            Home
           </router-link>
     </b-navbar-brand>
 
