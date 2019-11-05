@@ -1,9 +1,29 @@
 export interface BooleanVector {
   [id: string]: boolean;
 }
+import {TCModel} from '@iabtcf/core';
 import {Return} from './Return';
+import {EventStatus} from './status';
 
 export class TCData extends Return {
+
+  public constructor(tcModel: TCModel, tcString: string, eventStatus: EventStatus) {
+
+    super();
+
+    this.tcString = tcString;
+    this.eventStatus = eventStatus;
+    this.isServiceSpecific = tcModel.isServiceSpecific;
+    this.useNonStandardStacks = tcModel.useNonStandardStacks;
+    this.purposeOneTreatment = tcModel.purposeOneTreatment;
+    this.outOfBand = {
+      allowedVendors: tcModel.vendorsAllowed,
+      discloseVendors: tcModel.vendorsDisclosed,
+    };
+    // this.publisher = tcModel.publisher;
+    // this.publisherCC
+
+  }
 
   public tcString: string;
   public eventStatus: string;

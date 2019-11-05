@@ -34,5 +34,4 @@ export class Ping extends Return {
    */
   public gvlVersion: number;
 
-
 }

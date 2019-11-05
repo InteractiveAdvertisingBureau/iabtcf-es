@@ -21,7 +21,6 @@ export class InAppTCDataBuilder implements Builder {
     if (vendors) {
     }
 
-
     return iaTCData;
 
   }
