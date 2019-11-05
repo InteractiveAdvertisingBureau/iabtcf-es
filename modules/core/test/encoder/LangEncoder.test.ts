@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {LangEncoder} from '../../src/encoder/LangEncoder';
 
-
 export function run(): void {
 
   describe('LangEncoder', (): void => {
@@ -34,7 +33,6 @@ export function run(): void {
             expect.fail(`should have thrown an error and not returned: ${encoded}`);
 
           }).to.throw();
-
 
         });
 

@@ -25,7 +25,7 @@ export function run(): void {
       expect(BitLength.useNonStandardStacks).to.equal(1);
       expect(BitLength.specialFeatureOptIns).to.equal(12);
       expect(BitLength.purposeConsents).to.equal(24);
-      expect(BitLength.purposeLITransparency).to.equal(24);
+      expect(BitLength.purposeLegitimateInterest).to.equal(24);
       expect(BitLength.vendorId).to.equal(16);
       expect(BitLength.purposeId).to.equal(6);
       expect(BitLength.numEntries).to.equal(12);

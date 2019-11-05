@@ -26,6 +26,7 @@ export class LangEncoder implements Encoder<string> {
       throw new EncodingError(`invalid language code: ${value}`);
 
     }
+
     if (numBits % 2 === 1) {
 
       throw new EncodingError(`numBits must be even, ${numBits} is not valid`);
@@ -52,7 +53,6 @@ export class LangEncoder implements Encoder<string> {
       const mid: number = value.length/2;
       const firstLetter = intDecoder.decode(value.slice(0, mid)) + ASCII_START;
       const secondLetter = intDecoder.decode(value.slice(mid)) + ASCII_START;
-
 
       retr = String.fromCharCode(firstLetter) + String.fromCharCode(secondLetter);
 

@@ -1,11 +1,15 @@
 <template>
   <div>
-    <PageHead title="TCF Tools">
-    </PageHead>
-    <h4>Resources</h4>
+    <h4>TC string</h4>
     <ul>
       <li>
-        <a href="https://github.com/chrispaterson/iabtcf-es">
+        <router-link to="encode">Encode</router-link>
+      </li>
+    </ul>
+    <h4>External Links</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/chrispaterson/iabtcf">
           TCF Code Library Github
         </a>
       </li>
@@ -23,12 +27,10 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import PageHead from './PageHead.vue';
 
 // eslint-disable-next-line
 @Component({
   components: {
-    PageHead,
   },
 })
 export default class Landing extends Vue {

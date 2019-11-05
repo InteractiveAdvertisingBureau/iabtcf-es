@@ -35,7 +35,7 @@ class for General GVL Errors
 
 ⊕ **new GVLError**(msg: *`string`*): [GVLError](gvlerror.md)
 
-*Defined in [errors/GVLError.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/errors/GVLError.ts#L6)*
+*Defined in [errors/GVLError.ts:6](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/errors/GVLError.ts#L6)*
 
 constructor - constructs a GVLError
 
@@ -59,7 +59,7 @@ ___
 
 *Inherited from Error.message*
 
-*Defined in /Users/cpaterson/projects/iab/iabtcf-es/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:964*
+*Defined in /Users/cpaterson/projects/iab/iabtcf/modules/core/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:974*
 
 ___
 <a id="name"></a>
@@ -70,7 +70,7 @@ ___
 
 *Inherited from Error.name*
 
-*Defined in /Users/cpaterson/projects/iab/iabtcf-es/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:963*
+*Defined in /Users/cpaterson/projects/iab/iabtcf/modules/core/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:973*
 
 ___
 <a id="stack"></a>
@@ -83,7 +83,7 @@ ___
 
 *Overrides Error.stack*
 
-*Defined in /Users/cpaterson/projects/iab/iabtcf-es/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:965*
+*Defined in /Users/cpaterson/projects/iab/iabtcf/modules/core/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:975*
 
 ___
 <a id="error"></a>
@@ -92,7 +92,7 @@ ___
 
 **● Error**: *`ErrorConstructor`*
 
-*Defined in /Users/cpaterson/projects/iab/iabtcf-es/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:974*
+*Defined in /Users/cpaterson/projects/iab/iabtcf/modules/core/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:984*
 
 ___
 

@@ -29,7 +29,7 @@
 
 *Implementation of [VersionMap](../interfaces/versionmap.md).[1](../interfaces/versionmap.md#1)*
 
-*Defined in [encoder/PublisherFieldSequence.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/PublisherFieldSequence.ts#L6)*
+*Defined in [encoder/PublisherFieldSequence.ts:6](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/PublisherFieldSequence.ts#L6)*
 
 ___
 <a id="2"></a>
@@ -38,15 +38,15 @@ ___
 
 **● 2**: *`string`[]* =  [
     Fields.publisherConsents,
-    Fields.publisherLITransparency,
+    Fields.publisherLegitimateInterest,
     Fields.numCustomPurposes,
     Fields.publisherCustomConsents,
-    Fields.publisherCustomLITransparency,
+    Fields.publisherCustomLegitimateInterest,
   ]
 
 *Implementation of [VersionMap](../interfaces/versionmap.md).[2](../interfaces/versionmap.md#2)*
 
-*Defined in [encoder/PublisherFieldSequence.ts:7](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/PublisherFieldSequence.ts#L7)*
+*Defined in [encoder/PublisherFieldSequence.ts:7](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/PublisherFieldSequence.ts#L7)*
 
 ___
 
