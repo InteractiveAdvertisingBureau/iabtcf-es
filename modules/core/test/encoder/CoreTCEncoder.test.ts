@@ -95,9 +95,14 @@ export function run(): void {
               expect(decodedModel[key].getTime(), `${key} should be equal`)
                 .to.equal(Math.round(tcModel[key].getTime()/100)*100);
               break;
+
             case 'publisherRestrictions':
+
+              // Purpose Restrictions has a gvl reference in one and not the other
               expect(decodedModel[key].numRestrictions, `${key} should be equal`).to.equal(tcModel[key].numRestrictions);
+              expect(decodedModel[key].getAllRestrictions(), `${key} should be equal`).to.deep.equal(tcModel[key].getAllRestrictions());
               break;
+
             default:
               expect(decodedModel[key], `${key} should be equal`).to.deep.equal(tcModel[key]);
 
