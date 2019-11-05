@@ -62,7 +62,6 @@ export class CoreTCEncoder implements Encoder<TCModel> {
 
     encodeSequence.forEach((key: string): void => {
 
-      if (key === 'vendorLegitimateInterest') debugger;
       const encoder: Encoder<TCModelPropType> = new this.encMap[key]() as Encoder<TCModelPropType>;
       const bits = bitField.substr(bStringIdx, BitLength[key]);
 

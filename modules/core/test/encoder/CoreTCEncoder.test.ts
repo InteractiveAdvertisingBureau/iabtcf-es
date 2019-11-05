@@ -96,7 +96,7 @@ export function run(): void {
                 .to.equal(Math.round(tcModel[key].getTime()/100)*100);
               break;
             case 'publisherRestrictions':
-              // do nothing
+              expect(decodedModel[key].numRestrictions, `${key} should be equal`).to.equal(tcModel[key].numRestrictions);
               break;
             default:
               expect(decodedModel[key], `${key} should be equal`).to.deep.equal(tcModel[key]);
