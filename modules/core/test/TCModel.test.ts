@@ -11,6 +11,7 @@ describe('TCModel', (): void => {
     it(`should be able to set and get a valid ${fieldName}`, handler);
 
   };
+
   const testInt = (fieldName: string, lowestValue: number): void => {
 
     const shouldBeOk = (): void => {
@@ -26,6 +27,7 @@ describe('TCModel', (): void => {
       });
 
     };
+
     const shouldBeNotOk = (valueToTest: number): void => {
 
       it(`should not allow ${fieldName} to be ${valueToTest}`, (): void => {
@@ -49,7 +51,6 @@ describe('TCModel', (): void => {
 
     };
 
-
     describe(fieldName, (): void => {
 
       shouldBeOk();
@@ -60,7 +61,6 @@ describe('TCModel', (): void => {
     });
 
   };
-
 
   const testDate = (fieldName: string): void => {
 
@@ -127,7 +127,6 @@ describe('TCModel', (): void => {
 
   };
 
-
   it('should construct a TCModel with no arguments', (): void => {
 
     const makeModel: () => void = (): void => {
@@ -144,7 +143,7 @@ describe('TCModel', (): void => {
 
     // since we didn't construct with a gvl we should
     // have empty fields here
-    expect(tcModel.vendorListVersion).to.be.undefined;
+    expect(tcModel.vendorListVersion).to.equal(0);
     expect(tcModel.policyVersion).to.equal(2);
     expect(tcModel.gvl).to.be.undefined;
 
@@ -205,7 +204,6 @@ describe('TCModel', (): void => {
 
   });
 
-
   testInt('cmpId', 2);
   testInt('cmpVersion', 0);
   testInt('consentScreen', 0);
@@ -217,7 +215,7 @@ describe('TCModel', (): void => {
   testBoolean('useNonStandardStacks');
 
   testInstanceOf('purposeConsents', Vector);
-  testInstanceOf('purposeLITransparency', Vector);
+  testInstanceOf('purposeLegitimateInterest', Vector);
 
   testInstanceOf('vendorConsents', Vector);
   testInstanceOf('vendorLegitimateInterest', Vector);
@@ -242,6 +240,7 @@ describe('TCModel', (): void => {
       });
 
     };
+
     const shouldBeNotOk: (value: string) => void = (value: string): void => {
 
       it(`should not be ok with ${value}`, (): void => {
@@ -254,7 +253,8 @@ describe('TCModel', (): void => {
 
         }).to.throw();
 
-        expect(tcModel.consentLanguage).to.be.undefined;
+        // default language
+        expect(tcModel.consentLanguage).to.equal('EN');
 
       });
 
@@ -275,11 +275,9 @@ describe('TCModel', (): void => {
     shouldBeNotOk('15');
     shouldBeNotOk('{{');
 
-
   });
 
   describe('version', (): void => {
-
 
     const shouldBeOk: (value: number) => void = (value: number): void => {
 
@@ -298,6 +296,7 @@ describe('TCModel', (): void => {
       });
 
     };
+
     const shouldBeNotOk: (value: number) => void = (value: number): void => {
 
       it(`should not be ok with ${value}`, (): void => {
@@ -333,7 +332,6 @@ describe('TCModel', (): void => {
   const vendorlistJson = require('../dev/vendor-list.json');
     const gvl: GVL = new GVL(vendorlistJson);
 
-
     it('should be valid if everything is set', (done: () => void ): void => {
 
       const tcModel = new TCModel(gvl);
@@ -350,6 +348,7 @@ describe('TCModel', (): void => {
       });
 
     });
+
     const makeInvalidTest = (key: string): void => {
 
       it(`should be invalid if ${key} is not set`, (): void => {
@@ -367,6 +366,7 @@ describe('TCModel', (): void => {
           tcModel.cmpId = 23;
 
         }
+
         if (key !== 'cmpVersion') {
 
           tcModel.cmpVersion = 1;
@@ -380,8 +380,6 @@ describe('TCModel', (): void => {
     };
 
     [
-      'cmpId',
-      'cmpVersion',
       'gvl',
     ].forEach(makeInvalidTest);
 
@@ -392,6 +390,7 @@ describe('TCModel', (): void => {
     // eslint-disable-next-line
   const vendorlistJson = require('../dev/vendor-list.json');
     const gvl: GVL = new GVL(vendorlistJson);
+
     const loopGVLMap = (gvlKey: string, cb ): void => {
 
       for (const id in gvl[gvlKey]) {
@@ -410,7 +409,7 @@ describe('TCModel', (): void => {
       vendorConsents: {gvlKey: 'vendors'},
       vendorLegitimateInterest: {gvlKey: 'vendors'},
       purposeConsents: {gvlKey: 'purposes'},
-      purposeLITransparency: {gvlKey: 'purposes'},
+      purposeLegitimateInterest: {gvlKey: 'purposes'},
       specialFeatureOptIns: {gvlKey: 'specialFeatures'},
     };
 

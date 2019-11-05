@@ -1,8 +1,8 @@
 <template>
   <b-input-group >
     <b-form-checkbox
-      :id="valueName"
-      :name="valueName"
+      :id="id"
+      :name="id"
       @input="changeValue"
       switch
     >
@@ -12,28 +12,13 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator';
+import {Component} from 'vue-property-decorator';
+import {FormComponent} from './FormComponent';
 
 @Component
 
-export default class extends Vue {
+export default class extends FormComponent {
 
-  @Prop()
-  public valueName: string;
-  @Prop()
-  public label: string;
-
-  public constructor() {
-
-    super();
-
-  }
-
-  private changeValue(newVal: boolean): void {
-
-    this.$emit('update', newVal);
-
-  }
-
+  // default
 }
 </script>

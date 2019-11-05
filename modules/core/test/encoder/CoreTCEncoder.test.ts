@@ -26,7 +26,6 @@ export function run(): void {
       // full consent!
       tcModel.setAll();
 
-
       const encodeIt = (): void => {
 
         encoded = encoder.encode(tcModel);
@@ -64,6 +63,7 @@ export function run(): void {
         encoded = encoder.encode(tcModel);
 
       };
+
       const decodeIt = (): TCModel => {
 
         return encoder.decode(encoded, decodedModel);

@@ -5,16 +5,7 @@ import {
   GVL,
 } from '../src';
 
-interface MinimalModelOptions {
-  versions?: number;
-}
-
-const getMinimalModel = (customOptions: MinimalModelOptions = {}): TCModel => {
-
-  const options = {
-    version: 2,
-    ...customOptions,
-  };
+const getMinimalModel = (): TCModel => {
 
   const vendorlistJson = require('../dev/vendor-list.json'); // eslint-disable-line
   const model = new TCModel(new GVL(vendorlistJson));
@@ -22,14 +13,13 @@ const getMinimalModel = (customOptions: MinimalModelOptions = {}): TCModel => {
   model.cmpId = 123;
   model.cmpVersion = 1;
   model.consentLanguage = 'en';
-  model.version = options.version;
   return model;
 
 };
 
-const doEncode = (options = {}): Promise<string> => {
+const doEncode = (): Promise<string> => {
 
-  const model = getMinimalModel(options);
+  const model = getMinimalModel();
 
   return new Promise((resolve: (string) => void): void => {
 
@@ -50,7 +40,6 @@ const truncDate = (date: Date): number => {
   return Math.round(date.getTime() / 100) * 100;
 
 };
-
 
 const compareModels = (actual: TCModel, expected: TCModel): void => {
 
@@ -89,7 +78,7 @@ describe('TCString', (): void => {
 
       doEncode().then((encodedString): void => {
 
-        expect(encodedString.split('.')).to.be.lengthOf(4);
+        expect(encodedString.split('.')).to.be.lengthOf(1);
         done();
 
       });

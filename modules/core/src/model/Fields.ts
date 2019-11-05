@@ -13,7 +13,7 @@ export class Fields {
   public static readonly useNonStandardStacks: string = 'useNonStandardStacks';
   public static readonly specialFeatureOptIns: string = 'specialFeatureOptIns';
   public static readonly purposeConsents: string = 'purposeConsents';
-  public static readonly purposeLITransparency: string = 'purposeLITransparency';
+  public static readonly purposeLegitimateInterest: string = 'purposeLegitimateInterest';
   public static readonly purposeOneTreatment: string = 'purposeOneTreatment';
   public static readonly publisherCountryCode: string = 'publisherCountryCode';
   public static readonly vendorConsents: string = 'vendorConsents';
@@ -22,9 +22,10 @@ export class Fields {
   public static readonly vendorsDisclosed: string = 'vendorsDisclosed';
   public static readonly vendorsAllowed: string = 'vendorsAllowed';
   public static readonly publisherConsents: string = 'publisherConsents';
-  public static readonly publisherLITransparency: string = 'publisherLITransparency';
+  public static readonly publisherLegitimateInterest: string = 'publisherLegitimateInterest';
   public static readonly numCustomPurposes: string = 'numCustomPurposes';
   public static readonly publisherCustomConsents: string = 'publisherCustomConsents';
-  public static readonly publisherCustomLITransparency: string = 'publisherLITransparency';
+  public static readonly publisherCustomLegitimateInterest: string = 'publisherCustomLegitimateInterest';
+  public static readonly supportOOB: string = 'supportOOB';
 
 }

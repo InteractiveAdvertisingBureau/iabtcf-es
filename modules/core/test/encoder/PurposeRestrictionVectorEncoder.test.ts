@@ -7,16 +7,6 @@ import {PurposeRestriction} from '../../src/model/PurposeRestriction';
 import {RestrictionType} from '../../src/model/RestrictionType';
 import {BitLength} from '../../src/encoder/BitLength';
 
-const makePurposesAvailable = (purposes: number[]): void => {
-
-  purposes.forEach((purposeId: number): void => {
-
-    PurposeRestriction.availablePurposeIds.add(purposeId);
-
-  });
-
-};
-
 export function run(): void {
 
   describe('PurposeRestrictionVectorEncoder', (): void => {
@@ -33,7 +23,6 @@ export function run(): void {
 
     it('should create one restriction group and two vendor ranges', (): void => {
 
-      makePurposesAvailable([1, 2, 3]);
       const purposeId = 2;
       const vendors: number[] = [1, 2, 3, 4, 5, 7, 8, 9, 10, 11];
       const purposeRestriction: PurposeRestriction
@@ -88,7 +77,6 @@ export function run(): void {
 
       expect(numEntries).to.equal(2);
       index += BitLength.numEntries;
-
 
     });
 

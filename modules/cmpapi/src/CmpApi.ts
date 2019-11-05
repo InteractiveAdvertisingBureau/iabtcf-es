@@ -6,9 +6,20 @@ import {Ping, TCData} from './model';
 import {InAppTCDataBuilder, TCDataBuilder} from './model/builder';
 import {Return} from './model/Return';
 
-import {CmpStatus, DisplayStatus, EventStatus} from './model/status';
+import {
+  InAppTCDataBuilder,
+  TCDataBuilder,
+  PingBuilder,
+} from './model/builder';
 
-import {ArgSet, Callback, IATCDataCallback, PageCallHandler, Param, PingCallback, TCDataCallback} from './Types';
+import {
+  Param,
+  ArgSet,
+  TCDataCallback,
+  IATCDataCallback,
+  PingCallback,
+  Callback,
+} from './Types';
 
 export type Numberish = number | string;
 
@@ -148,6 +159,7 @@ export class CmpApi {
       /**
        * A stub didn't exist, so we have free reign to do whatever we want now.
        */
+
       this.addFrame();
 
       /**
@@ -225,9 +237,12 @@ export class CmpApi {
   }
 
   /**
-   * Public-facing CMP API commands
+   * getTCData - Public-facing CMP API commands
+   *
+   * @param {TCDataCallback} callback - callback to call when function
+   * @param {number[]} vendors? - optional list of vendor ids
+   * @return {void}
    */
-
   public getTCData(callback: TCDataCallback, vendors?: number[]): void{
 
     if (this.tcModel) {

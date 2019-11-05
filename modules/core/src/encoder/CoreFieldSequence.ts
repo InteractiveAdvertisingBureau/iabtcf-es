@@ -29,7 +29,7 @@ export class CoreFieldSequence implements VersionMap {
     Fields.useNonStandardStacks,
     Fields.specialFeatureOptIns,
     Fields.purposeConsents,
-    Fields.purposeLITransparency,
+    Fields.purposeLegitimateInterest,
     Fields.purposeOneTreatment,
     Fields.publisherCountryCode,
     Fields.vendorConsents,
