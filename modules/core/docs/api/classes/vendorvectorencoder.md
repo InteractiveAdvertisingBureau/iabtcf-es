@@ -32,7 +32,7 @@
 
 **● RANGE_DEFAULT**: *`boolean`* = false
 
-*Defined in [encoder/VendorVectorEncoder.ts:16](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/VendorVectorEncoder.ts#L16)*
+*Defined in [encoder/VendorVectorEncoder.ts:16](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/VendorVectorEncoder.ts#L16)*
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 ▸ **decode**(value: *`string`*): [Vector](vector.md)
 
-*Defined in [encoder/VendorVectorEncoder.ts:97](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/VendorVectorEncoder.ts#L97)*
+*Defined in [encoder/VendorVectorEncoder.ts:95](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/VendorVectorEncoder.ts#L95)*
 
 **Parameters:**
 
@@ -61,7 +61,7 @@ ___
 
 ▸ **encode**(value: *[Vector](vector.md)*): `string`
 
-*Defined in [encoder/VendorVectorEncoder.ts:24](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/VendorVectorEncoder.ts#L24)*
+*Defined in [encoder/VendorVectorEncoder.ts:24](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/VendorVectorEncoder.ts#L24)*
 
 **Parameters:**
 
@@ -80,7 +80,7 @@ ___
 
 *Implementation of [Encoder](../interfaces/encoder.md).[getBitLength](../interfaces/encoder.md#getbitlength)*
 
-*Defined in [encoder/VendorVectorEncoder.ts:217](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/VendorVectorEncoder.ts#L217)*
+*Defined in [encoder/VendorVectorEncoder.ts:213](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/VendorVectorEncoder.ts#L213)*
 
 **Returns:** `number`
 

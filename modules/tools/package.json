@@ -4,6 +4,7 @@
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "description": "Creates a UI for using iab. Transparency and Consent Framework (TCF) tools",
   "homepage": "https://github.com/chrispaterson/iabtcf-es/tree/master/modules/tools",
+  "private":true,
   "license": {
     "type": "Apache-2.0",
     "url": "https://opensource.org/licenses/apache2.0.php"
@@ -16,7 +17,7 @@
   "scripts": {
     "start": "vue-cli-service serve",
     "prepare": "npm run build",
-    "build": "vue-cli-service build",
+    "build": "rm ../../docs/js/* && rm ../../docs/css/* && vue-cli-service build --no-clean",
     "lint": "eslint ./src/**/*.ts",
     "report-coverage": ""
   },

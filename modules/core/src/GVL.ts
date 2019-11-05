@@ -12,6 +12,10 @@ import {
   ByPurposeVendorMap,
 } from './model/gvl';
 
+import {
+  ConsentLanguages,
+} from './model';
+
 import {IntMap} from './model/IntMap';
 /**
  * TODO: make map to cache language translations under language so if a
@@ -30,6 +34,10 @@ type PurposeSubType = 'consent' | 'legInt' | 'flexible';
  */
 export class GVL implements VendorList, Declarations {
 
+  private static LOADED_LANGUAGES: Map<string, Declarations> = new Map<string, Declarations>();
+
+  public static readonly DEFAULT_LANGUAGE: string = 'EN';
+
   /**
    * @static
    * @param {string} - the base url to load the vendor-list.json from.  This is
@@ -44,7 +52,6 @@ export class GVL implements VendorList, Declarations {
    * that is what the iab uses, but it could be different... if you want
    */
   public static latestFilename: string = 'vendor-list.json';
-
 
   /**
    * @static
@@ -168,10 +175,12 @@ export class GVL implements VendorList, Declarations {
    */
   public stacks: IntMap<Stack>;
 
-  public readonly DEFAULT_LANGUAGE: string = 'en';
-
   private lang_: string;
 
+  /**
+   * Set of available consent languages published by the IAB
+   */
+  private consentLanguages: ConsentLanguages = new ConsentLanguages();
 
   /**
    * @param {VersionOrVendorList} [versionOrVendorList] - can be either a
@@ -184,7 +193,7 @@ export class GVL implements VendorList, Declarations {
     // should have been configured before and instance was created and will persist through the app
     let url = GVL.baseUrl;
 
-    this.lang_ = this.DEFAULT_LANGUAGE;
+    this.lang_ = GVL.DEFAULT_LANGUAGE;
 
     if (this.isVendorList(versionOrVendorList as GVL)) {
 
@@ -217,6 +226,28 @@ export class GVL implements VendorList, Declarations {
 
     }
 
+    this.readyPromise.then((): void => {
+
+      this.cacheLanguage(GVL.DEFAULT_LANGUAGE);
+
+    });
+
+  }
+
+  private cacheLanguage(lang: string): void {
+
+    GVL.LOADED_LANGUAGES.set(lang, {
+      gvlSpecificationVersion: this.gvlSpecificationVersion,
+      vendorListVersion: this.vendorListVersion,
+      tcfPolicyVersion: this.tcfPolicyVersion,
+      lastUpdated: this.lastUpdated,
+      purposes: this.purposes,
+      specialPurposes: this.specialPurposes,
+      features: this.features,
+      specialFeatures: this.specialFeatures,
+      stacks: this.stacks,
+    });
+
   }
   private addTrailingSlashMaybe(url: string): string {
 
@@ -226,6 +257,7 @@ export class GVL implements VendorList, Declarations {
       url += '/';
 
     }
+
     return url;
 
   }
@@ -261,46 +293,65 @@ export class GVL implements VendorList, Declarations {
    */
   public changeLanguage(lang: string): Promise<void | GVLError> {
 
+    lang = lang.toUpperCase();
+
     return new Promise((resolve: Function, reject: Function): void => {
 
-      if (/^([A-z]){2}$/.test(lang)) {
-
-        lang = lang.toLowerCase();
+      if (this.consentLanguages.has(lang)) {
 
         if (lang !== this.lang_) {
 
-          let url = GVL.baseUrl;
+          if (GVL.LOADED_LANGUAGES.get(lang) !== undefined) {
 
-          if (!url) {
+            const cached: Declarations = GVL.LOADED_LANGUAGES.get(lang) as Declarations;
 
-            throw new GVLError('must specify GVL.baseUrl before changing the language');
+            for (const prop in cached) {
+
+              if (cached.hasOwnProperty(prop)) {
+
+                this[prop] = cached[prop];
+
+              }
+
+            }
+
+          } else {
+
+            let url = GVL.baseUrl;
+
+            if (!url) {
+
+              throw new GVLError('must specify GVL.baseUrl before changing the language');
+
+            }
+
+            url = this.addTrailingSlashMaybe(url);
+
+            // load version specified
+            url += GVL.languageFilename.replace('[LANG]', lang);
+
+            // hooks onto readyPromise
+            this.getJson(url).then((): void => {
+
+              this.cacheLanguage(lang);
+              resolve();
+
+            })
+              .catch((err): void => {
+
+                reject(new GVLError('unable to load language: ' + err.message));
+
+              });
 
           }
-
-          url = this.addTrailingSlashMaybe(url);
-
-          // load version specified
-          url += GVL.languageFilename.replace('[LANG]', lang);
-
-          // hooks onto readyPromise
-          this.getJson(url).then((): void => {
-
-            resolve();
-
-          })
-            .catch((err): void => {
-
-              reject(new GVLError('unable to load language: ' + err.message));
-
-            });
 
         } else {
 
           resolve();
 
         }
-        this.lang_ = lang;
 
+        this.lang_ = lang;
 
       } else {
 
@@ -328,11 +379,13 @@ export class GVL implements VendorList, Declarations {
     this.vendorListVersion = gvlObject.vendorListVersion;
     this.tcfPolicyVersion = gvlObject.tcfPolicyVersion;
     this.lastUpdated = gvlObject.lastUpdated;
+
     if (typeof this.lastUpdated === 'string') {
 
       this.lastUpdated = new Date(this.lastUpdated);
 
     }
+
     this.purposes = gvlObject.purposes;
     this.specialPurposes = gvlObject.specialPurposes;
     this.features = gvlObject.features;

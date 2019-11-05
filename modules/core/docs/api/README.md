@@ -5,6 +5,7 @@
 
 ### Enumerations
 
+* [OOBVendorsType](enums/oobvendorstype.md)
 * [RestrictionType](enums/restrictiontype.md)
 * [VectorEncodingType](enums/vectorencodingtype.md)
 
@@ -14,6 +15,7 @@
 * [BinarySearchTree](classes/binarysearchtree.md)
 * [BitLength](classes/bitlength.md)
 * [BooleanEncoder](classes/booleanencoder.md)
+* [ConsentLanguages](classes/consentlanguages.md)
 * [CoreFieldSequence](classes/corefieldsequence.md)
 * [CoreTCEncoder](classes/coretcencoder.md)
 * [DateEncoder](classes/dateencoder.md)
@@ -27,20 +29,21 @@
 * [IntEncoder](classes/intencoder.md)
 * [Json](classes/json.md)
 * [LangEncoder](classes/langencoder.md)
+* [OOBVendorsEncoder](classes/oobvendorsencoder.md)
 * [PublisherFieldSequence](classes/publisherfieldsequence.md)
 * [PublisherTCEncoder](classes/publishertcencoder.md)
 * [PurposeRestriction](classes/purposerestriction.md)
 * [PurposeRestrictionVector](classes/purposerestrictionvector.md)
 * [PurposeRestrictionVectorEncoder](classes/purposerestrictionvectorencoder.md)
 * [SegmentEncoderMap](classes/segmentencodermap.md)
+* [SegmentSequence](classes/segmentsequence.md)
 * [SegmentType](classes/segmenttype.md)
+* [Segments](classes/segments.md)
 * [TCModel](classes/tcmodel.md)
 * [TCModelError](classes/tcmodelerror.md)
 * [TCString](classes/tcstring.md)
 * [Vector](classes/vector.md)
 * [VendorVectorEncoder](classes/vendorvectorencoder.md)
-* [VendorsAllowedEncoder](classes/vendorsallowedencoder.md)
-* [VendorsDisclosedEncoder](classes/vendorsdisclosedencoder.md)
 
 ### Interfaces
 
@@ -81,7 +84,7 @@
 
 **Ƭ PurposeOrFeature**: *"purpose" \| "feature"*
 
-*Defined in [GVL.ts:22](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L22)*
+*Defined in [GVL.ts:26](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L26)*
 
 ___
 <a id="purposesubtype"></a>
@@ -90,7 +93,7 @@ ___
 
 **Ƭ PurposeSubType**: *"consent" \| "legInt" \| "flexible"*
 
-*Defined in [GVL.ts:23](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L23)*
+*Defined in [GVL.ts:27](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L27)*
 
 ___
 <a id="tcmodelproptype"></a>
@@ -99,7 +102,7 @@ ___
 
 **Ƭ TCModelPropType**: *`number` \| `Date` \| `string` \| `boolean` \| [Vector](classes/vector.md) \| [PurposeRestrictionVector](classes/purposerestrictionvector.md)*
 
-*Defined in [TCModel.ts:20](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/TCModel.ts#L20)*
+*Defined in [TCModel.ts:20](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/TCModel.ts#L20)*
 
 ___
 <a id="treenodemaybe"></a>
@@ -108,7 +111,7 @@ ___
 
 **Ƭ TreeNodeMaybe**: *[TreeNode](interfaces/treenode.md) \| `null`*
 
-*Defined in [model/BinarySearchTree.ts:1](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/model/BinarySearchTree.ts#L1)*
+*Defined in [model/BinarySearchTree.ts:1](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/BinarySearchTree.ts#L1)*
 
 ___
 <a id="versionorvendorlist"></a>
@@ -117,7 +120,7 @@ ___
 
 **Ƭ VersionOrVendorList**: *`string` \| `number` \| [VendorList](interfaces/vendorlist.md)*
 
-*Defined in [GVL.ts:21](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L21)*
+*Defined in [GVL.ts:25](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L25)*
 
 TODO: make map to cache language translations under language so if a language is loaded twice it won't go and get it more than once
 
@@ -128,7 +131,7 @@ ___
 
 **Ƭ idOrIds**: *`number` \| `number`[]*
 
-*Defined in [model/Vector.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/model/Vector.ts#L3)*
+*Defined in [model/Vector.ts:3](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Vector.ts#L3)*
 
 ___
 

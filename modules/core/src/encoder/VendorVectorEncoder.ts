@@ -30,7 +30,6 @@ export class VendorVectorEncoder implements Encoder<Vector> {
     this.maxId = value.maxId;
     this.ranges = [];
 
-
     value.forEach((curValue: boolean, i): void => {
 
       // build our bitfield no matter what
@@ -90,7 +89,6 @@ export class VendorVectorEncoder implements Encoder<Vector> {
     this.bitLength = retrString.length;
 
     return retrString;
-
 
   }
 
@@ -198,7 +196,6 @@ export class VendorVectorEncoder implements Encoder<Vector> {
 
       }
 
-
     } else {
 
       const fvDec: FixedVectorEncoder = new FixedVectorEncoder();
@@ -210,7 +207,6 @@ export class VendorVectorEncoder implements Encoder<Vector> {
     }
 
     return vector;
-
 
   }
 
@@ -229,7 +225,6 @@ export class VendorVectorEncoder implements Encoder<Vector> {
 
     // describe the number of entries to follow
     rangeString += this.intEncoder.encode(numEntries, BitLength.numEntries);
-
 
     // each range
     this.ranges.forEach((range: number[]): void => {
@@ -268,6 +263,7 @@ export class VendorVectorEncoder implements Encoder<Vector> {
 
       rLength += BitLength.singleOrRange;
       rLength += BitLength.vendorId;
+
       if (!single) {
 
         rLength += BitLength.vendorId;

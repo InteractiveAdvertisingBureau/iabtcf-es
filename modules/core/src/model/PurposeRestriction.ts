@@ -3,7 +3,6 @@ import {RestrictionType} from '.';
 
 export class PurposeRestriction {
 
-  public static availablePurposeIds: Set<number> = new Set();
   public static hashSeparator: string = '-';
 
   private purposeId_: number;
@@ -25,6 +24,7 @@ export class PurposeRestriction {
       this.purposeId = purposeId;
 
     }
+
     if (restrictionType !== undefined) {
 
       this.restrictionType = restrictionType;
@@ -56,6 +56,7 @@ export class PurposeRestriction {
       throw new Error('cannot hash invalid PurposeRestriction');
 
     }
+
     return `${this.purposeId}${PurposeRestriction.hashSeparator}${this.restrictionType}`;
 
   }
@@ -77,15 +78,7 @@ export class PurposeRestriction {
    */
   public set purposeId(idNum: number) {
 
-    if (idNum !== 1 && PurposeRestriction.availablePurposeIds.has(idNum)) {
-
-      this.purposeId_ = idNum;
-
-    } else {
-
-      throw new TCModelError('purposeId', idNum);
-
-    }
+    this.purposeId_ = idNum;
 
   }
 

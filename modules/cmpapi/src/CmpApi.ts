@@ -14,11 +14,9 @@ import {
 } from './model/status';
 
 import {
-
   InAppTCDataBuilder,
   TCDataBuilder,
   PingBuilder,
-
 } from './model/builder';
 
 import {
@@ -141,7 +139,6 @@ export class CmpApi {
 
         });
 
-
       } else {
 
         throw new Error(CmpApi.EXISTING_CMP);
@@ -153,6 +150,7 @@ export class CmpApi {
       /**
        * A stub didn't exist, so we have free reign to do whateve we want now.
        */
+
       this.addFrame();
 
       /**
@@ -221,9 +219,12 @@ export class CmpApi {
   }
 
   /**
-   * Public-facing CMP API commands
+   * getTCData - Public-facing CMP API commands
+   *
+   * @param {TCDataCallback} callback - callback to call when function
+   * @param {number[]} vendors? - optional list of vendor ids
+   * @return {void}
    */
-
   public getTCData(callback: TCDataCallback, vendors?: number[]): void{
 
     const builder: TCDataBuilder = new TCDataBuilder();

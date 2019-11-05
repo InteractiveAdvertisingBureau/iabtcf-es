@@ -40,7 +40,7 @@
 
 *Implementation of [VersionMap](../interfaces/versionmap.md).[1](../interfaces/versionmap.md#1)*
 
-*Defined in [encoder/CoreFieldSequence.ts:6](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/CoreFieldSequence.ts#L6)*
+*Defined in [encoder/CoreFieldSequence.ts:6](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/CoreFieldSequence.ts#L6)*
 
 ___
 <a id="2"></a>
@@ -61,7 +61,7 @@ ___
     Fields.useNonStandardStacks,
     Fields.specialFeatureOptIns,
     Fields.purposeConsents,
-    Fields.purposeLITransparency,
+    Fields.purposeLegitimateInterest,
     Fields.purposeOneTreatment,
     Fields.publisherCountryCode,
     Fields.vendorConsents,
@@ -71,7 +71,7 @@ ___
 
 *Implementation of [VersionMap](../interfaces/versionmap.md).[2](../interfaces/versionmap.md#2)*
 
-*Defined in [encoder/CoreFieldSequence.ts:18](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/CoreFieldSequence.ts#L18)*
+*Defined in [encoder/CoreFieldSequence.ts:18](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/CoreFieldSequence.ts#L18)*
 
 ___
 

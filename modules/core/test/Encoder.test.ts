@@ -10,11 +10,12 @@ import * as coreFieldSequence from './encoder/CoreFieldSequence.test';
 import * as segmentEncoderMap from './encoder/SegmentEncoderMap.test';
 import * as base64 from './encoder/Base64Url.test';
 import * as coreTC from './encoder/CoreTCEncoder.test';
-import * as vendorsDisclosed from './encoder/VendorsDisclosedEncoder.test';
-import * as vendorsAllowed from './encoder/VendorsAllowedEncoder.test';
+import * as oobVendorsEncoder from './encoder/OOBVendorsEncoder.test';
 import * as publisherTC from './encoder/PublisherTCEncoder.test';
 
 describe('Encoder', (): void => {
+
+  base64.run();
 
   bitLength.run();
 
@@ -39,16 +40,13 @@ describe('Encoder', (): void => {
   describe('Segment Encoders', (): void => {
 
     coreTC.run();
-    vendorsDisclosed.run();
-    vendorsAllowed.run();
+    oobVendorsEncoder.run();
     publisherTC.run();
 
   });
 
-
   // others
   coreFieldSequence.run();
   segmentEncoderMap.run();
-  base64.run();
 
 });

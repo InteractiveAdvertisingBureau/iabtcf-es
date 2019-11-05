@@ -4,6 +4,7 @@ import {
   BitLength,
   IntEncoder,
   SegmentEncoderMap,
+  SegmentSequence,
   SegmentType,
   Base64Url,
 } from './encoder';
@@ -19,31 +20,50 @@ export class TCString implements Encoder<TCModel> {
   /**
    *  encodes a model into a TCString
    *
-   * @type {TCModel}
    * @param {TCModel} tcModel - model to convert into encoded string
+   * @param {boolean} isForSaving = false - Defaults to false.  Whether a TC
+   * String is meant for storage (true) or meant to be handed to AdTech through
+   * the tcfapi (true).  This will modify which segments are handed back with
+   * the string.
    * @return {string} - base64url encoded Transparency and Consent String
    */
-  public encode(tcModel: TCModel): string {
+  public static encode(tcModel: TCModel, isForSaving: boolean = false): string {
 
-    let retrString = '';
+    const stringSegments: string[] = [];
     const segEncMap: SegmentEncoderMap = new SegmentEncoderMap();
-    const len = SegmentType.numTypes;
+    const segSequence: SegmentSequence = new SegmentSequence(tcModel, isForSaving);
+    const seq: string[] = segSequence[tcModel.version.toString()];
 
-    for (let i = 0; i < len; i ++) {
+    seq.forEach((segName: string): void => {
 
-      const encoder: Encoder<TCModel> = new segEncMap[SegmentType[i.toString()]]();
-      const dotOrNot: string = (i < len - 1) ? '.' : '';
-      const encoded: string = encoder.encode(tcModel);
+      const encoder: Encoder<TCModel> = new segEncMap[segName]();
+      const encoded: string = encoder.encode(tcModel, segName);
 
       if (encoded) {
 
-        retrString += encoded + dotOrNot;
+        stringSegments.push(encoded);
 
       }
 
-    }
+    });
 
-    return retrString;
+    return stringSegments.join('.');
+
+  }
+
+  /**
+   *  encodes a model into a TCString
+   *
+   * @param {TCModel} tcModel - model to convert into encoded string
+   * @param {boolean} isForSaving = false - Defaults to false.  Whether a TC
+   * String is meant for storage (true) or meant to be handed to AdTech through
+   * the tcfapi (true).  This will modify which segments are handed back with
+   * the string.
+   * @return {string} - base64url encoded Transparency and Consent String
+   */
+  public encode(tcModel: TCModel, isForSaving: boolean = false): string {
+
+    return TCString.encode(tcModel, isForSaving);
 
   }
 
@@ -54,7 +74,7 @@ export class TCString implements Encoder<TCModel> {
    * Consent String to decode
    * @return {TCModel} - Returns populated TCModel
    */
-  public decode(encodedString: string): TCModel {
+  public static decode(encodedString: string): TCModel {
 
     const base64Url: Base64Url = new Base64Url();
     const tcModel: TCModel = new TCModel();
@@ -89,6 +109,18 @@ export class TCString implements Encoder<TCModel> {
     }
 
     return tcModel;
+
+  }
+  /**
+   * Decodes a string into a TCModel
+   *
+   * @param {string} encodedString - base64url encoded Transparency and
+   * Consent String to decode
+   * @return {TCModel} - Returns populated TCModel
+   */
+  public decode(encodedString: string): TCModel {
+
+    return TCString.decode(encodedString);
 
   }
 

@@ -41,6 +41,6 @@ module.exports = {
       {'blankLine': 'always', 'prev': 'block-like',  'next': '*'},
       {'blankLine': 'always', 'prev': '*',  'next': 'block-like'},
     ],
-    'new-cap': 'off',
+    'new-cap': 'off'
   },
 };

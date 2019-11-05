@@ -17,12 +17,11 @@
 * [FixedVectorEncoder](../classes/fixedvectorencoder.md)
 * [IntEncoder](../classes/intencoder.md)
 * [LangEncoder](../classes/langencoder.md)
+* [OOBVendorsEncoder](../classes/oobvendorsencoder.md)
 * [PublisherTCEncoder](../classes/publishertcencoder.md)
 * [PurposeRestrictionVectorEncoder](../classes/purposerestrictionvectorencoder.md)
 * [TCString](../classes/tcstring.md)
 * [VendorVectorEncoder](../classes/vendorvectorencoder.md)
-* [VendorsAllowedEncoder](../classes/vendorsallowedencoder.md)
-* [VendorsDisclosedEncoder](../classes/vendorsdisclosedencoder.md)
 
 ## Index
 
@@ -40,9 +39,9 @@
 
 ###  decode
 
-▸ **decode**(value: *`string`*, target?: *[T]()*): `T`
+▸ **decode**(value: *`string`*, target?: *[T]()*, param?: *`number` \| `string`*): `T`
 
-*Defined in [encoder/Encoder.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/Encoder.ts#L3)*
+*Defined in [encoder/Encoder.ts:3](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/Encoder.ts#L3)*
 
 **Parameters:**
 
@@ -50,6 +49,7 @@
 | ------ | ------ |
 | value | `string` |
 | `Optional` target | [T]() |
+| `Optional` param | `number` \| `string` |
 
 **Returns:** `T`
 
@@ -58,16 +58,16 @@ ___
 
 ###  encode
 
-▸ **encode**(value: *`T`*, numBits?: *`undefined` \| `number`*): `string`
+▸ **encode**(value: *`T`*, param?: *`number` \| `string` \| `boolean`*): `string`
 
-*Defined in [encoder/Encoder.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/Encoder.ts#L2)*
+*Defined in [encoder/Encoder.ts:2](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/Encoder.ts#L2)*
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
 | value | `T` |
-| `Optional` numBits | `undefined` \| `number` |
+| `Optional` param | `number` \| `string` \| `boolean` |
 
 **Returns:** `string`
 
@@ -78,7 +78,7 @@ ___
 
 ▸ **getBitLength**(): `number`
 
-*Defined in [encoder/Encoder.ts:4](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/Encoder.ts#L4)*
+*Defined in [encoder/Encoder.ts:4](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/Encoder.ts#L4)*
 
 **Returns:** `number`
 
