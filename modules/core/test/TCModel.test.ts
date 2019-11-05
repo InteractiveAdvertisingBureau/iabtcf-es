@@ -109,7 +109,7 @@ describe('TCModel', (): void => {
     describe(fieldName, (): void => {
 
       // eslint-disable-next-line
-    const vendorlistJson = require('../dev/vendor-list.json');
+    const vendorlistJson = require('../../../dev/vendor-list.json');
       const gvl: GVL = new GVL(vendorlistJson);
 
       it(`should create an instance of ${instanceName} as ${fieldName} on init`, (): void => {
@@ -152,7 +152,7 @@ describe('TCModel', (): void => {
   it('should construct a TCModel with a GVL argument', (done: () => void): void => {
 
     // eslint-disable-next-line
-    const vendorlistJson = require('../dev/vendor-list.json');
+    const vendorlistJson = require('../../../dev/vendor-list.json');
     const gvl: GVL = new GVL(vendorlistJson);
 
     expect((): void => {
@@ -183,7 +183,7 @@ describe('TCModel', (): void => {
   it('should throw an error if gvl is attempted to be set more than once', (): void => {
 
     // eslint-disable-next-line
-    const vendorlistJson = require('../dev/vendor-list.json');
+    const vendorlistJson = require('../../../dev/vendor-list.json');
     const gvl: GVL = new GVL(vendorlistJson);
 
     expect((): void => {
@@ -329,7 +329,7 @@ describe('TCModel', (): void => {
   describe('isValid()', (): void => {
 
     // eslint-disable-next-line
-  const vendorlistJson = require('../dev/vendor-list.json');
+  const vendorlistJson = require('../../../dev/vendor-list.json');
     const gvl: GVL = new GVL(vendorlistJson);
 
     it('should be valid if everything is set', (done: () => void ): void => {
@@ -388,7 +388,7 @@ describe('TCModel', (): void => {
   const runSetAllAndUnsetAll = (): void => {
 
     // eslint-disable-next-line
-  const vendorlistJson = require('../dev/vendor-list.json');
+  const vendorlistJson = require('../../../dev/vendor-list.json');
     const gvl: GVL = new GVL(vendorlistJson);
 
     const loopGVLMap = (gvlKey: string, cb ): void => {

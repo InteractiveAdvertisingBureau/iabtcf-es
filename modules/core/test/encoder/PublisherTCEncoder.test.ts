@@ -7,12 +7,13 @@ import {
   TCModel,
   GVL,
 } from '../../src';
+
 export function run(): void {
 
   describe('PublisherTCEncoder', (): void => {
 
     // eslint-disable-next-line
-    const vendorlistJson = require('../../dev/vendor-list.json');
+    const vendorlistJson = require('../../../../dev/vendor-list.json');
     const gvl: GVL = new GVL(vendorlistJson);
 
     it('should encode into a string', (done: () => void): void => {
@@ -26,7 +27,6 @@ export function run(): void {
 
       // full consent!
       tcModel.setAll();
-
 
       const encodeIt = (): void => {
 
@@ -66,6 +66,7 @@ export function run(): void {
         encoded = encoder.encode(tcModel);
 
       };
+
       const decodeIt = (): TCModel => {
 
         return encoder.decode(encoded, decodedModel);
@@ -83,7 +84,6 @@ export function run(): void {
         encodeIt();
 
         const publisherFieldSequence: PublisherFieldSequence = new PublisherFieldSequence();
-
 
         publisherFieldSequence['2'].forEach((key: string): void => {
 
@@ -111,7 +111,6 @@ export function run(): void {
         done();
 
       });
-
 
     });
 
