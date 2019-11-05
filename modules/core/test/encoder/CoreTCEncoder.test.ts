@@ -11,7 +11,7 @@ export function run(): void {
   describe('CoreTCEncoder', (): void => {
 
     // eslint-disable-next-line
-    const vendorlistJson = require('../../dev/vendor-list.json');
+    const vendorlistJson = require('../../../../dev/vendor-list.json');
     const gvl: GVL = new GVL(vendorlistJson);
 
     it('should encode into a string', (done: () => void): void => {
