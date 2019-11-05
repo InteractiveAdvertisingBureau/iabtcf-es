@@ -1,37 +1,20 @@
-import {
-  TCModel,
-  TCString,
-} from '@iabtcf/core';
+import {TCModel, TCString} from '@iabtcf/core';
+import {Commands} from './Commands';
 
-import {
-  Ping,
-} from './model';
+import {Ping, TCData} from './model';
 
-import {
-  CmpStatus,
-  DisplayStatus,
-  EventStatus,
-} from './model/status';
+import {InAppTCDataBuilder, TCDataBuilder} from './model/builder';
+import {Return} from './model/Return';
 
-import {
+import {CmpStatus, DisplayStatus, EventStatus} from './model/status';
 
-  InAppTCDataBuilder,
-  TCDataBuilder,
-  PingBuilder,
-
-} from './model/builder';
-
-import {
-  Param,
-  ArgSet,
-  TCDataCallback,
-  IATCDataCallback,
-  PingCallback,
-  Callback,
-} from './Types';
+import {ArgSet, Callback, IATCDataCallback, PageCallHandler, Param, PingCallback, TCDataCallback} from './Types';
 
 export type Numberish = number | string;
 
+/**
+ * Consent Management Platform API
+ */
 export class CmpApi {
 
   private static readonly API_FUNCTION_NAME: string = '__tcfapi';
@@ -39,19 +22,32 @@ export class CmpApi {
 
   private static NOT_SUPPORTED: string = 'not supported by this CMP';
   private static EXISTING_CMP: string = 'CMP Exists already – cannot create';
+  private static TC_MODEL_INVALID: string = 'CMP Model is not in a valid state';
 
   private tcModel: TCModel;
   private tcString: TCString = new TCString();
+
   private gdprApplies: boolean;
-  private cmpStatus: CmpStatus;
-  private displayStatus: DisplayStatus;
   private eventStatus: EventStatus;
+  private cmpStatus: CmpStatus = CmpStatus.LOADING;
+  private displayStatus: DisplayStatus = DisplayStatus.HIDDEN;
 
-  /* eslint-disable-next-line */
+  private cmpId: number;
+  private cmpVersion: number;
+  private tcfPolicyVersion: number = 2;
+
   private queuedArgSets: ArgSet[];
-  private win: Window = window;
+  private eventArgSets: ArgSet[];
 
-  public constructor() {
+  private win: Window = window;
+  private customMethods = {};
+
+  // Todo: should we type this?
+
+  public constructor(cmpId: number, cmpVersion: number) {
+
+    this.cmpId = cmpId;
+    this.cmpVersion = cmpVersion;
 
     /**
      * Check for locator frame, if there is a stub then this should have been
@@ -127,7 +123,7 @@ export class CmpApi {
              * Hook up handlePageCall function
              */
             /* eslint-disable-next-line */
-            this.win[CmpApi.API_FUNCTION_NAME] = this.handlePageCall;
+            this.win[CmpApi.API_FUNCTION_NAME] = this.getPageCallHandler();
 
           } else {
 
@@ -141,7 +137,6 @@ export class CmpApi {
 
         });
 
-
       } else {
 
         throw new Error(CmpApi.EXISTING_CMP);
@@ -151,7 +146,7 @@ export class CmpApi {
     } else {
 
       /**
-       * A stub didn't exist, so we have free reign to do whateve we want now.
+       * A stub didn't exist, so we have free reign to do whatever we want now.
        */
       this.addFrame();
 
@@ -159,7 +154,7 @@ export class CmpApi {
        * Hook up handlePageCall function
        */
       /* eslint-disable-next-line */
-      this.win[CmpApi.API_FUNCTION_NAME] = this.handlePageCall;
+      this.win[CmpApi.API_FUNCTION_NAME] = this.getPageCallHandler();
 
     }
 
@@ -195,10 +190,19 @@ export class CmpApi {
 
   }
 
-  public setTCModel(tcm: TCModel, eventStatus: EventStatus): void {
+  public setTCModel(tcm: TCModel, eventStatus?: EventStatus): void {
 
-    this.tcModel = tcm;
-    this.eventStatus = eventStatus;
+    if (tcm.isValid()) {
+
+      this.tcModel = tcm;
+      this.eventStatus = eventStatus || this.eventStatus;
+      this.processQueues();
+
+    } else {
+
+      throw new Error(CmpApi.TC_MODEL_INVALID);
+
+    }
 
   }
 
@@ -226,26 +230,11 @@ export class CmpApi {
 
   public getTCData(callback: TCDataCallback, vendors?: number[]): void{
 
-    const builder: TCDataBuilder = new TCDataBuilder();
+    if (this.tcModel) {
 
-    if (builder.isBuildable()) {
-
-      callback(builder.build(vendors), true);
-
-    } else {
-
-      // queue it until we can build it
-    }
-
-  }
-
-  public getInAppTCData(callback: IATCDataCallback): void {
-
-    const builder: InAppTCDataBuilder = new InAppTCDataBuilder();
-
-    if (builder.isBuildable()) {
-
-      callback(builder.build(), true);
+      const tcData = new TCData(this.tcModel, this.tcString.encode(this.tcModel), this.eventStatus);
+      this.setReturnFields(tcData);
+      callback(tcData, true);
 
     } else {
 
@@ -256,11 +245,44 @@ export class CmpApi {
 
   public ping(callback: PingCallback): void {
 
-    const builder: PingBuilder = new PingBuilder();
+    const ping = new Ping();
+    this.setReturnFields(ping);
+
+    if (this.tcModel) {
+
+      ping.gvlVersion = this.tcModel.gvl.gvlSpecificationVersion;
+
+    }
+
+    ping.apiVersion = '3'; // todo: Where do I get this?
+    ping.cmpStatus = this.cmpStatus;
+    ping.displayStatus = this.displayStatus;
+    ping.cmpLoaded = true;
+
+    callback(ping);
+
+  }
+
+  /**
+   * Sets all the fields on a Return object using current cmp api data
+   * @param {Return} returnObj a Return object
+   */
+  private setReturnFields(returnObj: Return): void {
+
+    returnObj.cmpId = this.cmpId;
+    returnObj.cmpVersion = this.cmpVersion;
+    returnObj.gdprApplies = this.gdprApplies;
+    returnObj.tcfPolicyVersion = this.tcfPolicyVersion;
+
+  }
+
+  public getInAppTCData(callback: IATCDataCallback): void {
+
+    const builder: InAppTCDataBuilder = new InAppTCDataBuilder();
 
     if (builder.isBuildable()) {
 
-      callback(builder.build());
+      callback(builder.build(), true);
 
     } else {
 
@@ -284,7 +306,24 @@ export class CmpApi {
 
   }
 
-  public removeventListener(callback: TCDataCallback, registeredCallback: TCDataCallback): void {
+  public removeEventListener(callback: TCDataCallback, registeredCallback: TCDataCallback): void {
+  }
+
+  // eslint-disable-next-line valid-jsdoc
+  /**
+   * Returns the page call handler function with a reference to this api
+   * @return PageCallHandler
+   */
+  private getPageCallHandler(): PageCallHandler {
+
+    return (command: string, version: number, callback: Callback, param?: Param): void => {
+
+      const _this = this;
+
+      _this.handlePageCall(command, version, callback, param);
+
+    };
+
   }
 
   /**
@@ -293,36 +332,93 @@ export class CmpApi {
   /* eslint-disable-next-line */
   private handlePageCall(command: string, version: number, callback: Callback, param?: Param): void {
 
-    if (typeof this[command] === 'function') {
+    this.validateCommand(command, version, callback);
 
-      if (version === 2) {
+    switch (command) {
 
-        if (typeof callback === 'function') {
+      case Commands.PING: {
 
-          this[command](callback, param);
-
-        } else {
-
-          this.error(`callback required`);
-
-        }
-
-      } else {
-
-        this.error(`Version ${version} ${CmpApi.NOT_SUPPORTED}`);
+        this.ping(callback as PingCallback);
+        break;
 
       }
 
-    } else {
+      case Commands.GET_TC_DATA: {
 
-      this.error(`${command} command ${CmpApi.NOT_SUPPORTED}`);
+        this.getTCData(callback as TCDataCallback, param as number[]);
+        break;
+
+      }
+
+      case Commands.ADD_EVENT_LISTENER: {
+
+        this.addEventListener(callback as TCDataCallback);
+        break;
+
+      }
+
+      case Commands.REMOVE_EVENT_LISTENER: {
+
+        this.removeEventListener(callback as TCDataCallback, callback as TCDataCallback);
+        break;
+
+      }
+
+      default: {
+
+        // check if trying to execute a custom command
+        if (typeof this.customMethods[command] === 'function') {
+
+          // execute custom methods
+
+        }
+
+        this.error(`${command} command ${CmpApi.NOT_SUPPORTED}`);
+        break;
+
+      }
 
     }
 
   }
+
+  /**
+   * Validates that the parameters used to execute a command are valid
+   * @param command
+   * @param version
+   * @param callback
+   */
+  private validateCommand(command: string, version: number, callback: Callback): void {
+
+    // todo: what about params?
+
+    if (!command) {
+
+      this.error(`Command string must not be null or empty.`);
+
+    }
+
+    if (version !== 2) {
+
+      this.error(`Version ${version} ${CmpApi.NOT_SUPPORTED}`);
+
+    }
+
+    if (typeof callback !== 'function') {
+
+      this.error(`callback required`);
+
+    }
+
+  }
+
   private error(msg: string): void {
 
     console.error(msg);
+
+  }
+
+  private processQueues() {
 
   }
 

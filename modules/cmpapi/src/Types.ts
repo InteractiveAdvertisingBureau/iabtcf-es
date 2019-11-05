@@ -4,6 +4,7 @@ import {
   Ping,
 } from './model/';
 
+export type PageCallHandler = (command: string, version: number, callback: Callback, param?: Param) => void;
 export type Param = number[] | Callback | number | string;
 export type ArgSet = [ string, number, Callback, Param];
 export type TCDataCallback = (tcData: TCData, success: boolean) => void;
