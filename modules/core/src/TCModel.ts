@@ -13,6 +13,7 @@ import {
   PurposeRestrictionVector,
   IntMap,
   TCFields,
+  ConsentLanguages,
 
 } from './model';
 
@@ -132,6 +133,11 @@ export class TCModel implements TCFields {
   public readonly publisherRestrictions: PurposeRestrictionVector = new PurposeRestrictionVector();
 
   /**
+   * Set of available consent languages published by the IAB
+   */
+  private consentLanguages: ConsentLanguages = new ConsentLanguages();
+
+  /**
    * Constructs the TCModel. Passing a [[GVL]] is optional when constructing
    * as this TCModel may be constructed from decoding an existing encoded
    * TCString.
@@ -152,33 +158,24 @@ export class TCModel implements TCFields {
   }
 
   /**
-   * sets the [[GVL]] with side effects of also setting the `vendorListVersion` and `policyVersion`
-   * @param {GVL} gvl - may only be set once for this model.
-   * @throws {TCModelError} if a gvl is already set on this TCModel
+   * sets the [[GVL]] with side effects of also setting the `vendorListVersion`, `policyVersion`, and `consentLanguage`
+   * @param {GVL} gvl
    */
   public set gvl(gvl: GVL) {
 
-    if (this.gvl_ === undefined) {
+    /**
+     * Set the reference but wait to se the other values for when the data populates
+     */
+    this.gvl_ = gvl;
+    this.publisherRestrictions.gvl = gvl;
 
-      /**
-       * Set the reference but wait to se the other values for when the data populates
-       */
-      this.gvl_ = gvl;
-      this.publisherRestrictions.gvl = gvl;
+    gvl.readyPromise.then((): void => {
 
-      gvl.readyPromise.then((): void => {
+      this.vendorListVersion_ = gvl.vendorListVersion;
+      this.policyVersion_ = gvl.tcfPolicyVersion;
+      this.consentLanguage_ = gvl.language;
 
-        this.vendorListVersion_ = gvl.vendorListVersion;
-        this.policyVersion_ = gvl.tcfPolicyVersion;
-        this.consentLanguage = gvl.language;
-
-      });
-
-    } else {
-
-      throw new TCModelError('gvl', gvl, 'can be set only once');
-
-    }
+    });
 
   }
 
@@ -317,9 +314,17 @@ export class TCModel implements TCFields {
    */
   public set consentLanguage(lang: string) {
 
-    if (/^([A-z]){2}$/.test(lang)) {
+    lang = lang.toUpperCase();
 
-      this.consentLanguage_ = lang.toUpperCase();
+    if (this.consentLanguages.has(lang)) {
+
+      this.consentLanguage_ = lang;
+
+      if (this.gvl && GVL.baseUrl !== undefined) {
+
+        this.gvl.changeLanguage(lang);
+
+      }
 
     } else {
 
@@ -370,31 +375,27 @@ export class TCModel implements TCFields {
    */
   public set vendorListVersion(integer: number | string) {
 
-    let isError = false;
-    let errMsg = '';
-
     if (this.isIntAbove(integer, 0)) {
+
+      if (typeof integer === 'string') {
+
+        integer = parseInt(integer, 10);
+
+      }
 
       if (!this.gvl) {
 
         this.vendorListVersion_ = integer;
 
-      } else {
+      } else if (this.gvl.vendorListVersion !== integer) {
 
-        isError = true;
-        errMsg = 'cannot change value when gvl is alredy set';
+        this.gvl = new GVL(integer);
 
       }
 
     } else {
 
-      isError = true;
-
-    }
-
-    if (isError) {
-
-      throw new TCModelError('vendorListVersion', integer, errMsg);
+      throw new TCModelError('vendorListVersion', integer);
 
     }
 

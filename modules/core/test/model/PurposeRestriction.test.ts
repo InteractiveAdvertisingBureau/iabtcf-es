@@ -11,25 +11,6 @@ export function run(): void {
       const skip = 5;
       const max = 12;
 
-      beforeEach((): void => {
-
-        for (let i = 1; i <= max; i++) {
-
-          if ( i !== skip) {
-
-            PurposeRestriction.availablePurposeIds.add(i);
-
-          }
-
-        }
-
-      });
-      afterEach((): void => {
-
-        PurposeRestriction.availablePurposeIds = new Set<number>();
-
-      });
-
       const shouldBeOk: (value: number) => void = (value: number): void => {
 
         it(`should be ok with ${value}`, (): void => {
@@ -97,9 +78,6 @@ export function run(): void {
       it('should set and get a restrictionType and purposeId through the constructor', (): void => {
 
         const purposeId = 2;
-
-        PurposeRestriction.availablePurposeIds.add(purposeId);
-
         const purposeRestriction = new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
 
         expect(purposeRestriction.isValid()).to.be.true;
@@ -115,9 +93,6 @@ export function run(): void {
       it('should produce a hash', (): void => {
 
         const purposeId = 2;
-
-        PurposeRestriction.availablePurposeIds.add(purposeId);
-
         const purposeRestriction = new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
         const expected = `${purposeId}${PurposeRestriction.hashSeparator}${RestrictionType.NOT_ALLOWED}`;
 
@@ -125,31 +100,9 @@ export function run(): void {
 
       });
 
-      it('should error if it\'s invalid', (): void => {
-
-        const purposeId = 2;
-
-        PurposeRestriction.availablePurposeIds.add(purposeId);
-
-        const purposeRestriction = new PurposeRestriction(purposeId);
-        let hash = '';
-
-        expect((): void => {
-
-          hash = purposeRestriction.hash;
-
-        }).to.throw();
-
-        expect(hash).to.be.empty;
-
-      });
-
       it('should unHash properly', (): void => {
 
         const purposeId = 2;
-
-        PurposeRestriction.availablePurposeIds.add(purposeId);
-
         const purposeRestriction = new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
         const hash = `${purposeId}${PurposeRestriction.hashSeparator}${RestrictionType.NOT_ALLOWED}`;
 
@@ -160,9 +113,6 @@ export function run(): void {
       it('unHash should throw an error with an improper hash', (): void => {
 
         const purposeId = 2;
-
-        PurposeRestriction.availablePurposeIds.add(purposeId);
-
         const hash = `${purposeId}${RestrictionType.NOT_ALLOWED}`;
 
         expect((): void => {

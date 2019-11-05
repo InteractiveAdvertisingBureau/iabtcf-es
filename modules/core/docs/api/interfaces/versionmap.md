@@ -10,6 +10,7 @@
 
 * [CoreFieldSequence](../classes/corefieldsequence.md)
 * [PublisherFieldSequence](../classes/publisherfieldsequence.md)
+* [SegmentSequence](../classes/segmentsequence.md)
 
 ## Index
 
@@ -28,7 +29,7 @@
 
 **● 1**: *`string`[]*
 
-*Defined in [encoder/VersionMap.ts:2](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/VersionMap.ts#L2)*
+*Defined in [encoder/VersionMap.ts:2](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/VersionMap.ts#L2)*
 
 ___
 <a id="2"></a>
@@ -37,7 +38,7 @@ ___
 
 **● 2**: *`string`[]*
 
-*Defined in [encoder/VersionMap.ts:3](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/encoder/VersionMap.ts#L3)*
+*Defined in [encoder/VersionMap.ts:3](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/VersionMap.ts#L3)*
 
 ___
 

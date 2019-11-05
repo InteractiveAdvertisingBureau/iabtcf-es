@@ -7,7 +7,8 @@
       v-model="tcModel[id]"
       size="sm"
       @input="changeValue"
-      trim />
+      trim
+    />
     </b-form-group>
   </b-input-group>
 </template>

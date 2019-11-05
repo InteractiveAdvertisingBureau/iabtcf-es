@@ -7,3 +7,4 @@ export * from './Vector';
 export * from './TCFields';
 export * from './Fields';
 export * from './Segments';
+export * from './ConsentLanguages';

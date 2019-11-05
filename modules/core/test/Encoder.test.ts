@@ -15,6 +15,8 @@ import * as publisherTC from './encoder/PublisherTCEncoder.test';
 
 describe('Encoder', (): void => {
 
+  base64.run();
+
   bitLength.run();
 
   // more primitive types
@@ -46,6 +48,5 @@ describe('Encoder', (): void => {
   // others
   coreFieldSequence.run();
   segmentEncoderMap.run();
-  base64.run();
 
 });

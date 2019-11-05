@@ -8,22 +8,6 @@ export function run(): void {
 
   describe('PurposeRestrictionVector', (): void => {
 
-    const makePurposesAvailable = (purposes: number[]): void => {
-
-      purposes.forEach((purposeId: number): void => {
-
-        PurposeRestriction.availablePurposeIds.add(purposeId);
-
-      });
-
-    };
-
-    afterEach((): void => {
-
-      PurposeRestriction.availablePurposeIds = new Set<number>();
-
-    });
-
     it('should intialize as empty', (): void => {
 
       const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
@@ -33,7 +17,6 @@ export function run(): void {
     });
     it('should store vendors by purpose restriction in order', (): void => {
 
-      makePurposesAvailable([1, 2, 3]);
       const purposeId = 2;
       const vendors: number[] = [1, 44, 3, 5, 99, 22, 57, 2, 14, 28, 29, 33];
       const purposeRestriction: PurposeRestriction
@@ -60,7 +43,6 @@ export function run(): void {
 
     it('should return an empty array if a purpose restriction hasen\'t been defined for a vendor', (): void => {
 
-      makePurposesAvailable([1, 2, 3]);
       const purposeId = 2;
       const purposeRestriction: PurposeRestriction
         = new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
@@ -72,7 +54,6 @@ export function run(): void {
 
     it('should return all purposes restrictions set', (): void => {
 
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
       const numItems = 10;
       const vendors: number[] = [];
       const restrictions: Set<string> = new Set<string>();
@@ -107,8 +88,6 @@ export function run(): void {
 
     it('should return the restriction set on a particular vendor', (): void => {
 
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-
       const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
       const vendorId: number = makeRandomInt(1, 100);
       const purposeId: number = makeRandomInt(2, 12);
@@ -124,8 +103,6 @@ export function run(): void {
     });
 
     it('should remove a restriction', (): void => {
-
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 
       const numItems = 10;
       const vendors: number[] = [];
@@ -146,7 +123,7 @@ export function run(): void {
       }
 
       // select random one
-      const targetVendor: number = vendors[Math.floor(Math.random() * vendors.length - 1)];
+      const targetVendor: number = vendors[Math.floor(Math.random() * vendors.length)];
 
       expect(prv.getRestriction(targetVendor)).not.to.be.empty;
       expect(prv.getVendors(purpRestriction)).to.include(targetVendor);
@@ -159,8 +136,6 @@ export function run(): void {
     });
 
     it('should not error when trying to remove a restriction from Vector that is empty', (): void => {
-
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 
       const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
       const purposeId = 2;
@@ -177,8 +152,6 @@ export function run(): void {
     });
 
     it('should remove a restriction if one vendor', (): void => {
-
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 
       const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
       const purposeId = 2;
@@ -201,8 +174,6 @@ export function run(): void {
     });
 
     it('should set restriction type 0 on vendor regardless of flexible legal basis', (): void => {
-
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 
       const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
       const purposeId = 2;
@@ -241,8 +212,6 @@ export function run(): void {
 
     it('should not set restriction type 1 on vendor if no flexible legal basis for vendor', (): void => {
 
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-
       const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
       const purposeId = 2;
       const restrictionType: number = RestrictionType.REQUIRE_CONSENT;
@@ -279,8 +248,6 @@ export function run(): void {
     });
 
     it('should not set restriction type 2 on vendor if no flexible legal basis for vendor', (): void => {
-
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 
       const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
       const purposeId = 2;
@@ -319,8 +286,6 @@ export function run(): void {
     });
 
     it('should set restriction type 0 on vendor if no flexible legal basis for vendor', (): void => {
-
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 
       const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
       const purposeId = 2;

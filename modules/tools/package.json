@@ -17,7 +17,7 @@
   "scripts": {
     "start": "vue-cli-service serve",
     "prepare": "npm run build",
-    "build": "vue-cli-service build && cp -r ./vendorlist/* ../../docs/ && echo www.iabtcf.com >> ../../docs/CNAME && echo iabtcf.com >> ../../docs/CNAME",
+    "build": "rm ../../docs/js/* && rm ../../docs/css/* && vue-cli-service build --no-clean",
     "lint": "eslint ./src/**/*.ts",
     "report-coverage": ""
   },

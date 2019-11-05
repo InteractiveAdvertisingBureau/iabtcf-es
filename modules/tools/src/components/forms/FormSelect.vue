@@ -9,7 +9,8 @@
       v-model="selected"
       :options="options"
       @input="changeValue"
-      class="mt-3" />
+      class="mt-3"
+    />
 
     </b-form-group>
   </b-input-group>

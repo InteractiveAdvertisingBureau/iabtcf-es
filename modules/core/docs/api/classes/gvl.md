@@ -21,7 +21,6 @@ class with utilities for managing the global vendor list. Will use JSON to fetch
 
 ### Properties
 
-* [DEFAULT_LANGUAGE](gvl.md#default_language)
 * [features](gvl.md#features)
 * [gvlSpecificationVersion](gvl.md#gvlspecificationversion)
 * [lastUpdated](gvl.md#lastupdated)
@@ -32,6 +31,7 @@ class with utilities for managing the global vendor list. Will use JSON to fetch
 * [stacks](gvl.md#stacks)
 * [tcfPolicyVersion](gvl.md#tcfpolicyversion)
 * [vendorListVersion](gvl.md#vendorlistversion)
+* [DEFAULT_LANGUAGE](gvl.md#default_language)
 * [baseUrl](gvl.md#baseurl)
 * [languageFilename](gvl.md#languagefilename)
 * [latestFilename](gvl.md#latestfilename)
@@ -63,7 +63,7 @@ class with utilities for managing the global vendor list. Will use JSON to fetch
 
 ⊕ **new GVL**(versionOrVendorList?: *[VersionOrVendorList](../#versionorvendorlist)*): [GVL](gvl.md)
 
-*Defined in [GVL.ts:173](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L173)*
+*Defined in [GVL.ts:183](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L183)*
 
 **Parameters:**
 
@@ -77,15 +77,6 @@ ___
 
 ## Properties
 
-<a id="default_language"></a>
-
-###  DEFAULT_LANGUAGE
-
-**● DEFAULT_LANGUAGE**: *`string`* = "en"
-
-*Defined in [GVL.ts:171](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L171)*
-
-___
 <a id="features"></a>
 
 ###  features
@@ -94,7 +85,7 @@ ___
 
 *Implementation of [Declarations](../interfaces/declarations.md).[features](../interfaces/declarations.md#features)*
 
-*Defined in [GVL.ts:129](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L129)*
+*Defined in [GVL.ts:136](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L136)*
 
 *__param__*: collection of [Feature](../interfaces/feature.md)s
 
@@ -107,7 +98,7 @@ ___
 
 *Implementation of [Declarations](../interfaces/declarations.md).[gvlSpecificationVersion](../interfaces/declarations.md#gvlspecificationversion)*
 
-*Defined in [GVL.ts:91](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L91)*
+*Defined in [GVL.ts:98](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L98)*
 
 *__param__*: schema version for the GVL that is used
 
@@ -120,7 +111,7 @@ ___
 
 *Implementation of [Declarations](../interfaces/declarations.md).[lastUpdated](../interfaces/declarations.md#lastupdated)*
 
-*Defined in [GVL.ts:114](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L114)*
+*Defined in [GVL.ts:121](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L121)*
 
 *__param__*: the date in which the vendor list json file was last updated.
 
@@ -133,7 +124,7 @@ ___
 
 *Implementation of [Declarations](../interfaces/declarations.md).[purposes](../interfaces/declarations.md#purposes)*
 
-*Defined in [GVL.ts:119](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L119)*
+*Defined in [GVL.ts:126](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L126)*
 
 *__param__*: collection of [Purpose](../interfaces/purpose.md)s
 
@@ -144,7 +135,7 @@ ___
 
 **● readyPromise**: *`Promise`<`void` \| [GVLError](gvlerror.md)>*
 
-*Defined in [GVL.ts:86](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L86)*
+*Defined in [GVL.ts:93](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L93)*
 
 *__param__*: when this GVL object is populated with the data or rejected if there is an error
 
@@ -157,7 +148,7 @@ ___
 
 *Implementation of [Declarations](../interfaces/declarations.md).[specialFeatures](../interfaces/declarations.md#specialfeatures)*
 
-*Defined in [GVL.ts:134](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L134)*
+*Defined in [GVL.ts:141](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L141)*
 
 *__param__*: collection of [Feature](../interfaces/feature.md)s
 
@@ -170,7 +161,7 @@ ___
 
 *Implementation of [Declarations](../interfaces/declarations.md).[specialPurposes](../interfaces/declarations.md#specialpurposes)*
 
-*Defined in [GVL.ts:124](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L124)*
+*Defined in [GVL.ts:131](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L131)*
 
 *__param__*: collection of [Purpose](../interfaces/purpose.md)s
 
@@ -183,7 +174,7 @@ ___
 
 *Implementation of [Declarations](../interfaces/declarations.md).[stacks](../interfaces/declarations.md#stacks)*
 
-*Defined in [GVL.ts:169](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L169)*
+*Defined in [GVL.ts:176](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L176)*
 
 *__param__*: collection of [Stack](../interfaces/stack.md)s
 
@@ -196,7 +187,7 @@ ___
 
 *Implementation of [Declarations](../interfaces/declarations.md).[tcfPolicyVersion](../interfaces/declarations.md#tcfpolicyversion)*
 
-*Defined in [GVL.ts:108](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L108)*
+*Defined in [GVL.ts:115](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L115)*
 
 *__param__*: The TCF MO will increment this value whenever a GVL change (such as adding a new Purpose or Feature or a change in Purpose wording) legally invalidates existing TC Strings and requires CMPs to re-establish transparency and consent from users. If the policy version number in the latest GVL is different from the value in your TC String, then you need to re-establish transparency and consent for that user. A version 1 format TC String is considered to have a version value of 1.
 
@@ -209,9 +200,18 @@ ___
 
 *Implementation of [Declarations](../interfaces/declarations.md).[vendorListVersion](../interfaces/declarations.md#vendorlistversion)*
 
-*Defined in [GVL.ts:96](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L96)*
+*Defined in [GVL.ts:103](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L103)*
 
 *__param__*: with each published file change
+
+___
+<a id="default_language"></a>
+
+### `<Static>` DEFAULT_LANGUAGE
+
+**● DEFAULT_LANGUAGE**: *`string`* = "EN"
+
+*Defined in [GVL.ts:39](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L39)*
 
 ___
 <a id="baseurl"></a>
@@ -220,7 +220,7 @@ ___
 
 **● baseUrl**: *`string`*
 
-*Defined in [GVL.ts:39](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L39)*
+*Defined in [GVL.ts:47](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L47)*
 
 *__static__*: 
 
@@ -233,7 +233,7 @@ ___
 
 **● languageFilename**: *`string`* = "purposes-[LANG].json"
 
-*Defined in [GVL.ts:80](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L80)*
+*Defined in [GVL.ts:87](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L87)*
 
 *__param__*: Translations of the names and descriptions for Purposes, Special Purposes, Features, and Special Features to non-English languages are contained in a file where attributes containing English content (except vendor declaration information) are translated. The iab publishes one following the scheme below where the LANG is the iso639-1 language code. For a list of available translations [please go here](https://register.consensu.org/Translation).
 
@@ -251,7 +251,7 @@ ___
 
 **● latestFilename**: *`string`* = "vendor-list.json"
 
-*Defined in [GVL.ts:46](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L46)*
+*Defined in [GVL.ts:54](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L54)*
 
 *__static__*: 
 
@@ -264,7 +264,7 @@ ___
 
 **● versionedFilename**: *`string`* = "archives/vendor-list-v[VERSION].json"
 
-*Defined in [GVL.ts:63](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L63)*
+*Defined in [GVL.ts:70](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L70)*
 
 *__static__*: 
 
@@ -287,7 +287,7 @@ ___
 
 **get language**(): `string`
 
-*Defined in [GVL.ts:314](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L314)*
+*Defined in [GVL.ts:365](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L365)*
 
 **Returns:** `string`
 
@@ -298,7 +298,7 @@ ___
 
 **get vendors**(): [IntMap](../interfaces/intmap.md)<[Vendor](../interfaces/vendor.md)>
 
-*Defined in [GVL.ts:548](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L548)*
+*Defined in [GVL.ts:601](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L601)*
 
 **Returns:** [IntMap](../interfaces/intmap.md)<[Vendor](../interfaces/vendor.md)>
 
@@ -312,7 +312,7 @@ ___
 
 ▸ **changeLanguage**(lang: *`string`*): `Promise`<`void` \| [GVLError](gvlerror.md)>
 
-*Defined in [GVL.ts:262](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L262)*
+*Defined in [GVL.ts:294](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L294)*
 
 changeLanguage - retrieves the purpose language translation and sets the internal language variable
 
@@ -332,7 +332,7 @@ ___
 
 ▸ **getVendorsWithConsentPurpose**(purposeId: *`number`*): [IntMap](../interfaces/intmap.md)<[Vendor](../interfaces/vendor.md)>
 
-*Defined in [GVL.ts:482](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L482)*
+*Defined in [GVL.ts:535](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L535)*
 
 getVendorsWithConsentPurpose
 
@@ -352,7 +352,7 @@ ___
 
 ▸ **getVendorsWithFeature**(featureId: *`number`*): [IntMap](../interfaces/intmap.md)<[Vendor](../interfaces/vendor.md)>
 
-*Defined in [GVL.ts:530](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L530)*
+*Defined in [GVL.ts:583](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L583)*
 
 getVendorsWithFeature
 
@@ -372,7 +372,7 @@ ___
 
 ▸ **getVendorsWithFlexiblePurpose**(purposeId: *`number`*): [IntMap](../interfaces/intmap.md)<[Vendor](../interfaces/vendor.md)>
 
-*Defined in [GVL.ts:506](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L506)*
+*Defined in [GVL.ts:559](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L559)*
 
 getVendorsWithFlexiblePurpose
 
@@ -392,7 +392,7 @@ ___
 
 ▸ **getVendorsWithLegIntPurpose**(purposeId: *`number`*): [IntMap](../interfaces/intmap.md)<[Vendor](../interfaces/vendor.md)>
 
-*Defined in [GVL.ts:494](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L494)*
+*Defined in [GVL.ts:547](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L547)*
 
 getVendorsWithLegIntPurpose
 
@@ -412,7 +412,7 @@ ___
 
 ▸ **getVendorsWithSpecialFeature**(specialFeatureId: *`number`*): [IntMap](../interfaces/intmap.md)<[Vendor](../interfaces/vendor.md)>
 
-*Defined in [GVL.ts:542](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L542)*
+*Defined in [GVL.ts:595](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L595)*
 
 getVendorsWithSpecialFeature
 
@@ -432,7 +432,7 @@ ___
 
 ▸ **getVendorsWithSpecialPurpose**(specialPurposeId: *`number`*): [IntMap](../interfaces/intmap.md)<[Vendor](../interfaces/vendor.md)>
 
-*Defined in [GVL.ts:518](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L518)*
+*Defined in [GVL.ts:571](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L571)*
 
 getVendorsWithSpecialPurpose
 
@@ -452,7 +452,7 @@ ___
 
 ▸ **narrowVendorsTo**(vendorIds: *`number`[]*): `void`
 
-*Defined in [GVL.ts:560](https://github.com/chrispaterson/iabtcf-es/blob/5097780/modules/core/src/GVL.ts#L560)*
+*Defined in [GVL.ts:613](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/GVL.ts#L613)*
 
 narrowVendorsTo - narrows vendors represented in this GVL to the list of ids passed in
 
