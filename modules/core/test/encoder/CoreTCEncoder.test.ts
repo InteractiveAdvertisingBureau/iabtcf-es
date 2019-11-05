@@ -11,7 +11,7 @@ export function run(): void {
   describe('CoreTCEncoder', (): void => {
 
     // eslint-disable-next-line
-    const vendorlistJson = require('../../dev/vendor-list.json');
+    const vendorlistJson = require('../../../../dev/vendor-list.json');
     const gvl: GVL = new GVL(vendorlistJson);
 
     it('should encode into a string', (done: () => void): void => {
@@ -96,7 +96,7 @@ export function run(): void {
                 .to.equal(Math.round(tcModel[key].getTime()/100)*100);
               break;
             case 'publisherRestrictions':
-              // do nothing
+              expect(decodedModel[key].numRestrictions, `${key} should be equal`).to.equal(tcModel[key].numRestrictions);
               break;
             default:
               expect(decodedModel[key], `${key} should be equal`).to.deep.equal(tcModel[key]);

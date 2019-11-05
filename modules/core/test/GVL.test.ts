@@ -6,9 +6,9 @@ import {IntMap} from '../src/model/IntMap';
 import {XMLHttpTestTools} from './support/XMLHttpTestTools';
 
 // eslint-disable-next-line
-const vendorlistJson = require('../dev/vendor-list.json');
+const vendorlistJson = require('../../../dev/vendor-list.json');
 // eslint-disable-next-line
-const translationJson = require(`../dev/purposes-fr.json`);
+const translationJson = require(`../../../dev/purposes-fr.json`);
 
 describe('GVL', (): void => {
 

@@ -110,8 +110,8 @@ export class PurposeRestrictionVectorEncoder implements Encoder<PurposeRestricti
 
     let index = 0;
     const vector: PurposeRestrictionVector = new PurposeRestrictionVector();
-    const numRestrictions: number = this.intEnc.decode(value.substr(index, BitLength.maxId));
-    index += BitLength.maxId;
+    const numRestrictions: number = this.intEnc.decode(value.substr(index, BitLength.numRestrictions));
+    index += BitLength.numRestrictions;
 
     for (let i = 0; i < numRestrictions; i++) {
 
