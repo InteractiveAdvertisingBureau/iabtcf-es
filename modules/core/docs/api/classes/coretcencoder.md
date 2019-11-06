@@ -6,10 +6,6 @@
 
 **CoreTCEncoder**
 
-## Implements
-
-* [Encoder](../interfaces/encoder.md)<[TCModel](tcmodel.md)>
-
 ## Index
 
 ### Methods
@@ -23,11 +19,11 @@
 
 <a id="decode"></a>
 
-###  decode
+### `<Static>` decode
 
 ▸ **decode**(encodedString: *`string`*, tcModel: *[TCModel](tcmodel.md)*): [TCModel](tcmodel.md)
 
-*Defined in [encoder/CoreTCEncoder.ts:55](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/CoreTCEncoder.ts#L55)*
+*Defined in encoder/segment/CoreTCEncoder.ts:65*
 
 **Parameters:**
 
@@ -41,11 +37,11 @@
 ___
 <a id="encode"></a>
 
-###  encode
+### `<Static>` encode
 
 ▸ **encode**(tcModel: *[TCModel](tcmodel.md)*): `string`
 
-*Defined in [encoder/CoreTCEncoder.ts:24](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/CoreTCEncoder.ts#L24)*
+*Defined in encoder/segment/CoreTCEncoder.ts:35*
 
 **Parameters:**
 

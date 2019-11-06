@@ -1,4 +1,4 @@
-import {BooleanEncoder} from '../../src/encoder';
+import {BooleanEncoder} from '../../src/encoder/field';
 import {expect} from 'chai';
 
 export function run(): void {
@@ -9,17 +9,13 @@ export function run(): void {
 
       it('should encode true to 1', (): void => {
 
-        const boolEnc: BooleanEncoder = new BooleanEncoder();
-
-        expect(boolEnc.encode(true)).to.equal('1');
+        expect(BooleanEncoder.encode(true)).to.equal('1');
 
       });
 
       it('should encode false to 0', (): void => {
 
-        const boolEnc: BooleanEncoder = new BooleanEncoder();
-
-        expect(boolEnc.encode(false)).to.equal('0');
+        expect(BooleanEncoder.encode(false)).to.equal('0');
 
       });
 
@@ -28,17 +24,13 @@ export function run(): void {
 
       it('should decode 1 to true', (): void => {
 
-        const boolEncoder: BooleanEncoder = new BooleanEncoder();
-
-        expect(boolEncoder.decode('1')).to.be.true;
+        expect(BooleanEncoder.decode('1')).to.be.true;
 
       });
 
       it('should decode 0 to false', (): void => {
 
-        const boolEncoder: BooleanEncoder = new BooleanEncoder();
-
-        expect(boolEncoder.decode('0')).to.be.false;
+        expect(BooleanEncoder.decode('0')).to.be.false;
 
       });
 

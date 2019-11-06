@@ -26,7 +26,7 @@
 
 **● vendors**: *[IntMap](intmap.md)<[Vendor](vendor.md)>*
 
-*Defined in [model/gvl/VendorList.ts:6](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/gvl/VendorList.ts#L6)*
+*Defined in [model/gvl/VendorList.ts:6](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/gvl/VendorList.ts#L6)*
 
 ___
 

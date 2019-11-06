@@ -1,5 +1,14 @@
-import {VersionMap} from '.';
-import {Fields} from '../model';
+import {
+
+  VersionMap,
+
+} from '.';
+
+import {
+
+  Fields,
+
+} from '../../model';
 
 export class PublisherFieldSequence implements VersionMap {
 

@@ -13,6 +13,7 @@
     "bootstrap": "lerna bootstrap",
     "deploy": "lerna publish from-package",
     "build": "lerna run build",
+    "docs": "lerna run docs",
     "coverage": "nyc --reporter=lcov npm run test",
     "upload-coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "standard": "standard index.js"

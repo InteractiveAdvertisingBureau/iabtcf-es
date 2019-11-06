@@ -6,10 +6,6 @@
 
 **LangEncoder**
 
-## Implements
-
-* [Encoder](../interfaces/encoder.md)<`string`>
-
 ## Index
 
 ### Methods
@@ -23,11 +19,11 @@
 
 <a id="decode"></a>
 
-###  decode
+### `<Static>` decode
 
 ▸ **decode**(value: *`string`*): `string`
 
-*Defined in [encoder/LangEncoder.ts:44](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/LangEncoder.ts#L44)*
+*Defined in encoder/field/LangEncoder.ts:42*
 
 **Parameters:**
 
@@ -40,11 +36,11 @@
 ___
 <a id="encode"></a>
 
-###  encode
+### `<Static>` encode
 
 ▸ **encode**(value: *`string`*, numBits: *`number`*): `string`
 
-*Defined in [encoder/LangEncoder.ts:13](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/LangEncoder.ts#L13)*
+*Defined in encoder/field/LangEncoder.ts:12*
 
 **Parameters:**
 

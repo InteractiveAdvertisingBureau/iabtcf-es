@@ -6,10 +6,6 @@
 
 **DateEncoder**
 
-## Implements
-
-* [Encoder](../interfaces/encoder.md)<`Date`>
-
 ## Index
 
 ### Methods
@@ -23,11 +19,11 @@
 
 <a id="decode"></a>
 
-###  decode
+### `<Static>` decode
 
 ▸ **decode**(value: *`string`*): `Date`
 
-*Defined in [encoder/DateEncoder.ts:16](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/DateEncoder.ts#L16)*
+*Defined in encoder/field/DateEncoder.ts:13*
 
 **Parameters:**
 
@@ -40,11 +36,11 @@
 ___
 <a id="encode"></a>
 
-###  encode
+### `<Static>` encode
 
 ▸ **encode**(value: *`Date`*, numBits: *`number`*): `string`
 
-*Defined in [encoder/DateEncoder.ts:8](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/DateEncoder.ts#L8)*
+*Defined in encoder/field/DateEncoder.ts:7*
 
 **Parameters:**
 

@@ -43,13 +43,13 @@ const gvl = new GVL("LATEST");
 gvl.readPromise.then(() => {
 
   const tcModel = new TCModel(gvl);
-  const tcString = new TCString();
+  const encodedTCString = TCString.encode(tcModel);
 
   /**
    * this will output a default all "no" encoded string to the console at the
    * lastest GVL version.
    */
-  comsole.log(tcString.encode(tcModel));
+  comsole.log(encodedTCString);
 });
 ```
 

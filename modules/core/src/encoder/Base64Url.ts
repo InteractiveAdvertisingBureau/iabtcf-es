@@ -1,5 +1,4 @@
-import {Encoder} from '.';
-export class Base64Url implements Encoder<string> {
+export class Base64Url {
 
   private static readonly ONE_BYTE: number = 8;
 
@@ -10,7 +9,7 @@ export class Base64Url implements Encoder<string> {
    * @param {string} str - arbitrary-length bitfield string to be encoded to base64url
    * @return {string} - base64url encoded result
    */
-  public encode(str: string): string {
+  public static encode(str: string): string {
 
     /**
      * should only be 0 or 1
@@ -59,7 +58,7 @@ export class Base64Url implements Encoder<string> {
    * @param {string} str - base64url encoded bitfield string to be decoded
    * @return {string} - bitfield string
    */
-  public decode(str: string): string {
+  public static decode(str: string): string {
 
     /**
      * should contain only characters from the base64url set
@@ -98,7 +97,7 @@ export class Base64Url implements Encoder<string> {
 
   }
 
-  private fromURLEncoding(str: string): string {
+  private static fromURLEncoding(str: string): string {
 
     str = str.replace(/_/g, '/');
     str = str.replace(/-/g, '\+');
@@ -116,7 +115,7 @@ export class Base64Url implements Encoder<string> {
 
   }
 
-  private toURLENcoding(str: string): string {
+  private static toURLENcoding(str: string): string {
 
     // remove trailing '=' for url-safeness
     while (str.charAt(str.length - 1) === '=') {

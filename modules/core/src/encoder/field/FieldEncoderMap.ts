@@ -1,4 +1,8 @@
-import {TCFields} from '../model';
+import {
+
+  TCFields,
+
+} from '../../model';
 
 import {
   BooleanEncoder,
@@ -10,7 +14,7 @@ import {
   VendorVectorEncoder,
 } from '.';
 
-export class EncoderMap implements TCFields {
+export class FieldEncoderMap implements TCFields {
 
   public readonly version: typeof IntEncoder = IntEncoder;
   public readonly created: typeof DateEncoder = DateEncoder;

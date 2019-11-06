@@ -1,5 +1,14 @@
-import {expect} from 'chai';
-import {CoreFieldSequence} from '../../src/encoder';
+import {
+
+  expect,
+
+} from 'chai';
+
+import {
+
+  CoreFieldSequence,
+
+} from '../../src/encoder/sequence';
 
 export function run(): void {
 

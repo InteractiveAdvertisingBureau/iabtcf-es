@@ -1,7 +1,20 @@
-import {expect} from 'chai';
-import {FixedVectorEncoder} from '../../src/encoder/FixedVectorEncoder';
-import {Vector} from '../../src/model/Vector';
+import {
 
+  expect,
+
+} from 'chai';
+
+import {
+
+  FixedVectorEncoder,
+
+} from '../../src/encoder/field';
+
+import {
+
+  Vector,
+
+} from '../../src/model';
 
 export function run(): void {
 
@@ -18,9 +31,7 @@ export function run(): void {
         vector.set(2);
         vector.set(5);
 
-        const FVEnc: FixedVectorEncoder = new FixedVectorEncoder();
-
-        const result: string = FVEnc.encode(vector, numBits);
+        const result: string = FixedVectorEncoder.encode(vector, numBits);
 
         expect(result.length).to.equal(numBits);
         expect(result).to.equal('1100100000');
@@ -34,9 +45,7 @@ export function run(): void {
       it('should decode a fixed vector', (): void => {
 
         const vectorBits = '01100011101';
-        const fvDec: FixedVectorEncoder = new FixedVectorEncoder();
-
-        const vector: Vector = fvDec.decode(vectorBits);
+        const vector: Vector = FixedVectorEncoder.decode(vectorBits);
 
         expect(vector.maxId).to.equal(vectorBits.length);
 

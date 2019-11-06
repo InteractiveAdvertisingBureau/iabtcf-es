@@ -1,5 +1,14 @@
-import {expect} from 'chai';
-import {Base64Url} from '../../src/encoder/Base64Url';
+import {
+
+  expect,
+
+} from 'chai';
+
+import {
+
+  Base64Url,
+
+} from '../../src/encoder/Base64Url';
 
 export function run(): void {
 
@@ -23,9 +32,8 @@ export function run(): void {
 
       it(`should encode and decode ${input.length} bit long input`, (): void => {
 
-        const base64Url: Base64Url = new Base64Url();
-        const encoded = base64Url.encode(input);
-        const decoded = base64Url.decode(encoded);
+        const encoded = Base64Url.encode(input);
+        const decoded = Base64Url.decode(encoded);
 
         /**
          * there might be some additional zeros added to the end if the string is
@@ -67,14 +75,13 @@ export function run(): void {
 
     it('should throw an error if something other than a binary string is passed to encode', (): void => {
 
-      const base64Url: Base64Url = new Base64Url();
       const notABinaryString = '0ujalncl;lqo8ur88r2';
 
       let encoded = '';
 
       expect((): void => {
 
-        encoded = base64Url.encode(notABinaryString);
+        encoded = Base64Url.encode(notABinaryString);
 
       }).to.throw();
 
@@ -84,14 +91,13 @@ export function run(): void {
 
     it('should throw an error if something other than a base64url string is passed to decode', (): void => {
 
-      const base64Url: Base64Url = new Base64Url();
       const notABase64UrlString = '0ujalncl;lqo8ur88r2';
 
       let decoded = '';
 
       expect((): void => {
 
-        decoded = base64Url.decode(notABase64UrlString);
+        decoded = Base64Url.decode(notABase64UrlString);
 
       }).to.throw();
 

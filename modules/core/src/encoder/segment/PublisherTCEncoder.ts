@@ -1,60 +1,69 @@
 import {
 
-  Encoder,
-  EncoderMap,
-  BitLength,
-  Base64Url,
-  IntEncoder,
   SegmentType,
 
 } from '.';
 
-import {PublisherFieldSequence} from './PublisherFieldSequence';
+import {
+
+  Base64Url,
+  BitLength,
+
+} from '../';
+
+import {
+
+  FieldEncoderMap,
+  IntEncoder,
+
+} from '../field';
+
+import {
+
+  PublisherFieldSequence,
+
+} from '../sequence';
 
 import {
 
   TCModel,
   TCModelPropType,
 
-} from '..';
+} from '../../';
 
-export class PublisherTCEncoder implements Encoder<TCModel> {
+export class PublisherTCEncoder {
 
-  private encMap: EncoderMap = new EncoderMap();
+  public static encode(tcModel: TCModel): string {
 
-  public encode(tcModel: TCModel): string {
-
-    const intEnc: IntEncoder = new IntEncoder();
+    const encMap: FieldEncoderMap = new FieldEncoderMap();
     const pubFieldSequence: PublisherFieldSequence = new PublisherFieldSequence();
     const encodeSequence: string[] = pubFieldSequence[tcModel.version.toString()];
 
     // first encode the segment type
-    let bitField: string = intEnc.encode(SegmentType.publisherTC, BitLength.segmentType);
+    let bitField: string = IntEncoder.encode(SegmentType.publisherTC, BitLength.segmentType);
 
     encodeSequence.forEach((key: string): void => {
 
       const value: TCModelPropType = tcModel[key];
-      const encoder: Encoder<TCModelPropType> = new this.encMap[key]() as Encoder<TCModelPropType>;
+      const encoder = encMap[key];
       const numBits: number = (BitLength[key]) ? BitLength[key] : tcModel.numCustomPurposes;
 
       bitField += encoder.encode(value, numBits);
 
     });
 
-    const base64Url: Base64Url = new Base64Url();
-
     // base64url encode the string and return
-    return base64Url.encode(bitField);
+    return Base64Url.encode(bitField);
 
   }
 
-  public decode(encodedString: string, tcModel: TCModel): TCModel {
+  public static decode(encodedString: string, tcModel: TCModel): TCModel {
 
+    const encMap: FieldEncoderMap = new FieldEncoderMap();
     const pubFieldSequence: PublisherFieldSequence = new PublisherFieldSequence();
     const encodeSequence: string[] = pubFieldSequence[tcModel.version.toString()];
-    const base64Url: Base64Url = new Base64Url();
     let bStringIdx = 0;
-    let bitField = base64Url.decode(encodedString);
+    let bitField = Base64Url.decode(encodedString);
 
     /**
      * the first n bits are the type we don't actually care about them because
@@ -64,7 +73,7 @@ export class PublisherTCEncoder implements Encoder<TCModel> {
 
     encodeSequence.forEach((key: string): void => {
 
-      const encoder: Encoder<TCModelPropType> = new this.encMap[key]() as Encoder<TCModelPropType>;
+      const encoder = encMap[key];
       const numBits: number = (BitLength[key]) ? BitLength[key] : tcModel.numCustomPurposes;
 
       tcModel[key] = encoder.decode(bitField.substr(bStringIdx, numBits));

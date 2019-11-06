@@ -6,10 +6,6 @@
 
 **PublisherTCEncoder**
 
-## Implements
-
-* [Encoder](../interfaces/encoder.md)<[TCModel](tcmodel.md)>
-
 ## Index
 
 ### Methods
@@ -23,11 +19,11 @@
 
 <a id="decode"></a>
 
-###  decode
+### `<Static>` decode
 
 ▸ **decode**(encodedString: *`string`*, tcModel: *[TCModel](tcmodel.md)*): [TCModel](tcmodel.md)
 
-*Defined in [encoder/PublisherTCEncoder.ts:51](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/PublisherTCEncoder.ts#L51)*
+*Defined in encoder/segment/PublisherTCEncoder.ts:60*
 
 **Parameters:**
 
@@ -41,11 +37,11 @@
 ___
 <a id="encode"></a>
 
-###  encode
+### `<Static>` encode
 
 ▸ **encode**(tcModel: *[TCModel](tcmodel.md)*): `string`
 
-*Defined in [encoder/PublisherTCEncoder.ts:25](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/PublisherTCEncoder.ts#L25)*
+*Defined in encoder/segment/PublisherTCEncoder.ts:36*
 
 **Parameters:**
 
