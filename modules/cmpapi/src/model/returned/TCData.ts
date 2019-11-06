@@ -51,15 +51,16 @@ export class TCData extends Return {
    * Constructor to create a TCData object from a TCModel
    * @param {TCModel} tcModel
    * @param {EventStatus} eventStatus is optional
+   * @param {number[]} _vendorIds
    */
-  public constructor(tcModel: TCModel, eventStatus: EventStatus) {
+  public constructor(tcModel: TCModel, eventStatus: EventStatus, _vendorIds?: number[]) {
 
     super();
 
     const tcStringEncoder: TCString = new TCString();
-    const vendorIds = Object.keys(tcModel.gvl.vendors);
-    const purposeIds = Object.keys(tcModel.gvl.purposes);
-    const specialFeatureIds = Object.keys(tcModel.gvl.specialFeatures);
+    const vendorIds: string[] = _vendorIds ? _vendorIds.map((id) => id.toString(10)) : Object.keys(tcModel.gvl.vendors);
+    const purposeIds: string[] = Object.keys(tcModel.gvl.purposes);
+    const specialFeatureIds: string[] = Object.keys(tcModel.gvl.specialFeatures);
 
     this.tcString = tcStringEncoder.encode(tcModel);
     this.eventStatus = eventStatus;

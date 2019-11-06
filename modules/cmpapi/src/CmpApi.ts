@@ -1,12 +1,17 @@
 import {TCModel} from '@iabtcf/core';
-import {Commands} from './Commands';
+import {Commands} from './Commands/Commands';
 
 import {Ping, TCData} from './model';
 
-import {Return} from './model/Return';
-import {CmpStatus, DisplayStatus, EventStatus} from './model/status';
-
-import {ArgSet, Callback, IATCDataCallback, PageCallHandler, Param, PingCallback, TCDataCallback} from './Types';
+import {Return} from './model/returned/Return';
+import {CmpStatus, DisplayStatus, EventStatus} from './status';
+import {ArgSet} from "./types/ArgSet";
+import {Callback} from "./types/callback/Callback";
+import {IATCDataCallback} from "./types/callback/IATCDataCallback";
+import {PingCallback} from "./types/callback/PingCallback";
+import {TCDataCallback} from "./types/callback/TCDataCallback";
+import {PageCallHandler} from "./types/PageCallHandler";
+import {Param} from "./types/Param";
 
 export type Numberish = number | string;
 
