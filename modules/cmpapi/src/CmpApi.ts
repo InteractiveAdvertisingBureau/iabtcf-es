@@ -1,25 +1,12 @@
-import {TCModel, TCString} from '@iabtcf/core';
+import {TCModel} from '@iabtcf/core';
 import {Commands} from './Commands';
 
 import {Ping, TCData} from './model';
 
-import {InAppTCDataBuilder, TCDataBuilder} from './model/builder';
 import {Return} from './model/Return';
+import {CmpStatus, DisplayStatus, EventStatus} from './model/status';
 
-import {
-  InAppTCDataBuilder,
-  TCDataBuilder,
-  PingBuilder,
-} from './model/builder';
-
-import {
-  Param,
-  ArgSet,
-  TCDataCallback,
-  IATCDataCallback,
-  PingCallback,
-  Callback,
-} from './Types';
+import {ArgSet, Callback, IATCDataCallback, PageCallHandler, Param, PingCallback, TCDataCallback} from './Types';
 
 export type Numberish = number | string;
 
@@ -36,7 +23,6 @@ export class CmpApi {
   private static TC_MODEL_INVALID: string = 'CMP Model is not in a valid state';
 
   private tcModel: TCModel;
-  private tcString: TCString = new TCString();
 
   private gdprApplies: boolean;
   private eventStatus: EventStatus;
@@ -236,28 +222,6 @@ export class CmpApi {
 
   }
 
-  /**
-   * getTCData - Public-facing CMP API commands
-   *
-   * @param {TCDataCallback} callback - callback to call when function
-   * @param {number[]} vendors? - optional list of vendor ids
-   * @return {void}
-   */
-  public getTCData(callback: TCDataCallback, vendors?: number[]): void{
-
-    if (this.tcModel) {
-
-      const tcData = new TCData(this.tcModel, this.tcString.encode(this.tcModel), this.eventStatus);
-      this.setReturnFields(tcData);
-      callback(tcData, true);
-
-    } else {
-
-      // queue it until we can build it
-    }
-
-  }
-
   public ping(callback: PingCallback): void {
 
     const ping = new Ping();
@@ -279,6 +243,84 @@ export class CmpApi {
   }
 
   /**
+   * getTCData - Public-facing CMP API commands
+   *
+   * @param {TCDataCallback} callback - callback to call when function
+   * @param {number[]} vendorIds? - optional list of vendor ids
+   * @return {void}
+   */
+  public getTCData(callback: TCDataCallback, vendorIds?: number[]): void{
+
+    // Todo: Handle vendors list
+
+    if (vendorIds) {
+
+      if (!this.isVendorsListValid(vendorIds)) {
+
+        callback(null, false);
+
+      }
+
+    }
+
+    if (this.tcModel) {
+
+      const tcData = new TCData(this.tcModel, this.eventStatus, vendorIds);
+      this.setReturnFields(tcData);
+      callback(tcData, true);
+
+    } else {
+
+      // queue it until we can build it
+    }
+
+  }
+
+  /**
+   * Validates a vendor id list
+   * @param {number[]} vendors
+   * @return {boolean}
+   */
+  private isVendorsListValid(vendorIds: number[]): boolean {
+
+    return Array.isArray(vendorIds) && vendorIds.every((vendorId) => Number.isInteger(vendorId) && vendorId > 0);
+
+  }
+
+  public getInAppTCData(callback: IATCDataCallback): void {
+
+    // const builder: InAppTCDataBuilder = new InAppTCDataBuilder();
+    //
+    // if (builder.isBuildable()) {
+    //
+    //   callback(builder.build(), true);
+    //
+    // } else {
+    //
+    //   // queue it until we can build it
+    // }
+
+  }
+
+  public addEventListener(callback: TCDataCallback): void {
+
+    // const builder: TCDataBuilder = new TCDataBuilder();
+    //
+    // if (builder.isBuildable()) {
+    //
+    //   callback(builder.build(), true);
+    //
+    // } else {
+    //
+    //   // queue it until we can build it
+    // }
+
+  }
+
+  public removeEventListener(callback: TCDataCallback, registeredCallback: TCDataCallback): void {
+  }
+
+  /**
    * Sets all the fields on a Return object using current cmp api data
    * @param {Return} returnObj a Return object
    */
@@ -289,39 +331,6 @@ export class CmpApi {
     returnObj.gdprApplies = this.gdprApplies;
     returnObj.tcfPolicyVersion = this.tcfPolicyVersion;
 
-  }
-
-  public getInAppTCData(callback: IATCDataCallback): void {
-
-    const builder: InAppTCDataBuilder = new InAppTCDataBuilder();
-
-    if (builder.isBuildable()) {
-
-      callback(builder.build(), true);
-
-    } else {
-
-      // queue it until we can build it
-    }
-
-  }
-
-  public addEventListener(callback: TCDataCallback): void {
-
-    const builder: TCDataBuilder = new TCDataBuilder();
-
-    if (builder.isBuildable()) {
-
-      callback(builder.build(), true);
-
-    } else {
-
-      // queue it until we can build it
-    }
-
-  }
-
-  public removeEventListener(callback: TCDataCallback, registeredCallback: TCDataCallback): void {
   }
 
   // eslint-disable-next-line valid-jsdoc
@@ -399,9 +408,9 @@ export class CmpApi {
 
   /**
    * Validates that the parameters used to execute a command are valid
-   * @param command
-   * @param version
-   * @param callback
+   * @param {string} command
+   * @param {string} version
+   * @param {Callback} callback
    */
   private validateCommand(command: string, version: number, callback: Callback): void {
 
