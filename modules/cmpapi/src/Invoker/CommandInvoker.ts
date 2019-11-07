@@ -1,7 +1,6 @@
-import {Command} from '../Commands/';
 import {CmpData} from '../CmpData';
-import {Callback} from "../types/callback/Callback";
-import {Param} from "../types/Param";
+import {Command} from '../Commands/';
+import {Callback, Param} from '../types';
 
 /**
  * Invoker class for command design pattern

@@ -1,6 +1,7 @@
 import {CmpData} from '../CmpData';
 import {TCData} from '../model';
 import {Param, TCDataCallback} from '../types';
+import {Validation} from "../validation/Validation";
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
@@ -39,7 +40,7 @@ export class GetTcDataCommand extends BaseCommand implements Command {
   */
   private isVendorsListValid(vendorIds: number[]): boolean {
 
-    return Array.isArray(vendorIds) && vendorIds.every((vendorId) => Number.isInteger(vendorId) && vendorId > 0);
+    return Validation.isGtrZeroIntegerArray(vendorIds);
 
   }
 

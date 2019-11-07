@@ -1,10 +1,10 @@
 import {TCModel} from '@iabtcf/core';
 import {CmpCommandStream} from './CmpCommandStream';
 import {CmpData} from './CmpData';
-import {Commands, GetTcDataCommand, PingCommand} from './Commands';
+import {Commands, GetInAppTcDataCommand, GetTcDataCommand, GetVendorListCommand, PingCommand} from './Commands';
 import {CommandInvoker} from './Invoker/CommandInvoker';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
-import {ArgSet, Callback, IATCDataCallback, PageCallHandler, Param, TCDataCallback} from './types';
+import {ArgSet, Callback, PageCallHandler, Param, TCDataCallback} from './types';
 
 /**
  * Consent Management Platform API
@@ -13,11 +13,11 @@ export class CmpApi {
 
   private static NOT_SUPPORTED: string = 'not supported by this CMP';
 
-  private commandStream: CmpCommandStream;
+  private readonly commandStream: CmpCommandStream;
 
-  private commandInvoker: CommandInvoker;
+  private readonly commandInvoker: CommandInvoker;
 
-  private cmpData: CmpData;
+  private readonly cmpData: CmpData;
 
   private eventArgSets: ArgSet[];
 
@@ -39,9 +39,14 @@ export class CmpApi {
 
     const pingCommand = new PingCommand(this.cmpData);
     const getTcDataCommand = new GetTcDataCommand(this.cmpData);
+    const getInAppTcDataCommand = new GetInAppTcDataCommand(this.cmpData);
+    const getVendorListCommand = new GetVendorListCommand(this.cmpData);
+
     this.commandInvoker = new CommandInvoker(this.cmpData);
     this.commandInvoker.registerCommand(Commands.PING, pingCommand);
     this.commandInvoker.registerCommand(Commands.GET_TC_DATA, getTcDataCommand);
+    this.commandInvoker.registerCommand(Commands.GET_IN_APP_TC_DATA, getInAppTcDataCommand);
+    this.commandInvoker.registerCommand(Commands.GET_VENDOR_LIST, getVendorListCommand);
 
   }
 
@@ -68,86 +73,6 @@ export class CmpApi {
   public setDisplayStatus(displayStatus: DisplayStatus): void {
 
     this.cmpData.displayStatus = displayStatus;
-
-  }
-
-  // public ping(callback: PingCallback): void {
-  //
-  //   const ping = new Ping();
-  //   this.setReturnFields(ping);
-  //
-  //   if (this.cmpData.tcModel) {
-  //
-  //     ping.gvlVersion = this.cmpData.tcModel.gvl.gvlSpecificationVersion;
-  //
-  //   }
-  //
-  //   ping.apiVersion = '3'; // todo: Where do I get this?
-  //   ping.cmpStatus = this.cmpData.cmpStatus;
-  //   ping.displayStatus = this.cmpData.displayStatus;
-  //   ping.cmpLoaded = true;
-  //
-  //   callback(ping);
-  //
-  // }
-  //
-  // /**
-  //  * getTCData - Public-facing CMP API commands
-  //  *
-  //  * @param {TCDataCallback} callback - callback to call when function
-  //  * @param {number[]} vendorIds? - optional list of vendor ids
-  //  * @return {void}
-  //  */
-  // public getTCData(callback: TCDataCallback, vendorIds?: number[]): void{
-  //
-  //   // Todo: Handle vendors list
-  //
-  //   if (vendorIds) {
-  //
-  //     if (!this.isVendorsListValid(vendorIds)) {
-  //
-  //       callback(null, false);
-  //
-  //     }
-  //
-  //   }
-  //
-  //   if (this.cmpData.tcModel) {
-  //
-  //     const tcData = new TCData(this.cmpData.tcModel, this.cmpData.eventStatus, vendorIds);
-  //     this.setReturnFields(tcData);
-  //     callback(tcData, true);
-  //
-  //   } else {
-  //
-  //     // queue it until we can build it
-  //   }
-  //
-  // }
-  //
-  // /**
-  //  * Validates a vendor id list
-  //  * @param {number[]} vendorIds
-  //  * @return {boolean}
-  //  */
-  // private isVendorsListValid(vendorIds: number[]): boolean {
-  //
-  //   return Array.isArray(vendorIds) && vendorIds.every((vendorId) => Number.isInteger(vendorId) && vendorId > 0);
-  //
-  // }
-
-  public getInAppTCData(callback: IATCDataCallback): void {
-
-    // const builder: InAppTCDataBuilder = new InAppTCDataBuilder();
-    //
-    // if (builder.isBuildable()) {
-    //
-    //   callback(builder.build(), true);
-    //
-    // } else {
-    //
-    //   // queue it until we can build it
-    // }
 
   }
 
@@ -192,17 +117,21 @@ export class CmpApi {
 
       const _this = this;
 
-      _this.handlePageCall(command, version, callback, param);
+      _this.pageCallHandler(command, version, callback, param);
 
     };
 
   }
 
   /**
-   * Handler for page calls
+   * Handler for page call commands
+   * @type {PageCallHandler}
+   * @param {string} command
+   * @param {number} version
+   * @param {Callback} callback
+   * @param {Param} param
    */
-  /* eslint-disable-next-line */
-  private handlePageCall(command: string, version: number, callback: Callback, param?: Param): void {
+  private pageCallHandler(command: string, version: number, callback: Callback, param?: Param): void {
 
     this.validateCommand(command, version, callback);
 
@@ -217,6 +146,8 @@ export class CmpApi {
 
       case Commands.GET_TC_DATA: {
 
+        // Todo: where are we going to queue up commands?
+
         this.commandInvoker.execute(Commands.GET_TC_DATA, callback, param);
         break;
 
@@ -224,12 +155,27 @@ export class CmpApi {
 
       case Commands.GET_IN_APP_TC_DATA: {
 
+        // Todo: where are we going to queue up commands?
+
         this.commandInvoker.execute(Commands.GET_TC_DATA, callback, param);
         break;
 
       }
 
+      case Commands.GET_VENDOR_LIST: {
+
+        // Todo: where are we going to queue up commands?
+
+        // TODO: Implement get vendor list
+
+        this.commandInvoker.execute(Commands.GET_VENDOR_LIST, callback, param);
+        break;
+
+      }
+
       case Commands.ADD_EVENT_LISTENER: {
+
+        // Todo: where are we going to queue up commands?
 
         this.addEventListener(callback as TCDataCallback);
         break;
@@ -237,6 +183,8 @@ export class CmpApi {
       }
 
       case Commands.REMOVE_EVENT_LISTENER: {
+
+        // Todo: where are we going to queue up commands?
 
         this.removeEventListener(callback as TCDataCallback, callback as TCDataCallback);
         break;

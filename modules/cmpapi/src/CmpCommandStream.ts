@@ -3,7 +3,7 @@ import {CmpStatus} from './status';
 import {ArgSet, PageCallHandler} from './types';
 
 /**
- *
+ * Initializes CMP frame and hooks up the provided PageCallHandler function to stream commands through
  */
 export class CmpCommandStream {
 
