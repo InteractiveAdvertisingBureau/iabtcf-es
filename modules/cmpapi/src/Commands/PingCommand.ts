@@ -1,8 +1,6 @@
-import {Ping} from "../model";
-import {CmpData} from '../model/CmpData';
-import {Callback} from "../types/callback/Callback";
-import {PingCallback} from "../types/callback/PingCallback";
-import {Param} from "../types/Param";
+import {CmpData} from '../CmpData';
+import {Ping} from '../model';
+import {Param, PingCallback} from '../types';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
@@ -17,7 +15,7 @@ export class PingCommand extends BaseCommand implements Command {
   public execute(callback: PingCallback, param?: Param): void {
 
     const ping = new Ping();
-    this.setReturnFields(ping);
+    this.setBaseReturnFields(ping);
 
     if (this.cmpData.tcModel) {
 
@@ -25,12 +23,13 @@ export class PingCommand extends BaseCommand implements Command {
 
     }
 
-    ping.apiVersion = '3'; // todo: Where do I get this?
+    ping.apiVersion = this.cmpData.apiVersion.toString(10);
     ping.cmpStatus = this.cmpData.cmpStatus;
     ping.displayStatus = this.cmpData.displayStatus;
     ping.cmpLoaded = true;
 
     callback(ping);
+
   }
 
 }

@@ -1,8 +1,8 @@
 import {TCModel, TCString} from '@iabtcf/core';
-import {BooleanVector, createBooleanVector} from './BooleanVector';
-import {createRestrictions, Restrictions} from './Restrictions';
+import {BooleanVector, createBooleanVector} from '../BooleanVector';
+import {createRestrictions, Restrictions} from '../Restrictions';
 import {Return} from './Return';
-import {EventStatus} from './status';
+import {EventStatus} from '../../status';
 
 /**
  * Class represents consent data

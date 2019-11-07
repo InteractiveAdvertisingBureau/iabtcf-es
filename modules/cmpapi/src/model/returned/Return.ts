@@ -1,4 +1,4 @@
-import {BoolInt} from './BoolInt';
+import {BoolInt} from '../../types/BoolInt';
 
 export class Return {
 

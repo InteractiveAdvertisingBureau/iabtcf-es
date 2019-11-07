@@ -1,296 +1,140 @@
 import {TCModel} from '@iabtcf/core';
-import {Commands} from './Commands/Commands';
-
-import {Ping, TCData} from './model';
-
-import {Return} from './model/returned/Return';
+import {CmpCommandStream} from './CmpCommandStream';
+import {CmpData} from './CmpData';
+import {Commands, GetTcDataCommand, PingCommand} from './Commands';
+import {CommandInvoker} from './Invoker/CommandInvoker';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
-import {ArgSet} from "./types/ArgSet";
-import {Callback} from "./types/callback/Callback";
-import {IATCDataCallback} from "./types/callback/IATCDataCallback";
-import {PingCallback} from "./types/callback/PingCallback";
-import {TCDataCallback} from "./types/callback/TCDataCallback";
-import {PageCallHandler} from "./types/PageCallHandler";
-import {Param} from "./types/Param";
-
-export type Numberish = number | string;
+import {ArgSet, Callback, IATCDataCallback, PageCallHandler, Param, TCDataCallback} from './types';
 
 /**
  * Consent Management Platform API
  */
 export class CmpApi {
 
-  private static readonly API_FUNCTION_NAME: string = '__tcfapi';
-  private static readonly API_LOCATOR_NAME: string = '__tcfapiLocator';
-
   private static NOT_SUPPORTED: string = 'not supported by this CMP';
-  private static EXISTING_CMP: string = 'CMP Exists already – cannot create';
-  private static TC_MODEL_INVALID: string = 'CMP Model is not in a valid state';
 
-  private tcModel: TCModel;
+  private commandStream: CmpCommandStream;
 
-  private gdprApplies: boolean;
-  private eventStatus: EventStatus;
-  private cmpStatus: CmpStatus = CmpStatus.LOADING;
-  private displayStatus: DisplayStatus = DisplayStatus.HIDDEN;
+  private commandInvoker: CommandInvoker;
 
-  private cmpId: number;
-  private cmpVersion: number;
-  private tcfPolicyVersion: number = 2;
+  private cmpData: CmpData;
 
-  private queuedArgSets: ArgSet[];
   private eventArgSets: ArgSet[];
 
-  private win: Window = window;
   private customMethods = {};
 
-  // Todo: should we type this?
-
+  /**
+   * Constructor
+   * @param {number} cmpId
+   * @param {number} cmpVersion
+   */
   public constructor(cmpId: number, cmpVersion: number) {
 
-    this.cmpId = cmpId;
-    this.cmpVersion = cmpVersion;
-
     /**
-     * Check for locator frame, if there is a stub then this should have been
-     * created if not, we'll need to create it to be able to handle other
-     * frames calling
+     * Initialize cmp data, set up frame and replace stub with our command handler
      */
 
-    let frame = this.win;
-    let locatorFrameExists = false;
+    this.commandStream = new CmpCommandStream(this.getPageCallHandler());
+    this.cmpData = new CmpData(cmpId, cmpVersion);
 
-    while (frame) {
-
-      try {
-
-        /**
-         * throws a reference error if no frames exist
-         */
-
-        if (frame.frames[CmpApi.API_LOCATOR_NAME]) {
-
-          locatorFrameExists = true;
-          break;
-
-        }
-
-      } catch (ignore) {}
-
-      if (frame === this.win.top) {
-
-        break;
-
-      }
-
-      frame = frame.parent;
-
-    }
-
-    if (locatorFrameExists) {
-
-      /**
-       * If the locator frame exists, then that could mean one of two things:
-       * either 1. it's the stub, or 2. it's another CMP.  If it's the stub
-       * we'll want to capture the queue, otherwise we'll just die because we
-       * can't have two CMPs on a page
-       */
-
-      if (frame === this.win) {
-
-        /**
-         * This is the same window as ours, now we can create the API lets see
-         * if this is the stub
-         */
-
-        this.win[CmpApi.API_FUNCTION_NAME]('ping', 2, (ping: Ping): void => {
-
-          if (!ping.cmpLoaded && ping.cmpStatus === CmpStatus.STUB) {
-
-            /**
-             * this is our stub, we are all clear to load the full API
-             */
-
-            try {
-
-              this.queuedArgSets = this.win[CmpApi.API_FUNCTION_NAME]();
-
-            } catch (ignore) {
-
-              this.queuedArgSets = [];
-
-            }
-
-            /**
-             * Hook up handlePageCall function
-             */
-            /* eslint-disable-next-line */
-            this.win[CmpApi.API_FUNCTION_NAME] = this.getPageCallHandler();
-
-          } else {
-
-            /**
-             * Something exists on this page already, so we're not going to create an API
-             */
-
-            throw new Error(CmpApi.EXISTING_CMP);
-
-          }
-
-        });
-
-      } else {
-
-        throw new Error(CmpApi.EXISTING_CMP);
-
-      }
-
-    } else {
-
-      /**
-       * A stub didn't exist, so we have free reign to do whatever we want now.
-       */
-
-      this.addFrame();
-
-      /**
-       * Hook up handlePageCall function
-       */
-      /* eslint-disable-next-line */
-      this.win[CmpApi.API_FUNCTION_NAME] = this.getPageCallHandler();
-
-    }
-
-  }
-
-  private addFrame(): void {
-
-    const doc = this.win.document;
-
-    if (doc.body) {
-
-      /**
-       * check for body tag – otherwise we'll be
-       * be having a hard time appending a child
-       * to it if it doesn't exist
-       */
-
-      const iframe = doc.createElement('iframe');
-
-      iframe.style.cssText = 'display:none';
-      iframe.name = CmpApi.API_LOCATOR_NAME;
-      doc.body.appendChild(iframe);
-
-    } else {
-
-      /**
-       * Wait for the body tag to exist.
-       */
-
-      setTimeout(this.addFrame, 5);
-
-    }
+    const pingCommand = new PingCommand(this.cmpData);
+    const getTcDataCommand = new GetTcDataCommand(this.cmpData);
+    this.commandInvoker = new CommandInvoker(this.cmpData);
+    this.commandInvoker.registerCommand(Commands.PING, pingCommand);
+    this.commandInvoker.registerCommand(Commands.GET_TC_DATA, getTcDataCommand);
 
   }
 
   public setTCModel(tcm: TCModel, eventStatus?: EventStatus): void {
 
-    if (tcm.isValid()) {
-
-      this.tcModel = tcm;
-      this.eventStatus = eventStatus || this.eventStatus;
-      this.processQueues();
-
-    } else {
-
-      throw new Error(CmpApi.TC_MODEL_INVALID);
-
-    }
+    this.cmpData.tcModel = tcm;
+    this.cmpData.eventStatus = eventStatus || this.cmpData.eventStatus;
+    this.processQueues();
 
   }
 
   public setGdprApplies(applies: boolean): void {
 
-    this.gdprApplies = applies;
+    this.cmpData.gdprApplies = applies;
 
   }
 
   public setCmpStatus(cmpStatus: CmpStatus): void {
 
-    this.cmpStatus = cmpStatus;
+    this.cmpData.cmpStatus = cmpStatus;
 
   }
 
   public setDisplayStatus(displayStatus: DisplayStatus): void {
 
-    this.displayStatus = displayStatus;
+    this.cmpData.displayStatus = displayStatus;
 
   }
 
-  public ping(callback: PingCallback): void {
-
-    const ping = new Ping();
-    this.setReturnFields(ping);
-
-    if (this.tcModel) {
-
-      ping.gvlVersion = this.tcModel.gvl.gvlSpecificationVersion;
-
-    }
-
-    ping.apiVersion = '3'; // todo: Where do I get this?
-    ping.cmpStatus = this.cmpStatus;
-    ping.displayStatus = this.displayStatus;
-    ping.cmpLoaded = true;
-
-    callback(ping);
-
-  }
-
-  /**
-   * getTCData - Public-facing CMP API commands
-   *
-   * @param {TCDataCallback} callback - callback to call when function
-   * @param {number[]} vendorIds? - optional list of vendor ids
-   * @return {void}
-   */
-  public getTCData(callback: TCDataCallback, vendorIds?: number[]): void{
-
-    // Todo: Handle vendors list
-
-    if (vendorIds) {
-
-      if (!this.isVendorsListValid(vendorIds)) {
-
-        callback(null, false);
-
-      }
-
-    }
-
-    if (this.tcModel) {
-
-      const tcData = new TCData(this.tcModel, this.eventStatus, vendorIds);
-      this.setReturnFields(tcData);
-      callback(tcData, true);
-
-    } else {
-
-      // queue it until we can build it
-    }
-
-  }
-
-  /**
-   * Validates a vendor id list
-   * @param {number[]} vendors
-   * @return {boolean}
-   */
-  private isVendorsListValid(vendorIds: number[]): boolean {
-
-    return Array.isArray(vendorIds) && vendorIds.every((vendorId) => Number.isInteger(vendorId) && vendorId > 0);
-
-  }
+  // public ping(callback: PingCallback): void {
+  //
+  //   const ping = new Ping();
+  //   this.setReturnFields(ping);
+  //
+  //   if (this.cmpData.tcModel) {
+  //
+  //     ping.gvlVersion = this.cmpData.tcModel.gvl.gvlSpecificationVersion;
+  //
+  //   }
+  //
+  //   ping.apiVersion = '3'; // todo: Where do I get this?
+  //   ping.cmpStatus = this.cmpData.cmpStatus;
+  //   ping.displayStatus = this.cmpData.displayStatus;
+  //   ping.cmpLoaded = true;
+  //
+  //   callback(ping);
+  //
+  // }
+  //
+  // /**
+  //  * getTCData - Public-facing CMP API commands
+  //  *
+  //  * @param {TCDataCallback} callback - callback to call when function
+  //  * @param {number[]} vendorIds? - optional list of vendor ids
+  //  * @return {void}
+  //  */
+  // public getTCData(callback: TCDataCallback, vendorIds?: number[]): void{
+  //
+  //   // Todo: Handle vendors list
+  //
+  //   if (vendorIds) {
+  //
+  //     if (!this.isVendorsListValid(vendorIds)) {
+  //
+  //       callback(null, false);
+  //
+  //     }
+  //
+  //   }
+  //
+  //   if (this.cmpData.tcModel) {
+  //
+  //     const tcData = new TCData(this.cmpData.tcModel, this.cmpData.eventStatus, vendorIds);
+  //     this.setReturnFields(tcData);
+  //     callback(tcData, true);
+  //
+  //   } else {
+  //
+  //     // queue it until we can build it
+  //   }
+  //
+  // }
+  //
+  // /**
+  //  * Validates a vendor id list
+  //  * @param {number[]} vendorIds
+  //  * @return {boolean}
+  //  */
+  // private isVendorsListValid(vendorIds: number[]): boolean {
+  //
+  //   return Array.isArray(vendorIds) && vendorIds.every((vendorId) => Number.isInteger(vendorId) && vendorId > 0);
+  //
+  // }
 
   public getInAppTCData(callback: IATCDataCallback): void {
 
@@ -325,23 +169,22 @@ export class CmpApi {
   public removeEventListener(callback: TCDataCallback, registeredCallback: TCDataCallback): void {
   }
 
-  /**
-   * Sets all the fields on a Return object using current cmp api data
-   * @param {Return} returnObj a Return object
-   */
-  private setReturnFields(returnObj: Return): void {
+  // /**
+  //  * Sets all the fields on a Return object using current cmp api data
+  //  * @param {Return} returnObj a Return object
+  //  */
+  // private setReturnFields(returnObj: Return): void {
+  //
+  //   returnObj.cmpId = this.cmpData.cmpId;
+  //   returnObj.cmpVersion = this.cmpData.cmpVersion;
+  //   returnObj.gdprApplies = this.cmpData.gdprApplies;
+  //   returnObj.tcfPolicyVersion = this.cmpData.tcfPolicyVersion;
+  //
+  // }
 
-    returnObj.cmpId = this.cmpId;
-    returnObj.cmpVersion = this.cmpVersion;
-    returnObj.gdprApplies = this.gdprApplies;
-    returnObj.tcfPolicyVersion = this.tcfPolicyVersion;
-
-  }
-
-  // eslint-disable-next-line valid-jsdoc
   /**
    * Returns the page call handler function with a reference to this api
-   * @return PageCallHandler
+   * @return {PageCallHandler}
    */
   private getPageCallHandler(): PageCallHandler {
 
@@ -367,14 +210,21 @@ export class CmpApi {
 
       case Commands.PING: {
 
-        this.ping(callback as PingCallback);
+        this.commandInvoker.execute(Commands.PING, callback, param);
         break;
 
       }
 
       case Commands.GET_TC_DATA: {
 
-        this.getTCData(callback as TCDataCallback, param as number[]);
+        this.commandInvoker.execute(Commands.GET_TC_DATA, callback, param);
+        break;
+
+      }
+
+      case Commands.GET_IN_APP_TC_DATA: {
+
+        this.commandInvoker.execute(Commands.GET_TC_DATA, callback, param);
         break;
 
       }

@@ -1,7 +1,7 @@
 import {
   CmpStatus,
   DisplayStatus,
-} from './status';
+} from '../../status';
 
 import {Return} from './Return';
 

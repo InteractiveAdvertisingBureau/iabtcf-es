@@ -1,4 +1,4 @@
-import {CmpData} from '../model/CmpData';
+import {CmpData} from '../CmpData';
 import {Return} from '../model/returned/Return';
 
 export abstract class BaseCommand {
@@ -15,7 +15,7 @@ export abstract class BaseCommand {
      * Sets all the fields on a Return object using current cmp api data
      * @param {Return} returnObj a Return object
      */
-  protected setReturnFields(returnObj: Return): void {
+  protected setBaseReturnFields(returnObj: Return): void {
 
     returnObj.cmpId = this.cmpData.cmpId;
     returnObj.cmpVersion = this.cmpData.cmpVersion;

@@ -1,7 +1,6 @@
+import {CmpData} from '../CmpData';
 import {TCData} from '../model';
-import {CmpData} from '../model/CmpData';
-import {TCDataCallback} from "../types/callback/TCDataCallback";
-import {Param} from "../types/Param";
+import {Param, TCDataCallback} from '../types';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
@@ -28,7 +27,7 @@ export class GetTcDataCommand extends BaseCommand implements Command {
     }
 
     const tcData = new TCData(this.cmpData.tcModel, this.cmpData.eventStatus, vendorIds);
-    this.setReturnFields(tcData);
+    this.setBaseReturnFields(tcData);
     callback(tcData, true);
 
   }

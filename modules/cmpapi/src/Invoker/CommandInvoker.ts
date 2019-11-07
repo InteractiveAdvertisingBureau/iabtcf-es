@@ -1,5 +1,5 @@
 import {Command} from '../Commands/';
-import {CmpData} from '../model/CmpData';
+import {CmpData} from '../CmpData';
 import {Callback} from "../types/callback/Callback";
 import {Param} from "../types/Param";
 

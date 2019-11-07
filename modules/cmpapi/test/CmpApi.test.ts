@@ -87,7 +87,7 @@ describe('CmpApi', (): void => {
 
         };
 
-        win[API_FUNCTION_NAME]('getTCData', 2, callback, [1.3, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
+        win[API_FUNCTION_NAME]('getTCData', 2, callback, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
 
       });
 
