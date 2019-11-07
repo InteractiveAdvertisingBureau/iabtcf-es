@@ -5,6 +5,7 @@ import {Commands, GetInAppTcDataCommand, GetTcDataCommand, GetVendorListCommand,
 import {CommandInvoker} from './Invoker/CommandInvoker';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
 import {ArgSet, Callback, PageCallHandler, Param, TCDataCallback} from './types';
+import {CmpApiUtil, Validation} from './utilities';
 
 /**
  * Consent Management Platform API
@@ -94,6 +95,10 @@ export class CmpApi {
   public removeEventListener(callback: TCDataCallback, registeredCallback: TCDataCallback): void {
   }
 
+  private processQueues() {
+
+  }
+
   // /**
   //  * Sets all the fields on a Return object using current cmp api data
   //  * @param {Return} returnObj a Return object
@@ -124,7 +129,7 @@ export class CmpApi {
   }
 
   /**
-   * Handler for page call commands
+   * Handler for all page call commands
    * @type {PageCallHandler}
    * @param {string} command
    * @param {number} version
@@ -133,7 +138,18 @@ export class CmpApi {
    */
   private pageCallHandler(command: string, version: number, callback: Callback, param?: Param): void {
 
-    this.validateCommand(command, version, callback);
+    if (!this.validateCommand(command, version, callback)) {
+
+      /**
+       * Command didn't pass basic validation. Further processing of this command will stop here.
+       */
+      return;
+
+    }
+
+    /**
+     * Map command strings to their appropriate commands
+     */
 
     switch (command) {
 
@@ -193,14 +209,24 @@ export class CmpApi {
 
       default: {
 
-        // check if trying to execute a custom command
-        if (typeof this.customMethods[command] === 'function') {
+        if (Validation.isFunction(this.customMethods[command])) {
 
-          // execute custom methods
+          /**
+           * If custom methods were set, process them here.
+           * Todo: Handle custom commands
+           */
+
+        } else {
+
+          /**
+           * Command is not supported and has no custom methods defined
+           */
+
+          CmpApiUtil.failCallback(callback, `${command} command ${CmpApi.NOT_SUPPORTED}`);
+          break;
 
         }
 
-        this.error(`${command} command ${CmpApi.NOT_SUPPORTED}`);
         break;
 
       }
@@ -210,42 +236,37 @@ export class CmpApi {
   }
 
   /**
-   * Validates that the parameters used to execute a command are valid
+   * Validates that the common parameters used to execute a command are valid
+   * // Todo: possibly move into validation class as static
    * @param {string} command
    * @param {string} version
    * @param {Callback} callback
+   * @return {boolean}
    */
-  private validateCommand(command: string, version: number, callback: Callback): void {
+  private validateCommand(command: string, version: number, callback: Callback): boolean {
 
-    // todo: what about params?
+    if (!Validation.isNonEmptyString(command)) {
 
-    if (!command) {
-
-      this.error(`Command string must not be null or empty.`);
+      CmpApiUtil.failCallback(callback, `Command bust be a non-null or non-empty string`);
+      return false;
 
     }
 
-    if (version !== 2) {
+    if (!(Validation.isIntegerGtrOne(version) || version === null || version === undefined)) {
 
-      this.error(`Version ${version} ${CmpApi.NOT_SUPPORTED}`);
+      CmpApiUtil.failCallback(callback, `Version ${version} ${CmpApi.NOT_SUPPORTED}`);
+      return false;
 
     }
 
     if (typeof callback !== 'function') {
 
-      this.error(`callback required`);
+      CmpApiUtil.error(`callback required`);
+      return false;
 
     }
 
-  }
-
-  private error(msg: string): void {
-
-    console.error(msg);
-
-  }
-
-  private processQueues() {
+    return true;
 
   }
 

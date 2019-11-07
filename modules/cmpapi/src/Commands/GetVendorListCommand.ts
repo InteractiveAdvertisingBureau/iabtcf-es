@@ -1,7 +1,7 @@
 import {CmpData} from '../CmpData';
 import {GlobalVendorList} from '../model';
 import {VendorListCallback} from '../types';
-import {Validation} from '../validation/Validation';
+import {Validation} from '../utilities/Validation';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 

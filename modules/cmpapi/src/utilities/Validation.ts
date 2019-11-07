@@ -1,3 +1,6 @@
+/**
+ * Validation class used to organize reusable validation methods
+ */
 export class Validation {
 
   public static isArray(obj): boolean {
@@ -16,6 +19,12 @@ export class Validation {
   public static isString(obj): boolean {
 
     return (typeof obj === 'string' || obj instanceof String);
+
+  }
+
+  public static isNonEmptyString(obj): boolean {
+
+    return Validation.isString(obj) && obj.length > 0;
 
   }
 
@@ -45,7 +54,7 @@ export class Validation {
 
   public static isFunction(obj): boolean {
 
-    return (typeof obj !== 'function');
+    return (typeof obj === 'function');
 
   }
 
