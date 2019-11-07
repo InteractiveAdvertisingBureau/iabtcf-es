@@ -24,6 +24,8 @@ import Nav from './components/nav/Nav.vue';
 import {SectionModel} from './model/SectionModel';
 import BootstrapVue from 'bootstrap-vue';
 
+import {GVL} from '@iabtcf/core';
+
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
 
@@ -32,15 +34,22 @@ const routes: RouteConfig[] = sectionModel.getRouteConfig();
 
 const router = new VueRouter({routes});
 
-// eslint doesn't like these decorators...
-// eslint-disable-next-line
 @Component({
   router,
   components: {
     Nav,
   },
 })
-export default class App extends Vue {};
+export default class App extends Vue {
+
+  public constructor() {
+
+    super();
+    GVL.baseUrl = './';
+
+  }
+
+};
 </script>
 <style lang="scss">
   @import './styles/index.scss';

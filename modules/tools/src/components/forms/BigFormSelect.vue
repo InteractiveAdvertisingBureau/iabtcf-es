@@ -38,7 +38,6 @@ export default class extends FormComponent {
   private mounted(): void {
 
     this.size = Math.min(this.options.length, 10);
-    debugger;
 
   }
 
