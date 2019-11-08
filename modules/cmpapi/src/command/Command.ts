@@ -1,5 +1,4 @@
-import {Callback} from "../types/callback/Callback";
-import {Param} from "../types/Param";
+import {Callback, Param} from '../types';
 
 export interface Command {
 

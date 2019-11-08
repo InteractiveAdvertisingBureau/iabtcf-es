@@ -1,7 +1,7 @@
 import {CmpData} from '../CmpData';
 import {TCData} from '../model';
 import {Param, TCDataCallback} from '../types';
-import {Validation} from '../utilities';
+import {CmpApiUtil, Constants, Validation} from '../utilities';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
@@ -21,7 +21,7 @@ export class GetTcDataCommand extends BaseCommand implements Command {
 
       if (!this.isVendorsListValid(vendorIds)) {
 
-        callback(null, false);
+        CmpApiUtil.failCallback(callback, Constants.VENDOR_LIST_INVALID);
 
       }
 

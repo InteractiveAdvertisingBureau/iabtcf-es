@@ -1,6 +1,7 @@
 export * from './ArgSet';
 export * from './BoolInt';
 export * from './PageCallHandler';
+export * from './CommandArgsHandler';
 export * from './Param';
 export * from './callback/PingCallback';
 export * from './callback/TCDataCallback';

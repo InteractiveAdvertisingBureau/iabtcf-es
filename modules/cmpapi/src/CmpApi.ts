@@ -6,7 +6,7 @@ import {CommandInvoker} from './Invoker/CommandInvoker';
 import {CommandArgs} from './model';
 import {CommandQueue} from './queue/CommandQueue';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
-import {ArgSet, Callback, PageCallHandler, Param} from './types';
+import {ArgSet, Callback, CommandArgsHandler, PageCallHandler, Param} from './types';
 import {CmpApiUtil, Constants, Validation} from './utilities';
 
 /**
@@ -18,9 +18,9 @@ export class CmpApi {
 
   private readonly commandInvoker: CommandInvoker;
 
-  private readonly cmpData: CmpData;
-
   private readonly commandQueue: CommandQueue;
+
+  private readonly cmpData: CmpData;
 
   private eventArgSets: ArgSet[];
 
@@ -37,11 +37,13 @@ export class CmpApi {
      * Initialize cmp data, set up frame and replace stub with our command handler
      */
 
-    this.commandQueue = new CommandQueue();
-
-    // Todo: Need to test with a stub for the args callback!!!!
-    this.commandStream = new CmpCommandStream(this.getPageCallHandler(), this.getSetCommandArgsCallback());
     this.cmpData = new CmpData(cmpId, cmpVersion);
+
+    this.commandQueue = new CommandQueue();
+    this.commandQueue.setCommandProcessor(this.getCommandProcessor());
+
+    this.commandStream = new CmpCommandStream(this.getPageCallHandler(), this.getCommandArgsHandler());
+
 
     const pingCommand = new PingCommand(this.cmpData);
     const getTcDataCommand = new GetTcDataCommand(this.cmpData);
@@ -56,11 +58,16 @@ export class CmpApi {
 
   }
 
+  /*
+      ======================== START CMP METHODS ========================
+      Methods exposed to the cmp to set data. Think I would like to move these somewhere.
+   */
+
   public setTCModel(tcm: TCModel, eventStatus?: EventStatus): void {
 
     this.cmpData.tcModel = tcm;
     this.cmpData.eventStatus = eventStatus || this.cmpData.eventStatus;
-    this.commandQueue.processCommands();
+    this.commandQueue.processAndClearCommands();
 
   }
 
@@ -82,6 +89,10 @@ export class CmpApi {
 
   }
 
+  /*
+    ======================== END CMP METHODS ========================
+ */
+
   /**
    * Returns the page call handler function with a reference to this api
    * @return {PageCallHandler}
@@ -98,12 +109,30 @@ export class CmpApi {
 
   }
 
-  private getSetCommandArgsCallback(): (commandArgs: CommandArgs[]) => void {
+  /**
+   * Returns the page call handler function with a reference to this api
+   * @return {CommandArgsHandler}
+   */
+  private getCommandArgsHandler(): CommandArgsHandler {
 
     return (commandArgs: CommandArgs[]): void => {
 
       const _this = this;
-      _this.commandQueue.queueCommands(commandArgs);
+
+      /**
+       * Filter out invalid commands and add them to queue.
+       */
+
+      const filteredCommandArgs = commandArgs.filter((ca: CommandArgs) => ca.validate('', true));
+      _this.commandQueue.queueCommands(filteredCommandArgs);
+      console.log('COMMAND ARGS', commandArgs);
+      console.log('FILTERED COMMAND ARGS', filteredCommandArgs);
+
+      if (_this.cmpData.tcModelIsSet) {
+
+        _this.commandQueue.processAndClearCommands();
+
+      }
 
     };
 
@@ -255,6 +284,17 @@ export class CmpApi {
   private shouldCommandBeQueued(commandArgs: CommandArgs): boolean {
 
     return commandArgs.command === Commands.PING ? false : !this.cmpData.tcModelIsSet;
+
+  }
+
+  private getCommandProcessor(): (commandArgs: CommandArgs) => void {
+
+    return (commandArgs) => {
+
+      const _this = this;
+      return _this.processCommand(commandArgs);
+
+    };
 
   }
 

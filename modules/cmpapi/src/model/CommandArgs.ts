@@ -47,34 +47,45 @@ export class CommandArgs {
   }
 
   /**
-   * Validates that the common parameters used to execute a command are valid
+   * Validates that the common parameters used to execute a command are valid.
+   * Returns validation message through string ref.
+   * If failCallbackIfNotValid is true, the method will call the callback with failed values if not valid.
    * @param {string} validationMessage
+   * @param {boolean} failCallbackIfNotValid
    * @return {boolean}
    */
-  public validate(validationMessage: string): boolean {
+  public validate(validationMessage: string, failCallbackIfNotValid = false): boolean {
 
-    if (!Validation.isNonEmptyString(this._command)) {
+    let isValid = true;
+
+    if (isValid && !Validation.isNonEmptyString(this._command)) {
 
       validationMessage = Constants.COMMAND_INVALID;
-      return false;
+      isValid = false;
 
     }
 
     if (!(Validation.isIntegerGtrOne(this._version) || this._version === null || this._version === undefined)) {
 
       validationMessage = `Version ${this._version} ${Constants.NOT_SUPPORTED}`;
-      return false;
+      isValid = false;
 
     }
 
     if (!Validation.isFunction(this._callback)) {
 
       validationMessage = Constants.CALLBACK_REQUIRED;
-      return false;
+      isValid = false;
 
     }
 
-    return true;
+    if (!isValid && failCallbackIfNotValid) {
+
+      CmpApiUtil.failCallback(this._callback, validationMessage);
+
+    }
+
+    return isValid;
 
   }
 

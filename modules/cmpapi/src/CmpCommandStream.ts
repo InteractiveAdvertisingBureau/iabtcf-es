@@ -1,7 +1,7 @@
 import {Commands} from './command';
 import {CommandArgs, Ping} from './model';
 import {CmpStatus} from './status';
-import {ArgSet, PageCallHandler} from './types';
+import {ArgSet, CommandArgsHandler, PageCallHandler} from './types';
 import {Constants, Validation} from './utilities';
 
 /**
@@ -18,17 +18,11 @@ export class CmpCommandStream {
   /**
    * Constructor
    * @param {PageCallHandler} pageCallHandler
-   * @param {(ca: CommandArgs[]) => void} setCommandArgsCallback
+   * @param {CommandArgsHandler} commandArgsHandler
    */
-  public constructor(pageCallHandler: PageCallHandler, setCommandArgsCallback: (ca: CommandArgs[]) => void) {
+  public constructor(pageCallHandler: PageCallHandler, commandArgsHandler: CommandArgsHandler) {
 
-    this.initFrameAndCallHandler(pageCallHandler, setCommandArgsCallback);
-
-  }
-
-  public get commandArgsSet(): CommandArgs[] {
-
-    return this.queuedArgSets.map((as: ArgSet) => new CommandArgs(...as));
+    this.initFrameAndCallHandler(pageCallHandler, commandArgsHandler);
 
   }
 
@@ -37,8 +31,9 @@ export class CmpCommandStream {
    * created if not, we'll need to create it to be able to handle other
    * frames calling
    * @param {PageCallHandler} pageCallHandler
+   * @param {CommandArgsHandler} commandArgsHandler
    */
-  private initFrameAndCallHandler(pageCallHandler: PageCallHandler, setCommandArgsCallback: (ca: CommandArgs[]) => void): void {
+  private initFrameAndCallHandler(pageCallHandler: PageCallHandler, commandArgsHandler: CommandArgsHandler): void {
 
     let frame = this.win;
     let locatorFrameExists = false;
@@ -106,7 +101,7 @@ export class CmpCommandStream {
 
               }
 
-              setCommandArgsCallback(this.commandArgsSet);
+              commandArgsHandler(this.commandArgsSet);
 
               /**
                * Hook up handlePageCall function
@@ -162,6 +157,12 @@ export class CmpCommandStream {
   private set __tcfapi(value) {
 
     this.win[Constants.API_FUNCTION_NAME] = value;
+
+  }
+
+  public get commandArgsSet(): CommandArgs[] {
+
+    return this.queuedArgSets.map((as: ArgSet) => new CommandArgs(...as));
 
   }
 

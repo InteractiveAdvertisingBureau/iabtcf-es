@@ -1,6 +1,5 @@
 import {CmpData} from '../CmpData';
-import {Callback} from "../types/callback/Callback";
-import {Param} from "../types/Param";
+import {Callback, Param} from '../types';
 import {Command} from './Command';
 import {GetTcDataCommand} from './GetTcDataCommand';
 

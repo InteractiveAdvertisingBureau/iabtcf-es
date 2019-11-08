@@ -1,6 +1,7 @@
 import {CmpData} from '../CmpData';
 import {GlobalVendorList} from '../model';
 import {VendorListCallback} from '../types';
+import {CmpApiUtil, Constants} from '../utilities';
 import {Validation} from '../utilities/Validation';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
@@ -21,7 +22,7 @@ export class GetVendorListCommand extends BaseCommand implements Command {
 
       if (!this.isValidVendorListVersion(vendorListVersion)) {
 
-        callback(null, false);
+        CmpApiUtil.failCallback(callback, Constants.VENDOR_LIST_VERSION_INVALID);
 
       }
 

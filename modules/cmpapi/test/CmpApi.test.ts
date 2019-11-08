@@ -1,5 +1,6 @@
 import {GVL, TCModel} from '@iabtcf/core';
 import {assert} from 'chai';
+import {createStub} from '../dev/stub';
 import {
   CmpApi,
   EventStatus,
@@ -23,13 +24,31 @@ describe('CmpApi', (): void => {
   // eslint-disable-next-line no-unused-vars
   let cmpApi: CmpApi;
 
+  createStub();
+
   describe('Creation', (): void => {
 
     describe('Before creation of a new instance of CmpApi:', (): void => {
 
-      it('Page handler is NOT created', (): void => {
+      it('Stub exists', (done): void => {
 
-        assert.isNotFunction(win[API_FUNCTION_NAME], 'Page handler was created or is a function');
+        assert.isFunction(win[API_FUNCTION_NAME], 'Stub is not a function.');
+
+        const callback: PingCallback = (pingReturn: Ping | null) => {
+
+          assert.isNotNull(pingReturn, 'Stub Ping return is null');
+
+          if (pingReturn) {
+
+            assert.equal(pingReturn.cmpStatus, 'stubCMP', 'Stub is not in a valid state');
+
+          }
+
+          done();
+
+        };
+
+        win[API_FUNCTION_NAME]('ping', 2, callback);
 
       });
 

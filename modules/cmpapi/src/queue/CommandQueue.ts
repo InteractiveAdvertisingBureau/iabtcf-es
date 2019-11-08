@@ -1,13 +1,26 @@
 import {CommandArgs} from '../model';
-import {ArgSet} from '../types';
 
 export class CommandQueue {
 
   private commandArgs: CommandArgs[];
 
+  private processCommand: (commandArgs: CommandArgs) => void;
+
   public constructor(commandArgs?: CommandArgs[]) {
 
     this.commandArgs = commandArgs ? commandArgs : [];
+
+  }
+
+  public get queueLength(): number {
+
+    return this.commandArgs.length;
+
+  }
+
+  public get isEmpty(): boolean {
+
+    return this.commandArgs.length < 1;
 
   }
 
@@ -29,10 +42,17 @@ export class CommandQueue {
 
   }
 
-  public processCommands() {
+  public processAndClearCommands(): void {
+
+    this.commandArgs.forEach((commandArgs: CommandArgs) => this.processCommand(commandArgs));
+    this.commandArgs = [];
 
   }
 
+  public setCommandProcessor(commandProcessor: (commandArgs: CommandArgs) => void) {
 
+    this.processCommand = commandProcessor;
+
+  }
 
 }
