@@ -1,8 +1,9 @@
 import {TCModel} from '@iabtcf/core';
 import {CmpCommandStream} from './CmpCommandStream';
 import {CmpData} from './CmpData';
-import {Commands, GetInAppTcDataCommand, GetTcDataCommand, GetVendorListCommand, PingCommand} from './Commands';
+import {Commands, GetInAppTcDataCommand, GetTcDataCommand, GetVendorListCommand, PingCommand} from './command';
 import {CommandInvoker} from './Invoker/CommandInvoker';
+import {CommandQueue} from "./queue/CommandQueue";
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
 import {ArgSet, Callback, PageCallHandler, Param, TCDataCallback} from './types';
 import {CmpApiUtil, Validation} from './utilities';
@@ -12,13 +13,15 @@ import {CmpApiUtil, Validation} from './utilities';
  */
 export class CmpApi {
 
-  private static NOT_SUPPORTED: string = 'not supported by this CMP';
+  private static readonly NOT_SUPPORTED: string = 'not supported by this CMP';
 
   private readonly commandStream: CmpCommandStream;
 
   private readonly commandInvoker: CommandInvoker;
 
   private readonly cmpData: CmpData;
+
+  private readonly commandQueue: CommandQueue;
 
   private eventArgSets: ArgSet[];
 
