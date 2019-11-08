@@ -1,34 +1,34 @@
-import {Ping} from './model';
+import {Commands} from './command';
+import {CommandArgs, Ping} from './model';
 import {CmpStatus} from './status';
 import {ArgSet, PageCallHandler} from './types';
+import {Constants, Validation} from './utilities';
 
 /**
  * Initializes CMP frame and hooks up the provided PageCallHandler function to stream commands through
  */
 export class CmpCommandStream {
 
-  private static readonly API_FUNCTION_NAME: string = '__tcfapi';
-  private static readonly API_LOCATOR_NAME: string = '__tcfapiLocator';
-
-  private static readonly EXISTING_CMP: string = 'CMP Exists already – cannot create';
-
   private win: Window = window;
 
-  private _queuedArgSets: ArgSet[];
+  private queuedArgSets: ArgSet[];
+
+  private initFinished: boolean = false;
 
   /**
    * Constructor
    * @param {PageCallHandler} pageCallHandler
+   * @param {(ca: CommandArgs[]) => void} setCommandArgsCallback
    */
-  public constructor(pageCallHandler: PageCallHandler) {
+  public constructor(pageCallHandler: PageCallHandler, setCommandArgsCallback: (ca: CommandArgs[]) => void) {
 
-    this.initFrameAndCallHandler(pageCallHandler);
+    this.initFrameAndCallHandler(pageCallHandler, setCommandArgsCallback);
 
   }
 
-  public get queuedArgSets(): ArgSet[] {
+  public get commandArgsSet(): CommandArgs[] {
 
-    return this._queuedArgSets;
+    return this.queuedArgSets.map((as: ArgSet) => new CommandArgs(...as));
 
   }
 
@@ -38,7 +38,7 @@ export class CmpCommandStream {
    * frames calling
    * @param {PageCallHandler} pageCallHandler
    */
-  private initFrameAndCallHandler(pageCallHandler: PageCallHandler): void {
+  private initFrameAndCallHandler(pageCallHandler: PageCallHandler, setCommandArgsCallback: (ca: CommandArgs[]) => void): void {
 
     let frame = this.win;
     let locatorFrameExists = false;
@@ -51,7 +51,7 @@ export class CmpCommandStream {
          * throws a reference error if no frames exist
          */
 
-        if (frame.frames[CmpCommandStream.API_LOCATOR_NAME]) {
+        if (frame.frames[Constants.API_LOCATOR_NAME]) {
 
           locatorFrameExists = true;
           break;
@@ -83,48 +83,54 @@ export class CmpCommandStream {
 
         /**
          * This is the same window as ours, now we can create the API lets see
-         * if this is the stub
+         * if this is the stub.
          */
 
-        this.win[CmpCommandStream.API_FUNCTION_NAME]('ping', 2, (ping: Ping): void => {
+        if (Validation.isFunction(this.__tcfapi)) {
 
-          if (!ping.cmpLoaded && ping.cmpStatus === CmpStatus.STUB) {
+          this.__tcfapi(Commands.PING, 2, (ping: Ping): void => {
 
-            /**
-             * this is our stub, we are all clear to load the full API
-             */
+            if (!ping.cmpLoaded && ping.cmpStatus === CmpStatus.STUB) {
 
-            try {
+              /**
+               * this is our stub, we are all clear to load the full API and get queued commands
+               */
 
-              this._queuedArgSets = this.win[CmpCommandStream.API_FUNCTION_NAME]();
+              try {
 
-            } catch (ignore) {
+                this.queuedArgSets = (this.__tcfapi)();
 
-              this._queuedArgSets = [];
+              } catch (ignore) {
+
+                this.queuedArgSets = [];
+
+              }
+
+              setCommandArgsCallback(this.commandArgsSet);
+
+              /**
+               * Hook up handlePageCall function
+               */
+
+              this.replaceStubWithPageCallFunction(pageCallHandler);
+
+            } else {
+
+              /**
+               * Something exists on this page already, so we're not going to create an API
+               */
+
+              throw new Error(Constants.EXISTING_CMP);
 
             }
 
-            /**
-             * Hook up handlePageCall function
-             */
+          });
 
-            this.replaceStubWithPageCallFunction(pageCallHandler);
-
-          } else {
-
-            /**
-             * Something exists on this page already, so we're not going to create an API
-             */
-
-            throw new Error(CmpCommandStream.EXISTING_CMP);
-
-          }
-
-        });
+        }
 
       } else {
 
-        throw new Error(CmpCommandStream.EXISTING_CMP);
+        throw new Error(Constants.EXISTING_CMP);
 
       }
 
@@ -146,12 +152,26 @@ export class CmpCommandStream {
 
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private get __tcfapi(): (...args) => any {
+
+    return this.win[Constants.API_FUNCTION_NAME];
+
+  }
+
+  private set __tcfapi(value) {
+
+    this.win[Constants.API_FUNCTION_NAME] = value;
+
+  }
+
   /**
    * Hook up handlePageCall function
+   * @param {PageCallHandler} pageCallHandler
    */
   private replaceStubWithPageCallFunction(pageCallHandler: PageCallHandler) {
 
-    this.win[CmpCommandStream.API_FUNCTION_NAME] = pageCallHandler;
+    this.win[Constants.API_FUNCTION_NAME] = pageCallHandler;
 
   }
 
@@ -173,7 +193,7 @@ export class CmpCommandStream {
       const iframe = doc.createElement('iframe');
 
       iframe.style.cssText = 'display:none';
-      iframe.name = CmpCommandStream.API_LOCATOR_NAME;
+      iframe.name = Constants.API_LOCATOR_NAME;
       doc.body.appendChild(iframe);
 
     } else {

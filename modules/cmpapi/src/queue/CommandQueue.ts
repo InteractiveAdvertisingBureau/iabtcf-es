@@ -1,13 +1,13 @@
 import {CommandArgs} from '../model';
-import {ArgSet} from "../types";
+import {ArgSet} from '../types';
 
 export class CommandQueue {
 
   private commandArgs: CommandArgs[];
 
-  public constructor(commandArgs: CommandArgs[]) {
+  public constructor(commandArgs?: CommandArgs[]) {
 
-    this.commandArgs = commandArgs;
+    this.commandArgs = commandArgs ? commandArgs : [];
 
   }
 
@@ -23,11 +23,16 @@ export class CommandQueue {
 
   }
 
+  public queueCommands(commandArgsSet: CommandArgs[]) {
+
+    this.commandArgs.push(...commandArgsSet);
+
+  }
+
   public processCommands() {
 
   }
 
-  add(queuedArgSets: ArgSet[]) {
 
-  }
+
 }

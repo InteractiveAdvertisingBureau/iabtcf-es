@@ -37,8 +37,10 @@ export class CmpApi {
      * Initialize cmp data, set up frame and replace stub with our command handler
      */
 
-    this.commandStream = new CmpCommandStream(this.getPageCallHandler());
-    this.commandQueue.add(this.commandStream.queuedArgSets);
+    this.commandQueue = new CommandQueue();
+
+    // Todo: Need to test with a stub for the args callback!!!!
+    this.commandStream = new CmpCommandStream(this.getPageCallHandler(), this.getSetCommandArgsCallback());
     this.cmpData = new CmpData(cmpId, cmpVersion);
 
     const pingCommand = new PingCommand(this.cmpData);
@@ -96,6 +98,17 @@ export class CmpApi {
 
   }
 
+  private getSetCommandArgsCallback(): (commandArgs: CommandArgs[]) => void {
+
+    return (commandArgs: CommandArgs[]): void => {
+
+      const _this = this;
+      _this.commandQueue.queueCommands(commandArgs);
+
+    };
+
+  }
+
   /**
    * Handler for all page call commands
    * @type {PageCallHandler}
@@ -129,7 +142,14 @@ export class CmpApi {
 
     if (this.shouldCommandBeQueued(commandArgs)) {
 
+      /**
+       * Command will be placed in a queue to be processed once the api is ready. The lifecycle ends here for this
+       * command request.
+       */
+
       this.commandQueue.queueCommand(commandArgs);
+
+      return;
 
     }
 

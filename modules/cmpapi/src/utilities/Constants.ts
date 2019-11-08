@@ -1,5 +1,9 @@
 export class Constants {
 
+  public static readonly API_FUNCTION_NAME: string = '__tcfapi';
+  public static readonly API_LOCATOR_NAME: string = '__tcfapiLocator';
+
+  public static readonly EXISTING_CMP: string = 'CMP Exists already – cannot create';
   public static readonly NOT_SUPPORTED: string = `not supported by this CMP`;
   public static readonly COMMAND_NOT_SUPPORTED: string = `command ${Constants.NOT_SUPPORTED}`;
   public static readonly CALLBACK_REQUIRED: string = `callback required`;
