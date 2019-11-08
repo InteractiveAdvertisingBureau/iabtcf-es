@@ -10,11 +10,11 @@ export class CmpCommandStream {
   private static readonly API_FUNCTION_NAME: string = '__tcfapi';
   private static readonly API_LOCATOR_NAME: string = '__tcfapiLocator';
 
-  private static EXISTING_CMP: string = 'CMP Exists already – cannot create';
+  private static readonly EXISTING_CMP: string = 'CMP Exists already – cannot create';
 
   private win: Window = window;
 
-  private queuedArgSets: ArgSet[];
+  private _queuedArgSets: ArgSet[];
 
   /**
    * Constructor
@@ -23,6 +23,12 @@ export class CmpCommandStream {
   public constructor(pageCallHandler: PageCallHandler) {
 
     this.initFrameAndCallHandler(pageCallHandler);
+
+  }
+
+  public get queuedArgSets(): ArgSet[] {
+
+    return this._queuedArgSets;
 
   }
 
@@ -90,11 +96,11 @@ export class CmpCommandStream {
 
             try {
 
-              this.queuedArgSets = this.win[CmpCommandStream.API_FUNCTION_NAME]();
+              this._queuedArgSets = this.win[CmpCommandStream.API_FUNCTION_NAME]();
 
             } catch (ignore) {
 
-              this.queuedArgSets = [];
+              this._queuedArgSets = [];
 
             }
 

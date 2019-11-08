@@ -1,4 +1,5 @@
 import {CommandArgs} from '../model';
+import {ArgSet} from "../types";
 
 export class CommandQueue {
 
@@ -26,4 +27,7 @@ export class CommandQueue {
 
   }
 
+  add(queuedArgSets: ArgSet[]) {
+
+  }
 }

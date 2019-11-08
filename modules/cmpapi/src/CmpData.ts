@@ -1,12 +1,11 @@
 import {TCModel} from '@iabtcf/core';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
+import {Constants} from './utilities';
 
 /**
  * Class holds shareable data across cmp api
  */
 export class CmpData {
-
-  private static TC_MODEL_INVALID: string = 'CMP Model is not in a valid state';
 
   private _tcModel: TCModel;
 
@@ -27,11 +26,18 @@ export class CmpData {
 
     /**
      * Defaults
+     * Todo: check these with chris
      */
     this._apiVersion = 3;
     this._tcfPolicyVersion = 2;
     this._cmpStatus = CmpStatus.LOADING;
     this._displayStatus = DisplayStatus.HIDDEN;
+
+  }
+
+  public get tcModelIsSet(): boolean {
+
+    return !!this._tcModel;
 
   }
 
@@ -54,7 +60,7 @@ export class CmpData {
 
     } else {
 
-      throw new Error(CmpData.TC_MODEL_INVALID);
+      throw new Error(Constants.TC_MODEL_INVALID);
 
     }
 

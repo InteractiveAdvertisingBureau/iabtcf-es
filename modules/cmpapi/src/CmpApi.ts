@@ -6,15 +6,13 @@ import {CommandInvoker} from './Invoker/CommandInvoker';
 import {CommandArgs} from './model';
 import {CommandQueue} from './queue/CommandQueue';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
-import {ArgSet, Callback, PageCallHandler, Param, TCDataCallback} from './types';
-import {CmpApiUtil, Validation} from './utilities';
+import {ArgSet, Callback, PageCallHandler, Param} from './types';
+import {CmpApiUtil, Constants, Validation} from './utilities';
 
 /**
  * Consent Management Platform API
  */
 export class CmpApi {
-
-  private static readonly NOT_SUPPORTED: string = 'not supported by this CMP';
 
   private readonly commandStream: CmpCommandStream;
 
@@ -40,6 +38,7 @@ export class CmpApi {
      */
 
     this.commandStream = new CmpCommandStream(this.getPageCallHandler());
+    this.commandQueue.add(this.commandStream.queuedArgSets);
     this.cmpData = new CmpData(cmpId, cmpVersion);
 
     const pingCommand = new PingCommand(this.cmpData);
@@ -59,7 +58,7 @@ export class CmpApi {
 
     this.cmpData.tcModel = tcm;
     this.cmpData.eventStatus = eventStatus || this.cmpData.eventStatus;
-    this.processQueues();
+    this.commandQueue.processCommands();
 
   }
 
@@ -80,41 +79,6 @@ export class CmpApi {
     this.cmpData.displayStatus = displayStatus;
 
   }
-
-  public addEventListener(callback: TCDataCallback): void {
-
-    // const builder: TCDataBuilder = new TCDataBuilder();
-    //
-    // if (builder.isBuildable()) {
-    //
-    //   callback(builder.build(), true);
-    //
-    // } else {
-    //
-    //   // queue it until we can build it
-    // }
-
-  }
-
-  public removeEventListener(callback: TCDataCallback, registeredCallback: TCDataCallback): void {
-  }
-
-  private processQueues() {
-
-  }
-
-  // /**
-  //  * Sets all the fields on a Return object using current cmp api data
-  //  * @param {Return} returnObj a Return object
-  //  */
-  // private setReturnFields(returnObj: Return): void {
-  //
-  //   returnObj.cmpId = this.cmpData.cmpId;
-  //   returnObj.cmpVersion = this.cmpData.cmpVersion;
-  //   returnObj.gdprApplies = this.cmpData.gdprApplies;
-  //   returnObj.tcfPolicyVersion = this.cmpData.tcfPolicyVersion;
-  //
-  // }
 
   /**
    * Returns the page call handler function with a reference to this api
@@ -142,29 +106,34 @@ export class CmpApi {
    */
   private pageCallHandler(command: string, version: number, callback: Callback, param?: Param): void {
 
-    if (!this.validateCommand(command, version, callback)) {
+    const commandArgs = new CommandArgs(command, version, callback, param);
+
+    /**
+     * First location where validation takes place in the lifecycle of a command.
+     */
+
+    const validationMessage = '';
+
+    if (!commandArgs.validate(validationMessage)) {
 
       /**
-       * Command didn't pass basic validation. Further processing of this command will stop here.
+       * Log failed validation message to console and execute command with failed arguments if its a function.
+       * End processing of this command by returning void.
        */
+
+      CmpApiUtil.failCallback(callback, validationMessage);
+
       return;
 
     }
 
-    const commandArgs = this.createCommandArgs(command, version, callback, param);
+    if (this.shouldCommandBeQueued(commandArgs)) {
+
+      this.commandQueue.queueCommand(commandArgs);
+
+    }
 
     this.processCommand(commandArgs);
-
-  }
-
-  private createCommandArgs(command: string, version: number, callback: Callback, param?: Param): CommandArgs {
-
-    return {
-      command: command,
-      version: version.toString(10),
-      callback: callback,
-      param: param,
-    };
 
   }
 
@@ -216,7 +185,7 @@ export class CmpApi {
 
         // Todo: where are we going to queue up commands?
 
-        this.addEventListener(commandArgs.callback as TCDataCallback);
+        // this.addEventListener(commandArgs.callback as TCDataCallback);
         break;
 
       }
@@ -225,7 +194,7 @@ export class CmpApi {
 
         // Todo: where are we going to queue up commands?
 
-        this.removeEventListener(commandArgs.callback as TCDataCallback, commandArgs.callback as TCDataCallback);
+        // this.removeEventListener(commandArgs.callback as TCDataCallback, commandArgs.callback as TCDataCallback);
         break;
 
       }
@@ -245,7 +214,7 @@ export class CmpApi {
            * Command is not supported and has no custom methods defined
            */
 
-          CmpApiUtil.failCallback(commandArgs.callback, `${commandArgs.command} command ${CmpApi.NOT_SUPPORTED}`);
+          CmpApiUtil.failCallback(commandArgs.callback, `${commandArgs.command} ${Constants.COMMAND_NOT_SUPPORTED}`);
           break;
 
         }
@@ -259,37 +228,13 @@ export class CmpApi {
   }
 
   /**
-   * Validates that the common parameters used to execute a command are valid
-   * // Todo: possibly move into validation class as static
-   * @param {string} command
-   * @param {string} version
-   * @param {Callback} callback
+   * Returns true if a command needs to be placed in a queue to be processed later
+   * @param {CommandArgs} commandArgs
    * @return {boolean}
    */
-  private validateCommand(command: string, version: number, callback: Callback): boolean {
+  private shouldCommandBeQueued(commandArgs: CommandArgs): boolean {
 
-    if (!Validation.isNonEmptyString(command)) {
-
-      CmpApiUtil.failCallback(callback, `Command bust be a non-null or non-empty string`);
-      return false;
-
-    }
-
-    if (!(Validation.isIntegerGtrOne(version) || version === null || version === undefined)) {
-
-      CmpApiUtil.failCallback(callback, `Version ${version} ${CmpApi.NOT_SUPPORTED}`);
-      return false;
-
-    }
-
-    if (typeof callback !== 'function') {
-
-      CmpApiUtil.error(`callback required`);
-      return false;
-
-    }
-
-    return true;
+    return commandArgs.command === Commands.PING ? false : !this.cmpData.tcModelIsSet;
 
   }
 

@@ -1,4 +1,5 @@
 import {Callback} from '../types';
+import {Validation} from './Validation';
 
 /**
  * Utility class to encapsulate common functions needed throughout CmpApi
@@ -21,12 +22,19 @@ export abstract class CmpApiUtil {
 
     }
 
-    callback(null, false);
+    if (Validation.isFunction(callback)) {
+
+      callback(null, false);
+
+    }
 
   }
 
   /**
    * Logs an error in the console
+   *
+   * todo: log to window level array
+   *
    * @param {string} msg
    */
   public static error(msg: string): void {
