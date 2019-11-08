@@ -1,7 +1,7 @@
 import {CmpData} from '../CmpData';
 import {TCData} from '../model';
 import {Param, TCDataCallback} from '../types';
-import {Validation} from "../utilities/Validation";
+import {Validation} from '../utilities';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 

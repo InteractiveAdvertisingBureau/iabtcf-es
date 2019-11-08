@@ -3,7 +3,8 @@ import {CmpCommandStream} from './CmpCommandStream';
 import {CmpData} from './CmpData';
 import {Commands, GetInAppTcDataCommand, GetTcDataCommand, GetVendorListCommand, PingCommand} from './command';
 import {CommandInvoker} from './Invoker/CommandInvoker';
-import {CommandQueue} from "./queue/CommandQueue";
+import {CommandArgs} from './model';
+import {CommandQueue} from './queue/CommandQueue';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
 import {ArgSet, Callback, PageCallHandler, Param, TCDataCallback} from './types';
 import {CmpApiUtil, Validation} from './utilities';
@@ -150,15 +151,34 @@ export class CmpApi {
 
     }
 
-    /**
-     * Map command strings to their appropriate commands
-     */
+    const commandArgs = this.createCommandArgs(command, version, callback, param);
 
-    switch (command) {
+    this.processCommand(commandArgs);
+
+  }
+
+  private createCommandArgs(command: string, version: number, callback: Callback, param?: Param): CommandArgs {
+
+    return {
+      command: command,
+      version: version.toString(10),
+      callback: callback,
+      param: param,
+    };
+
+  }
+
+  /**
+   * Maps a commands arguments to it's appropriate command and executes it
+   * @param {CommandArgs} commandArgs
+   */
+  private processCommand(commandArgs: CommandArgs) {
+
+    switch (commandArgs.command) {
 
       case Commands.PING: {
 
-        this.commandInvoker.execute(Commands.PING, callback, param);
+        this.commandInvoker.execute(Commands.PING, commandArgs.callback, commandArgs.param);
         break;
 
       }
@@ -167,7 +187,7 @@ export class CmpApi {
 
         // Todo: where are we going to queue up commands?
 
-        this.commandInvoker.execute(Commands.GET_TC_DATA, callback, param);
+        this.commandInvoker.execute(Commands.GET_TC_DATA, commandArgs.callback, commandArgs.param);
         break;
 
       }
@@ -176,7 +196,7 @@ export class CmpApi {
 
         // Todo: where are we going to queue up commands?
 
-        this.commandInvoker.execute(Commands.GET_TC_DATA, callback, param);
+        this.commandInvoker.execute(Commands.GET_TC_DATA, commandArgs.callback, commandArgs.param);
         break;
 
       }
@@ -187,7 +207,7 @@ export class CmpApi {
 
         // TODO: Implement get vendor list
 
-        this.commandInvoker.execute(Commands.GET_VENDOR_LIST, callback, param);
+        this.commandInvoker.execute(Commands.GET_VENDOR_LIST, commandArgs.callback, commandArgs.param);
         break;
 
       }
@@ -196,7 +216,7 @@ export class CmpApi {
 
         // Todo: where are we going to queue up commands?
 
-        this.addEventListener(callback as TCDataCallback);
+        this.addEventListener(commandArgs.callback as TCDataCallback);
         break;
 
       }
@@ -205,14 +225,14 @@ export class CmpApi {
 
         // Todo: where are we going to queue up commands?
 
-        this.removeEventListener(callback as TCDataCallback, callback as TCDataCallback);
+        this.removeEventListener(commandArgs.callback as TCDataCallback, commandArgs.callback as TCDataCallback);
         break;
 
       }
 
       default: {
 
-        if (Validation.isFunction(this.customMethods[command])) {
+        if (Validation.isFunction(this.customMethods[commandArgs.command])) {
 
           /**
            * If custom methods were set, process them here.
@@ -225,7 +245,7 @@ export class CmpApi {
            * Command is not supported and has no custom methods defined
            */
 
-          CmpApiUtil.failCallback(callback, `${command} command ${CmpApi.NOT_SUPPORTED}`);
+          CmpApiUtil.failCallback(commandArgs.callback, `${commandArgs.command} command ${CmpApi.NOT_SUPPORTED}`);
           break;
 
         }
