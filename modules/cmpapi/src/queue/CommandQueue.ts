@@ -32,11 +32,15 @@ export class CommandQueue {
 
   public queueCommand(commandArgs: CommandArgs) {
 
+    // Todo: filter dups
+
     this.commandArgs.push(commandArgs);
 
   }
 
   public queueCommands(commandArgsSet: CommandArgs[]) {
+
+    // Todo: filter dups
 
     this.commandArgs.push(...commandArgsSet);
 

@@ -64,6 +64,8 @@ export class CmpApi {
 
   public setTCModel(tcm: TCModel, eventStatus?: EventStatus): void {
 
+    // Todo: DEEP COPY NEEDED!
+
     this.cmpData.tcModel = tcm;
     this.cmpData.eventStatus = eventStatus || this.cmpData.eventStatus;
     this.commandQueue.processAndClearCommands();
