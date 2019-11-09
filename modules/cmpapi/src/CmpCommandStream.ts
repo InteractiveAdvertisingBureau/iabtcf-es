@@ -101,7 +101,7 @@ export class CmpCommandStream {
 
               }
 
-              commandArgsHandler(this.commandArgsSet);
+              commandArgsHandler(this.queuedArgSets);
 
               /**
                * Hook up handlePageCall function
@@ -157,12 +157,6 @@ export class CmpCommandStream {
   private set __tcfapi(value) {
 
     this.win[Constants.API_FUNCTION_NAME] = value;
-
-  }
-
-  public get commandArgsSet(): CommandArgs[] {
-
-    return this.queuedArgSets.map((as: ArgSet) => new CommandArgs(...as));
 
   }
 

@@ -1,9 +1,8 @@
-import {Callback, Param} from '../types';
-import {CmpApiUtil, Constants, Validation} from '../utilities';
+import {Callback, Param} from '../../types';
+import {CmpApiUtil, Constants, Validation} from '../../utilities';
 
 /**
  * Holds the arguments needed to execute a command
- * Todo: Consider a class, could validate and extend for specific validation
  */
 export class CommandArgs {
 

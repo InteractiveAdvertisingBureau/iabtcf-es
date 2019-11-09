@@ -1,7 +1,5 @@
 import {CmpData} from '../CmpData';
-import {TCData} from '../model';
-import {Param, TCDataCallback} from '../types';
-import {CmpApiUtil, Constants, Validation} from '../utilities';
+import {GetTcDataCommandArgs, TCData} from '../model';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
@@ -13,34 +11,11 @@ export class GetTcDataCommand extends BaseCommand implements Command {
 
   }
 
-  public execute(callback: TCDataCallback, param?: Param): void {
+  public execute(commandArgs: GetTcDataCommandArgs): void {
 
-    const vendorIds = param as number[];
-
-    if (vendorIds) {
-
-      if (!this.isVendorsListValid(vendorIds)) {
-
-        CmpApiUtil.failCallback(callback, Constants.VENDOR_LIST_INVALID);
-
-      }
-
-    }
-
-    const tcData = new TCData(this.cmpData.tcModel, this.cmpData.eventStatus, vendorIds);
+    const tcData = new TCData(this.cmpData.tcModel, this.cmpData.eventStatus, commandArgs.param as number[]);
     this.setBaseReturnFields(tcData);
-    callback(tcData, true);
-
-  }
-
-  /*
-  * Validates a vendor id list
-  * @vendorIds {number[]} vendorIds
-  * @return {boolean}
-  */
-  private isVendorsListValid(vendorIds: number[]): boolean {
-
-    return Validation.isGtrZeroIntegerArray(vendorIds);
+    commandArgs.callback(tcData, true);
 
   }
 

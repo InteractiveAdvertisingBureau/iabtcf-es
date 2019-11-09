@@ -1,5 +1,5 @@
 import {CmpData} from '../CmpData';
-import {Callback, Param} from '../types';
+import {CommandArgs} from '../model';
 import {Command} from './Command';
 import {GetTcDataCommand} from './GetTcDataCommand';
 
@@ -11,7 +11,7 @@ export class GetInAppTcDataCommand extends GetTcDataCommand implements Command {
 
   }
 
-  public execute(callback: Callback, param?: Param): void {
+  public execute(commandArgs: CommandArgs): void {
   }
 
 }

@@ -1,7 +1,7 @@
-import {Callback, Param} from '../types';
+import {CommandArgs} from '../model';
 
 export interface Command {
 
-  execute(callback: Callback, param?: Param): void;
+  execute(commandArgs: CommandArgs): void;
 
 }

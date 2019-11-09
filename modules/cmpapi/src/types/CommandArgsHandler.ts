@@ -1,3 +1,3 @@
-import {CommandArgs} from '../model';
+import {ArgSet} from './ArgSet';
 
-export type CommandArgsHandler = (commandArgs: CommandArgs[]) => void;
+export type CommandArgsHandler = (argSets: ArgSet[]) => void;

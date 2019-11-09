@@ -3,7 +3,7 @@ import {CmpCommandStream} from './CmpCommandStream';
 import {CmpData} from './CmpData';
 import {Commands, GetInAppTcDataCommand, GetTcDataCommand, GetVendorListCommand, PingCommand} from './command';
 import {CommandInvoker} from './Invoker/CommandInvoker';
-import {CommandArgs} from './model';
+import {CommandArgs, GetTcDataCommandArgs, GetVendorListCommandArgs} from './model';
 import {CommandQueue} from './queue/CommandQueue';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
 import {ArgSet, Callback, CommandArgsHandler, PageCallHandler, Param} from './types';
@@ -43,7 +43,6 @@ export class CmpApi {
     this.commandQueue.setCommandProcessor(this.getCommandProcessor());
 
     this.commandStream = new CmpCommandStream(this.getPageCallHandler(), this.getCommandArgsHandler());
-
 
     const pingCommand = new PingCommand(this.cmpData);
     const getTcDataCommand = new GetTcDataCommand(this.cmpData);
@@ -115,18 +114,19 @@ export class CmpApi {
    */
   private getCommandArgsHandler(): CommandArgsHandler {
 
-    return (commandArgs: CommandArgs[]): void => {
+    return (commandArgs: ArgSet[]): void => {
 
       const _this = this;
 
       /**
-       * Filter out invalid commands and add them to queue.
+       * Convert and Filter out invalid commands and add them to queue.
        */
 
-      const filteredCommandArgs = commandArgs.filter((ca: CommandArgs) => ca.validate('', true));
+      const filteredCommandArgs = commandArgs
+        .map((as: ArgSet) => _this.createCommandArgs(...as))
+        .filter((ca: CommandArgs) => ca.validate('', true));
+
       _this.commandQueue.queueCommands(filteredCommandArgs);
-      console.log('COMMAND ARGS', commandArgs);
-      console.log('FILTERED COMMAND ARGS', filteredCommandArgs);
 
       if (_this.cmpData.tcModelIsSet) {
 
@@ -148,7 +148,7 @@ export class CmpApi {
    */
   private pageCallHandler(command: string, version: number, callback: Callback, param?: Param): void {
 
-    const commandArgs = new CommandArgs(command, version, callback, param);
+    const commandArgs = this.createCommandArgs(command, version, callback, param);
 
     /**
      * First location where validation takes place in the lifecycle of a command.
@@ -186,6 +186,38 @@ export class CmpApi {
 
   }
 
+  private createCommandArgs(command: string, version: number, callback: Callback, param?: Param): CommandArgs {
+
+    let commandArgs: CommandArgs;
+
+    switch (command) {
+
+      case Commands.GET_TC_DATA: {
+
+        commandArgs = new GetTcDataCommandArgs(command, version, callback, param);
+        break;
+
+      }
+
+      case Commands.GET_VENDOR_LIST: {
+
+        commandArgs = new GetVendorListCommandArgs(command, version, callback, param);
+        break;
+
+      }
+
+      default: {
+
+        commandArgs = new CommandArgs(command, version, callback, param);
+
+      }
+
+    }
+
+    return commandArgs;
+
+  }
+
   /**
    * Maps a commands arguments to it's appropriate command and executes it
    * @param {CommandArgs} commandArgs
@@ -196,7 +228,7 @@ export class CmpApi {
 
       case Commands.PING: {
 
-        this.commandInvoker.execute(Commands.PING, commandArgs.callback, commandArgs.param);
+        this.commandInvoker.execute(Commands.PING, commandArgs);
         break;
 
       }
@@ -205,7 +237,7 @@ export class CmpApi {
 
         // Todo: where are we going to queue up commands?
 
-        this.commandInvoker.execute(Commands.GET_TC_DATA, commandArgs.callback, commandArgs.param);
+        this.commandInvoker.execute(Commands.GET_TC_DATA, commandArgs);
         break;
 
       }
@@ -214,7 +246,7 @@ export class CmpApi {
 
         // Todo: where are we going to queue up commands?
 
-        this.commandInvoker.execute(Commands.GET_TC_DATA, commandArgs.callback, commandArgs.param);
+        this.commandInvoker.execute(Commands.GET_TC_DATA, commandArgs);
         break;
 
       }
@@ -225,7 +257,7 @@ export class CmpApi {
 
         // TODO: Implement get vendor list
 
-        this.commandInvoker.execute(Commands.GET_VENDOR_LIST, commandArgs.callback, commandArgs.param);
+        this.commandInvoker.execute(Commands.GET_VENDOR_LIST, commandArgs);
         break;
 
       }

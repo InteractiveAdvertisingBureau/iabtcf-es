@@ -1,5 +1,5 @@
 import {CmpData} from '../CmpData';
-import {Ping} from '../model';
+import {CommandArgs, Ping} from '../model';
 import {Param, PingCallback} from '../types';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
@@ -12,7 +12,7 @@ export class PingCommand extends BaseCommand implements Command {
 
   }
 
-  public execute(callback: PingCallback, param?: Param): void {
+  public execute(commandArgs: CommandArgs): void {
 
     const ping = new Ping();
     this.setBaseReturnFields(ping);
@@ -28,7 +28,7 @@ export class PingCommand extends BaseCommand implements Command {
     ping.displayStatus = this.cmpData.displayStatus;
     ping.cmpLoaded = true;
 
-    callback(ping);
+    (commandArgs.callback as PingCallback)(ping);
 
   }
 

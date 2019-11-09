@@ -1,5 +1,6 @@
 import {CmpData} from '../CmpData';
 import {Command} from '../command/';
+import {CommandArgs} from "../model";
 import {Callback, Param} from '../types';
 
 /**
@@ -23,13 +24,13 @@ export class CommandInvoker {
 
   }
 
-  public execute(commandName: string, callback: Callback, param?: Param): void {
+  public execute(commandName: string, commandArgs: CommandArgs): void {
 
     const command = this.commandMap.get(commandName);
 
     if (command) {
 
-      command.execute(callback, param);
+      command.execute(commandArgs);
 
     } else {
 

@@ -1,4 +1,5 @@
 import {CmpData} from '../CmpData';
+import {CommandArgs} from "../model";
 import {Callback} from "../types/callback/Callback";
 import {Param} from "../types/Param";
 import {BaseCommand} from './BaseCommand';
@@ -12,7 +13,7 @@ export class AddEventListenerCommand extends BaseCommand implements Command {
 
   }
 
-  public execute(callback: Callback, param?: Param): void {
+  public execute(commandArgs: CommandArgs): void {
   }
 
 }
