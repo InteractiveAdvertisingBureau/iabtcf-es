@@ -171,6 +171,10 @@ export class CmpApi {
 
     }
 
+    /**
+     * Queue command if it needs to be
+     */
+
     if (this.shouldCommandBeQueued(commandArgs)) {
 
       /**
@@ -183,6 +187,10 @@ export class CmpApi {
       return;
 
     }
+
+    /**
+     * Todo: Place in event queue if need be
+     */
 
     this.processCommand(commandArgs);
 

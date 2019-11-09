@@ -48,8 +48,12 @@ export class CommandQueue {
 
   public processAndClearCommands(): void {
 
-    this.commandArgs.forEach((commandArgs: CommandArgs) => this.processCommand(commandArgs));
-    this.commandArgs = [];
+    if (this.hasCommands) {
+
+      this.commandArgs.forEach((commandArgs: CommandArgs) => this.processCommand(commandArgs));
+      this.commandArgs = [];
+
+    }
 
   }
 
