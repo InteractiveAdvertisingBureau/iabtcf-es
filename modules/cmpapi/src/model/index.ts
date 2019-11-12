@@ -4,6 +4,3 @@ export * from './returned/Ping';
 export * from './returned/GlobalVendorList';
 export * from './Restrictions';
 export * from './BooleanVector';
-export * from './CommandArgs/CommandArgs';
-export * from './CommandArgs/GetTcDataCommandArgs';
-export * from './CommandArgs/GetVendorListCommandArgs';

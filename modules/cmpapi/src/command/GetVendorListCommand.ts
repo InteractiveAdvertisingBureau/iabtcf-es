@@ -1,25 +1,44 @@
 import {CmpData} from '../CmpData';
-import {GetVendorListCommandArgs, GlobalVendorList} from '../model';
-import {VendorListCallback} from '../types';
+import {GlobalVendorList} from '../model';
+import {Callback, Param, VendorListCallback} from '../types';
 import {CmpApiUtil, Constants} from '../utilities';
-import {Validation} from '../utilities/Validation';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
 export class GetVendorListCommand extends BaseCommand implements Command {
 
-  public constructor(cmpData: CmpData) {
+  public constructor(cmpData: CmpData, command: string, version: number, callback: Callback, param?: Param) {
 
-    super(cmpData);
+    super(cmpData, command, version, callback, param);
 
   }
 
-  public execute(commandArgs: GetVendorListCommandArgs): void {
+  public execute(): void {
 
-    const gvl = new GlobalVendorList(this.cmpData.tcModel, commandArgs.param as string | number);
+    const gvl = new GlobalVendorList(this.cmpData.tcModel, this.param as string | number);
     this.setBaseReturnFields(gvl);
 
-    commandArgs.callback(gvl, true);
+    (this.callback as VendorListCallback)(gvl, true);
+
+  }
+
+  public validate(validationMessage: string, failCallbackIfNotValid: boolean = false): boolean {
+
+    if (!this.isValidVendorListVersion()) {
+
+      validationMessage = Constants.VENDOR_LIST_VERSION_INVALID;
+
+      if (failCallbackIfNotValid) {
+
+        CmpApiUtil.failCallback(this.callback, validationMessage);
+
+      }
+
+      return false;
+
+    }
+
+    return super.validate(validationMessage, failCallbackIfNotValid);
 
   }
 

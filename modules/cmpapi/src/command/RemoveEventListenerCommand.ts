@@ -1,17 +1,17 @@
 import {CmpData} from '../CmpData';
-import {CommandArgs} from '../model';
+import {Callback, Param} from "../types";
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
 export class RemoveEventListenerCommand extends BaseCommand implements Command {
 
-  public constructor(cmpData: CmpData) {
+  public constructor(cmpData: CmpData, command: string, version: number, callback: Callback, param?: Param) {
 
-    super(cmpData);
+    super(cmpData, command, version, callback, param);
 
   }
 
-  public execute(commandArgs: CommandArgs): void {
+  public execute(): void {
   }
 
 }

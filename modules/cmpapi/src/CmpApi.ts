@@ -1,9 +1,17 @@
 import {TCModel} from '@iabtcf/core';
 import {CmpCommandStream} from './CmpCommandStream';
 import {CmpData} from './CmpData';
-import {Commands, GetInAppTcDataCommand, GetTcDataCommand, GetVendorListCommand, PingCommand} from './command';
-import {CommandInvoker} from './Invoker/CommandInvoker';
-import {CommandArgs, GetTcDataCommandArgs, GetVendorListCommandArgs} from './model';
+import {
+  AddEventListenerCommand,
+  Command,
+  Commands,
+  CustomCommand,
+  GetInAppTcDataCommand,
+  GetTcDataCommand,
+  GetVendorListCommand,
+  PingCommand,
+  RemoveEventListenerCommand,
+} from './command';
 import {CommandQueue} from './queue/CommandQueue';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
 import {ArgSet, Callback, CommandArgsHandler, PageCallHandler, Param} from './types';
@@ -15,8 +23,6 @@ import {CmpApiUtil, Constants, Validation} from './utilities';
 export class CmpApi {
 
   private readonly commandStream: CmpCommandStream;
-
-  private readonly commandInvoker: CommandInvoker;
 
   private readonly commandQueue: CommandQueue;
 
@@ -40,20 +46,8 @@ export class CmpApi {
     this.cmpData = new CmpData(cmpId, cmpVersion);
 
     this.commandQueue = new CommandQueue();
-    this.commandQueue.setCommandProcessor(this.getCommandProcessor());
 
     this.commandStream = new CmpCommandStream(this.getPageCallHandler(), this.getCommandArgsHandler());
-
-    const pingCommand = new PingCommand(this.cmpData);
-    const getTcDataCommand = new GetTcDataCommand(this.cmpData);
-    const getInAppTcDataCommand = new GetInAppTcDataCommand(this.cmpData);
-    const getVendorListCommand = new GetVendorListCommand(this.cmpData);
-
-    this.commandInvoker = new CommandInvoker(this.cmpData);
-    this.commandInvoker.registerCommand(Commands.PING, pingCommand);
-    this.commandInvoker.registerCommand(Commands.GET_TC_DATA, getTcDataCommand);
-    this.commandInvoker.registerCommand(Commands.GET_IN_APP_TC_DATA, getInAppTcDataCommand);
-    this.commandInvoker.registerCommand(Commands.GET_VENDOR_LIST, getVendorListCommand);
 
   }
 
@@ -111,7 +105,7 @@ export class CmpApi {
   }
 
   /**
-   * Returns the page call handler function with a reference to this api
+   * Returns the command args handler function with a reference to this api
    * @return {CommandArgsHandler}
    */
   private getCommandArgsHandler(): CommandArgsHandler {
@@ -121,16 +115,20 @@ export class CmpApi {
       const _this = this;
 
       /**
-       * Convert and Filter out invalid commands and add them to queue.
+       * Convert and Filter out invalid commands
+       */
+      const filteredCommands = commandArgs
+        .map((as: ArgSet) => _this.createCommand(...as))
+        .filter((command: Command | null) => command != null && command.validate('', true));
+
+      /**
+       * Add commands to que and process/clear them if we can
        */
 
-      const filteredCommandArgs = commandArgs
-        .map((as: ArgSet) => _this.createCommandArgs(...as))
-        .filter((ca: CommandArgs) => ca.validate('', true));
+      // @ts-ignore
+      _this.commandQueue.queueCommands(filteredCommands);
 
-      _this.commandQueue.queueCommands(filteredCommandArgs);
-
-      if (_this.cmpData.tcModelIsSet) {
+      if (_this.canProcessCommandQueue) {
 
         _this.commandQueue.processAndClearCommands();
 
@@ -143,200 +141,154 @@ export class CmpApi {
   /**
    * Handler for all page call commands
    * @type {PageCallHandler}
-   * @param {string} command
+   * @param {string} commandStr
    * @param {number} version
    * @param {Callback} callback
    * @param {Param} param
    */
-  private pageCallHandler(command: string, version: number, callback: Callback, param?: Param): void {
+  private pageCallHandler(commandStr: string, version: number, callback: Callback, param?: Param): void {
 
-    const commandArgs = this.createCommandArgs(command, version, callback, param);
+    const command = this.createCommand(commandStr, version, callback, param);
 
-    /**
-     * First location where validation takes place in the lifecycle of a command.
-     */
-
-    const validationMessage = '';
-
-    if (!commandArgs.validate(validationMessage)) {
+    if (command) {
 
       /**
-       * Log failed validation message to console and execute command with failed arguments if its a function.
-       * End processing of this command by returning void.
+       * Validate, possibly queue and/or process command
        */
 
-      CmpApiUtil.failCallback(callback, validationMessage);
+      const validationMessage = '';
 
-      return;
+      if (!command.validate(validationMessage)) {
 
-    }
+        /**
+         * Log failed validation message to console and execute command with failed arguments if its a function.
+         * End processing of this command by returning void.
+         */
 
-    /**
-     * Queue command if it needs to be
-     */
+        CmpApiUtil.failCallback(callback, validationMessage);
 
-    if (this.shouldCommandBeQueued(commandArgs)) {
+        return;
+
+      }
 
       /**
-       * Command will be placed in a queue to be processed once the api is ready. The lifecycle ends here for this
-       * command request.
+       * Queue command if it needs to be
        */
 
-      this.commandQueue.queueCommand(commandArgs);
+      if (this.shouldCommandBeQueued(command)) {
 
-      return;
+        /**
+         * Command will be placed in a queue to be processed once the api is ready. The lifecycle ends here for this
+         * command request.
+         */
+
+        this.commandQueue.queueCommand(command);
+
+        return;
+
+      }
+
+      /**
+       * Todo: Place in event queue if need be
+       */
+
+      /**
+       * Execute the command
+       */
+
+      command.execute();
 
     }
-
-    /**
-     * Todo: Place in event queue if need be
-     */
-
-    this.processCommand(commandArgs);
 
   }
 
-  private createCommandArgs(command: string, version: number, callback: Callback, param?: Param): CommandArgs {
-
-    let commandArgs: CommandArgs;
+  private createCommand(command: string, version: number, callback: Callback, param?: Param): Command | null {
 
     switch (command) {
 
-      case Commands.GET_TC_DATA: {
-
-        commandArgs = new GetTcDataCommandArgs(command, version, callback, param);
-        break;
-
-      }
-
-      case Commands.GET_VENDOR_LIST: {
-
-        commandArgs = new GetVendorListCommandArgs(command, version, callback, param);
-        break;
-
-      }
-
-      default: {
-
-        commandArgs = new CommandArgs(command, version, callback, param);
-
-      }
-
-    }
-
-    return commandArgs;
-
-  }
-
-  /**
-   * Maps a commands arguments to it's appropriate command and executes it
-   * @param {CommandArgs} commandArgs
-   */
-  private processCommand(commandArgs: CommandArgs) {
-
-    switch (commandArgs.command) {
-
       case Commands.PING: {
 
-        this.commandInvoker.execute(Commands.PING, commandArgs);
-        break;
+        return new PingCommand(this.cmpData, command, version, callback, param);
 
       }
 
       case Commands.GET_TC_DATA: {
 
-        // Todo: where are we going to queue up commands?
-
-        this.commandInvoker.execute(Commands.GET_TC_DATA, commandArgs);
-        break;
+        return new GetTcDataCommand(this.cmpData, command, version, callback, param);
 
       }
 
       case Commands.GET_IN_APP_TC_DATA: {
 
-        // Todo: where are we going to queue up commands?
-
-        this.commandInvoker.execute(Commands.GET_TC_DATA, commandArgs);
-        break;
+        return new GetInAppTcDataCommand(this.cmpData, command, version, callback, param);
 
       }
 
       case Commands.GET_VENDOR_LIST: {
 
-        // Todo: where are we going to queue up commands?
-
         // TODO: Implement get vendor list
 
-        this.commandInvoker.execute(Commands.GET_VENDOR_LIST, commandArgs);
-        break;
+        return new GetVendorListCommand(this.cmpData, command, version, callback, param);
 
       }
 
       case Commands.ADD_EVENT_LISTENER: {
 
-        // Todo: where are we going to queue up commands?
-
-        // this.addEventListener(commandArgs.callback as TCDataCallback);
-        break;
+        return new AddEventListenerCommand(this.cmpData, command, version, callback, param);
 
       }
 
       case Commands.REMOVE_EVENT_LISTENER: {
 
-        // Todo: where are we going to queue up commands?
-
-        // this.removeEventListener(commandArgs.callback as TCDataCallback, commandArgs.callback as TCDataCallback);
-        break;
+        return new RemoveEventListenerCommand(this.cmpData, command, version, callback, param);
 
       }
 
       default: {
 
-        if (Validation.isFunction(this.customMethods[commandArgs.command])) {
+        if (Validation.isFunction(this.customMethods[command])) {
 
           /**
            * If custom methods were set, process them here.
            * Todo: Handle custom commands
            */
 
-        } else {
-
-          /**
-           * Command is not supported and has no custom methods defined
-           */
-
-          CmpApiUtil.failCallback(commandArgs.callback, `${commandArgs.command} ${Constants.COMMAND_NOT_SUPPORTED}`);
-          break;
+          return new CustomCommand(this.cmpData, command, version, callback, param);
 
         }
 
-        break;
+        /**
+         * Command is not supported and has no custom methods defined
+         */
+
+        CmpApiUtil.failCallback(callback, `${command} ${Constants.COMMAND_NOT_SUPPORTED}`);
 
       }
 
     }
 
+    return null;
+
   }
 
   /**
    * Returns true if a command needs to be placed in a queue to be processed later
-   * @param {CommandArgs} commandArgs
+   * @param {Command} command
    * @return {boolean}
    */
-  private shouldCommandBeQueued(commandArgs: CommandArgs): boolean {
+  private shouldCommandBeQueued(command: Command): boolean {
 
-    return commandArgs.command === Commands.PING ? false : !this.cmpData.tcModelIsSet;
+    return command.getCommandString() === Commands.PING ? false : !this.canProcessCommandQueue;
 
   }
 
-  private getCommandProcessor(): (commandArgs: CommandArgs) => void {
+  /**
+   * Returns true if we can process commands in queues
+   * @return {boolean}
+   */
+  private get canProcessCommandQueue(): boolean {
 
-    return (commandArgs) => {
-
-      const _this = this;
-      return _this.processCommand(commandArgs);
-
-    };
+    return this.cmpData.tcModelIsSet;
 
   }
 

@@ -1,18 +1,18 @@
 import {CmpData} from '../CmpData';
-import {CommandArgs, Ping} from '../model';
-import {Param, PingCallback} from '../types';
+import {Ping} from '../model';
+import {Callback, Param, PingCallback} from '../types';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
 export class PingCommand extends BaseCommand implements Command {
 
-  public constructor(cmpData: CmpData) {
+  public constructor(cmpData: CmpData, command: string, version: number, callback: Callback, param?: Param) {
 
-    super(cmpData);
+    super(cmpData, command, version, callback, param);
 
   }
 
-  public execute(commandArgs: CommandArgs): void {
+  public execute(): void {
 
     const ping = new Ping();
     this.setBaseReturnFields(ping);
@@ -28,7 +28,7 @@ export class PingCommand extends BaseCommand implements Command {
     ping.displayStatus = this.cmpData.displayStatus;
     ping.cmpLoaded = true;
 
-    (commandArgs.callback as PingCallback)(ping);
+    (this.callback as PingCallback)(ping);
 
   }
 

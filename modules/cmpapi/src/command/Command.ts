@@ -1,7 +1,9 @@
-import {CommandArgs} from '../model';
-
 export interface Command {
 
-  execute(commandArgs: CommandArgs): void;
+  validate(validationMessage: string, failCallbackIfNotValid?: boolean): boolean;
+
+  execute(): void;
+
+  getCommandString(): string;
 
 }

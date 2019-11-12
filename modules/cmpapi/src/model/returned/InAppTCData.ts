@@ -4,7 +4,7 @@ import {
 
 import {
   BoolInt,
-} from '../../types/BoolInt';
+} from '../../types';
 
 export interface StringBoolVector {
   [id: string]: string;

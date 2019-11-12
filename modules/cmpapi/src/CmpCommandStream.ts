@@ -1,5 +1,5 @@
 import {Commands} from './command';
-import {CommandArgs, Ping} from './model';
+import {Ping} from './model';
 import {CmpStatus} from './status';
 import {ArgSet, CommandArgsHandler, PageCallHandler} from './types';
 import {Constants, Validation} from './utilities';

@@ -6,4 +6,5 @@ export * from './GetInAppTcDataCommand';
 export * from './GetVendorListCommand';
 export * from './AddEventListenerCommand';
 export * from './RemoveEventListenerCommand';
+export * from './CustomCommand';
 export * from './Commands';

@@ -1,48 +1,48 @@
-import {CommandArgs} from '../model';
+import {Command} from '../command';
 
 export class CommandQueue {
 
-  private commandArgs: CommandArgs[];
+  private commands: Command[];
 
-  private processCommand: (commandArgs: CommandArgs) => void;
+  private processCommand: (command: Command) => void;
 
-  public constructor(commandArgs?: CommandArgs[]) {
+  public constructor(commands?: Command[]) {
 
-    this.commandArgs = commandArgs ? commandArgs : [];
+    this.commands = commands ? commands : [];
 
   }
 
   public get queueLength(): number {
 
-    return this.commandArgs.length;
+    return this.commands.length;
 
   }
 
   public get isEmpty(): boolean {
 
-    return this.commandArgs.length < 1;
+    return this.commands.length < 1;
 
   }
 
   public get hasCommands(): boolean {
 
-    return this.commandArgs.length > 0;
+    return this.commands.length > 0;
 
   }
 
-  public queueCommand(commandArgs: CommandArgs) {
+  public queueCommand(command: Command) {
 
     // Todo: filter dups
 
-    this.commandArgs.push(commandArgs);
+    this.commands.push(command);
 
   }
 
-  public queueCommands(commandArgsSet: CommandArgs[]) {
+  public queueCommands(commands: Command[]) {
 
     // Todo: filter dups
 
-    this.commandArgs.push(...commandArgsSet);
+    this.commands.push(...commands);
 
   }
 
@@ -50,16 +50,10 @@ export class CommandQueue {
 
     if (this.hasCommands) {
 
-      this.commandArgs.forEach((commandArgs: CommandArgs) => this.processCommand(commandArgs));
-      this.commandArgs = [];
+      this.commands.forEach((command: Command) => command.execute());
+      this.commands = [];
 
     }
-
-  }
-
-  public setCommandProcessor(commandProcessor: (commandArgs: CommandArgs) => void) {
-
-    this.processCommand = commandProcessor;
 
   }
 
