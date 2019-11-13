@@ -1,29 +1,40 @@
 import {CmpData} from '../CmpData';
+import {EventListenerQueue} from '../queue/EventListenerQueue';
 import {Callback, Param} from '../types';
+import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 import {GetTcDataCommand} from './GetTcDataCommand';
 
-export class AddEventListenerCommand extends GetTcDataCommand implements Command {
+export class AddEventListenerCommand extends BaseCommand implements Command {
 
-  public getCallback(): Callback {
+  private readonly getTcDataCommand: GetTcDataCommand;
+  private eventListenerQueue: EventListenerQueue;
 
-    return this.callback;
+  public constructor(
+    eventListenerQueue: EventListenerQueue,
+    cmpData: CmpData,
+    command: string,
+    version: number,
+    callback: Callback,
+    param?: Param) {
 
-  }
+    super(cmpData, command, version, callback, param);
 
-  public constructor(cmpData: CmpData, command: string, version: number, callback: Callback, param?: Param) {
+    this.eventListenerQueue = eventListenerQueue;
 
-    /**
-     * Note we are making the param undefined. This command doesn't use it.
-     */
-
-    super(cmpData, command, version, callback, undefined);
+    this.getTcDataCommand = new GetTcDataCommand(cmpData, command, version, callback, param);
 
   }
 
   public execute(): void {
 
-    super.execute();
+    this.eventListenerQueue.add(this.callback, this.getTcDataCommand);
+
+  }
+
+  public validate(validationMessage: string, failCallbackIfNotValid?: boolean): boolean {
+
+    return this.getTcDataCommand.validate(validationMessage, failCallbackIfNotValid);
 
   }
 

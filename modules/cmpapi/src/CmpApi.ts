@@ -63,7 +63,8 @@ export class CmpApi {
 
     this.cmpData.tcModel = tcm;
     this.cmpData.eventStatus = eventStatus || this.cmpData.eventStatus;
-    this.commandQueue.processAndClearCommands();
+    this.commandQueue.executeAndClearCommands();
+    this.eventListenerQueue.executeCommands();
 
   }
 
@@ -104,45 +105,10 @@ export class CmpApi {
     if (command) {
 
       /**
-       * Validate, possibly queue and/or process command
+       * Validate, if it isn't valid, finish processing command
        */
 
-      const validationMessage = '';
-
-      if (!command.validate(validationMessage)) {
-
-        /**
-         * Log failed validation message to console and execute command with failed arguments if its a function.
-         * End processing of this command by returning void.
-         */
-
-        CmpApiUtil.failCallback(callback, validationMessage);
-
-        return;
-
-      }
-
-      /**
-       * Place in event queue if need be
-       */
-      if (command instanceof AddEventListenerCommand) {
-
-        this.eventListenerQueue.add(callback, command);
-
-        return;
-
-      }
-
-      /**
-       * Remove from event listener queue if need be
-       */
-      if (command instanceof RemoveEventListenerCommand) {
-
-        if (this.eventListenerQueue.remove(callback)) {
-
-          command.execute();
-
-        }
+      if (!command.validate('', true)) {
 
         return;
 
@@ -215,13 +181,13 @@ export class CmpApi {
 
       case Commands.ADD_EVENT_LISTENER: {
 
-        return new AddEventListenerCommand(this.cmpData, command, version, callback, param);
+        return new AddEventListenerCommand(this.eventListenerQueue, this.cmpData, command, version, callback, param);
 
       }
 
       case Commands.REMOVE_EVENT_LISTENER: {
 
-        return new RemoveEventListenerCommand(this.cmpData, command, version, callback, param);
+        return new RemoveEventListenerCommand(this.eventListenerQueue, this.cmpData, command, version, callback, param);
 
       }
 
@@ -281,35 +247,20 @@ export class CmpApi {
       /**
        * Convert and Filter out invalid commands
        */
-      const filteredCommands = commandArgs
-        .map((as: ArgSet) => ({callback: as[2], command: _this.createCommand(...as)}))
-        .filter((commandArgs) =>
-          commandArgs.command != null && commandArgs.command.validate('', true)
-        );
-
-      filteredCommands
-        .filter((commandArgs) => (commandArgs.command instanceof AddEventListenerCommand))
-        // @ts-ignore
-        .forEach((commandArgs) => _this.eventListenerQueue.add(commandArgs.callback, commandArgs.command));
-
-      filteredCommands
-        .filter((commandArgs) => (
-          commandArgs.command instanceof RemoveEventListenerCommand)
-          && _this.eventListenerQueue.remove(commandArgs.callback)
-        )
-        // @ts-ignore
-        .forEach((commandArgs) => commandArgs.command.execute());
+      const validCommands = commandArgs
+        .map((as: ArgSet) => _this.createCommand(...as))
+        .filter((command) => command != null && command.validate('', true));
 
       /**
        * Add commands to que and process/clear them if we can
        */
 
       // @ts-ignore
-      _this.commandQueue.queueCommands(filteredCommands);
+      _this.commandQueue.queueCommands(validCommands);
 
       if (_this.canProcessCommandQueue) {
 
-        _this.commandQueue.processAndClearCommands();
+        _this.commandQueue.executeAndClearCommands();
 
       }
 

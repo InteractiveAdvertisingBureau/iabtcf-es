@@ -32,7 +32,7 @@ export class CommandQueue {
 
   }
 
-  public processAndClearCommands(): void {
+  public executeAndClearCommands(): void {
 
     if (this.hasCommands) {
 

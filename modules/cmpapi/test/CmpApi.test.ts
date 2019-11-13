@@ -302,6 +302,58 @@ describe('CmpApi', (): void => {
 
       });
 
+      describe('addEventListener', (): void => {
+
+        it('addEventListener works', (done): void => {
+
+          let callCount = 0;
+          const maxCallCount = 3;
+
+          const callback: TCDataCallback = (tcData: TCData | null, success: boolean) => {
+
+            callCount++;
+
+            assert.isTrue(success, 'addEventListener was not successful');
+            assert.isNotNull(tcData, 'addEventListener returned null tcData');
+
+            if (tcData) {
+
+              assert.equal(tcData.purpose.consents['3'], true, 'Purpose Consent did not match set value');
+              assert.equal(tcData.purpose.consents['2'], false, 'Purpose Consent did not match set value');
+              // @ts-ignore
+              assert.equal(tcData.eventStatus, EventStatus.TC_LOADED, 'Event status did not match set value');
+
+            }
+
+            // Todo: Check the object more thoroughly
+            if (callCount >= maxCallCount) {
+
+              done();
+
+            }
+
+          };
+
+          win[API_FUNCTION_NAME]('addEventListener', 2, callback);
+
+          const tcModel = new TCModel(gvl);
+          tcModel.cmpId = 23;
+          tcModel.cmpVersion = 1;
+
+          // full consent!
+          tcModel.setAll();
+
+          tcModel.purposeConsents.unset(2);
+          tcModel.vendorConsents.unset(37);
+
+          cmpApi.setTCModel(tcModel, EventStatus.TC_LOADED);
+          cmpApi.setTCModel(tcModel, EventStatus.TC_LOADED);
+          cmpApi.setTCModel(tcModel, EventStatus.TC_LOADED);
+
+        });
+
+      });
+
       describe('getVendorList', (): void => {
 
         it('getVendorList works', (done): void => {
