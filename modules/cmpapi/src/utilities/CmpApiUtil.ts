@@ -1,4 +1,4 @@
-import {Callback} from '../types';
+import {Callback, RemoveListenerCallback} from '../types';
 import {Validation} from './Validation';
 
 /**
@@ -24,7 +24,18 @@ export abstract class CmpApiUtil {
 
     if (Validation.isFunction(callback)) {
 
-      callback(null, false);
+      try {
+
+        /**
+         * Todo: need to figure this out
+         */
+        callback(null, false);
+
+      } catch (e) {
+
+        (callback as RemoveListenerCallback)(false);
+
+      }
 
     }
 

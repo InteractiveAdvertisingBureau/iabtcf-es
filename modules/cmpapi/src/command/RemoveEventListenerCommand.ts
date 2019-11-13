@@ -1,5 +1,5 @@
 import {CmpData} from '../CmpData';
-import {Callback, Param} from "../types";
+import {Callback, Param, RemoveListenerCallback} from '../types';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
@@ -12,6 +12,9 @@ export class RemoveEventListenerCommand extends BaseCommand implements Command {
   }
 
   public execute(): void {
+
+    (this.callback as RemoveListenerCallback)(true);
+
   }
 
 }

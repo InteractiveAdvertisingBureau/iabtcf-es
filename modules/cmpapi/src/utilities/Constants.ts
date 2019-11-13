@@ -11,5 +11,6 @@ export class Constants {
   public static readonly TC_MODEL_INVALID: string = `CMP Model is not in a valid state`;
   public static readonly VENDOR_LIST_INVALID: string = `Vendor list is not valid`;
   public static readonly VENDOR_LIST_VERSION_INVALID: string = `Vendor list version is not valid`;
+  public static readonly EVENT_LISTENER_NOT_FOUND: string = `Event listener not found.`;
 
 }

@@ -13,6 +13,7 @@ import {
   RemoveEventListenerCommand,
 } from './command';
 import {CommandQueue} from './queue/CommandQueue';
+import {EventListenerQueue} from './queue/EventListenerQueue';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
 import {ArgSet, Callback, CommandArgsHandler, PageCallHandler, Param} from './types';
 import {CmpApiUtil, Constants, Validation} from './utilities';
@@ -25,6 +26,8 @@ export class CmpApi {
   private readonly commandStream: CmpCommandStream;
 
   private readonly commandQueue: CommandQueue;
+
+  private readonly eventListenerQueue: EventListenerQueue;
 
   private readonly cmpData: CmpData;
 
@@ -39,11 +42,9 @@ export class CmpApi {
    */
   public constructor(cmpId: number, cmpVersion: number) {
 
-    /**
-     * Initialize cmp data, set up frame and replace stub with our command handler
-     */
-
     this.cmpData = new CmpData(cmpId, cmpVersion);
+
+    this.eventListenerQueue = new EventListenerQueue();
 
     this.commandQueue = new CommandQueue();
 
@@ -89,56 +90,6 @@ export class CmpApi {
  */
 
   /**
-   * Returns the page call handler function with a reference to this api
-   * @return {PageCallHandler}
-   */
-  private getPageCallHandler(): PageCallHandler {
-
-    return (command: string, version: number, callback: Callback, param?: Param): void => {
-
-      const _this = this;
-
-      _this.pageCallHandler(command, version, callback, param);
-
-    };
-
-  }
-
-  /**
-   * Returns the command args handler function with a reference to this api
-   * @return {CommandArgsHandler}
-   */
-  private getCommandArgsHandler(): CommandArgsHandler {
-
-    return (commandArgs: ArgSet[]): void => {
-
-      const _this = this;
-
-      /**
-       * Convert and Filter out invalid commands
-       */
-      const filteredCommands = commandArgs
-        .map((as: ArgSet) => _this.createCommand(...as))
-        .filter((command: Command | null) => command != null && command.validate('', true));
-
-      /**
-       * Add commands to que and process/clear them if we can
-       */
-
-      // @ts-ignore
-      _this.commandQueue.queueCommands(filteredCommands);
-
-      if (_this.canProcessCommandQueue) {
-
-        _this.commandQueue.processAndClearCommands();
-
-      }
-
-    };
-
-  }
-
-  /**
    * Handler for all page call commands
    * @type {PageCallHandler}
    * @param {string} commandStr
@@ -172,10 +123,36 @@ export class CmpApi {
       }
 
       /**
+       * Place in event queue if need be
+       */
+      if (command instanceof AddEventListenerCommand) {
+
+        this.eventListenerQueue.add(callback, command);
+
+        return;
+
+      }
+
+      /**
+       * Remove from event listener queue if need be
+       */
+      if (command instanceof RemoveEventListenerCommand) {
+
+        if (this.eventListenerQueue.remove(callback)) {
+
+          command.execute();
+
+        }
+
+        return;
+
+      }
+
+      /**
        * Queue command if it needs to be
        */
 
-      if (this.shouldCommandBeQueued(command)) {
+      if (this.shouldCommandBeQueued(commandStr)) {
 
         /**
          * Command will be placed in a queue to be processed once the api is ready. The lifecycle ends here for this
@@ -189,10 +166,6 @@ export class CmpApi {
       }
 
       /**
-       * Todo: Place in event queue if need be
-       */
-
-      /**
        * Execute the command
        */
 
@@ -202,6 +175,14 @@ export class CmpApi {
 
   }
 
+  /**
+   * Creates a new Command based on the command string provided
+   * @param {string} command
+   * @param {number} version
+   * @param {Callback} callback
+   * @param {Param} param
+   * @return {Command | null} returns null if the command is not supported
+   */
   private createCommand(command: string, version: number, callback: Callback, param?: Param): Command | null {
 
     switch (command) {
@@ -272,13 +253,78 @@ export class CmpApi {
   }
 
   /**
+   * Returns the page call handler function with a reference to this api
+   * @return {PageCallHandler}
+   */
+  private getPageCallHandler(): PageCallHandler {
+
+    return (command: string, version: number, callback: Callback, param?: Param): void => {
+
+      const _this = this;
+
+      _this.pageCallHandler(command, version, callback, param);
+
+    };
+
+  }
+
+  /**
+   * Returns the command args handler function with a reference to this api
+   * @return {CommandArgsHandler}
+   */
+  private getCommandArgsHandler(): CommandArgsHandler {
+
+    return (commandArgs: ArgSet[]): void => {
+
+      const _this = this;
+
+      /**
+       * Convert and Filter out invalid commands
+       */
+      const filteredCommands = commandArgs
+        .map((as: ArgSet) => ({callback: as[2], command: _this.createCommand(...as)}))
+        .filter((commandArgs) =>
+          commandArgs.command != null && commandArgs.command.validate('', true)
+        );
+
+      filteredCommands
+        .filter((commandArgs) => (commandArgs.command instanceof AddEventListenerCommand))
+        // @ts-ignore
+        .forEach((commandArgs) => _this.eventListenerQueue.add(commandArgs.callback, commandArgs.command));
+
+      filteredCommands
+        .filter((commandArgs) => (
+          commandArgs.command instanceof RemoveEventListenerCommand)
+          && _this.eventListenerQueue.remove(commandArgs.callback)
+        )
+        // @ts-ignore
+        .forEach((commandArgs) => commandArgs.command.execute());
+
+      /**
+       * Add commands to que and process/clear them if we can
+       */
+
+      // @ts-ignore
+      _this.commandQueue.queueCommands(filteredCommands);
+
+      if (_this.canProcessCommandQueue) {
+
+        _this.commandQueue.processAndClearCommands();
+
+      }
+
+    };
+
+  }
+
+  /**
    * Returns true if a command needs to be placed in a queue to be processed later
-   * @param {Command} command
+   * @param {string} commandStr
    * @return {boolean}
    */
-  private shouldCommandBeQueued(command: Command): boolean {
+  private shouldCommandBeQueued(commandStr: string): boolean {
 
-    return command.getCommandString() === Commands.PING ? false : !this.canProcessCommandQueue;
+    return commandStr === Commands.PING ? false : !this.canProcessCommandQueue;
 
   }
 

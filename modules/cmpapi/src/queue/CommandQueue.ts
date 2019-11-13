@@ -4,23 +4,9 @@ export class CommandQueue {
 
   private commands: Command[];
 
-  private processCommand: (command: Command) => void;
-
   public constructor(commands?: Command[]) {
 
     this.commands = commands ? commands : [];
-
-  }
-
-  public get queueLength(): number {
-
-    return this.commands.length;
-
-  }
-
-  public get isEmpty(): boolean {
-
-    return this.commands.length < 1;
 
   }
 

@@ -4,6 +4,4 @@ export interface Command {
 
   execute(): void;
 
-  getCommandString(): string;
-
 }
