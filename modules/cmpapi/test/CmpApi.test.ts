@@ -5,6 +5,8 @@ import {
   CmpApi,
   EventStatus,
   GlobalVendorList,
+  IATCDataCallback,
+  InAppTCData,
   Ping,
   PingCallback,
   TCData,
@@ -185,6 +187,44 @@ describe('CmpApi', (): void => {
           // full consent!
           tcModel.setAll();
 
+          tcModel.purposeConsents.unset(2);
+          tcModel.vendorConsents.unset(37);
+
+          cmpApi.setTCModel(tcModel, EventStatus.TC_LOADED);
+
+          const callback: TCDataCallback = (tcData: TCData | null, success: boolean) => {
+
+            assert.isTrue(success, 'getTCData was not successful');
+            assert.isNotNull(tcData, 'getTCData returned null tcData');
+
+            if (tcData) {
+
+              assert.equal(tcData.purpose.consents['3'], true, 'Purpose Consent did not match set value');
+              assert.equal(tcData.purpose.consents['2'], false, 'Purpose Consent did not match set value');
+              // @ts-ignore
+              assert.equal(tcData.eventStatus, EventStatus.TC_LOADED, 'Event status did not match set value');
+
+            }
+
+            // Todo: Check the object more thoroughly
+
+            done();
+
+          };
+
+          win[API_FUNCTION_NAME]('getTCData', 2, callback);
+
+        });
+
+        it('getTCData works with vendor ids', (done): void => {
+
+          const tcModel = new TCModel(gvl);
+          tcModel.cmpId = 23;
+          tcModel.cmpVersion = 1;
+
+          // full consent!
+          tcModel.setAll();
+
           cmpApi.setTCModel(tcModel, EventStatus.TC_LOADED);
 
           const callback: TCDataCallback = (tcData: TCData | null, success: boolean) => {
@@ -200,7 +240,7 @@ describe('CmpApi', (): void => {
 
           };
 
-          win[API_FUNCTION_NAME]('getTCData', 2, callback, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
+          win[API_FUNCTION_NAME]('getTCData', 2, callback, [1, 2, 3, 12, 37, 48]);
 
         });
 
@@ -215,6 +255,48 @@ describe('CmpApi', (): void => {
           };
 
           win[API_FUNCTION_NAME]('getTCData', 2, callback, [1.5, 2]);
+
+        });
+
+      });
+
+      describe('getInAppTCData', (): void => {
+
+        it('getInAppTCData works', (done): void => {
+
+          const tcModel = new TCModel(gvl);
+          tcModel.cmpId = 23;
+          tcModel.cmpVersion = 1;
+
+          // full consent!
+          tcModel.setAll();
+
+          tcModel.purposeConsents.unset(2);
+          tcModel.vendorConsents.unset(37);
+
+          cmpApi.setTCModel(tcModel, EventStatus.TC_LOADED);
+
+          const callback: IATCDataCallback = (inAppTcData: InAppTCData | null, success: boolean) => {
+
+            assert.isTrue(success, 'getInAppTCData was not successful');
+            assert.isNotNull(inAppTcData, 'getInAppTCData returned null tcData');
+
+            if (inAppTcData) {
+
+              assert.equal((inAppTcData.purpose.consents as string).charAt(0), '1', 'Purpose Consent did not match set value');
+              assert.equal((inAppTcData.purpose.consents as string).charAt(1), '0', 'Purpose Consent did not match set value');
+              // @ts-ignore
+              assert.equal(inAppTcData.eventStatus, EventStatus.TC_LOADED, 'Event status did not match set value');
+
+            }
+
+            // Todo: Check the object more thoroughly
+
+            done();
+
+          };
+
+          win[API_FUNCTION_NAME]('getInAppTCData', 2, callback);
 
         });
 

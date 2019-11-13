@@ -1,58 +1,70 @@
-import {
-  Return,
-} from './Return';
+import {TCModel, Vector} from '@iabtcf/core';
+import {EventStatus} from '../../status';
+import {BooleanVector} from '../BooleanVector';
+import {Restrictions} from '../Restrictions';
+import {TCData} from './TCData';
 
-import {
-  BoolInt,
-} from '../../types';
+export class InAppTCData extends TCData {
 
-export interface StringBoolVector {
-  [id: string]: string;
-}
+  public constructor(tcModel: TCModel, eventStatus: EventStatus, vendorIds: number[]) {
 
-export class InAppTCData extends Return {
+    super(tcModel, eventStatus, vendorIds);
 
-  public tcString: string;
-  public eventStatus: string;
-  public useNonStandardStacks: BoolInt;
-  public publisherCC: string;
-  public purposeOneTreatment: BoolInt;
-  public outOfBand: {
+    /**
+     * In app tc data doesn't have the outOfBand field. Setting it to undefined.
+     */
+    this.outOfBand = undefined;
 
-    allowedVendors: StringBoolVector;
-    discloseVendors: StringBoolVector;
-
-  };
-  public purpose: {
-
-    consents: StringBoolVector;
-    legitimateInterests: StringBoolVector;
-
-  };
-  public vendor: {
-
-    consents: StringBoolVector;
-    legitimateInterestslegInts: StringBoolVector;
-
-  };
-  public speicalFeatureOptins: StringBoolVector;
-  public publisher: {
-
-    consents: StringBoolVector;
-    legitimateInterests: StringBoolVector;
-    customPurpose: {
-
-      consents: StringBoolVector;
-      legitimateInterests: StringBoolVector;
-
-    };
-    restrictions: {
-
-      [purposeId: string]: {
-        [vendorId: string]: 0 | 1 | 2;
-      };
-
-    };
   }
+
+  /**
+   * Creates a string bit field with a value for each id where each value is '1' if its id is in the passed in vector
+   * @override
+   * @param {string[]} ids
+   * @param {Vector }vector
+   * @return {BooleanVector | string}
+   */
+  protected createVectorField(ids: string[], vector: Vector): BooleanVector | string {
+
+    return this.createBitFieldString(ids, vector);
+
+  }
+
+  /**
+   * Creates a string bit field with a value for each id where each value is '1' if its id is in the passed in vector
+   * @param {string[]} ids
+   * @param {Vector }vector
+   * @return {string}
+   */
+  protected createBitFieldString(ids: string[], vector: Vector): string {
+
+    return ids.map((id: string) => vector.has(+id) ? '1' : '0').join('');
+
+  }
+
+  /**
+   * Creates a restrictions object given a TCModel
+   * @override
+   * @param {TCModel} tcModel
+   * @return {Restrictions}
+   */
+  protected createRestrictions(tcModel: TCModel): Restrictions {
+
+    return tcModel.publisherRestrictions.getAllRestrictions().reduce<Restrictions>((obj, pr): Restrictions => {
+
+      const purposeId = pr.purposeId.toString(10);
+      obj[purposeId] = '';
+
+      tcModel.publisherRestrictions.getVendors(pr).forEach((vendorId: number) => {
+
+        (obj[purposeId] as string).concat(pr.restrictionType.toString(10));
+
+      });
+
+      return obj;
+
+    }, {});
+
+  };
 
 }

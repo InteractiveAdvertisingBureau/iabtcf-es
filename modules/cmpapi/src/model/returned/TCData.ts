@@ -1,8 +1,9 @@
-import {TCModel, TCString} from '@iabtcf/core';
-import {BooleanVector, createBooleanVector} from '../BooleanVector';
-import {createRestrictions, Restrictions} from '../Restrictions';
-import {Return} from './Return';
+import {TCModel, TCString, Vector} from '@iabtcf/core';
 import {EventStatus} from '../../status';
+import {BoolInt} from '../../types';
+import {BooleanVector, createBooleanVector} from '../BooleanVector';
+import {Restrictions} from '../Restrictions';
+import {Return} from './Return';
 
 /**
  * Class represents consent data
@@ -11,37 +12,39 @@ export class TCData extends Return {
 
   public tcString: string;
   public eventStatus: string;
-  public isServiceSpecific: boolean;
-  public useNonStandardStacks: boolean;
+  public isServiceSpecific: boolean | BoolInt;
+  public useNonStandardStacks: boolean | BoolInt;
   public publisherCC: string;
-  public purposeOneTreatment: boolean;
+  public purposeOneTreatment: boolean | BoolInt;
+
+  // TcDataOnly
   public outOfBand: {
 
     allowedVendors: BooleanVector;
     discloseVendors: BooleanVector;
 
-  };
+  } | undefined;
   public purpose: {
 
-    consents: BooleanVector;
-    legitimateInterests: BooleanVector;
+    consents: BooleanVector | string;
+    legitimateInterests: BooleanVector | string;
 
   };
   public vendor: {
 
-    consents: BooleanVector;
-    legitimateInterests: BooleanVector;
+    consents: BooleanVector | string;
+    legitimateInterests: BooleanVector | string;
 
   };
-  public specialFeatureOptins: BooleanVector;
+  public specialFeatureOptins: BooleanVector | string;
   public publisher: {
 
-    consents: BooleanVector;
-    legitimateInterests: BooleanVector;
+    consents: BooleanVector | string;
+    legitimateInterests: BooleanVector | string;
     customPurpose: {
 
-      consents: BooleanVector;
-      legitimateInterests: BooleanVector;
+      consents: BooleanVector | string;
+      legitimateInterests: BooleanVector | string;
 
     };
     restrictions: Restrictions;
@@ -76,30 +79,67 @@ export class TCData extends Return {
 
     this.purpose = {
 
-      consents: createBooleanVector(purposeIds, tcModel.purposeConsents),
-      legitimateInterests: createBooleanVector(purposeIds, tcModel.purposeLegitimateInterest),
+      consents: this.createVectorField(purposeIds, tcModel.purposeConsents),
+      legitimateInterests: this.createVectorField(purposeIds, tcModel.purposeLegitimateInterest),
 
     };
 
     this.vendor = {
-      consents: createBooleanVector(vendorIds, tcModel.vendorConsents),
-      legitimateInterests: createBooleanVector(vendorIds, tcModel.vendorLegitimateInterest),
+      consents: this.createVectorField(vendorIds, tcModel.vendorConsents),
+      legitimateInterests: this.createVectorField(vendorIds, tcModel.vendorLegitimateInterest),
     };
 
-    this.specialFeatureOptins = createBooleanVector(specialFeatureIds, tcModel.specialFeatureOptIns);
+    this.specialFeatureOptins = this.createVectorField(specialFeatureIds, tcModel.specialFeatureOptIns);
 
     this.publisher = {
 
-      consents: createBooleanVector(purposeIds, tcModel.publisherConsents),
-      legitimateInterests: createBooleanVector(purposeIds, tcModel.publisherLegitimateInterest),
+      consents: this.createVectorField(purposeIds, tcModel.publisherConsents),
+      legitimateInterests: this.createVectorField(purposeIds, tcModel.publisherLegitimateInterest),
       customPurpose: {
 
-        consents: createBooleanVector(purposeIds, tcModel.publisherCustomConsents),
-        legitimateInterests: createBooleanVector(purposeIds, tcModel.publisherCustomLegitimateInterest),
+        consents: this.createVectorField(purposeIds, tcModel.publisherCustomConsents),
+        legitimateInterests: this.createVectorField(purposeIds, tcModel.publisherCustomLegitimateInterest),
 
       },
-      restrictions: createRestrictions(tcModel),
+      restrictions: this.createRestrictions(tcModel),
     };
+
+  }
+
+  /**
+   * Creates a restrictions object given a TCModel
+   * @param {TCModel} tcModel
+   * @return {Restrictions}
+   */
+  protected createRestrictions(tcModel: TCModel): Restrictions {
+
+    return tcModel.publisherRestrictions.getAllRestrictions().reduce<Restrictions>((obj, pr): Restrictions => {
+
+      const purposeId = pr.purposeId.toString(10);
+      obj[purposeId] = {};
+
+      tcModel.publisherRestrictions.getVendors(pr).forEach((vendorId: number) => {
+
+        obj[purposeId][vendorId.toString(10)] = pr.restrictionType;
+
+      });
+
+      return obj;
+
+    }, {});
+
+  };
+
+  /**
+   * Creates a string bit field with a value for each id where each value is '1' if its id is in the passed in vector
+   * Can be overwritten to return a string
+   * @param {string[]} ids
+   * @param {Vector }vector
+   * @return {BooleanVector | string}
+   */
+  protected createVectorField(ids: string[], vector: Vector): BooleanVector | string {
+
+    return createBooleanVector(ids, vector);
 
   }
 
