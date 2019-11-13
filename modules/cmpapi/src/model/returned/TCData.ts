@@ -60,12 +60,11 @@ export class TCData extends Return {
 
     super();
 
-    const tcStringEncoder: TCString = new TCString();
     const vendorIds: string[] = _vendorIds ? _vendorIds.map((id) => id.toString(10)) : Object.keys(tcModel.gvl.vendors);
     const purposeIds: string[] = Object.keys(tcModel.gvl.purposes);
     const specialFeatureIds: string[] = Object.keys(tcModel.gvl.specialFeatures);
 
-    this.tcString = tcStringEncoder.encode(tcModel);
+    this.tcString = TCString.encode(tcModel);
     this.eventStatus = eventStatus;
     this.isServiceSpecific = tcModel.isServiceSpecific;
     this.useNonStandardStacks = tcModel.useNonStandardStacks;
