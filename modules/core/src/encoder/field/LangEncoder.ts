@@ -1,19 +1,17 @@
 import {
-  Encoder,
   IntEncoder,
 } from '.';
 
 import {
   DecodingError,
   EncodingError,
-} from '../errors';
+} from '../../errors';
 
-export class LangEncoder implements Encoder<string> {
+export class LangEncoder {
 
-  public encode(value: string, numBits: number): string {
+  public static encode(value: string, numBits: number): string {
 
     value = value.toUpperCase();
-    const intEncoder: IntEncoder = new IntEncoder();
 
     const ASCII_START = 65;
     const firstLetter: number = value.charCodeAt(0) - ASCII_START;
@@ -34,25 +32,24 @@ export class LangEncoder implements Encoder<string> {
     }
 
     numBits = numBits/2;
-    const firstLetterBString: string = intEncoder.encode(firstLetter, numBits);
-    const secondLetterBString: string = intEncoder.encode(secondLetter, numBits);
+    const firstLetterBString: string = IntEncoder.encode(firstLetter, numBits);
+    const secondLetterBString: string = IntEncoder.encode(secondLetter, numBits);
 
     return firstLetterBString + secondLetterBString;
 
   }
 
-  public decode(value: string): string {
+  public static decode(value: string): string {
 
     let retr: string;
 
     // is it an even number of bits? we have to divide it
     if (!(value.length % 2)) {
 
-      const intDecoder: IntEncoder = new IntEncoder();
       const ASCII_START = 65;
       const mid: number = value.length/2;
-      const firstLetter = intDecoder.decode(value.slice(0, mid)) + ASCII_START;
-      const secondLetter = intDecoder.decode(value.slice(mid)) + ASCII_START;
+      const firstLetter = IntEncoder.decode(value.slice(0, mid)) + ASCII_START;
+      const secondLetter = IntEncoder.decode(value.slice(mid)) + ASCII_START;
 
       retr = String.fromCharCode(firstLetter) + String.fromCharCode(secondLetter);
 

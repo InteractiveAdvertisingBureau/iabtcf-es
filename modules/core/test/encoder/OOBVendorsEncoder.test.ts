@@ -1,15 +1,26 @@
-import {expect} from 'chai';
 import {
-  OOBVendorsEncoder,
-} from '../../src/encoder';
+
+  expect,
+
+} from 'chai';
 
 import {
+
+  OOBVendorsEncoder,
+
+} from '../../src/encoder/segment';
+
+import {
+
   Fields,
+
 } from '../../src/model';
 
 import {
+
   TCModel,
   GVL,
+
 } from '../../src';
 
 export function run(): void {
@@ -23,7 +34,6 @@ export function run(): void {
     it('should encode into a string', (done: () => void): void => {
 
       const tcModel: TCModel = new TCModel(gvl);
-      const encoder: OOBVendorsEncoder = new OOBVendorsEncoder();
       let encoded = '';
 
       tcModel.cmpId = 23;
@@ -34,7 +44,7 @@ export function run(): void {
 
       const encodeIt = (): void => {
 
-        encoded = encoder.encode(tcModel, Fields.vendorsAllowed);
+        encoded = OOBVendorsEncoder.encode(tcModel, Fields.vendorsAllowed);
 
       };
 
@@ -55,7 +65,6 @@ export function run(): void {
     it('TCModel->String->TCModel and should be equal', (done: () => void): void => {
 
       const tcModel: TCModel = new TCModel(gvl);
-      const encoder: OOBVendorsEncoder = new OOBVendorsEncoder();
       const decodedModel: TCModel = new TCModel();
       let encoded = '';
 
@@ -71,13 +80,13 @@ export function run(): void {
 
       const encodeIt = (): void => {
 
-        encoded = encoder.encode(tcModel, Fields.vendorsAllowed);
+        encoded = OOBVendorsEncoder.encode(tcModel, Fields.vendorsAllowed);
 
       };
 
       const decodeIt = (): void => {
 
-        encoder.decode(encoded, decodedModel);
+        OOBVendorsEncoder.decode(encoded, decodedModel);
 
       };
 

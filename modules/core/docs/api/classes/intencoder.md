@@ -6,10 +6,6 @@
 
 **IntEncoder**
 
-## Implements
-
-* [Encoder](../interfaces/encoder.md)<`number` \| `string`>
-
 ## Index
 
 ### Methods
@@ -23,11 +19,11 @@
 
 <a id="decode"></a>
 
-###  decode
+### `<Static>` decode
 
 ▸ **decode**(value: *`string`*): `number`
 
-*Defined in [encoder/IntEncoder.ts:36](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/IntEncoder.ts#L36)*
+*Defined in encoder/field/IntEncoder.ts:39*
 
 **Parameters:**
 
@@ -40,11 +36,11 @@
 ___
 <a id="encode"></a>
 
-###  encode
+### `<Static>` encode
 
 ▸ **encode**(value: *`number` \| `string`*, numBits: *`number`*): `string`
 
-*Defined in [encoder/IntEncoder.ts:6](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/IntEncoder.ts#L6)*
+*Defined in encoder/field/IntEncoder.ts:9*
 
 **Parameters:**
 

@@ -25,7 +25,7 @@
 
 **● core**: *`string`* = "core"
 
-*Defined in [model/Segments.ts:4](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Segments.ts#L4)*
+*Defined in [model/Segments.ts:4](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Segments.ts#L4)*
 
 ___
 <a id="publishertc"></a>
@@ -34,7 +34,7 @@ ___
 
 **● publisherTC**: *`string`* = "publisherTC"
 
-*Defined in [model/Segments.ts:7](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Segments.ts#L7)*
+*Defined in [model/Segments.ts:7](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Segments.ts#L7)*
 
 ___
 <a id="vendorsallowed"></a>
@@ -43,7 +43,7 @@ ___
 
 **● vendorsAllowed**: *`string`* =  Fields.vendorsAllowed
 
-*Defined in [model/Segments.ts:6](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Segments.ts#L6)*
+*Defined in [model/Segments.ts:6](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Segments.ts#L6)*
 
 ___
 <a id="vendorsdisclosed"></a>
@@ -52,7 +52,7 @@ ___
 
 **● vendorsDisclosed**: *`string`* =  Fields.vendorsDisclosed
 
-*Defined in [model/Segments.ts:5](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Segments.ts#L5)*
+*Defined in [model/Segments.ts:5](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Segments.ts#L5)*
 
 ___
 

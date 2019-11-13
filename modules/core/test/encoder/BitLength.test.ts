@@ -1,5 +1,14 @@
-import {expect} from 'chai';
-import {BitLength} from '../../src/encoder';
+import {
+
+  expect,
+
+} from 'chai';
+
+import {
+
+  BitLength,
+
+} from '../../src/encoder';
 
 export function run(): void {
 

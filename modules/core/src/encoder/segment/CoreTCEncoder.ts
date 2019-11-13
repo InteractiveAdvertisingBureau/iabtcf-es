@@ -1,28 +1,40 @@
 import {
 
-  Encoder,
-  EncoderMap,
   BitLength,
   Base64Url,
 
-} from '.';
+} from '../';
 
-import {CoreFieldSequence} from './CoreFieldSequence';
-import {EncodingError} from '../errors';
+import {
+
+  FieldEncoderMap,
+
+} from '../field';
+
+import {
+
+  CoreFieldSequence,
+
+} from '../sequence';
+
+import {
+
+  EncodingError,
+
+} from '../../errors';
 
 import {
 
   TCModel,
   TCModelPropType,
 
-} from '..';
+} from '../../';
 
-export class CoreTCEncoder implements Encoder<TCModel> {
+export class CoreTCEncoder {
 
-  private encMap: EncoderMap = new EncoderMap();
+  public static encode(tcModel: TCModel): string {
 
-  public encode(tcModel: TCModel): string {
-
+    const encMap: FieldEncoderMap = new FieldEncoderMap();
     const coreFieldSequence: CoreFieldSequence = new CoreFieldSequence();
     const encodeSequence: string[] = coreFieldSequence[tcModel.version.toString()];
     let bitField = '';
@@ -31,7 +43,7 @@ export class CoreTCEncoder implements Encoder<TCModel> {
 
       const value: TCModelPropType = tcModel[key];
       const numBits: number = BitLength[key];
-      const encoder: Encoder<TCModelPropType> = new this.encMap[key]() as Encoder<TCModelPropType>;
+      const encoder = encMap[key];
 
       try {
 
@@ -45,24 +57,22 @@ export class CoreTCEncoder implements Encoder<TCModel> {
 
     });
 
-    const base64Url: Base64Url = new Base64Url();
-
     // base64url encode the string and return
-    return base64Url.encode(bitField);
+    return Base64Url.encode(bitField);
 
   }
 
-  public decode(encodedString: string, tcModel: TCModel): TCModel {
+  public static decode(encodedString: string, tcModel: TCModel): TCModel {
 
+    const encMap: FieldEncoderMap = new FieldEncoderMap();
     const coreFieldSequence: CoreFieldSequence = new CoreFieldSequence();
     const encodeSequence: string[] = coreFieldSequence[tcModel.version.toString()];
-    const base64Url: Base64Url = new Base64Url();
-    const bitField = base64Url.decode(encodedString);
+    const bitField = Base64Url.decode(encodedString);
     let bStringIdx = 0;
 
     encodeSequence.forEach((key: string): void => {
 
-      const encoder: Encoder<TCModelPropType> = new this.encMap[key]() as Encoder<TCModelPropType>;
+      const encoder = encMap[key];
       const bits = bitField.substr(bStringIdx, BitLength[key]);
 
       tcModel[key] = encoder.decode(bits);

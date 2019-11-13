@@ -18,7 +18,7 @@
     "start": "vue-cli-service serve",
     "prepare": "npm run build",
     "build": "rm ../../docs/js/* && rm ../../docs/css/* && vue-cli-service build --no-clean",
-    "lint": "eslint ./src/**/*.ts",
+    "lint": "eslint ./src/**/*",
     "report-coverage": ""
   },
   "dependencies": {

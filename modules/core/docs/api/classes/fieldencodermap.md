@@ -1,10 +1,10 @@
-[@iabtcf/core - API Documentation](../README.md) > [EncoderMap](../classes/encodermap.md)
+[@iabtcf/core - API Documentation](../README.md) > [FieldEncoderMap](../classes/fieldencodermap.md)
 
-# Class: EncoderMap
+# Class: FieldEncoderMap
 
 ## Hierarchy
 
-**EncoderMap**
+**FieldEncoderMap**
 
 ## Implements
 
@@ -14,33 +14,33 @@
 
 ### Properties
 
-* [cmpId](encodermap.md#cmpid)
-* [cmpVersion](encodermap.md#cmpversion)
-* [consentLanguage](encodermap.md#consentlanguage)
-* [consentScreen](encodermap.md#consentscreen)
-* [created](encodermap.md#created)
-* [isServiceSpecific](encodermap.md#isservicespecific)
-* [lastUpdated](encodermap.md#lastupdated)
-* [numCustomPurposes](encodermap.md#numcustompurposes)
-* [policyVersion](encodermap.md#policyversion)
-* [publisherConsents](encodermap.md#publisherconsents)
-* [publisherCountryCode](encodermap.md#publishercountrycode)
-* [publisherCustomConsents](encodermap.md#publishercustomconsents)
-* [publisherCustomLegitimateInterest](encodermap.md#publishercustomlegitimateinterest)
-* [publisherLegitimateInterest](encodermap.md#publisherlegitimateinterest)
-* [publisherRestrictions](encodermap.md#publisherrestrictions)
-* [purposeConsents](encodermap.md#purposeconsents)
-* [purposeLegitimateInterest](encodermap.md#purposelegitimateinterest)
-* [purposeOneTreatment](encodermap.md#purposeonetreatment)
-* [segmentType](encodermap.md#segmenttype)
-* [specialFeatureOptIns](encodermap.md#specialfeatureoptins)
-* [useNonStandardStacks](encodermap.md#usenonstandardstacks)
-* [vendorConsents](encodermap.md#vendorconsents)
-* [vendorLegitimateInterest](encodermap.md#vendorlegitimateinterest)
-* [vendorListVersion](encodermap.md#vendorlistversion)
-* [vendorsAllowed](encodermap.md#vendorsallowed)
-* [vendorsDisclosed](encodermap.md#vendorsdisclosed)
-* [version](encodermap.md#version)
+* [cmpId](fieldencodermap.md#cmpid)
+* [cmpVersion](fieldencodermap.md#cmpversion)
+* [consentLanguage](fieldencodermap.md#consentlanguage)
+* [consentScreen](fieldencodermap.md#consentscreen)
+* [created](fieldencodermap.md#created)
+* [isServiceSpecific](fieldencodermap.md#isservicespecific)
+* [lastUpdated](fieldencodermap.md#lastupdated)
+* [numCustomPurposes](fieldencodermap.md#numcustompurposes)
+* [policyVersion](fieldencodermap.md#policyversion)
+* [publisherConsents](fieldencodermap.md#publisherconsents)
+* [publisherCountryCode](fieldencodermap.md#publishercountrycode)
+* [publisherCustomConsents](fieldencodermap.md#publishercustomconsents)
+* [publisherCustomLegitimateInterest](fieldencodermap.md#publishercustomlegitimateinterest)
+* [publisherLegitimateInterest](fieldencodermap.md#publisherlegitimateinterest)
+* [publisherRestrictions](fieldencodermap.md#publisherrestrictions)
+* [purposeConsents](fieldencodermap.md#purposeconsents)
+* [purposeLegitimateInterest](fieldencodermap.md#purposelegitimateinterest)
+* [purposeOneTreatment](fieldencodermap.md#purposeonetreatment)
+* [segmentType](fieldencodermap.md#segmenttype)
+* [specialFeatureOptIns](fieldencodermap.md#specialfeatureoptins)
+* [useNonStandardStacks](fieldencodermap.md#usenonstandardstacks)
+* [vendorConsents](fieldencodermap.md#vendorconsents)
+* [vendorLegitimateInterest](fieldencodermap.md#vendorlegitimateinterest)
+* [vendorListVersion](fieldencodermap.md#vendorlistversion)
+* [vendorsAllowed](fieldencodermap.md#vendorsallowed)
+* [vendorsDisclosed](fieldencodermap.md#vendorsdisclosed)
+* [version](fieldencodermap.md#version)
 
 ---
 
@@ -54,7 +54,7 @@
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[cmpId](../interfaces/tcfields.md#cmpid)*
 
-*Defined in [encoder/EncoderMap.ts:18](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L18)*
+*Defined in encoder/field/FieldEncoderMap.ts:22*
 
 ___
 <a id="cmpversion"></a>
@@ -65,7 +65,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[cmpVersion](../interfaces/tcfields.md#cmpversion)*
 
-*Defined in [encoder/EncoderMap.ts:19](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L19)*
+*Defined in encoder/field/FieldEncoderMap.ts:23*
 
 ___
 <a id="consentlanguage"></a>
@@ -76,7 +76,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[consentLanguage](../interfaces/tcfields.md#consentlanguage)*
 
-*Defined in [encoder/EncoderMap.ts:21](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L21)*
+*Defined in encoder/field/FieldEncoderMap.ts:25*
 
 ___
 <a id="consentscreen"></a>
@@ -87,7 +87,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[consentScreen](../interfaces/tcfields.md#consentscreen)*
 
-*Defined in [encoder/EncoderMap.ts:20](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L20)*
+*Defined in encoder/field/FieldEncoderMap.ts:24*
 
 ___
 <a id="created"></a>
@@ -98,7 +98,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[created](../interfaces/tcfields.md#created)*
 
-*Defined in [encoder/EncoderMap.ts:16](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L16)*
+*Defined in encoder/field/FieldEncoderMap.ts:20*
 
 ___
 <a id="isservicespecific"></a>
@@ -109,7 +109,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[isServiceSpecific](../interfaces/tcfields.md#isservicespecific)*
 
-*Defined in [encoder/EncoderMap.ts:24](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L24)*
+*Defined in encoder/field/FieldEncoderMap.ts:28*
 
 ___
 <a id="lastupdated"></a>
@@ -120,7 +120,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[lastUpdated](../interfaces/tcfields.md#lastupdated)*
 
-*Defined in [encoder/EncoderMap.ts:17](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L17)*
+*Defined in encoder/field/FieldEncoderMap.ts:21*
 
 ___
 <a id="numcustompurposes"></a>
@@ -131,7 +131,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[numCustomPurposes](../interfaces/tcfields.md#numcustompurposes)*
 
-*Defined in [encoder/EncoderMap.ts:40](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L40)*
+*Defined in encoder/field/FieldEncoderMap.ts:44*
 
 ___
 <a id="policyversion"></a>
@@ -142,7 +142,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[policyVersion](../interfaces/tcfields.md#policyversion)*
 
-*Defined in [encoder/EncoderMap.ts:23](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L23)*
+*Defined in encoder/field/FieldEncoderMap.ts:27*
 
 ___
 <a id="publisherconsents"></a>
@@ -153,7 +153,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[publisherConsents](../interfaces/tcfields.md#publisherconsents)*
 
-*Defined in [encoder/EncoderMap.ts:38](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L38)*
+*Defined in encoder/field/FieldEncoderMap.ts:42*
 
 ___
 <a id="publishercountrycode"></a>
@@ -164,7 +164,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[publisherCountryCode](../interfaces/tcfields.md#publishercountrycode)*
 
-*Defined in [encoder/EncoderMap.ts:30](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L30)*
+*Defined in encoder/field/FieldEncoderMap.ts:34*
 
 ___
 <a id="publishercustomconsents"></a>
@@ -175,7 +175,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[publisherCustomConsents](../interfaces/tcfields.md#publishercustomconsents)*
 
-*Defined in [encoder/EncoderMap.ts:41](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L41)*
+*Defined in encoder/field/FieldEncoderMap.ts:45*
 
 ___
 <a id="publishercustomlegitimateinterest"></a>
@@ -186,7 +186,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[publisherCustomLegitimateInterest](../interfaces/tcfields.md#publishercustomlegitimateinterest)*
 
-*Defined in [encoder/EncoderMap.ts:42](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L42)*
+*Defined in encoder/field/FieldEncoderMap.ts:46*
 
 ___
 <a id="publisherlegitimateinterest"></a>
@@ -197,7 +197,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[publisherLegitimateInterest](../interfaces/tcfields.md#publisherlegitimateinterest)*
 
-*Defined in [encoder/EncoderMap.ts:39](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L39)*
+*Defined in encoder/field/FieldEncoderMap.ts:43*
 
 ___
 <a id="publisherrestrictions"></a>
@@ -208,7 +208,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[publisherRestrictions](../interfaces/tcfields.md#publisherrestrictions)*
 
-*Defined in [encoder/EncoderMap.ts:33](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L33)*
+*Defined in encoder/field/FieldEncoderMap.ts:37*
 
 ___
 <a id="purposeconsents"></a>
@@ -219,7 +219,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[purposeConsents](../interfaces/tcfields.md#purposeconsents)*
 
-*Defined in [encoder/EncoderMap.ts:27](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L27)*
+*Defined in encoder/field/FieldEncoderMap.ts:31*
 
 ___
 <a id="purposelegitimateinterest"></a>
@@ -230,7 +230,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[purposeLegitimateInterest](../interfaces/tcfields.md#purposelegitimateinterest)*
 
-*Defined in [encoder/EncoderMap.ts:28](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L28)*
+*Defined in encoder/field/FieldEncoderMap.ts:32*
 
 ___
 <a id="purposeonetreatment"></a>
@@ -241,7 +241,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[purposeOneTreatment](../interfaces/tcfields.md#purposeonetreatment)*
 
-*Defined in [encoder/EncoderMap.ts:29](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L29)*
+*Defined in encoder/field/FieldEncoderMap.ts:33*
 
 ___
 <a id="segmenttype"></a>
@@ -250,7 +250,7 @@ ___
 
 **● segmentType**: *[IntEncoder](intencoder.md)* =  IntEncoder
 
-*Defined in [encoder/EncoderMap.ts:35](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L35)*
+*Defined in encoder/field/FieldEncoderMap.ts:39*
 
 ___
 <a id="specialfeatureoptins"></a>
@@ -261,7 +261,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[specialFeatureOptIns](../interfaces/tcfields.md#specialfeatureoptins)*
 
-*Defined in [encoder/EncoderMap.ts:26](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L26)*
+*Defined in encoder/field/FieldEncoderMap.ts:30*
 
 ___
 <a id="usenonstandardstacks"></a>
@@ -272,7 +272,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[useNonStandardStacks](../interfaces/tcfields.md#usenonstandardstacks)*
 
-*Defined in [encoder/EncoderMap.ts:25](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L25)*
+*Defined in encoder/field/FieldEncoderMap.ts:29*
 
 ___
 <a id="vendorconsents"></a>
@@ -283,7 +283,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[vendorConsents](../interfaces/tcfields.md#vendorconsents)*
 
-*Defined in [encoder/EncoderMap.ts:31](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L31)*
+*Defined in encoder/field/FieldEncoderMap.ts:35*
 
 ___
 <a id="vendorlegitimateinterest"></a>
@@ -294,7 +294,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[vendorLegitimateInterest](../interfaces/tcfields.md#vendorlegitimateinterest)*
 
-*Defined in [encoder/EncoderMap.ts:32](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L32)*
+*Defined in encoder/field/FieldEncoderMap.ts:36*
 
 ___
 <a id="vendorlistversion"></a>
@@ -305,7 +305,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[vendorListVersion](../interfaces/tcfields.md#vendorlistversion)*
 
-*Defined in [encoder/EncoderMap.ts:22](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L22)*
+*Defined in encoder/field/FieldEncoderMap.ts:26*
 
 ___
 <a id="vendorsallowed"></a>
@@ -316,7 +316,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[vendorsAllowed](../interfaces/tcfields.md#vendorsallowed)*
 
-*Defined in [encoder/EncoderMap.ts:37](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L37)*
+*Defined in encoder/field/FieldEncoderMap.ts:41*
 
 ___
 <a id="vendorsdisclosed"></a>
@@ -327,7 +327,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[vendorsDisclosed](../interfaces/tcfields.md#vendorsdisclosed)*
 
-*Defined in [encoder/EncoderMap.ts:36](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L36)*
+*Defined in encoder/field/FieldEncoderMap.ts:40*
 
 ___
 <a id="version"></a>
@@ -338,7 +338,7 @@ ___
 
 *Implementation of [TCFields](../interfaces/tcfields.md).[version](../interfaces/tcfields.md#version)*
 
-*Defined in [encoder/EncoderMap.ts:15](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/EncoderMap.ts#L15)*
+*Defined in encoder/field/FieldEncoderMap.ts:19*
 
 ___
 

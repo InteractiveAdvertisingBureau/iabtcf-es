@@ -48,7 +48,7 @@
 
 **● cmpId**: *`string`* = "cmpId"
 
-*Defined in [model/Fields.ts:6](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L6)*
+*Defined in [model/Fields.ts:6](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L6)*
 
 ___
 <a id="cmpversion"></a>
@@ -57,7 +57,7 @@ ___
 
 **● cmpVersion**: *`string`* = "cmpVersion"
 
-*Defined in [model/Fields.ts:7](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L7)*
+*Defined in [model/Fields.ts:7](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L7)*
 
 ___
 <a id="consentlanguage"></a>
@@ -66,7 +66,7 @@ ___
 
 **● consentLanguage**: *`string`* = "consentLanguage"
 
-*Defined in [model/Fields.ts:9](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L9)*
+*Defined in [model/Fields.ts:9](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L9)*
 
 ___
 <a id="consentscreen"></a>
@@ -75,7 +75,7 @@ ___
 
 **● consentScreen**: *`string`* = "consentScreen"
 
-*Defined in [model/Fields.ts:8](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L8)*
+*Defined in [model/Fields.ts:8](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L8)*
 
 ___
 <a id="created"></a>
@@ -84,7 +84,7 @@ ___
 
 **● created**: *`string`* = "created"
 
-*Defined in [model/Fields.ts:4](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L4)*
+*Defined in [model/Fields.ts:4](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L4)*
 
 ___
 <a id="isservicespecific"></a>
@@ -93,7 +93,7 @@ ___
 
 **● isServiceSpecific**: *`string`* = "isServiceSpecific"
 
-*Defined in [model/Fields.ts:12](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L12)*
+*Defined in [model/Fields.ts:12](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L12)*
 
 ___
 <a id="lastupdated"></a>
@@ -102,7 +102,7 @@ ___
 
 **● lastUpdated**: *`string`* = "lastUpdated"
 
-*Defined in [model/Fields.ts:5](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L5)*
+*Defined in [model/Fields.ts:5](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L5)*
 
 ___
 <a id="numcustompurposes"></a>
@@ -111,7 +111,7 @@ ___
 
 **● numCustomPurposes**: *`string`* = "numCustomPurposes"
 
-*Defined in [model/Fields.ts:26](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L26)*
+*Defined in [model/Fields.ts:26](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L26)*
 
 ___
 <a id="policyversion"></a>
@@ -120,7 +120,7 @@ ___
 
 **● policyVersion**: *`string`* = "policyVersion"
 
-*Defined in [model/Fields.ts:11](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L11)*
+*Defined in [model/Fields.ts:11](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L11)*
 
 ___
 <a id="publisherconsents"></a>
@@ -129,7 +129,7 @@ ___
 
 **● publisherConsents**: *`string`* = "publisherConsents"
 
-*Defined in [model/Fields.ts:24](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L24)*
+*Defined in [model/Fields.ts:24](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L24)*
 
 ___
 <a id="publishercountrycode"></a>
@@ -138,7 +138,7 @@ ___
 
 **● publisherCountryCode**: *`string`* = "publisherCountryCode"
 
-*Defined in [model/Fields.ts:18](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L18)*
+*Defined in [model/Fields.ts:18](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L18)*
 
 ___
 <a id="publishercustomconsents"></a>
@@ -147,7 +147,7 @@ ___
 
 **● publisherCustomConsents**: *`string`* = "publisherCustomConsents"
 
-*Defined in [model/Fields.ts:27](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L27)*
+*Defined in [model/Fields.ts:27](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L27)*
 
 ___
 <a id="publishercustomlegitimateinterest"></a>
@@ -156,7 +156,7 @@ ___
 
 **● publisherCustomLegitimateInterest**: *`string`* = "publisherCustomLegitimateInterest"
 
-*Defined in [model/Fields.ts:28](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L28)*
+*Defined in [model/Fields.ts:28](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L28)*
 
 ___
 <a id="publisherlegitimateinterest"></a>
@@ -165,7 +165,7 @@ ___
 
 **● publisherLegitimateInterest**: *`string`* = "publisherLegitimateInterest"
 
-*Defined in [model/Fields.ts:25](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L25)*
+*Defined in [model/Fields.ts:25](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L25)*
 
 ___
 <a id="publisherrestrictions"></a>
@@ -174,7 +174,7 @@ ___
 
 **● publisherRestrictions**: *`string`* = "publisherRestrictions"
 
-*Defined in [model/Fields.ts:21](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L21)*
+*Defined in [model/Fields.ts:21](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L21)*
 
 ___
 <a id="purposeconsents"></a>
@@ -183,7 +183,7 @@ ___
 
 **● purposeConsents**: *`string`* = "purposeConsents"
 
-*Defined in [model/Fields.ts:15](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L15)*
+*Defined in [model/Fields.ts:15](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L15)*
 
 ___
 <a id="purposelegitimateinterest"></a>
@@ -192,7 +192,7 @@ ___
 
 **● purposeLegitimateInterest**: *`string`* = "purposeLegitimateInterest"
 
-*Defined in [model/Fields.ts:16](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L16)*
+*Defined in [model/Fields.ts:16](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L16)*
 
 ___
 <a id="purposeonetreatment"></a>
@@ -201,7 +201,7 @@ ___
 
 **● purposeOneTreatment**: *`string`* = "purposeOneTreatment"
 
-*Defined in [model/Fields.ts:17](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L17)*
+*Defined in [model/Fields.ts:17](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L17)*
 
 ___
 <a id="specialfeatureoptins"></a>
@@ -210,7 +210,7 @@ ___
 
 **● specialFeatureOptIns**: *`string`* = "specialFeatureOptIns"
 
-*Defined in [model/Fields.ts:14](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L14)*
+*Defined in [model/Fields.ts:14](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L14)*
 
 ___
 <a id="supportoob"></a>
@@ -219,7 +219,7 @@ ___
 
 **● supportOOB**: *`string`* = "supportOOB"
 
-*Defined in [model/Fields.ts:29](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L29)*
+*Defined in [model/Fields.ts:29](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L29)*
 
 ___
 <a id="usenonstandardstacks"></a>
@@ -228,7 +228,7 @@ ___
 
 **● useNonStandardStacks**: *`string`* = "useNonStandardStacks"
 
-*Defined in [model/Fields.ts:13](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L13)*
+*Defined in [model/Fields.ts:13](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L13)*
 
 ___
 <a id="vendorconsents"></a>
@@ -237,7 +237,7 @@ ___
 
 **● vendorConsents**: *`string`* = "vendorConsents"
 
-*Defined in [model/Fields.ts:19](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L19)*
+*Defined in [model/Fields.ts:19](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L19)*
 
 ___
 <a id="vendorlegitimateinterest"></a>
@@ -246,7 +246,7 @@ ___
 
 **● vendorLegitimateInterest**: *`string`* = "vendorLegitimateInterest"
 
-*Defined in [model/Fields.ts:20](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L20)*
+*Defined in [model/Fields.ts:20](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L20)*
 
 ___
 <a id="vendorlistversion"></a>
@@ -255,7 +255,7 @@ ___
 
 **● vendorListVersion**: *`string`* = "vendorListVersion"
 
-*Defined in [model/Fields.ts:10](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L10)*
+*Defined in [model/Fields.ts:10](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L10)*
 
 ___
 <a id="vendorsallowed"></a>
@@ -264,7 +264,7 @@ ___
 
 **● vendorsAllowed**: *`string`* = "vendorsAllowed"
 
-*Defined in [model/Fields.ts:23](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L23)*
+*Defined in [model/Fields.ts:23](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L23)*
 
 ___
 <a id="vendorsdisclosed"></a>
@@ -273,7 +273,7 @@ ___
 
 **● vendorsDisclosed**: *`string`* = "vendorsDisclosed"
 
-*Defined in [model/Fields.ts:22](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L22)*
+*Defined in [model/Fields.ts:22](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L22)*
 
 ___
 <a id="version"></a>
@@ -282,7 +282,7 @@ ___
 
 **● version**: *`string`* = "version"
 
-*Defined in [model/Fields.ts:3](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/Fields.ts#L3)*
+*Defined in [model/Fields.ts:3](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Fields.ts#L3)*
 
 ___
 

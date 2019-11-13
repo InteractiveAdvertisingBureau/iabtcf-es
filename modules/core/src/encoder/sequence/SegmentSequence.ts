@@ -1,6 +1,19 @@
-import {VersionMap} from '.';
-import {Segments, Fields} from '../model';
-import {TCModel} from '../';
+import {
+
+  VersionMap,
+
+} from '.';
+
+import {
+  Segments,
+  Fields,
+} from '../../model';
+
+import {
+
+  TCModel,
+
+} from '../../';
 
 export class SegmentSequence implements VersionMap {
 

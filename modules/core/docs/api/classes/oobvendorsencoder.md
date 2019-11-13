@@ -6,10 +6,6 @@
 
 **OOBVendorsEncoder**
 
-## Implements
-
-* [Encoder](../interfaces/encoder.md)<[TCModel](tcmodel.md)>
-
 ## Index
 
 ### Methods
@@ -23,11 +19,11 @@
 
 <a id="decode"></a>
 
-###  decode
+### `<Static>` decode
 
 ▸ **decode**(encodedString: *`string`*, tcModel: *[TCModel](tcmodel.md)*): [TCModel](tcmodel.md)
 
-*Defined in [encoder/OOBVendorsEncoder.ts:51](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/OOBVendorsEncoder.ts#L51)*
+*Defined in encoder/segment/OOBVendorsEncoder.ts:66*
 
 **Parameters:**
 
@@ -41,11 +37,11 @@
 ___
 <a id="encode"></a>
 
-###  encode
+### `<Static>` encode
 
 ▸ **encode**(tcModel: *[TCModel](tcmodel.md)*, type: *`string`*): `string`
 
-*Defined in [encoder/OOBVendorsEncoder.ts:29](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/OOBVendorsEncoder.ts#L29)*
+*Defined in encoder/segment/OOBVendorsEncoder.ts:43*
 
 **Parameters:**
 

@@ -6,10 +6,6 @@
 
 **BooleanEncoder**
 
-## Implements
-
-* [Encoder](../interfaces/encoder.md)<`boolean`>
-
 ## Index
 
 ### Methods
@@ -23,11 +19,11 @@
 
 <a id="decode"></a>
 
-###  decode
+### `<Static>` decode
 
 ▸ **decode**(value: *`string`*): `boolean`
 
-*Defined in [encoder/BooleanEncoder.ts:11](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/BooleanEncoder.ts#L11)*
+*Defined in encoder/field/BooleanEncoder.ts:9*
 
 **Parameters:**
 
@@ -40,11 +36,11 @@
 ___
 <a id="encode"></a>
 
-###  encode
+### `<Static>` encode
 
 ▸ **encode**(value: *`boolean`*): `string`
 
-*Defined in [encoder/BooleanEncoder.ts:5](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/BooleanEncoder.ts#L5)*
+*Defined in encoder/field/BooleanEncoder.ts:3*
 
 **Parameters:**
 

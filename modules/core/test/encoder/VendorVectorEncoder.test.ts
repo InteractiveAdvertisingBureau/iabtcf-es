@@ -1,10 +1,21 @@
-import {expect} from 'chai';
+import {
+
+  expect,
+
+} from 'chai';
 
 import {
+
+  BitLength,
+
+} from '../../src/encoder';
+
+import {
+
   VendorVectorEncoder,
   VectorEncodingType,
-  BitLength,
-} from '../../src/encoder';
+
+} from '../../src/encoder/field';
 
 import {Vector} from '../../src/model';
 
@@ -31,16 +42,16 @@ export function run(): void {
           vector.set(i);
 
         }
+
         return vector;
 
       };
 
       it('should encode a vector of length 10 with no gaps as a bitfield', (): void => {
 
-        const vvEnc: VendorVectorEncoder = new VendorVectorEncoder();
         const numVendors = 10;
         const vector: Vector = getVector(numVendors);
-        const result: string = vvEnc.encode(vector);
+        const result: string = VendorVectorEncoder.encode(vector);
 
         expect(result.length).to.equal(headerLength + numVendors);
 
@@ -64,11 +75,10 @@ export function run(): void {
        */
       it('should encode a vector with 48 vendors and no gaps as a range', (): void => {
 
-        const vvEnc: VendorVectorEncoder = new VendorVectorEncoder();
         const numVendors = 48;
         const singleRangeLength = 46;
         const vector: Vector = getVector(numVendors);
-        const result: string = vvEnc.encode(vector);
+        const result: string = VendorVectorEncoder.encode(vector);
 
         // bitfield would be numVendors + headerLength
         expect(result.length).to.equal(headerLength + singleRangeLength);
@@ -117,14 +127,13 @@ export function run(): void {
 
       it('should encode a vector of length 48 1 gap as a bitfield since a that would be shorter', (): void => {
 
-        const vvEnc: VendorVectorEncoder = new VendorVectorEncoder();
         const numVendors = 48;
         const vector: Vector = getVector(numVendors);
 
         // gap something in the middle
         vector.unset(Math.round(numVendors/2));
 
-        const result: string = vvEnc.encode(vector);
+        const result: string = VendorVectorEncoder.encode(vector);
 
         expect(result.length).to.equal(headerLength + numVendors);
 
@@ -143,14 +152,13 @@ export function run(): void {
 
       it('should encode a vector of length 100 1 gap as a range since a that would be shorter', (): void => {
 
-        const vvEnc: VendorVectorEncoder = new VendorVectorEncoder();
         const numVendors = 100;
         const vector: Vector = getVector(numVendors);
         const vendorWithNo: number = numVendors/2;
 
         vector.unset(vendorWithNo);
 
-        const result: string = vvEnc.encode(vector);
+        const result: string = VendorVectorEncoder.encode(vector);
         const range = result.substr(headerLength);
         const rangeLength: number = 1 + BitLength.numEntries + 2*(1 + 2* BitLength.vendorId);
         let index = 0;
@@ -244,9 +252,8 @@ export function run(): void {
 
           }
 
-          const vve: VendorVectorEncoder = new VendorVectorEncoder();
-          const encoded = vve.encode(vector);
-          const decodedVector = vve.decode(encoded);
+          const encoded = VendorVectorEncoder.encode(vector);
+          const decodedVector = VendorVectorEncoder.decode(encoded);
 
           expect(decodedVector.maxId).to.equal(vector.maxId);
 
@@ -284,12 +291,11 @@ export function run(): void {
 
         }
 
-        const vve: VendorVectorEncoder = new VendorVectorEncoder();
-        let encoded = vve.encode(vector);
+        let encoded = VendorVectorEncoder.encode(vector);
         const index = BitLength.maxId + 1;
 
         encoded = encoded.substr(0, index) + '1' + encoded.substr(index + 1);
-        const decodedVector = vve.decode(encoded);
+        const decodedVector = VendorVectorEncoder.decode(encoded);
 
         vector.forEach((value: boolean, id: number): void => {
 
@@ -315,9 +321,8 @@ export function run(): void {
 
         }
 
-        const vve: VendorVectorEncoder = new VendorVectorEncoder();
-        const encoded = vve.encode(vector);
-        const decodedVector = vve.decode(encoded);
+        const encoded = VendorVectorEncoder.encode(vector);
+        const decodedVector = VendorVectorEncoder.decode(encoded);
 
         vector.forEach((value: boolean, id: number): void => {
 
@@ -343,12 +348,11 @@ export function run(): void {
 
         }
 
-        const vve: VendorVectorEncoder = new VendorVectorEncoder();
-        let encoded = vve.encode(vector);
+        let encoded = VendorVectorEncoder.encode(vector);
         const index = BitLength.maxId + 1;
 
         encoded = encoded.substr(0, index) + '1' + encoded.substr(index + 1);
-        const decodedVector = vve.decode(encoded);
+        const decodedVector = VendorVectorEncoder.decode(encoded);
 
         vector.forEach((value: boolean, id: number): void => {
 

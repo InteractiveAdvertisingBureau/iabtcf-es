@@ -4,7 +4,7 @@
  * 2 = OOB vendors allowed
  * 3 = PublisherTC
  */
-import {Segments} from '../model';
+import {Segments} from '../../model';
 
 export class SegmentType {
 

@@ -18,7 +18,6 @@ import {Component} from 'vue-property-decorator';
 import {FormComponent} from './FormComponent';
 
 @Component
-
 export default class extends FormComponent {
 
 }

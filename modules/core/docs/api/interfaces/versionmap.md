@@ -29,7 +29,7 @@
 
 **● 1**: *`string`[]*
 
-*Defined in [encoder/VersionMap.ts:2](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/VersionMap.ts#L2)*
+*Defined in encoder/sequence/VersionMap.ts:2*
 
 ___
 <a id="2"></a>
@@ -38,7 +38,7 @@ ___
 
 **● 2**: *`string`[]*
 
-*Defined in [encoder/VersionMap.ts:3](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/VersionMap.ts#L3)*
+*Defined in encoder/sequence/VersionMap.ts:3*
 
 ___
 

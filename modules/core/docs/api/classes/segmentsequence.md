@@ -31,7 +31,7 @@
 
 ⊕ **new SegmentSequence**(tcModel: *[TCModel](tcmodel.md)*, isForSaving: *`boolean`*): [SegmentSequence](segmentsequence.md)
 
-*Defined in [encoder/SegmentSequence.ts:12](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/SegmentSequence.ts#L12)*
+*Defined in encoder/sequence/SegmentSequence.ts:25*
 
 **Parameters:**
 
@@ -56,7 +56,7 @@ ___
 
 *Implementation of [VersionMap](../interfaces/versionmap.md).[1](../interfaces/versionmap.md#1)*
 
-*Defined in [encoder/SegmentSequence.ts:7](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/SegmentSequence.ts#L7)*
+*Defined in encoder/sequence/SegmentSequence.ts:20*
 
 ___
 <a id="2"></a>
@@ -69,7 +69,7 @@ ___
 
 *Implementation of [VersionMap](../interfaces/versionmap.md).[2](../interfaces/versionmap.md#2)*
 
-*Defined in [encoder/SegmentSequence.ts:10](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/encoder/SegmentSequence.ts#L10)*
+*Defined in encoder/sequence/SegmentSequence.ts:23*
 
 ___
 

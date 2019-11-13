@@ -36,7 +36,7 @@ import {LinkModel} from '../../model/LinkModel';
 // eslint-disable-next-line
 @Component
 
-export default class Nav extends Vue {
+export default class extends Vue {
 
   public sectionModel: SectionModel = new SectionModel();
   public get links(): LinkModel[] {

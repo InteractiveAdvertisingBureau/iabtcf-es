@@ -1,9 +1,12 @@
-import {Encoder} from '.';
-import {EncodingError} from '../errors';
+import {
 
-export class IntEncoder implements Encoder<number | string> {
+  EncodingError,
 
-  public encode(value: number | string, numBits: number): string {
+} from '../../errors';
+
+export class IntEncoder {
+
+  public static encode(value: number | string, numBits: number): string {
 
     let bitString;
 
@@ -33,7 +36,7 @@ export class IntEncoder implements Encoder<number | string> {
 
   }
 
-  public decode(value: string): number {
+  public static decode(value: string): number {
 
     return parseInt(value, 2);
 

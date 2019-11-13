@@ -19,7 +19,7 @@
 
 **ALLOWED**:  = "vendorsAllowed"
 
-*Defined in [model/OOBVendorsType.ts:2](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/OOBVendorsType.ts#L2)*
+*Defined in [model/OOBVendorsType.ts:2](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/OOBVendorsType.ts#L2)*
 
 ___
 <a id="disclosed"></a>
@@ -28,7 +28,7 @@ ___
 
 **DISCLOSED**:  = "vendorsDisclosed"
 
-*Defined in [model/OOBVendorsType.ts:3](https://github.com/chrispaterson/iabtcf/blob/f683445/modules/core/src/model/OOBVendorsType.ts#L3)*
+*Defined in [model/OOBVendorsType.ts:3](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/OOBVendorsType.ts#L3)*
 
 ___
 

@@ -1,5 +1,9 @@
 import {expect} from 'chai';
-import {LangEncoder} from '../../src/encoder/LangEncoder';
+import {
+
+  LangEncoder,
+
+} from '../../src/encoder/field';
 
 export function run(): void {
 
@@ -11,8 +15,7 @@ export function run(): void {
 
         it(`should encode "${testStr}" into ${numBits} as "${expectedValue}"`, (): void => {
 
-          const langEnc: LangEncoder = new LangEncoder();
-          const encoded = langEnc.encode(testStr, numBits);
+          const encoded = LangEncoder.encode(testStr, numBits);
 
           expect(encoded).to.equal(expectedValue);
 
@@ -24,11 +27,9 @@ export function run(): void {
 
         it(`should not encode "${testStr}" into ${numBits}: ${reason}`, (): void => {
 
-          const langEnc: LangEncoder = new LangEncoder();
-
           expect((): void => {
 
-            const encoded = langEnc.encode(testStr, numBits);
+            const encoded = LangEncoder.encode(testStr, numBits);
 
             expect.fail(`should have thrown an error and not returned: ${encoded}`);
 
@@ -53,13 +54,11 @@ export function run(): void {
     });
     describe('decode', (): void => {
 
-      const langEnc: LangEncoder = new LangEncoder();
-
       it('should decode an encoded language', (): void => {
 
         const lang = 'FR';
-        const encoded = langEnc.encode(lang, 12);
-        const decoded = langEnc.decode(encoded);
+        const encoded = LangEncoder.encode(lang, 12);
+        const decoded = LangEncoder.decode(encoded);
 
         expect(decoded).to.equal(lang);
 
@@ -67,11 +66,11 @@ export function run(): void {
       it('should throw an error if the bit length is odd', (): void => {
 
         const lang = 'FR';
-        const encoded = langEnc.encode(lang, 12);
+        const encoded = LangEncoder.encode(lang, 12);
 
         expect((): void => {
 
-          const decoded = langEnc.decode('0' + encoded);
+          const decoded = LangEncoder.decode('0' + encoded);
 
           expect.fail(`should have thrown an error and not returned: ${decoded}`);
 

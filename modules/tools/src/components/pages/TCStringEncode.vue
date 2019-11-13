@@ -163,7 +163,6 @@ GVL.baseUrl = document.location.origin;
 export default class extends Vue {
 
   private tcModel: TCModel = new TCModel();
-  private tcString: TCString = new TCString();
   private consentLanguages: ConsentLanguages = new ConsentLanguages();
   private vendors_: FormField[] = [];
   private purposes_: FormField[] = [];
@@ -241,7 +240,7 @@ export default class extends Vue {
 
       }
 
-      this.encodedTCString = this.tcString.encode(this.tcModel);
+      this.encodedTCString = TCString.encode(this.tcModel);
 
     });
 
@@ -251,7 +250,7 @@ export default class extends Vue {
 
     try {
 
-      this.encodedTCString = this.tcString.encode(this.tcModel);
+      this.encodedTCString = TCString.encode(this.tcModel);
 
     } catch (err) {
 

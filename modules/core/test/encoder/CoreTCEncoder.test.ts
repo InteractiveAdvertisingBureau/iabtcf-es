@@ -1,9 +1,26 @@
-import {expect} from 'chai';
-import {CoreFieldSequence} from '../../src/encoder/CoreFieldSequence';
-import {CoreTCEncoder} from '../../src/encoder/CoreTCEncoder';
 import {
+
+  expect,
+
+} from 'chai';
+
+import {
+
+  CoreFieldSequence,
+
+} from '../../src/encoder/sequence';
+
+import {
+
+  CoreTCEncoder,
+
+} from '../../src/encoder/segment';
+
+import {
+
   TCModel,
   GVL,
+
 } from '../../src';
 
 export function run(): void {
@@ -17,7 +34,6 @@ export function run(): void {
     it('should encode into a string', (done: () => void): void => {
 
       const tcModel: TCModel = new TCModel(gvl);
-      const encoder: CoreTCEncoder = new CoreTCEncoder();
       let encoded = '';
 
       tcModel.cmpId = 23;
@@ -28,7 +44,7 @@ export function run(): void {
 
       const encodeIt = (): void => {
 
-        encoded = encoder.encode(tcModel);
+        encoded = CoreTCEncoder.encode(tcModel);
 
       };
 
@@ -48,7 +64,6 @@ export function run(): void {
     it('TCModel->String->TCModel and should be equal', (done: () => void): void => {
 
       const tcModel: TCModel = new TCModel(gvl);
-      const encoder: CoreTCEncoder = new CoreTCEncoder();
       const decodedModel: TCModel = new TCModel();
       let encoded = '';
 
@@ -60,13 +75,13 @@ export function run(): void {
 
       const encodeIt = (): void => {
 
-        encoded = encoder.encode(tcModel);
+        encoded = CoreTCEncoder.encode(tcModel);
 
       };
 
       const decodeIt = (): TCModel => {
 
-        return encoder.decode(encoded, decodedModel);
+        return CoreTCEncoder.decode(encoded, decodedModel);
 
       };
 
@@ -95,9 +110,14 @@ export function run(): void {
               expect(decodedModel[key].getTime(), `${key} should be equal`)
                 .to.equal(Math.round(tcModel[key].getTime()/100)*100);
               break;
+
             case 'publisherRestrictions':
+
+              // Purpose Restrictions has a gvl reference in one and not the other
               expect(decodedModel[key].numRestrictions, `${key} should be equal`).to.equal(tcModel[key].numRestrictions);
+              expect(decodedModel[key].getAllRestrictions(), `${key} should be equal`).to.deep.equal(tcModel[key].getAllRestrictions());
               break;
+
             default:
               expect(decodedModel[key], `${key} should be equal`).to.deep.equal(tcModel[key]);
 

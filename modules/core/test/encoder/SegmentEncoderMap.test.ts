@@ -1,5 +1,14 @@
-import {expect} from 'chai';
-import {SegmentEncoderMap} from '../../src/encoder';
+import {
+
+  expect,
+
+} from 'chai';
+
+import {
+
+  SegmentEncoderMap,
+
+} from '../../src/encoder/segment';
 
 export function run(): void {
 

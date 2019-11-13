@@ -1,8 +1,15 @@
-import {expect} from 'chai';
 import {
+
+  expect,
+
+} from 'chai';
+
+import {
+
   TCString,
   TCModel,
   GVL,
+
 } from '../src';
 
 const getMinimalModel = (): TCModel => {
@@ -25,9 +32,7 @@ const doEncode = (): Promise<string> => {
 
     model.gvl.readyPromise.then((): void => {
 
-      const tcString = new TCString();
-
-      resolve(tcString.encode(model));
+      resolve(TCString.encode(model));
 
     });
 
@@ -91,13 +96,12 @@ describe('TCString', (): void => {
 
     it('returns an equivalent model if encoded and decoded', (done: () => void): void => {
 
-      const tcString = new TCString();
       const model = getMinimalModel();
 
       model.gvl.readyPromise.then((): void => {
 
-        const encodedString = tcString.encode(model);
-        const decodedModel = tcString.decode(encodedString);
+        const encodedString = TCString.encode(model);
+        const decodedModel = TCString.decode(encodedString);
 
         compareModels(decodedModel, model);
         done();
