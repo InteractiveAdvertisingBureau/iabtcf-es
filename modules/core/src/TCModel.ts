@@ -21,6 +21,14 @@ export type TCModelPropType = number | Date | string | boolean | Vector | Purpos
 
 export class TCModel implements TCFields {
 
+  public clone(): TCModel {
+
+    const clone = new (this.constructor as typeof TCModel)(this.gvl) as TCModel;
+
+    return clone;
+
+  }
+
   private static readonly MAX_ENCODING_VERSION: number = 2;
 
   // Defaults

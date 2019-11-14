@@ -13,6 +13,7 @@ import {
   TCDataCallback,
   VendorListCallback,
 } from '../src';
+import {CmpApiUtil} from '../src/utilities';
 
 describe('CmpApi', (): void => {
 
@@ -27,6 +28,50 @@ describe('CmpApi', (): void => {
   let cmpApi: CmpApi;
 
   createStub();
+
+  const sameDataDifferentObject = function(obj1, obj2, objName): void {
+
+    assert.equal(JSON.stringify(obj1), JSON.stringify(obj2), `${objName} stringify did not match original`);
+    assert.deepEqual(obj1, obj2, objName + `${objName} data did not match`);
+    assert.notEqual(obj1, obj2, objName + `${objName} are the same object`);
+
+  };
+
+  describe('Clone Tests:', (): void => {
+
+    it('TcModel Clone Works', (): void => {
+
+      const tcModel = new TCModel(gvl);
+      tcModel.cmpId = 23;
+      tcModel.cmpVersion = 1;
+
+      // full consent!
+      tcModel.setAll();
+
+      tcModel.purposeConsents.unset(2);
+      tcModel.vendorConsents.unset(37);
+
+      const cloneOne = tcModel.clone();
+
+      const clone = CmpApiUtil.deepCopyObject(tcModel, cloneOne);
+
+      assert.equal(cloneOne.isValid(), tcModel.isValid(), 'tcModel IsValid did not return the same value as original');
+      assert.equal(cloneOne.publisherRestrictions.isValid(), tcModel.publisherRestrictions.isValid(), 'PR IsValid did not return the same value as original');
+
+      assert.equal(cloneOne.cmpId, tcModel.cmpId, 'cmpId did not match original value');
+      assert.equal(cloneOne.created.getTime(), tcModel.created.getTime(), 'created did not match set value');
+      assert.notStrictEqual(cloneOne.created, tcModel.created, 'created matched strict equals');
+
+      sameDataDifferentObject(cloneOne, tcModel, 'TcModel');
+      sameDataDifferentObject(cloneOne.purposeConsents, tcModel.purposeConsents, 'purposeConsents');
+      assert.equal(cloneOne.purposeConsents.maxId, tcModel.purposeConsents.maxId, 'purposeConsents max id did not match set value');
+      sameDataDifferentObject(cloneOne.publisherRestrictions.getAllRestrictions(), tcModel.publisherRestrictions.getAllRestrictions(), 'PR Restrictions');
+      sameDataDifferentObject(cloneOne.gvl.specialFeatures, tcModel.gvl.specialFeatures, 'specialFeatures');
+      sameDataDifferentObject(cloneOne.gvl.vendors, tcModel.gvl.vendors, 'vendors');
+
+    });
+
+  });
 
   describe('Creation', (): void => {
 
