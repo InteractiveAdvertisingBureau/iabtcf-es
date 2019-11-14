@@ -1,29 +1,19 @@
+import {Cloneable} from './Cloneable';
+import {DeepCopy} from './DeepCopy';
 import {TCModelError} from './errors';
 import {GVL} from './GVL';
-import {
 
-  GVLMapItem,
-  Purpose,
-
-} from './model/gvl';
-
-import {
-
-  Vector,
-  PurposeRestrictionVector,
-  IntMap,
-  TCFields,
-  ConsentLanguages,
-
-} from './model';
+import {ConsentLanguages, IntMap, PurposeRestrictionVector, TCFields, Vector} from './model';
+import {GVLMapItem, Purpose} from './model/gvl';
 
 export type TCModelPropType = number | Date | string | boolean | Vector | PurposeRestrictionVector;
 
-export class TCModel implements TCFields {
+export class TCModel extends DeepCopy<TCModel> implements TCFields, Cloneable<TCModel> {
 
   public clone(): TCModel {
 
     const clone = new (this.constructor as typeof TCModel)(this.gvl) as TCModel;
+    this.deepCopyObject(this, clone);
 
     return clone;
 
@@ -153,6 +143,8 @@ export class TCModel implements TCFields {
    * @param {GVL} [gvl]
    */
   public constructor(gvl?: GVL) {
+
+    super();
 
     if (gvl) {
 

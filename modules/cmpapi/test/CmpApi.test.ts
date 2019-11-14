@@ -13,7 +13,6 @@ import {
   TCDataCallback,
   VendorListCallback,
 } from '../src';
-import {CmpApiUtil} from '../src/utilities';
 
 describe('CmpApi', (): void => {
 
@@ -53,7 +52,7 @@ describe('CmpApi', (): void => {
 
       const cloneOne = tcModel.clone();
 
-      const clone = CmpApiUtil.deepCopyObject(tcModel, cloneOne);
+      // const cloneOne = CmpApiUtil.deepCopyObject(clone);
 
       assert.equal(cloneOne.isValid(), tcModel.isValid(), 'tcModel IsValid did not return the same value as original');
       assert.equal(cloneOne.publisherRestrictions.isValid(), tcModel.publisherRestrictions.isValid(), 'PR IsValid did not return the same value as original');

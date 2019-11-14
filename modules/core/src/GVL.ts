@@ -1,3 +1,5 @@
+import {Cloneable} from './Cloneable';
+import {DeepCopy} from './DeepCopy';
 import {Json} from './Json';
 import {GVLError} from './errors';
 
@@ -32,7 +34,16 @@ type PurposeSubType = 'consent' | 'legInt' | 'flexible';
  * object and provide accessors.  Provides ways to group vendors on the list by
  * purpose and feature.
  */
-export class GVL implements VendorList, Declarations {
+export class GVL extends DeepCopy<GVL> implements VendorList, Declarations, Cloneable<GVL> {
+
+  public clone(): GVL {
+
+    const clone = new (this.constructor as typeof GVL)(this) as GVL;
+    this.deepCopyObject(this, clone);
+
+    return clone;
+
+  }
 
   private static LOADED_LANGUAGES: Map<string, Declarations> = new Map<string, Declarations>();
 
@@ -189,6 +200,8 @@ export class GVL implements VendorList, Declarations {
    * will be loaded
    */
   public constructor( versionOrVendorList?: VersionOrVendorList ) {
+
+    super();
 
     // should have been configured before and instance was created and will persist through the app
     let url = GVL.baseUrl;

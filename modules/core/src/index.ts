@@ -5,3 +5,5 @@ export * from './TCString';
 export * from './model';
 export * from './model/gvl';
 export * from './errors';
+export * from './Cloneable';
+export * from './DeepCopy';
