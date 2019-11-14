@@ -1,13 +1,8 @@
-import {
-
-  PurposeRestriction,
-  BinarySearchTree,
-  RestrictionType,
-
-} from '.';
-
-import {GVL} from '..';
-import {Vendor} from './gvl';
+import {PurposeRestriction} from './PurposeRestriction';
+import {BinarySearchTree} from './BinarySearchTree';
+import {RestrictionType} from './RestrictionType';
+import {GVL} from '../GVL';
+import {Vendor} from './gvl/Vendor';
 
 export class PurposeRestrictionVector {
 

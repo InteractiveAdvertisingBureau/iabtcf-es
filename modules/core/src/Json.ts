@@ -11,6 +11,7 @@ export class Json {
     return new Promise((resolve: (response: object) => void, reject: (error: Error) => void): void => {
 
       const req: XMLHttpRequest = new XMLHttpRequest();
+
       const onLoad: (evt: Event) => void = (): void => {
 
         // is the response done
@@ -36,16 +37,19 @@ export class Json {
         }
 
       };
+
       const onError: (evt: Event) => void = (): void => {
 
         reject(new Error('fetch error'));
 
       };
+
       const onAbort: (evt: Event) => void = (): void => {
 
         reject(new Error('fetch aborted'));
 
       };
+
       const onTimeout: () => void = (): void => {
 
         reject(new Error('Timeout ' + timeout + 'ms ' + jsonURL));
@@ -55,11 +59,9 @@ export class Json {
       req.responseType = 'json';
       req.withCredentials = sendCookies;
 
-
       req.addEventListener('load', onLoad);
       req.addEventListener('error', onError);
       req.addEventListener('abort', onAbort);
-
 
       req.open('GET', jsonURL, true);
 

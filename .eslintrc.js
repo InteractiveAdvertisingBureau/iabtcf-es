@@ -3,14 +3,25 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   extends: [
     'plugin:@typescript-eslint/recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
     'google',
   ],
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': [ 
+        '.ts' 
+      ]
+    },
+  },
   parserOptions: {
     parser: '@typescript-eslint/parser',
     ecmaVersion: 2018,
     sourceType: 'module',
   },
   rules: {
+    'import/no-cycle': ['error', { maxDepth: 1 }],
     '@typescript-eslint/indent': ['error', 2],
     'max-len': ['error', {
       'ignoreUrls': true,
