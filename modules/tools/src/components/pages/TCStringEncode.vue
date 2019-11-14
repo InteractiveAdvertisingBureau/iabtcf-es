@@ -16,7 +16,7 @@
                :tcModel="tcModel"
                :options="vendorListVersions"
                id="vendorListVersion"
-               @update="update"
+               @update="onVendorListSet"
               />
             <template v-if="isReady">
               <text-field
@@ -136,7 +136,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" >
 import {Component, Vue, Watch} from 'vue-property-decorator';
 import {TCModel, GVL, TCString, Vendor, Purpose, Feature, ConsentLanguages} from '@iabtcf/core';
 import TextField from '../forms/TextField.vue';
@@ -180,10 +180,9 @@ export default class extends Vue {
     {value: 'supportOOB', text: 'Supports OOB'},
     {value: 'useNonStandardStacks', text: 'Publisher Uses Non-Standard Stacks'},
   ];
+  private isReady: boolean = false;
 
-  @Watch('tcModel.gvl')
-  private onGVLSet(): void {
-
+  private listenForGVLChanges(): void {
     this.tcModel.gvl.readyPromise.then((): void => {
 
       const vendors = this.tcModel.gvl.vendors;
@@ -199,6 +198,7 @@ export default class extends Vue {
         if (vendors.hasOwnProperty(id)) {
 
           const vendor: Vendor = vendors[id];
+
           this.vendors_.push({
             text: vendor.name,
             value: id,
@@ -243,7 +243,6 @@ export default class extends Vue {
       this.encodedTCString = TCString.encode(this.tcModel);
 
     });
-
   }
 
   private update(): void {
@@ -260,12 +259,15 @@ export default class extends Vue {
 
   }
 
-  private get isReady(): boolean {
+  private onVendorListSet(selectedVersion: number): void {
 
-    return (!this.tcModel.gvl);
+    this.tcModel.vendorListVersion = selectedVersion;
+    this.listenForGVLChanges();
+    debugger;
+    // this.update();
+    // this.isReady = true;
 
   }
-
   private get languages(): FormField[] {
 
     return Array.from(this.consentLanguages).map((lang: string): FormField => {
