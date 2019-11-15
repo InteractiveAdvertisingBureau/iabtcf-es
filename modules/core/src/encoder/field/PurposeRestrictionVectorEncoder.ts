@@ -1,21 +1,15 @@
 import {
-
   IntEncoder,
+} from './IntEncoder';
+import {
   BooleanEncoder,
-
-} from '.';
-
+} from './BooleanEncoder';
 import {
-
   BitLength,
-
 } from '../';
-
 import {
-
   PurposeRestrictionVector,
   PurposeRestriction,
-
 } from '../../model';
 
 export class PurposeRestrictionVectorEncoder {

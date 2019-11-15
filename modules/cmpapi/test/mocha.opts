@@ -1,0 +1,4 @@
+# mocha.opts
+--require ts-node/register
+--require jsdom-global/register
+--require source-map-support/register

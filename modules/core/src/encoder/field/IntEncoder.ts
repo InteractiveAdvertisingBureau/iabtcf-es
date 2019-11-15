@@ -1,7 +1,5 @@
 import {
-
   EncodingError,
-
 } from '../../errors';
 
 export class IntEncoder {

@@ -1,15 +1,18 @@
-import {
+import {PurposeRestriction} from './PurposeRestriction';
+import {BinarySearchTree} from './BinarySearchTree';
+import {RestrictionType} from './RestrictionType';
+import {GVL} from '../GVL';
+import {Vendor} from './gvl/Vendor';
+import {Cloneable} from '../cloneable/Cloneable';
 
-  PurposeRestriction,
-  BinarySearchTree,
-  RestrictionType,
+export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector> {
 
-} from '.';
 
-import {GVL} from '..';
-import {Vendor} from './gvl';
+  public clone(): PurposeRestrictionVector {
 
-export class PurposeRestrictionVector {
+    return this._clone();
+
+  }
 
   /**
    * a map indexed by a string which will be a 'hash' of the purpose and
@@ -19,6 +22,12 @@ export class PurposeRestrictionVector {
    */
   private map: Map<string, BinarySearchTree> = new Map<string, BinarySearchTree>();
   private gvl_: GVL;
+
+  public constructor() {
+
+    super(PurposeRestrictionVector);
+
+  }
 
   private has(hash: string): boolean {
 

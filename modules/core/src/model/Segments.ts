@@ -1,4 +1,5 @@
-import {Fields} from './';
+import {Fields} from './Fields';
+
 export class Segments {
 
   public static readonly core: string = 'core';
