@@ -1,24 +1,13 @@
-import {Cloneable} from './Cloneable';
-import {DeepCopy} from './DeepCopy';
-import {Json} from './Json';
+import {Cloneable} from './cloneable/Cloneable';
 import {GVLError} from './errors';
+import {Json} from './Json';
 
-import {
-  Declarations,
-  Purpose,
-  Feature,
-  IDSetMap,
-  Stack,
-  Vendor,
-  VendorList,
-  ByPurposeVendorMap,
-} from './model/gvl';
+import {ConsentLanguages,} from './model';
 
-import {
-  ConsentLanguages,
-} from './model';
+import {ByPurposeVendorMap, Declarations, Feature, IDSetMap, Purpose, Stack, Vendor, VendorList,} from './model/gvl';
 
 import {IntMap} from './model/IntMap';
+
 /**
  * TODO: make map to cache language translations under language so if a
  * language is loaded twice it won't go and get it more than once
@@ -34,14 +23,11 @@ type PurposeSubType = 'consent' | 'legInt' | 'flexible';
  * object and provide accessors.  Provides ways to group vendors on the list by
  * purpose and feature.
  */
-export class GVL extends DeepCopy<GVL> implements VendorList, Declarations, Cloneable<GVL> {
+export class GVL extends Cloneable<GVL> implements VendorList, Declarations {
 
   public clone(): GVL {
 
-    const clone = new (this.constructor as typeof GVL)(this) as GVL;
-    this.deepCopyObject(this, clone);
-
-    return clone;
+    return this._clone(this);
 
   }
 
@@ -201,7 +187,7 @@ export class GVL extends DeepCopy<GVL> implements VendorList, Declarations, Clon
    */
   public constructor( versionOrVendorList?: VersionOrVendorList ) {
 
-    super();
+    super(GVL);
 
     // should have been configured before and instance was created and will persist through the app
     let url = GVL.baseUrl;

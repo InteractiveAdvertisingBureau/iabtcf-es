@@ -1,7 +1,14 @@
-import {TCModelError} from '../errors';
 import {RestrictionType} from '.';
+import {Cloneable} from '../cloneable/Cloneable';
+import {TCModelError} from '../errors';
 
-export class PurposeRestriction {
+export class PurposeRestriction extends Cloneable<PurposeRestriction> {
+
+  public clone(): PurposeRestriction {
+
+    return this._clone();
+
+  }
 
   public static hashSeparator: string = '-';
 
@@ -18,6 +25,8 @@ export class PurposeRestriction {
    * @return {undefined}
    */
   public constructor(purposeId?: number, restrictionType?: RestrictionType) {
+
+    super(PurposeRestriction);
 
     if (purposeId !== undefined) {
 
