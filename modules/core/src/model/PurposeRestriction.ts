@@ -1,6 +1,6 @@
-import {RestrictionType} from '.';
 import {Cloneable} from '../cloneable/Cloneable';
 import {TCModelError} from '../errors';
+import {RestrictionType} from './RestrictionType';
 
 export class PurposeRestriction extends Cloneable<PurposeRestriction> {
 

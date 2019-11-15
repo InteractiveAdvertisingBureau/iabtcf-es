@@ -59,11 +59,7 @@ export class CmpApi {
 
   public setTCModel(tcm: TCModel, eventStatus?: EventStatus): void {
 
-    // Todo: DEEP COPY NEEDED!
-
-    const clone: TCModel = tcm.clone();
-
-    this.cmpData.tcModel = CmpApiUtil.deepCopyObject<TCModel>(tcm, clone);
+    this.cmpData.tcModel = tcm.clone();
     this.cmpData.eventStatus = eventStatus || this.cmpData.eventStatus;
     this.commandQueue.executeAndClearCommands();
     this.eventListenerQueue.executeCommands();

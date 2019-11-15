@@ -1,10 +1,12 @@
-import {BinarySearchTree, PurposeRestriction, RestrictionType} from '.';
-
-import {GVL} from '..';
+import {PurposeRestriction} from './PurposeRestriction';
+import {BinarySearchTree} from './BinarySearchTree';
+import {RestrictionType} from './RestrictionType';
+import {GVL} from '../GVL';
+import {Vendor} from './gvl/Vendor';
 import {Cloneable} from '../cloneable/Cloneable';
-import {Vendor} from './gvl';
 
 export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector> {
+
 
   public clone(): PurposeRestrictionVector {
 

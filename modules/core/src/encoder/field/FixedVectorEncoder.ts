@@ -1,8 +1,6 @@
 import {
-
   BooleanEncoder,
-
-} from '.';
+} from './BooleanEncoder';
 
 import {
 
