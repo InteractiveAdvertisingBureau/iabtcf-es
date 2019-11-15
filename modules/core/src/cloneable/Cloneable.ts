@@ -19,6 +19,7 @@ import {AnyConstructor} from './AnyConstructor';
  *    return this._clone();
  *   }
  * }
+ * Todo: There must be more non primitive build in types to check. But for our current purposes, this works great.
  */
 export abstract class Cloneable<T> {
 
@@ -88,91 +89,99 @@ export abstract class Cloneable<T> {
 
       return this.copyObjectFields(target, destination);
 
-    }
+    } else {
 
-    if (target instanceof Cloneable) {
+      if (target instanceof Cloneable) {
+
+        /**
+         * The target extends our Cloneable class. Nice. Just call clone() and return it.
+         */
+
+        destination = target.clone();
+        return destination;
+
+      }
 
       /**
-       * The target extends our Cloneable class. Nice. Just call clone() and return it.
+       * Go through type checking to build up the copy
+       * Todo: we may need more types
        */
 
-      destination = target.clone();
-      return destination;
+      if (target instanceof Promise) {
 
-    }
+        // Todo: ----------------------- Not sure if this is what we want.
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        destination = target;
+        return destination;
 
-    /**
-     * Go through type checking to build up the copy
-     * Todo: we may need more types
-     */
+      }
 
-    if (target instanceof Promise) {
-
-      // Todo: ----------------------- Not sure if this is what we want.
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      destination = target;
-      return destination;
-
-    }
-
-    if (target instanceof Date) {
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      destination = new Date(target.getTime()) as any;
-      return destination;
-
-    }
-
-    if (target instanceof Array) {
-
-      const cp = [] as AnyArray;
-      (target as AnyArray).forEach((v) => {
-
-        cp.push(v);
-
-      });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      destination = cp.map((n: any) => this.deepCopyObject<any>(n, {})) as any;
-      return destination;
-
-    }
-
-    if (target instanceof Set) {
-
-      const cp = new Set();
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/explicit-function-return-type
-      (target as Set<any>).forEach((v) => {
+      if (target instanceof Date) {
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        cp.add(this.deepCopyObject<any>(v, {}));
+        destination = new Date(target.getTime()) as any;
+        return destination;
 
-      });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      destination = cp as any;
-      return destination;
+      }
 
-    }
+      if (target instanceof Array) {
 
-    if (target instanceof Map) {
+        const cp = [] as AnyArray;
+        (target as AnyArray).forEach((v) => {
 
-      const cp = new Map();
+          cp.push(v);
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/explicit-function-return-type
-      (target as Map<any, any>).forEach((v) => {
-
+        });
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        cp[v](this.deepCopyObject<any>(v, {}));
+        destination = cp.map((n: any) => this.deepCopyObject<any>(n, {})) as any;
+        return destination;
 
-      });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      destination = cp as any;
-      return destination;
+      }
+
+      if (target instanceof Set) {
+
+        const cp = new Set();
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/explicit-function-return-type
+        (target as Set<any>).forEach((v) => {
+
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          cp.add(this.deepCopyObject<any>(v, {}));
+
+        });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        destination = cp as any;
+        return destination;
+
+      }
+
+      if (target instanceof Map) {
+
+        const cp = new Map();
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/explicit-function-return-type
+        (target as Map<any, any>).forEach((v, k) => {
+
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          cp.set(k, this.deepCopyObject<any>(v, {}));
+
+        });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        destination = cp as any;
+        return destination;
+
+      }
+
+      if (typeof target === 'object' && target !== {}) {
+
+        return this.copyObjectFields(target, destination);
+
+      }
 
     }
 
-
-      return this.copyObjectFields(target, destination);
+    destination = target;
+    return destination;
 
   };
 

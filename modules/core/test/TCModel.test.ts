@@ -206,7 +206,7 @@ describe('TCModel', (): void => {
 
   const sameDataDifferentObject = function(obj1, obj2, objName): void {
 
-    // assert.equal(JSON.stringify(obj1), JSON.stringify(obj2), `${objName} stringify did not match original`);
+    assert.equal(JSON.stringify(obj1), JSON.stringify(obj2), `${objName} stringify did not match original`);
     assert.deepEqual(obj1, obj2, objName + `${objName} data did not match`);
     assert.notEqual(obj1, obj2, objName + `${objName} are the same object`);
 
@@ -228,6 +228,9 @@ describe('TCModel', (): void => {
     tcModel.vendorConsents.unset(37);
 
     const clone = tcModel.clone();
+
+    console.log(JSON.stringify(tcModel));
+    console.log(JSON.stringify(clone));
 
     assert.equal(clone.isValid(), tcModel.isValid(), 'tcModel IsValid did not return the same value as original');
     assert.equal(clone.publisherRestrictions.isValid(), tcModel.publisherRestrictions.isValid(), 'PR IsValid did not return the same value as original');
