@@ -164,7 +164,7 @@ export class CmpCommandStream {
    * Hook up handlePageCall function
    * @param {PageCallHandler} pageCallHandler
    */
-  private replaceStubWithPageCallFunction(pageCallHandler: PageCallHandler) {
+  private replaceStubWithPageCallFunction(pageCallHandler: PageCallHandler): void {
 
     this.win[Constants.API_FUNCTION_NAME] = pageCallHandler;
 

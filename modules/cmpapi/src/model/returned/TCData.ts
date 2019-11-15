@@ -54,13 +54,13 @@ export class TCData extends Return {
    * Constructor to create a TCData object from a TCModel
    * @param {TCModel} tcModel
    * @param {EventStatus} eventStatus is optional
-   * @param {number[]} _vendorIds
+   * @param {number[]} _vendorIds - if not undefined, will be used to filter vendor ids
    */
   public constructor(tcModel: TCModel, eventStatus: EventStatus, _vendorIds?: number[]) {
 
     super();
 
-    const vendorIds: string[] = _vendorIds ? _vendorIds.map((id) => id.toString(10)) : Object.keys(tcModel.gvl.vendors);
+    const vendorIds: string[] = this.getVendorIds(tcModel, _vendorIds);
     const purposeIds: string[] = Object.keys(tcModel.gvl.purposes);
     const specialFeatureIds: string[] = Object.keys(tcModel.gvl.specialFeatures);
 
@@ -106,6 +106,19 @@ export class TCData extends Return {
   }
 
   /**
+   * Returns a string[] of vendor ids to be used when creating the TCData instance.
+   * If vendorIds param is not undefined, its converted to a string[] and returned, if not the ids from the gvl is used.
+   * @param {TCModel} tcModel
+   * @param {number[]} vendorIds
+   * @return {string[]}
+   */
+  private getVendorIds(tcModel: TCModel, vendorIds?: number[], ): string[] {
+
+    return vendorIds ? vendorIds.map((id): string => id.toString(10)) : Object.keys(tcModel.gvl.vendors);
+
+  }
+
+  /**
    * Creates a restrictions object given a TCModel
    * @param {TCModel} tcModel
    * @return {Restrictions}
@@ -117,7 +130,7 @@ export class TCData extends Return {
       const purposeId = pr.purposeId.toString(10);
       obj[purposeId] = {};
 
-      tcModel.publisherRestrictions.getVendors(pr).forEach((vendorId: number) => {
+      tcModel.publisherRestrictions.getVendors(pr).forEach((vendorId: number): void => {
 
         obj[purposeId][vendorId.toString(10)] = pr.restrictionType;
 

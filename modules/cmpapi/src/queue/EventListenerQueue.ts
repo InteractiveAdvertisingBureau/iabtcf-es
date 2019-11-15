@@ -28,7 +28,7 @@ export class EventListenerQueue {
 
   public executeCommands(): void {
 
-    this.commands.forEach((command) => command.execute());
+    this.commands.forEach((command): void => command.execute());
 
   }
 

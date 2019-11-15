@@ -1,7 +1,8 @@
 import {Vector} from '@iabtcf/core';
+import {BoolString} from '../types';
 
 export interface StringBoolVector {
-  [id: string]: string;
+  [id: string]: BoolString;
 }
 
 /**
@@ -12,7 +13,7 @@ export interface StringBoolVector {
  */
 export const createStringBoolVector = function(ids: string[], vector: Vector): StringBoolVector {
 
-  return ids.reduce<StringBoolVector>((map, obj) => {
+  return ids.reduce<StringBoolVector>((map, obj): StringBoolVector => {
 
     map[obj] = vector.has(+obj) ? '1' : '0';
     return map;

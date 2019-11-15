@@ -16,7 +16,7 @@ export class CommandQueue {
 
   }
 
-  public queueCommand(command: Command) {
+  public queueCommand(command: Command): void {
 
     // Todo: filter dups
 
@@ -24,7 +24,7 @@ export class CommandQueue {
 
   }
 
-  public queueCommands(commands: Command[]) {
+  public queueCommands(commands: Command[]): void {
 
     // Todo: filter dups
 
@@ -36,7 +36,7 @@ export class CommandQueue {
 
     if (this.hasCommands) {
 
-      this.commands.forEach((command: Command) => command.execute());
+      this.commands.forEach((command: Command): void => command.execute());
       this.commands = [];
 
     }

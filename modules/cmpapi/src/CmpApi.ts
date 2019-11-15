@@ -165,7 +165,7 @@ export class CmpApi {
 
       case Commands.GET_IN_APP_TC_DATA: {
 
-        return new GetInAppTcDataCommand(this.cmpData, command, version, callback, param);
+        return new GetInAppTcDataCommand(this.cmpData, command, version, callback);
 
       }
 
@@ -246,8 +246,8 @@ export class CmpApi {
        * Convert and Filter out invalid commands
        */
       const validCommands = commandArgs
-        .map((as: ArgSet) => _this.createCommand(...as))
-        .filter((command) => command != null && command.validate('', true));
+        .map((as: ArgSet): Command | null => _this.createCommand(...as))
+        .filter((command): boolean => command != null && command.validate('', true));
 
       /**
        * Add commands to que and process/clear them if we can

@@ -1,5 +1,6 @@
 import {TCModel, Vector} from '@iabtcf/core';
 import {EventStatus} from '../../status';
+import {BoolString} from '../../types';
 import {BooleanVector} from '../BooleanVector';
 import {Restrictions} from '../Restrictions';
 import {TCData} from './TCData';
@@ -38,7 +39,7 @@ export class InAppTCData extends TCData {
    */
   protected createBitFieldString(ids: string[], vector: Vector): string {
 
-    return ids.map((id: string) => vector.has(+id) ? '1' : '0').join('');
+    return ids.map((id: string): BoolString => vector.has(+id) ? '1' : '0').join('');
 
   }
 
@@ -55,7 +56,7 @@ export class InAppTCData extends TCData {
       const purposeId = pr.purposeId.toString(10);
       obj[purposeId] = '';
 
-      tcModel.publisherRestrictions.getVendors(pr).forEach((vendorId: number) => {
+      tcModel.publisherRestrictions.getVendors(pr).forEach((): void => {
 
         (obj[purposeId] as string).concat(pr.restrictionType.toString(10));
 

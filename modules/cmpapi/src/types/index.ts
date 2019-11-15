@@ -1,5 +1,6 @@
 export * from './ArgSet';
 export * from './BoolInt';
+export * from './BoolString';
 export * from './PageCallHandler';
 export * from './CommandArgsHandler';
 export * from './Param';

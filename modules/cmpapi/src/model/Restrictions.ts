@@ -1,7 +1,9 @@
+import {RestrictionType} from '@iabtcf/core';
+
 export interface Restrictions {
 
   [purposeId: string]: {
-    [vendorId: string]: 0 | 1 | 2;
+    [vendorId: string]: RestrictionType;
   } | string;
 
 }

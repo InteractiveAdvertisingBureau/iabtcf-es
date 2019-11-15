@@ -1,5 +1,3 @@
-import {GVL, PurposeRestriction, PurposeRestrictionVector, Vector, VendorList} from '@iabtcf/core';
-import {Type} from 'typedoc/dist/lib/models';
 import {Callback, RemoveListenerCallback} from '../types';
 import {Validation} from './Validation';
 
@@ -56,4 +54,5 @@ export abstract class CmpApiUtil {
     // console.error(msg);
 
   }
+
 }

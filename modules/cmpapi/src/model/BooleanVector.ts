@@ -12,7 +12,7 @@ export interface BooleanVector {
  */
 export const createBooleanVector = function(ids: string[], vector: Vector): BooleanVector {
 
-  return ids.reduce<BooleanVector>((map, obj) => {
+  return ids.reduce<BooleanVector>((map, obj): BooleanVector => {
 
     map[obj] = vector.has(+obj);
     return map;

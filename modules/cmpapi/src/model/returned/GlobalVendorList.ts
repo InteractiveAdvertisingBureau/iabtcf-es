@@ -8,6 +8,8 @@ export class GlobalVendorList extends Return {
 
     super();
 
+    console.warn('GlobalVendorList command not implemented');
+
   }
 
 }
