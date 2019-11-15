@@ -59,6 +59,7 @@
     "coveralls": "^3.0.4",
     "eslint": "~5.16.0",
     "eslint-config-google": "^0.13.0",
+    "eslint-plugin-import": "^2.18.2",
     "jscover": "^1.0.0",
     "jsdom": "15.1.1",
     "jsdom-global": "3.0.2",

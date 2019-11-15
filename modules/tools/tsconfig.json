@@ -3,6 +3,9 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist",
+     "plugins": [
+      { "name": "vue-ts-plugin" }
+    ],
     "types": [
       "webpack-env"
     ],
@@ -15,7 +18,6 @@
   },
   "include": [
     "src/**/*.ts",
-    "src/**/*.vue",
-    "tests/**/*.ts"
+    "src/**/*.vue"
   ]
 }

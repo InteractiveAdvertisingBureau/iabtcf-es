@@ -1,6 +1,6 @@
 import {
   IntEncoder,
-} from '.';
+} from './IntEncoder';
 
 export class DateEncoder {
 

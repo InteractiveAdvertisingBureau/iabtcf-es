@@ -1,25 +1,19 @@
+import {Cloneable} from './cloneable/Cloneable';
 import {TCModelError} from './errors';
 import {GVL} from './GVL';
-import {
 
-  GVLMapItem,
-  Purpose,
-
-} from './model/gvl';
-
-import {
-
-  Vector,
-  PurposeRestrictionVector,
-  IntMap,
-  TCFields,
-  ConsentLanguages,
-
-} from './model';
+import {ConsentLanguages, IntMap, PurposeRestrictionVector, TCFields, Vector} from './model';
+import {GVLMapItem, Purpose} from './model/gvl';
 
 export type TCModelPropType = number | Date | string | boolean | Vector | PurposeRestrictionVector;
 
-export class TCModel implements TCFields {
+export class TCModel extends Cloneable<TCModel> implements TCFields {
+
+  public clone(): TCModel {
+
+    return this._clone(this.gvl);
+
+  }
 
   private static readonly MAX_ENCODING_VERSION: number = 2;
 
@@ -37,7 +31,7 @@ export class TCModel implements TCFields {
   private cmpVersion_: number | string = 0;
   private vendorListVersion_: number | string = 0;
 
-  // automagically set when created, updated and gvl set
+  // automatically set when created, updated and gvl set
   private created_: Date;
   private lastUpdated_: Date;
 
@@ -58,6 +52,8 @@ export class TCModel implements TCFields {
    * of consent. Purposes are published in the Global Vendor List (see. [[GVL]]).
    */
   public readonly purposeConsents: Vector = new Vector();
+
+  public readonly testMap: Map<number, object> = new Map<number, any>([[1, {yes: 'no'}], [2, 'two']]);
 
   /**
    * The user’s consent value for each Purpose established on the legal basis
@@ -146,6 +142,8 @@ export class TCModel implements TCFields {
    */
   public constructor(gvl?: GVL) {
 
+    super(TCModel);
+
     if (gvl) {
 
       this.gvl = gvl;
@@ -164,7 +162,7 @@ export class TCModel implements TCFields {
   public set gvl(gvl: GVL) {
 
     /**
-     * Set the reference but wait to se the other values for when the data populates
+     * Set the reference but wait to see the other values for when the data populates
      */
     this.gvl_ = gvl;
     this.publisherRestrictions.gvl = gvl;
@@ -551,10 +549,10 @@ export class TCModel implements TCFields {
   };
 
   /**
-   * sets all items on the vector
+   * Sets all items on the vector
    *
-   * @param {IntMap} gvlMap - this will be one of the maps defined in the [[IntMap]]
-   * @param {Vector)} vector - vector to affect
+   * @param {IntMap<T>} gvlMap - this will be one of the maps defined in the [[IntMap]]
+   * @param {Vector} vector - vector to affect
    * @return {void}
    */
   private setAllOnVector<T>(gvlMap: IntMap<T>, vector: Vector): void {
@@ -789,14 +787,13 @@ export class TCModel implements TCFields {
       for (let i = 0; i < num; i++) {
 
         const id: string = (i + 1).toString();
-        const purpose: Purpose = {
+
+        this.customPurposes[id] = {
           id: i+1,
           name: `publisher purpose ${id}`,
           description: `publisher purpose description${id}`,
           descriptionLegal: `publisher purpose legal description ${id}`,
         };
-
-        this.customPurposes[id] = purpose;
 
       }
 
@@ -810,7 +807,7 @@ export class TCModel implements TCFields {
    *
    * @param {number | string} possibleInt - value to check
    * @param {number} above - the lower limit
-   * @return{boolean} - wehther or not `possibleInt` is both an int and above `above` number
+   * @return{boolean} - whether or not `possibleInt` is both an int and above `above` number
    */
   private isIntAbove(possibleInt: number | string, above: number): boolean {
 
@@ -824,7 +821,11 @@ export class TCModel implements TCFields {
 
   }
 
-  // This is a type check I need it to be an 'any'
+  /**
+   * This is a type check I need it to be an 'any'
+   * @param {any} obj
+   * @return {boolean}
+   */
   // eslint-disable-next-line
   private isGVLMapItem(obj: any): obj is GVLMapItem {
 
