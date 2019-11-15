@@ -1,12 +1,8 @@
 import {Cloneable} from './cloneable/Cloneable';
 import {GVLError} from './errors';
 import {Json} from './Json';
-
-import {ConsentLanguages,} from './model';
-
-import {ByPurposeVendorMap, Declarations, Feature, IDSetMap, Purpose, Stack, Vendor, VendorList,} from './model/gvl';
-
-import {IntMap} from './model/IntMap';
+import {ConsentLanguages, IntMap} from './model';
+import {ByPurposeVendorMap, Declarations, Feature, IDSetMap, Purpose, Stack, Vendor, VendorList} from './model/gvl';
 
 /**
  * TODO: make map to cache language translations under language so if a
@@ -24,12 +20,6 @@ type PurposeSubType = 'consent' | 'legInt' | 'flexible';
  * purpose and feature.
  */
 export class GVL extends Cloneable<GVL> implements VendorList, Declarations {
-
-  public clone(): GVL {
-
-    return this._clone(this);
-
-  }
 
   private static LOADED_LANGUAGES: Map<string, Declarations> = new Map<string, Declarations>();
 
@@ -230,6 +220,16 @@ export class GVL extends Cloneable<GVL> implements VendorList, Declarations {
       this.cacheLanguage(GVL.DEFAULT_LANGUAGE);
 
     });
+
+  }
+
+  /**
+   * Creates a clone of this GVL
+   * @return {GVL}
+   */
+  public clone(): GVL {
+
+    return this._clone(this);
 
   }
 

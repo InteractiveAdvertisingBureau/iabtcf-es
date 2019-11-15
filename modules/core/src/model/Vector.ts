@@ -8,12 +8,6 @@ type idOrIds = number | number[];
  */
 class Vector extends Cloneable<Vector> {
 
-  public clone(): Vector {
-
-    return this._clone();
-
-  }
-
   private maxId_: number = 0;
   /**
    * keep a set for faster lookup
@@ -35,6 +29,16 @@ class Vector extends Cloneable<Vector> {
       this.set(ids);
 
     }
+
+  }
+
+  /**
+   * Creates a clone of this Vector
+   * @return {Vector}
+   */
+  public clone(): Vector {
+
+    return this._clone();
 
   }
 
