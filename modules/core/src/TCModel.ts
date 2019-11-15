@@ -9,12 +9,6 @@ export type TCModelPropType = number | Date | string | boolean | Vector | Purpos
 
 export class TCModel extends Cloneable<TCModel> implements TCFields {
 
-  public clone(): TCModel {
-
-    return this._clone(this.gvl);
-
-  }
-
   private static readonly MAX_ENCODING_VERSION: number = 2;
 
   // Defaults
@@ -152,6 +146,16 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
 
     this.created = new Date();
     this.updated();
+
+  }
+
+  /**
+   * Creates a clone of this TCModel
+   * @return {TCModel}
+   */
+  public clone(): TCModel {
+
+    return this._clone(this.gvl);
 
   }
 

@@ -4,12 +4,6 @@ import {RestrictionType} from './RestrictionType';
 
 export class PurposeRestriction extends Cloneable<PurposeRestriction> {
 
-  public clone(): PurposeRestriction {
-
-    return this._clone();
-
-  }
-
   public static hashSeparator: string = '-';
 
   private purposeId_: number;
@@ -41,6 +35,17 @@ export class PurposeRestriction extends Cloneable<PurposeRestriction> {
     }
 
   }
+
+  /**
+   * Creates a clone of this PurposeRestriction
+   * @return {PurposeRestriction}
+   */
+  public clone(): PurposeRestriction {
+
+    return this._clone();
+
+  }
+
   public static unHash(hash: string): PurposeRestriction {
 
     const splitUp: string[] = hash.split(this.hashSeparator);

@@ -7,13 +7,6 @@ import {Cloneable} from '../cloneable/Cloneable';
 
 export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector> {
 
-
-  public clone(): PurposeRestrictionVector {
-
-    return this._clone();
-
-  }
-
   /**
    * a map indexed by a string which will be a 'hash' of the purpose and
    * restriction type.
@@ -26,6 +19,16 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
   public constructor() {
 
     super(PurposeRestrictionVector);
+
+  }
+
+  /**
+   * Creates a clone of this PurposeRestrictionVector
+   * @return {PurposeRestrictionVector}
+   */
+  public clone(): PurposeRestrictionVector {
+
+    return this._clone();
 
   }
 
