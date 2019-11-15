@@ -229,9 +229,6 @@ describe('TCModel', (): void => {
 
     const clone = tcModel.clone();
 
-    console.log(JSON.stringify(tcModel));
-    console.log(JSON.stringify(clone));
-
     assert.equal(clone.isValid(), tcModel.isValid(), 'tcModel IsValid did not return the same value as original');
     assert.equal(clone.publisherRestrictions.isValid(), tcModel.publisherRestrictions.isValid(), 'PR IsValid did not return the same value as original');
 

@@ -5,13 +5,14 @@ export const createStub = () => {
   if (typeof (window['__tcfapi']) !== 'function') {
 
     const queue = [
-      ['getTCData', 2, (tcData: TCData | null, success: boolean) => console.log('TcData status1', success)],
-      ['getTCData', 2, (tcData: TCData | null, success: boolean) => console.log('TcData status2', success), [1, 2, 3, 4, 13]],
-      ['getTCData', 2, (tcData: TCData | null, success: boolean) => console.log('TcData status3', success), [1.5, 2, 3, 4, 13]],
-      ['getVendorList', 2, (gvl: GlobalVendorList | null, success: boolean) => console.log('getVendorList status', success)],
-      ['BAD_COMMAND1', 0, (gvl: GlobalVendorList | null, success: boolean) => console.log('BAD_COMMAND1 status', success)],
-      ['BAD_COMMAND2', 2, (gvl: GlobalVendorList | null, success: boolean) => console.log('BAD_COMMAND2 status', success)],
-      ['BAD_COMMAND3', 2, 'not a function'],
+      ['getTCData', 2, (tcData: TCData | null, success: boolean) => {}],
+      ['getInAppTCData', 2, (tcData: TCData | null, success: boolean) => {}],
+      ['getTCData', 2, (tcData: TCData | null, success: boolean) => {}, [1, 2, 3, 4, 13]],
+      // ['getTCData', 2, (tcData: TCData | null, success: boolean) => {}, [1.5, 2, 3, 4, 13]],
+      ['getVendorList', 2, (gvl: GlobalVendorList | null, success: boolean) => {}],
+      // ['BAD_COMMAND1', 0, (gvl: GlobalVendorList | null, success: boolean) => {}],
+      // ['BAD_COMMAND2', 2, (gvl: GlobalVendorList | null, success: boolean) => {}],
+      // ['BAD_COMMAND3', 2, 'not a function'],
     ];
     const win = window;
     const doc = win.document;
