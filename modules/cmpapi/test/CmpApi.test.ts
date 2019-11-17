@@ -400,6 +400,8 @@ describe('CmpApi', (): void => {
 
       describe('getVendorList', (): void => {
 
+        GVL.baseUrl = 'https://vendorlist.consensu.org/v2';
+
         it('getVendorList works', (done): void => {
 
           const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean) => {
@@ -411,6 +413,20 @@ describe('CmpApi', (): void => {
           };
 
           win[API_FUNCTION_NAME]('getVendorList', 2, callback, 2);
+
+        });
+
+        it('getVendorList works using 5 as the version', (done): void => {
+
+          const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean) => {
+
+            assert.isTrue(success, 'success was false');
+            assert.isNotNull(gvl, 'gvl was null');
+            done();
+
+          };
+
+          win[API_FUNCTION_NAME]('getVendorList', 2, callback, 5);
 
         });
 
@@ -428,6 +444,7 @@ describe('CmpApi', (): void => {
 
         });
 
+        // Todo: this isn't correct. It is supposed to be 0 or greater is valid
         it('getVendorList fails when using 1 as version', (done): void => {
 
           const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean) => {

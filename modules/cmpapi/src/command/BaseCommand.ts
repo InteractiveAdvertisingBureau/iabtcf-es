@@ -3,6 +3,9 @@ import {Return} from '../model/returned/Return';
 import {Callback, Param} from '../types';
 import {CmpApiUtil, Constants, Validation} from '../utilities';
 
+/**
+ * Base command class handles validation of basic command fields
+ */
 export abstract class BaseCommand {
 
   protected cmpData: CmpData;
@@ -12,12 +15,6 @@ export abstract class BaseCommand {
   protected versionString: string;
   protected callback: Callback;
   protected param?: Param;
-
-  public getCommandString(): string {
-
-    return this.command;
-
-  }
 
   protected constructor(cmpData: CmpData, command: string, version: number, callback: Callback, param?: Param) {
 

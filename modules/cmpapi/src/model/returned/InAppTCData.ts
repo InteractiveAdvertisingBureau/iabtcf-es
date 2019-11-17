@@ -5,6 +5,9 @@ import {BooleanVector} from '../BooleanVector';
 import {Restrictions} from '../Restrictions';
 import {TCData} from './TCData';
 
+/**
+ * InAppTCData
+ */
 export class InAppTCData extends TCData {
 
   public constructor(tcModel: TCModel, eventStatus: EventStatus, vendorIds: number[]) {
