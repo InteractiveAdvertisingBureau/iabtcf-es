@@ -5,19 +5,20 @@ import {
   AddEventListenerCommand,
   Command,
   Commands,
-  CustomCommand, CustomCommandFunction,
+  CustomCommand,
+  CustomCommandFunction,
   GetInAppTcDataCommand,
   GetTcDataCommand,
   GetVendorListCommand,
   PingCommand,
   RemoveEventListenerCommand,
 } from './command';
-import {isValidatable, Validatable} from './validatable/Validatable';
 import {CommandQueue} from './queue/CommandQueue';
 import {EventListenerQueue} from './queue/EventListenerQueue';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
 import {ArgSet, Callback, CommandArgsHandler, PageCallHandler, Param} from './types';
 import {CmpApiUtil, Constants, Validation} from './utilities';
+import {isValidatable, Validatable} from './validatable/Validatable';
 
 export interface CustomCommandRegistration {
   command: string;
