@@ -2,17 +2,22 @@ import {GVL, TCModel} from '@iabtcf/core';
 import {assert} from 'chai';
 import {createStub} from '../dev/stub';
 import {
-  CmpApi,
+  CmpApi, CustomCommandRegistration,
   EventStatus,
   GlobalVendorList,
   IATCDataCallback,
   InAppTCData,
   Ping,
-  PingCallback,
+  PingCallback, RemoveListenerCallback,
   TCData,
   TCDataCallback,
   VendorListCallback,
 } from '../src';
+
+interface TestData {
+  testString: string;
+  testNum: number;
+}
 
 describe('CmpApi', (): void => {
 
@@ -22,6 +27,17 @@ describe('CmpApi', (): void => {
   // eslint-disable-next-line
   const vendorlistJson = require('../../../dev/vendor-list.json');
   const gvl: GVL = new GVL(vendorlistJson);
+
+  const testData: TestData = {testString: 'There was a farmer who had a dog, and DOG_NAME was his name-o', testNum: 42};
+
+  const customCommands: CustomCommandRegistration[] = [
+    {command: 'testCustomCommand', customFunction: (version, callback, param) => {
+
+      const _testData = testData;
+      callback({..._testData, testString: _testData.testString.replace('DOG_NAME', 'BINGO')});
+
+    }},
+  ];
 
   // eslint-disable-next-line no-unused-vars
   let cmpApi: CmpApi;
@@ -104,7 +120,7 @@ describe('CmpApi', (): void => {
 
       it('Page handler is created and is a function', (): void => {
 
-        cmpApi = new CmpApi(1, 3);
+        cmpApi = new CmpApi(1, 3, customCommands);
 
         assert.isFunction(win[API_FUNCTION_NAME], 'Page handler was not created or not a function');
 
@@ -217,6 +233,23 @@ describe('CmpApi', (): void => {
         tcModel.setAll();
 
         assert.doesNotThrow(() => cmpApi.setTCModel(tcModel, EventStatus.TC_LOADED), 'setTCModel threw an error');
+
+      });
+
+      it('custom command works', (done): void => {
+
+        const param = 'BINGO';
+        const expectedTestString = testData.testString.replace('DOG_NAME', param);
+
+        const callback = (data: TestData): void => {
+
+          assert.isNotNull(data, 'custom command returned null data');
+          assert.strictEqual(data.testString, expectedTestString);
+          done();
+
+        };
+
+        win[API_FUNCTION_NAME](customCommands[0].command, 2, callback, param);
 
       });
 
@@ -346,14 +379,13 @@ describe('CmpApi', (): void => {
 
       });
 
-      describe('addEventListener', (): void => {
+      describe('EventListeners', (): void => {
 
-        it('addEventListener works', (done): void => {
+        let addEventListenerCallback;
 
-          let callCount = 0;
-          const maxCallCount = 3;
+        const getAddEventListenerCallback = (callCount: number, maxCallCount: number, done) => {
 
-          const callback: TCDataCallback = (tcData: TCData | null, success: boolean) => {
+          const _addEventListenerCallback: TCDataCallback = (tcData: TCData | null, success: boolean) => {
 
             callCount++;
 
@@ -369,8 +401,10 @@ describe('CmpApi', (): void => {
 
             }
 
+            assert.isFalse(callCount > maxCallCount, 'addEventListenerCallback called after it was removed');
+
             // Todo: Check the object more thoroughly
-            if (callCount >= maxCallCount) {
+            if (callCount === maxCallCount) {
 
               done();
 
@@ -378,27 +412,75 @@ describe('CmpApi', (): void => {
 
           };
 
-          win[API_FUNCTION_NAME]('addEventListener', 2, callback);
+          return _addEventListenerCallback;
 
-          const tcModel = new TCModel(gvl);
-          tcModel.cmpId = 23;
-          tcModel.cmpVersion = 1;
+        };
 
-          // full consent!
-          tcModel.setAll();
+        describe('addEventListener', (): void => {
 
-          tcModel.purposeConsents.unset(2);
-          tcModel.vendorConsents.unset(37);
+          it('addEventListener works', (done): void => {
 
-          cmpApi.setTCModel(tcModel, EventStatus.TC_LOADED);
-          cmpApi.setTCModel(tcModel, EventStatus.TC_LOADED);
-          cmpApi.setTCModel(tcModel, EventStatus.TC_LOADED);
+            const callCount = 0;
+            const maxCallCount = 3;
+
+            addEventListenerCallback = getAddEventListenerCallback(callCount, maxCallCount, done);
+
+            win[API_FUNCTION_NAME]('addEventListener', 2, addEventListenerCallback);
+
+            const tcModel = new TCModel(gvl);
+            tcModel.cmpId = 23;
+            tcModel.cmpVersion = 1;
+
+            // full consent!
+            tcModel.setAll();
+
+            tcModel.purposeConsents.unset(2);
+            tcModel.vendorConsents.unset(37);
+
+            cmpApi.setTCModel(tcModel, EventStatus.TC_LOADED);
+            cmpApi.setTCModel(tcModel, EventStatus.TC_LOADED);
+            cmpApi.setTCModel(tcModel, EventStatus.TC_LOADED);
+
+          });
+
+        });
+
+        describe('removeEventListener', (): void => {
+
+          it('removeEventListener works', (done): void => {
+
+            const callback: RemoveListenerCallback = (success: boolean | null) => {
+
+              assert.isTrue(success, 'removeEventListener did not return successful');
+
+              // Try setting tc model to trigger addEventListenerCallback more times then it was expected
+              const tcModel = new TCModel(gvl);
+              tcModel.cmpId = 23;
+              tcModel.cmpVersion = 1;
+
+              // full consent!
+              tcModel.setAll();
+
+              tcModel.purposeConsents.unset(2);
+              tcModel.vendorConsents.unset(37);
+
+              cmpApi.setTCModel(tcModel, EventStatus.TC_LOADED);
+
+              done();
+
+            };
+
+            win[API_FUNCTION_NAME]('removeEventListener', 2, callback, addEventListenerCallback);
+
+          });
 
         });
 
       });
 
       describe('getVendorList', (): void => {
+
+        GVL.baseUrl = 'https://vendorlist.consensu.org/v2';
 
         it('getVendorList works', (done): void => {
 
@@ -411,6 +493,20 @@ describe('CmpApi', (): void => {
           };
 
           win[API_FUNCTION_NAME]('getVendorList', 2, callback, 2);
+
+        });
+
+        it('getVendorList works using 5 as the version', (done): void => {
+
+          const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean) => {
+
+            assert.isTrue(success, 'success was false');
+            assert.isNotNull(gvl, 'gvl was null');
+            done();
+
+          };
+
+          win[API_FUNCTION_NAME]('getVendorList', 2, callback, 5);
 
         });
 
@@ -428,6 +524,7 @@ describe('CmpApi', (): void => {
 
         });
 
+        // Todo: this isn't correct. It is supposed to be 0 or greater is valid
         it('getVendorList fails when using 1 as version', (done): void => {
 
           const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean) => {

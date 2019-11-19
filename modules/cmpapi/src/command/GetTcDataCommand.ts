@@ -2,10 +2,12 @@ import {CmpData} from '../CmpData';
 import {TCData} from '../model';
 import {Callback, Param, TCDataCallback} from '../types';
 import {CmpApiUtil, Constants} from '../utilities';
+import {ValidationResult} from "../validatable/ValidationResult";
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
+import {Validatable} from '../validatable/Validatable';
 
-export class GetTcDataCommand extends BaseCommand implements Command {
+export class GetTcDataCommand extends BaseCommand implements Command, Validatable {
 
   public constructor(cmpData: CmpData, command: string, version: number, callback: Callback, param?: Param) {
 
@@ -13,6 +15,9 @@ export class GetTcDataCommand extends BaseCommand implements Command {
 
   }
 
+  /**
+   * Executes the get tc data command
+   */
   public execute(): void {
 
     const tcData = new TCData(this.cmpData.tcModel, this.cmpData.eventStatus, this.param as number[]);
@@ -21,23 +26,30 @@ export class GetTcDataCommand extends BaseCommand implements Command {
 
   }
 
-  public validate(validationMessage: string, failCallbackIfNotValid: boolean = false): boolean {
+  /**
+   * Validates the vendor list was valid and returns the result.
+   * Base class validation is also handled.
+   * @param {boolean} failCallbackIfNotValid
+   * @return {ValidationResult}
+   */
+  public validate(failCallbackIfNotValid: boolean = false): ValidationResult {
+
+    const validationResult = super.validate(failCallbackIfNotValid);
 
     if (!this.isVendorsListValid()) {
 
-      validationMessage = Constants.VENDOR_LIST_INVALID;
+      validationResult.validationMessages.push(Constants.VENDOR_LIST_INVALID);
+      validationResult.isValid = false;
 
       if (failCallbackIfNotValid) {
 
-        CmpApiUtil.failCallback(this.callback, validationMessage);
+        CmpApiUtil.failCallback(this.callback, validationResult.validationMessages);
 
       }
 
-      return false;
-
     }
 
-    return super.validate(validationMessage, failCallbackIfNotValid);
+    return validationResult;
 
   }
 

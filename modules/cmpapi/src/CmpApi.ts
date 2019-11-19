@@ -5,18 +5,24 @@ import {
   AddEventListenerCommand,
   Command,
   Commands,
-  CustomCommand,
+  CustomCommand, CustomCommandFunction,
   GetInAppTcDataCommand,
   GetTcDataCommand,
   GetVendorListCommand,
   PingCommand,
   RemoveEventListenerCommand,
 } from './command';
+import {isValidatable, Validatable} from './validatable/Validatable';
 import {CommandQueue} from './queue/CommandQueue';
 import {EventListenerQueue} from './queue/EventListenerQueue';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
 import {ArgSet, Callback, CommandArgsHandler, PageCallHandler, Param} from './types';
 import {CmpApiUtil, Constants, Validation} from './utilities';
+
+export interface CustomCommandRegistration {
+  command: string;
+  customFunction: CustomCommandFunction;
+}
 
 /**
  * Consent Management Platform API
@@ -31,24 +37,52 @@ export class CmpApi {
 
   private readonly cmpData: CmpData;
 
-  private eventArgSets: ArgSet[];
-
-  private customMethods = {};
+  private customCommandMap = new Map<string, CustomCommandFunction>();
 
   /**
    * Constructor
    * @param {number} cmpId
    * @param {number} cmpVersion
+   * @param {CustomCommandRegistration[]} customCommands
    */
-  public constructor(cmpId: number, cmpVersion: number) {
+  public constructor(cmpId: number, cmpVersion: number, customCommands: CustomCommandRegistration[] = []) {
 
     this.cmpData = new CmpData(cmpId, cmpVersion);
+
+    this.registerCustomCommands(customCommands);
 
     this.eventListenerQueue = new EventListenerQueue();
 
     this.commandQueue = new CommandQueue();
 
     this.commandStream = new CmpCommandStream(this.getPageCallHandler(), this.getCommandArgsHandler());
+
+  }
+
+  /**
+   * Validates and add custom commands to custom commands map
+   * @param {CustomCommandRegistration[]} customCommands
+   * @return {void}
+   */
+  private registerCustomCommands(customCommands: CustomCommandRegistration[]): void {
+
+    customCommands.forEach((cc): void => {
+
+      /**
+       * Validate and add custom command to map
+       */
+
+      if (Validation.isFunction(cc.customFunction)) {
+
+        this.customCommandMap.set(cc.command, cc.customFunction);
+
+      } else {
+
+        throw Error(Constants.CUSTOM_COMMAND_FUNCTION_INVALID);
+
+      }
+
+    });
 
   }
 
@@ -106,7 +140,7 @@ export class CmpApi {
        * Validate, if it isn't valid, finish processing command
        */
 
-      if (!command.validate('', true)) {
+      if (isValidatable(command) && !command.validate(true).isValid) {
 
         return;
 
@@ -149,6 +183,21 @@ export class CmpApi {
    */
   private createCommand(command: string, version: number, callback: Callback, param?: Param): Command | null {
 
+    /**
+     * Custom commands can over ride the default commands, we will check them first
+     * and return a custom command if one has been registered.
+     */
+
+    if (this.customCommandMap.has(command)) {
+
+      return new CustomCommand(this.customCommandMap.get(command) as CustomCommandFunction, version, callback, param);
+
+    }
+
+    /**
+     * Handle the creation of default commands
+     */
+
     switch (command) {
 
       case Commands.PING: {
@@ -171,8 +220,6 @@ export class CmpApi {
 
       case Commands.GET_VENDOR_LIST: {
 
-        // TODO: Implement get vendor list
-
         return new GetVendorListCommand(this.cmpData, command, version, callback, param);
 
       }
@@ -190,17 +237,6 @@ export class CmpApi {
       }
 
       default: {
-
-        if (Validation.isFunction(this.customMethods[command])) {
-
-          /**
-           * If custom methods were set, process them here.
-           * Todo: Handle custom commands
-           */
-
-          return new CustomCommand(this.cmpData, command, version, callback, param);
-
-        }
 
         /**
          * Command is not supported and has no custom methods defined
@@ -246,11 +282,13 @@ export class CmpApi {
        * Convert and Filter out invalid commands
        */
       const validCommands = commandArgs
-        .map((as: ArgSet): Command | null => _this.createCommand(...as))
-        .filter((command): boolean => command != null && command.validate('', true));
+        .map((as: ArgSet): Command | Validatable | null => _this.createCommand(...as))
+        .filter((command): boolean => command != null)
+        .filter((command): boolean => isValidatable(command as Command)
+          ? (command as Validatable).validate(true).isValid : true);
 
       /**
-       * Add commands to que and process/clear them if we can
+       * Add commands to queue and process/clear them if we can
        */
 
       // @ts-ignore

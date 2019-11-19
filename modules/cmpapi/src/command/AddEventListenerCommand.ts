@@ -1,11 +1,16 @@
 import {CmpData} from '../CmpData';
 import {EventListenerQueue} from '../queue/EventListenerQueue';
 import {Callback, Param} from '../types';
+import {ValidationResult} from "../validatable/ValidationResult";
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 import {GetTcDataCommand} from './GetTcDataCommand';
+import {Validatable} from '../validatable/Validatable';
 
-export class AddEventListenerCommand extends BaseCommand implements Command {
+/**
+ * Adds an event listener to an EventListenerQueue
+ */
+export class AddEventListenerCommand extends BaseCommand implements Command, Validatable {
 
   private readonly getTcDataCommand: GetTcDataCommand;
   private eventListenerQueue: EventListenerQueue;
@@ -32,9 +37,9 @@ export class AddEventListenerCommand extends BaseCommand implements Command {
 
   }
 
-  public validate(validationMessage: string, failCallbackIfNotValid?: boolean): boolean {
+  public validate(failCallbackIfNotValid?: boolean): ValidationResult {
 
-    return this.getTcDataCommand.validate(validationMessage, failCallbackIfNotValid);
+    return this.getTcDataCommand.validate(failCallbackIfNotValid);
 
   }
 

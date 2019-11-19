@@ -1,14 +1,34 @@
-import {TCModel} from '@iabtcf/core';
+import {Declarations, Feature, GVL, IntMap, Purpose, Stack, Vendor, VendorList} from '@iabtcf/core';
 import {Return} from './Return';
 
-export class GlobalVendorList extends Return {
+interface GlobalVendorListFields extends VendorList, Declarations {}
 
-  // Todo: Implement GlobalVendorList Class
-  public constructor(tcModel: TCModel, param?: string | number) {
+// Todo: we are thinking of making this just the interface. What about base return values?
+export class GlobalVendorList extends Return implements GlobalVendorListFields {
+
+  public gvlSpecificationVersion: number;
+  public vendorListVersion: number;
+  public lastUpdated: string | Date;
+  public purposes: IntMap<Purpose>;
+  public specialPurposes: IntMap<Purpose>;
+  public features: IntMap<Feature>;
+  public specialFeatures: IntMap<Feature>;
+  public vendors: IntMap<Vendor>;
+  public stacks: IntMap<Stack>;
+
+  public constructor(gvl: GVL) {
 
     super();
 
-    console.warn('GlobalVendorList command not implemented');
+    this.gvlSpecificationVersion = gvl.gvlSpecificationVersion;
+    this.vendorListVersion = gvl.vendorListVersion;
+    this.lastUpdated = gvl.lastUpdated;
+    this.purposes = gvl.purposes;
+    this.specialPurposes = gvl.specialPurposes;
+    this.features = gvl.features;
+    this.specialFeatures = gvl.specialFeatures;
+    this.vendors = gvl.vendors;
+    this.stacks = gvl.stacks;
 
   }
 

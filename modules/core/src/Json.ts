@@ -3,7 +3,7 @@ export class Json {
   /**
    * @param {string} jsonURL - full path to the json
    * @param {boolean} sendCookies - Whether or not to send the XMLHttpRequest with credentials or not
-   * @param {number} [timeout] - optional timeout in miliseconds
+   * @param {number} [timeout] - optional timeout in milliseconds
    * @return {Promise} - resolves with parsed JSON
    */
   public static fetch(jsonURL: string, sendCookies: boolean = false, timeout: number = 0): Promise<object> {
@@ -30,7 +30,7 @@ export class Json {
 
           } else {
 
-            reject(new Error(`JSON Error Status: ${req.status} responeType: ${req.responseType} (should be json)`));
+            reject(new Error(`JSON Error Status: ${req.status} responseType: ${req.responseType} (should be json)`));
 
           }
 
