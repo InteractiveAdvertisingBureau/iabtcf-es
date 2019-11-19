@@ -1,4 +1,5 @@
 export class Constants {
+
   // Todo: Possibly move validation messages into validation code
 
   public static readonly API_FUNCTION_NAME: string = `__tcfapi`;

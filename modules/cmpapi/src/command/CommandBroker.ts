@@ -1,5 +1,5 @@
 import {CmpDataReader} from '../cmpdata';
-import {ArgSet, Callback, CommandArgsHandler, PageCallHandler, Param} from '../types';
+import {ArgSet, Callback, CommandArgsHandler, PageCallHandler, Param, TcModelChangeEventHandler} from '../types';
 import {CmpApiUtil, Constants} from '../utilities';
 import {ValidationUtil} from '../validation';
 import {isValidatable, Validatable} from '../validation/Validatable';
@@ -279,9 +279,13 @@ export class CommandBroker {
 
   }
 
-  private getTcModelChangeCallback() {
+  /**
+   * Returns a callback method to handle changes to the TcModel
+   * @return {TcModelChangeEventHandler}
+   */
+  private getTcModelChangeCallback(): TcModelChangeEventHandler {
 
-    return () => {
+    return (): void => {
 
       const _this = this;
       _this.commandQueue.executeAndClearCommands();

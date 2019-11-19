@@ -1,7 +1,8 @@
 import {TCModel} from '@iabtcf/core';
 import {CmpStatus, DisplayStatus, EventStatus} from '../status';
 import {Constants} from '../utilities';
-import {CmpDataReader} from './CmpDataReader';
+import {CmpDataReader} from '.';
+import {TcModelChangeEventHandler} from '../types';
 
 /**
  * Class holds shareable data across cmp api and provides change event listener for TcModel
@@ -20,7 +21,7 @@ export class CmpData implements CmpDataReader {
   private cmpStatus: CmpStatus;
   private displayStatus: DisplayStatus;
 
-  private tcModelChangeEventCallback: () => void;
+  private tcModelChangeEventCallback: TcModelChangeEventHandler;
 
   public constructor(cmpId: number, cmpVersion: number) {
 
@@ -38,19 +39,19 @@ export class CmpData implements CmpDataReader {
 
   }
 
-  registerTcModelChangeEventCallback(tcModelChangeCallback: () => void) {
+  public registerTcModelChangeEventCallback(tcModelChangeCallback: TcModelChangeEventHandler) {
 
     this.tcModelChangeEventCallback = tcModelChangeCallback;
 
   }
 
-  get tcModelIsSet(): boolean {
+  public get tcModelIsSet(): boolean {
 
     return !!this.tcModel;
 
   }
 
-  getTcModel(): TCModel {
+  public getTcModel(): TCModel {
 
     return this.tcModel;
 
@@ -80,7 +81,7 @@ export class CmpData implements CmpDataReader {
 
   }
 
-  getApiVersion(): number {
+  public getApiVersion(): number {
 
     return this.apiVersion;
 
@@ -92,7 +93,7 @@ export class CmpData implements CmpDataReader {
 
   }
 
-  getCmpId(): number {
+  public getCmpId(): number {
 
     return this.cmpId;
 
@@ -104,7 +105,7 @@ export class CmpData implements CmpDataReader {
 
   }
 
-  getCmpVersion(): number {
+  public getCmpVersion(): number {
 
     return this.cmpVersion;
 
@@ -116,7 +117,7 @@ export class CmpData implements CmpDataReader {
 
   }
 
-  getTcfPolicyVersion(): number {
+  public getTcfPolicyVersion(): number {
 
     return this.tcfPolicyVersion;
 
@@ -128,7 +129,7 @@ export class CmpData implements CmpDataReader {
 
   }
 
-  getGdprApplies(): boolean {
+  public getGdprApplies(): boolean {
 
     return this.gdprApplies;
 
@@ -140,7 +141,7 @@ export class CmpData implements CmpDataReader {
 
   }
 
-  getEventStatus(): EventStatus {
+  public getEventStatus(): EventStatus {
 
     return this.eventStatus;
 
@@ -152,7 +153,7 @@ export class CmpData implements CmpDataReader {
 
   }
 
-  getCmpStatus(): CmpStatus {
+  public getCmpStatus(): CmpStatus {
 
     return this.cmpStatus;
 
@@ -164,7 +165,7 @@ export class CmpData implements CmpDataReader {
 
   }
 
-  getDisplayStatus(): DisplayStatus {
+  public getDisplayStatus(): DisplayStatus {
 
     return this.displayStatus;
 

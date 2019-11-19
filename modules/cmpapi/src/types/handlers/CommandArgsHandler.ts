@@ -1,3 +1,3 @@
-import {ArgSet} from './ArgSet';
+import {ArgSet} from '../ArgSet';
 
 export type CommandArgsHandler = (argSets: ArgSet[]) => void;
