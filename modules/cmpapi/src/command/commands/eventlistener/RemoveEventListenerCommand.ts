@@ -2,7 +2,7 @@ import {CmpDataReader} from '../../../cmpdata';
 import {EventListenerQueue} from '../../../queue/EventListenerQueue';
 import {Callback, Param, RemoveListenerCallback, TCDataCallback} from '../../../types';
 import {CmpApiUtil, Constants} from '../../../utilities';
-import {Validatable} from '../../../validatable/Validatable';
+import {Validatable} from '../../../validation/Validatable';
 import {BaseCommand} from '../BaseCommand';
 import {Command} from '../Command';
 

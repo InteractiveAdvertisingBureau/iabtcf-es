@@ -1,7 +1,7 @@
 /**
  * Validation class used to organize reusable validation methods
  */
-export class Validation {
+export class ValidationUtil {
 
   public static isArray(obj): boolean {
 
@@ -12,7 +12,7 @@ export class Validation {
   public static isGtrZeroIntegerArray(ray: number[]): boolean {
 
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    return Validation.isArray(ray) && ray.every((elm) => Validation.isIntegerGtrZero(elm));
+    return ValidationUtil.isArray(ray) && ray.every((elm) => ValidationUtil.isIntegerGtrZero(elm));
 
   }
 
@@ -24,7 +24,7 @@ export class Validation {
 
   public static isNonEmptyString(obj): boolean {
 
-    return Validation.isString(obj) && obj.length > 0;
+    return ValidationUtil.isString(obj) && obj.length > 0;
 
   }
 
@@ -42,13 +42,13 @@ export class Validation {
 
   public static isIntegerGtrZero(obj): boolean {
 
-    return Validation.isInteger(obj) && obj > 0;
+    return ValidationUtil.isInteger(obj) && obj > 0;
 
   }
 
   public static isIntegerGtrOne(obj): boolean {
 
-    return Validation.isInteger(obj) && obj > 1;
+    return ValidationUtil.isInteger(obj) && obj > 1;
 
   }
 

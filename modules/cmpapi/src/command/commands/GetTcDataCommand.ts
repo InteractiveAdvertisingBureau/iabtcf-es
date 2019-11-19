@@ -2,8 +2,8 @@ import {CmpDataReader} from '../../cmpdata';
 import {TCData} from '../../model';
 import {Callback, Param, TCDataCallback} from '../../types';
 import {CmpApiUtil, Constants} from '../../utilities';
-import {Validatable} from '../../validatable/Validatable';
-import {ValidationResult} from '../../validatable/ValidationResult';
+import {Validatable} from '../../validation/Validatable';
+import {ValidationResult} from '../../validation/ValidationResult';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 

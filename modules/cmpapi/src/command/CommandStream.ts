@@ -2,7 +2,7 @@ import {Ping} from '../model';
 import {CmpStatus} from '../status';
 import {ArgSet, CommandArgsHandler, PageCallHandler} from '../types';
 import {Constants} from '../utilities';
-import {Validation} from '../validatable';
+import {ValidationUtil} from '../validation';
 import {Commands} from './commands';
 
 /**
@@ -82,7 +82,7 @@ export class CommandStream {
          * if this is the stub.
          */
 
-        if (Validation.isFunction(this.__tcfapi)) {
+        if (ValidationUtil.isFunction(this.__tcfapi)) {
 
           this.__tcfapi(Commands.PING, 2, (ping: Ping): void => {
 

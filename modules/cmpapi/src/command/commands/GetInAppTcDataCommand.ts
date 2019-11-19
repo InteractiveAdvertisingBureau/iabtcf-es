@@ -1,7 +1,7 @@
 import {CmpDataReader} from '../../cmpdata';
 import {InAppTCData} from '../../model';
 import {Callback, IATCDataCallback} from '../../types';
-import {Validatable} from '../../validatable/Validatable';
+import {Validatable} from '../../validation/Validatable';
 import {Command} from './Command';
 import {GetTcDataCommand} from './GetTcDataCommand';
 

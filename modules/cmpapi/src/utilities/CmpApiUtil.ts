@@ -1,5 +1,5 @@
 import {Callback, RemoveListenerCallback} from '../types';
-import {Validation} from '../validatable/Validation';
+import {ValidationUtil} from '../validation/ValidationUtil';
 
 /**
  * Utility class to encapsulate common functions needed throughout CmpApi
@@ -18,7 +18,7 @@ export abstract class CmpApiUtil {
 
     if (messages) {
 
-      if (Validation.isArray(messages)) {
+      if (ValidationUtil.isArray(messages)) {
 
         this.logError(`Errors: ${(messages as string[]).join(', ')}`);
 
@@ -30,7 +30,7 @@ export abstract class CmpApiUtil {
 
     }
 
-    if (Validation.isFunction(callback)) {
+    if (ValidationUtil.isFunction(callback)) {
 
       try {
 

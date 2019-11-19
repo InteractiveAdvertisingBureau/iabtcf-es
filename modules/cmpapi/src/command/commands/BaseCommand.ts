@@ -2,7 +2,7 @@ import {CmpDataReader} from '../../cmpdata';
 import {Return} from '../../model/returned/Return';
 import {Callback, Param} from '../../types';
 import {CmpApiUtil, Constants} from '../../utilities';
-import {Validation, ValidationResult} from '../../validatable';
+import {ValidationUtil, ValidationResult} from '../../validation';
 
 /**
  * Base command class holds basic command parameters and has functionality to
@@ -54,21 +54,21 @@ export abstract class BaseCommand {
       validationMessages: [],
     };
 
-    if (validationResult.isValid && !Validation.isNonEmptyString(this.command)) {
+    if (validationResult.isValid && !ValidationUtil.isNonEmptyString(this.command)) {
 
       validationResult.validationMessages.push(Constants.COMMAND_INVALID);
       validationResult.isValid = false;
 
     }
 
-    if (!(Validation.isIntegerGtrOne(this.version) || this.version === null || this.version === undefined)) {
+    if (!(ValidationUtil.isIntegerGtrOne(this.version) || this.version === null || this.version === undefined)) {
 
       validationResult.validationMessages.push(`Version ${this.version} ${Constants.NOT_SUPPORTED}`);
       validationResult.isValid = false;
 
     }
 
-    if (!Validation.isFunction(this.callback)) {
+    if (!ValidationUtil.isFunction(this.callback)) {
 
       validationResult.validationMessages.push(Constants.CALLBACK_REQUIRED);
       validationResult.isValid = false;
@@ -96,7 +96,7 @@ export abstract class BaseCommand {
 
     if (vendorIds) {
 
-      if (!Validation.isGtrZeroIntegerArray(vendorIds)) {
+      if (!ValidationUtil.isGtrZeroIntegerArray(vendorIds)) {
 
         return false;
 
@@ -116,7 +116,7 @@ export abstract class BaseCommand {
 
     if (this.param) {
 
-      return Validation.isIntegerGtrOne(+this.param) || this.param === 'LATEST';
+      return ValidationUtil.isIntegerGtrOne(+this.param) || this.param === 'LATEST';
 
     }
 

@@ -3,8 +3,8 @@ import {CommandQueue} from '../queue/CommandQueue';
 import {EventListenerQueue} from '../queue/EventListenerQueue';
 import {ArgSet, Callback, CommandArgsHandler, PageCallHandler, Param} from '../types';
 import {CmpApiUtil, Constants} from '../utilities';
-import {Validation} from '../validatable';
-import {isValidatable, Validatable} from '../validatable/Validatable';
+import {ValidationUtil} from '../validation';
+import {isValidatable, Validatable} from '../validation/Validatable';
 import {
   Command,
   Commands,
@@ -63,7 +63,7 @@ export class CommandBroker {
        * Validate and add custom command to map
        */
 
-      if (Validation.isFunction(cc.customFunction)) {
+      if (ValidationUtil.isFunction(cc.customFunction)) {
 
         this.customCommandMap.set(cc.command, cc.customFunction);
 

@@ -1,7 +1,7 @@
 import {CmpDataReader} from '../../cmpdata';
 import {Ping} from '../../model';
 import {Callback, Param, PingCallback} from '../../types';
-import {Validatable} from '../../validatable/Validatable';
+import {Validatable} from '../../validation/Validatable';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
