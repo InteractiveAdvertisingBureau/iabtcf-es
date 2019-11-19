@@ -2,17 +2,19 @@ import {GVL, TCModel} from '@iabtcf/core';
 import {assert} from 'chai';
 import {createStub} from '../dev/stub';
 import {
-  CmpApi, CustomCommandRegistration,
+  CmpApi,
   EventStatus,
   GlobalVendorList,
   IATCDataCallback,
   InAppTCData,
   Ping,
-  PingCallback, RemoveListenerCallback,
+  PingCallback,
+  RemoveListenerCallback,
   TCData,
   TCDataCallback,
   VendorListCallback,
 } from '../src';
+import {CustomCommandRegistration} from '../src/command';
 
 interface TestData {
   testString: string;

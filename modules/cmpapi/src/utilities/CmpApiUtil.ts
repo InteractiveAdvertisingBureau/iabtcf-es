@@ -1,5 +1,5 @@
 import {Callback, RemoveListenerCallback} from '../types';
-import {Validation} from './Validation';
+import {Validation} from '../validatable/Validation';
 
 /**
  * Utility class to encapsulate common functions needed throughout CmpApi

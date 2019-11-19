@@ -1,4 +1,4 @@
-import {Callback, Param} from '../types';
+import {Callback, Param} from '../../types';
 import {Command} from './Command';
 
 export type CustomCommandFunction = (...args: any) => void;

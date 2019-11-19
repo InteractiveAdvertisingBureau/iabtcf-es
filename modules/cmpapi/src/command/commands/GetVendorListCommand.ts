@@ -1,10 +1,10 @@
 import {GVL} from '@iabtcf/core';
-import {CmpData} from '../CmpData';
-import {GlobalVendorList} from '../model';
-import {Callback, Param, VendorListCallback} from '../types';
-import {CmpApiUtil, Constants} from '../utilities';
-import {Validatable} from '../validatable/Validatable';
-import {ValidationResult} from '../validatable/ValidationResult';
+import {CmpDataReader} from '../../cmpdata';
+import {GlobalVendorList} from '../../model';
+import {Callback, Param, VendorListCallback} from '../../types';
+import {CmpApiUtil, Constants} from '../../utilities';
+import {Validatable} from '../../validatable/Validatable';
+import {ValidationResult} from '../../validatable/ValidationResult';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
@@ -13,7 +13,7 @@ import {Command} from './Command';
  */
 export class GetVendorListCommand extends BaseCommand implements Command, Validatable {
 
-  public constructor(cmpData: CmpData, command: string, version: number, callback: Callback, param?: Param) {
+  public constructor(cmpData: CmpDataReader, command: string, version: number, callback: Callback, param?: Param) {
 
     super(cmpData, command, version, callback, param);
 

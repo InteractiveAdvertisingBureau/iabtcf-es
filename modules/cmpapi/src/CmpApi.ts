@@ -1,7 +1,6 @@
 import {TCModel} from '@iabtcf/core';
-import {CmpData} from './CmpData';
-import {CommandBroker} from './CommandBroker';
-import {CustomCommandRegistration} from './CustomCommandRegistration';
+import {CmpData} from './cmpdata';
+import {CommandBroker, CustomCommandRegistration} from './command';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
 
 /**

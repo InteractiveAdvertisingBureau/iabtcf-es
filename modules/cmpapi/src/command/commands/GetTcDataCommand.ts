@@ -1,15 +1,15 @@
-import {CmpData} from '../CmpData';
-import {TCData} from '../model';
-import {Callback, Param, TCDataCallback} from '../types';
-import {CmpApiUtil, Constants} from '../utilities';
-import {Validatable} from '../validatable/Validatable';
-import {ValidationResult} from '../validatable/ValidationResult';
+import {CmpDataReader} from '../../cmpdata';
+import {TCData} from '../../model';
+import {Callback, Param, TCDataCallback} from '../../types';
+import {CmpApiUtil, Constants} from '../../utilities';
+import {Validatable} from '../../validatable/Validatable';
+import {ValidationResult} from '../../validatable/ValidationResult';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
 export class GetTcDataCommand extends BaseCommand implements Command, Validatable {
 
-  public constructor(cmpData: CmpData, command: string, version: number, callback: Callback, param?: Param) {
+  public constructor(cmpData: CmpDataReader, command: string, version: number, callback: Callback, param?: Param) {
 
     super(cmpData, command, version, callback, param);
 

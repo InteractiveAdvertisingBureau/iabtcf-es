@@ -1,6 +1,11 @@
-import {CmpData} from './CmpData';
+import {CmpDataReader} from '../cmpdata';
+import {CommandQueue} from '../queue/CommandQueue';
+import {EventListenerQueue} from '../queue/EventListenerQueue';
+import {ArgSet, Callback, CommandArgsHandler, PageCallHandler, Param} from '../types';
+import {CmpApiUtil, Constants} from '../utilities';
+import {Validation} from '../validatable';
+import {isValidatable, Validatable} from '../validatable/Validatable';
 import {
-  AddEventListenerCommand,
   Command,
   Commands,
   CustomCommand,
@@ -9,15 +14,10 @@ import {
   GetTcDataCommand,
   GetVendorListCommand,
   PingCommand,
-  RemoveEventListenerCommand,
-} from './command';
+} from './commands';
+import {AddEventListenerCommand, RemoveEventListenerCommand} from './commands/eventlistener';
 import {CommandStream} from './CommandStream';
 import {CustomCommandRegistration} from './CustomCommandRegistration';
-import {CommandQueue} from './queue/CommandQueue';
-import {EventListenerQueue} from './queue/EventListenerQueue';
-import {ArgSet, Callback, CommandArgsHandler, PageCallHandler, Param} from './types';
-import {CmpApiUtil, Constants, Validation} from './utilities';
-import {isValidatable, Validatable} from './validatable/Validatable';
 
 /**
  * CommandBroker handles setup, routing, calling validation and execution of commands
@@ -32,9 +32,9 @@ export class CommandBroker {
 
   private readonly customCommandMap = new Map<string, CustomCommandFunction>();
 
-  private readonly cmpData: CmpData;
+  private readonly cmpData: CmpDataReader;
 
-  public constructor(cmpData: CmpData, customCommands: CustomCommandRegistration[] = []) {
+  public constructor(cmpData: CmpDataReader, customCommands: CustomCommandRegistration[] = []) {
 
     this.cmpData = cmpData;
 

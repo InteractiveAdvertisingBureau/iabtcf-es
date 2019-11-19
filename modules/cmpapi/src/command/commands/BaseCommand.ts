@@ -1,8 +1,8 @@
-import {CmpData} from '../CmpData';
-import {Return} from '../model/returned/Return';
-import {Callback, Param} from '../types';
-import {CmpApiUtil, Constants, Validation} from '../utilities';
-import {ValidationResult} from '../validatable/ValidationResult';
+import {CmpDataReader} from '../../cmpdata';
+import {Return} from '../../model/returned/Return';
+import {Callback, Param} from '../../types';
+import {CmpApiUtil, Constants} from '../../utilities';
+import {Validation, ValidationResult} from '../../validatable';
 
 /**
  * Base command class holds basic command parameters and has functionality to
@@ -10,7 +10,7 @@ import {ValidationResult} from '../validatable/ValidationResult';
  */
 export abstract class BaseCommand {
 
-  protected cmpData: CmpData;
+  protected cmpData: CmpDataReader;
 
   protected command: string;
   protected version: number;
@@ -18,7 +18,7 @@ export abstract class BaseCommand {
   protected callback: Callback;
   protected param?: Param;
 
-  protected constructor(cmpData: CmpData, command: string, version: number, callback: Callback, param?: Param) {
+  protected constructor(cmpData: CmpDataReader, command: string, version: number, callback: Callback, param?: Param) {
 
     this.cmpData = cmpData;
     this.command = command;

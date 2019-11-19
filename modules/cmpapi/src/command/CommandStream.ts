@@ -1,8 +1,9 @@
-import {Commands} from './command';
-import {Ping} from './model';
-import {CmpStatus} from './status';
-import {ArgSet, CommandArgsHandler, PageCallHandler} from './types';
-import {Constants, Validation} from './utilities';
+import {Ping} from '../model';
+import {CmpStatus} from '../status';
+import {ArgSet, CommandArgsHandler, PageCallHandler} from '../types';
+import {Constants} from '../utilities';
+import {Validation} from '../validatable';
+import {Commands} from './commands';
 
 /**
  * Initializes CMP frame and hooks up the provided PageCallHandler function to stream commands through

@@ -1,4 +1,4 @@
-import {Command} from '../command';
+import {Command} from '../command/commands';
 import {Callback} from '../types';
 import {CmpApiUtil, Constants} from '../utilities';
 

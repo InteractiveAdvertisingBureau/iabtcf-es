@@ -1,10 +1,10 @@
-import {CmpData} from '../CmpData';
-import {EventListenerQueue} from '../queue/EventListenerQueue';
-import {Callback, Param, RemoveListenerCallback, TCDataCallback} from '../types';
-import {CmpApiUtil, Constants} from '../utilities';
-import {Validatable} from '../validatable/Validatable';
-import {BaseCommand} from './BaseCommand';
-import {Command} from './Command';
+import {CmpDataReader} from '../../../cmpdata';
+import {EventListenerQueue} from '../../../queue/EventListenerQueue';
+import {Callback, Param, RemoveListenerCallback, TCDataCallback} from '../../../types';
+import {CmpApiUtil, Constants} from '../../../utilities';
+import {Validatable} from '../../../validatable/Validatable';
+import {BaseCommand} from '../BaseCommand';
+import {Command} from '../Command';
 
 /**
  * Removes an event listener from an EventListenerQueue
@@ -15,7 +15,7 @@ export class RemoveEventListenerCommand extends BaseCommand implements Command, 
 
   public constructor(
     eventListenerQueue: EventListenerQueue,
-    cmpData: CmpData,
+    cmpData: CmpDataReader,
     command: string,
     version: number,
     callback: Callback,

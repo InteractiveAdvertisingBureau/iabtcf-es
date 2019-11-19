@@ -1,11 +1,12 @@
 import {TCModel} from '@iabtcf/core';
-import {CmpStatus, DisplayStatus, EventStatus} from './status';
-import {Constants} from './utilities';
+import {CmpStatus, DisplayStatus, EventStatus} from '../status';
+import {Constants} from '../utilities';
+import {CmpDataReader} from './CmpDataReader';
 
 /**
  * Class holds shareable data across cmp api and provides change event listener for TcModel
  */
-export class CmpData {
+export class CmpData implements CmpDataReader {
 
   private tcModel: TCModel;
 
@@ -37,19 +38,19 @@ export class CmpData {
 
   }
 
-  public registerTcModelChangeEventCallback(tcModelChangeCallback: () => void) {
+  registerTcModelChangeEventCallback(tcModelChangeCallback: () => void) {
 
     this.tcModelChangeEventCallback = tcModelChangeCallback;
 
   }
 
-  public get tcModelIsSet(): boolean {
+  get tcModelIsSet(): boolean {
 
     return !!this.tcModel;
 
   }
 
-  public getTcModel(): TCModel {
+  getTcModel(): TCModel {
 
     return this.tcModel;
 
@@ -79,7 +80,7 @@ export class CmpData {
 
   }
 
-  public getApiVersion(): number {
+  getApiVersion(): number {
 
     return this.apiVersion;
 
@@ -91,7 +92,7 @@ export class CmpData {
 
   }
 
-  public getCmpId(): number {
+  getCmpId(): number {
 
     return this.cmpId;
 
@@ -103,7 +104,7 @@ export class CmpData {
 
   }
 
-  public getCmpVersion(): number {
+  getCmpVersion(): number {
 
     return this.cmpVersion;
 
@@ -115,7 +116,7 @@ export class CmpData {
 
   }
 
-  public getTcfPolicyVersion(): number {
+  getTcfPolicyVersion(): number {
 
     return this.tcfPolicyVersion;
 
@@ -127,7 +128,7 @@ export class CmpData {
 
   }
 
-  public getGdprApplies(): boolean {
+  getGdprApplies(): boolean {
 
     return this.gdprApplies;
 
@@ -139,7 +140,7 @@ export class CmpData {
 
   }
 
-  public getEventStatus(): EventStatus {
+  getEventStatus(): EventStatus {
 
     return this.eventStatus;
 
@@ -151,7 +152,7 @@ export class CmpData {
 
   }
 
-  public getCmpStatus(): CmpStatus {
+  getCmpStatus(): CmpStatus {
 
     return this.cmpStatus;
 
@@ -163,7 +164,7 @@ export class CmpData {
 
   }
 
-  public getDisplayStatus(): DisplayStatus {
+  getDisplayStatus(): DisplayStatus {
 
     return this.displayStatus;
 

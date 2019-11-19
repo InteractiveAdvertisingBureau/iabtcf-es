@@ -1,7 +1,7 @@
-import {CmpData} from '../CmpData';
-import {InAppTCData} from '../model';
-import {Callback, IATCDataCallback} from '../types';
-import {Validatable} from '../validatable/Validatable';
+import {CmpDataReader} from '../../cmpdata';
+import {InAppTCData} from '../../model';
+import {Callback, IATCDataCallback} from '../../types';
+import {Validatable} from '../../validatable/Validatable';
 import {Command} from './Command';
 import {GetTcDataCommand} from './GetTcDataCommand';
 
@@ -10,7 +10,7 @@ import {GetTcDataCommand} from './GetTcDataCommand';
  */
 export class GetInAppTcDataCommand extends GetTcDataCommand implements Command, Validatable {
 
-  public constructor(cmpData: CmpData, command: string, version: number, callback: Callback) {
+  public constructor(cmpData: CmpDataReader, command: string, version: number, callback: Callback) {
 
     /**
      * Note we are making the param undefined. This command doesn't use it.

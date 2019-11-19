@@ -1,5 +1,5 @@
 /**
- * An enum representing all mandatory commands the CMP API must provide
+ * An enum representing all commands the CMP API provides
  *
  * @readonly
  * @enum {string}

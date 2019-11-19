@@ -1,7 +1,4 @@
-import {
-  CmpStatus,
-  DisplayStatus,
-} from '../../status';
+import {CmpStatus, DisplayStatus,} from '../../status';
 
 import {Return} from './Return';
 

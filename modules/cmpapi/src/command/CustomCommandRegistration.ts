@@ -1,4 +1,4 @@
-import {CustomCommandFunction} from "./command";
+import {CustomCommandFunction} from './commands';
 
 export interface CustomCommandRegistration {
   command: string;
