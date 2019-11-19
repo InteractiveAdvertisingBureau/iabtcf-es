@@ -1,7 +1,6 @@
 import {CmpDataReader} from '../../../cmpdata';
 import {Param, RemoveListenerCallback, TCDataCallback} from '../../../types';
-import {Constants} from '../../../utilities';
-import {Validatable} from '../../../validation';
+import {Validatable, ValidationMessages} from '../../../validation';
 import {Callback} from '../../callback/Callback';
 import {EventListenerQueue} from '../../queues';
 import {BaseCommand} from '../BaseCommand';
@@ -39,7 +38,7 @@ export class RemoveEventListenerCommand extends BaseCommand implements Command, 
 
     } else {
 
-      this.callback.fail(Constants.CUSTOM_COMMAND_FUNCTION_INVALID);
+      this.callback.fail(ValidationMessages.CUSTOM_COMMAND_FUNCTION_INVALID);
 
     }
 

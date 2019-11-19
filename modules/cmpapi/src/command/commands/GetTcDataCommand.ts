@@ -1,8 +1,7 @@
 import {CmpDataReader} from '../../cmpdata';
 import {TCData} from '../../model';
 import {Param, TCDataCallback} from '../../types';
-import {Constants} from '../../utilities';
-import {Validatable, ValidationResult} from '../../validation';
+import {Validatable, ValidationMessages, ValidationResult} from '../../validation';
 import {Callback} from '../callback/Callback';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
@@ -39,7 +38,7 @@ export class GetTcDataCommand extends BaseCommand implements Command, Validatabl
 
     if (!this.isVendorsListValid()) {
 
-      validationResult.validationMessages.push(Constants.VENDOR_LIST_INVALID);
+      validationResult.validationMessages.push(ValidationMessages.VENDOR_LIST_INVALID);
       validationResult.isValid = false;
 
       if (failCallbackIfNotValid) {

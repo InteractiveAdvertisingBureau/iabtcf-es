@@ -1,7 +1,13 @@
 import {CmpDataReader} from '../cmpdata';
-import {ArgSet, CallbackFunction, CommandArgsHandler, PageCallHandler, Param, TcModelChangeEventHandler} from '../types';
-import {Constants} from '../utilities';
-import {ValidationUtil} from '../validation';
+import {
+  ArgSet,
+  CallbackFunction,
+  CommandArgsHandler,
+  PageCallHandler,
+  Param,
+  TcModelChangeEventHandler
+} from '../types';
+import {ValidationMessages, ValidationUtil} from '../validation';
 import {isValidatable, Validatable} from '../validation/Validatable';
 import {Callback} from './callback/Callback';
 import {
@@ -69,7 +75,7 @@ export class CommandBroker {
 
       } else {
 
-        throw Error(Constants.CUSTOM_COMMAND_FUNCTION_INVALID);
+        throw Error(ValidationMessages.CUSTOM_COMMAND_FUNCTION_INVALID);
 
       }
 
@@ -250,7 +256,7 @@ export class CommandBroker {
         /**
          * Command is not supported and has no custom methods defined
          */
-        callback.fail(`${command} ${Constants.COMMAND_NOT_SUPPORTED}`);
+        callback.fail(`${command} ${ValidationMessages.COMMAND_NOT_SUPPORTED}`);
 
       }
 

@@ -1,14 +1,16 @@
 import {Ping} from '../model';
 import {CmpStatus} from '../status';
 import {ArgSet, CommandArgsHandler, PageCallHandler} from '../types';
-import {Constants} from '../utilities';
-import {ValidationUtil} from '../validation';
+import {ValidationMessages, ValidationUtil} from '../validation';
 import {Commands} from './commands';
 
 /**
  * Initializes CMP frame and hooks up the provided PageCallHandler function to stream commands through
  */
 export class CommandStream {
+
+  private readonly API_FUNCTION_NAME: string = `__tcfapi`;
+  private readonly API_LOCATOR_NAME: string = `__tcfapiLocator`;
 
   private win: Window = window;
 
@@ -47,7 +49,7 @@ export class CommandStream {
          * throws a reference error if no frames exist
          */
 
-        if (frame.frames[Constants.API_LOCATOR_NAME]) {
+        if (frame.frames[this.API_LOCATOR_NAME]) {
 
           locatorFrameExists = true;
           break;
@@ -116,7 +118,7 @@ export class CommandStream {
                * Something exists on this page already, so we're not going to create an API
                */
 
-              throw new Error(Constants.EXISTING_CMP);
+              throw new Error(ValidationMessages.EXISTING_CMP);
 
             }
 
@@ -126,7 +128,7 @@ export class CommandStream {
 
       } else {
 
-        throw new Error(Constants.EXISTING_CMP);
+        throw new Error(ValidationMessages.EXISTING_CMP);
 
       }
 
@@ -151,13 +153,13 @@ export class CommandStream {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private get __tcfapi(): (...args) => any {
 
-    return this.win[Constants.API_FUNCTION_NAME];
+    return this.win[this.API_FUNCTION_NAME];
 
   }
 
   private set __tcfapi(value) {
 
-    this.win[Constants.API_FUNCTION_NAME] = value;
+    this.win[this.API_FUNCTION_NAME] = value;
 
   }
 
@@ -167,7 +169,7 @@ export class CommandStream {
    */
   private replaceStubWithPageCallFunction(pageCallHandler: PageCallHandler): void {
 
-    this.win[Constants.API_FUNCTION_NAME] = pageCallHandler;
+    this.win[this.API_FUNCTION_NAME] = pageCallHandler;
 
   }
 
@@ -189,7 +191,7 @@ export class CommandStream {
       const iframe = doc.createElement('iframe');
 
       iframe.style.cssText = 'display:none';
-      iframe.name = Constants.API_LOCATOR_NAME;
+      iframe.name = this.API_LOCATOR_NAME;
       doc.body.appendChild(iframe);
 
     } else {

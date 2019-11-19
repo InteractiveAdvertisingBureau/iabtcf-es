@@ -1,8 +1,7 @@
 import {CmpDataReader} from '../../cmpdata';
 import {Return} from '../../model/returned/Return';
 import {Param} from '../../types';
-import {Constants} from '../../utilities';
-import {ValidationResult, ValidationUtil} from '../../validation';
+import {ValidationMessages, ValidationResult, ValidationUtil} from '../../validation';
 import {Callback} from '../callback/Callback';
 
 /**
@@ -58,21 +57,21 @@ export abstract class BaseCommand {
 
     if (validationResult.isValid && !ValidationUtil.isNonEmptyString(this.command)) {
 
-      validationResult.validationMessages.push(Constants.COMMAND_INVALID);
+      validationResult.validationMessages.push(ValidationMessages.COMMAND_INVALID);
       validationResult.isValid = false;
 
     }
 
     if (!(ValidationUtil.isIntegerGtrOne(this.version) || this.version === null || this.version === undefined)) {
 
-      validationResult.validationMessages.push(`Version ${this.version} ${Constants.NOT_SUPPORTED}`);
+      validationResult.validationMessages.push(`Version ${this.version} ${ValidationMessages.NOT_SUPPORTED}`);
       validationResult.isValid = false;
 
     }
 
     if (!this.callback.isValid) {
 
-      validationResult.validationMessages.push(Constants.CALLBACK_REQUIRED);
+      validationResult.validationMessages.push(ValidationMessages.CALLBACK_REQUIRED);
       validationResult.isValid = false;
 
     }

@@ -1,11 +1,9 @@
 import {GVL} from '@iabtcf/core';
 import {CmpDataReader} from '../../cmpdata';
 import {GlobalVendorList} from '../../model';
-import {CallbackFunction, Param, VendorListCallback} from '../../types';
-import {CmpLog, Constants} from '../../utilities';
-import {Validatable} from '../../validation/Validatable';
-import {ValidationResult} from '../../validation/ValidationResult';
-import {Callback} from "../callback/Callback";
+import {Param, VendorListCallback} from '../../types';
+import {Validatable, ValidationMessages, ValidationResult} from '../../validation';
+import {Callback} from '../callback/Callback';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
@@ -56,7 +54,7 @@ export class GetVendorListCommand extends BaseCommand implements Command, Valida
 
     if (!this.isValidVendorListVersion()) {
 
-      validationResult.validationMessages.push(Constants.VENDOR_LIST_VERSION_INVALID);
+      validationResult.validationMessages.push(ValidationMessages.VENDOR_LIST_VERSION_INVALID);
       validationResult.isValid = false;
 
       if (failCallbackIfNotValid) {

@@ -1,8 +1,8 @@
 import {TCModel} from '@iabtcf/core';
-import {CmpStatus, DisplayStatus, EventStatus} from '../status';
-import {Constants} from '../utilities';
 import {CmpDataReader} from '.';
+import {CmpStatus, DisplayStatus, EventStatus} from '../status';
 import {TcModelChangeEventHandler} from '../types';
+import {ValidationMessages} from '../validation';
 
 /**
  * Class holds shareable data across cmp api and provides change event listener for TcModel
@@ -75,7 +75,7 @@ export class CmpData implements CmpDataReader {
 
     } else {
 
-      throw new Error(Constants.TC_MODEL_INVALID);
+      throw new Error(ValidationMessages.TC_MODEL_INVALID);
 
     }
 
