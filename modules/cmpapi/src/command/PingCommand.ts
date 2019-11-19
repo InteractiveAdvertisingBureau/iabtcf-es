@@ -3,8 +3,12 @@ import {Ping} from '../model';
 import {Callback, Param, PingCallback} from '../types';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
+import {Validatable} from '../validatable/Validatable';
 
-export class PingCommand extends BaseCommand implements Command {
+/**
+ * Executes a ping command request and executes its callback method with ping data
+ */
+export class PingCommand extends BaseCommand implements Command, Validatable {
 
   public constructor(cmpData: CmpData, command: string, version: number, callback: Callback, param?: Param) {
 
@@ -12,6 +16,9 @@ export class PingCommand extends BaseCommand implements Command {
 
   }
 
+  /**
+   * Executes the ping command
+   */
   public execute(): void {
 
     const ping = new Ping();

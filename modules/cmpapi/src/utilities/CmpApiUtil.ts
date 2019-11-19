@@ -12,13 +12,21 @@ export abstract class CmpApiUtil {
   /**
    * Executes the callback function with null and false parameters
    * @param {Callback} callback
-   * @param {string} message to be logged to console as error
+   * @param {string[] | string} messages to be logged to console as error
    */
-  public static failCallback(callback: Callback, message?: string): void {
+  public static failCallback(callback: Callback, messages?: string[] | string): void {
 
-    if (message) {
+    if (messages) {
 
-      this.logError(message);
+      if (Validation.isArray(messages)) {
+
+        this.logError(`Errors: ${(messages as string[]).join(', ')}`);
+
+      } else {
+
+        this.logError(messages as string);
+
+      }
 
     }
 

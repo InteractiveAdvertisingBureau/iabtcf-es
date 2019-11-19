@@ -2,9 +2,11 @@ import {CmpData} from '../CmpData';
 import {Return} from '../model/returned/Return';
 import {Callback, Param} from '../types';
 import {CmpApiUtil, Constants, Validation} from '../utilities';
+import {ValidationResult} from "../validatable/ValidationResult";
 
 /**
- * Base command class handles validation of basic command fields
+ * Base command class holds basic command parameters and has functionality to
+ * handle basic validation.
  */
 export abstract class BaseCommand {
 
@@ -47,38 +49,41 @@ export abstract class BaseCommand {
    * @param {boolean} failCallbackIfNotValid
    * @return {boolean}
    */
-  public validate(validationMessage: string, failCallbackIfNotValid = false): boolean {
+  public validate(failCallbackIfNotValid = false): ValidationResult {
 
-    let isValid = true;
+    const validationResult: ValidationResult = {
+      isValid: true,
+      validationMessages: [],
+    };
 
-    if (isValid && !Validation.isNonEmptyString(this.command)) {
+    if (validationResult.isValid && !Validation.isNonEmptyString(this.command)) {
 
-      validationMessage = Constants.COMMAND_INVALID;
-      isValid = false;
+      validationResult.validationMessages.push(Constants.COMMAND_INVALID);
+      validationResult.isValid = false;
 
     }
 
     if (!(Validation.isIntegerGtrOne(this.version) || this.version === null || this.version === undefined)) {
 
-      validationMessage = `Version ${this.version} ${Constants.NOT_SUPPORTED}`;
-      isValid = false;
+      validationResult.validationMessages.push(`Version ${this.version} ${Constants.NOT_SUPPORTED}`);
+      validationResult.isValid = false;
 
     }
 
     if (!Validation.isFunction(this.callback)) {
 
-      validationMessage = Constants.CALLBACK_REQUIRED;
-      isValid = false;
+      validationResult.validationMessages.push(Constants.CALLBACK_REQUIRED);
+      validationResult.isValid = false;
 
     }
 
-    if (!isValid && failCallbackIfNotValid) {
+    if (!validationResult.isValid && failCallbackIfNotValid) {
 
-      CmpApiUtil.failCallback(this.callback, validationMessage);
+      CmpApiUtil.failCallback(this.callback, validationResult.validationMessages);
 
     }
 
-    return isValid;
+    return validationResult;
 
   }
 

@@ -3,6 +3,7 @@ import {Return} from './Return';
 
 interface GlobalVendorListFields extends VendorList, Declarations {}
 
+// Todo: we are thinking of making this just the interface. What about base return values?
 export class GlobalVendorList extends Return implements GlobalVendorListFields {
 
   public gvlSpecificationVersion: number;

@@ -1,11 +1,15 @@
 import {CmpData} from '../CmpData';
 import {EventListenerQueue} from '../queue/EventListenerQueue';
-import {Callback, Param, RemoveListenerCallback} from '../types';
-import {CmpApiUtil, Constants, Validation} from '../utilities';
+import {Callback, Param, RemoveListenerCallback, TCDataCallback} from '../types';
+import {CmpApiUtil, Constants} from '../utilities';
+import {Validatable} from '../validatable/Validatable';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
-export class RemoveEventListenerCommand extends BaseCommand implements Command {
+/**
+ * Removes an event listener from an EventListenerQueue
+ */
+export class RemoveEventListenerCommand extends BaseCommand implements Command, Validatable {
 
   private eventListenerQueue: EventListenerQueue;
 
@@ -23,31 +27,20 @@ export class RemoveEventListenerCommand extends BaseCommand implements Command {
 
   }
 
+  /**
+   * Executes the ping remove event listener command
+   */
   public execute(): void {
 
-    if (this.eventListenerQueue.remove(this.callback)) {
+    if (this.eventListenerQueue.remove(this.param as TCDataCallback)) {
 
       (this.callback as RemoveListenerCallback)(true);
 
-    }
+    } else {
 
-  }
-
-  public validate(validationMessage: string, failCallbackIfNotValid?: boolean): boolean {
-
-    if (!Validation.isFunction(this.callback)) {
-
-      validationMessage = Constants.CALLBACK_REQUIRED;
-
-      if (failCallbackIfNotValid) {
-
-        CmpApiUtil.failCallback(this.callback, validationMessage);
-
-      }
+      CmpApiUtil.failCallback(this.callback, Constants.CUSTOM_COMMAND_FUNCTION_INVALID);
 
     }
-
-    return super.validate(validationMessage, failCallbackIfNotValid);
 
   }
 

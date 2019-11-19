@@ -3,13 +3,15 @@ import {CmpData} from '../CmpData';
 import {GlobalVendorList} from '../model';
 import {Callback, Param, VendorListCallback} from '../types';
 import {CmpApiUtil, Constants} from '../utilities';
+import {ValidationResult} from "../validatable/ValidationResult";
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
+import {Validatable} from '../validatable/Validatable';
 
 /**
  * Gets a version of the Global Vendors List
  */
-export class GetVendorListCommand extends BaseCommand implements Command {
+export class GetVendorListCommand extends BaseCommand implements Command, Validatable {
 
   public constructor(cmpData: CmpData, command: string, version: number, callback: Callback, param?: Param) {
 
@@ -17,6 +19,9 @@ export class GetVendorListCommand extends BaseCommand implements Command {
 
   }
 
+  /**
+   * Executes the get vendors list command
+   */
   public execute(): void {
 
     /**
@@ -38,29 +43,29 @@ export class GetVendorListCommand extends BaseCommand implements Command {
   }
 
   /**
-   * Validates the vendor list was valid and returns the result.
+   * Validates the vendor list version was valid and returns the result.
    * Base class validation is also handled.
-   * @param validationMessage
-   * @param failCallbackIfNotValid
-   * @return {boolean}
+   * @param {boolean} failCallbackIfNotValid
+   * @return {ValidationResult}
    */
-  public validate(validationMessage: string, failCallbackIfNotValid: boolean = false): boolean {
+  public validate(failCallbackIfNotValid: boolean = false): ValidationResult {
+
+    const validationResult = super.validate(failCallbackIfNotValid);
 
     if (!this.isValidVendorListVersion()) {
 
-      validationMessage = Constants.VENDOR_LIST_VERSION_INVALID;
+      validationResult.validationMessages.push(Constants.VENDOR_LIST_VERSION_INVALID);
+      validationResult.isValid = false;
 
       if (failCallbackIfNotValid) {
 
-        CmpApiUtil.failCallback(this.callback, validationMessage);
+        CmpApiUtil.failCallback(this.callback, validationResult.validationMessages);
 
       }
 
-      return false;
-
     }
 
-    return super.validate(validationMessage, failCallbackIfNotValid);
+    return validationResult;
 
   }
 
