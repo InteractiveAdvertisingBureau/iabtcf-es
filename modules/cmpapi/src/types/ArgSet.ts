@@ -1,4 +1,4 @@
-import {Callback} from './callbacks/Callback';
+import {CallbackFunction} from './callbacks/CallbackFunction';
 import {Param} from './Param';
 
-export type ArgSet = [string, number, Callback, Param];
+export type ArgSet = [string, number, CallbackFunction, Param];

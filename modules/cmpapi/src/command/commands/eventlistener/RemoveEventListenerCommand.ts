@@ -1,7 +1,8 @@
 import {CmpDataReader} from '../../../cmpdata';
-import {Callback, Param, RemoveListenerCallback, TCDataCallback} from '../../../types';
-import {CmpApiUtil, Constants} from '../../../utilities';
+import {Param, RemoveListenerCallback, TCDataCallback} from '../../../types';
+import {Constants} from '../../../utilities';
 import {Validatable} from '../../../validation';
+import {Callback} from '../../callback/Callback';
 import {EventListenerQueue} from '../../queues';
 import {BaseCommand} from '../BaseCommand';
 import {Command} from '../Command';
@@ -34,11 +35,11 @@ export class RemoveEventListenerCommand extends BaseCommand implements Command, 
 
     if (this.eventListenerQueue.remove(this.param as TCDataCallback)) {
 
-      (this.callback as RemoveListenerCallback)(true);
+      (this.callback.function as RemoveListenerCallback)(true);
 
     } else {
 
-      CmpApiUtil.failCallback(this.callback, Constants.CUSTOM_COMMAND_FUNCTION_INVALID);
+      this.callback.fail(Constants.CUSTOM_COMMAND_FUNCTION_INVALID);
 
     }
 

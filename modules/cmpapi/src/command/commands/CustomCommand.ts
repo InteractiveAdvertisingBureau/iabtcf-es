@@ -1,4 +1,5 @@
-import {Callback, Param} from '../../types';
+import {Param} from '../../types';
+import {Callback} from '../callback/Callback';
 import {Command} from './Command';
 
 export type CustomCommandFunction = (...args: any) => void;
@@ -14,7 +15,8 @@ export class CustomCommand implements Command {
   protected callback: Callback;
   protected param?: Param;
 
-  public constructor(customMethod: CustomCommandFunction, version: number, callback: Callback, param?: Param) {
+  public constructor(
+    customMethod: CustomCommandFunction, version: number, callback: Callback, param?: Param) {
 
     this.customMethod = customMethod;
     this.version = version;
@@ -25,7 +27,7 @@ export class CustomCommand implements Command {
 
   public execute(): void {
 
-    this.customMethod(this.version, this.callback, this.param);
+    this.customMethod(this.version, this.callback.function, this.param);
 
   }
 

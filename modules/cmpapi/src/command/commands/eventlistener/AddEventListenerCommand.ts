@@ -1,6 +1,7 @@
 import {CmpDataReader} from '../../../cmpdata';
-import {Callback, Param} from '../../../types';
+import {Param} from '../../../types';
 import {Validatable, ValidationResult} from '../../../validation';
+import {Callback} from '../../callback/Callback';
 import {EventListenerQueue} from '../../queues';
 import {BaseCommand} from '../BaseCommand';
 import {Command} from '../Command';
@@ -32,7 +33,7 @@ export class AddEventListenerCommand extends BaseCommand implements Command, Val
 
   public execute(): void {
 
-    this.eventListenerQueue.add(this.callback, this.getTcDataCommand);
+    this.eventListenerQueue.add(this.callback.function, this.getTcDataCommand);
 
   }
 

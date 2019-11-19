@@ -1,8 +1,9 @@
 import {CmpDataReader} from '../cmpdata';
-import {ArgSet, Callback, CommandArgsHandler, PageCallHandler, Param, TcModelChangeEventHandler} from '../types';
-import {CmpApiUtil, Constants} from '../utilities';
+import {ArgSet, CallbackFunction, CommandArgsHandler, PageCallHandler, Param, TcModelChangeEventHandler} from '../types';
+import {Constants} from '../utilities';
 import {ValidationUtil} from '../validation';
 import {isValidatable, Validatable} from '../validation/Validatable';
+import {Callback} from './callback/Callback';
 import {
   Command,
   Commands,
@@ -82,7 +83,7 @@ export class CommandBroker {
    */
   private getPageCallHandler(): PageCallHandler {
 
-    return (command: string, version: number, callback: Callback, param?: Param): void => {
+    return (command: string, version: number, callback: CallbackFunction, param?: Param): void => {
 
       const _this = this;
 
@@ -97,10 +98,10 @@ export class CommandBroker {
    * @type {PageCallHandler}
    * @param {string} commandStr
    * @param {number} version
-   * @param {Callback} callback
+   * @param {CallbackFunction} callback
    * @param {Param} param
    */
-  private pageCallHandler(commandStr: string, version: number, callback: Callback, param?: Param): void {
+  private pageCallHandler(commandStr: string, version: number, callback: CallbackFunction, param?: Param): void {
 
     const command = this.createCommand(commandStr, version, callback, param);
 
@@ -183,12 +184,14 @@ export class CommandBroker {
    * Creates a new Command based on the command string provided
    * @param {string} command
    * @param {number} version
-   * @param {Callback} callback
+   * @param {CallbackFunction} callbackFunction
    * @param {Param} param
    * @return {Command | null} returns null if the command is not supported
    */
-  private createCommand(command: string, version: number, callback: Callback, param?: Param): Command | null {
+  private createCommand(
+    command: string, version: number, callbackFunction: CallbackFunction, param?: Param): Command | null {
 
+    const callback: Callback = new Callback(callbackFunction);
     /**
      * Custom commands can over ride the default commands, we will check them first
      * and return a custom command if one has been registered.
@@ -247,8 +250,7 @@ export class CommandBroker {
         /**
          * Command is not supported and has no custom methods defined
          */
-
-        CmpApiUtil.failCallback(callback, `${command} ${Constants.COMMAND_NOT_SUPPORTED}`);
+        callback.fail(`${command} ${Constants.COMMAND_NOT_SUPPORTED}`);
 
       }
 

@@ -1,10 +1,11 @@
 import {GVL} from '@iabtcf/core';
 import {CmpDataReader} from '../../cmpdata';
 import {GlobalVendorList} from '../../model';
-import {Callback, Param, VendorListCallback} from '../../types';
-import {CmpApiUtil, Constants} from '../../utilities';
+import {CallbackFunction, Param, VendorListCallback} from '../../types';
+import {CmpLog, Constants} from '../../utilities';
 import {Validatable} from '../../validation/Validatable';
 import {ValidationResult} from '../../validation/ValidationResult';
+import {Callback} from "../callback/Callback";
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
@@ -13,7 +14,8 @@ import {Command} from './Command';
  */
 export class GetVendorListCommand extends BaseCommand implements Command, Validatable {
 
-  public constructor(cmpData: CmpDataReader, command: string, version: number, callback: Callback, param?: Param) {
+  public constructor(
+    cmpData: CmpDataReader, command: string, version: number, callback: Callback, param?: Param) {
 
     super(cmpData, command, version, callback, param);
 
@@ -36,9 +38,9 @@ export class GetVendorListCommand extends BaseCommand implements Command, Valida
       const gvl = new GlobalVendorList(_gvl);
       this.setBaseReturnFields(gvl);
 
-      (this.callback as VendorListCallback)(gvl, true);
+      (this.callback.function as VendorListCallback)(gvl, true);
 
-    }, ((reason) => CmpApiUtil.failCallback(this.callback, reason)));
+    }, ((reason) => this.callback.fail(reason)));
 
   }
 
@@ -59,7 +61,7 @@ export class GetVendorListCommand extends BaseCommand implements Command, Valida
 
       if (failCallbackIfNotValid) {
 
-        CmpApiUtil.failCallback(this.callback, validationResult.validationMessages);
+        this.callback.fail(validationResult.validationMessages);
 
       }
 

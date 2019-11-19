@@ -1,15 +1,16 @@
 import {CmpDataReader} from '../../cmpdata';
 import {TCData} from '../../model';
-import {Callback, Param, TCDataCallback} from '../../types';
-import {CmpApiUtil, Constants} from '../../utilities';
-import {Validatable} from '../../validation/Validatable';
-import {ValidationResult} from '../../validation/ValidationResult';
+import {Param, TCDataCallback} from '../../types';
+import {Constants} from '../../utilities';
+import {Validatable, ValidationResult} from '../../validation';
+import {Callback} from '../callback/Callback';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
 export class GetTcDataCommand extends BaseCommand implements Command, Validatable {
 
-  public constructor(cmpData: CmpDataReader, command: string, version: number, callback: Callback, param?: Param) {
+  public constructor(
+    cmpData: CmpDataReader, command: string, version: number, callback: Callback, param?: Param) {
 
     super(cmpData, command, version, callback, param);
 
@@ -22,7 +23,7 @@ export class GetTcDataCommand extends BaseCommand implements Command, Validatabl
 
     const tcData = new TCData(this.cmpData.getTcModel(), this.cmpData.getEventStatus(), this.param as number[]);
     this.setBaseReturnFields(tcData);
-    (this.callback as TCDataCallback)(tcData, true);
+    (this.callback.function as TCDataCallback)(tcData, true);
 
   }
 
@@ -43,7 +44,7 @@ export class GetTcDataCommand extends BaseCommand implements Command, Validatabl
 
       if (failCallbackIfNotValid) {
 
-        CmpApiUtil.failCallback(this.callback, validationResult.validationMessages);
+        this.callback.fail(validationResult.validationMessages);
 
       }
 

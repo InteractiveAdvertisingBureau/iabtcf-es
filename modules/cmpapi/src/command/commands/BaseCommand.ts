@@ -1,8 +1,9 @@
 import {CmpDataReader} from '../../cmpdata';
 import {Return} from '../../model/returned/Return';
-import {Callback, Param} from '../../types';
-import {CmpApiUtil, Constants} from '../../utilities';
+import {Param} from '../../types';
+import {Constants} from '../../utilities';
 import {ValidationResult, ValidationUtil} from '../../validation';
+import {Callback} from '../callback/Callback';
 
 /**
  * Base command class holds basic command parameters and has functionality to
@@ -18,7 +19,8 @@ export abstract class BaseCommand {
   protected callback: Callback;
   protected param?: Param;
 
-  protected constructor(cmpData: CmpDataReader, command: string, version: number, callback: Callback, param?: Param) {
+  protected constructor(
+    cmpData: CmpDataReader, command: string, version: number, callback: Callback, param?: Param) {
 
     this.cmpData = cmpData;
     this.command = command;
@@ -68,7 +70,7 @@ export abstract class BaseCommand {
 
     }
 
-    if (!ValidationUtil.isFunction(this.callback)) {
+    if (!this.callback.isValid) {
 
       validationResult.validationMessages.push(Constants.CALLBACK_REQUIRED);
       validationResult.isValid = false;
@@ -77,7 +79,7 @@ export abstract class BaseCommand {
 
     if (!validationResult.isValid && failCallbackIfNotValid) {
 
-      CmpApiUtil.failCallback(this.callback, validationResult.validationMessages);
+      this.callback.fail(validationResult.validationMessages);
 
     }
 

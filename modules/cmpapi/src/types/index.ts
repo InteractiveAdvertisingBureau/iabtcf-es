@@ -7,7 +7,7 @@ export * from './callbacks/TCDataCallback';
 export * from './callbacks/IATCDataCallback';
 export * from './callbacks/VendorListCallback';
 export * from './callbacks/RemoveListenerCallback';
-export * from './callbacks/Callback';
+export * from './callbacks/CallbackFunction';
 export * from './handlers/TcModelChangeEventHandler';
 export * from './handlers/CommandArgsHandler';
 export * from './handlers/PageCallHandler';

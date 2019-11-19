@@ -1,7 +1,8 @@
 import {CmpDataReader} from '../../cmpdata';
 import {Ping} from '../../model';
-import {Callback, Param, PingCallback} from '../../types';
-import {Validatable} from '../../validation/Validatable';
+import {Param, PingCallback} from '../../types';
+import {Validatable} from '../../validation';
+import {Callback} from '../callback/Callback';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
@@ -10,7 +11,8 @@ import {Command} from './Command';
  */
 export class PingCommand extends BaseCommand implements Command, Validatable {
 
-  public constructor(cmpData: CmpDataReader, command: string, version: number, callback: Callback, param?: Param) {
+  public constructor(
+    cmpData: CmpDataReader, command: string, version: number, callback: Callback, param?: Param) {
 
     super(cmpData, command, version, callback, param);
 
@@ -35,7 +37,7 @@ export class PingCommand extends BaseCommand implements Command, Validatable {
     ping.displayStatus = this.cmpData.getDisplayStatus();
     ping.cmpLoaded = true;
 
-    (this.callback as PingCallback)(ping);
+    (this.callback.function as PingCallback)(ping);
 
   }
 

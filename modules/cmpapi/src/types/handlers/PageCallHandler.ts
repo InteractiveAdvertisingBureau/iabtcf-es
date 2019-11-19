@@ -1,4 +1,4 @@
-import {Callback} from '../callbacks/Callback';
+import {CallbackFunction} from '../callbacks/CallbackFunction';
 import {Param} from '../Param';
 
-export type PageCallHandler = (command: string, version: number, callback: Callback, param?: Param) => void;
+export type PageCallHandler = (command: string, version: number, callback: CallbackFunction, param?: Param) => void;

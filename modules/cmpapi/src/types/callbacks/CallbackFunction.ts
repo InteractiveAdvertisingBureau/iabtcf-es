@@ -4,4 +4,5 @@ import {RemoveListenerCallback} from './RemoveListenerCallback';
 import {TCDataCallback} from './TCDataCallback';
 import {VendorListCallback} from './VendorListCallback';
 
-export type Callback = TCDataCallback | IATCDataCallback | PingCallback | VendorListCallback | RemoveListenerCallback;
+export type CallbackFunction =
+  TCDataCallback | IATCDataCallback | PingCallback | VendorListCallback | RemoveListenerCallback;

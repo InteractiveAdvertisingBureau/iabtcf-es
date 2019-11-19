@@ -1,28 +1,19 @@
-import {Callback} from '../../types';
-import {CmpApiUtil, Constants} from '../../utilities';
+import {CallbackFunction} from '../../types';
 import {Command} from '../commands';
 
 export class EventListenerQueue {
 
-  private commands: Map<Callback, Command> = new Map<Callback, Command>();
+  private commands: Map<CallbackFunction, Command> = new Map<CallbackFunction, Command>();
 
-  public add(callback: Callback, command: Command): void {
+  public add(callback: CallbackFunction, command: Command): void {
 
     this.commands.set(callback, command);
 
   }
 
-  public remove(callback: Callback): boolean {
+  public remove(callback: CallbackFunction): boolean {
 
-    if (!this.commands.delete(callback)) {
-
-      CmpApiUtil.failCallback(callback, Constants.EVENT_LISTENER_NOT_FOUND);
-
-      return false;
-
-    }
-
-    return true;
+    return this.commands.delete(callback);
 
   }
 
