@@ -1,3 +1,3 @@
-import {ArgSet} from '../ArgSet';
+import {TcfApiArgSet} from '../TcfApiArgSet';
 
-export type CommandArgsHandler = (argSets: ArgSet[]) => void;
+export type CommandArgsHandler = (argSets: TcfApiArgSet[]) => void;

@@ -18,8 +18,7 @@ export abstract class BaseCommand {
   protected callback: Callback;
   protected param?: Param;
 
-  protected constructor(
-    cmpData: CmpDataReader, command: string, version: number, callback: Callback, param?: Param) {
+  protected constructor(cmpData: CmpDataReader, command: string, version: number, callback: Callback, param?: Param) {
 
     this.cmpData = cmpData;
     this.command = command;

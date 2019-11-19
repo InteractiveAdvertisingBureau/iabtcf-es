@@ -12,8 +12,7 @@ import {Command} from './Command';
  */
 export class GetVendorListCommand extends BaseCommand implements Command, Validatable {
 
-  public constructor(
-    cmpData: CmpDataReader, command: string, version: number, callback: Callback, param?: Param) {
+  public constructor(cmpData: CmpDataReader, command: string, version: number, callback: Callback, param?: Param) {
 
     super(cmpData, command, version, callback, param);
 

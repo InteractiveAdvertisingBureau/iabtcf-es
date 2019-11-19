@@ -15,8 +15,7 @@ export class CustomCommand implements Command {
   protected callback: Callback;
   protected param?: Param;
 
-  public constructor(
-    customMethod: CustomCommandFunction, version: number, callback: Callback, param?: Param) {
+  public constructor(customMethod: CustomCommandFunction, version: number, callback: Callback, param?: Param) {
 
     this.customMethod = customMethod;
     this.version = version;

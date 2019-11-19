@@ -1,7 +1,3 @@
-/**
- * Todo: What to do about logging?
- */
-
 export abstract class CmpLog {
 
   /**

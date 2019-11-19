@@ -6,7 +6,7 @@ import {Restrictions} from '../Restrictions';
 import {Return} from './Return';
 
 /**
- * Class represents consent data
+ * TCData Class represents consent data
  */
 export class TCData extends Return {
 

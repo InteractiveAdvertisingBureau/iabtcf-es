@@ -1,6 +1,6 @@
 import {CmpDataReader} from '../cmpdata';
 import {
-  ArgSet,
+  TcfApiArgSet,
   CallbackFunction,
   CommandArgsHandler,
   PageCallHandler,
@@ -26,7 +26,8 @@ import {CustomCommandRegistration} from './CustomCommandRegistration';
 import {CommandQueue, EventListenerQueue} from './queues';
 
 /**
- * CommandBroker handles setup, routing, calling validation and execution of commands
+ * CommandBroker handles setup, routing, calling validation and facilitating the execution of default and custom.
+ * The class handles all the commands the page will issue.
  */
 export class CommandBroker {
 
@@ -40,6 +41,11 @@ export class CommandBroker {
 
   private readonly cmpData: CmpDataReader;
 
+  /**
+   * Constructor
+   * @param {CmpDataReader} cmpData
+   * @param {CustomCommandRegistration[]} customCommands
+   */
   public constructor(cmpData: CmpDataReader, customCommands: CustomCommandRegistration[] = []) {
 
     this.cmpData = cmpData;
@@ -156,7 +162,7 @@ export class CommandBroker {
    */
   private getCommandArgsHandler(): CommandArgsHandler {
 
-    return (commandArgs: ArgSet[]): void => {
+    return (commandArgs: TcfApiArgSet[]): void => {
 
       const _this = this;
 
@@ -164,7 +170,7 @@ export class CommandBroker {
        * Convert and Filter out invalid commands
        */
       const validCommands = commandArgs
-        .map((as: ArgSet): Command | Validatable | null => _this.createCommand(...as))
+        .map((as: TcfApiArgSet): Command | Validatable | null => _this.createCommand(...as))
         .filter((command): boolean => command != null)
         .filter((command): boolean => isValidatable(command as Command)
           ? (command as Validatable).validate(true).isValid : true);

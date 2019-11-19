@@ -1,4 +1,4 @@
-export * from './ArgSet';
+export * from './TcfApiArgSet';
 export * from './BoolInt';
 export * from './BoolString';
 export * from './Param';

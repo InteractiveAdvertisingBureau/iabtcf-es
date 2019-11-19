@@ -1,6 +1,6 @@
 import {Ping} from '../model';
 import {CmpStatus} from '../status';
-import {ArgSet, CommandArgsHandler, PageCallHandler} from '../types';
+import {TcfApiArgSet, CommandArgsHandler, PageCallHandler} from '../types';
 import {ValidationMessages, ValidationUtil} from '../validation';
 import {Commands} from './commands';
 
@@ -10,13 +10,12 @@ import {Commands} from './commands';
 export class CommandStream {
 
   private readonly API_FUNCTION_NAME: string = `__tcfapi`;
+
   private readonly API_LOCATOR_NAME: string = `__tcfapiLocator`;
 
   private win: Window = window;
 
-  private queuedArgSets: ArgSet[];
-
-  private initFinished: boolean = false;
+  private queuedArgSets: TcfApiArgSet[];
 
   /**
    * Constructor
@@ -150,6 +149,12 @@ export class CommandStream {
 
   }
 
+  // eslint-disable-next-line valid-jsdoc
+  /**
+   * Gets the tcf api function from the window
+   * @return {(...args) => unknown}
+   * @private
+   */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private get __tcfapi(): (...args) => any {
 
@@ -157,6 +162,12 @@ export class CommandStream {
 
   }
 
+  // eslint-disable-next-line valid-jsdoc
+  /**
+   * Sets the tcf api function in the window
+   * @param {(...args) => void} value
+   * @private
+   */
   private set __tcfapi(value) {
 
     this.win[this.API_FUNCTION_NAME] = value;
@@ -169,7 +180,7 @@ export class CommandStream {
    */
   private replaceStubWithPageCallFunction(pageCallHandler: PageCallHandler): void {
 
-    this.win[this.API_FUNCTION_NAME] = pageCallHandler;
+    this.__tcfapi = pageCallHandler;
 
   }
 

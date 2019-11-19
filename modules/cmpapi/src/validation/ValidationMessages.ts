@@ -1,3 +1,6 @@
+/**
+ * ValidationMessages class contains all the validation related messages for CmpApi
+ */
 export class ValidationMessages {
 
   public static readonly EXISTING_CMP: string = 'CMP Exists already – cannot create';

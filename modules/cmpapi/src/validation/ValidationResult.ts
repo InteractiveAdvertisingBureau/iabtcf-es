@@ -4,6 +4,6 @@
 export interface ValidationResult {
   // True if validation passed
   isValid: boolean;
-  // An array of messages as to why validation did not pass
+  // An array of messages concerning the validation result
   validationMessages: string[];
 }
