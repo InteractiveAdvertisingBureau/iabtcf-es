@@ -1,6 +1,4 @@
 import {CmpDataReader} from '../cmpdata';
-import {CommandQueue} from '../queue/CommandQueue';
-import {EventListenerQueue} from '../queue/EventListenerQueue';
 import {ArgSet, Callback, CommandArgsHandler, PageCallHandler, Param} from '../types';
 import {CmpApiUtil, Constants} from '../utilities';
 import {ValidationUtil} from '../validation';
@@ -18,6 +16,7 @@ import {
 import {AddEventListenerCommand, RemoveEventListenerCommand} from './commands/eventlistener';
 import {CommandStream} from './CommandStream';
 import {CustomCommandRegistration} from './CustomCommandRegistration';
+import {CommandQueue, EventListenerQueue} from './queues';
 
 /**
  * CommandBroker handles setup, routing, calling validation and execution of commands

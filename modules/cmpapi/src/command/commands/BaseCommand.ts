@@ -2,7 +2,7 @@ import {CmpDataReader} from '../../cmpdata';
 import {Return} from '../../model/returned/Return';
 import {Callback, Param} from '../../types';
 import {CmpApiUtil, Constants} from '../../utilities';
-import {ValidationUtil, ValidationResult} from '../../validation';
+import {ValidationResult, ValidationUtil} from '../../validation';
 
 /**
  * Base command class holds basic command parameters and has functionality to

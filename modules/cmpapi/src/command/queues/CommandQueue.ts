@@ -1,4 +1,4 @@
-import {Command} from '../command/commands';
+import {Command} from '../commands';
 
 /**
  * Class to hold and execute commands that are not yet ready to be processed

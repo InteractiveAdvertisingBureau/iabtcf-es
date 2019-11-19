@@ -1,6 +1,6 @@
-import {Command} from '../command/commands';
-import {Callback} from '../types';
-import {CmpApiUtil, Constants} from '../utilities';
+import {Callback} from '../../types';
+import {CmpApiUtil, Constants} from '../../utilities';
+import {Command} from '../commands';
 
 export class EventListenerQueue {
 
