@@ -6,7 +6,7 @@ export class Constants {
 
   public static readonly EXISTING_CMP: string = 'CMP Exists already – cannot create';
   public static readonly NOT_SUPPORTED: string = `not supported by this CMP`;
-  public static readonly COMMAND_NOT_SUPPORTED: string = `command ${Constants.NOT_SUPPORTED}`;
+  public static readonly COMMAND_NOT_SUPPORTED: string = `Command ${Constants.NOT_SUPPORTED}`;
   public static readonly CALLBACK_REQUIRED: string = `Callback required`;
   public static readonly EVENT_LISTENER_NOT_FOUND: string = `Event listener not found.`;
   public static readonly REMOVE_EVENT_LISTENER_ERROR: string = `Listener could not be removed: the parameter callback is not registered or is invalid`;

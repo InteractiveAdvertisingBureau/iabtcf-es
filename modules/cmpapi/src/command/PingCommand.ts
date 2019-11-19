@@ -24,15 +24,15 @@ export class PingCommand extends BaseCommand implements Command, Validatable {
     const ping = new Ping();
     this.setBaseReturnFields(ping);
 
-    if (this.cmpData.tcModel) {
+    if (this.cmpData.tcModelIsSet) {
 
-      ping.gvlVersion = this.cmpData.tcModel.gvl.gvlSpecificationVersion;
+      ping.gvlVersion = this.cmpData.getTcModel().gvl.gvlSpecificationVersion;
 
     }
 
-    ping.apiVersion = this.cmpData.apiVersion.toString(10);
-    ping.cmpStatus = this.cmpData.cmpStatus;
-    ping.displayStatus = this.cmpData.displayStatus;
+    ping.apiVersion = this.cmpData.getApiVersion().toString(10);
+    ping.cmpStatus = this.cmpData.getCmpStatus();
+    ping.displayStatus = this.cmpData.getDisplayStatus();
     ping.cmpLoaded = true;
 
     (this.callback as PingCallback)(ping);

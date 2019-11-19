@@ -3,60 +3,73 @@ import {CmpStatus, DisplayStatus, EventStatus} from './status';
 import {Constants} from './utilities';
 
 /**
- * Class holds shareable data across cmp api
+ * Class holds shareable data across cmp api and provides change event listener for TcModel
  */
 export class CmpData {
 
-  private _tcModel: TCModel;
+  private tcModel: TCModel;
 
-  private _apiVersion: number;
-  private _cmpId: number;
-  private _cmpVersion: number;
-  private _tcfPolicyVersion: number;
-  private _gdprApplies: boolean;
+  private apiVersion: number;
+  private cmpId: number;
+  private cmpVersion: number;
+  private tcfPolicyVersion: number;
+  private gdprApplies: boolean;
 
-  private _eventStatus: EventStatus;
-  private _cmpStatus: CmpStatus;
-  private _displayStatus: DisplayStatus;
+  private eventStatus: EventStatus;
+  private cmpStatus: CmpStatus;
+  private displayStatus: DisplayStatus;
+
+  private tcModelChangeEventCallback: () => void;
 
   public constructor(cmpId: number, cmpVersion: number) {
 
-    this._cmpId = cmpId;
-    this._cmpVersion = cmpVersion;
+    this.cmpId = cmpId;
+    this.cmpVersion = cmpVersion;
 
     /**
      * Defaults
      * Todo: check these with chris
      */
-    this._apiVersion = 3;
-    this._tcfPolicyVersion = 2;
-    this._cmpStatus = CmpStatus.LOADING;
-    this._displayStatus = DisplayStatus.HIDDEN;
+    this.apiVersion = 3;
+    this.tcfPolicyVersion = 2;
+    this.cmpStatus = CmpStatus.LOADING;
+    this.displayStatus = DisplayStatus.HIDDEN;
+
+  }
+
+  public registerTcModelChangeEventCallback(tcModelChangeCallback: () => void) {
+
+    this.tcModelChangeEventCallback = tcModelChangeCallback;
 
   }
 
   public get tcModelIsSet(): boolean {
 
-    return !!this._tcModel;
+    return !!this.tcModel;
 
   }
 
-  public get tcModel(): TCModel {
+  public getTcModel(): TCModel {
 
-    return this._tcModel;
+    return this.tcModel;
 
   }
 
   /**
-   * Sets the tc model and throws an error if its not valid
-   * @throws {Error}
-   * @param {TCModel} value
+   * Set TcModel and EventStatus
+   * Todo: I think we might want to force the event status. Ask chris.
+   * @param {TCModel} tcm
+   * @param {EventStatus} eventStatus
+   * @return {void}
    */
-  public set tcModel(value: TCModel) {
+  public setTCModel(tcm: TCModel, eventStatus?: EventStatus): void {
 
-    if (value.isValid()) {
+    if (tcm.isValid()) {
 
-      this._tcModel = value;
+      this.tcModel = tcm;
+      this.eventStatus = eventStatus || this.eventStatus;
+
+      this.tcModelChangeEventCallback();
 
     } else {
 
@@ -66,99 +79,99 @@ export class CmpData {
 
   }
 
-  public get apiVersion(): number {
+  public getApiVersion(): number {
 
-    return this._apiVersion;
-
-  }
-
-  public set apiVersion(value: number) {
-
-    this._apiVersion = value;
+    return this.apiVersion;
 
   }
 
-  public get cmpId(): number {
+  public setApiVersion(value: number): void {
 
-    return this._cmpId;
-
-  }
-
-  public set cmpId(value: number) {
-
-    this._cmpId = value;
+    this.apiVersion = value;
 
   }
 
-  public get cmpVersion(): number {
+  public getCmpId(): number {
 
-    return this._cmpVersion;
-
-  }
-
-  public set cmpVersion(value: number) {
-
-    this._cmpVersion = value;
+    return this.cmpId;
 
   }
 
-  public get tcfPolicyVersion(): number {
+  public setCmpId(value: number): void {
 
-    return this._tcfPolicyVersion;
-
-  }
-
-  public set tcfPolicyVersion(value: number) {
-
-    this._tcfPolicyVersion = value;
+    this.cmpId = value;
 
   }
 
-  public get gdprApplies(): boolean {
+  public getCmpVersion(): number {
 
-    return this._gdprApplies;
-
-  }
-
-  public set gdprApplies(value: boolean) {
-
-    this._gdprApplies = value;
+    return this.cmpVersion;
 
   }
 
-  public get eventStatus(): EventStatus {
+  public setCmpVersion(value: number): void {
 
-    return this._eventStatus;
-
-  }
-
-  public set eventStatus(value: EventStatus) {
-
-    this._eventStatus = value;
+    this.cmpVersion = value;
 
   }
 
-  public get cmpStatus(): CmpStatus {
+  public getTcfPolicyVersion(): number {
 
-    return this._cmpStatus;
-
-  }
-
-  public set cmpStatus(value: CmpStatus) {
-
-    this._cmpStatus = value;
+    return this.tcfPolicyVersion;
 
   }
 
-  public get displayStatus(): DisplayStatus {
+  public setTcfPolicyVersion(value: number): void {
 
-    return this._displayStatus;
+    this.tcfPolicyVersion = value;
 
   }
 
-  public set displayStatus(value: DisplayStatus) {
+  public getGdprApplies(): boolean {
 
-    this._displayStatus = value;
+    return this.gdprApplies;
+
+  }
+
+  public setGdprApplies(value: boolean): void {
+
+    this.gdprApplies = value;
+
+  }
+
+  public getEventStatus(): EventStatus {
+
+    return this.eventStatus;
+
+  }
+
+  public setEventStatus(value: EventStatus): void {
+
+    this.eventStatus = value;
+
+  }
+
+  public getCmpStatus(): CmpStatus {
+
+    return this.cmpStatus;
+
+  }
+
+  public setCmpStatus(value: CmpStatus): void {
+
+    this.cmpStatus = value;
+
+  }
+
+  public getDisplayStatus(): DisplayStatus {
+
+    return this.displayStatus;
+
+  }
+
+  public setDisplayStatus(value: DisplayStatus): void {
+
+    this.displayStatus = value;
 
   }
 

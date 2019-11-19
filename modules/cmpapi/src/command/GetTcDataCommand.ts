@@ -2,10 +2,10 @@ import {CmpData} from '../CmpData';
 import {TCData} from '../model';
 import {Callback, Param, TCDataCallback} from '../types';
 import {CmpApiUtil, Constants} from '../utilities';
-import {ValidationResult} from "../validatable/ValidationResult";
+import {Validatable} from '../validatable/Validatable';
+import {ValidationResult} from '../validatable/ValidationResult';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
-import {Validatable} from '../validatable/Validatable';
 
 export class GetTcDataCommand extends BaseCommand implements Command, Validatable {
 
@@ -20,7 +20,7 @@ export class GetTcDataCommand extends BaseCommand implements Command, Validatabl
    */
   public execute(): void {
 
-    const tcData = new TCData(this.cmpData.tcModel, this.cmpData.eventStatus, this.param as number[]);
+    const tcData = new TCData(this.cmpData.getTcModel(), this.cmpData.getEventStatus(), this.param as number[]);
     this.setBaseReturnFields(tcData);
     (this.callback as TCDataCallback)(tcData, true);
 

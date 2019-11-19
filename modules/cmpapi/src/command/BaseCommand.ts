@@ -2,7 +2,7 @@ import {CmpData} from '../CmpData';
 import {Return} from '../model/returned/Return';
 import {Callback, Param} from '../types';
 import {CmpApiUtil, Constants, Validation} from '../utilities';
-import {ValidationResult} from "../validatable/ValidationResult";
+import {ValidationResult} from '../validatable/ValidationResult';
 
 /**
  * Base command class holds basic command parameters and has functionality to
@@ -34,18 +34,16 @@ export abstract class BaseCommand {
      */
   protected setBaseReturnFields(returnObj: Return): void {
 
-    returnObj.cmpId = this.cmpData.cmpId;
-    returnObj.cmpVersion = this.cmpData.cmpVersion;
-    returnObj.gdprApplies = this.cmpData.gdprApplies;
-    returnObj.tcfPolicyVersion = this.cmpData.tcfPolicyVersion;
+    returnObj.cmpId = this.cmpData.getCmpId();
+    returnObj.cmpVersion = this.cmpData.getCmpVersion();
+    returnObj.gdprApplies = this.cmpData.getGdprApplies();
+    returnObj.tcfPolicyVersion = this.cmpData.getTcfPolicyVersion();
 
   }
 
   /**
    * Validates that the common parameters used to execute a command are valid.
-   * Returns validation message through string ref.
    * If failCallbackIfNotValid is true, the method will call the callback with failed values if not valid.
-   * @param {string} validationMessage
    * @param {boolean} failCallbackIfNotValid
    * @return {boolean}
    */

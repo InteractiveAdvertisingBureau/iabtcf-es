@@ -3,10 +3,10 @@ import {CmpData} from '../CmpData';
 import {GlobalVendorList} from '../model';
 import {Callback, Param, VendorListCallback} from '../types';
 import {CmpApiUtil, Constants} from '../utilities';
-import {ValidationResult} from "../validatable/ValidationResult";
+import {Validatable} from '../validatable/Validatable';
+import {ValidationResult} from '../validatable/ValidationResult';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
-import {Validatable} from '../validatable/Validatable';
 
 /**
  * Gets a version of the Global Vendors List
@@ -29,7 +29,7 @@ export class GetVendorListCommand extends BaseCommand implements Command, Valida
      * specific version.
      */
 
-    const _gvl: GVL = this.param ? new GVL(this.param as string | number) : this.cmpData.tcModel.gvl.clone();
+    const _gvl: GVL = this.param ? new GVL(this.param as string | number) : this.cmpData.getTcModel().gvl.clone();
 
     _gvl.readyPromise.then(() => {
 

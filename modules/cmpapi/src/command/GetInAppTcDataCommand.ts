@@ -1,9 +1,9 @@
 import {CmpData} from '../CmpData';
 import {InAppTCData} from '../model';
 import {Callback, IATCDataCallback} from '../types';
+import {Validatable} from '../validatable/Validatable';
 import {Command} from './Command';
 import {GetTcDataCommand} from './GetTcDataCommand';
-import {Validatable} from '../validatable/Validatable';
 
 /**
  * Get in app tc data command
@@ -25,9 +25,9 @@ export class GetInAppTcDataCommand extends GetTcDataCommand implements Command, 
    */
   public execute(): void {
 
-    const inAppTCData = new InAppTCData(this.cmpData.tcModel, this.cmpData.eventStatus, this.param as number[]);
-    this.setBaseReturnFields(inAppTCData);
-    (this.callback as IATCDataCallback)(inAppTCData, true);
+    const iATCData = new InAppTCData(this.cmpData.getTcModel(), this.cmpData.getEventStatus(), this.param as number[]);
+    this.setBaseReturnFields(iATCData);
+    (this.callback as IATCDataCallback)(iATCData, true);
 
   }
 

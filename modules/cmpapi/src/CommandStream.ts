@@ -7,7 +7,7 @@ import {Constants, Validation} from './utilities';
 /**
  * Initializes CMP frame and hooks up the provided PageCallHandler function to stream commands through
  */
-export class CmpCommandStream {
+export class CommandStream {
 
   private win: Window = window;
 
