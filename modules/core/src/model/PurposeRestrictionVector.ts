@@ -3,8 +3,15 @@ import {BinarySearchTree} from './BinarySearchTree';
 import {RestrictionType} from './RestrictionType';
 import {GVL} from '../GVL';
 import {Vendor} from './gvl/Vendor';
+import {Cloneable} from '../cloneable/Cloneable';
 
-export class PurposeRestrictionVector {
+export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector> {
+
+  /**
+   * if this originatd from an encoded string we'll need a place to store the
+   * bit length; it can be set and got from here
+   */
+  public bitLength: number = 0;
 
   /**
    * a map indexed by a string which will be a 'hash' of the purpose and
@@ -14,6 +21,22 @@ export class PurposeRestrictionVector {
    */
   private map: Map<string, BinarySearchTree> = new Map<string, BinarySearchTree>();
   private gvl_: GVL;
+
+  public constructor() {
+
+    super(PurposeRestrictionVector);
+
+  }
+
+  /**
+   * Creates a clone of this PurposeRestrictionVector
+   * @return {PurposeRestrictionVector}
+   */
+  public clone(): PurposeRestrictionVector {
+
+    return this._clone();
+
+  }
 
   private has(hash: string): boolean {
 
@@ -87,6 +110,7 @@ export class PurposeRestrictionVector {
       if (!this.has(hash)) {
 
         this.map.set(hash, new BinarySearchTree());
+        this.bitLength = 0;
 
       }
 
@@ -149,6 +173,7 @@ export class PurposeRestrictionVector {
       if (bst.isEmpty()) {
 
         this.map.delete(hash);
+        this.bitLength = 0;
 
       }
 

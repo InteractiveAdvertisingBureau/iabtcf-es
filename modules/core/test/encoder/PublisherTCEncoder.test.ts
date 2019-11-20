@@ -1,12 +1,16 @@
 import {expect} from 'chai';
 import {
+  TCModel,
+  GVL,
+} from '../../src';
+import {
   PublisherFieldSequence,
   PublisherTCEncoder,
 } from '../../src/encoder';
 import {
-  TCModel,
-  GVL,
-} from '../../src';
+  Vector,
+  PurposeRestrictionVector,
+} from '../../src/model/';
 
 export function run(): void {
 
@@ -96,11 +100,38 @@ export function run(): void {
               expect(decodedModel[key].getTime(), `${key} should be equal`)
                 .to.equal(Math.round(tcModel[key].getTime()/100)*100);
               break;
+            case 'specialFeatureOptIns':
+            case 'purposeConsents':
+            case 'publisherConsents':
+            case 'purposeLegitimateInterest':
+            case 'publisherLegitimateInterest':
+            case 'publisherCustomConsents':
+            case 'publisherCustomLegitimateInterest':
+            case 'vendorConsents':
+            case 'vendorLegitimateInterest':
+            case 'vendorsDisclosed':
+            case 'vendorsAllowed':
+
+              const oldVector: Vector = tcModel[key];
+              const newVector: Vector = decodedModel[key];
+
+              expect(newVector.maxId).to.equal(oldVector.maxId);
+              expect(newVector.size).to.equal(oldVector.size);
+              oldVector.forEach((value: boolean, id: number): void => {
+
+                expect(newVector.has(id)).to.equal(value);
+
+              });
+              break;
             case 'publisherRestrictions':
-              // do nothing
+              const oldPRVector: PurposeRestrictionVector = tcModel[key];
+              const newPRVector: PurposeRestrictionVector = decodedModel[key];
+
+              expect(newPRVector.isEmpty()).to.equal(oldPRVector.isEmpty());
+              expect(newPRVector.numRestrictions).to.equal(oldPRVector.numRestrictions);
               break;
             default:
-              expect(decodedModel[key], `${key} should be equal`).to.deep.equal(tcModel[key]);
+              expect(decodedModel[key], `${key} should be equal`).to.equal(tcModel[key]);
 
           }
 

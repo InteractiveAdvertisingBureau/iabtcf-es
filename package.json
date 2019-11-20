@@ -3,13 +3,13 @@
   "description": "Official compliant tool suite for implementing the iab. Transparency and Consent Framework (TCF).",
   "private": true,
   "author": "Chris Paterson <tcf@chrispaterson.io>",
-  "homepage": "https://github.com/chrispaterson/iabtcf-es",
+  "homepage": "https://github.com/chrispaterson/iabtcf",
   "license": {
     "type": "Apache-2.0",
     "url": "https://opensource.org/licenses/apache2.0.php"
   },
   "scripts": {
-    "test": "mocha './modules/core/test/*.ts'",
+    "test": "mocha ./modules/**/test/*.ts",
     "bootstrap": "lerna bootstrap",
     "deploy": "lerna publish from-package",
     "build": "lerna run build",

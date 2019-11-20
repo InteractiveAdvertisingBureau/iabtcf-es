@@ -23,7 +23,7 @@
 
 ▸ **decode**(encodedString: *`string`*, tcModel: *[TCModel](tcmodel.md)*): [TCModel](tcmodel.md)
 
-*Defined in encoder/segment/PublisherTCEncoder.ts:60*
+*Defined in [encoder/segment/PublisherTCEncoder.ts:60](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/segment/PublisherTCEncoder.ts#L60)*
 
 **Parameters:**
 
@@ -41,7 +41,7 @@ ___
 
 ▸ **encode**(tcModel: *[TCModel](tcmodel.md)*): `string`
 
-*Defined in encoder/segment/PublisherTCEncoder.ts:36*
+*Defined in [encoder/segment/PublisherTCEncoder.ts:36](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/segment/PublisherTCEncoder.ts#L36)*
 
 **Parameters:**
 

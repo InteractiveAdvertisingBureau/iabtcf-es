@@ -23,7 +23,7 @@
 
 ▸ **decode**(value: *`string`*): `number`
 
-*Defined in encoder/field/IntEncoder.ts:39*
+*Defined in [encoder/field/IntEncoder.ts:37](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/field/IntEncoder.ts#L37)*
 
 **Parameters:**
 
@@ -40,7 +40,7 @@ ___
 
 ▸ **encode**(value: *`number` \| `string`*, numBits: *`number`*): `string`
 
-*Defined in encoder/field/IntEncoder.ts:9*
+*Defined in [encoder/field/IntEncoder.ts:7](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/field/IntEncoder.ts#L7)*
 
 **Parameters:**
 

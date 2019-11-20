@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import {expect, assert} from 'chai';
 import {TCModel} from '../src/TCModel';
 
 import {Vector} from '../src/model/Vector';
@@ -180,27 +180,44 @@ describe('TCModel', (): void => {
 
   });
 
-  it('should throw an error if gvl is attempted to be set more than once', (): void => {
+  const sameDataDifferentObject = function(obj1, obj2, objName): void {
+
+    assert.equal(JSON.stringify(obj1), JSON.stringify(obj2), `${objName} stringify did not match original`);
+    assert.deepEqual(obj1, obj2, objName + `${objName} data did not match`);
+    assert.notEqual(obj1, obj2, objName + `${objName} are the same object`);
+
+  };
+
+  it('should clone a TCModel', (): void => {
 
     // eslint-disable-next-line
     const vendorlistJson = require('../../../dev/vendor-list.json');
     const gvl: GVL = new GVL(vendorlistJson);
-
-    expect((): void => {
-
-      // disabling because it's upset that I'm not doing anything with this
-      // eslint-disable-next-line
-      const tcModel: TCModel = new TCModel(gvl);
-
-    }).to.not.throw();
-
     const tcModel = new TCModel(gvl);
+    tcModel.cmpId = 23;
+    tcModel.cmpVersion = 1;
 
-    expect((): void => {
+    // full consent!
+    tcModel.setAll();
 
-      tcModel.gvl = gvl;
+    tcModel.purposeConsents.unset(2);
+    tcModel.vendorConsents.unset(37);
 
-    }).to.throw();
+    const clone = tcModel.clone();
+
+    assert.equal(clone.isValid(), tcModel.isValid(), 'tcModel IsValid did not return the same value as original');
+    assert.equal(clone.publisherRestrictions.isValid(), tcModel.publisherRestrictions.isValid(), 'PR IsValid did not return the same value as original');
+
+    assert.equal(clone.cmpId, tcModel.cmpId, 'cmpId did not match original value');
+    assert.equal(clone.created.getTime(), tcModel.created.getTime(), 'created did not match set value');
+    assert.notStrictEqual(clone.created, tcModel.created, 'created matched strict equals');
+
+    sameDataDifferentObject(clone, tcModel, 'TcModel');
+    sameDataDifferentObject(clone.purposeConsents, tcModel.purposeConsents, 'purposeConsents');
+    assert.equal(clone.purposeConsents.maxId, tcModel.purposeConsents.maxId, 'purposeConsents max id did not match set value');
+    sameDataDifferentObject(clone.publisherRestrictions.getAllRestrictions(), tcModel.publisherRestrictions.getAllRestrictions(), 'PR Restrictions');
+    sameDataDifferentObject(clone.gvl.specialFeatures, tcModel.gvl.specialFeatures, 'specialFeatures');
+    sameDataDifferentObject(clone.gvl.vendors, tcModel.gvl.vendors, 'vendors');
 
   });
 
@@ -260,10 +277,62 @@ describe('TCModel', (): void => {
 
     };
 
-    shouldBeOk('aa');
-    shouldBeOk('zz');
-    shouldBeOk('AA');
-    shouldBeOk('ZZ');
+    shouldBeOk('EN');
+    shouldBeOk('BG');
+    shouldBeOk('CS');
+    shouldBeOk('DA');
+    shouldBeOk('DE');
+    shouldBeOk('EL');
+    shouldBeOk('ES');
+    shouldBeOk('ET');
+    shouldBeOk('FI');
+    shouldBeOk('FR');
+    shouldBeOk('GA');
+    shouldBeOk('HR');
+    shouldBeOk('HU');
+    shouldBeOk('IT');
+    shouldBeOk('LT');
+    shouldBeOk('LV');
+    shouldBeOk('MT');
+    shouldBeOk('NL');
+    shouldBeOk('PL');
+    shouldBeOk('PT');
+    shouldBeOk('RO');
+    shouldBeOk('SK');
+    shouldBeOk('SL');
+    shouldBeOk('SV');
+
+    shouldBeOk('en');
+    shouldBeOk('bg');
+    shouldBeOk('cs');
+    shouldBeOk('da');
+    shouldBeOk('de');
+    shouldBeOk('el');
+    shouldBeOk('es');
+    shouldBeOk('et');
+    shouldBeOk('fi');
+    shouldBeOk('fr');
+    shouldBeOk('ga');
+    shouldBeOk('hr');
+    shouldBeOk('hu');
+    shouldBeOk('it');
+    shouldBeOk('lt');
+    shouldBeOk('lv');
+    shouldBeOk('mt');
+    shouldBeOk('nl');
+    shouldBeOk('pl');
+    shouldBeOk('pt');
+    shouldBeOk('ro');
+    shouldBeOk('sk');
+    shouldBeOk('sl');
+    shouldBeOk('sv');
+
+    shouldBeNotOk(' EN');
+    shouldBeNotOk('  ');
+    shouldBeNotOk('aa');
+    shouldBeNotOk('zz');
+    shouldBeNotOk('AA');
+    shouldBeNotOk('ZZ');
 
     // too long
     shouldBeNotOk('aaa');

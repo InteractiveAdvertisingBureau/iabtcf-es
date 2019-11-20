@@ -1,3 +1,4 @@
+import {Cloneable} from '../cloneable/Cloneable';
 import {TCModelError} from '../errors';
 
 type idOrIds = number | number[];
@@ -5,8 +6,13 @@ type idOrIds = number | number[];
 /**
  * Vector class is like a Set except it keeps track of a max id
  */
-class Vector {
+class Vector extends Cloneable<Vector> {
 
+  /**
+   * if this originatd from an encoded string we'll need a place to store the
+   * bit length; it can be set and got from here
+   */
+  public bitLength: number = 0;
   private maxId_: number = 0;
   /**
    * keep a set for faster lookup
@@ -21,11 +27,23 @@ class Vector {
    */
   public constructor(ids?: idOrIds) {
 
+    super(Vector);
+
     if (ids !== undefined) {
 
       this.set(ids);
 
     }
+
+  }
+
+  /**
+   * Creates a clone of this Vector
+   * @return {Vector}
+   */
+  public clone(): Vector {
+
+    return this._clone();
 
   }
 
@@ -69,6 +87,11 @@ class Vector {
     } else {
 
       this.set_.delete(id);
+
+      /**
+       * if bitLength was set before, it must now be unset
+       */
+      this.bitLength = 0;
 
       if (id === this.maxId) {
 
@@ -116,6 +139,10 @@ class Vector {
 
       this.set_.add(id);
       this.maxId_ = Math.max(this.maxId, id);
+      /**
+       * if bitLength was set before, it must now be unset
+       */
+      this.bitLength = 0;
 
     }
 

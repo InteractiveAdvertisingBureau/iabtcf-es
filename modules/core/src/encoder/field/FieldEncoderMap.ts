@@ -1,18 +1,11 @@
-import {
-
-  TCFields,
-
-} from '../../model';
-
-import {
-  BooleanEncoder,
-  DateEncoder,
-  FixedVectorEncoder,
-  IntEncoder,
-  LangEncoder,
-  PurposeRestrictionVectorEncoder,
-  VendorVectorEncoder,
-} from '.';
+import {TCFields} from '../../model';
+import {BooleanEncoder} from './BooleanEncoder';
+import {DateEncoder} from './DateEncoder';
+import {FixedVectorEncoder} from './FixedVectorEncoder';
+import {IntEncoder} from './IntEncoder';
+import {LangEncoder} from './LangEncoder';
+import {PurposeRestrictionVectorEncoder} from './PurposeRestrictionVectorEncoder';
+import {VendorVectorEncoder} from './VendorVectorEncoder';
 
 export class FieldEncoderMap implements TCFields {
 

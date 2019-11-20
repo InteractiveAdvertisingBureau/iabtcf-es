@@ -8,7 +8,7 @@
 
 ## Indexable
 
-\[id: `string`\]:&nbsp;`string`
+\[id: `string`\]:&nbsp;[BoolString](../#boolstring)
 ## Index
 
 ---

@@ -34,8 +34,8 @@ module.exports = {
     'require-jsdoc': [0],
     'semi': ['error', 'always'],
     'padded-blocks': ['error', 'always'],
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-console': 'error',
+    'no-debugger': 'error',
     '@typescript-eslint/indent': ['error', 2],
     'indent': [
       'error', 2, {
@@ -49,6 +49,8 @@ module.exports = {
     'padding-line-between-statements': [
       'error',
       {'blankLine': 'any', 'prev': ['const', 'let', 'var'], 'next': ['const', 'let', 'var']},
+      {'blankLine': 'always', 'prev': '*',  'next': 'class'},
+      {'blankLine': 'always', 'prev': '*',  'next': 'function'},
       {'blankLine': 'always', 'prev': 'block-like',  'next': '*'},
       {'blankLine': 'always', 'prev': '*',  'next': 'block-like'},
     ],

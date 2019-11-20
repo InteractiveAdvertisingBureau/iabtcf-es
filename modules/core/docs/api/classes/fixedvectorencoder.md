@@ -23,7 +23,7 @@
 
 ▸ **decode**(value: *`string`*): [Vector](vector.md)
 
-*Defined in encoder/field/FixedVectorEncoder.ts:29*
+*Defined in [encoder/field/FixedVectorEncoder.ts:20](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/field/FixedVectorEncoder.ts#L20)*
 
 **Parameters:**
 
@@ -40,7 +40,7 @@ ___
 
 ▸ **encode**(value: *[Vector](vector.md)*, numBits: *`number`*): `string`
 
-*Defined in encoder/field/FixedVectorEncoder.ts:15*
+*Defined in [encoder/field/FixedVectorEncoder.ts:6](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/field/FixedVectorEncoder.ts#L6)*
 
 **Parameters:**
 

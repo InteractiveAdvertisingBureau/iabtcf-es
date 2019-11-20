@@ -29,7 +29,7 @@
 
 *Implementation of [VersionMap](../interfaces/versionmap.md).[1](../interfaces/versionmap.md#1)*
 
-*Defined in encoder/sequence/PublisherFieldSequence.ts:15*
+*Defined in [encoder/sequence/PublisherFieldSequence.ts:6](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/sequence/PublisherFieldSequence.ts#L6)*
 
 ___
 <a id="2"></a>
@@ -46,7 +46,7 @@ ___
 
 *Implementation of [VersionMap](../interfaces/versionmap.md).[2](../interfaces/versionmap.md#2)*
 
-*Defined in encoder/sequence/PublisherFieldSequence.ts:16*
+*Defined in [encoder/sequence/PublisherFieldSequence.ts:7](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/sequence/PublisherFieldSequence.ts#L7)*
 
 ___
 

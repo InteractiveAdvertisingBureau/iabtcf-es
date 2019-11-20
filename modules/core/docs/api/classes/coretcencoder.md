@@ -23,7 +23,7 @@
 
 ▸ **decode**(encodedString: *`string`*, tcModel: *[TCModel](tcmodel.md)*): [TCModel](tcmodel.md)
 
-*Defined in encoder/segment/CoreTCEncoder.ts:65*
+*Defined in [encoder/segment/CoreTCEncoder.ts:48](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/segment/CoreTCEncoder.ts#L48)*
 
 **Parameters:**
 
@@ -41,7 +41,7 @@ ___
 
 ▸ **encode**(tcModel: *[TCModel](tcmodel.md)*): `string`
 
-*Defined in encoder/segment/CoreTCEncoder.ts:35*
+*Defined in [encoder/segment/CoreTCEncoder.ts:18](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/segment/CoreTCEncoder.ts#L18)*
 
 **Parameters:**
 

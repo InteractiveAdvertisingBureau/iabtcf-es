@@ -1,34 +1,17 @@
+import {FieldEncoderMap} from '../field';
+import {CoreFieldSequence} from '../sequence';
 import {
-
-  BitLength,
-  Base64Url,
-
-} from '../';
-
-import {
-
-  FieldEncoderMap,
-
-} from '../field';
-
-import {
-
-  CoreFieldSequence,
-
-} from '../sequence';
-
-import {
-
   EncodingError,
-
+  DecodingError,
 } from '../../errors';
-
 import {
-
   TCModel,
   TCModelPropType,
-
 } from '../../';
+import {
+  BitLength,
+  Base64Url,
+} from '../';
 
 export class CoreTCEncoder {
 
@@ -81,9 +64,13 @@ export class CoreTCEncoder {
 
         bStringIdx += BitLength[key];
 
-      } else if (typeof encoder.getBitLength === 'function') {
+      } else if (tcModel[key].bitLength) {
 
-        bStringIdx += encoder.getBitLength();
+        bStringIdx += tcModel[key].bitLength;
+
+      } else {
+
+        throw new DecodingError(`error decoding ${key}`);
 
       }
 
