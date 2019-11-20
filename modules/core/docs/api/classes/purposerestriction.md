@@ -4,7 +4,9 @@
 
 ## Hierarchy
 
-**PurposeRestriction**
+ [Cloneable](cloneable.md)<[PurposeRestriction](purposerestriction.md)>
+
+**↳ PurposeRestriction**
 
 ## Index
 
@@ -24,6 +26,7 @@
 
 ### Methods
 
+* [clone](purposerestriction.md#clone)
 * [isSameAs](purposerestriction.md#issameas)
 * [isValid](purposerestriction.md#isvalid)
 * [unHash](purposerestriction.md#unhash)
@@ -38,7 +41,9 @@
 
 ⊕ **new PurposeRestriction**(purposeId?: *`undefined` \| `number`*, restrictionType?: *[RestrictionType](../enums/restrictiontype.md)*): [PurposeRestriction](purposerestriction.md)
 
-*Defined in [model/PurposeRestriction.ts:9](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/PurposeRestriction.ts#L9)*
+*Overrides [Cloneable](cloneable.md).[constructor](cloneable.md#constructor)*
+
+*Defined in [model/PurposeRestriction.ts:10](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestriction.ts#L10)*
 
 constructor
 
@@ -61,7 +66,7 @@ ___
 
 **● restrictionType**: *[RestrictionType](../enums/restrictiontype.md)*
 
-*Defined in [model/PurposeRestriction.ts:9](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/PurposeRestriction.ts#L9)*
+*Defined in [model/PurposeRestriction.ts:10](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestriction.ts#L10)*
 
 ___
 <a id="hashseparator"></a>
@@ -70,7 +75,7 @@ ___
 
 **● hashSeparator**: *`string`* = "-"
 
-*Defined in [model/PurposeRestriction.ts:6](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/PurposeRestriction.ts#L6)*
+*Defined in [model/PurposeRestriction.ts:7](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestriction.ts#L7)*
 
 ___
 
@@ -82,7 +87,7 @@ ___
 
 **get hash**(): `string`
 
-*Defined in [model/PurposeRestriction.ts:52](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/PurposeRestriction.ts#L52)*
+*Defined in [model/PurposeRestriction.ts:66](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestriction.ts#L66)*
 
 **Returns:** `string`
 
@@ -95,12 +100,12 @@ ___
 
 **set purposeId**(idNum: *`number`*): `void`
 
-*Defined in [model/PurposeRestriction.ts:69](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/PurposeRestriction.ts#L69)*
+*Defined in [model/PurposeRestriction.ts:83](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestriction.ts#L83)*
 
 **Returns:** `number`
 The purpose Id associated with a publisher purpose-by-vendor restriction that resulted in a different consent or LI status than the consent or LI purposes allowed lists.
 
-*Defined in [model/PurposeRestriction.ts:79](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/PurposeRestriction.ts#L79)*
+*Defined in [model/PurposeRestriction.ts:93](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestriction.ts#L93)*
 
 **Parameters:**
 
@@ -115,13 +120,49 @@ ___
 
 ## Methods
 
+<a id="_clone"></a>
+
+### `<Private>` _clone
+
+▸ **_clone**(...constructorArgs: *[AnyArray](../#anyarray)*): [PurposeRestriction](purposerestriction.md)
+
+*Inherited from [Cloneable](cloneable.md).[_clone](cloneable.md#_clone)*
+
+*Defined in [cloneable/Cloneable.ts:52](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/cloneable/Cloneable.ts#L52)*
+
+Method to be called in the child concrete class's clone method
+
+**Parameters:**
+
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| `Rest` constructorArgs | [AnyArray](../#anyarray) |  arguments to be passed to the cloned objects constructor if need be |
+
+**Returns:** [PurposeRestriction](purposerestriction.md)
+
+___
+<a id="clone"></a>
+
+###  clone
+
+▸ **clone**(): [PurposeRestriction](purposerestriction.md)
+
+*Overrides [Cloneable](cloneable.md).[clone](cloneable.md#clone)*
+
+*Defined in [model/PurposeRestriction.ts:43](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestriction.ts#L43)*
+
+Creates a clone of this PurposeRestriction
+
+**Returns:** [PurposeRestriction](purposerestriction.md)
+
+___
 <a id="issameas"></a>
 
 ###  isSameAs
 
 ▸ **isSameAs**(otherPR: *[PurposeRestriction](purposerestriction.md)*): `boolean`
 
-*Defined in [model/PurposeRestriction.ts:90](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/PurposeRestriction.ts#L90)*
+*Defined in [model/PurposeRestriction.ts:104](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestriction.ts#L104)*
 
 **Parameters:**
 
@@ -138,7 +179,7 @@ ___
 
 ▸ **isValid**(): `boolean`
 
-*Defined in [model/PurposeRestriction.ts:85](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/PurposeRestriction.ts#L85)*
+*Defined in [model/PurposeRestriction.ts:99](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestriction.ts#L99)*
 
 **Returns:** `boolean`
 
@@ -149,7 +190,7 @@ ___
 
 ▸ **unHash**(hash: *`string`*): [PurposeRestriction](purposerestriction.md)
 
-*Defined in [model/PurposeRestriction.ts:35](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/PurposeRestriction.ts#L35)*
+*Defined in [model/PurposeRestriction.ts:49](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestriction.ts#L49)*
 
 **Parameters:**
 

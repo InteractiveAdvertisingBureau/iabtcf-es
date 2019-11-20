@@ -45,7 +45,7 @@ Ping response builder
 
 *Implementation of [Ping](../interfaces/ping.md).[apiVersion](../interfaces/ping.md#apiversion)*
 
-*Defined in [command/responsebuilders/PingBldr.ts:29](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/PingBldr.ts#L29)*
+*Defined in [command/responsebuilders/PingBldr.ts:29](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/PingBldr.ts#L29)*
 
 version of the CMP API that is supported; e.g. “2”
 
@@ -60,7 +60,7 @@ ___
 
 *Inherited from [ResponseBuilder](responsebuilder.md).[cmpId](responsebuilder.md#cmpid)*
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:9](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L9)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:9](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L9)*
 
 ___
 <a id="cmploaded"></a>
@@ -71,7 +71,7 @@ ___
 
 *Implementation of [Ping](../interfaces/ping.md).[cmpLoaded](../interfaces/ping.md#cmploaded)*
 
-*Defined in [command/responsebuilders/PingBldr.ts:14](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/PingBldr.ts#L14)*
+*Defined in [command/responsebuilders/PingBldr.ts:14](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/PingBldr.ts#L14)*
 
 true - CMP main script is loaded false - still running stub
 
@@ -84,7 +84,7 @@ ___
 
 *Implementation of [Ping](../interfaces/ping.md).[cmpStatus](../interfaces/ping.md#cmpstatus)*
 
-*Defined in [command/responsebuilders/PingBldr.ts:19](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/PingBldr.ts#L19)*
+*Defined in [command/responsebuilders/PingBldr.ts:19](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/PingBldr.ts#L19)*
 
 see Ping Status Codes in following table
 
@@ -99,7 +99,7 @@ ___
 
 *Inherited from [ResponseBuilder](responsebuilder.md).[cmpVersion](responsebuilder.md#cmpversion)*
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:10](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L10)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:10](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L10)*
 
 ___
 <a id="displaystatus"></a>
@@ -110,7 +110,7 @@ ___
 
 *Implementation of [Ping](../interfaces/ping.md).[displayStatus](../interfaces/ping.md#displaystatus)*
 
-*Defined in [command/responsebuilders/PingBldr.ts:24](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/PingBldr.ts#L24)*
+*Defined in [command/responsebuilders/PingBldr.ts:24](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/PingBldr.ts#L24)*
 
 see Ping Status Codes in following table
 
@@ -125,7 +125,7 @@ ___
 
 *Inherited from [ResponseBuilder](responsebuilder.md).[gdprApplies](responsebuilder.md#gdprapplies)*
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:11](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L11)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:11](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L11)*
 
 ___
 <a id="gvlversion"></a>
@@ -136,7 +136,7 @@ ___
 
 *Implementation of [Ping](../interfaces/ping.md).[gvlVersion](../interfaces/ping.md#gvlversion)*
 
-*Defined in [command/responsebuilders/PingBldr.ts:35](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/PingBldr.ts#L35)*
+*Defined in [command/responsebuilders/PingBldr.ts:35](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/PingBldr.ts#L35)*
 
 Version of the GVL currently loaded by the CMP undefined if still the stub
 
@@ -151,7 +151,7 @@ ___
 
 *Inherited from [ResponseBuilder](responsebuilder.md).[tcfPolicyVersion](responsebuilder.md#tcfpolicyversion)*
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:12](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L12)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:12](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L12)*
 
 ___
 
@@ -165,7 +165,7 @@ ___
 
 *Inherited from [ResponseBuilder](responsebuilder.md).[buildResponse](responsebuilder.md#buildresponse)*
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:18](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L18)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:18](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L18)*
 
 Returns this with fields only
 

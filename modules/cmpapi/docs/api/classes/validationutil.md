@@ -32,7 +32,7 @@ Validation class used to organize reusable validation methods
 
 ▸ **isArray**(obj: *`any`*): `boolean`
 
-*Defined in [validation/ValidationUtil.ts:6](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationUtil.ts#L6)*
+*Defined in [validation/ValidationUtil.ts:6](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationUtil.ts#L6)*
 
 **Parameters:**
 
@@ -49,7 +49,7 @@ ___
 
 ▸ **isFunction**(obj: *`any`*): `boolean`
 
-*Defined in [validation/ValidationUtil.ts:55](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationUtil.ts#L55)*
+*Defined in [validation/ValidationUtil.ts:55](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationUtil.ts#L55)*
 
 **Parameters:**
 
@@ -66,7 +66,7 @@ ___
 
 ▸ **isGtrZeroIntegerArray**(ray: *`number`[]*): `boolean`
 
-*Defined in [validation/ValidationUtil.ts:12](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationUtil.ts#L12)*
+*Defined in [validation/ValidationUtil.ts:12](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationUtil.ts#L12)*
 
 **Parameters:**
 
@@ -83,7 +83,7 @@ ___
 
 ▸ **isInteger**(obj: *`any`*): `boolean`
 
-*Defined in [validation/ValidationUtil.ts:37](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationUtil.ts#L37)*
+*Defined in [validation/ValidationUtil.ts:37](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationUtil.ts#L37)*
 
 **Parameters:**
 
@@ -100,7 +100,7 @@ ___
 
 ▸ **isIntegerGtrOne**(obj: *`any`*): `boolean`
 
-*Defined in [validation/ValidationUtil.ts:49](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationUtil.ts#L49)*
+*Defined in [validation/ValidationUtil.ts:49](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationUtil.ts#L49)*
 
 **Parameters:**
 
@@ -117,7 +117,7 @@ ___
 
 ▸ **isIntegerGtrZero**(obj: *`any`*): `boolean`
 
-*Defined in [validation/ValidationUtil.ts:43](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationUtil.ts#L43)*
+*Defined in [validation/ValidationUtil.ts:43](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationUtil.ts#L43)*
 
 **Parameters:**
 
@@ -134,7 +134,7 @@ ___
 
 ▸ **isNonEmptyString**(obj: *`any`*): `boolean`
 
-*Defined in [validation/ValidationUtil.ts:25](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationUtil.ts#L25)*
+*Defined in [validation/ValidationUtil.ts:25](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationUtil.ts#L25)*
 
 **Parameters:**
 
@@ -151,7 +151,7 @@ ___
 
 ▸ **isNumber**(obj: *`any`*): `boolean`
 
-*Defined in [validation/ValidationUtil.ts:31](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationUtil.ts#L31)*
+*Defined in [validation/ValidationUtil.ts:31](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationUtil.ts#L31)*
 
 **Parameters:**
 
@@ -168,7 +168,7 @@ ___
 
 ▸ **isString**(obj: *`any`*): `boolean`
 
-*Defined in [validation/ValidationUtil.ts:19](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationUtil.ts#L19)*
+*Defined in [validation/ValidationUtil.ts:19](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationUtil.ts#L19)*
 
 **Parameters:**
 

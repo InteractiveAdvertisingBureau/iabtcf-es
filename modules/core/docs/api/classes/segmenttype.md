@@ -30,7 +30,7 @@
 
 **● 0**: *`string`* =  Segments.core
 
-*Defined in encoder/segment/SegmentType.ts:11*
+*Defined in [encoder/segment/SegmentType.ts:11](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/segment/SegmentType.ts#L11)*
 
 ___
 <a id="1"></a>
@@ -39,7 +39,7 @@ ___
 
 **● 1**: *`string`* =  Segments.vendorsDisclosed
 
-*Defined in encoder/segment/SegmentType.ts:12*
+*Defined in [encoder/segment/SegmentType.ts:12](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/segment/SegmentType.ts#L12)*
 
 ___
 <a id="2"></a>
@@ -48,7 +48,7 @@ ___
 
 **● 2**: *`string`* =  Segments.vendorsAllowed
 
-*Defined in encoder/segment/SegmentType.ts:13*
+*Defined in [encoder/segment/SegmentType.ts:13](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/segment/SegmentType.ts#L13)*
 
 ___
 <a id="3"></a>
@@ -57,7 +57,7 @@ ___
 
 **● 3**: *`string`* =  Segments.publisherTC
 
-*Defined in encoder/segment/SegmentType.ts:14*
+*Defined in [encoder/segment/SegmentType.ts:14](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/segment/SegmentType.ts#L14)*
 
 ___
 <a id="core"></a>
@@ -66,7 +66,7 @@ ___
 
 **● core**: *`number`* = 0
 
-*Defined in encoder/segment/SegmentType.ts:16*
+*Defined in [encoder/segment/SegmentType.ts:16](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/segment/SegmentType.ts#L16)*
 
 ___
 <a id="numtypes"></a>
@@ -75,7 +75,7 @@ ___
 
 **● numTypes**: *`number`* = 4
 
-*Defined in encoder/segment/SegmentType.ts:21*
+*Defined in [encoder/segment/SegmentType.ts:21](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/segment/SegmentType.ts#L21)*
 
 ___
 <a id="publishertc"></a>
@@ -84,7 +84,7 @@ ___
 
 **● publisherTC**: *`number`* = 3
 
-*Defined in encoder/segment/SegmentType.ts:19*
+*Defined in [encoder/segment/SegmentType.ts:19](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/segment/SegmentType.ts#L19)*
 
 ___
 <a id="vendorsallowed"></a>
@@ -93,7 +93,7 @@ ___
 
 **● vendorsAllowed**: *`number`* = 2
 
-*Defined in encoder/segment/SegmentType.ts:18*
+*Defined in [encoder/segment/SegmentType.ts:18](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/segment/SegmentType.ts#L18)*
 
 ___
 <a id="vendorsdisclosed"></a>
@@ -102,7 +102,7 @@ ___
 
 **● vendorsDisclosed**: *`number`* = 1
 
-*Defined in encoder/segment/SegmentType.ts:17*
+*Defined in [encoder/segment/SegmentType.ts:17](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/segment/SegmentType.ts#L17)*
 
 ___
 

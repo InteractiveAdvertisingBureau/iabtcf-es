@@ -23,7 +23,7 @@
 
 ▸ **decode**(encodedString: *`string`*, tcModel: *[TCModel](tcmodel.md)*): [TCModel](tcmodel.md)
 
-*Defined in encoder/segment/OOBVendorsEncoder.ts:66*
+*Defined in [encoder/segment/OOBVendorsEncoder.ts:66](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/segment/OOBVendorsEncoder.ts#L66)*
 
 **Parameters:**
 
@@ -41,7 +41,7 @@ ___
 
 ▸ **encode**(tcModel: *[TCModel](tcmodel.md)*, type: *`string`*): `string`
 
-*Defined in encoder/segment/OOBVendorsEncoder.ts:43*
+*Defined in [encoder/segment/OOBVendorsEncoder.ts:43](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/segment/OOBVendorsEncoder.ts#L43)*
 
 **Parameters:**
 

@@ -49,7 +49,7 @@ TCData response model to be returned to TCF Api Command issuer
 
 *Inherited from [Response](response.md).[cmpId](response.md#cmpid)*
 
-*Defined in [model/responses/Response.ts:7](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/Response.ts#L7)*
+*Defined in [model/responses/Response.ts:7](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/Response.ts#L7)*
 
 ___
 <a id="cmpversion"></a>
@@ -60,7 +60,7 @@ ___
 
 *Inherited from [Response](response.md).[cmpVersion](response.md#cmpversion)*
 
-*Defined in [model/responses/Response.ts:8](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/Response.ts#L8)*
+*Defined in [model/responses/Response.ts:8](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/Response.ts#L8)*
 
 ___
 <a id="eventstatus"></a>
@@ -69,7 +69,7 @@ ___
 
 **● eventStatus**: *`string`*
 
-*Defined in [model/responses/TCData.ts:11](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/TCData.ts#L11)*
+*Defined in [model/responses/TCData.ts:11](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/TCData.ts#L11)*
 
 ___
 <a id="gdprapplies"></a>
@@ -80,7 +80,7 @@ ___
 
 *Inherited from [Response](response.md).[gdprApplies](response.md#gdprapplies)*
 
-*Defined in [model/responses/Response.ts:9](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/Response.ts#L9)*
+*Defined in [model/responses/Response.ts:9](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/Response.ts#L9)*
 
 ___
 <a id="isservicespecific"></a>
@@ -89,7 +89,7 @@ ___
 
 **● isServiceSpecific**: *`boolean` \| [BoolInt](../#boolint)*
 
-*Defined in [model/responses/TCData.ts:12](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/TCData.ts#L12)*
+*Defined in [model/responses/TCData.ts:12](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/TCData.ts#L12)*
 
 ___
 <a id="outofband"></a>
@@ -98,7 +98,7 @@ ___
 
 **● outOfBand**: *`object` \| `undefined`*
 
-*Defined in [model/responses/TCData.ts:16](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/TCData.ts#L16)*
+*Defined in [model/responses/TCData.ts:16](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/TCData.ts#L16)*
 
 ___
 <a id="publisher"></a>
@@ -107,7 +107,7 @@ ___
 
 **● publisher**: *`object`*
 
-*Defined in [model/responses/TCData.ts:35](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/TCData.ts#L35)*
+*Defined in [model/responses/TCData.ts:35](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/TCData.ts#L35)*
 
 #### Type declaration
 
@@ -130,7 +130,7 @@ ___
 
 **● publisherCC**: *`string`*
 
-*Defined in [model/responses/TCData.ts:14](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/TCData.ts#L14)*
+*Defined in [model/responses/TCData.ts:14](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/TCData.ts#L14)*
 
 ___
 <a id="purpose"></a>
@@ -139,7 +139,7 @@ ___
 
 **● purpose**: *`object`*
 
-*Defined in [model/responses/TCData.ts:22](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/TCData.ts#L22)*
+*Defined in [model/responses/TCData.ts:22](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/TCData.ts#L22)*
 
 #### Type declaration
 
@@ -154,7 +154,7 @@ ___
 
 **● purposeOneTreatment**: *`boolean` \| [BoolInt](../#boolint)*
 
-*Defined in [model/responses/TCData.ts:15](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/TCData.ts#L15)*
+*Defined in [model/responses/TCData.ts:15](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/TCData.ts#L15)*
 
 ___
 <a id="specialfeatureoptins"></a>
@@ -163,7 +163,7 @@ ___
 
 **● specialFeatureOptins**: *[BooleanVector](booleanvector.md) \| `string`*
 
-*Defined in [model/responses/TCData.ts:34](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/TCData.ts#L34)*
+*Defined in [model/responses/TCData.ts:34](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/TCData.ts#L34)*
 
 ___
 <a id="tcstring"></a>
@@ -172,7 +172,7 @@ ___
 
 **● tcString**: *`string`*
 
-*Defined in [model/responses/TCData.ts:10](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/TCData.ts#L10)*
+*Defined in [model/responses/TCData.ts:10](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/TCData.ts#L10)*
 
 ___
 <a id="tcfpolicyversion"></a>
@@ -183,7 +183,7 @@ ___
 
 *Inherited from [Response](response.md).[tcfPolicyVersion](response.md#tcfpolicyversion)*
 
-*Defined in [model/responses/Response.ts:10](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/Response.ts#L10)*
+*Defined in [model/responses/Response.ts:10](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/Response.ts#L10)*
 
 ___
 <a id="usenonstandardstacks"></a>
@@ -192,7 +192,7 @@ ___
 
 **● useNonStandardStacks**: *`boolean` \| [BoolInt](../#boolint)*
 
-*Defined in [model/responses/TCData.ts:13](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/TCData.ts#L13)*
+*Defined in [model/responses/TCData.ts:13](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/TCData.ts#L13)*
 
 ___
 <a id="vendor"></a>
@@ -201,7 +201,7 @@ ___
 
 **● vendor**: *`object`*
 
-*Defined in [model/responses/TCData.ts:28](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/TCData.ts#L28)*
+*Defined in [model/responses/TCData.ts:28](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/TCData.ts#L28)*
 
 #### Type declaration
 

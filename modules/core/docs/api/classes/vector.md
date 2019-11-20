@@ -6,13 +6,19 @@ Vector class is like a Set except it keeps track of a max id
 
 ## Hierarchy
 
-**Vector**
+ [Cloneable](cloneable.md)<[Vector](vector.md)>
+
+**↳ Vector**
 
 ## Index
 
 ### Constructors
 
 * [constructor](vector.md#constructor)
+
+### Properties
+
+* [bitLength](vector.md#bitlength)
 
 ### Accessors
 
@@ -21,6 +27,7 @@ Vector class is like a Set except it keeps track of a max id
 
 ### Methods
 
+* [clone](vector.md#clone)
 * [empty](vector.md#empty)
 * [forEach](vector.md#foreach)
 * [has](vector.md#has)
@@ -37,7 +44,9 @@ Vector class is like a Set except it keeps track of a max id
 
 ⊕ **new Vector**(ids?: *[idOrIds](../#idorids)*): [Vector](vector.md)
 
-*Defined in [model/Vector.ts:14](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Vector.ts#L14)*
+*Overrides [Cloneable](cloneable.md).[constructor](cloneable.md#constructor)*
+
+*Defined in [model/Vector.ts:20](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/Vector.ts#L20)*
 
 constructor
 
@@ -51,6 +60,20 @@ constructor
 
 ___
 
+## Properties
+
+<a id="bitlength"></a>
+
+###  bitLength
+
+**● bitLength**: *`number`* = 0
+
+*Defined in [model/Vector.ts:15](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/Vector.ts#L15)*
+
+if this originatd from an encoded string we'll need a place to store the bit length; it can be set and got from here
+
+___
+
 ## Accessors
 
 <a id="maxid"></a>
@@ -59,7 +82,7 @@ ___
 
 **get maxId**(): `number`
 
-*Defined in [model/Vector.ts:37](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Vector.ts#L37)*
+*Defined in [model/Vector.ts:55](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/Vector.ts#L55)*
 
 maxId
 
@@ -73,7 +96,7 @@ ___
 
 **get size**(): `number`
 
-*Defined in [model/Vector.ts:150](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Vector.ts#L150)*
+*Defined in [model/Vector.ts:177](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/Vector.ts#L177)*
 
 **Returns:** `number`
 
@@ -81,13 +104,49 @@ ___
 
 ## Methods
 
+<a id="_clone"></a>
+
+### `<Private>` _clone
+
+▸ **_clone**(...constructorArgs: *[AnyArray](../#anyarray)*): [Vector](vector.md)
+
+*Inherited from [Cloneable](cloneable.md).[_clone](cloneable.md#_clone)*
+
+*Defined in [cloneable/Cloneable.ts:52](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/cloneable/Cloneable.ts#L52)*
+
+Method to be called in the child concrete class's clone method
+
+**Parameters:**
+
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| `Rest` constructorArgs | [AnyArray](../#anyarray) |  arguments to be passed to the cloned objects constructor if need be |
+
+**Returns:** [Vector](vector.md)
+
+___
+<a id="clone"></a>
+
+###  clone
+
+▸ **clone**(): [Vector](vector.md)
+
+*Overrides [Cloneable](cloneable.md).[clone](cloneable.md#clone)*
+
+*Defined in [model/Vector.ts:44](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/Vector.ts#L44)*
+
+Creates a clone of this Vector
+
+**Returns:** [Vector](vector.md)
+
+___
 <a id="empty"></a>
 
 ###  empty
 
 ▸ **empty**(): `void`
 
-*Defined in [model/Vector.ts:123](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Vector.ts#L123)*
+*Defined in [model/Vector.ts:150](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/Vector.ts#L150)*
 
 **Returns:** `void`
 
@@ -98,7 +157,7 @@ ___
 
 ▸ **forEach**(callback: *`function`*): `void`
 
-*Defined in [model/Vector.ts:140](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Vector.ts#L140)*
+*Defined in [model/Vector.ts:167](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/Vector.ts#L167)*
 
 forEach - to traverse from id=1 to id=maxId in a sequential non-sparse manner
 
@@ -119,7 +178,7 @@ ___
 
 ▸ **has**(id: *`number`*): `boolean`
 
-*Defined in [model/Vector.ts:49](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Vector.ts#L49)*
+*Defined in [model/Vector.ts:67](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/Vector.ts#L67)*
 
 get
 
@@ -139,7 +198,7 @@ ___
 
 ▸ **set**(id: *[idOrIds](../#idorids)*): `void`
 
-*Defined in [model/Vector.ts:100](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Vector.ts#L100)*
+*Defined in [model/Vector.ts:123](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/Vector.ts#L123)*
 
 set - sets an id assumed to be a truthy value by its presence
 
@@ -158,7 +217,7 @@ ___
 
 ▸ **unset**(id: *[idOrIds](../#idorids)*): `void`
 
-*Defined in [model/Vector.ts:63](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Vector.ts#L63)*
+*Defined in [model/Vector.ts:81](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/Vector.ts#L81)*
 
 unset
 

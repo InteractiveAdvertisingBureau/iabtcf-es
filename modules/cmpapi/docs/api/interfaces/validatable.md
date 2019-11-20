@@ -34,7 +34,7 @@ Interface requires class implements the validate method
 
 ▸ **validate**(failCallbackIfNotValid?: *`undefined` \| `false` \| `true`*): [ValidationResult](validationresult.md)
 
-*Defined in [validation/Validatable.ts:8](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/Validatable.ts#L8)*
+*Defined in [validation/Validatable.ts:8](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/Validatable.ts#L8)*
 
 **Parameters:**
 

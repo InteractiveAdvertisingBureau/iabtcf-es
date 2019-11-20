@@ -23,7 +23,7 @@
 
 ▸ **decode**(value: *`string`*): `boolean`
 
-*Defined in encoder/field/BooleanEncoder.ts:9*
+*Defined in [encoder/field/BooleanEncoder.ts:9](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/field/BooleanEncoder.ts#L9)*
 
 **Parameters:**
 
@@ -40,7 +40,7 @@ ___
 
 ▸ **encode**(value: *`boolean`*): `string`
 
-*Defined in encoder/field/BooleanEncoder.ts:3*
+*Defined in [encoder/field/BooleanEncoder.ts:3](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/field/BooleanEncoder.ts#L3)*
 
 **Parameters:**
 

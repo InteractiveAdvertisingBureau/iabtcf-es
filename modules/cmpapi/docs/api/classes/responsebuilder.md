@@ -43,7 +43,7 @@ Base response class containing all basic required response data and common metho
 
 *Implementation of [Response](../interfaces/response.md).[cmpId](../interfaces/response.md#cmpid)*
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:9](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L9)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:9](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L9)*
 
 ___
 <a id="cmpversion"></a>
@@ -54,7 +54,7 @@ ___
 
 *Implementation of [Response](../interfaces/response.md).[cmpVersion](../interfaces/response.md#cmpversion)*
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:10](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L10)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:10](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L10)*
 
 ___
 <a id="gdprapplies"></a>
@@ -65,7 +65,7 @@ ___
 
 *Implementation of [Response](../interfaces/response.md).[gdprApplies](../interfaces/response.md#gdprapplies)*
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:11](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L11)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:11](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L11)*
 
 ___
 <a id="tcfpolicyversion"></a>
@@ -76,7 +76,7 @@ ___
 
 *Implementation of [Response](../interfaces/response.md).[tcfPolicyVersion](../interfaces/response.md#tcfpolicyversion)*
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:12](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L12)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:12](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L12)*
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 ▸ **buildResponse**(): `this`
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:18](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L18)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:18](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L18)*
 
 Returns this with fields only
 

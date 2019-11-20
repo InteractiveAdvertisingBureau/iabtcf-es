@@ -50,7 +50,7 @@ Executes a ping command request and executes its callback method with ping data
 
 *Overrides [BaseCommand](basecommand.md).[constructor](basecommand.md#constructor)*
 
-*Defined in [command/commands/PingCommand.ts:12](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/PingCommand.ts#L12)*
+*Defined in [command/commands/PingCommand.ts:12](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/PingCommand.ts#L12)*
 
 **Parameters:**
 
@@ -76,7 +76,7 @@ ___
 
 *Inherited from [BaseCommand](basecommand.md).[callback](basecommand.md#callback)*
 
-*Defined in [command/commands/BaseCommand.ts:18](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/BaseCommand.ts#L18)*
+*Defined in [command/commands/BaseCommand.ts:18](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/BaseCommand.ts#L18)*
 
 ___
 <a id="cmpdata"></a>
@@ -87,7 +87,7 @@ ___
 
 *Inherited from [BaseCommand](basecommand.md).[cmpData](basecommand.md#cmpdata)*
 
-*Defined in [command/commands/BaseCommand.ts:13](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/BaseCommand.ts#L13)*
+*Defined in [command/commands/BaseCommand.ts:13](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/BaseCommand.ts#L13)*
 
 ___
 <a id="command"></a>
@@ -98,7 +98,7 @@ ___
 
 *Inherited from [BaseCommand](basecommand.md).[command](basecommand.md#command)*
 
-*Defined in [command/commands/BaseCommand.ts:15](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/BaseCommand.ts#L15)*
+*Defined in [command/commands/BaseCommand.ts:15](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/BaseCommand.ts#L15)*
 
 ___
 <a id="param"></a>
@@ -109,7 +109,7 @@ ___
 
 *Inherited from [BaseCommand](basecommand.md).[param](basecommand.md#param)*
 
-*Defined in [command/commands/BaseCommand.ts:19](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/BaseCommand.ts#L19)*
+*Defined in [command/commands/BaseCommand.ts:19](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/BaseCommand.ts#L19)*
 
 ___
 <a id="version"></a>
@@ -120,7 +120,7 @@ ___
 
 *Inherited from [BaseCommand](basecommand.md).[version](basecommand.md#version)*
 
-*Defined in [command/commands/BaseCommand.ts:16](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/BaseCommand.ts#L16)*
+*Defined in [command/commands/BaseCommand.ts:16](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/BaseCommand.ts#L16)*
 
 ___
 <a id="versionstring"></a>
@@ -131,7 +131,7 @@ ___
 
 *Inherited from [BaseCommand](basecommand.md).[versionString](basecommand.md#versionstring)*
 
-*Defined in [command/commands/BaseCommand.ts:17](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/BaseCommand.ts#L17)*
+*Defined in [command/commands/BaseCommand.ts:17](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/BaseCommand.ts#L17)*
 
 ___
 
@@ -145,7 +145,7 @@ ___
 
 *Implementation of [Command](../interfaces/command.md).[execute](../interfaces/command.md#execute)*
 
-*Defined in [command/commands/PingCommand.ts:23](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/PingCommand.ts#L23)*
+*Defined in [command/commands/PingCommand.ts:23](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/PingCommand.ts#L23)*
 
 Executes the ping command
 
@@ -160,7 +160,7 @@ ___
 
 *Inherited from [BaseCommand](basecommand.md).[isValidVendorListVersion](basecommand.md#isvalidvendorlistversion)*
 
-*Defined in [command/commands/BaseCommand.ts:115](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/BaseCommand.ts#L115)*
+*Defined in [command/commands/BaseCommand.ts:115](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/BaseCommand.ts#L115)*
 
 Validates the current vendor list id version
 
@@ -175,7 +175,7 @@ ___
 
 *Inherited from [BaseCommand](basecommand.md).[isVendorsListValid](basecommand.md#isvendorslistvalid)*
 
-*Defined in [command/commands/BaseCommand.ts:93](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/BaseCommand.ts#L93)*
+*Defined in [command/commands/BaseCommand.ts:93](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/BaseCommand.ts#L93)*
 
 **Returns:** `boolean`
 
@@ -188,7 +188,7 @@ ___
 
 *Inherited from [BaseCommand](basecommand.md).[setBaseReturnFields](basecommand.md#setbasereturnfields)*
 
-*Defined in [command/commands/BaseCommand.ts:35](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/BaseCommand.ts#L35)*
+*Defined in [command/commands/BaseCommand.ts:35](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/BaseCommand.ts#L35)*
 
 Sets all the fields on a Return object using current cmp api data
 
@@ -209,7 +209,7 @@ ___
 
 *Inherited from [BaseCommand](basecommand.md).[validate](basecommand.md#validate)*
 
-*Defined in [command/commands/BaseCommand.ts:50](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/BaseCommand.ts#L50)*
+*Defined in [command/commands/BaseCommand.ts:50](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/BaseCommand.ts#L50)*
 
 Validates that the common parameters used to execute a command are valid. If failCallbackIfNotValid is true, the method will call the callback with failed values if not valid.
 

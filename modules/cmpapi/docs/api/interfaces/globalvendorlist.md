@@ -48,7 +48,7 @@ GlobalVendorList response model to be returned to TCF Api Command issuer
 
 *Inherited from [Response](response.md).[cmpId](response.md#cmpid)*
 
-*Defined in [model/responses/Response.ts:7](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/Response.ts#L7)*
+*Defined in [model/responses/Response.ts:7](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/Response.ts#L7)*
 
 ___
 <a id="cmpversion"></a>
@@ -59,7 +59,7 @@ ___
 
 *Inherited from [Response](response.md).[cmpVersion](response.md#cmpversion)*
 
-*Defined in [model/responses/Response.ts:8](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/Response.ts#L8)*
+*Defined in [model/responses/Response.ts:8](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/Response.ts#L8)*
 
 ___
 <a id="features"></a>
@@ -81,7 +81,7 @@ ___
 
 *Inherited from [Response](response.md).[gdprApplies](response.md#gdprapplies)*
 
-*Defined in [model/responses/Response.ts:9](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/Response.ts#L9)*
+*Defined in [model/responses/Response.ts:9](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/Response.ts#L9)*
 
 ___
 <a id="gvlspecificationversion"></a>

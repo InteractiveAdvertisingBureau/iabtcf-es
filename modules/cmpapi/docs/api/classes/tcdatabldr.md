@@ -57,7 +57,7 @@ TCData response builder
 
 ⊕ **new TCDataBldr**(tcModel: *`TCModel`*, eventStatus: *[EventStatus](../enums/eventstatus.md)*, _vendorIds?: *`number`[]*): [TCDataBldr](tcdatabldr.md)
 
-*Defined in [command/responsebuilders/TCDataBldr.ts:50](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L50)*
+*Defined in [command/responsebuilders/TCDataBldr.ts:50](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L50)*
 
 Constructor to create a TCData object from a TCModel
 
@@ -85,7 +85,7 @@ ___
 
 *Inherited from [ResponseBuilder](responsebuilder.md).[cmpId](responsebuilder.md#cmpid)*
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:9](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L9)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:9](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L9)*
 
 ___
 <a id="cmpversion"></a>
@@ -98,7 +98,7 @@ ___
 
 *Inherited from [ResponseBuilder](responsebuilder.md).[cmpVersion](responsebuilder.md#cmpversion)*
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:10](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L10)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:10](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L10)*
 
 ___
 <a id="eventstatus"></a>
@@ -109,7 +109,7 @@ ___
 
 *Implementation of [TCData](../interfaces/tcdata.md).[eventStatus](../interfaces/tcdata.md#eventstatus)*
 
-*Defined in [command/responsebuilders/TCDataBldr.ts:13](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L13)*
+*Defined in [command/responsebuilders/TCDataBldr.ts:13](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L13)*
 
 ___
 <a id="gdprapplies"></a>
@@ -122,7 +122,7 @@ ___
 
 *Inherited from [ResponseBuilder](responsebuilder.md).[gdprApplies](responsebuilder.md#gdprapplies)*
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:11](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L11)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:11](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L11)*
 
 ___
 <a id="isservicespecific"></a>
@@ -133,7 +133,7 @@ ___
 
 *Implementation of [TCData](../interfaces/tcdata.md).[isServiceSpecific](../interfaces/tcdata.md#isservicespecific)*
 
-*Defined in [command/responsebuilders/TCDataBldr.ts:14](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L14)*
+*Defined in [command/responsebuilders/TCDataBldr.ts:14](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L14)*
 
 ___
 <a id="outofband"></a>
@@ -144,7 +144,7 @@ ___
 
 *Implementation of [TCData](../interfaces/tcdata.md).[outOfBand](../interfaces/tcdata.md#outofband)*
 
-*Defined in [command/responsebuilders/TCDataBldr.ts:20](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L20)*
+*Defined in [command/responsebuilders/TCDataBldr.ts:20](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L20)*
 
 ___
 <a id="publisher"></a>
@@ -155,7 +155,7 @@ ___
 
 *Implementation of [TCData](../interfaces/tcdata.md).[publisher](../interfaces/tcdata.md#publisher)*
 
-*Defined in [command/responsebuilders/TCDataBldr.ts:39](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L39)*
+*Defined in [command/responsebuilders/TCDataBldr.ts:39](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L39)*
 
 #### Type declaration
 
@@ -180,7 +180,7 @@ ___
 
 *Implementation of [TCData](../interfaces/tcdata.md).[publisherCC](../interfaces/tcdata.md#publishercc)*
 
-*Defined in [command/responsebuilders/TCDataBldr.ts:16](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L16)*
+*Defined in [command/responsebuilders/TCDataBldr.ts:16](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L16)*
 
 ___
 <a id="purpose"></a>
@@ -191,7 +191,7 @@ ___
 
 *Implementation of [TCData](../interfaces/tcdata.md).[purpose](../interfaces/tcdata.md#purpose)*
 
-*Defined in [command/responsebuilders/TCDataBldr.ts:26](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L26)*
+*Defined in [command/responsebuilders/TCDataBldr.ts:26](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L26)*
 
 #### Type declaration
 
@@ -208,7 +208,7 @@ ___
 
 *Implementation of [TCData](../interfaces/tcdata.md).[purposeOneTreatment](../interfaces/tcdata.md#purposeonetreatment)*
 
-*Defined in [command/responsebuilders/TCDataBldr.ts:17](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L17)*
+*Defined in [command/responsebuilders/TCDataBldr.ts:17](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L17)*
 
 ___
 <a id="specialfeatureoptins"></a>
@@ -219,7 +219,7 @@ ___
 
 *Implementation of [TCData](../interfaces/tcdata.md).[specialFeatureOptins](../interfaces/tcdata.md#specialfeatureoptins)*
 
-*Defined in [command/responsebuilders/TCDataBldr.ts:38](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L38)*
+*Defined in [command/responsebuilders/TCDataBldr.ts:38](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L38)*
 
 ___
 <a id="tcstring"></a>
@@ -230,7 +230,7 @@ ___
 
 *Implementation of [TCData](../interfaces/tcdata.md).[tcString](../interfaces/tcdata.md#tcstring)*
 
-*Defined in [command/responsebuilders/TCDataBldr.ts:12](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L12)*
+*Defined in [command/responsebuilders/TCDataBldr.ts:12](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L12)*
 
 ___
 <a id="tcfpolicyversion"></a>
@@ -243,7 +243,7 @@ ___
 
 *Inherited from [ResponseBuilder](responsebuilder.md).[tcfPolicyVersion](responsebuilder.md#tcfpolicyversion)*
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:12](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L12)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:12](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L12)*
 
 ___
 <a id="usenonstandardstacks"></a>
@@ -254,7 +254,7 @@ ___
 
 *Implementation of [TCData](../interfaces/tcdata.md).[useNonStandardStacks](../interfaces/tcdata.md#usenonstandardstacks)*
 
-*Defined in [command/responsebuilders/TCDataBldr.ts:15](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L15)*
+*Defined in [command/responsebuilders/TCDataBldr.ts:15](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L15)*
 
 ___
 <a id="vendor"></a>
@@ -265,7 +265,7 @@ ___
 
 *Implementation of [TCData](../interfaces/tcdata.md).[vendor](../interfaces/tcdata.md#vendor)*
 
-*Defined in [command/responsebuilders/TCDataBldr.ts:32](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L32)*
+*Defined in [command/responsebuilders/TCDataBldr.ts:32](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L32)*
 
 #### Type declaration
 
@@ -285,7 +285,7 @@ ___
 
 *Inherited from [ResponseBuilder](responsebuilder.md).[buildResponse](responsebuilder.md#buildresponse)*
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:18](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L18)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:18](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L18)*
 
 Returns this with fields only
 
@@ -298,7 +298,7 @@ ___
 
 ▸ **createRestrictions**(tcModel: *`TCModel`*): [Restrictions](../interfaces/restrictions.md)
 
-*Defined in [command/responsebuilders/TCDataBldr.ts:125](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L125)*
+*Defined in [command/responsebuilders/TCDataBldr.ts:125](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L125)*
 
 Creates a restrictions object given a TCModel
 
@@ -317,7 +317,7 @@ ___
 
 ▸ **createVectorField**(ids: *`string`[]*, vector: *`Vector`*): [BooleanVector](../interfaces/booleanvector.md) \| `string`
 
-*Defined in [command/responsebuilders/TCDataBldr.ts:151](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L151)*
+*Defined in [command/responsebuilders/TCDataBldr.ts:151](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/TCDataBldr.ts#L151)*
 
 Creates a string bit field with a value for each id where each value is '1' if its id is in the passed in vector Can be overwritten to return a string
 

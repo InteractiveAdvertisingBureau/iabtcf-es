@@ -38,7 +38,7 @@ Ping response model to be returned to TCF Api Command issuer
 
 **● apiVersion**: *`string`*
 
-*Defined in [model/responses/Ping.ts:11](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/Ping.ts#L11)*
+*Defined in [model/responses/Ping.ts:11](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/Ping.ts#L11)*
 
 ___
 <a id="cmpid"></a>
@@ -49,7 +49,7 @@ ___
 
 *Inherited from [Response](response.md).[cmpId](response.md#cmpid)*
 
-*Defined in [model/responses/Response.ts:7](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/Response.ts#L7)*
+*Defined in [model/responses/Response.ts:7](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/Response.ts#L7)*
 
 ___
 <a id="cmploaded"></a>
@@ -58,7 +58,7 @@ ___
 
 **● cmpLoaded**: *`boolean`*
 
-*Defined in [model/responses/Ping.ts:8](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/Ping.ts#L8)*
+*Defined in [model/responses/Ping.ts:8](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/Ping.ts#L8)*
 
 ___
 <a id="cmpstatus"></a>
@@ -67,7 +67,7 @@ ___
 
 **● cmpStatus**: *[CmpStatus](../enums/cmpstatus.md)*
 
-*Defined in [model/responses/Ping.ts:9](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/Ping.ts#L9)*
+*Defined in [model/responses/Ping.ts:9](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/Ping.ts#L9)*
 
 ___
 <a id="cmpversion"></a>
@@ -78,7 +78,7 @@ ___
 
 *Inherited from [Response](response.md).[cmpVersion](response.md#cmpversion)*
 
-*Defined in [model/responses/Response.ts:8](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/Response.ts#L8)*
+*Defined in [model/responses/Response.ts:8](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/Response.ts#L8)*
 
 ___
 <a id="displaystatus"></a>
@@ -87,7 +87,7 @@ ___
 
 **● displayStatus**: *[DisplayStatus](../enums/displaystatus.md)*
 
-*Defined in [model/responses/Ping.ts:10](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/Ping.ts#L10)*
+*Defined in [model/responses/Ping.ts:10](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/Ping.ts#L10)*
 
 ___
 <a id="gdprapplies"></a>
@@ -98,7 +98,7 @@ ___
 
 *Inherited from [Response](response.md).[gdprApplies](response.md#gdprapplies)*
 
-*Defined in [model/responses/Response.ts:9](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/Response.ts#L9)*
+*Defined in [model/responses/Response.ts:9](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/Response.ts#L9)*
 
 ___
 <a id="gvlversion"></a>
@@ -107,7 +107,7 @@ ___
 
 **● gvlVersion**: *`number`*
 
-*Defined in [model/responses/Ping.ts:12](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/Ping.ts#L12)*
+*Defined in [model/responses/Ping.ts:12](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/Ping.ts#L12)*
 
 ___
 <a id="tcfpolicyversion"></a>
@@ -118,7 +118,7 @@ ___
 
 *Inherited from [Response](response.md).[tcfPolicyVersion](response.md#tcfpolicyversion)*
 
-*Defined in [model/responses/Response.ts:10](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/responses/Response.ts#L10)*
+*Defined in [model/responses/Response.ts:10](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/responses/Response.ts#L10)*
 
 ___
 

@@ -20,7 +20,7 @@
 
 **CMP_UI_SHOWN**:  = "cmpuishown"
 
-*Defined in [status/EventStatus.ts:3](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/status/EventStatus.ts#L3)*
+*Defined in [status/EventStatus.ts:3](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/status/EventStatus.ts#L3)*
 
 ___
 <a id="tc_loaded"></a>
@@ -29,7 +29,7 @@ ___
 
 **TC_LOADED**:  = "tcloaded"
 
-*Defined in [status/EventStatus.ts:2](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/status/EventStatus.ts#L2)*
+*Defined in [status/EventStatus.ts:2](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/status/EventStatus.ts#L2)*
 
 ___
 <a id="user_action_complete"></a>
@@ -38,7 +38,7 @@ ___
 
 **USER_ACTION_COMPLETE**:  = "useractioncomplete"
 
-*Defined in [status/EventStatus.ts:4](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/status/EventStatus.ts#L4)*
+*Defined in [status/EventStatus.ts:4](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/status/EventStatus.ts#L4)*
 
 ___
 

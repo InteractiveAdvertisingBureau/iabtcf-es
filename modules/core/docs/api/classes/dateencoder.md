@@ -23,7 +23,7 @@
 
 ▸ **decode**(value: *`string`*): `Date`
 
-*Defined in encoder/field/DateEncoder.ts:13*
+*Defined in [encoder/field/DateEncoder.ts:13](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/field/DateEncoder.ts#L13)*
 
 **Parameters:**
 
@@ -40,7 +40,7 @@ ___
 
 ▸ **encode**(value: *`Date`*, numBits: *`number`*): `string`
 
-*Defined in encoder/field/DateEncoder.ts:7*
+*Defined in [encoder/field/DateEncoder.ts:7](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/field/DateEncoder.ts#L7)*
 
 **Parameters:**
 

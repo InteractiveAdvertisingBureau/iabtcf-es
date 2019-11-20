@@ -47,7 +47,7 @@
 
 ⊕ **new ConsentLanguages**(): [ConsentLanguages](consentlanguages.md)
 
-*Defined in [model/ConsentLanguages.ts:1](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/ConsentLanguages.ts#L1)*
+*Defined in [model/ConsentLanguages.ts:1](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/ConsentLanguages.ts#L1)*
 
 **Returns:** [ConsentLanguages](consentlanguages.md)
 

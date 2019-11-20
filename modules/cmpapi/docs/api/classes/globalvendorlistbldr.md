@@ -51,7 +51,7 @@ GlobalVendorList response builder
 
 ⊕ **new GlobalVendorListBldr**(gvl: *`GVL`*): [GlobalVendorListBldr](globalvendorlistbldr.md)
 
-*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:18](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L18)*
+*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:18](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L18)*
 
 **Parameters:**
 
@@ -75,7 +75,7 @@ ___
 
 *Inherited from [ResponseBuilder](responsebuilder.md).[cmpId](responsebuilder.md#cmpid)*
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:9](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L9)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:9](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L9)*
 
 ___
 <a id="cmpversion"></a>
@@ -88,7 +88,7 @@ ___
 
 *Inherited from [ResponseBuilder](responsebuilder.md).[cmpVersion](responsebuilder.md#cmpversion)*
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:10](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L10)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:10](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L10)*
 
 ___
 <a id="features"></a>
@@ -99,7 +99,7 @@ ___
 
 *Implementation of [GlobalVendorList](../interfaces/globalvendorlist.md).[features](../interfaces/globalvendorlist.md#features)*
 
-*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:15](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L15)*
+*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:15](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L15)*
 
 ___
 <a id="gdprapplies"></a>
@@ -112,7 +112,7 @@ ___
 
 *Inherited from [ResponseBuilder](responsebuilder.md).[gdprApplies](responsebuilder.md#gdprapplies)*
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:11](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L11)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:11](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L11)*
 
 ___
 <a id="gvlspecificationversion"></a>
@@ -123,7 +123,7 @@ ___
 
 *Implementation of [GlobalVendorList](../interfaces/globalvendorlist.md).[gvlSpecificationVersion](../interfaces/globalvendorlist.md#gvlspecificationversion)*
 
-*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:10](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L10)*
+*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:10](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L10)*
 
 ___
 <a id="lastupdated"></a>
@@ -134,7 +134,7 @@ ___
 
 *Implementation of [GlobalVendorList](../interfaces/globalvendorlist.md).[lastUpdated](../interfaces/globalvendorlist.md#lastupdated)*
 
-*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:12](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L12)*
+*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:12](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L12)*
 
 ___
 <a id="purposes"></a>
@@ -145,7 +145,7 @@ ___
 
 *Implementation of [GlobalVendorList](../interfaces/globalvendorlist.md).[purposes](../interfaces/globalvendorlist.md#purposes)*
 
-*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:13](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L13)*
+*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:13](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L13)*
 
 ___
 <a id="specialfeatures"></a>
@@ -156,7 +156,7 @@ ___
 
 *Implementation of [GlobalVendorList](../interfaces/globalvendorlist.md).[specialFeatures](../interfaces/globalvendorlist.md#specialfeatures)*
 
-*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:16](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L16)*
+*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:16](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L16)*
 
 ___
 <a id="specialpurposes"></a>
@@ -167,7 +167,7 @@ ___
 
 *Implementation of [GlobalVendorList](../interfaces/globalvendorlist.md).[specialPurposes](../interfaces/globalvendorlist.md#specialpurposes)*
 
-*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:14](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L14)*
+*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:14](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L14)*
 
 ___
 <a id="stacks"></a>
@@ -178,7 +178,7 @@ ___
 
 *Implementation of [GlobalVendorList](../interfaces/globalvendorlist.md).[stacks](../interfaces/globalvendorlist.md#stacks)*
 
-*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:18](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L18)*
+*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:18](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L18)*
 
 ___
 <a id="tcfpolicyversion"></a>
@@ -191,7 +191,7 @@ ___
 
 *Inherited from [ResponseBuilder](responsebuilder.md).[tcfPolicyVersion](responsebuilder.md#tcfpolicyversion)*
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:12](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L12)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:12](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L12)*
 
 ___
 <a id="vendorlistversion"></a>
@@ -202,7 +202,7 @@ ___
 
 *Implementation of [GlobalVendorList](../interfaces/globalvendorlist.md).[vendorListVersion](../interfaces/globalvendorlist.md#vendorlistversion)*
 
-*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:11](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L11)*
+*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:11](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L11)*
 
 ___
 <a id="vendors"></a>
@@ -213,7 +213,7 @@ ___
 
 *Implementation of [GlobalVendorList](../interfaces/globalvendorlist.md).[vendors](../interfaces/globalvendorlist.md#vendors)*
 
-*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:17](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L17)*
+*Defined in [command/responsebuilders/GlobalVendorListBldr.ts:17](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/GlobalVendorListBldr.ts#L17)*
 
 ___
 
@@ -227,7 +227,7 @@ ___
 
 *Inherited from [ResponseBuilder](responsebuilder.md).[buildResponse](responsebuilder.md#buildresponse)*
 
-*Defined in [command/responsebuilders/ResponseBuilder.ts:18](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L18)*
+*Defined in [command/responsebuilders/ResponseBuilder.ts:18](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/responsebuilders/ResponseBuilder.ts#L18)*
 
 Returns this with fields only
 

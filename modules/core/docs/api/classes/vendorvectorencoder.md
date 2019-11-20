@@ -27,7 +27,7 @@
 
 **● RANGE_DEFAULT**: *`boolean`* = false
 
-*Defined in encoder/field/VendorVectorEncoder.ts:24*
+*Defined in [encoder/field/VendorVectorEncoder.ts:10](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/field/VendorVectorEncoder.ts#L10)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 ▸ **decode**(value: *`string`*): [Vector](vector.md)
 
-*Defined in encoder/field/VendorVectorEncoder.ts:92*
+*Defined in [encoder/field/VendorVectorEncoder.ts:78](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/field/VendorVectorEncoder.ts#L78)*
 
 **Parameters:**
 
@@ -56,7 +56,7 @@ ___
 
 ▸ **encode**(value: *[Vector](vector.md)*): `string`
 
-*Defined in encoder/field/VendorVectorEncoder.ts:26*
+*Defined in [encoder/field/VendorVectorEncoder.ts:12](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/field/VendorVectorEncoder.ts#L12)*
 
 **Parameters:**
 

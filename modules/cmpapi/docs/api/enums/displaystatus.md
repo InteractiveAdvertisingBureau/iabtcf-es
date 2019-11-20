@@ -26,7 +26,7 @@ An enum representing all the possible statuses for the displayStatus returned th
 
 **DISABLED**:  = "disabled"
 
-*Defined in [status/DisplayStatus.ts:12](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/status/DisplayStatus.ts#L12)*
+*Defined in [status/DisplayStatus.ts:12](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/status/DisplayStatus.ts#L12)*
 
 ___
 <a id="hidden"></a>
@@ -35,7 +35,7 @@ ___
 
 **HIDDEN**:  = "hidden"
 
-*Defined in [status/DisplayStatus.ts:11](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/status/DisplayStatus.ts#L11)*
+*Defined in [status/DisplayStatus.ts:11](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/status/DisplayStatus.ts#L11)*
 
 ___
 <a id="visible"></a>
@@ -44,7 +44,7 @@ ___
 
 **VISIBLE**:  = "visible"
 
-*Defined in [status/DisplayStatus.ts:10](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/status/DisplayStatus.ts#L10)*
+*Defined in [status/DisplayStatus.ts:10](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/status/DisplayStatus.ts#L10)*
 
 ___
 

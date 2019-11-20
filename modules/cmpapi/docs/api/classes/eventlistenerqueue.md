@@ -24,7 +24,7 @@
 
 ▸ **add**(callback: *[CallbackFunction](../#callbackfunction)*, command: *[Command](../interfaces/command.md)*): `void`
 
-*Defined in [command/queues/EventListenerQueue.ts:8](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/queues/EventListenerQueue.ts#L8)*
+*Defined in [command/queues/EventListenerQueue.ts:8](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/queues/EventListenerQueue.ts#L8)*
 
 **Parameters:**
 
@@ -42,7 +42,7 @@ ___
 
 ▸ **executeCommands**(): `void`
 
-*Defined in [command/queues/EventListenerQueue.ts:20](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/queues/EventListenerQueue.ts#L20)*
+*Defined in [command/queues/EventListenerQueue.ts:20](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/queues/EventListenerQueue.ts#L20)*
 
 **Returns:** `void`
 
@@ -53,7 +53,7 @@ ___
 
 ▸ **remove**(callback: *[CallbackFunction](../#callbackfunction)*): `boolean`
 
-*Defined in [command/queues/EventListenerQueue.ts:14](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/queues/EventListenerQueue.ts#L14)*
+*Defined in [command/queues/EventListenerQueue.ts:14](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/queues/EventListenerQueue.ts#L14)*
 
 **Parameters:**
 

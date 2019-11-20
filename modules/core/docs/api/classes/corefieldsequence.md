@@ -40,7 +40,7 @@
 
 *Implementation of [VersionMap](../interfaces/versionmap.md).[1](../interfaces/versionmap.md#1)*
 
-*Defined in encoder/sequence/CoreFieldSequence.ts:15*
+*Defined in [encoder/sequence/CoreFieldSequence.ts:6](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/sequence/CoreFieldSequence.ts#L6)*
 
 ___
 <a id="2"></a>
@@ -71,7 +71,7 @@ ___
 
 *Implementation of [VersionMap](../interfaces/versionmap.md).[2](../interfaces/versionmap.md#2)*
 
-*Defined in encoder/sequence/CoreFieldSequence.ts:27*
+*Defined in [encoder/sequence/CoreFieldSequence.ts:18](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/sequence/CoreFieldSequence.ts#L18)*
 
 ___
 

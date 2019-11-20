@@ -34,7 +34,7 @@ Class to hold and execute commands that are not yet ready to be processed
 
 ⊕ **new CommandQueue**(commands?: *[Command](../interfaces/command.md)[]*): [CommandQueue](commandqueue.md)
 
-*Defined in [command/queues/CommandQueue.ts:8](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/queues/CommandQueue.ts#L8)*
+*Defined in [command/queues/CommandQueue.ts:8](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/queues/CommandQueue.ts#L8)*
 
 Constructor
 
@@ -56,7 +56,7 @@ ___
 
 **get hasCommands**(): `boolean`
 
-*Defined in [command/queues/CommandQueue.ts:24](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/queues/CommandQueue.ts#L24)*
+*Defined in [command/queues/CommandQueue.ts:24](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/queues/CommandQueue.ts#L24)*
 
 Returns true if we currently have commands waiting to be executed
 
@@ -72,7 +72,7 @@ ___
 
 ▸ **executeAndClearCommands**(): `void`
 
-*Defined in [command/queues/CommandQueue.ts:57](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/queues/CommandQueue.ts#L57)*
+*Defined in [command/queues/CommandQueue.ts:57](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/queues/CommandQueue.ts#L57)*
 
 Executes all commands in the queue and clears the queue
 
@@ -85,7 +85,7 @@ ___
 
 ▸ **queueCommand**(command: *[Command](../interfaces/command.md)*): `void`
 
-*Defined in [command/queues/CommandQueue.ts:34](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/queues/CommandQueue.ts#L34)*
+*Defined in [command/queues/CommandQueue.ts:34](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/queues/CommandQueue.ts#L34)*
 
 Adds a {Command} to the queue
 
@@ -104,7 +104,7 @@ ___
 
 ▸ **queueCommands**(commands: *[Command](../interfaces/command.md)[]*): `void`
 
-*Defined in [command/queues/CommandQueue.ts:46](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/queues/CommandQueue.ts#L46)*
+*Defined in [command/queues/CommandQueue.ts:46](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/queues/CommandQueue.ts#L46)*
 
 Adds a list of {Command} to the queue
 
