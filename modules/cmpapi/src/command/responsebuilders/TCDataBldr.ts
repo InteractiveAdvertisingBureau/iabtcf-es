@@ -1,14 +1,13 @@
 import {TCModel, TCString, Vector} from '@iabtcf/core';
+import {BooleanVector, createBooleanVector, Restrictions, TCData} from '../../model';
 import {EventStatus} from '../../status';
 import {BoolInt} from '../../types';
-import {BooleanVector, createBooleanVector} from '../BooleanVector';
-import {Restrictions} from '../Restrictions';
-import {Return} from './Return';
+import {ResponseBuilder} from './ResponseBuilder';
 
 /**
- * TCData Class represents consent data
+ * TCData response builder
  */
-export class TCData extends Return {
+export class TCDataBldr extends ResponseBuilder implements TCData {
 
   public tcString: string;
   public eventStatus: string;

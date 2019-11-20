@@ -7,11 +7,11 @@ import {
   GlobalVendorList,
   IATCDataCallback,
   InAppTCData,
-  Ping,
   PingCallback,
+  Ping,
   RemoveListenerCallback,
-  TCData,
   TCDataCallback,
+  TCData,
   VendorListCallback,
 } from '../src';
 import {CustomCommandRegistration} from '../src/command';

@@ -1,10 +1,11 @@
-import {Declarations, Feature, GVL, IntMap, Purpose, Stack, Vendor, VendorList} from '@iabtcf/core';
-import {Return} from './Return';
+import {Feature, GVL, IntMap, Purpose, Stack, Vendor} from '@iabtcf/core';
+import {GlobalVendorList} from '../../model';
+import {ResponseBuilder} from './ResponseBuilder';
 
-interface GlobalVendorListFields extends VendorList, Declarations {}
-
-// Todo: we are thinking of making this just the interface. What about base return values?
-export class GlobalVendorList extends Return implements GlobalVendorListFields {
+/**
+ * GlobalVendorList response builder
+ */
+export class GlobalVendorListBldr extends ResponseBuilder implements GlobalVendorList {
 
   public gvlSpecificationVersion: number;
   public vendorListVersion: number;

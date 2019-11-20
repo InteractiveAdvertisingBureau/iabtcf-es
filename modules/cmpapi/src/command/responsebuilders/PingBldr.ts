@@ -1,8 +1,11 @@
-import {CmpStatus, DisplayStatus,} from '../../status';
+import {Ping} from '../../model';
+import {CmpStatus, DisplayStatus} from '../../status';
+import {ResponseBuilder} from './ResponseBuilder';
 
-import {Return} from './Return';
-
-export class Ping extends Return {
+/**
+ * Ping response builder
+ */
+export class PingBldr extends ResponseBuilder implements Ping {
 
   /**
    * true - CMP main script is loaded

@@ -1,5 +1,5 @@
 import {CmpDataReader} from '../../cmpdata';
-import {Return} from '../../model/returned/Return';
+import {ResponseBuilder} from '../responsebuilders/ResponseBuilder';
 import {Param} from '../../types';
 import {ValidationMessages, ValidationResult, ValidationUtil} from '../../validation';
 import {Callback} from '../callback/Callback';
@@ -30,9 +30,9 @@ export abstract class BaseCommand {
 
   /**
      * Sets all the fields on a Return object using current cmp api data
-     * @param {Return} returnObj a Return object
+     * @param {ResponseBuilder} returnObj a Return object
      */
-  protected setBaseReturnFields(returnObj: Return): void {
+  protected setBaseReturnFields(returnObj: ResponseBuilder): void {
 
     returnObj.cmpId = this.cmpData.getCmpId();
     returnObj.cmpVersion = this.cmpData.getCmpVersion();

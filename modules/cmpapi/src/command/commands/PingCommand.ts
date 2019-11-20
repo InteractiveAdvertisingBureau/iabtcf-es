@@ -1,8 +1,8 @@
 import {CmpDataReader} from '../../cmpdata';
-import {Ping} from '../../model';
 import {Param, PingCallback} from '../../types';
 import {Validatable} from '../../validation';
 import {Callback} from '../callback/Callback';
+import {PingBldr} from '../responsebuilders';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
@@ -22,7 +22,7 @@ export class PingCommand extends BaseCommand implements Command, Validatable {
    */
   public execute(): void {
 
-    const ping = new Ping();
+    const ping = new PingBldr();
     this.setBaseReturnFields(ping);
 
     if (this.cmpData.tcModelIsSet) {
@@ -36,7 +36,7 @@ export class PingCommand extends BaseCommand implements Command, Validatable {
     ping.displayStatus = this.cmpData.getDisplayStatus();
     ping.cmpLoaded = true;
 
-    (this.callback.function as PingCallback)(ping);
+    (this.callback.function as PingCallback)(ping.buildResponse());
 
   }
 

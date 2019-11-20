@@ -1,14 +1,15 @@
 import {TCModel, Vector} from '@iabtcf/core';
+import {BooleanVector, InAppTCData, Restrictions} from '../../model';
 import {EventStatus} from '../../status';
 import {BoolString} from '../../types';
-import {BooleanVector} from '../BooleanVector';
-import {Restrictions} from '../Restrictions';
-import {TCData} from './TCData';
+import {TCDataBldr} from './TCDataBldr';
 
 /**
- * InAppTCData
+ * InAppTCData response builder
  */
-export class InAppTCData extends TCData {
+export class InAppTCDataBldr extends TCDataBldr implements InAppTCData {
+
+  public outOfBand: undefined;
 
   public constructor(tcModel: TCModel, eventStatus: EventStatus, vendorIds: number[]) {
 

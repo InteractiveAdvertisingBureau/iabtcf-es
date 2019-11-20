@@ -1,9 +1,9 @@
 import {GVL} from '@iabtcf/core';
 import {CmpDataReader} from '../../cmpdata';
-import {GlobalVendorList} from '../../model';
 import {Param, VendorListCallback} from '../../types';
 import {Validatable, ValidationMessages, ValidationResult} from '../../validation';
 import {Callback} from '../callback/Callback';
+import {GlobalVendorListBldr} from '../responsebuilders';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
@@ -32,10 +32,10 @@ export class GetVendorListCommand extends BaseCommand implements Command, Valida
 
     _gvl.readyPromise.then(() => {
 
-      const gvl = new GlobalVendorList(_gvl);
+      const gvl = new GlobalVendorListBldr(_gvl);
       this.setBaseReturnFields(gvl);
 
-      (this.callback.function as VendorListCallback)(gvl, true);
+      (this.callback.function as VendorListCallback)(gvl.buildResponse(), true);
 
     }, ((reason) => this.callback.fail(reason)));
 

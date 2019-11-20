@@ -1,8 +1,8 @@
 import {CmpDataReader} from '../../cmpdata';
-import {TCData} from '../../model';
 import {Param, TCDataCallback} from '../../types';
 import {Validatable, ValidationMessages, ValidationResult} from '../../validation';
 import {Callback} from '../callback/Callback';
+import {TCDataBldr} from '../responsebuilders';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
@@ -19,9 +19,9 @@ export class GetTcDataCommand extends BaseCommand implements Command, Validatabl
    */
   public execute(): void {
 
-    const tcData = new TCData(this.cmpData.getTcModel(), this.cmpData.getEventStatus(), this.param as number[]);
+    const tcData = new TCDataBldr(this.cmpData.getTcModel(), this.cmpData.getEventStatus(), this.param as number[]);
     this.setBaseReturnFields(tcData);
-    (this.callback.function as TCDataCallback)(tcData, true);
+    (this.callback.function as TCDataCallback)(tcData.buildResponse(), true);
 
   }
 
