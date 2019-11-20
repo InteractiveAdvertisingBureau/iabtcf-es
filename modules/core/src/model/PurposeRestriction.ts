@@ -1,7 +1,8 @@
+import {Cloneable} from '../cloneable/Cloneable';
 import {TCModelError} from '../errors';
 import {RestrictionType} from './RestrictionType';
 
-export class PurposeRestriction {
+export class PurposeRestriction extends Cloneable<PurposeRestriction> {
 
   public static hashSeparator: string = '-';
 
@@ -19,6 +20,8 @@ export class PurposeRestriction {
    */
   public constructor(purposeId?: number, restrictionType?: RestrictionType) {
 
+    super(PurposeRestriction);
+
     if (purposeId !== undefined) {
 
       this.purposeId = purposeId;
@@ -32,6 +35,17 @@ export class PurposeRestriction {
     }
 
   }
+
+  /**
+   * Creates a clone of this PurposeRestriction
+   * @return {PurposeRestriction}
+   */
+  public clone(): PurposeRestriction {
+
+    return this._clone();
+
+  }
+
   public static unHash(hash: string): PurposeRestriction {
 
     const splitUp: string[] = hash.split(this.hashSeparator);

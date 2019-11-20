@@ -1,4 +1,4 @@
 export * from './CmpApi';
-export * from './Types';
+export * from './types/';
 export * from './model/';
-export * from './model/status';
+export * from './status';

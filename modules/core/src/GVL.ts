@@ -1,22 +1,9 @@
-import {Json} from './Json';
+import {Cloneable} from './cloneable/Cloneable';
 import {GVLError} from './errors';
+import {Json} from './Json';
+import {ConsentLanguages, IntMap} from './model';
+import {ByPurposeVendorMap, Declarations, Feature, IDSetMap, Purpose, Stack, Vendor, VendorList} from './model/gvl';
 
-import {
-  Declarations,
-  Purpose,
-  Feature,
-  IDSetMap,
-  Stack,
-  Vendor,
-  VendorList,
-  ByPurposeVendorMap,
-} from './model/gvl';
-
-import {
-  ConsentLanguages,
-} from './model';
-
-import {IntMap} from './model/IntMap';
 /**
  * TODO: make map to cache language translations under language so if a
  * language is loaded twice it won't go and get it more than once
@@ -32,7 +19,7 @@ type PurposeSubType = 'consent' | 'legInt' | 'flexible';
  * object and provide accessors.  Provides ways to group vendors on the list by
  * purpose and feature.
  */
-export class GVL implements VendorList, Declarations {
+export class GVL extends Cloneable<GVL> implements VendorList, Declarations {
 
   private static LOADED_LANGUAGES: Map<string, Declarations> = new Map<string, Declarations>();
 
@@ -190,6 +177,8 @@ export class GVL implements VendorList, Declarations {
    */
   public constructor( versionOrVendorList?: VersionOrVendorList ) {
 
+    super(GVL);
+
     // should have been configured before and instance was created and will persist through the app
     let url = GVL.baseUrl;
 
@@ -231,6 +220,16 @@ export class GVL implements VendorList, Declarations {
       this.cacheLanguage(GVL.DEFAULT_LANGUAGE);
 
     });
+
+  }
+
+  /**
+   * Creates a clone of this GVL
+   * @return {GVL}
+   */
+  public clone(): GVL {
+
+    return this._clone(this);
 
   }
 
