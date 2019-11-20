@@ -7,7 +7,7 @@ export abstract class CmpLog {
    *
    * @param {string} msg
    */
-  public static error(msg: string): void {
+  public static error(msg: string): void { // eslint-disable-line
 
     // Todo: do something with the message
     // console.error(msg);

@@ -2,6 +2,10 @@
 
 # Class: CmpApi
 
+Consent Management Platform API
+
+This is the only class that the CMP should create and interface with to set data for commands to utilize.
+
 ## Hierarchy
 
 **CmpApi**
@@ -14,11 +18,6 @@
 
 ### Methods
 
-* [addEventListener](cmpapi.md#addeventlistener)
-* [getInAppTCData](cmpapi.md#getinapptcdata)
-* [getTCData](cmpapi.md#gettcdata)
-* [ping](cmpapi.md#ping)
-* [removeventListener](cmpapi.md#removeventlistener)
 * [setCmpStatus](cmpapi.md#setcmpstatus)
 * [setDisplayStatus](cmpapi.md#setdisplaystatus)
 * [setGdprApplies](cmpapi.md#setgdprapplies)
@@ -32,9 +31,19 @@
 
 ###  constructor
 
-⊕ **new CmpApi**(): [CmpApi](cmpapi.md)
+⊕ **new CmpApi**(cmpId: *`number`*, cmpVersion: *`number`*, customCommands?: *[CustomCommandRegistration](../interfaces/customcommandregistration.md)[]*): [CmpApi](cmpapi.md)
 
-*Defined in [CmpApi.ts:52](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L52)*
+*Defined in [CmpApi.ts:21](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/CmpApi.ts#L21)*
+
+Constructor
+
+**Parameters:**
+
+| Name | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| cmpId | `number` | - |  \- |
+| cmpVersion | `number` | - |  \- |
+| `Default value` customCommands | [CustomCommandRegistration](../interfaces/customcommandregistration.md)[] |  [] |   |
 
 **Returns:** [CmpApi](cmpapi.md)
 
@@ -42,108 +51,21 @@ ___
 
 ## Methods
 
-<a id="addeventlistener"></a>
-
-###  addEventListener
-
-▸ **addEventListener**(callback: *[TCDataCallback](../#tcdatacallback)*): `void`
-
-*Defined in [CmpApi.ts:272](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L272)*
-
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| callback | [TCDataCallback](../#tcdatacallback) |
-
-**Returns:** `void`
-
-___
-<a id="getinapptcdata"></a>
-
-###  getInAppTCData
-
-▸ **getInAppTCData**(callback: *[IATCDataCallback](../#iatcdatacallback)*): `void`
-
-*Defined in [CmpApi.ts:242](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L242)*
-
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| callback | [IATCDataCallback](../#iatcdatacallback) |
-
-**Returns:** `void`
-
-___
-<a id="gettcdata"></a>
-
-###  getTCData
-
-▸ **getTCData**(callback: *[TCDataCallback](../#tcdatacallback)*, vendors?: *`number`[]*): `void`
-
-*Defined in [CmpApi.ts:227](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L227)*
-
-Public-facing CMP API commands
-
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| callback | [TCDataCallback](../#tcdatacallback) |
-| `Optional` vendors | `number`[] |
-
-**Returns:** `void`
-
-___
-<a id="ping"></a>
-
-###  ping
-
-▸ **ping**(callback: *[PingCallback](../#pingcallback)*): `void`
-
-*Defined in [CmpApi.ts:257](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L257)*
-
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| callback | [PingCallback](../#pingcallback) |
-
-**Returns:** `void`
-
-___
-<a id="removeventlistener"></a>
-
-###  removeventListener
-
-▸ **removeventListener**(callback: *[TCDataCallback](../#tcdatacallback)*, registeredCallback: *[TCDataCallback](../#tcdatacallback)*): `void`
-
-*Defined in [CmpApi.ts:287](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L287)*
-
-**Parameters:**
-
-| Name | Type |
-| ------ | ------ |
-| callback | [TCDataCallback](../#tcdatacallback) |
-| registeredCallback | [TCDataCallback](../#tcdatacallback) |
-
-**Returns:** `void`
-
-___
 <a id="setcmpstatus"></a>
 
 ###  setCmpStatus
 
 ▸ **setCmpStatus**(cmpStatus: *[CmpStatus](../enums/cmpstatus.md)*): `void`
 
-*Defined in [CmpApi.ts:211](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L211)*
+*Defined in [CmpApi.ts:63](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/CmpApi.ts#L63)*
+
+Sets the current status of the cmp
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| cmpStatus | [CmpStatus](../enums/cmpstatus.md) |
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| cmpStatus | [CmpStatus](../enums/cmpstatus.md) |   |
 
 **Returns:** `void`
 
@@ -154,13 +76,15 @@ ___
 
 ▸ **setDisplayStatus**(displayStatus: *[DisplayStatus](../enums/displaystatus.md)*): `void`
 
-*Defined in [CmpApi.ts:217](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L217)*
+*Defined in [CmpApi.ts:73](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/CmpApi.ts#L73)*
+
+Sets the current display status
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| displayStatus | [DisplayStatus](../enums/displaystatus.md) |
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| displayStatus | [DisplayStatus](../enums/displaystatus.md) |   |
 
 **Returns:** `void`
 
@@ -171,13 +95,15 @@ ___
 
 ▸ **setGdprApplies**(applies: *`boolean`*): `void`
 
-*Defined in [CmpApi.ts:205](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L205)*
+*Defined in [CmpApi.ts:53](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/CmpApi.ts#L53)*
+
+Sets the value for GDPR Applies
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| applies | `boolean` |
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| applies | `boolean` |   |
 
 **Returns:** `void`
 
@@ -186,16 +112,18 @@ ___
 
 ###  setTCModel
 
-▸ **setTCModel**(tcm: *`TCModel`*, eventStatus: *[EventStatus](../enums/eventstatus.md)*): `void`
+▸ **setTCModel**(tcModel: *`TCModel`*, eventStatus?: *[EventStatus](../enums/eventstatus.md)*): `void`
 
-*Defined in [CmpApi.ts:198](https://github.com/chrispaterson/iabtcf-es/blob/0b97360/modules/cmpapi/src/CmpApi.ts#L198)*
+*Defined in [CmpApi.ts:43](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/CmpApi.ts#L43)*
+
+Sets the TCModel Note: A clone will be used if the cloneable interface was implemented for the model.
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
-| tcm | `TCModel` |
-| eventStatus | [EventStatus](../enums/eventstatus.md) |
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| tcModel | `TCModel` |  \- |
+| `Optional` eventStatus | [EventStatus](../enums/eventstatus.md) |   |
 
 **Returns:** `void`
 

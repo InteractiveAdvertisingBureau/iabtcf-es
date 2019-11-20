@@ -5,7 +5,7 @@ import {
   CommandArgsHandler,
   PageCallHandler,
   Param,
-  TcModelChangeEventHandler
+  TcModelChangeEventHandler,
 } from '../types';
 import {ValidationMessages, ValidationUtil} from '../validation';
 import {isValidatable, Validatable} from '../validation/Validatable';
