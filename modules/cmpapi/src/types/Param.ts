@@ -1,3 +1,3 @@
-import {Callback} from './callback/Callback';
+import {CallbackFunction} from './callbacks/CallbackFunction';
 
-export type Param = number[] | Callback | number | string;
+export type Param = number[] | CallbackFunction | number | string;
