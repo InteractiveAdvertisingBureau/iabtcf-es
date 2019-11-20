@@ -41,7 +41,7 @@ CmpDataReader interface is used to define the methods used to read data from Cmp
 
 **● tcModelIsSet**: *`boolean`*
 
-*Defined in [cmpdata/CmpDataReader.ts:9](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L9)*
+*Defined in [cmpdata/CmpDataReader.ts:9](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L9)*
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 ▸ **getApiVersion**(): `number`
 
-*Defined in [cmpdata/CmpDataReader.ts:15](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L15)*
+*Defined in [cmpdata/CmpDataReader.ts:15](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L15)*
 
 **Returns:** `number`
 
@@ -64,7 +64,7 @@ ___
 
 ▸ **getCmpId**(): `number`
 
-*Defined in [cmpdata/CmpDataReader.ts:17](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L17)*
+*Defined in [cmpdata/CmpDataReader.ts:17](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L17)*
 
 **Returns:** `number`
 
@@ -75,7 +75,7 @@ ___
 
 ▸ **getCmpStatus**(): [CmpStatus](../enums/cmpstatus.md)
 
-*Defined in [cmpdata/CmpDataReader.ts:27](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L27)*
+*Defined in [cmpdata/CmpDataReader.ts:27](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L27)*
 
 **Returns:** [CmpStatus](../enums/cmpstatus.md)
 
@@ -86,7 +86,7 @@ ___
 
 ▸ **getCmpVersion**(): `number`
 
-*Defined in [cmpdata/CmpDataReader.ts:19](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L19)*
+*Defined in [cmpdata/CmpDataReader.ts:19](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L19)*
 
 **Returns:** `number`
 
@@ -97,7 +97,7 @@ ___
 
 ▸ **getDisplayStatus**(): [DisplayStatus](../enums/displaystatus.md)
 
-*Defined in [cmpdata/CmpDataReader.ts:29](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L29)*
+*Defined in [cmpdata/CmpDataReader.ts:29](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L29)*
 
 **Returns:** [DisplayStatus](../enums/displaystatus.md)
 
@@ -108,7 +108,7 @@ ___
 
 ▸ **getEventStatus**(): [EventStatus](../enums/eventstatus.md)
 
-*Defined in [cmpdata/CmpDataReader.ts:25](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L25)*
+*Defined in [cmpdata/CmpDataReader.ts:25](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L25)*
 
 **Returns:** [EventStatus](../enums/eventstatus.md)
 
@@ -119,7 +119,7 @@ ___
 
 ▸ **getGdprApplies**(): `boolean`
 
-*Defined in [cmpdata/CmpDataReader.ts:23](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L23)*
+*Defined in [cmpdata/CmpDataReader.ts:23](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L23)*
 
 **Returns:** `boolean`
 
@@ -130,7 +130,7 @@ ___
 
 ▸ **getTcModel**(): `TCModel`
 
-*Defined in [cmpdata/CmpDataReader.ts:13](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L13)*
+*Defined in [cmpdata/CmpDataReader.ts:13](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L13)*
 
 **Returns:** `TCModel`
 
@@ -141,7 +141,7 @@ ___
 
 ▸ **getTcfPolicyVersion**(): `number`
 
-*Defined in [cmpdata/CmpDataReader.ts:21](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L21)*
+*Defined in [cmpdata/CmpDataReader.ts:21](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L21)*
 
 **Returns:** `number`
 
@@ -152,7 +152,7 @@ ___
 
 ▸ **registerTcModelChangeEventCallback**(tcModelChangeCallback: *`function`*): `void`
 
-*Defined in [cmpdata/CmpDataReader.ts:11](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L11)*
+*Defined in [cmpdata/CmpDataReader.ts:11](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/cmpdata/CmpDataReader.ts#L11)*
 
 **Parameters:**
 

@@ -34,7 +34,7 @@ ValidationMessages class contains all the validation related messages for CmpApi
 
 **● CALLBACK_REQUIRED**: *`string`* =  `Callback required`
 
-*Defined in [validation/ValidationMessages.ts:9](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationMessages.ts#L9)*
+*Defined in [validation/ValidationMessages.ts:9](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationMessages.ts#L9)*
 
 ___
 <a id="command_invalid"></a>
@@ -43,7 +43,7 @@ ___
 
 **● COMMAND_INVALID**: *`string`* =  `Command Must be a non-null or non-empty string`
 
-*Defined in [validation/ValidationMessages.ts:13](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationMessages.ts#L13)*
+*Defined in [validation/ValidationMessages.ts:13](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationMessages.ts#L13)*
 
 ___
 <a id="command_not_supported"></a>
@@ -52,7 +52,7 @@ ___
 
 **● COMMAND_NOT_SUPPORTED**: *`string`* =  `Command ${ValidationMessages.NOT_SUPPORTED}`
 
-*Defined in [validation/ValidationMessages.ts:8](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationMessages.ts#L8)*
+*Defined in [validation/ValidationMessages.ts:8](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationMessages.ts#L8)*
 
 ___
 <a id="custom_command_function_invalid"></a>
@@ -61,7 +61,7 @@ ___
 
 **● CUSTOM_COMMAND_FUNCTION_INVALID**: *`string`* =  `Custom command must be a function`
 
-*Defined in [validation/ValidationMessages.ts:12](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationMessages.ts#L12)*
+*Defined in [validation/ValidationMessages.ts:12](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationMessages.ts#L12)*
 
 ___
 <a id="event_listener_not_found"></a>
@@ -70,7 +70,7 @@ ___
 
 **● EVENT_LISTENER_NOT_FOUND**: *`string`* =  `Event listener not found.`
 
-*Defined in [validation/ValidationMessages.ts:10](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationMessages.ts#L10)*
+*Defined in [validation/ValidationMessages.ts:10](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationMessages.ts#L10)*
 
 ___
 <a id="existing_cmp"></a>
@@ -79,7 +79,7 @@ ___
 
 **● EXISTING_CMP**: *`string`* = "CMP Exists already – cannot create"
 
-*Defined in [validation/ValidationMessages.ts:6](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationMessages.ts#L6)*
+*Defined in [validation/ValidationMessages.ts:6](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationMessages.ts#L6)*
 
 ___
 <a id="not_supported"></a>
@@ -88,7 +88,7 @@ ___
 
 **● NOT_SUPPORTED**: *`string`* =  `not supported by this CMP`
 
-*Defined in [validation/ValidationMessages.ts:7](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationMessages.ts#L7)*
+*Defined in [validation/ValidationMessages.ts:7](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationMessages.ts#L7)*
 
 ___
 <a id="remove_event_listener_error"></a>
@@ -97,7 +97,7 @@ ___
 
 **● REMOVE_EVENT_LISTENER_ERROR**: *`string`* =  `Listener could not be removed: the parameter callback is not registered or is invalid`
 
-*Defined in [validation/ValidationMessages.ts:11](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationMessages.ts#L11)*
+*Defined in [validation/ValidationMessages.ts:11](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationMessages.ts#L11)*
 
 ___
 <a id="tc_model_invalid"></a>
@@ -106,7 +106,7 @@ ___
 
 **● TC_MODEL_INVALID**: *`string`* =  `CMP Model is not in a valid state`
 
-*Defined in [validation/ValidationMessages.ts:14](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationMessages.ts#L14)*
+*Defined in [validation/ValidationMessages.ts:14](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationMessages.ts#L14)*
 
 ___
 <a id="vendor_list_invalid"></a>
@@ -115,7 +115,7 @@ ___
 
 **● VENDOR_LIST_INVALID**: *`string`* =  `Vendor list is not valid`
 
-*Defined in [validation/ValidationMessages.ts:15](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationMessages.ts#L15)*
+*Defined in [validation/ValidationMessages.ts:15](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationMessages.ts#L15)*
 
 ___
 <a id="vendor_list_version_invalid"></a>
@@ -124,7 +124,7 @@ ___
 
 **● VENDOR_LIST_VERSION_INVALID**: *`string`* =  `Vendor list version is not valid`
 
-*Defined in [validation/ValidationMessages.ts:16](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationMessages.ts#L16)*
+*Defined in [validation/ValidationMessages.ts:16](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationMessages.ts#L16)*
 
 ___
 

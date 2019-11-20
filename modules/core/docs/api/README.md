@@ -15,6 +15,7 @@
 * [BinarySearchTree](classes/binarysearchtree.md)
 * [BitLength](classes/bitlength.md)
 * [BooleanEncoder](classes/booleanencoder.md)
+* [Cloneable](classes/cloneable.md)
 * [ConsentLanguages](classes/consentlanguages.md)
 * [CoreFieldSequence](classes/corefieldsequence.md)
 * [CoreTCEncoder](classes/coretcencoder.md)
@@ -47,6 +48,7 @@
 
 ### Interfaces
 
+* [AnyConstructor](interfaces/anyconstructor.md)
 * [ByFeatureVendorMap](interfaces/byfeaturevendormap.md)
 * [ByPurposeVendorMap](interfaces/bypurposevendormap.md)
 * [BySpecialFeatureVendorMap](interfaces/byspecialfeaturevendormap.md)
@@ -66,6 +68,7 @@
 
 ### Type aliases
 
+* [AnyArray](#anyarray)
 * [PurposeOrFeature](#purposeorfeature)
 * [PurposeSubType](#purposesubtype)
 * [TCModelPropType](#tcmodelproptype)
@@ -77,13 +80,22 @@
 
 ## Type aliases
 
+<a id="anyarray"></a>
+
+###  AnyArray
+
+**Ƭ AnyArray**: *`any`[]*
+
+*Defined in [cloneable/AnyArray.ts:2](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/cloneable/AnyArray.ts#L2)*
+
+___
 <a id="purposeorfeature"></a>
 
 ###  PurposeOrFeature
 
 **Ƭ PurposeOrFeature**: *"purpose" \| "feature"*
 
-*Defined in [GVL.ts:26](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/GVL.ts#L26)*
+*Defined in [GVL.ts:13](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/GVL.ts#L13)*
 
 ___
 <a id="purposesubtype"></a>
@@ -92,7 +104,7 @@ ___
 
 **Ƭ PurposeSubType**: *"consent" \| "legInt" \| "flexible"*
 
-*Defined in [GVL.ts:27](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/GVL.ts#L27)*
+*Defined in [GVL.ts:14](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/GVL.ts#L14)*
 
 ___
 <a id="tcmodelproptype"></a>
@@ -101,7 +113,7 @@ ___
 
 **Ƭ TCModelPropType**: *`number` \| `Date` \| `string` \| `boolean` \| [Vector](classes/vector.md) \| [PurposeRestrictionVector](classes/purposerestrictionvector.md)*
 
-*Defined in [TCModel.ts:20](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/TCModel.ts#L20)*
+*Defined in [TCModel.ts:8](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/TCModel.ts#L8)*
 
 ___
 <a id="treenodemaybe"></a>
@@ -110,7 +122,7 @@ ___
 
 **Ƭ TreeNodeMaybe**: *[TreeNode](interfaces/treenode.md) \| `null`*
 
-*Defined in [model/BinarySearchTree.ts:1](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/BinarySearchTree.ts#L1)*
+*Defined in [model/BinarySearchTree.ts:1](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/BinarySearchTree.ts#L1)*
 
 ___
 <a id="versionorvendorlist"></a>
@@ -119,7 +131,7 @@ ___
 
 **Ƭ VersionOrVendorList**: *`string` \| `number` \| [VendorList](interfaces/vendorlist.md)*
 
-*Defined in [GVL.ts:25](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/GVL.ts#L25)*
+*Defined in [GVL.ts:12](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/GVL.ts#L12)*
 
 TODO: make map to cache language translations under language so if a language is loaded twice it won't go and get it more than once
 
@@ -130,7 +142,7 @@ ___
 
 **Ƭ idOrIds**: *`number` \| `number`[]*
 
-*Defined in [model/Vector.ts:3](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/Vector.ts#L3)*
+*Defined in [model/Vector.ts:4](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/Vector.ts#L4)*
 
 ___
 

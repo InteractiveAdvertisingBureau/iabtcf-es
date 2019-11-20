@@ -25,7 +25,7 @@ The result of a validation
 
 **● isValid**: *`boolean`*
 
-*Defined in [validation/ValidationResult.ts:6](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationResult.ts#L6)*
+*Defined in [validation/ValidationResult.ts:6](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationResult.ts#L6)*
 
 ___
 <a id="validationmessages"></a>
@@ -34,7 +34,7 @@ ___
 
 **● validationMessages**: *`string`[]*
 
-*Defined in [validation/ValidationResult.ts:8](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/ValidationResult.ts#L8)*
+*Defined in [validation/ValidationResult.ts:8](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/ValidationResult.ts#L8)*
 
 ___
 

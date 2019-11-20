@@ -23,7 +23,7 @@
 
 ▸ **decode**(value: *`string`*): [PurposeRestrictionVector](purposerestrictionvector.md)
 
-*Defined in encoder/field/PurposeRestrictionVectorEncoder.ts:102*
+*Defined in [encoder/field/PurposeRestrictionVectorEncoder.ts:90](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/field/PurposeRestrictionVectorEncoder.ts#L90)*
 
 **Parameters:**
 
@@ -40,7 +40,7 @@ ___
 
 ▸ **encode**(value: *[PurposeRestrictionVector](purposerestrictionvector.md)*): `string`
 
-*Defined in encoder/field/PurposeRestrictionVectorEncoder.ts:23*
+*Defined in [encoder/field/PurposeRestrictionVectorEncoder.ts:11](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/encoder/field/PurposeRestrictionVectorEncoder.ts#L11)*
 
 **Parameters:**
 

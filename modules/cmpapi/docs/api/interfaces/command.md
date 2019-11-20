@@ -35,7 +35,7 @@ Command interface requires a command have an execute method
 
 ▸ **execute**(): `void`
 
-*Defined in [command/commands/Command.ts:6](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/Command.ts#L6)*
+*Defined in [command/commands/Command.ts:6](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/Command.ts#L6)*
 
 **Returns:** `void`
 

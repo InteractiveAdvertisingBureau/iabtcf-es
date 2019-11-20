@@ -39,7 +39,7 @@ Custom command used by a CMP to execute a custom method. No validation will be p
 
 ⊕ **new CustomCommand**(customMethod: *[CustomCommandFunction](../#customcommandfunction)*, version: *`number`*, callback: *[Callback](callback.md)*, param?: *[Param](../#param)*): [CustomCommand](customcommand.md)
 
-*Defined in [command/commands/CustomCommand.ts:16](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/CustomCommand.ts#L16)*
+*Defined in [command/commands/CustomCommand.ts:16](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/CustomCommand.ts#L16)*
 
 **Parameters:**
 
@@ -62,7 +62,7 @@ ___
 
 **● callback**: *[Callback](callback.md)*
 
-*Defined in [command/commands/CustomCommand.ts:15](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/CustomCommand.ts#L15)*
+*Defined in [command/commands/CustomCommand.ts:15](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/CustomCommand.ts#L15)*
 
 ___
 <a id="custommethod"></a>
@@ -71,7 +71,7 @@ ___
 
 **● customMethod**: *[CustomCommandFunction](../#customcommandfunction)*
 
-*Defined in [command/commands/CustomCommand.ts:13](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/CustomCommand.ts#L13)*
+*Defined in [command/commands/CustomCommand.ts:13](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/CustomCommand.ts#L13)*
 
 ___
 <a id="param"></a>
@@ -80,7 +80,7 @@ ___
 
 **● param**: *[Param](../#param)*
 
-*Defined in [command/commands/CustomCommand.ts:16](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/CustomCommand.ts#L16)*
+*Defined in [command/commands/CustomCommand.ts:16](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/CustomCommand.ts#L16)*
 
 ___
 <a id="version"></a>
@@ -89,7 +89,7 @@ ___
 
 **● version**: *`number`*
 
-*Defined in [command/commands/CustomCommand.ts:14](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/CustomCommand.ts#L14)*
+*Defined in [command/commands/CustomCommand.ts:14](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/CustomCommand.ts#L14)*
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 *Implementation of [Command](../interfaces/command.md).[execute](../interfaces/command.md#execute)*
 
-*Defined in [command/commands/CustomCommand.ts:27](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/CustomCommand.ts#L27)*
+*Defined in [command/commands/CustomCommand.ts:27](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/CustomCommand.ts#L27)*
 
 **Returns:** `void`
 

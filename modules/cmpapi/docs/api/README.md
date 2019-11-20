@@ -85,7 +85,7 @@
 
 **Ƭ BoolInt**: *`0` \| `1`*
 
-*Defined in [types/BoolInt.ts:1](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/types/BoolInt.ts#L1)*
+*Defined in [types/BoolInt.ts:1](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/types/BoolInt.ts#L1)*
 
 ___
 <a id="boolstring"></a>
@@ -94,7 +94,7 @@ ___
 
 **Ƭ BoolString**: *"0" \| "1"*
 
-*Defined in [types/BoolString.ts:1](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/types/BoolString.ts#L1)*
+*Defined in [types/BoolString.ts:1](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/types/BoolString.ts#L1)*
 
 ___
 <a id="callbackfunction"></a>
@@ -103,7 +103,7 @@ ___
 
 **Ƭ CallbackFunction**: *[TCDataCallback](#tcdatacallback) \| [IATCDataCallback](#iatcdatacallback) \| [PingCallback](#pingcallback) \| [VendorListCallback](#vendorlistcallback) \| [RemoveListenerCallback](#removelistenercallback)*
 
-*Defined in [types/callbacks/CallbackFunction.ts:10](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/types/callbacks/CallbackFunction.ts#L10)*
+*Defined in [types/callbacks/CallbackFunction.ts:10](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/types/callbacks/CallbackFunction.ts#L10)*
 
 Union type of all default command callback function signatures
 
@@ -114,7 +114,7 @@ ___
 
 **Ƭ CommandArgsHandler**: *`function`*
 
-*Defined in [types/handlers/CommandArgsHandler.ts:3](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/types/handlers/CommandArgsHandler.ts#L3)*
+*Defined in [types/handlers/CommandArgsHandler.ts:3](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/types/handlers/CommandArgsHandler.ts#L3)*
 
 #### Type declaration
 ▸(argSets: *[TcfApiArgSet](#tcfapiargset)[]*): `void`
@@ -134,7 +134,7 @@ ___
 
 **Ƭ CustomCommandFunction**: *`function`*
 
-*Defined in [command/commands/CustomCommand.ts:5](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/CustomCommand.ts#L5)*
+*Defined in [command/commands/CustomCommand.ts:5](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/CustomCommand.ts#L5)*
 
 #### Type declaration
 ▸(...args: *`any`*): `void`
@@ -154,7 +154,7 @@ ___
 
 **Ƭ IATCDataCallback**: *`function`*
 
-*Defined in [types/callbacks/IATCDataCallback.ts:3](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/types/callbacks/IATCDataCallback.ts#L3)*
+*Defined in [types/callbacks/IATCDataCallback.ts:3](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/types/callbacks/IATCDataCallback.ts#L3)*
 
 #### Type declaration
 ▸(IATCData: *[InAppTCData](interfaces/inapptcdata.md) \| `null`*, success: *`boolean`*): `void`
@@ -175,7 +175,7 @@ ___
 
 **Ƭ PageCallHandler**: *`function`*
 
-*Defined in [types/handlers/PageCallHandler.ts:4](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/types/handlers/PageCallHandler.ts#L4)*
+*Defined in [types/handlers/PageCallHandler.ts:4](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/types/handlers/PageCallHandler.ts#L4)*
 
 #### Type declaration
 ▸(command: *`string`*, version: *`number`*, callback: *[CallbackFunction](#callbackfunction)*, param?: *[Param](#param)*): `void`
@@ -198,7 +198,7 @@ ___
 
 **Ƭ Param**: *`number`[] \| [CallbackFunction](#callbackfunction) \| `number` \| `string`*
 
-*Defined in [types/Param.ts:3](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/types/Param.ts#L3)*
+*Defined in [types/Param.ts:3](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/types/Param.ts#L3)*
 
 ___
 <a id="pingcallback"></a>
@@ -207,7 +207,7 @@ ___
 
 **Ƭ PingCallback**: *`function`*
 
-*Defined in [types/callbacks/PingCallback.ts:3](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/types/callbacks/PingCallback.ts#L3)*
+*Defined in [types/callbacks/PingCallback.ts:3](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/types/callbacks/PingCallback.ts#L3)*
 
 #### Type declaration
 ▸(pingReturn: *[Ping](interfaces/ping.md) \| `null`*): `void`
@@ -227,7 +227,7 @@ ___
 
 **Ƭ RemoveListenerCallback**: *`function`*
 
-*Defined in [types/callbacks/RemoveListenerCallback.ts:1](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/types/callbacks/RemoveListenerCallback.ts#L1)*
+*Defined in [types/callbacks/RemoveListenerCallback.ts:1](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/types/callbacks/RemoveListenerCallback.ts#L1)*
 
 #### Type declaration
 ▸(status: *`boolean` \| `null`*): `void`
@@ -247,7 +247,7 @@ ___
 
 **Ƭ TCDataCallback**: *`function`*
 
-*Defined in [types/callbacks/TCDataCallback.ts:3](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/types/callbacks/TCDataCallback.ts#L3)*
+*Defined in [types/callbacks/TCDataCallback.ts:3](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/types/callbacks/TCDataCallback.ts#L3)*
 
 #### Type declaration
 ▸(tcData: *[TCData](interfaces/tcdata.md) \| `null`*, success: *`boolean`*): `void`
@@ -268,7 +268,7 @@ ___
 
 **Ƭ TcModelChangeEventHandler**: *`function`*
 
-*Defined in [types/handlers/TcModelChangeEventHandler.ts:1](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/types/handlers/TcModelChangeEventHandler.ts#L1)*
+*Defined in [types/handlers/TcModelChangeEventHandler.ts:1](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/types/handlers/TcModelChangeEventHandler.ts#L1)*
 
 #### Type declaration
 ▸(): `void`
@@ -282,7 +282,7 @@ ___
 
 **Ƭ TcfApiArgSet**: *[`string`, `number`, [CallbackFunction](#callbackfunction), [Param](#param)]*
 
-*Defined in [types/TcfApiArgSet.ts:7](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/types/TcfApiArgSet.ts#L7)*
+*Defined in [types/TcfApiArgSet.ts:7](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/types/TcfApiArgSet.ts#L7)*
 
 Arguments passed to page level api function
 
@@ -293,7 +293,7 @@ ___
 
 **Ƭ VendorListCallback**: *`function`*
 
-*Defined in [types/callbacks/VendorListCallback.ts:3](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/types/callbacks/VendorListCallback.ts#L3)*
+*Defined in [types/callbacks/VendorListCallback.ts:3](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/types/callbacks/VendorListCallback.ts#L3)*
 
 #### Type declaration
 ▸(gvl: *[GlobalVendorList](interfaces/globalvendorlist.md) \| `null`*, success: *`boolean`*): `void`
@@ -317,7 +317,7 @@ ___
 
 ▸ **createBooleanVector**(ids: *`string`[]*, vector: *`Vector`*): [BooleanVector](interfaces/booleanvector.md)
 
-*Defined in [model/BooleanVector.ts:13](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/BooleanVector.ts#L13)*
+*Defined in [model/BooleanVector.ts:13](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/BooleanVector.ts#L13)*
 
 Creates a boolean vector with a value for each id where each value is true if its id is in the passed in vector
 
@@ -337,7 +337,7 @@ ___
 
 ▸ **createStringBoolVector**(ids: *`string`[]*, vector: *`Vector`*): [StringBoolVector](interfaces/stringboolvector.md)
 
-*Defined in [model/StringBoolVector.ts:14](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/model/StringBoolVector.ts#L14)*
+*Defined in [model/StringBoolVector.ts:14](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/model/StringBoolVector.ts#L14)*
 
 Creates a string bool vector with a value for each id where each value is '1' if its id is in the passed in vector
 
@@ -357,7 +357,7 @@ ___
 
 ▸ **isValidatable**(obj: *`object`*): `boolean`
 
-*Defined in [validation/Validatable.ts:17](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/validation/Validatable.ts#L17)*
+*Defined in [validation/Validatable.ts:17](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/validation/Validatable.ts#L17)*
 
 Checks if an object implements the Validatable interface
 

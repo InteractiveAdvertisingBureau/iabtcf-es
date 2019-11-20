@@ -29,7 +29,7 @@ An enum representing all commands the CMP API provides
 
 **ADD_EVENT_LISTENER**:  = "addEventListener"
 
-*Defined in [command/commands/Commands.ts:12](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/Commands.ts#L12)*
+*Defined in [command/commands/Commands.ts:12](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/Commands.ts#L12)*
 
 ___
 <a id="get_in_app_tc_data"></a>
@@ -38,7 +38,7 @@ ___
 
 **GET_IN_APP_TC_DATA**:  = "getInAppTCData"
 
-*Defined in [command/commands/Commands.ts:10](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/Commands.ts#L10)*
+*Defined in [command/commands/Commands.ts:10](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/Commands.ts#L10)*
 
 ___
 <a id="get_tc_data"></a>
@@ -47,7 +47,7 @@ ___
 
 **GET_TC_DATA**:  = "getTCData"
 
-*Defined in [command/commands/Commands.ts:9](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/Commands.ts#L9)*
+*Defined in [command/commands/Commands.ts:9](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/Commands.ts#L9)*
 
 ___
 <a id="get_vendor_list"></a>
@@ -56,7 +56,7 @@ ___
 
 **GET_VENDOR_LIST**:  = "getVendorList"
 
-*Defined in [command/commands/Commands.ts:11](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/Commands.ts#L11)*
+*Defined in [command/commands/Commands.ts:11](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/Commands.ts#L11)*
 
 ___
 <a id="ping"></a>
@@ -65,7 +65,7 @@ ___
 
 **PING**:  = "ping"
 
-*Defined in [command/commands/Commands.ts:8](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/Commands.ts#L8)*
+*Defined in [command/commands/Commands.ts:8](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/Commands.ts#L8)*
 
 ___
 <a id="remove_event_listener"></a>
@@ -74,7 +74,7 @@ ___
 
 **REMOVE_EVENT_LISTENER**:  = "removeEventListener"
 
-*Defined in [command/commands/Commands.ts:13](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/commands/Commands.ts#L13)*
+*Defined in [command/commands/Commands.ts:13](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/commands/Commands.ts#L13)*
 
 ___
 

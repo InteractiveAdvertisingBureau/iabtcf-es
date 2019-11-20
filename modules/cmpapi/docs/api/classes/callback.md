@@ -33,7 +33,7 @@ Callback class wraps a callback function to provide added functionality
 
 ⊕ **new Callback**(callbackFunc: *[CallbackFunction](../#callbackfunction)*): [Callback](callback.md)
 
-*Defined in [command/callback/Callback.ts:10](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/callback/Callback.ts#L10)*
+*Defined in [command/callback/Callback.ts:10](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/callback/Callback.ts#L10)*
 
 **Parameters:**
 
@@ -53,7 +53,7 @@ ___
 
 **get function**(): [CallbackFunction](../#callbackfunction)
 
-*Defined in [command/callback/Callback.ts:21](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/callback/Callback.ts#L21)*
+*Defined in [command/callback/Callback.ts:21](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/callback/Callback.ts#L21)*
 
 Returns the callback function
 
@@ -66,7 +66,7 @@ ___
 
 **get isValid**(): `boolean`
 
-*Defined in [command/callback/Callback.ts:30](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/callback/Callback.ts#L30)*
+*Defined in [command/callback/Callback.ts:30](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/callback/Callback.ts#L30)*
 
 Returns true if the callback function is a valid function
 
@@ -82,7 +82,7 @@ ___
 
 ▸ **fail**(messages?: *`string`[] \| `string`*): `void`
 
-*Defined in [command/callback/Callback.ts:41](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/callback/Callback.ts#L41)*
+*Defined in [command/callback/Callback.ts:41](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/callback/Callback.ts#L41)*
 
 Attempts to evoke the callback function with failing parameters and logs any messages with it if provided.
 

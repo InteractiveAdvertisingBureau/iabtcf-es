@@ -22,7 +22,7 @@
 
 ▸ **error**(msg: *`string`*): `void`
 
-*Defined in [utilities/CmpLog.ts:10](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/utilities/CmpLog.ts#L10)*
+*Defined in [utilities/CmpLog.ts:10](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/utilities/CmpLog.ts#L10)*
 
 Logs an error in the console
 

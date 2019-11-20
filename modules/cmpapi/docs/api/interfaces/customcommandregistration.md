@@ -23,7 +23,7 @@
 
 **● command**: *`string`*
 
-*Defined in [command/CustomCommandRegistration.ts:4](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/CustomCommandRegistration.ts#L4)*
+*Defined in [command/CustomCommandRegistration.ts:4](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/CustomCommandRegistration.ts#L4)*
 
 ___
 <a id="customfunction"></a>
@@ -32,7 +32,7 @@ ___
 
 **● customFunction**: *[CustomCommandFunction](../#customcommandfunction)*
 
-*Defined in [command/CustomCommandRegistration.ts:5](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/command/CustomCommandRegistration.ts#L5)*
+*Defined in [command/CustomCommandRegistration.ts:5](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/command/CustomCommandRegistration.ts#L5)*
 
 ___
 

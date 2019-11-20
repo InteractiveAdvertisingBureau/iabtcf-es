@@ -4,9 +4,19 @@
 
 ## Hierarchy
 
-**PurposeRestrictionVector**
+ [Cloneable](cloneable.md)<[PurposeRestrictionVector](purposerestrictionvector.md)>
+
+**↳ PurposeRestrictionVector**
 
 ## Index
+
+### Constructors
+
+* [constructor](purposerestrictionvector.md#constructor)
+
+### Properties
+
+* [bitLength](purposerestrictionvector.md#bitlength)
 
 ### Accessors
 
@@ -16,6 +26,7 @@
 ### Methods
 
 * [add](purposerestrictionvector.md#add)
+* [clone](purposerestrictionvector.md#clone)
 * [getAllRestrictions](purposerestrictionvector.md#getallrestrictions)
 * [getRestriction](purposerestrictionvector.md#getrestriction)
 * [getVendors](purposerestrictionvector.md#getvendors)
@@ -24,6 +35,36 @@
 * [remove](purposerestrictionvector.md#remove)
 
 ---
+
+## Constructors
+
+<a id="constructor"></a>
+
+###  constructor
+
+⊕ **new PurposeRestrictionVector**(): [PurposeRestrictionVector](purposerestrictionvector.md)
+
+*Overrides [Cloneable](cloneable.md).[constructor](cloneable.md#constructor)*
+
+*Defined in [model/PurposeRestrictionVector.ts:23](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestrictionVector.ts#L23)*
+
+**Returns:** [PurposeRestrictionVector](purposerestrictionvector.md)
+
+___
+
+## Properties
+
+<a id="bitlength"></a>
+
+###  bitLength
+
+**● bitLength**: *`number`* = 0
+
+*Defined in [model/PurposeRestrictionVector.ts:14](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestrictionVector.ts#L14)*
+
+if this originatd from an encoded string we'll need a place to store the bit length; it can be set and got from here
+
+___
 
 ## Accessors
 
@@ -35,13 +76,13 @@
 
 **set gvl**(value: *[GVL](gvl.md)*): `void`
 
-*Defined in [model/PurposeRestrictionVector.ts:205](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/PurposeRestrictionVector.ts#L205)*
+*Defined in [model/PurposeRestrictionVector.ts:225](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestrictionVector.ts#L225)*
 
 Essential for being able to determine whether we can actually set a purpose restriction since they have to have a flexible legal basis
 
 **Returns:** [GVL](gvl.md)
 
-*Defined in [model/PurposeRestrictionVector.ts:170](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/PurposeRestrictionVector.ts#L170)*
+*Defined in [model/PurposeRestrictionVector.ts:190](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestrictionVector.ts#L190)*
 
 Essential for being able to determine whether we can actually set a purpose restriction since they have to have a flexible legal basis
 
@@ -60,7 +101,7 @@ ___
 
 **get numRestrictions**(): `number`
 
-*Defined in [model/PurposeRestrictionVector.ts:222](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/PurposeRestrictionVector.ts#L222)*
+*Defined in [model/PurposeRestrictionVector.ts:242](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestrictionVector.ts#L242)*
 
 **Returns:** `number`
 
@@ -68,13 +109,34 @@ ___
 
 ## Methods
 
+<a id="_clone"></a>
+
+### `<Private>` _clone
+
+▸ **_clone**(...constructorArgs: *[AnyArray](../#anyarray)*): [PurposeRestrictionVector](purposerestrictionvector.md)
+
+*Inherited from [Cloneable](cloneable.md).[_clone](cloneable.md#_clone)*
+
+*Defined in [cloneable/Cloneable.ts:52](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/cloneable/Cloneable.ts#L52)*
+
+Method to be called in the child concrete class's clone method
+
+**Parameters:**
+
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| `Rest` constructorArgs | [AnyArray](../#anyarray) |  arguments to be passed to the cloned objects constructor if need be |
+
+**Returns:** [PurposeRestrictionVector](purposerestrictionvector.md)
+
+___
 <a id="add"></a>
 
 ###  add
 
 ▸ **add**(vendorId: *`number`*, purposeRestriction: *[PurposeRestriction](purposerestriction.md)*): `void`
 
-*Defined in [model/PurposeRestrictionVector.ts:86](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/PurposeRestrictionVector.ts#L86)*
+*Defined in [model/PurposeRestrictionVector.ts:104](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestrictionVector.ts#L104)*
 
 **Parameters:**
 
@@ -86,13 +148,28 @@ ___
 **Returns:** `void`
 
 ___
+<a id="clone"></a>
+
+###  clone
+
+▸ **clone**(): [PurposeRestrictionVector](purposerestrictionvector.md)
+
+*Overrides [Cloneable](cloneable.md).[clone](cloneable.md#clone)*
+
+*Defined in [model/PurposeRestrictionVector.ts:35](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestrictionVector.ts#L35)*
+
+Creates a clone of this PurposeRestrictionVector
+
+**Returns:** [PurposeRestrictionVector](purposerestrictionvector.md)
+
+___
 <a id="getallrestrictions"></a>
 
 ###  getAllRestrictions
 
 ▸ **getAllRestrictions**(): [PurposeRestriction](purposerestriction.md)[]
 
-*Defined in [model/PurposeRestrictionVector.ts:130](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/PurposeRestrictionVector.ts#L130)*
+*Defined in [model/PurposeRestrictionVector.ts:149](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestrictionVector.ts#L149)*
 
 **Returns:** [PurposeRestriction](purposerestriction.md)[]
 
@@ -103,7 +180,7 @@ ___
 
 ▸ **getRestriction**(vendorId: *`number`*): [PurposeRestriction](purposerestriction.md)[]
 
-*Defined in [model/PurposeRestrictionVector.ts:112](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/PurposeRestrictionVector.ts#L112)*
+*Defined in [model/PurposeRestrictionVector.ts:131](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestrictionVector.ts#L131)*
 
 **Parameters:**
 
@@ -120,7 +197,7 @@ ___
 
 ▸ **getVendors**(purposeRestriction: *[PurposeRestriction](purposerestriction.md)*): `number`[]
 
-*Defined in [model/PurposeRestrictionVector.ts:104](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/PurposeRestrictionVector.ts#L104)*
+*Defined in [model/PurposeRestrictionVector.ts:123](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestrictionVector.ts#L123)*
 
 **Parameters:**
 
@@ -137,7 +214,7 @@ ___
 
 ▸ **isEmpty**(): `boolean`
 
-*Defined in [model/PurposeRestrictionVector.ts:211](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/PurposeRestrictionVector.ts#L211)*
+*Defined in [model/PurposeRestrictionVector.ts:231](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestrictionVector.ts#L231)*
 
 **Returns:** `boolean`
 
@@ -148,7 +225,7 @@ ___
 
 ▸ **isValid**(): `boolean`
 
-*Defined in [model/PurposeRestrictionVector.ts:216](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/PurposeRestrictionVector.ts#L216)*
+*Defined in [model/PurposeRestrictionVector.ts:236](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestrictionVector.ts#L236)*
 
 **Returns:** `boolean`
 
@@ -159,7 +236,7 @@ ___
 
 ▸ **remove**(vendorId: *`number`*, purposeRestriction: *[PurposeRestriction](purposerestriction.md)*): `void`
 
-*Defined in [model/PurposeRestrictionVector.ts:144](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/PurposeRestrictionVector.ts#L144)*
+*Defined in [model/PurposeRestrictionVector.ts:163](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/PurposeRestrictionVector.ts#L163)*
 
 **Parameters:**
 

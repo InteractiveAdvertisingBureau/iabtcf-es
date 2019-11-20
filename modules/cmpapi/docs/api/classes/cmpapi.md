@@ -33,7 +33,7 @@ This is the only class that the CMP should create and interface with to set data
 
 ⊕ **new CmpApi**(cmpId: *`number`*, cmpVersion: *`number`*, customCommands?: *[CustomCommandRegistration](../interfaces/customcommandregistration.md)[]*): [CmpApi](cmpapi.md)
 
-*Defined in [CmpApi.ts:21](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/CmpApi.ts#L21)*
+*Defined in [CmpApi.ts:21](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/CmpApi.ts#L21)*
 
 Constructor
 
@@ -57,7 +57,7 @@ ___
 
 ▸ **setCmpStatus**(cmpStatus: *[CmpStatus](../enums/cmpstatus.md)*): `void`
 
-*Defined in [CmpApi.ts:63](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/CmpApi.ts#L63)*
+*Defined in [CmpApi.ts:63](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/CmpApi.ts#L63)*
 
 Sets the current status of the cmp
 
@@ -76,7 +76,7 @@ ___
 
 ▸ **setDisplayStatus**(displayStatus: *[DisplayStatus](../enums/displaystatus.md)*): `void`
 
-*Defined in [CmpApi.ts:73](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/CmpApi.ts#L73)*
+*Defined in [CmpApi.ts:73](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/CmpApi.ts#L73)*
 
 Sets the current display status
 
@@ -95,7 +95,7 @@ ___
 
 ▸ **setGdprApplies**(applies: *`boolean`*): `void`
 
-*Defined in [CmpApi.ts:53](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/CmpApi.ts#L53)*
+*Defined in [CmpApi.ts:53](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/CmpApi.ts#L53)*
 
 Sets the value for GDPR Applies
 
@@ -114,7 +114,7 @@ ___
 
 ▸ **setTCModel**(tcModel: *`TCModel`*, eventStatus?: *[EventStatus](../enums/eventstatus.md)*): `void`
 
-*Defined in [CmpApi.ts:43](https://github.com/chrispaterson/iabtcf/blob/a518601/modules/cmpapi/src/CmpApi.ts#L43)*
+*Defined in [CmpApi.ts:43](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/cmpapi/src/CmpApi.ts#L43)*
 
 Sets the TCModel Note: A clone will be used if the cloneable interface was implemented for the model.
 

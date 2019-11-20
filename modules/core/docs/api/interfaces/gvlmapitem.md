@@ -6,13 +6,13 @@
 
 **GVLMapItem**
 
+↳  [Vendor](vendor.md)
+
 ↳  [Feature](feature.md)
 
 ↳  [Purpose](purpose.md)
 
 ↳  [Stack](stack.md)
-
-↳  [Vendor](vendor.md)
 
 ## Index
 
@@ -31,7 +31,7 @@
 
 **● id**: *`number`*
 
-*Defined in [model/gvl/GVLMapItem.ts:2](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/gvl/GVLMapItem.ts#L2)*
+*Defined in [model/gvl/GVLMapItem.ts:2](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/gvl/GVLMapItem.ts#L2)*
 
 ___
 <a id="name"></a>
@@ -40,7 +40,7 @@ ___
 
 **● name**: *`string`*
 
-*Defined in [model/gvl/GVLMapItem.ts:3](https://github.com/chrispaterson/iabtcf/blob/ef31894/modules/core/src/model/gvl/GVLMapItem.ts#L3)*
+*Defined in [model/gvl/GVLMapItem.ts:3](https://github.com/chrispaterson/iabtcf/blob/aa3fc72/modules/core/src/model/gvl/GVLMapItem.ts#L3)*
 
 ___
 
