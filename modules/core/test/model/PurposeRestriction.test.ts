@@ -8,51 +8,19 @@ export function run(): void {
 
     describe('purposeId', (): void => {
 
-      const skip = 5;
-      const max = 12;
+      it(`should be ok with 2`, (): void => {
 
-      const shouldBeOk: (value: number) => void = (value: number): void => {
+        const purposeRestriction = new PurposeRestriction();
 
-        it(`should be ok with ${value}`, (): void => {
+        expect((): void => {
 
-          const purposeRestriction = new PurposeRestriction();
+          purposeRestriction.purposeId = 2;
 
-          expect((): void => {
+        }).not.to.throw();
 
-            purposeRestriction.purposeId = value;
+        expect(purposeRestriction.purposeId).to.equal(2);
 
-          }).not.to.throw();
-
-          expect(purposeRestriction.purposeId).to.equal(value);
-
-        });
-
-      };
-
-      const shouldBeNotOk: (value: number) => void = (value: number): void => {
-
-        it(`should not be ok with ${value}`, (): void => {
-
-          const purposeRestriction = new PurposeRestriction();
-
-          expect((): void => {
-
-            purposeRestriction.purposeId = value;
-
-          }).to.throw();
-
-          expect(purposeRestriction.purposeId).to.be.undefined;
-
-        });
-
-      };
-
-      shouldBeOk(2);
-      shouldBeNotOk(1);
-      shouldBeNotOk(0);
-      shouldBeNotOk(skip);
-      shouldBeNotOk(max + 1);
-      shouldBeNotOk(1.1);
+      });
 
     });
     describe('restrictionType', (): void => {

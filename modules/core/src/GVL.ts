@@ -34,7 +34,7 @@ type PurposeSubType = 'consent' | 'legInt' | 'flexible';
  */
 export class GVL implements VendorList, Declarations {
 
-  private static LOADED_LANGUAGES: Map<string, Declarations> = new Map<string, Declarations>();
+  private static LANGUAGE_CACHE: Map<string, Declarations> = new Map<string, Declarations>();
 
   public static readonly DEFAULT_LANGUAGE: string = 'EN';
 
@@ -234,9 +234,37 @@ export class GVL implements VendorList, Declarations {
 
   }
 
+  /**
+   * emptyLanguageCache
+   *
+   * @param {string} [lang] - Optional ISO 639-1 langauge code to remove from
+   * the cache.  If a falsy value is passed it will empty the entire cache.
+   * @return {boolean} - whether or not the item specified was in the cache and
+   * subsequently removed
+   */
+  public emptyLanguageCache(lang?: string): boolean {
+
+    let retr = false;
+
+    if (lang) {
+
+      GVL.LANGUAGE_CACHE = new Map<string, Declarations>();
+      retr = true;
+
+    } else if (GVL.LANGUAGE_CACHE.has(lang as string)) {
+
+      GVL.LANGUAGE_CACHE.delete(lang as string);
+      retr = true;
+
+    }
+
+    return retr;
+
+  }
+
   private cacheLanguage(lang: string): void {
 
-    GVL.LOADED_LANGUAGES.set(lang, {
+    GVL.LANGUAGE_CACHE.set(lang, {
       gvlSpecificationVersion: this.gvlSpecificationVersion,
       vendorListVersion: this.vendorListVersion,
       tcfPolicyVersion: this.tcfPolicyVersion,
@@ -301,9 +329,9 @@ export class GVL implements VendorList, Declarations {
 
         if (lang !== this.lang_) {
 
-          if (GVL.LOADED_LANGUAGES.get(lang) !== undefined) {
+          if (GVL.LANGUAGE_CACHE.get(lang) !== undefined) {
 
-            const cached: Declarations = GVL.LOADED_LANGUAGES.get(lang) as Declarations;
+            const cached: Declarations = GVL.LANGUAGE_CACHE.get(lang) as Declarations;
 
             for (const prop in cached) {
 
@@ -314,6 +342,8 @@ export class GVL implements VendorList, Declarations {
               }
 
             }
+
+            resolve();
 
           } else {
 
@@ -362,11 +392,13 @@ export class GVL implements VendorList, Declarations {
     });
 
   }
+
   public get language(): string {
 
     return this.lang_;
 
   }
+
   private isVendorList(gvlObject: object): gvlObject is VendorList {
 
     return gvlObject !== undefined && (gvlObject as VendorList).vendors !== undefined;
