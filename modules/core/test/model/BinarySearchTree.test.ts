@@ -15,6 +15,7 @@ export function run(): void {
         ar.push(i);
 
       }
+
       return ar;
 
     };
@@ -57,6 +58,7 @@ export function run(): void {
         bst.add(ar[i]);
 
       }
+
       const result: number[] = bst.get();
 
       // expect the bst get method to return a sorted
@@ -103,7 +105,6 @@ export function run(): void {
 
     });
 
-
     for (let i = 0; i < 12; i++) {
 
       const numItems = Math.pow(2, i);
@@ -111,6 +112,7 @@ export function run(): void {
       const maxVal = startNum + numItems - 1;
       const ar: number[] = getRandomArray(numItems, startNum);
       const randomNum: number = ar[Math.floor(Math.random()*ar.length)];
+
       const makeTree = (): BinarySearchTree => {
 
         const bst = new BinarySearchTree();
@@ -120,6 +122,7 @@ export function run(): void {
           bst.add(ar[i]);
 
         }
+
         return bst;
 
       };

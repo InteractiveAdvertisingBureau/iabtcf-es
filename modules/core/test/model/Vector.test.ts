@@ -125,6 +125,7 @@ export function run(): void {
           expect(vector.has(id)).to.be.true;
 
         }
+
         i++;
 
       });
@@ -134,7 +135,6 @@ export function run(): void {
       expect(vector.maxId).to.equal(Math.max(...idAr));
 
     });
-
 
   });
 

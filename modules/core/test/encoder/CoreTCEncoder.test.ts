@@ -1,20 +1,10 @@
+import {expect} from 'chai';
+import {CoreFieldSequence} from '../../src/encoder/sequence';
+import {CoreTCEncoder} from '../../src/encoder/segment';
 import {
-
-  expect,
-
-} from 'chai';
-
-import {
-
-  CoreFieldSequence,
-
-} from '../../src/encoder/sequence';
-
-import {
-
-  CoreTCEncoder,
-
-} from '../../src/encoder/segment';
+  Vector,
+  PurposeRestrictionVector,
+} from '../../src/model/';
 
 import {
 
@@ -88,14 +78,14 @@ export function run(): void {
       expect(tcModel.gvl).to.equal(gvl);
       tcModel.gvl.readyPromise.then((): void => {
 
+        const coreFieldSequence: CoreFieldSequence = new CoreFieldSequence();
+
         expect(tcModel.isValid(), 'input model is valid').to.be.true;
 
         expect(encodeIt).not.to.throw();
         expect(decodeIt).not.to.throw();
 
         encodeIt();
-
-        const coreFieldSequence: CoreFieldSequence = new CoreFieldSequence();
 
         coreFieldSequence['2'].forEach((key: string): void => {
 
@@ -111,15 +101,38 @@ export function run(): void {
                 .to.equal(Math.round(tcModel[key].getTime()/100)*100);
               break;
 
-            case 'publisherRestrictions':
+            case 'specialFeatureOptIns':
+            case 'purposeConsents':
+            case 'publisherConsents':
+            case 'purposeLegitimateInterest':
+            case 'publisherLegitimateInterest':
+            case 'publisherCustomConsents':
+            case 'publisherCustomLegitimateInterest':
+            case 'vendorConsents':
+            case 'vendorLegitimateInterest':
+            case 'vendorsDisclosed':
+            case 'vendorsAllowed':
 
-              // Purpose Restrictions has a gvl reference in one and not the other
-              expect(decodedModel[key].numRestrictions, `${key} should be equal`).to.equal(tcModel[key].numRestrictions);
-              expect(decodedModel[key].getAllRestrictions(), `${key} should be equal`).to.deep.equal(tcModel[key].getAllRestrictions());
+              const oldVector: Vector = tcModel[key];
+              const newVector: Vector = decodedModel[key];
+
+              expect(newVector.maxId).to.equal(oldVector.maxId);
+              expect(newVector.size).to.equal(oldVector.size);
+              oldVector.forEach((value: boolean, id: number): void => {
+
+                expect(newVector.has(id)).to.equal(value);
+
+              });
               break;
+            case 'publisherRestrictions':
+              const oldPRVector: PurposeRestrictionVector = tcModel[key];
+              const newPRVector: PurposeRestrictionVector = decodedModel[key];
 
+              expect(newPRVector.isEmpty()).to.equal(oldPRVector.isEmpty());
+              expect(newPRVector.numRestrictions).to.equal(oldPRVector.numRestrictions);
+              break;
             default:
-              expect(decodedModel[key], `${key} should be equal`).to.deep.equal(tcModel[key]);
+              expect(decodedModel[key], `${key} should be equal`).to.equal(tcModel[key]);
 
           }
 

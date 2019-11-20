@@ -180,30 +180,6 @@ describe('TCModel', (): void => {
 
   });
 
-  it('should throw an error if gvl is attempted to be set more than once', (): void => {
-
-    // eslint-disable-next-line
-    const vendorlistJson = require('../../../dev/vendor-list.json');
-    const gvl: GVL = new GVL(vendorlistJson);
-
-    expect((): void => {
-
-      // disabling because it's upset that I'm not doing anything with this
-      // eslint-disable-next-line
-      const tcModel: TCModel = new TCModel(gvl);
-
-    }).to.not.throw();
-
-    const tcModel = new TCModel(gvl);
-
-    expect((): void => {
-
-      tcModel.gvl = gvl;
-
-    }).to.throw();
-
-  });
-
   const sameDataDifferentObject = function(obj1, obj2, objName): void {
 
     assert.equal(JSON.stringify(obj1), JSON.stringify(obj2), `${objName} stringify did not match original`);
@@ -301,10 +277,62 @@ describe('TCModel', (): void => {
 
     };
 
-    shouldBeOk('aa');
-    shouldBeOk('zz');
-    shouldBeOk('AA');
-    shouldBeOk('ZZ');
+    shouldBeOk('EN');
+    shouldBeOk('BG');
+    shouldBeOk('CS');
+    shouldBeOk('DA');
+    shouldBeOk('DE');
+    shouldBeOk('EL');
+    shouldBeOk('ES');
+    shouldBeOk('ET');
+    shouldBeOk('FI');
+    shouldBeOk('FR');
+    shouldBeOk('GA');
+    shouldBeOk('HR');
+    shouldBeOk('HU');
+    shouldBeOk('IT');
+    shouldBeOk('LT');
+    shouldBeOk('LV');
+    shouldBeOk('MT');
+    shouldBeOk('NL');
+    shouldBeOk('PL');
+    shouldBeOk('PT');
+    shouldBeOk('RO');
+    shouldBeOk('SK');
+    shouldBeOk('SL');
+    shouldBeOk('SV');
+
+    shouldBeOk('en');
+    shouldBeOk('bg');
+    shouldBeOk('cs');
+    shouldBeOk('da');
+    shouldBeOk('de');
+    shouldBeOk('el');
+    shouldBeOk('es');
+    shouldBeOk('et');
+    shouldBeOk('fi');
+    shouldBeOk('fr');
+    shouldBeOk('ga');
+    shouldBeOk('hr');
+    shouldBeOk('hu');
+    shouldBeOk('it');
+    shouldBeOk('lt');
+    shouldBeOk('lv');
+    shouldBeOk('mt');
+    shouldBeOk('nl');
+    shouldBeOk('pl');
+    shouldBeOk('pt');
+    shouldBeOk('ro');
+    shouldBeOk('sk');
+    shouldBeOk('sl');
+    shouldBeOk('sv');
+
+    shouldBeNotOk(' EN');
+    shouldBeNotOk('  ');
+    shouldBeNotOk('aa');
+    shouldBeNotOk('zz');
+    shouldBeNotOk('AA');
+    shouldBeNotOk('ZZ');
 
     // too long
     shouldBeNotOk('aaa');

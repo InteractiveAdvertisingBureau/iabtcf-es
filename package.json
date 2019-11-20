@@ -9,7 +9,7 @@
     "url": "https://opensource.org/licenses/apache2.0.php"
   },
   "scripts": {
-    "test": "mocha './modules/core/test/*.ts'",
+    "test": "mocha ./modules/**/test/*.ts",
     "bootstrap": "lerna bootstrap",
     "deploy": "lerna publish from-package",
     "build": "lerna run build",

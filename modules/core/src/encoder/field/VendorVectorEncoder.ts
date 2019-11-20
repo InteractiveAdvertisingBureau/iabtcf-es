@@ -1,23 +1,9 @@
-import {
-
-  Vector,
-
-} from '../../model';
-
-import {
-
-  BitLength,
-
-} from '../';
-
-import {
-
-  IntEncoder,
-  BooleanEncoder,
-  FixedVectorEncoder,
-  VectorEncodingType,
-
-} from '.';
+import {Vector} from '../../model';
+import {BitLength} from '../';
+import {IntEncoder} from './IntEncoder';
+import {BooleanEncoder} from './BooleanEncoder';
+import {FixedVectorEncoder} from './FixedVectorEncoder';
+import {VectorEncodingType} from './VectorEncodingType';
 
 export class VendorVectorEncoder {
 
@@ -92,15 +78,10 @@ export class VendorVectorEncoder {
   public static decode(value: string): Vector {
 
     let vector: Vector;
-
     let index = 0;
-
     const maxId: number = IntEncoder.decode(value.substr(index, BitLength.maxId));
-
     index += BitLength.maxId;
-
     const encodingType: VectorEncodingType = IntEncoder.decode(value.charAt(index));
-
     index += BitLength.encodingType;
 
     /**
@@ -199,6 +180,8 @@ export class VendorVectorEncoder {
       vector = FixedVectorEncoder.decode(bitField);
 
     }
+
+    vector.bitLength = index;
 
     return vector;
 

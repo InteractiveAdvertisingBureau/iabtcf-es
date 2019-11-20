@@ -54,7 +54,6 @@ describe('GVL', (): void => {
 
     assertPopulated(gvl);
 
-
   });
 
   it('should get latest GVL if nothing is passed to the constructor', (done): void => {
@@ -131,7 +130,6 @@ describe('GVL', (): void => {
 
   it('should narrow a group of vendors when narrowVendorsTo is called with list of ids', (): void => {
 
-
     if (Object.keys(vendorlistJson.vendors).length > 1) {
 
       const gvl: GVL = new GVL(vendorlistJson);
@@ -149,11 +147,10 @@ describe('GVL', (): void => {
 
     GVL.baseUrl = 'http://sweetcmp.com';
 
-    const DEFAULT_LANGUAGE = 'en';
     const gvl: GVL = new GVL(vendorlistJson);
-    const language = 'fr';
+    const language = 'FR';
 
-    expect(gvl.language).to.equal(DEFAULT_LANGUAGE);
+    expect(gvl.language).to.equal(GVL.DEFAULT_LANGUAGE);
 
     gvl.changeLanguage(language).then((): void => {
 
@@ -210,6 +207,7 @@ describe('GVL', (): void => {
   langNotOk('-Z');
   langNotOk('35');
   langNotOk('ZZZ');
+  langNotOk('US');
   langNotOk('usa');
   langNotOk('..');
 
@@ -217,7 +215,16 @@ describe('GVL', (): void => {
 
     const gvl: GVL = new GVL(vendorlistJson);
 
-    gvl.changeLanguage('fr')
+    // must remove it otherwise it won't work
+    gvl.emptyLanguageCache('FR');
+
+    gvl.changeLanguage('FR')
+      .then((): void => {
+
+        expect.fail(`without setting GVL.baseURL, this should have failed: ${GVL.baseUrl}`);
+        done();
+
+      })
       .catch((err): void => {
 
         // expect(err).to.be.an.instanceof(GVLError);
@@ -232,12 +239,11 @@ describe('GVL', (): void => {
 
     GVL.baseUrl = 'http://sweetcmp.com';
 
-    const DEFAULT_LANGUAGE = 'en';
     const gvl: GVL = new GVL(vendorlistJson);
 
-    expect(gvl.language).to.equal(DEFAULT_LANGUAGE);
+    expect(gvl.language).to.equal(GVL.DEFAULT_LANGUAGE);
 
-    gvl.changeLanguage(DEFAULT_LANGUAGE);
+    gvl.changeLanguage(GVL.DEFAULT_LANGUAGE);
     expect(XMLHttpTestTools.requests.length).to.equal(0);
 
   });
@@ -246,11 +252,11 @@ describe('GVL', (): void => {
 
     GVL.baseUrl = 'http://sweetcmp.com';
 
-    const DEFAULT_LANGUAGE = 'en';
     const gvl: GVL = new GVL(vendorlistJson);
-    const language = 'fr';
+    const language = 'FR';
+    gvl.emptyLanguageCache('FR');
 
-    expect(gvl.language).to.equal(DEFAULT_LANGUAGE);
+    expect(gvl.language).to.equal(GVL.DEFAULT_LANGUAGE);
 
     gvl.changeLanguage(language)
       .then((): void => {
@@ -284,7 +290,6 @@ describe('GVL', (): void => {
   };
 
   const vendorGroupGoodTest = (purposeOrFeature: string, subType: string, special: boolean): void => {
-
 
     it(`should group vendors by${special ? ' special' : ''} ${purposeOrFeature} ${subType}`, (): void => {
 
@@ -330,6 +335,7 @@ describe('GVL', (): void => {
           specialOrSubType = capitalize(subType);
 
         }
+
         const gvlMethodName: string = 'getVendorsWith' + specialOrSubType + cappedPORF;
         const gvlMap: IntMap<Vendor>
           = gvl[gvlMethodName](intId);

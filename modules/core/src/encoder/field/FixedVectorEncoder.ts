@@ -1,12 +1,5 @@
-import {
-  BooleanEncoder,
-} from './BooleanEncoder';
-
-import {
-
-  Vector,
-
-} from '../../model';
+import {BooleanEncoder} from './BooleanEncoder';
+import {Vector} from '../../model';
 
 export class FixedVectorEncoder {
 
@@ -37,6 +30,8 @@ export class FixedVectorEncoder {
       }
 
     }
+
+    vector.bitLength = value.length;
 
     return vector;
 

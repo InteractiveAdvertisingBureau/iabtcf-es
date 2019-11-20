@@ -1,12 +1,6 @@
-import {
-  IntEncoder,
-} from './IntEncoder';
-import {
-  BooleanEncoder,
-} from './BooleanEncoder';
-import {
-  BitLength,
-} from '../';
+import {IntEncoder} from './IntEncoder';
+import {BooleanEncoder} from './BooleanEncoder';
+import {BitLength} from '../BitLength';
 import {
   PurposeRestrictionVector,
   PurposeRestriction,
@@ -140,6 +134,8 @@ export class PurposeRestrictionVectorEncoder {
       }
 
     }
+
+    vector.bitLength = index;
 
     return vector;
 

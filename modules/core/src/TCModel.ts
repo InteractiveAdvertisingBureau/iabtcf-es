@@ -125,7 +125,7 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
   /**
    * Set of available consent languages published by the IAB
    */
-  private consentLanguages: ConsentLanguages = new ConsentLanguages();
+  public readonly consentLanguages: ConsentLanguages = new ConsentLanguages();
 
   /**
    * Constructs the TCModel. Passing a [[GVL]] is optional when constructing
