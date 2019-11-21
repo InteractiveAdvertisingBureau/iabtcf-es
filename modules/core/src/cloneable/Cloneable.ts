@@ -127,13 +127,13 @@ export abstract class Cloneable<T> {
       if (target instanceof Array) {
 
         const cp = [] as AnyArray;
-        (target as AnyArray).forEach((v) => {
+        (target as AnyArray).forEach((v): void => {
 
           cp.push(v);
 
         });
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        destination = cp.map((n: any) => this.deepCopyObject<any>(n, {})) as any;
+        destination = cp.map((n: any): any => this.deepCopyObject<any>(n, {})) as any;
         return destination;
 
       }
@@ -195,7 +195,7 @@ export abstract class Cloneable<T> {
 
     // eslint-disable-next-line @typescript-eslint/no-object-literal-type-assertion,@typescript-eslint/no-explicit-any
     const cp = {...(target as { [key: string]: any })} as { [key: string]: any };
-    Object.keys(cp).forEach((k) => {
+    Object.keys(cp).forEach((k): void => {
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       destination[k] = this.deepCopyObject<any>(cp[k], {});
