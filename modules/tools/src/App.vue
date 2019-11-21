@@ -22,7 +22,9 @@ import {Component, Vue} from 'vue-property-decorator';
 import VueRouter, {RouteConfig} from 'vue-router';
 import Nav from './components/nav/Nav.vue';
 import {SectionModel} from './model/SectionModel';
-import {BootstrapVue} from 'bootstrap-vue';
+
+// eslint-ignore-next-line
+import BootstrapVue from 'bootstrap-vue';
 
 import {GVL} from '@iabtcf/core';
 
