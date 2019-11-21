@@ -12,6 +12,7 @@
     "bootstrap": "lerna bootstrap",
     "deploy": "lerna publish from-package",
     "build": "lerna run build",
+    "lint": "lerna run lint",
     "docs": "lerna run docs",
     "test": "mocha",
     "serve:coverage": "http-server coverage/ -o",

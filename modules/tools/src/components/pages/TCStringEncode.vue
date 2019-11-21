@@ -4,130 +4,138 @@
       <b-row>
         <b-col cols="12">
           <tc-string-input
-            v-model=encodedTCString
+            v-model="encodedTCString"
           />
         </b-col>
       </b-row>
       <b-row>
         <b-col cols="2">
-          <b-card bg-variant="light" class="b-card">
+          <b-card
+            bg-variant="light"
+            class="b-card">
             <form-select
               label="Vendor List Version"
-               :tcModel="tcModel"
-               :options="vendorListVersions"
-               id="vendorListVersion"
-               @update="onVendorListSet"
-              />
+              :tc-model="tcModel"
+              :options="vendorListVersions"
+              id="vendorListVersion"
+              @update="onVendorListSet"
+            />
             <template v-if="isReady">
               <text-field
-                 v-for="formField in formFields"
-                   :label="formField.text"
-                   :tcModel="tcModel"
-                   :id="formField.value"
-                   :key="formField.value"
-                   @update="update"
+                v-for="formField in formFields"
+                :label="formField.text"
+                :tc-model="tcModel"
+                :id="formField.value"
+                :key="formField.value"
+                @update="update"
               />
               <form-select
                 label="Consent Language"
-                 :tcModel="tcModel"
-                 :options="languages"
-                 id="consentLanguage"
-                 @update="update"
-                />
+                :tc-model="tcModel"
+                :options="languages"
+                id="consentLanguage"
+                @update="update"
+              />
               <form-select
                 label="Pub Country Code"
-                 :tcModel="tcModel"
-                 :options="countries"
-                 id="publisherCountryCode"
-                 @update="update"
-                />
+                :tc-model="tcModel"
+                :options="countries"
+                id="publisherCountryCode"
+                @update="update"
+              />
             </template>
           </b-card>
         </b-col>
 
         <template v-if="isReady">
           <b-col cols="3">
-            <b-card bg-variant="light" class="b-card">
+            <b-card
+              bg-variant="light"
+              class="b-card">
               <date-field
-                 id="created"
-                 label="Created Date"
-                 :tcModel="tcModel"
-                 @update="update"
+                id="created"
+                label="Created Date"
+                :tc-model="tcModel"
+                @update="update"
               />
               <date-field
-                 id="lastUpdated"
-                 label="Last Updated Date"
-                 :tcModel="tcModel"
-                 @update="update"
+                id="lastUpdated"
+                label="Last Updated Date"
+                :tc-model="tcModel"
+                @update="update"
               />
 
               <checkbox-boolean
-                 v-for="field in boolFields"
-                   :id="field.value"
-                   :label="field.text"
-                   :tcModel="tcModel"
-                   :key="field.value"
-                   @update="update"
-               />
-              <br />
+                v-for="field in boolFields"
+                :id="field.value"
+                :label="field.text"
+                :tc-model="tcModel"
+                :key="field.value"
+                @update="update"
+              />
+              <br >
             </b-card>
           </b-col>
 
           <b-col cols="3">
-            <b-card bg-variant="light" class="b-card">
+            <b-card
+              bg-variant="light"
+              class="b-card">
               <big-form-select
                 label="Vendor Consents"
-                 :tcModel="tcModel"
-                 :options="vendors"
-                 id="vendorConsents"
-                 @update="update"
-                />
+                :tc-model="tcModel"
+                :options="vendors"
+                id="vendorConsents"
+                @update="update"
+              />
               <big-form-select
                 label="Vendor Legitimate Interest"
-                 :tcModel="tcModel"
-                 :options="vendors"
-                 id="vendorLegitimateInterest"
-                 @update="update"
-                />
+                :tc-model="tcModel"
+                :options="vendors"
+                id="vendorLegitimateInterest"
+                @update="update"
+              />
               <big-form-select
                 label="OOB Vendors Allowed"
-                 :tcModel="tcModel"
-                 :options="vendors"
-                 id="vendorsAllowed"
-                 @update="update"
-                />
+                :tc-model="tcModel"
+                :options="vendors"
+                id="vendorsAllowed"
+                @update="update"
+              />
               <big-form-select
                 label="OOB Vendors Disclosed"
-                 :tcModel="tcModel"
-                 :options="vendors"
-                 id="vendorsDisclosed"
-                 @update="update"
-                />
+                :tc-model="tcModel"
+                :options="vendors"
+                id="vendorsDisclosed"
+                @update="update"
+              />
             </b-card>
           </b-col>
           <b-col cols="4">
-            <b-card bg-variant="light" class="b-card">
+            <b-card
+              bg-variant="light"
+              class="b-card">
               <big-form-select
                 label="Purpose Consents"
-                 :tcModel="tcModel"
-                 :options="purposes"
-                 id="purposeConsents"
-                 @update="update"
-                />
+                :tc-model="tcModel"
+                :options="purposes"
+                id="purposeConsents"
+                @update="update"
+              />
               <big-form-select
                 label="Purpose Legitimate Interest"
-                 :tcModel="tcModel"
-                 :options="purposes"
-                 id="purposeConsents"
-                 @update="update"
-                />
+                :tc-model="tcModel"
+                :options="purposes"
+                id="purposeConsents"
+                @update="update"
+              />
               <big-form-select
                 label="Special Feature Optins"
-                 :tcModel="tcModel"
-                 :options="specialFeatures"
-                 id="specialFeatureOptIns"
-                 @update="update"
-                />
+                :tc-model="tcModel"
+                :options="specialFeatures"
+                id="specialFeatureOptIns"
+                @update="update"
+              />
             </b-card>
           </b-col>
         </template>
@@ -137,7 +145,7 @@
 </template>
 
 <script lang="ts" >
-import {Component, Vue, Watch} from 'vue-property-decorator';
+import {Component, Vue} from 'vue-property-decorator';
 import {TCModel, GVL, TCString, Vendor, Purpose, Feature, ConsentLanguages} from '@iabtcf/core';
 import TextField from '../forms/TextField.vue';
 import DateField from '../forms/DateField.vue';
@@ -183,6 +191,7 @@ export default class extends Vue {
   private isReady: boolean = false;
 
   private listenForGVLChanges(): void {
+
     this.tcModel.gvl.readyPromise.then((): void => {
 
       const vendors = this.tcModel.gvl.vendors;
@@ -243,6 +252,7 @@ export default class extends Vue {
       this.encodedTCString = TCString.encode(this.tcModel);
 
     });
+
   }
 
   private update(): void {
@@ -263,7 +273,6 @@ export default class extends Vue {
 
     this.tcModel.vendorListVersion = selectedVersion;
     this.listenForGVLChanges();
-    debugger;
     // this.update();
     // this.isReady = true;
 
@@ -280,26 +289,31 @@ export default class extends Vue {
     });
 
   }
+
   private get countries(): FormField[] {
 
     return Countries.getFormFields();
 
   }
+
   private get vendors(): FormField[] {
 
     return this.vendors_;
 
   }
+
   private get purposes(): FormField[] {
 
     return this.purposes_;
 
   }
+
   private get specialFeatures(): FormField[] {
 
     return this.specialFeatures_;
 
   }
+
   private get vendorListVersions(): FormField[] {
 
     const numVersions = 7;

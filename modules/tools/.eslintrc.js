@@ -3,4 +3,7 @@ module.exports = {
     '../../.eslintrc.js',
     'plugin:@vue/recommended',
   ],
+  rules: {
+    '@vue/comment-directive': [0]
+  }
 };

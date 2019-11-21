@@ -706,6 +706,11 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@iabtcf/core@^1.0.0-alpha.9":
+  version "1.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@iabtcf/core/-/core-1.0.0-alpha.9.tgz#4cd4866ab33f5e6997b7c3b9f4a5d435cacc9118"
+  integrity sha512-Wx2C1YM9E/GAT2i+CWLJajKaLK4tmmRlxj373pV61uK6pNeqGJcx9N+PFEW0t4L5u9pMOD7gYJkvR7t6utKQ6w==
+
 "@intervolga/optimize-cssnano-plugin@^1.0.5":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@intervolga/optimize-cssnano-plugin/-/optimize-cssnano-plugin-1.0.6.tgz#be7c7846128b88f6a9b1d1261a0ad06eb5c0fdf8"
@@ -1075,6 +1080,13 @@
   dependencies:
     "@typescript-eslint/eslint-plugin" "^1.1.0"
     "@typescript-eslint/parser" "^1.1.0"
+
+"@vue/eslint-plugin@^4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@vue/eslint-plugin/-/eslint-plugin-4.2.0.tgz#38c4e649faa08e457393e0a24cfbb3ff1f4a8a4e"
+  integrity sha512-XVSLEVoNnrjaxvsun5kqZyeuWyUkp97gSnLkLOvkPkoAnLwIfjG3TuZQNm7yTEukZWmaa+7FpgMdSFqL8Z0XkA==
+  dependencies:
+    vue-eslint-parser "^2.0.1"
 
 "@vue/preload-webpack-plugin@^1.1.0":
   version "1.1.1"
@@ -9030,7 +9042,7 @@ vue-class-component@^7.0.2, vue-class-component@^7.1.0:
   resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-7.1.0.tgz#b33efcb10e17236d684f70b1e96f1946ec793e87"
   integrity sha512-G9152NzUkz0i0xTfhk0Afc8vzdXxDR1pfN4dTwE72cskkgJtdXfrKBkMfGvDuxUh35U500g5Ve4xL8PEGdWeHg==
 
-vue-eslint-parser@^2.0.3:
+vue-eslint-parser@^2.0.1, vue-eslint-parser@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-2.0.3.tgz#c268c96c6d94cfe3d938a5f7593959b0ca3360d1"
   integrity sha512-ZezcU71Owm84xVF6gfurBQUGg8WQ+WZGxgDEQu1IHFBZNx7BFZg3L1yHxrCBNNwbwFtE1GuvfJKMtb6Xuwc/Bw==
