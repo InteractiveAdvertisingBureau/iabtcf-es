@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PurposeRestriction} from '../../src/model/PurposeRestriction';
 import {RestrictionType} from '../../src/model/RestrictionType';
 import {PurposeRestrictionVector} from '../../src/model/PurposeRestrictionVector';
-import {makeRandomInt} from '../support/makeRandomInt';
+import {makeRandomInt} from 'makeRandomInt';
 
 export function run(): void {
 

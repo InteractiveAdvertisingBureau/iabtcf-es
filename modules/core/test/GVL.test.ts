@@ -3,7 +3,7 @@ import * as sinon from 'sinon';
 import {GVL} from '../src/GVL';
 import {Vendor} from '../src/model/gvl';
 import {IntMap} from '../src/model/IntMap';
-import {XMLHttpTestTools} from './support/XMLHttpTestTools';
+import {XMLHttpTestTools} from 'XMLHttpTestTools';
 
 // eslint-disable-next-line
 const vendorlistJson = require('../../../dev/vendor-list.json');
