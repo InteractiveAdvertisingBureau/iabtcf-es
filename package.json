@@ -14,7 +14,8 @@
     "deploy": "lerna publish from-package",
     "build": "lerna run build",
     "docs": "lerna run docs",
-    "coverage": "nyc --reporter html npm run test && http-server coverage/ -o",
+    "serve:coverage": "http-server coverage/ -o",
+    "coverage": "nyc --reporter html npm run test && npm run serve:coverage",
     "lcov": "nyc --reporter=lcov npm run test",
     "upload-lcov": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "standard": "standard index.js"
