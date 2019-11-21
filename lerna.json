@@ -6,6 +6,9 @@
         "*.md",
         "test/**"
       ]
+    },
+    "bootstrap": {
+      "forceLocal": true
     }
   },
   "useWorkspaces": true,

@@ -49,7 +49,7 @@ export abstract class Cloneable<T> {
    * @private
    * @return {T}
    */
-  protected _clone(...constructorArgs: AnyArray): T {
+  public _clone(...constructorArgs: AnyArray): T {
 
     /**
      * Create an instance of child class and copy its fields

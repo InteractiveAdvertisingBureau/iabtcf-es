@@ -16,10 +16,8 @@
   },
   "scripts": {
     "start": "vue-cli-service serve",
-    "prepare": "npm run build",
-    "build": "vue-cli-service build --no-clean",
-    "lint": "eslint ./src/**/*.ts ./src/**/*.vue",
-    "report-coverage": ""
+    "build": "echo 'disabled: vue-cli-service build --no-clean'",
+    "lint": "eslint ./src/**/*.ts ./src/**/*.vue"
   },
   "dependencies": {
     "@iabtcf/core": "^1.0.0-alpha.9",
