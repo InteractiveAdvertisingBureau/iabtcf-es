@@ -7,6 +7,7 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:import/typescript',
     'google',
+    'plugin:json/recommended',
   ],
   settings: {
     'import/parsers': {
