@@ -17,7 +17,7 @@
     "docs": "typedoc --ignoreCompilerErrors --tsconfig ./tsconfig.json  src",
     "prepare": "npm run build",
     "build": "rm -r lib ; tsc",
-    "test": "mocha './test/*.ts'",
+    "test": "mocha",
     "debug": "ndb npm test",
     "lint": "eslint ./src/**/*.ts",
     "report-coverage": ""

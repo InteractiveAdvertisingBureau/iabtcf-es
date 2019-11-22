@@ -1,0 +1,7 @@
+extends: '../../.mocharc.yml'
+require:
+  - 'ts-node/register'
+  - 'jsdom-global/register'
+  - 'source-map-support/register'
+  - 'tsconfig-paths/register'
+spec: ./test/*.ts
