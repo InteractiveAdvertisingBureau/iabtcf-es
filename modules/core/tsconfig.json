@@ -12,11 +12,11 @@
     "src/**/*"
   ],
   "typedocOptions": {
-    "theme": "markdown",
+    "theme": "default",
     "mode": "file",
     "readme": "none",
     "name": "@iabtcf/core - API Documentation",
-    "out": "docs/api",
+    "out": "../../site/api/core/",
     "excludePrivate":true
   }
 }
