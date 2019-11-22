@@ -21,12 +21,22 @@ import {AnyConstructor} from './AnyConstructor';
  * }
  * Todo: There must be more non primitive build in types to check. But for our current purposes, this works great.
  */
-export abstract class Cloneable<T> {
+export class Cloneable<T> {
 
   /**
-   * Child class must implement the clone() method
+   * @return {T}
    */
-  public abstract clone(): T;
+  public clone(): T {
+
+    /**
+     * Create an instance of child class and copy its fields
+     */
+
+    const concreteChildCopy: T = new this.childConstructor();
+
+    return this.deepCopyObject<T>(this as unknown as T, concreteChildCopy);
+
+  };
 
   /**
    * Child class's constructor value
@@ -40,24 +50,6 @@ export abstract class Cloneable<T> {
   protected constructor(childConstructor: AnyConstructor<T>) {
 
     this.childConstructor = childConstructor;
-
-  }
-
-  /**
-   * Method to be called in the child concrete class's clone method
-   * @param {AnyArray} constructorArgs - arguments to be passed to the cloned objects constructor if need be
-   * @private
-   * @return {T}
-   */
-  public _clone(...constructorArgs: AnyArray): T {
-
-    /**
-     * Create an instance of child class and copy its fields
-     */
-
-    const concreteChildCopy: T = new this.childConstructor(...constructorArgs);
-
-    return this.deepCopyObject<T>(this as unknown as T, concreteChildCopy);
 
   }
 

@@ -47,8 +47,6 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
    */
   public readonly purposeConsents: Vector = new Vector();
 
-  public readonly testMap: Map<number, object> = new Map<number, any>([[1, {yes: 'no'}], [2, 'two']]);
-
   /**
    * The user’s consent value for each Purpose established on the legal basis
    * of consent, for the publisher.  Purposes are published in the Global
@@ -146,16 +144,6 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
 
     this.created = new Date();
     this.updated();
-
-  }
-
-  /**
-   * Creates a clone of this TCModel
-   * @return {TCModel}
-   */
-  public clone(): TCModel {
-
-    return this._clone(this.gvl);
 
   }
 
