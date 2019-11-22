@@ -182,7 +182,6 @@ describe('TCModel', (): void => {
 
   const sameDataDifferentObject = function(obj1, obj2, objName): void {
 
-    assert.equal(JSON.stringify(obj1), JSON.stringify(obj2), `${objName} stringify did not match original`);
     assert.deepEqual(obj1, obj2, objName + `${objName} data did not match`);
     assert.notEqual(obj1, obj2, objName + `${objName} are the same object`);
 

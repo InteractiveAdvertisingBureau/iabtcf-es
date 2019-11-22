@@ -224,16 +224,6 @@ export class GVL extends Cloneable<GVL> implements VendorList, Declarations {
   }
 
   /**
-   * Creates a clone of this GVL
-   * @return {GVL}
-   */
-  public clone(): GVL {
-
-    return this._clone(this);
-
-  }
-
-  /**
    * emptyLanguageCache
    *
    * @param {string} [lang] - Optional ISO 639-1 langauge code to remove from

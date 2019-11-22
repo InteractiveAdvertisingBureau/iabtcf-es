@@ -38,16 +38,6 @@ class Vector extends Cloneable<Vector> {
   }
 
   /**
-   * Creates a clone of this Vector
-   * @return {Vector}
-   */
-  public clone(): Vector {
-
-    return this._clone();
-
-  }
-
-  /**
    * maxId
    *
    * @return {number} - the highest id in this Vector
