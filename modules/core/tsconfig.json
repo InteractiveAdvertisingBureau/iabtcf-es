@@ -16,7 +16,7 @@
     "mode": "file",
     "readme": "none",
     "name": "@iabtcf/core - API Documentation",
-    "out": "../../site/api/core/",
+    "out": "../../docs/api/core/",
     "excludePrivate":true
   }
 }
