@@ -17,7 +17,8 @@
     "test": "mocha",
     "serve:coverage": "http-server coverage/ -o",
     "coverage": "nyc --reporter html npm run test && npm run serve:coverage",
-    "upload:lcov": "nyc --reporter=text-lcov | coveralls"
+    "test:lcov": "nyc --reporter=lcov mocha",
+    "upload:lcov": "cat coverage/lcov.info | coveralls"
   },
   "keywords": [
     "interactive",

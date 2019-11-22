@@ -2,9 +2,7 @@ sudo: false
 language: node_js
 cache: yarn
 script:
-  - yarn install
   - ls -la node_modules/@iabtcf/
-  - yarn run lint
-  - yarn run build
+  - yarn run test:lcov
 after_success:
   - yarn run upload:lcov
