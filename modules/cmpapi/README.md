@@ -13,3 +13,4 @@ Ensures other in-page digital marketing technologies have access to CMP transpar
 ## Documentation
 
  * [API Documentation](docs/api/README.md#iabtcfcmpapi---api-documentation)
+ * [Usage Documentation](docs/usage/README.md)

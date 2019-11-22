@@ -1,10 +1,11 @@
 import {CmpDataReader} from '../cmpdata';
+import {CmpStatus} from "../status";
 import {
-  TcfApiArgSet,
   CallbackFunction,
   CommandArgsHandler,
   PageCallHandler,
   Param,
+  TcfApiArgSet,
   TcModelChangeEventHandler,
 } from '../types';
 import {ValidationMessages, ValidationUtil} from '../validation';
@@ -289,7 +290,7 @@ export class CommandBroker {
    */
   private get canProcessCommandQueue(): boolean {
 
-    return this.cmpData.tcModelIsSet;
+    return this.cmpData.tcModelIsSet && (this.cmpData.getCmpStatus() !== CmpStatus.ERROR);
 
   }
 

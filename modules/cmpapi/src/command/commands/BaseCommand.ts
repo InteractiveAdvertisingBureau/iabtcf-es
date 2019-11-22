@@ -116,7 +116,7 @@ export abstract class BaseCommand {
 
     if (this.param) {
 
-      return ValidationUtil.isIntegerGtrOne(+this.param) || this.param === 'LATEST';
+      return ValidationUtil.isIntegerGtrZero(+this.param) || this.param === 'LATEST';
 
     }
 
