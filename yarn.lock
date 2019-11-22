@@ -5975,7 +5975,7 @@ jscover@^1.0.0:
     fs-extra "0.3.1"
     ndir "0.1.5"
 
-jsdom-global@3.0.2, jsdom-global@^3.0.2:
+jsdom-global@3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/jsdom-global/-/jsdom-global-3.0.2.tgz#6bd299c13b0c4626b2da2c0393cd4385d606acb9"
   integrity sha1-a9KZwTsMRiay2iwDk81DhdYGrLk=

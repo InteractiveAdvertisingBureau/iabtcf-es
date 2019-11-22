@@ -3,6 +3,7 @@ language: node_js
 cache: yarn
 script:
   - yarn install
+  - ls -la node_modules/@iabtcf/
   - yarn run lint
   - yarn run build
 after_success:
