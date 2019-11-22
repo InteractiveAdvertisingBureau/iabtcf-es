@@ -2,8 +2,7 @@ sudo: false
 language: node_js
 cache: yarn
 script:
-  - git config --unset travis.slug
-  - git config --add travis.slug chrispaterson/iabtcf 
+  - git config travis.slug chrispaterson/iabtcf
   - yarn workspace @iabtcf/core run build
   - yarn run test:lcov
 after_success:
