@@ -1,0 +1,1037 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>GVL | @iabtcf/core - API Documentation</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">@iabtcf/core - API Documentation</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../index.html">Globals</a>
+				</li>
+				<li>
+					<a href="gvl.html">GVL</a>
+				</li>
+			</ul>
+			<h1>Class GVL</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>class with utilities for managing the global vendor list.  Will use JSON to
+							fetch the vendor list from specified url and will serialize it into this
+							object and provide accessors.  Provides ways to group vendors on the list by
+						purpose and feature.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<a href="cloneable.html" class="tsd-signature-type">Cloneable</a><span class="tsd-signature-symbol">&lt;</span><a href="gvl.html" class="tsd-signature-type">GVL</a><span class="tsd-signature-symbol">&gt;</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">GVL</span>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../interfaces/vendorlist.html" class="tsd-signature-type">VendorList</a></li>
+					<li><a href="../interfaces/declarations.html" class="tsd-signature-type">Declarations</a></li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="gvl.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="gvl.html#features" class="tsd-kind-icon">features</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="gvl.html#gvlspecificationversion" class="tsd-kind-icon">gvl<wbr>Specification<wbr>Version</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="gvl.html#lastupdated" class="tsd-kind-icon">last<wbr>Updated</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="gvl.html#purposes" class="tsd-kind-icon">purposes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="gvl.html#readypromise" class="tsd-kind-icon">ready<wbr>Promise</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="gvl.html#specialfeatures" class="tsd-kind-icon">special<wbr>Features</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="gvl.html#specialpurposes" class="tsd-kind-icon">special<wbr>Purposes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="gvl.html#stacks" class="tsd-kind-icon">stacks</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="gvl.html#tcfpolicyversion" class="tsd-kind-icon">tcf<wbr>Policy<wbr>Version</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="gvl.html#vendorlistversion" class="tsd-kind-icon">vendor<wbr>List<wbr>Version</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="gvl.html#default_language" class="tsd-kind-icon">DEFAULT_<wbr>LANGUAGE</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="gvl.html#baseurl" class="tsd-kind-icon">base<wbr>Url</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="gvl.html#languagefilename" class="tsd-kind-icon">language<wbr>Filename</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="gvl.html#latestfilename" class="tsd-kind-icon">latest<wbr>Filename</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="gvl.html#versionedfilename" class="tsd-kind-icon">versioned<wbr>Filename</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="gvl.html#language" class="tsd-kind-icon">language</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="gvl.html#vendors" class="tsd-kind-icon">vendors</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-private"><a href="gvl.html#_clone" class="tsd-kind-icon">_clone</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="gvl.html#changelanguage" class="tsd-kind-icon">change<wbr>Language</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="gvl.html#clone" class="tsd-kind-icon">clone</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="gvl.html#emptylanguagecache" class="tsd-kind-icon">empty<wbr>Language<wbr>Cache</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="gvl.html#getvendorswithconsentpurpose" class="tsd-kind-icon">get<wbr>Vendors<wbr>With<wbr>Consent<wbr>Purpose</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="gvl.html#getvendorswithfeature" class="tsd-kind-icon">get<wbr>Vendors<wbr>With<wbr>Feature</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="gvl.html#getvendorswithflexiblepurpose" class="tsd-kind-icon">get<wbr>Vendors<wbr>With<wbr>Flexible<wbr>Purpose</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="gvl.html#getvendorswithlegintpurpose" class="tsd-kind-icon">get<wbr>Vendors<wbr>With<wbr>Leg<wbr>Int<wbr>Purpose</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="gvl.html#getvendorswithspecialfeature" class="tsd-kind-icon">get<wbr>Vendors<wbr>With<wbr>Special<wbr>Feature</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="gvl.html#getvendorswithspecialpurpose" class="tsd-kind-icon">get<wbr>Vendors<wbr>With<wbr>Special<wbr>Purpose</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="gvl.html#narrowvendorsto" class="tsd-kind-icon">narrow<wbr>Vendors<wbr>To</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">new GVL<span class="tsd-signature-symbol">(</span>versionOrVendorList<span class="tsd-signature-symbol">?: </span><a href="../index.html#versionorvendorlist" class="tsd-signature-type">VersionOrVendorList</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="gvl.html" class="tsd-signature-type">GVL</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides <a href="cloneable.html">Cloneable</a>.<a href="cloneable.html#constructor">constructor</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L170">src/GVL.ts:170</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> versionOrVendorList: <a href="../index.html#versionorvendorlist" class="tsd-signature-type">VersionOrVendorList</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="gvl.html" class="tsd-signature-type">GVL</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="features" class="tsd-anchor"></a>
+					<h3>features</h3>
+					<div class="tsd-signature tsd-kind-icon">features<span class="tsd-signature-symbol">:</span> <a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/feature.html" class="tsd-signature-type">Feature</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/declarations.html">Declarations</a>.<a href="../interfaces/declarations.html#features">features</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L123">src/GVL.ts:123</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>collection of <a href="../interfaces/feature.html">Feature</a>s</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="gvlspecificationversion" class="tsd-anchor"></a>
+					<h3>gvl<wbr>Specification<wbr>Version</h3>
+					<div class="tsd-signature tsd-kind-icon">gvl<wbr>Specification<wbr>Version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/declarations.html">Declarations</a>.<a href="../interfaces/declarations.html#gvlspecificationversion">gvlSpecificationVersion</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L85">src/GVL.ts:85</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>schema version for the GVL that is used</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="lastupdated" class="tsd-anchor"></a>
+					<h3>last<wbr>Updated</h3>
+					<div class="tsd-signature tsd-kind-icon">last<wbr>Updated<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Date</span></div>
+					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/declarations.html">Declarations</a>.<a href="../interfaces/declarations.html#lastupdated">lastUpdated</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L108">src/GVL.ts:108</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the date in which the vendor list
+								json file  was last updated.</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="purposes" class="tsd-anchor"></a>
+					<h3>purposes</h3>
+					<div class="tsd-signature tsd-kind-icon">purposes<span class="tsd-signature-symbol">:</span> <a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/purpose.html" class="tsd-signature-type">Purpose</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/declarations.html">Declarations</a>.<a href="../interfaces/declarations.html#purposes">purposes</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L113">src/GVL.ts:113</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>collection of <a href="../interfaces/purpose.html">Purpose</a>s</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="readypromise" class="tsd-anchor"></a>
+					<h3>ready<wbr>Promise</h3>
+					<div class="tsd-signature tsd-kind-icon">ready<wbr>Promise<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><a href="gvlerror.html" class="tsd-signature-type">GVLError</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L80">src/GVL.ts:80</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>when this GVL object is populated with the data
+								or rejected if there is an error</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="specialfeatures" class="tsd-anchor"></a>
+					<h3>special<wbr>Features</h3>
+					<div class="tsd-signature tsd-kind-icon">special<wbr>Features<span class="tsd-signature-symbol">:</span> <a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/feature.html" class="tsd-signature-type">Feature</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/declarations.html">Declarations</a>.<a href="../interfaces/declarations.html#specialfeatures">specialFeatures</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L128">src/GVL.ts:128</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>collection of <a href="../interfaces/feature.html">Feature</a>s</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="specialpurposes" class="tsd-anchor"></a>
+					<h3>special<wbr>Purposes</h3>
+					<div class="tsd-signature tsd-kind-icon">special<wbr>Purposes<span class="tsd-signature-symbol">:</span> <a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/purpose.html" class="tsd-signature-type">Purpose</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/declarations.html">Declarations</a>.<a href="../interfaces/declarations.html#specialpurposes">specialPurposes</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L118">src/GVL.ts:118</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>collection of <a href="../interfaces/purpose.html">Purpose</a>s</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="stacks" class="tsd-anchor"></a>
+					<h3>stacks</h3>
+					<div class="tsd-signature tsd-kind-icon">stacks<span class="tsd-signature-symbol">:</span> <a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/stack.html" class="tsd-signature-type">Stack</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/declarations.html">Declarations</a>.<a href="../interfaces/declarations.html#stacks">stacks</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L163">src/GVL.ts:163</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>collection of <a href="../interfaces/stack.html">Stack</a>s</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="tcfpolicyversion" class="tsd-anchor"></a>
+					<h3>tcf<wbr>Policy<wbr>Version</h3>
+					<div class="tsd-signature tsd-kind-icon">tcf<wbr>Policy<wbr>Version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/declarations.html">Declarations</a>.<a href="../interfaces/declarations.html#tcfpolicyversion">tcfPolicyVersion</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L102">src/GVL.ts:102</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>The TCF MO will increment this value
+									whenever a GVL change (such as adding a new Purpose or Feature or a change
+									in Purpose wording) legally invalidates existing TC Strings and requires
+									CMPs to re-establish transparency and consent from users. If the policy
+									version number in the latest GVL is different from the value in your TC
+									String, then you need to re-establish transparency and consent for that
+									user. A version 1 format TC String is considered to have a version value
+								of 1.</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="vendorlistversion" class="tsd-anchor"></a>
+					<h3>vendor<wbr>List<wbr>Version</h3>
+					<div class="tsd-signature tsd-kind-icon">vendor<wbr>List<wbr>Version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/declarations.html">Declarations</a>.<a href="../interfaces/declarations.html#vendorlistversion">vendorListVersion</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L90">src/GVL.ts:90</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>with each published file change</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="default_language" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> DEFAULT_<wbr>LANGUAGE</h3>
+					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>LANGUAGE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;EN&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L26">src/GVL.ts:26</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="baseurl" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> base<wbr>Url</h3>
+					<div class="tsd-signature tsd-kind-icon">base<wbr>Url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L34">src/GVL.ts:34</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>static</dt>
+							<dd></dd>
+							<dt>param</dt>
+							<dd><p>the base url to load the vendor-list.json from.  This is
+									broken out from the filename because it follows a different scheme for
+								latest file vs versioned files.</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="languagefilename" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> language<wbr>Filename</h3>
+					<div class="tsd-signature tsd-kind-icon">language<wbr>Filename<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;purposes-[LANG].json&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L74">src/GVL.ts:74</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>Translations of the names and descriptions for Purposes,
+									Special Purposes, Features, and Special Features to non-English languages
+									are contained in a file where attributes containing English content
+									(except vendor declaration information) are translated.  The iab publishes
+									one following the scheme below where the LANG is the iso639-1 language
+									code.  For a list of available translations
+								<a href="https://register.consensu.org/Translation">please go here</a>.</p>
+								<p>eg.</p>
+								<pre><code class="language-javascript">GVL.baseUrl = <span class="hljs-string">"http://www.mydomain.com/iabcmp/"</span>;
+GVL.languageFilename = <span class="hljs-string">"purposes?getPurposes=[LANG]"</span>;</code></pre>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="latestfilename" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> latest<wbr>Filename</h3>
+					<div class="tsd-signature tsd-kind-icon">latest<wbr>Filename<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;vendor-list.json&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L41">src/GVL.ts:41</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>static</dt>
+							<dd></dd>
+							<dt>param</dt>
+							<dd><p>the latest is assumed to be vendor-list.json because
+								that is what the iab uses, but it could be different... if you want</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="versionedfilename" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> versioned<wbr>Filename</h3>
+					<div class="tsd-signature tsd-kind-icon">versioned<wbr>Filename<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;archives/vendor-list-v[VERSION].json&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L57">src/GVL.ts:57</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>static</dt>
+							<dd></dd>
+							<dt>param</dt>
+							<dd><p>the versioned name is assumed to be
+									vendor-list-v[VERSION].json where [VERSION] will be replaced with the
+									specified version.  But it could be different... if you want just make
+									sure to include the [VERSION] macro if you have a numbering scheme, it&#39;s a
+								simple string substitution.</p>
+								<p>eg.</p>
+								<pre><code class="language-javascript">GVL.baseUrl = <span class="hljs-string">"http://www.mydomain.com/iabcmp/"</span>;
+GVL.versionedFilename = <span class="hljs-string">"vendorlist?getVersion=[VERSION]"</span>;</code></pre>
+							</dd>
+						</dl>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="language" class="tsd-anchor"></a>
+					<h3>language</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> language<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L395">src/GVL.ts:395</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="vendors" class="tsd-anchor"></a>
+					<h3>vendors</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> vendors<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/vendor.html" class="tsd-signature-type">Vendor</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L632">src/GVL.ts:632</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/vendor.html" class="tsd-signature-type">Vendor</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+					<a name="_clone" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _clone</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">_clone<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>constructorArgs<span class="tsd-signature-symbol">: </span><a href="../index.html#anyarray" class="tsd-signature-type">AnyArray</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="gvl.html" class="tsd-signature-type">GVL</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="cloneable.html">Cloneable</a>.<a href="cloneable.html#_clone">_clone</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/cloneable/Cloneable.ts#L52">src/cloneable/Cloneable.ts:52</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method to be called in the child concrete class&#39;s clone method</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>constructorArgs: <a href="../index.html#anyarray" class="tsd-signature-type">AnyArray</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>arguments to be passed to the cloned objects constructor if need be</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="gvl.html" class="tsd-signature-type">GVL</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="changelanguage" class="tsd-anchor"></a>
+					<h3>change<wbr>Language</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">change<wbr>Language<span class="tsd-signature-symbol">(</span>lang<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><a href="gvlerror.html" class="tsd-signature-type">GVLError</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L321">src/GVL.ts:321</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>changeLanguage - retrieves the purpose language translation and sets the
+									internal language variable</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>lang: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>ISO 639-1 langauge code to change language to</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><a href="gvlerror.html" class="tsd-signature-type">GVLError</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<ul>
+								<li>returns the <code>readyPromise</code> and
+								resolves when this GVL is populated with the data from the language file.</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="clone" class="tsd-anchor"></a>
+					<h3>clone</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">clone<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="gvl.html" class="tsd-signature-type">GVL</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides <a href="cloneable.html">Cloneable</a>.<a href="cloneable.html#clone">clone</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L230">src/GVL.ts:230</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a clone of this GVL</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="gvl.html" class="tsd-signature-type">GVL</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="emptylanguagecache" class="tsd-anchor"></a>
+					<h3>empty<wbr>Language<wbr>Cache</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">empty<wbr>Language<wbr>Cache<span class="tsd-signature-symbol">(</span>lang<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L244">src/GVL.ts:244</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>emptyLanguageCache</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> lang: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<ul>
+								<li>whether or not the item specified was in the cache and
+								subsequently removed</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getvendorswithconsentpurpose" class="tsd-anchor"></a>
+					<h3>get<wbr>Vendors<wbr>With<wbr>Consent<wbr>Purpose</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Vendors<wbr>With<wbr>Consent<wbr>Purpose<span class="tsd-signature-symbol">(</span>purposeId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/vendor.html" class="tsd-signature-type">Vendor</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L566">src/GVL.ts:566</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>getVendorsWithConsentPurpose</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>purposeId: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/vendor.html" class="tsd-signature-type">Vendor</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<ul>
+								<li>list of vendors that have declared the consent purpose id</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getvendorswithfeature" class="tsd-anchor"></a>
+					<h3>get<wbr>Vendors<wbr>With<wbr>Feature</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Vendors<wbr>With<wbr>Feature<span class="tsd-signature-symbol">(</span>featureId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/vendor.html" class="tsd-signature-type">Vendor</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L614">src/GVL.ts:614</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>getVendorsWithFeature</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>featureId: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/vendor.html" class="tsd-signature-type">Vendor</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<ul>
+								<li>list of vendors that have declared the feature id</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getvendorswithflexiblepurpose" class="tsd-anchor"></a>
+					<h3>get<wbr>Vendors<wbr>With<wbr>Flexible<wbr>Purpose</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Vendors<wbr>With<wbr>Flexible<wbr>Purpose<span class="tsd-signature-symbol">(</span>purposeId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/vendor.html" class="tsd-signature-type">Vendor</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L590">src/GVL.ts:590</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>getVendorsWithFlexiblePurpose</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>purposeId: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/vendor.html" class="tsd-signature-type">Vendor</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<ul>
+								<li>list of vendors that have declared the flexible purpose id</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getvendorswithlegintpurpose" class="tsd-anchor"></a>
+					<h3>get<wbr>Vendors<wbr>With<wbr>Leg<wbr>Int<wbr>Purpose</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Vendors<wbr>With<wbr>Leg<wbr>Int<wbr>Purpose<span class="tsd-signature-symbol">(</span>purposeId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/vendor.html" class="tsd-signature-type">Vendor</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L578">src/GVL.ts:578</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>getVendorsWithLegIntPurpose</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>purposeId: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/vendor.html" class="tsd-signature-type">Vendor</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<ul>
+								<li>list of vendors that have declared the legInt (Legitimate Interest) purpose id</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getvendorswithspecialfeature" class="tsd-anchor"></a>
+					<h3>get<wbr>Vendors<wbr>With<wbr>Special<wbr>Feature</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Vendors<wbr>With<wbr>Special<wbr>Feature<span class="tsd-signature-symbol">(</span>specialFeatureId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/vendor.html" class="tsd-signature-type">Vendor</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L626">src/GVL.ts:626</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>getVendorsWithSpecialFeature</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>specialFeatureId: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/vendor.html" class="tsd-signature-type">Vendor</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<ul>
+								<li>list of vendors that have declared the special feature id</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getvendorswithspecialpurpose" class="tsd-anchor"></a>
+					<h3>get<wbr>Vendors<wbr>With<wbr>Special<wbr>Purpose</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Vendors<wbr>With<wbr>Special<wbr>Purpose<span class="tsd-signature-symbol">(</span>specialPurposeId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/vendor.html" class="tsd-signature-type">Vendor</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L602">src/GVL.ts:602</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>getVendorsWithSpecialPurpose</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>specialPurposeId: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/vendor.html" class="tsd-signature-type">Vendor</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<ul>
+								<li>list of vendors that have declared the special purpose id</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="narrowvendorsto" class="tsd-anchor"></a>
+					<h3>narrow<wbr>Vendors<wbr>To</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">narrow<wbr>Vendors<wbr>To<span class="tsd-signature-symbol">(</span>vendorIds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/GVL.ts#L644">src/GVL.ts:644</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>narrowVendorsTo - narrows vendors represented in this GVL to the list of ids passed in</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>vendorIds: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>list of ids to narrow this GVL to</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../index.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
+						<a href="gvl.html" class="tsd-kind-icon">GVL</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+								<a href="gvl.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="gvl.html#features" class="tsd-kind-icon">features</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="gvl.html#gvlspecificationversion" class="tsd-kind-icon">gvl<wbr>Specification<wbr>Version</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="gvl.html#lastupdated" class="tsd-kind-icon">last<wbr>Updated</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="gvl.html#purposes" class="tsd-kind-icon">purposes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="gvl.html#readypromise" class="tsd-kind-icon">ready<wbr>Promise</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="gvl.html#specialfeatures" class="tsd-kind-icon">special<wbr>Features</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="gvl.html#specialpurposes" class="tsd-kind-icon">special<wbr>Purposes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="gvl.html#stacks" class="tsd-kind-icon">stacks</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="gvl.html#tcfpolicyversion" class="tsd-kind-icon">tcf<wbr>Policy<wbr>Version</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="gvl.html#vendorlistversion" class="tsd-kind-icon">vendor<wbr>List<wbr>Version</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="gvl.html#default_language" class="tsd-kind-icon">DEFAULT_<wbr>LANGUAGE</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="gvl.html#baseurl" class="tsd-kind-icon">base<wbr>Url</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="gvl.html#languagefilename" class="tsd-kind-icon">language<wbr>Filename</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="gvl.html#latestfilename" class="tsd-kind-icon">latest<wbr>Filename</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="gvl.html#versionedfilename" class="tsd-kind-icon">versioned<wbr>Filename</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="gvl.html#language" class="tsd-kind-icon">language</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="gvl.html#vendors" class="tsd-kind-icon">vendors</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+								<a href="gvl.html#_clone" class="tsd-kind-icon">_clone</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="gvl.html#changelanguage" class="tsd-kind-icon">change<wbr>Language</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="gvl.html#clone" class="tsd-kind-icon">clone</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="gvl.html#emptylanguagecache" class="tsd-kind-icon">empty<wbr>Language<wbr>Cache</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="gvl.html#getvendorswithconsentpurpose" class="tsd-kind-icon">get<wbr>Vendors<wbr>With<wbr>Consent<wbr>Purpose</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="gvl.html#getvendorswithfeature" class="tsd-kind-icon">get<wbr>Vendors<wbr>With<wbr>Feature</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="gvl.html#getvendorswithflexiblepurpose" class="tsd-kind-icon">get<wbr>Vendors<wbr>With<wbr>Flexible<wbr>Purpose</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="gvl.html#getvendorswithlegintpurpose" class="tsd-kind-icon">get<wbr>Vendors<wbr>With<wbr>Leg<wbr>Int<wbr>Purpose</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="gvl.html#getvendorswithspecialfeature" class="tsd-kind-icon">get<wbr>Vendors<wbr>With<wbr>Special<wbr>Feature</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="gvl.html#getvendorswithspecialpurpose" class="tsd-kind-icon">get<wbr>Vendors<wbr>With<wbr>Special<wbr>Purpose</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="gvl.html#narrowvendorsto" class="tsd-kind-icon">narrow<wbr>Vendors<wbr>To</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

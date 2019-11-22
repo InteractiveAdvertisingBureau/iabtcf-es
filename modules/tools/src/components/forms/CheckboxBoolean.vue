@@ -6,7 +6,7 @@
       @input="changeValue"
       switch
     >
-    {{label}}
+      {{ label }}
     </b-form-checkbox>
   </b-input-group>
 </template>

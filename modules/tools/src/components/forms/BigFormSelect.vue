@@ -4,15 +4,15 @@
       :label-for="id"
       :label="label"
     >
-    <b-form-select
-      id="id"
-      v-model="selected"
-      :options="options"
-      multiple
-      :select-size="size"
-      @input="changeValue"
-      class="mt-3"
-    />
+      <b-form-select
+        id="id"
+        v-model="selected"
+        :options="options"
+        multiple
+        :select-size="size"
+        @input="changeValue"
+        class="mt-3"
+      />
 
     </b-form-group>
   </b-input-group>

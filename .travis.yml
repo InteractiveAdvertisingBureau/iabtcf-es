@@ -1,7 +1,8 @@
 sudo: false
 language: node_js
+cache: yarn
 script:
-  - npm run bootstrap
-  - npm run coverage
+  - yarn workspace @iabtcf/core run build
+  - yarn run test:lcov
 after_success:
-  - npm run upload-coverage
+  - yarn run upload:lcov

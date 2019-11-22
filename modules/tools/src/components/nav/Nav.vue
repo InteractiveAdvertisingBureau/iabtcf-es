@@ -1,30 +1,35 @@
 <template>
   <div>
-  <b-navbar toggleable="lg" type="light" variant="faded">
-    <b-navbar-brand>
-          <router-link to="/">
-            Home
-          </router-link>
-    </b-navbar-brand>
+    <b-navbar
+      toggleable="lg"
+      type="light"
+      variant="faded">
+      <b-navbar-brand>
+        <router-link to="/">
+          Home
+        </router-link>
+      </b-navbar-brand>
 
-    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-navbar-toggle
+      target="nav-collapse"/>
 
-    <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav>
-        <b-nav-item
-          v-for="link, idx in links"
-
-          :key="idx"
+      <b-collapse
+        id="nav-collapse"
+        is-nav>
+        <b-navbar-nav>
+          <b-nav-item
+            v-for="(link, idx) in links"
+            :key="idx"
           >
-          <router-link :to="link.path">
-            {{ link.title }}
-          </router-link>
-        </b-nav-item>
-      </b-navbar-nav>
+            <router-link :to="link.path">
+              {{ link.title }}
+            </router-link>
+          </b-nav-item>
+        </b-navbar-nav>
 
-    </b-collapse>
-  </b-navbar>
-</div>
+      </b-collapse>
+    </b-navbar>
+  </div>
 </template>
 
 <script lang="ts">

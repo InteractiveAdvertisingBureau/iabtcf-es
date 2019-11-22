@@ -11,11 +11,11 @@
     "src/**/*"
   ],
   "typedocOptions": {
-    "theme": "markdown",
+    "theme": "default",
     "mode": "file",
     "readme": "none",
     "name": "@iabtcf/cmpapi - API Documentation",
-    "out": "docs/api",
+    "out": "../../docs/api/cmpapi/",
     "excludePrivate":true
   }
 }

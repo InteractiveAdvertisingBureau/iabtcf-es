@@ -3,12 +3,12 @@
     <b-form-group
       :label="label"
     >
-    <b-form-input
-      v-model="tcModel[id]"
-      size="sm"
-      @input="changeValue"
-      trim
-    />
+      <b-form-input
+        v-model="tcModel[id]"
+        size="sm"
+        @input="changeValue"
+        trim
+      />
     </b-form-group>
   </b-input-group>
 </template>

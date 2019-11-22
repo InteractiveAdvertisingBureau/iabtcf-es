@@ -22,6 +22,8 @@ import {Component, Vue} from 'vue-property-decorator';
 import VueRouter, {RouteConfig} from 'vue-router';
 import Nav from './components/nav/Nav.vue';
 import {SectionModel} from './model/SectionModel';
+
+// eslint-disable-next-line import/no-named-as-default
 import BootstrapVue from 'bootstrap-vue';
 
 import {GVL} from '@iabtcf/core';
