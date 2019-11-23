@@ -1,5 +1,5 @@
 import {CmpDataReader} from '../cmpdata';
-import {CmpStatus} from "../status";
+import {CmpStatus} from '../status';
 import {
   CallbackFunction,
   CommandArgsHandler,
