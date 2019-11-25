@@ -557,6 +557,57 @@ describe('CmpApi', (): void => {
 
       });
 
+      describe('Disable CmpApi', (): void => {
+
+        it('getTCData does not work after setting disabled', (done): void => {
+
+          cmpApi.disable();
+
+          const getTCDataCallback = createGetTCDataCallback(() => {
+
+            assert.isFalse(true, 'getTCData works after setting disabled');
+
+          });
+
+          win[API_FUNCTION_NAME]('getTCData', 2, getTCDataCallback, [1, 2, 3, 12, 37, 48]);
+
+          // wait one second and call it done
+          setTimeout(() => done(), 1000);
+
+        });
+
+        it('ping still works after setting disabled', (done): void => {
+
+          const callback: PingCallback = (pingReturn: Ping | null) => {
+
+            assert.isNotNull(pingReturn, 'Ping returned null');
+            assert.equal((pingReturn as Ping).cmpStatus, 'error', 'CmpStatus is not error');
+            done();
+
+          };
+
+          win[API_FUNCTION_NAME]('ping', 2, callback);
+
+        });
+
+        it('Set TcData throws error', (): void => {
+
+          cmpApi.disable();
+
+          assert.throws(() => cmpApi.tcModel = createValidTCModel(), 'CmpApi is Disabled');
+
+        });
+
+        it('Set uiVisible throws error', (): void => {
+
+          cmpApi.disable();
+
+          assert.throws(() => cmpApi.uiVisible = true, 'CmpApi is Disabled');
+
+        });
+
+      });
+
     });
 
   });

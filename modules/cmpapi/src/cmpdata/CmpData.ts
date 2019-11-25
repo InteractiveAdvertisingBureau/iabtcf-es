@@ -25,6 +25,7 @@ export class CmpData implements CmpDataReader {
   private displayStatus: DisplayStatus;
 
   private tcModelChangeEventCallback: TcModelChangeEventHandler;
+  private disabledByCmp: boolean;
 
   /**
    * Constructor
@@ -64,6 +65,15 @@ export class CmpData implements CmpDataReader {
   public get tcModelIsSet(): boolean {
 
     return !!this.tcModel;
+
+  }
+
+  /**
+   * Returns true if the TcModel is valid
+   */
+  public get tcModelIsValid(): boolean {
+
+    return this.tcModelIsSet && this.tcModel.isValid();
 
   }
 
@@ -257,6 +267,26 @@ export class CmpData implements CmpDataReader {
   public setDisplayStatus(value: DisplayStatus): void {
 
     this.displayStatus = value;
+
+  }
+
+  /**
+   * Sets disabledByCmp
+   * @param {boolean} value
+   */
+  public setDisabledByCmp(value: boolean): void {
+
+    this.disabledByCmp = value;
+
+  }
+
+  /**
+   * Gets the value of disabledByCmp
+   * @return {boolean}
+   */
+  public getDisabledByCmp(): boolean {
+
+    return this.disabledByCmp;
 
   }
 

@@ -15,6 +15,18 @@ Ensures other in-page digital marketing technologies have access to CMP transpar
 CmpApi is the only class needed to provide in-page digital marketing technologies access to a CMP transparency and consent information.
 The process involves setting the state of a few properties and/or a valid [TCModel](../../modules/core/readme.md#tcmodel).
  * [API Documentation](docs/api/README.md#iabtcfcmpapi---api-documentation)
+ 
+## Installation
+
+npm
+```
+npm install @iabtcf/cmpapi --save
+```
+
+yarn
+```
+yarn add @iabtcf/cmpapi
+```
 
 
 
@@ -94,6 +106,19 @@ cmpApi.uiVisible = false;
 ````javascript
 cmpApi.uiVisible = true;
 ````
+
+
+## Disabling the CmpApi
+If, for any reason, we are unable to perform the operations in compliance with 
+the TCF and thus should not continue to serve page request commands (other than ping),
+the CmpApi provides a disable method. Calling the disabled method will put the CmpApi
+into a permanent error state. Only ping and custom commands will continue to be executed
+for page requests. 
+
+````javascript
+cmpApi.disable();
+````
+
 
 ## Custom Commands
 The [Constructor](docs/api/classes/cmpapi.md#constructor) for CmpApi has an optional parameter to pass in your array of custom commands.

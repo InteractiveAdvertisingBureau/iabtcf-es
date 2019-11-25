@@ -70,7 +70,27 @@ export class CmpApi {
    */
   public set uiVisible(isVisible: boolean) {
 
-    this.cmpService.setUiVisible(isVisible);
+    // Catch errors and set error cmp status and stop serving requests.
+    try {
+
+      this.cmpService.setUiVisible(isVisible);
+
+    } catch (e) {
+
+      this.cmpData.setCmpStatus(CmpStatus.ERROR);
+      CmpLog.error(e);
+      throw e;
+
+    }
+  }
+
+  /**
+   * Disables the CmpApi from serving anything but ping and custom commands
+   * Cannot be undone
+   */
+  public disable(): void {
+
+    this.cmpService.disable();
 
   }
 

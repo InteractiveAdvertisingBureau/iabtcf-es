@@ -134,14 +134,19 @@ export class CommandBroker {
        * Queue command if it needs to be
        */
 
-      if (this.shouldCommandBeQueued(commandStr)) {
+      if (this.shouldCommandBeQueued(command)) {
 
-        /**
-         * Command will be placed in a queue to be processed once the api is ready. The lifecycle ends here for this
-         * command request.
-         */
+        // do not queue if we are disabled
+        if (!this.cmpData.getDisabledByCmp()) {
 
-        this.commandQueue.queueCommand(command);
+          /**
+           * Command will be placed in a queue to be processed once the api is ready. The lifecycle ends here for this
+           * command request.
+           */
+
+          this.commandQueue.queueCommand(command);
+
+        }
 
         return;
 
@@ -275,12 +280,13 @@ export class CommandBroker {
 
   /**
    * Returns true if a command needs to be placed in a queue to be processed later
-   * @param {string} commandStr
+   * @param {Command} command
    * @return {boolean}
    */
-  private shouldCommandBeQueued(commandStr: string): boolean {
+  private shouldCommandBeQueued(command: Command): boolean {
 
-    return commandStr === Commands.PING ? false : !this.canProcessCommandQueue;
+    return (command instanceof PingCommand) || (command instanceof CustomCommand) ?
+      false : !this.canProcessCommandQueue;
 
   }
 
@@ -290,7 +296,7 @@ export class CommandBroker {
    */
   private get canProcessCommandQueue(): boolean {
 
-    return this.cmpData.tcModelIsSet && (this.cmpData.getCmpStatus() !== CmpStatus.ERROR);
+    return this.cmpData.tcModelIsValid && (this.cmpData.getCmpStatus() !== CmpStatus.ERROR);
 
   }
 

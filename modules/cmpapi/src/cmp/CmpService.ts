@@ -26,6 +26,8 @@ export class CmpService {
    */
   public setTcModel(tcModel: TCModel | null): void {
 
+    this.throwIfCmpApiIsDisabled();
+
     if (tcModel) {
 
       if (tcModel.isValid()) {
@@ -68,6 +70,8 @@ export class CmpService {
    */
   public setUiVisible(isVisible: boolean): void {
 
+    this.throwIfCmpApiIsDisabled();
+
     if (isVisible) {
 
       this.cmpData.setDisplayStatus(DisplayStatus.VISIBLE);
@@ -77,6 +81,34 @@ export class CmpService {
 
       this.cmpData.setDisplayStatus(DisplayStatus.DISABLED);
       this.cmpData.setEventStatus(EventStatus.TC_LOADED);
+
+    }
+
+  }
+
+  /**
+   * Disables the CmpApi from serving anything but ping and custom commands by setting cmp status to error
+   * This can not be undone
+   */
+  public disable(): void {
+
+    this.cmpData.setDisabledByCmp(true);
+    this.cmpData.setCmpStatus(CmpStatus.ERROR);
+
+  }
+
+  /**
+   * Throws an error if the Cmp has disabled the CmpApi
+   */
+  private throwIfCmpApiIsDisabled(): void {
+
+    if (this.cmpData.getDisabledByCmp()) {
+
+      /**
+       * If the CMP set the disabled state, throw an error.
+       */
+
+      throw new Error(ValidationMessages.CMP_API_IN_DISABLED_STATE);
 
     }
 
