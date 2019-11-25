@@ -28,16 +28,6 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
   }
 
-  /**
-   * Creates a clone of this PurposeRestrictionVector
-   * @return {PurposeRestrictionVector}
-   */
-  public clone(): PurposeRestrictionVector {
-
-    return this._clone();
-
-  }
-
   private has(hash: string): boolean {
 
     return this.map.has(hash);

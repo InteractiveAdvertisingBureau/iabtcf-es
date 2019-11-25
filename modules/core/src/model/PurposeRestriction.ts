@@ -36,16 +36,6 @@ export class PurposeRestriction extends Cloneable<PurposeRestriction> {
 
   }
 
-  /**
-   * Creates a clone of this PurposeRestriction
-   * @return {PurposeRestriction}
-   */
-  public clone(): PurposeRestriction {
-
-    return this._clone();
-
-  }
-
   public static unHash(hash: string): PurposeRestriction {
 
     const splitUp: string[] = hash.split(this.hashSeparator);
