@@ -134,7 +134,7 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
    */
   public constructor(gvl?: GVL) {
 
-    super(TCModel);
+    super();
 
     if (gvl) {
 

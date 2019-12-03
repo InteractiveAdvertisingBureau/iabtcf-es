@@ -1,10 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "XMLHttpTestTools": ["./test/XMLHttpTestTools"],
-      "makeRandomInt": ["./test/makeRandomInt"]
-    },
     "moduleResolution": "node",
     "module": "commonjs",
     "target": "ESNext",

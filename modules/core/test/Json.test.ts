@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import * as sinon from 'sinon';
 import {Json} from '../src/Json';
-import {XMLHttpTestTools} from 'XMLHttpTestTools';
+import {XMLHttpTestTools} from '@iabtcf/testing';
 
 describe('Json->fetch', (): void => {
 
@@ -13,7 +13,6 @@ describe('Json->fetch', (): void => {
   afterEach(XMLHttpTestTools.afterEach);
 
   it('should fetch and parse a json with only a url', (done: () => void): void => {
-
 
     Json.fetch('blah')
       .then((response: object): void => {
@@ -37,7 +36,6 @@ describe('Json->fetch', (): void => {
 
     req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(responseObj));
 
-
   });
 
   it('should fail if a 404 returned', (done: () => void): void => {
@@ -59,7 +57,6 @@ describe('Json->fetch', (): void => {
     XMLHttpTestTools.requests[0].respond(404, {}, '');
 
     expect(XMLHttpTestTools.requests.length).to.equal(1);
-
 
   });
 
@@ -84,7 +81,6 @@ describe('Json->fetch', (): void => {
     expect(req.method).to.equal('GET');
 
     req.error();
-
 
   });
 

@@ -1,6 +1,6 @@
 import * as sinon from 'sinon';
 
-class XMLHttpTestTools {
+export class XMLHttpTestTools {
 
   public static JSON_HEADER: object = {'Content-Type': 'application/json'};
   private static xhr: sinon.SinonFakeXMLHttpRequestStatic;
@@ -25,5 +25,3 @@ class XMLHttpTestTools {
   }
 
 }
-
-export {XMLHttpTestTools};

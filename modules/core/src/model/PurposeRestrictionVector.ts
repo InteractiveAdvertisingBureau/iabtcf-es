@@ -24,7 +24,7 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
   public constructor() {
 
-    super(PurposeRestrictionVector);
+    super();
 
   }
 

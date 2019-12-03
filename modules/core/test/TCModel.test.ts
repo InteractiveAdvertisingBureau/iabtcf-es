@@ -180,10 +180,10 @@ describe('TCModel', (): void => {
 
   });
 
-  const sameDataDifferentObject = function(obj1, obj2, objName): void {
+  const sameDataDeifferentReference = function(obj1, obj2, objName): void {
 
-    assert.deepEqual(obj1, obj2, objName + `${objName} data did not match`);
-    assert.notEqual(obj1, obj2, objName + `${objName} are the same object`);
+    expect(obj1, `${objName} is not deeply equal`).to.deep.equal(obj2);
+    expect(obj1, `${objName}'s are the same object reference`).to.not.equal(obj2);
 
   };
 
@@ -211,12 +211,14 @@ describe('TCModel', (): void => {
     assert.equal(clone.created.getTime(), tcModel.created.getTime(), 'created did not match set value');
     assert.notStrictEqual(clone.created, tcModel.created, 'created matched strict equals');
 
-    sameDataDifferentObject(clone, tcModel, 'TcModel');
-    sameDataDifferentObject(clone.purposeConsents, tcModel.purposeConsents, 'purposeConsents');
+    expect(JSON.stringify(tcModel, null, 2)).to.equal(JSON.stringify(clone, null, 2));
+
+    sameDataDeifferentReference(clone, tcModel, 'TcModel');
+    sameDataDeifferentReference(clone.purposeConsents, tcModel.purposeConsents, 'purposeConsents');
     assert.equal(clone.purposeConsents.maxId, tcModel.purposeConsents.maxId, 'purposeConsents max id did not match set value');
-    sameDataDifferentObject(clone.publisherRestrictions.getAllRestrictions(), tcModel.publisherRestrictions.getAllRestrictions(), 'PR Restrictions');
-    sameDataDifferentObject(clone.gvl.specialFeatures, tcModel.gvl.specialFeatures, 'specialFeatures');
-    sameDataDifferentObject(clone.gvl.vendors, tcModel.gvl.vendors, 'vendors');
+    sameDataDeifferentReference(clone.publisherRestrictions.getAllRestrictions(), tcModel.publisherRestrictions.getAllRestrictions(), 'PR Restrictions');
+    sameDataDeifferentReference(clone.gvl.specialFeatures, tcModel.gvl.specialFeatures, 'specialFeatures');
+    sameDataDeifferentReference(clone.gvl.vendors, tcModel.gvl.vendors, 'vendors');
 
   });
 

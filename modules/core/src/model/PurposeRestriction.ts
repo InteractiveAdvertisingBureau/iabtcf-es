@@ -20,7 +20,7 @@ export class PurposeRestriction extends Cloneable<PurposeRestriction> {
    */
   public constructor(purposeId?: number, restrictionType?: RestrictionType) {
 
-    super(PurposeRestriction);
+    super();
 
     if (purposeId !== undefined) {
 

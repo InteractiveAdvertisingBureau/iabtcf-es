@@ -171,15 +171,18 @@ export class GVL extends Cloneable<GVL> implements VendorList, Declarations {
 
   /**
    * @param {VersionOrVendorList} [versionOrVendorList] - can be either a
-   * [[VendorList]] object  or a version number represented as a string or
+   * [[VendorList]] object or a version number represented as a string or
    * number to download.  If nothing is passed the latest version of the GVL
    * will be loaded
    */
   public constructor( versionOrVendorList?: VersionOrVendorList ) {
 
-    super(GVL);
+    super();
 
-    // should have been configured before and instance was created and will persist through the app
+    /**
+     * should have been configured before and instance was created and will
+     * persist through the app
+     */
     let url = GVL.baseUrl;
 
     this.lang_ = GVL.DEFAULT_LANGUAGE;
@@ -203,15 +206,15 @@ export class GVL extends Cloneable<GVL> implements VendorList, Declarations {
 
         // load version specified
         url += GVL.versionedFilename.replace('[VERSION]', versionOrVendorList + '');
-        this.getJson(url);
 
       } else {
 
         // whatever it is (or isn't)... it doesn't matter we'll just get the latest
         url += GVL.latestFilename;
-        this.getJson(url);
 
       }
+
+      this.readyPromise = this.fetchJson(url);
 
     }
 
@@ -279,9 +282,9 @@ export class GVL extends Cloneable<GVL> implements VendorList, Declarations {
 
   }
 
-  private getJson(url: string): Promise<void | Error> {
+  private fetchJson(url: string): Promise<void | Error> {
 
-    this.readyPromise = new Promise((resolve: Function, reject: Function): void => {
+    return new Promise((resolve: Function, reject: Function): void => {
 
       Json.fetch(url).then((response: object): void => {
 
@@ -296,7 +299,30 @@ export class GVL extends Cloneable<GVL> implements VendorList, Declarations {
         });
 
     });
-    return this.readyPromise;
+
+  }
+
+  /**
+   * getJson - Method for getting the JSON that was downloaded to created this
+   * `GVL` object
+   *
+   * @return {VendorList} - The basic JSON structure without the extra
+   * functionality and methods of this class.
+   */
+  public getJson(): VendorList {
+
+    return JSON.parse(JSON.stringify({
+      gvlSpecificationVersion: this.gvlSpecificationVersion,
+      vendorListVersion: this.vendorListVersion,
+      tcfPolicyVersion: this.tcfPolicyVersion,
+      lastUpdated: this.lastUpdated,
+      purposes: this.purposes,
+      specialPurposes: this.specialPurposes,
+      features: this.features,
+      specialFeatures: this.specialFeatures,
+      stacks: this.stacks,
+      vendors: this.fullVendorList,
+    }));
 
   }
 
@@ -350,7 +376,7 @@ export class GVL extends Cloneable<GVL> implements VendorList, Declarations {
             url += GVL.languageFilename.replace('[LANG]', lang);
 
             // hooks onto readyPromise
-            this.getJson(url).then((): void => {
+            this.fetchJson(url).then((): void => {
 
               this.cacheLanguage(lang);
               resolve();
@@ -646,6 +672,18 @@ export class GVL extends Cloneable<GVL> implements VendorList, Declarations {
 
     });
     this.mapVendors();
+
+  }
+
+  /**
+   * clone - overrides base `clone()` method since GVL is a special class that
+   * represents a JSON structure with some additional functionality
+   *
+   * @return {GVL}
+   */
+  public clone(): GVL {
+
+    return new GVL(this.getJson());
 
   }
 

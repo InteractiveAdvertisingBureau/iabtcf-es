@@ -3,29 +3,50 @@ import * as sinon from 'sinon';
 import {GVL} from '../src/GVL';
 import {Vendor} from '../src/model/gvl';
 import {IntMap} from '../src/model/IntMap';
-import {XMLHttpTestTools} from 'XMLHttpTestTools';
+import {XMLHttpTestTools} from '@iabtcf/testing';
 
 // eslint-disable-next-line
 const vendorlistJson = require('../../../dev/vendor-list.json');
 // eslint-disable-next-line
 const translationJson = require(`../../../dev/purposes-fr.json`);
 
+const gvlKeys: string[] = [
+  'gvlSpecificationVersion',
+  'vendorListVersion',
+  'tcfPolicyVersion',
+  'lastUpdated',
+  'purposes',
+  'specialPurposes',
+  'features',
+  'specialFeatures',
+  'vendors',
+  'stacks',
+];
+
 describe('GVL', (): void => {
 
   const assertPopulated = (gvl: GVL): void => {
 
-    expect(gvl.gvlSpecificationVersion, 'gvlSpecificationVersion should match')
-      .to.equal(vendorlistJson.gvlSpecificationVersion);
-    expect(gvl.vendorListVersion, 'vendorListVersion should match').to.equal(vendorlistJson.vendorListVersion);
-    expect(gvl.tcfPolicyVersion, 'tcfPolicyVersion should match').to.equal(vendorlistJson.tcfPolicyVersion);
-    expect((gvl.lastUpdated as Date).getTime(), 'lastUpdated  should match')
-      .to.equal((new Date(vendorlistJson.lastUpdated).getTime()));
-    expect(gvl.purposes, 'purposes should match').to.deep.equal(vendorlistJson.purposes);
-    expect(gvl.specialPurposes, 'specialPurposes should match').to.deep.equal(vendorlistJson.specialPurposes);
-    expect(gvl.features, 'features should match').to.deep.equal(vendorlistJson.features);
-    expect(gvl.specialFeatures, 'specialFeatures should match').to.deep.equal(vendorlistJson.specialFeatures);
-    expect(gvl.vendors, 'vendors should match').to.deep.equal(vendorlistJson.vendors);
-    expect(gvl.stacks, 'stacks should match').to.deep.equal(vendorlistJson.stacks);
+    gvlKeys.forEach((key: string): void => {
+
+      const msg = `${key} should match`;
+
+      if (key === 'lastUpdated') {
+
+        expect((gvl[key] as Date).getTime(), msg)
+          .to.equal((new Date(vendorlistJson.lastUpdated).getTime()));
+
+      } else if (typeof vendorlistJson[key] === 'object') {
+
+        expect(gvl[key], msg).to.deep.equal(vendorlistJson[key]);
+
+      } else {
+
+        expect(gvl[key], msg).to.equal(vendorlistJson[key]);
+
+      }
+
+    });
 
   };
 
@@ -56,6 +77,16 @@ describe('GVL', (): void => {
 
   });
 
+  it('should clone all values', (): void => {
+
+    const gvl: GVL = new GVL(vendorlistJson);
+    const clone: GVL = gvl.clone();
+
+    assertPopulated(gvl);
+    assertPopulated(clone);
+
+  });
+
   it('should get latest GVL if nothing is passed to the constructor', (done): void => {
 
     GVL.baseUrl = 'http://sweetcmp.com';
@@ -69,12 +100,18 @@ describe('GVL', (): void => {
     expect(req.method).to.equal('GET');
     expect(req.url).to.equal(`${GVL.baseUrl}/vendor-list.json`);
 
-    gvl.readyPromise.then((): void => {
+    gvl.readyPromise
+      .then((): void => {
 
-      assertPopulated(gvl);
-      done();
+        assertPopulated(gvl);
+        done();
 
-    });
+      })
+      .catch((): void => {
+
+        expect.fail('Should have worked');
+
+      });
     req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(vendorlistJson));
 
   });
@@ -93,12 +130,18 @@ describe('GVL', (): void => {
     expect(req.method).to.equal('GET');
     expect(req.url).to.equal(`${GVL.baseUrl}/archives/vendor-list-v${version}.json`);
 
-    gvl.readyPromise.then((): void => {
+    gvl.readyPromise
+      .then((): void => {
 
-      assertPopulated(gvl);
-      done();
+        assertPopulated(gvl);
+        done();
 
-    });
+      })
+      .catch((): void => {
+
+        expect.fail('Should have worked');
+
+      });
     req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(vendorlistJson));
 
   });
@@ -117,12 +160,18 @@ describe('GVL', (): void => {
     expect(req.method).to.equal('GET');
     expect(req.url).to.equal(`${GVL.baseUrl}/archives/vendor-list-v${version}.json`);
 
-    gvl.readyPromise.then((): void => {
+    gvl.readyPromise
+      .then((): void => {
 
-      assertPopulated(gvl);
-      done();
+        assertPopulated(gvl);
+        done();
 
-    });
+      })
+      .catch((): void => {
+
+        expect.fail('Should have worked');
+
+      });
 
     req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(vendorlistJson));
 
@@ -152,24 +201,30 @@ describe('GVL', (): void => {
 
     expect(gvl.language).to.equal(GVL.DEFAULT_LANGUAGE);
 
-    gvl.changeLanguage(language).then((): void => {
+    gvl.changeLanguage(language)
+      .then((): void => {
 
-      expect(gvl.purposes, 'purposes should match').to.deep.equal(translationJson.purposes);
-      expect(gvl.specialPurposes, 'specialPurposes should match').to.deep.equal(translationJson.specialPurposes);
-      expect(gvl.features, 'features should match').to.deep.equal(translationJson.features);
-      expect(gvl.specialFeatures, 'specialFeatures should match').to.deep.equal(translationJson.specialFeatures);
-      expect(gvl.stacks, 'stacks should match').to.deep.equal(translationJson.stacks);
+        expect(gvl.purposes, 'purposes should match').to.deep.equal(translationJson.purposes);
+        expect(gvl.specialPurposes, 'specialPurposes should match').to.deep.equal(translationJson.specialPurposes);
+        expect(gvl.features, 'features should match').to.deep.equal(translationJson.features);
+        expect(gvl.specialFeatures, 'specialFeatures should match').to.deep.equal(translationJson.specialFeatures);
+        expect(gvl.stacks, 'stacks should match').to.deep.equal(translationJson.stacks);
 
-      expect(gvl.purposes, 'purposes should match').to.not.deep.equal(vendorlistJson.purposes);
-      expect(gvl.specialPurposes, 'specialPurposes should match').to.not.deep.equal(vendorlistJson.specialPurposes);
-      expect(gvl.features, 'features should match').to.not.deep.equal(vendorlistJson.features);
-      expect(gvl.specialFeatures, 'specialFeatures should match').to.not.deep.equal(vendorlistJson.specialFeatures);
+        expect(gvl.purposes, 'purposes should match').to.not.deep.equal(vendorlistJson.purposes);
+        expect(gvl.specialPurposes, 'specialPurposes should match').to.not.deep.equal(vendorlistJson.specialPurposes);
+        expect(gvl.features, 'features should match').to.not.deep.equal(vendorlistJson.features);
+        expect(gvl.specialFeatures, 'specialFeatures should match').to.not.deep.equal(vendorlistJson.specialFeatures);
 
-      expect(gvl.language).to.equal(language);
+        expect(gvl.language).to.equal(language);
 
-      done();
+        done();
 
-    });
+      })
+      .catch((): void => {
+
+        expect.fail('Should have worked');
+
+      });
 
     expect(XMLHttpTestTools.requests.length).to.equal(1);
 

@@ -2,6 +2,7 @@ sudo: false
 language: node_js
 cache: yarn
 script:
+  - yarn workspace @iabtcf/testing run build
   - yarn workspace @iabtcf/core run build
   - yarn run test:lcov
 after_success:

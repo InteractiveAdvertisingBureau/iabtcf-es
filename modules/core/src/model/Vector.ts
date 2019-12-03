@@ -27,7 +27,7 @@ class Vector extends Cloneable<Vector> {
    */
   public constructor(ids?: idOrIds) {
 
-    super(Vector);
+    super();
 
     if (ids !== undefined) {
 
