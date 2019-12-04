@@ -1,6 +1,6 @@
 {
   "name": "@iabtcf/site",
-  "version": "1.0.0-alpha.9",
+  "version": "1.0.0-beta.0",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "description": "Creates a UI for using iab. Transparency and Consent Framework (TCF) tools",
   "homepage": "https://github.com/chrispaterson/iabtcf-es/tree/master/modules/tools",
@@ -20,7 +20,7 @@
     "lint": "eslint ./src/**/*.ts ./src/**/*.vue"
   },
   "dependencies": {
-    "@iabtcf/core": "^1.0.0-alpha.9",
+    "@iabtcf/core": "^1.0.0-beta.0",
     "bootstrap-vue": "^2.1.0",
     "core-js": "^2.6.5",
     "jquery": "^3.4.0",

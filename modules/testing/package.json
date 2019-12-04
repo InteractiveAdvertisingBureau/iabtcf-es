@@ -1,6 +1,6 @@
 {
   "name": "@iabtcf/testing",
-  "version": "1.0.0-alpha.9",
+  "version": "1.0.0-beta.0",
   "description": "Shared testing utilities",
   "private": true,
   "author": "Chris Paterson <tcf@chrispaterson.io>",
