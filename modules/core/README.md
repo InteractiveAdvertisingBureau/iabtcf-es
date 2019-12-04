@@ -261,7 +261,7 @@ A CMP UI may want to group vendors by what purpose they use under what legal bas
 * `getVendorsWithSpecialFeature(featureId)`
 * `getVendorsWithSpecialPurpose(purposId)`
 
-All 6 grouping methods return a [GVLMap](../api/interfaces/gvlmap.md)<[Vendor](../api/interfaces/vendor.md)> object
+All 6 grouping methods return an [IntMap](https://www.iabtcf.com/api/core/interfaces/intmap.html)<[Vendor](https://www.iabtcf.com/api/core/interfaces/vendor.html)> object
 
 ```javascript
 import {GVL} from '@iabtcf/core';

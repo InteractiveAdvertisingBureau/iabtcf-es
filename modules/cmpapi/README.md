@@ -13,8 +13,8 @@ Ensures other in-page digital marketing technologies have access to CMP transpar
 # CmpApi
 
 CmpApi is the only class needed to provide in-page digital marketing technologies access to a CMP transparency and consent information.
-The process involves setting the state of a few properties and/or a valid [TCModel](../../modules/core/readme.md#tcmodel).
- * [API Documentation](docs/api/README.md#iabtcfcmpapi---api-documentation)
+The process involves setting the state of a few properties and/or a valid [TCModel](https://www.iabtcf.com/api/core/classes/tcmodel.html).
+ * [API Docs](https://www.iabtcf.com/api/cmpapi/)
 
 ## Installation
 
@@ -46,7 +46,7 @@ const cmpApi = new CmpApi(1, 3);
 During construction of the CmpApi, the __tcfapi stub is replaced with CmpApi's own function
 for handling __tcfapi command requests. Commands that were waiting to be executed in the stub are
 filtered out if not valid. Ping and custom commands are executed and removed from the queue while
-all other commands remain queued until a valid [TCModel](../../modules/core/readme.md#tcmodel) is set.
+all other commands remain queued until a valid [TCModel](https://www.iabtcf.com/api/core/classes/tcmodel.html) is set.
 
 **Note:** After creation, __tcfapi can service ping commands and custom commands only. All other commands
 will be queue until we have a valid TCModel. So lets create and set one.
@@ -55,7 +55,7 @@ will be queue until we have a valid TCModel. So lets create and set one.
 
 
 ## Set TCModel
-Create a **valid** [TCModel](../../modules/core/readme.md#tcmodel) and set it in CmpApi. The CmpApi doesn't keep the reference to the passed in TCModel, it will create it's own deep copy.
+Create a **valid** [TCModel](https://www.iabtcf.com/api/core/classes/tcmodel.html) and set it in CmpApi. The CmpApi doesn't keep the reference to the passed in TCModel, it will create it's own deep copy.
 
 ````javascript
 // Create a TCModel
@@ -74,7 +74,7 @@ will be queue until we have a valid TCModel. So lets create and set one.
 ## Show UI and Update TCModel
 The CmpApi needs to know when you are going to show the user the CMP UI.
 
-**Note:** You do not have to let CmpApi know when you stop showing the UI as setting the [TCModel](../../modules/core/readme.md#tcmodel) will handle this.
+**Note:** You do not have to let CmpApi know when you stop showing the UI as setting the [TCModel](https://www.iabtcf.com/api/core/classes/tcmodel.html) will handle this.
 
 ````javascript
 // Set uiVisible to true. No need to set it to false afterward.
@@ -124,7 +124,7 @@ cmpApi.disable();
 
 
 ## Custom Commands
-The [Constructor](docs/api/classes/cmpapi.md#constructor) for CmpApi has an optional parameter to pass in your array of custom commands.
+The [Constructor]([TCModel](https://www.iabtcf.com/api/core/classes/tcmodel.html)) for CmpApi has an optional parameter to pass in your array of custom commands.
 CmpApi will not perform any validation custom commands. The CMP is responsible for handling validations and errors. Custom function signatures
 must have parameters (version, callback, param). What the CMP does with the parameters passed to it is for the CMP to decide.
 
@@ -184,7 +184,7 @@ __tcfapi('wheelsOnTheBus', 2, songLyricCallback, {thing: 'Doggy', sound: 'bark'}
 ## CmpApi Examples
 
 ### Example 1: Typical Use - Create, Set, Show and Update TCModel
-The basic usage of CmpApi would be to create an instance, set the [TCModel](../../modules/core/readme.md#tcmodel), optionally show the CMP UI and update the TCModel.
+The basic usage of CmpApi would be to create an instance, set the [TCModel](https://www.iabtcf.com/api/core/classes/tcmodel.html), optionally show the CMP UI and update the TCModel.
 
 ````javascript
 import {CmpApi} from '@iabtcf/cmpapi';
