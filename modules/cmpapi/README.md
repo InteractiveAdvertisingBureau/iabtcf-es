@@ -15,7 +15,7 @@ Ensures other in-page digital marketing technologies have access to CMP transpar
 CmpApi is the only class needed to provide in-page digital marketing technologies access to a CMP transparency and consent information.
 The process involves setting the state of a few properties and/or a valid [TCModel](../../modules/core/readme.md#tcmodel).
  * [API Documentation](docs/api/README.md#iabtcfcmpapi---api-documentation)
- 
+
 ## Installation
 
 npm
@@ -36,7 +36,10 @@ yarn add @iabtcf/cmpapi
 import {CmpApi} from '@iabtcf/cmpapi';
 import {TCModel} from '@iabtcf/core';
 
-// To create an instance of the CmpApi. Pass in your Cmp ID and the Cmp Version to constructor. Custom commands are optional.
+/**
+ * To create an instance of the CmpApi. Pass in your Cmp ID and the Cmp Version
+ * to constructor. Custom commands are optional.
+ */
 const cmpApi = new CmpApi(1, 3);
 ````
 
@@ -69,7 +72,7 @@ will be queue until we have a valid TCModel. So lets create and set one.
 
 
 ## Show UI and Update TCModel
-The CmpApi needs to know when you are going to show the user the CMP UI. 
+The CmpApi needs to know when you are going to show the user the CMP UI.
 
 **Note:** You do not have to let CmpApi know when you stop showing the UI as setting the [TCModel](../../modules/core/readme.md#tcmodel) will handle this.
 
@@ -109,11 +112,11 @@ cmpApi.uiVisible = true;
 
 
 ## Disabling the CmpApi
-If, for any reason, we are unable to perform the operations in compliance with 
+If, for any reason, we are unable to perform the operations in compliance with
 the TCF and thus should not continue to serve page request commands (other than ping),
 the CmpApi provides a disable method. Calling the disabled method will put the CmpApi
 into a permanent error state. Only ping and custom commands will continue to be executed
-for page requests. 
+for page requests.
 
 ````javascript
 cmpApi.disable();
@@ -171,9 +174,9 @@ const songLyricCallback = (lyrics, success) => {
   }
 
 }
-__tcfapi('bingo', 2, songLyricCallback, 'Bingo'); 
+__tcfapi('bingo', 2, songLyricCallback, 'Bingo');
 // Console Output: There was a farmer who had a dog, and Bingo was his name-o
-__tcfapi('wheelsOnTheBus', 2, songLyricCallback, {thing: 'Doggy', sound: 'bark'}); 
+__tcfapi('wheelsOnTheBus', 2, songLyricCallback, {thing: 'Doggy', sound: 'bark'});
 // Console Output: The Doggy on the bus goes bark bark bark!
 ...
 ````
@@ -188,18 +191,25 @@ import {CmpApi} from '@iabtcf/cmpapi';
 import {TCModel} from '@iabtcf/core';
 import {MyCustomCommands} from './MyCustomCommands';
 
-// To create an instance of the CmpApi. Pass in your Cmp ID, Cmp Version and optional custom commands to constructor.
+/**
+ * To create an instance of the CmpApi. Pass in your Cmp ID, Cmp Version and
+ * optional custom commands to constructor.
+ */
 const cmpApi = new CmpApi(1, 3, MyCustomCommands);
 
 /**
- * During initialization of the CmpApi, the __tcfapi stub is replaced with CmpApi's own function
- * for handling __tcfapi command requests. All commands that were waiting to be executed in the stub are
- * filtered out if not valid. If any commands are able to executed at this point, they are.
- * For example, if their is a ping command in the queue, it will be executed immediately and
- * removed from the queue, while getTcData command requests will not.
- * 
- * At this point, __tcfapi can serve ping commands and custom commands only. All other commands
- * will be queue until we have a valid TCModel. So lets create and set one.
+ * During initialization of the CmpApi, the __tcfapi stub is replaced with
+ * CmpApi's own function for handling __tcfapi command requests. All commands
+ * that were waiting to be executed in the stub are filtered out if not valid.
+ * If any commands are able to executed at this point, they are.
+ *
+ * For example, if their is a ping command in the queue, it will be executed
+ * immediately and removed from the queue, while getTcData command requests
+ * will not.
+ *
+ * At this point, __tcfapi can serve ping commands and custom commands only.
+ * All other commands will be queue until we have a valid TCModel. So lets
+ * create and set one.
  */
 
 // Create a TCModel
@@ -211,12 +221,14 @@ const tcModel = new TCModel();
 cmpApi.tcModel = tcModel;
 
 /**
-* With a valid TCModel set, Any queued __tcfapi page request commands will be executed and the queue 
-* will be cleared. All event listeners will be evoked (and every time you set a new TCModel). 
-* All __tcfapi page requests from this point on will be executed immediately without queuing.
-* 
-* Now, optionally, we may want to show the CMP UI to the user to make selections.
-*/
+ * With a valid TCModel set, Any queued __tcfapi page request commands will be
+ * executed and the queue will be cleared. All event listeners will be evoked
+ * (and every time you set a new TCModel).  All __tcfapi page requests from
+ * this point on will be executed immediately without queuing.
+ *
+ * Now, optionally, we may want to show the CMP UI to the user to make
+ * selections.
+ */
 
 // Set uiVisible to true. No need to set it to false afterward.
 cmpApi.uiVisible = true;
@@ -236,7 +248,6 @@ cmpApi.tcModel = tcModel;
 import {CmpApi} from '@iabtcf/cmpapi';
 import {TCModel} from '@iabtcf/core';
 
-// To create an instance of the CmpApi. Pass in your Cmp ID and the Cmp Version to constructor.
 const cmpApi = new CmpApi(1, 3);
 
 // Create a TCModel
@@ -257,12 +268,13 @@ cmpApi.uiVisible = false;
 import {CmpApi} from '@iabtcf/cmpapi';
 import {TCModel} from '@iabtcf/core';
 
-// To create an instance of the CmpApi. Pass in your Cmp ID and the Cmp Version to constructor.
+/**
+ * To create an instance of the CmpApi. Pass in your Cmp ID and the Cmp Version
+ * to constructor.
+ */
 const cmpApi = new CmpApi(1, 3);
 
 cmpApi.gdprApplies = false;
 
 // Done
 ````
-
-
