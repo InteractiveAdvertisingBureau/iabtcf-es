@@ -38,7 +38,7 @@ yarn
 yarn add @iabtcf/core
 ```
 
-#### Importing
+#### Using
 
 ```javascript
 import {TCModel, TCString, GVL} from '@iabtcf/core';
