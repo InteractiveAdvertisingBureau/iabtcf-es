@@ -57,8 +57,7 @@ tcModel.gvl.readPromise.then(() => {
 
   // Set values on tcModel...
 
-  const tcString = new TCString();
-  const encodedString = tcString.encode(tcModel);
+  const encodedString = TCString.encode(tcModel);
 
   console.log(encodedString); // TC string encoded begins with 'C'
 
