@@ -84,13 +84,15 @@ tcModel.cmpVersion = //{myCMPVersion}
 
 ```
 
-### General Meta Fields
+### CMP Meta Fields
 
 ```javascript
 import {TCModel} from '@iabtcf/core';
 
 const tcModel = new TCModel();
-tcModel
+tcModel.cmpId = // my CMP ID
+tcModel.cmpVersion = // my CMP Version
+tcModel.consentScreen = // Screen consent was captured on (internal ID encoded into the TC string)
 ```
 
 ### Vectors
