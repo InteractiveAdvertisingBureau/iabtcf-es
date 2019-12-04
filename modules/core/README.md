@@ -74,7 +74,7 @@ gvl.readPromise.then(() => {
 
 This class is intended to be used as a stateful model to model the TCF Data.
 
-[API Docs](docs/api/classes/tcmodel.md)
+[API Docs](https://www.iabtcf.com/api/core/classes/tcmodel.html)
 
 ```javascript
 import {TCModel, GVL} from '@iabtcf/core';
@@ -111,7 +111,7 @@ tcModel.vendorConsents.set(7);
 
 # GVL
 
-* [API Docs](docs/api/classes/gvl.md)
+* [API Docs](https://www.iabtcf.com/api/core/classes/gvl.html)
 * [Autoload latest vendor-list.json](#autoload-latest-vendor-list.json)
 * [Autoload specific vendor-list.json](#autoload-specific-vendor-list.json)
 * [Pass vendor-list.json object](#pass-vendor-list.json-object)
@@ -312,7 +312,7 @@ gvl.readyPomise.then(() => {
 
 # TCString
 
-[API Docs](docs/api/classes/tcstring.md)
+[API Docs](https://www.iabtcf.com/api/core/classes/tcstring.html)
 
 - [Decode](#decode-an-iab-tc-string)
 - [Encode](#encode-an-iab-tc-string)
