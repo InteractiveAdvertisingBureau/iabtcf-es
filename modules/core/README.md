@@ -43,20 +43,24 @@ yarn add @iabtcf/core
 ```javascript
 import {TCModel, TCString, GVL} from '@iabtcf/core';
 
+/**
+ *  the IAB requires CMPs to host their own vendor-list.json files.  This must
+ *  be set before creating any instance of the GVL class.
+ */
 GVL.baseURL = "http://mydomain.com/cmp/vendorlist";
 
 // create a new TC string
-const gvl = new GVL();
-gvl.readPromise.then(() => {
+const tcModel = new TCModel(new GVL());
 
-  const tcModel = new TCModel(gvl);
+// Some fields will not be populated until a GVL is loaded
+tcModel.gvl.readPromise.then(() => {
 
   // Set values on tcModel...
 
   const tcString = new TCString();
   const encodedString = tcString.encode(tcModel);
 
-  // send out string
+  console.log(encodedString); // TC string encoded begins with 'C'
 
 }
 
