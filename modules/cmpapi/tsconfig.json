@@ -9,14 +9,6 @@
   ],
   "include": [
     "src/**/*"
-  ],
-  "typedocOptions": {
-    "theme": "default",
-    "mode": "file",
-    "readme": "none",
-    "name": "@iabtcf/cmpapi - API Documentation",
-    "out": "../../docs/api/cmpapi/",
-    "excludePrivate":true
-  }
+  ]
 }
 
