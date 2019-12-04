@@ -92,7 +92,7 @@ import {TCModel} from '@iabtcf/core';
 const tcModel = new TCModel();
 tcModel.cmpId = // my CMP ID
 tcModel.cmpVersion = // my CMP Version
-tcModel.consentScreen = // Screen consent was captured on (internal ID encoded into the TC string)
+tcModel.consentScreen = // On which 'screen' consent was captured; this is a cmp proprietary number encoded into the TC string
 ```
 
 ### Vectors
