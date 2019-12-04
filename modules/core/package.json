@@ -47,10 +47,6 @@
   "eslintIgnore": [
     "lib"
   ],
-  "nyc": {
-    "extends": "@istanbuljs/nyc-config-typescript",
-    "check-coverage": true
-  },
   "publishConfig": {
     "access": "public"
   },

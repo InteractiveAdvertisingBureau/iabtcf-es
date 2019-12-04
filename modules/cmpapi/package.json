@@ -20,7 +20,7 @@
     "test": "mocha",
     "debug": "ndb npm test",
     "lint": "eslint ./src/**/*.ts",
-    "report-coverage": ""
+    "report-coverage": "nyc --reporter=lcov npm run test"
   },
   "dependencies": {
     "@iabtcf/core": "^1.0.0-beta.0"
@@ -50,10 +50,6 @@
   "eslintIgnore": [
     "lib"
   ],
-  "nyc": {
-    "extends": "@istanbuljs/nyc-config-typescript",
-    "check-coverage": true
-  },
   "publishConfig": {
     "access": "public"
   },
