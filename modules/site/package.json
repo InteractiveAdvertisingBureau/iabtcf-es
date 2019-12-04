@@ -1,5 +1,5 @@
 {
-  "name": "@iabtcf/tools",
+  "name": "@iabtcf/site",
   "version": "1.0.0-alpha.9",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "description": "Creates a UI for using iab. Transparency and Consent Framework (TCF) tools",
@@ -40,7 +40,7 @@
     "@vue/eslint-config-typescript": "^4.0.0",
     "@vue/eslint-plugin": "^4.2.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.16.0",
+    "eslint": "^4.0.0",
     "eslint-plugin-vue": "^5.0.0",
     "fibers": "^4.0.1",
     "lint-staged": "^8.1.5",
@@ -49,7 +49,8 @@
     "sass-loader": "^8.0.0",
     "typescript": "~3.4.0",
     "vue-template-compiler": "^2.6.10",
-    "vue-ts-plugin": "^0.1.0"
+    "vue-ts-plugin": "^0.1.0",
+    "webpack": "^4.36.0"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
