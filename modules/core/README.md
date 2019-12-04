@@ -9,30 +9,22 @@ Ensures consistent encoding and decoding of [IAB's Transparency and Consent Fram
 
   - [Installation](#installation)
   - [Including in your project](#including-in-your-project)
-  - [TCModel](#tcmodel)
-  - [GVL](#gvl)
+  - [`TCModel`](#tcmodel) - Creates a stateful model to store a Transparency and Consent user interaction with all the fields specifed in the [TC string](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#about-the-transparency--consent-string-tc-string) encoding schema.
+     - [Information that is stored in a TC string (specification)](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#what-information-is-stored-in-a-tc-string)
+  - [GVL](#gvl) - The [Global Vendor List](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#the-global-vendor-list) contains all of the information about vendors and legal language to display to users in a CMP user interface, this component helps manage it.
       + [Autoload latest vendor-list.json](#autoload-latest-vendor-listjson)
       + [Autoload specific version vendor-list.json](#autoload-specific-version-vendor-listjson)
       + [Pass vendor-list.json object](#pass-vendor-listjson-object)
       + [Change GVL Language](#change-gvl-language)
       + [Get only vendors with a specific feature or purpose under legal basis](#get-only-vendors-with-a-specific-feature-or-purpose-under-legal-basis)
       + [Narrow the list of vendors](#narrow-the-list-of-vendors)
-  - [TCString](#tcstring)
+      + [filtering](#narrow-the-list-of-vendors) vendors for subsets of the GVL.
+      + [sorting of vendors based on purpose legal bases](#get-only-vendors-with-a-specific-feature-or-purpose-under-legal-basis) that the CMP will need to show the vendors in.
+      + loading [GVL JSON files](#autoload-specific-vendor-listjson)
+      + loading [language translations](#change-gvl-language) of Purposes, Features, Special Features, Special Purposes, and Stacks
+  - [TCString](#tcstring) - Encodes a [`TCModel`](#tcmodel) into a [TC string](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#about-the-transparency--consent-string-tc-string) and decodes a [TC string](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#about-the-transparency--consent-string-tc-string) into a [`TCModel`](#tcmodel)
       + [Decode an IAB TC String](#decode-an-iab-tc-string)
       + [Encode an IAB TC String](#encode-an-iab-tc-string)
-
-## Major Components
-
- - `TCModel` - Creates a stateful model to store a Transparency and Consent user interaction with all the fields specifed in the [TC String](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#about-the-transparency--consent-string-tc-string) encoding schema.
-     - [Information that is stored in a TC String](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#what-information-is-stored-in-a-tc-string)
- - `GVL` - The [Global Vendor List](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#the-global-vendor-list) contains all of the information about vendors and legal language to display to users in a CMP user interface, this component helps manage it.
-    - [filtering](#narrow-the-list-of-vendors) vendors for subsets of the GVL.
-    - [sorting of vendors based on purpose legal bases](#get-only-vendors-with-a-specific-feature-or-purpose-under-legal-basis) that the CMP will need to show the vendors in.
-    - loading [GVL JSON files](#autoload-specific-vendor-listjson)
-    - loading [language translations](#change-gvl-language) of Purposes, Features, Special Features, Special Purposes, and Stacks
- - `TCString`
-   - [Encodes a `TCModel` to an encoded IAB TC String](#encode-an-iab-tc-string)
-   - [Decodes a encoded IAB TC String to a `TCModel`](#decode-an-iab-tc-string)
 
 #### Installation
 
@@ -46,10 +38,7 @@ yarn
 yarn add @iabtcf/core
 ```
 
-#### Including in your project
-
 ```javascript
-
 import {TCModel, TCString, GVL} from '@iabtcf/core';
 
 GVL.baseURL = "http://mydomain.com/cmp/vendorlist";
@@ -72,42 +61,121 @@ gvl.readPromise.then(() => {
 
 # TCModel
 
-This class is intended to be used as a stateful model to model the TCF Data.
-
 [API Docs](https://www.iabtcf.com/api/core/classes/tcmodel.html)
 
-```javascript
-import {TCModel, GVL} from '@iabtcf/core';
+### Creating a new TCModel
 
+To encode a `TCModel` a `GVL` must be included.
+
+```javascript
+import {TCModel} from '@iabtcf/core';
+
+// creates a TCModel
 const tcModel = new TCModel();
 
 // to encode you must have a cmpId and cmpVersion
 tcModel.cmpId = //{myCMPID}
 tcModel.cmpVersion = //{myCMPVersion}
 
-// to encode you will need to use a version of the GVL (global vendor list)
-GVL.baseUrl = 'http://mycompany.com/cmp/gvl';
-
-tcModel.gvl = new GVL();
-
 /**
  * we now have a TCString assigned with a GVL which will set vendorListVersion,
  * tcfPolicyVersion and consentLanguage
  */
 
-// give all vendors consent
-tcModel.setAllVendorConsents();
+```
 
-// don't give vendor 7 consent
-tcModel.vendorConsents.unset(7);
+### General Meta Fields
 
-// don't give vendor 3, 5, 9 consent
-tcModel.vendorConsents.unset([3,5,9]);
+```javascript
+import {TCModel} from '@iabtcf/core';
 
-// actually give 7 consent
-tcModel.vendorConsents.set(7);
+const tcModel = new TCModel();
+tcModel
+```
+
+### Vectors
+
+The [`TCModel`](https://www.iabtcf.com/api/core/classes/tcmodel.html) leverages a [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) style [`Vector`](https://www.iabtcf.com/api/core/classes/vector.html) data structure to set consents, optins, allowed, disclosed, and legitimate interest establishment.  Properties that leverage this data structure are:
+ - **Vendors**
+   - [`vendorConsents`](https://www.iabtcf.com/api/core/classes/tcmodel.html#vendorconsents)
+   - [`vendorLegitimateInterest`](https://www.iabtcf.com/api/core/classes/tcmodel.html#vendorlegitimateinterest)
+   - [`vendorsAllowed`](https://www.iabtcf.com/api/core/classes/tcmodel.html#vendorsallowed)
+   - [`vendorsDisclosed`](https://www.iabtcf.com/api/core/classes/tcmodel.html#vendorsdisclosed)
+ - **Global Purposes**
+   - [`purposeConsents`](https://www.iabtcf.com/api/core/classes/tcmodel.html#purposeconsents)
+   - [`purposeLegitimateInterest`](https://www.iabtcf.com/api/core/classes/tcmodel.html#legitimateinterest)
+ - **Special Feature Opt-Ins**
+   - [`specialFeatureOptIns`](https://www.iabtcf.com/api/core/classes/tcmodel.html#specialfeatureoptins)
+ - **Publisher**
+   - [`publisherConsents`](https://www.iabtcf.com/api/core/classes/tcmodel.html#publisherconsents)
+   - [`publisherCustomConsents`](https://www.iabtcf.com/api/core/classes/tcmodel.html#publishercustomconsents)
+   - [`publisherLegitimateInterest`](https://www.iabtcf.com/api/core/classes/tcmodel.html#publisherlegitimateinterest)
+   - [`publisherCustomLegitimateInterest`](https://www.iabtcf.com/api/core/classes/tcmodel.html#publishercustomlegitimateInterest)
+   - [`publisherRestrictions`](https://www.iabtcf.com/api/core/classes/tcmodel.html#publisherrestrictions)
+     - This Vector is a special [`PurposeRestrictionVector`](https://www.iabtcf.com/api/core/classes/purposerestrictionvector.html) of [`PurposeRestrictions`](https://www.iabtcf.com/api/core/classes/purposerestriction.html)
+
+**Example with `vendorConsents`**
+
+The `vendorConsents` property on the `TCModel` is a [`Vector`](https://www.iabtcf.com/api/core/classes/vector.html).  This example illustrates the methods of a [`Vector`](https://www.iabtcf.com/api/core/classes/vector.html). With the exception of the `publisherRestrictions`, which implements a different type of [`PurposeRestrictionVector`](https://www.iabtcf.com/api/core/classes/purposerestrictionvector.html), all of the above Vectors will have this interface and functionality.
+
+```javascript
+// Give Vendor ID 23 consent
+tcModel.vendorConsents.set(23);
+
+console.log(tcModel.vendorConsents.has(24)); // true
+console.log(tcModel.vendorConsents.maxId); // 24
+console.log(tcModel.vendorConsents.size); // 1
+
+// remove vendor 24
+tcModel.vendorConsents.unset(24);
+console.log(tcModel.vendorConsents.has(24)); // false
+console.log(tcModel.vendorConsents.maxId); // 0
+console.log(tcModel.vendorConsents.size); // 0
+
+// give a group of vendors consent
+tcModel.vendorConsents.set([24, 14, 24, 100, 102]);
+console.log(tcModel.vendorConsents.has(24)); // true
+console.log(tcModel.vendorConsents.has(14)); // true
+console.log(tcModel.vendorConsents.has(200)); // false
+console.log(tcModel.vendorConsents.maxId); // 102
+console.log(tcModel.vendorConsents.size); // 5
+
+// loop through all ids 1 to maxId (102 loops)
+tcModel.vendorConsents.forEach((hasConsent, vendorId) => {
+
+  // check each id for consent
+
+});
+
+// empty everything
+tcModel.vendorConsents.empty();
+
+console.log(tcModel.vendorConsents.has(24)); // false
+console.log(tcModel.vendorConsents.maxId); // 0
+console.log(tcModel.vendorConsents.size); // 0
+```
+
+### Setting Publisher Restrictions
+
+A [Publisher Restriction](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#what-are-publisher-restrictions) is a restriction placed on a Vendor by a publisher limiting the purposes for which that Vendor is allowed to process personal data.  The `TCModel.publisherRestrictions` is an instance of the [`PurposeRestrictionVector`](https://www.iabtcf.com/api/core/classes/purposerestrictionvector.html), which is a vector containing [`PurposeRestrictions`](https://www.iabtcf.com/api/core/classes/purposerestriction.html)'s.
+
+**Example of setting publisher restrictions**
+
+```javascript
+
+import {TCModel, PurposeRestriction, RestrictionType} from '@iabtcf/core';
+
+// first you must create a PurposeRestriction
+const purposeRestriction = PurposeRestriction();
+
+purposeRestriction.purposeId = 2;
+purposeRestriction.restrictionType = RestrictionType.NOT_ALLOWED;
+
+// vendorID and restriction
+tcModel.publisherRestrictions.add(2000, purposeRestriction);
 
 ```
+
 
 # GVL
 
