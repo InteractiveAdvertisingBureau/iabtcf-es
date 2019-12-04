@@ -1,4 +1,4 @@
-import {Cloneable} from '../cloneable/Cloneable';
+import {Cloneable} from '../Cloneable';
 import {TCModelError} from '../errors';
 
 type idOrIds = number | number[];

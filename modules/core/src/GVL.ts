@@ -1,4 +1,4 @@
-import {Cloneable} from './cloneable/Cloneable';
+import {Cloneable} from './Cloneable';
 import {GVLError} from './errors';
 import {Json} from './Json';
 import {ConsentLanguages, IntMap} from './model';
