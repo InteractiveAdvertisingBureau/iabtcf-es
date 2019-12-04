@@ -38,12 +38,15 @@ yarn
 yarn add @iabtcf/core
 ```
 
+#### Importing
+
 ```javascript
 import {TCModel, TCString, GVL} from '@iabtcf/core';
 
 GVL.baseURL = "http://mydomain.com/cmp/vendorlist";
 
-const gvl = new GVL("LATEST");
+// create a new TC string
+const gvl = new GVL();
 gvl.readPromise.then(() => {
 
   const tcModel = new TCModel(gvl);
@@ -56,6 +59,9 @@ gvl.readPromise.then(() => {
   // send out string
 
 }
+
+// take an encoded TC string and decode into a TCModel
+const decodedTCModel = TCString.decode(encodedString);
 
 ```
 
