@@ -93,12 +93,16 @@
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-set-signature tsd-parent-kind-class"><a href="cmpapi.html#tcmodel" class="tsd-kind-icon">tc<wbr>Model</a></li>
+								<li class="tsd-kind-set-signature tsd-parent-kind-class"><a href="cmpapi.html#uivisible" class="tsd-kind-icon">ui<wbr>Visible</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cmpapi.html#setcmpstatus" class="tsd-kind-icon">set<wbr>Cmp<wbr>Status</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cmpapi.html#setdisplaystatus" class="tsd-kind-icon">set<wbr>Display<wbr>Status</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cmpapi.html#setgdprapplies" class="tsd-kind-icon">set<wbr>Gdpr<wbr>Applies</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cmpapi.html#settcmodel" class="tsd-kind-icon">setTCModel</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cmpapi.html#disable" class="tsd-kind-icon">disable</a></li>
 							</ul>
 						</section>
 					</div>
@@ -116,7 +120,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/cmpapi/src/CmpApi.ts#L21">CmpApi.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/CmpApi.ts#L28">CmpApi.ts:28</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -146,127 +150,93 @@
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
+					<a name="tcmodel" class="tsd-anchor"></a>
+					<h3>tc<wbr>Model</h3>
+					<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> tcModel<span class="tsd-signature-symbol">(</span>tcModel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TCModel</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/CmpApi.ts#L50">CmpApi.ts:50</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the TCModel the commands will use to facilitate page requests</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>tcModel: <span class="tsd-signature-type">TCModel</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
+					<a name="uivisible" class="tsd-anchor"></a>
+					<h3>ui<wbr>Visible</h3>
+					<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> uiVisible<span class="tsd-signature-symbol">(</span>isVisible<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/CmpApi.ts#L71">CmpApi.ts:71</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets whether or not the CMP is going to show the CMP UI to the user.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>isVisible: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setcmpstatus" class="tsd-anchor"></a>
-					<h3>set<wbr>Cmp<wbr>Status</h3>
+					<a name="disable" class="tsd-anchor"></a>
+					<h3>disable</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Cmp<wbr>Status<span class="tsd-signature-symbol">(</span>cmpStatus<span class="tsd-signature-symbol">: </span><a href="../enums/cmpstatus.html" class="tsd-signature-type">CmpStatus</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">disable<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/cmpapi/src/CmpApi.ts#L63">CmpApi.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/CmpApi.ts#L91">CmpApi.ts:91</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Sets the current status of the cmp</p>
+									<p>Disables the CmpApi from serving anything but ping and custom commands
+									Cannot be undone</p>
 								</div>
 							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>cmpStatus: <a href="../enums/cmpstatus.html" class="tsd-signature-type">CmpStatus</a></h5>
-									<div class="tsd-comment tsd-typography">
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setdisplaystatus" class="tsd-anchor"></a>
-					<h3>set<wbr>Display<wbr>Status</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Display<wbr>Status<span class="tsd-signature-symbol">(</span>displayStatus<span class="tsd-signature-symbol">: </span><a href="../enums/displaystatus.html" class="tsd-signature-type">DisplayStatus</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/cmpapi/src/CmpApi.ts#L73">CmpApi.ts:73</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Sets the current display status</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>displayStatus: <a href="../enums/displaystatus.html" class="tsd-signature-type">DisplayStatus</a></h5>
-									<div class="tsd-comment tsd-typography">
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setgdprapplies" class="tsd-anchor"></a>
-					<h3>set<wbr>Gdpr<wbr>Applies</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Gdpr<wbr>Applies<span class="tsd-signature-symbol">(</span>applies<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/cmpapi/src/CmpApi.ts#L53">CmpApi.ts:53</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Sets the value for GDPR Applies</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>applies: <span class="tsd-signature-type">boolean</span></h5>
-									<div class="tsd-comment tsd-typography">
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="settcmodel" class="tsd-anchor"></a>
-					<h3>setTCModel</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">setTCModel<span class="tsd-signature-symbol">(</span>tcModel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TCModel</span>, eventStatus<span class="tsd-signature-symbol">?: </span><a href="../enums/eventstatus.html" class="tsd-signature-type">EventStatus</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/cmpapi/src/CmpApi.ts#L43">CmpApi.ts:43</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Sets the TCModel
-									Note: A clone will be used if the cloneable interface was implemented for the model.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>tcModel: <span class="tsd-signature-type">TCModel</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> eventStatus: <a href="../enums/eventstatus.html" class="tsd-signature-type">EventStatus</a></h5>
-									<div class="tsd-comment tsd-typography">
-									</div>
-								</li>
-							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -291,17 +261,14 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="cmpapi.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="cmpapi.html#setcmpstatus" class="tsd-kind-icon">set<wbr>Cmp<wbr>Status</a>
+							<li class=" tsd-kind-set-signature tsd-parent-kind-class">
+								<a href="cmpapi.html#tcmodel" class="tsd-kind-icon">tc<wbr>Model</a>
+							</li>
+							<li class=" tsd-kind-set-signature tsd-parent-kind-class">
+								<a href="cmpapi.html#uivisible" class="tsd-kind-icon">ui<wbr>Visible</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="cmpapi.html#setdisplaystatus" class="tsd-kind-icon">set<wbr>Display<wbr>Status</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="cmpapi.html#setgdprapplies" class="tsd-kind-icon">set<wbr>Gdpr<wbr>Applies</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="cmpapi.html#settcmodel" class="tsd-kind-icon">setTCModel</a>
+								<a href="cmpapi.html#disable" class="tsd-kind-icon">disable</a>
 							</li>
 						</ul>
 					</li>

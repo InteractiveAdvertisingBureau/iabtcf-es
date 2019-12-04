@@ -1,4 +1,4 @@
-import {Cloneable} from '../cloneable/Cloneable';
+import {Cloneable} from '../Cloneable';
 import {TCModelError} from '../errors';
 import {RestrictionType} from './RestrictionType';
 
@@ -20,7 +20,7 @@ export class PurposeRestriction extends Cloneable<PurposeRestriction> {
    */
   public constructor(purposeId?: number, restrictionType?: RestrictionType) {
 
-    super(PurposeRestriction);
+    super();
 
     if (purposeId !== undefined) {
 

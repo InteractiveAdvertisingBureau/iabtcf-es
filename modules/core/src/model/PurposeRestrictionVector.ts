@@ -3,7 +3,7 @@ import {BinarySearchTree} from './BinarySearchTree';
 import {RestrictionType} from './RestrictionType';
 import {GVL} from '../GVL';
 import {Vendor} from './gvl/Vendor';
-import {Cloneable} from '../cloneable/Cloneable';
+import {Cloneable} from '../Cloneable';
 
 export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector> {
 
@@ -21,12 +21,6 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
    */
   private map: Map<string, BinarySearchTree> = new Map<string, BinarySearchTree>();
   private gvl_: GVL;
-
-  public constructor() {
-
-    super(PurposeRestrictionVector);
-
-  }
 
   private has(hash: string): boolean {
 

@@ -75,14 +75,7 @@
 					</div>
 					<p>Example:</p>
 					<p>class Example extends Cloneable<Example> {</p>
-					<p> public constructor() {
-						super(Example);
-					}</p>
-					<p> public clone(): Example {
-						// if you have arguments that must be passed to constructor, pass them here.
-						return this._clone();
-						}
-						}
+					<p>}
 					Todo: There must be more non primitive build in types to check. But for our current purposes, this works great.</p>
 				</div>
 			</section>
@@ -123,93 +116,20 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-private-protected">
-							<h3>Constructors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-protected"><a href="cloneable.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="cloneable.html#_clone" class="tsd-kind-icon">_clone</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cloneable.html#clone" class="tsd-kind-icon">clone</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private-protected">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-protected">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Cloneable<span class="tsd-signature-symbol">(</span>childConstructor<span class="tsd-signature-symbol">: </span><a href="../interfaces/anyconstructor.html" class="tsd-signature-type">AnyConstructor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="cloneable.html" class="tsd-signature-type">Cloneable</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/cloneable/Cloneable.ts#L34">src/cloneable/Cloneable.ts:34</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Constructor</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>childConstructor: <a href="../interfaces/anyconstructor.html" class="tsd-signature-type">AnyConstructor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-										</div>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="cloneable.html" class="tsd-signature-type">Cloneable</a></h4>
-						</li>
-					</ul>
-				</section>
-			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="_clone" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _clone</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">_clone<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>constructorArgs<span class="tsd-signature-symbol">: </span><a href="../index.html#anyarray" class="tsd-signature-type">AnyArray</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/cloneable/Cloneable.ts#L52">src/cloneable/Cloneable.ts:52</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Method to be called in the child concrete class&#39;s clone method</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>constructorArgs: <a href="../index.html#anyarray" class="tsd-signature-type">AnyArray</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>arguments to be passed to the cloned objects constructor if need be</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="clone" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> clone</h3>
+					<h3>clone</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">clone<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
 					</ul>
@@ -217,12 +137,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/844a2e4/modules/core/src/cloneable/Cloneable.ts#L29">src/cloneable/Cloneable.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/Cloneable.ts#L20">src/Cloneable.ts:20</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Child class must implement the clone() method</p>
+									<p>clone - returns a copy of the classes with new values and not references</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
@@ -246,12 +166,6 @@
 					<li class="current tsd-kind-class tsd-has-type-parameter">
 						<a href="cloneable.html" class="tsd-kind-icon">Cloneable</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-protected">
-								<a href="cloneable.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="cloneable.html#_clone" class="tsd-kind-icon">_clone</a>
-							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="cloneable.html#clone" class="tsd-kind-icon">clone</a>
 							</li>

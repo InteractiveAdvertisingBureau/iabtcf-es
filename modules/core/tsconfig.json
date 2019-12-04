@@ -1,7 +1,6 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
     "rootDir": "src",
     "outDir": "lib"
   },
@@ -10,14 +9,6 @@
   ],
   "include": [
     "src/**/*"
-  ],
-  "typedocOptions": {
-    "theme": "default",
-    "mode": "file",
-    "readme": "none",
-    "name": "@iabtcf/core - API Documentation",
-    "out": "../../docs/api/core/",
-    "excludePrivate":true
-  }
+  ]
 }
 

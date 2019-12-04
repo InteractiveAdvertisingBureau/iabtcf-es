@@ -1,4 +1,4 @@
-import {Cloneable} from '../cloneable/Cloneable';
+import {Cloneable} from '../Cloneable';
 import {TCModelError} from '../errors';
 
 type idOrIds = number | number[];
@@ -18,24 +18,6 @@ class Vector extends Cloneable<Vector> {
    * keep a set for faster lookup
    */
   private set_: Set<number> = new Set<number>();
-
-  /**
-   * constructor
-   *
-   * @param {number[]} ids? - initialized set of `true` values
-   * @return {undefined}
-   */
-  public constructor(ids?: idOrIds) {
-
-    super(Vector);
-
-    if (ids !== undefined) {
-
-      this.set(ids);
-
-    }
-
-  }
 
   /**
    * maxId

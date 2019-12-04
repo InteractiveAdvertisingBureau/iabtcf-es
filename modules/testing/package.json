@@ -1,0 +1,80 @@
+{
+  "name": "@iabtcf/testing",
+  "version": "1.0.0-beta.0",
+  "description": "Shared testing utilities",
+  "private": true,
+  "author": "Chris Paterson <tcf@chrispaterson.io>",
+  "homepage": "https://github.com/chrispaterson/iabtcf",
+  "license": {
+    "type": "Apache-2.0",
+    "url": "https://opensource.org/licenses/apache2.0.php"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
+  "scripts": {
+    "docs": "typedoc --ignoreCompilerErrors --tsconfig ./tsconfig.json  src",
+    "prepare": "npm run build",
+    "build": "rm -r lib ; tsc",
+    "test": "mocha",
+    "debug": "ndb npm test",
+    "lint": "eslint ./src/**/*.ts",
+    "report-coverage": ""
+  },
+  "dependencies": {
+    "@types/sinon": "^7.0.13",
+    "@types/sinon-chai": "3.2.2",
+    "sinon": "^7.3.2",
+    "sinon-chai": "^3.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.0.0",
+    "source-map-support": "^0.5.12",
+    "ts-node": "^8.3.0",
+    "typescript": "~3.4.0"
+  },
+  "eslintIgnore": [
+    "lib"
+  ],
+  "nyc": {
+    "extends": "@istanbuljs/nyc-config-typescript",
+    "check-coverage": true
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "interactive",
+    "advertising",
+    "bureau",
+    "iab",
+    "transparency",
+    "consent",
+    "consentstring",
+    "tcstring",
+    "gvl",
+    "vendor",
+    "framework",
+    "tcf",
+    "lib",
+    "library",
+    "cmp",
+    "2.0",
+    "v2.0",
+    "v2",
+    "software",
+    "development",
+    "api",
+    "kit",
+    "sdk",
+    "gdpr"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chrispaterson/iabtcf-es.git",
+    "directory": "modules/cmpapi"
+  },
+  "gitHead": "5b4d74172887c1c8301ae5d28027af810aa03272"
+}

@@ -1,16 +1,10 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "XMLHttpTestTools": ["./test/XMLHttpTestTools"],
-      "makeRandomInt": ["./test/makeRandomInt"]
-    },
+    "target": "ES6",
+    "module": "ES6",
     "moduleResolution": "node",
-    "module": "commonjs",
-    "target": "ESNext",
     "experimentalDecorators": true,
     "removeComments": true,
-    "resolveJsonModule": true,
     "downlevelIteration": true,
     "noImplicitAny": false,
     "esModuleInterop": true,
@@ -19,6 +13,7 @@
     "allowUnreachableCode": false,
     "strict": true,
     "strictPropertyInitialization": false,
+    "downlevelIteration": true,
     "pretty": true,
     "forceConsistentCasingInFileNames": true,
     "forceConsistentCasingInFileNames": true,

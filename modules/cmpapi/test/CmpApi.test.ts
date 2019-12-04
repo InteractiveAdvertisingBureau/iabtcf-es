@@ -33,7 +33,7 @@ describe('CmpApi', (): void => {
   const testData: TestData = {testString: 'There was a farmer who had a dog, and DOG_NAME was his name-o', testNum: 42};
 
   const customCommands: CustomCommandRegistration[] = [
-    {command: 'testCustomCommand', customFunction: (version, callback, param) => {
+    {command: 'testCustomCommand', customFunction: (version: string, callback: (obj: object) => void): void => {
 
       const _testData = testData;
       callback({..._testData, testString: _testData.testString.replace('DOG_NAME', 'BINGO')});
@@ -46,51 +46,7 @@ describe('CmpApi', (): void => {
 
   createStub();
 
-  const sameDataDifferentObject = function(obj1, obj2, objName): void {
-
-    assert.equal(JSON.stringify(obj1), JSON.stringify(obj2), `${objName} stringify did not match original`);
-    assert.deepEqual(obj1, obj2, objName + `${objName} data did not match`);
-    assert.notEqual(obj1, obj2, objName + `${objName} are the same object`);
-
-  };
-
-  describe('Clone Tests:', (): void => {
-
-    it('TcModel Clone Works', (): void => {
-
-      const tcModel = new TCModel(gvl);
-      tcModel.cmpId = 23;
-      tcModel.cmpVersion = 1;
-
-      // full consent!
-      tcModel.setAll();
-
-      tcModel.purposeConsents.unset(2);
-      tcModel.vendorConsents.unset(37);
-
-      const cloneOne = tcModel.clone();
-
-      // const cloneOne = CmpApiUtil.deepCopyObject(clone);
-
-      assert.equal(cloneOne.isValid(), tcModel.isValid(), 'tcModel IsValid did not return the same value as original');
-      assert.equal(cloneOne.publisherRestrictions.isValid(), tcModel.publisherRestrictions.isValid(), 'PR IsValid did not return the same value as original');
-
-      assert.equal(cloneOne.cmpId, tcModel.cmpId, 'cmpId did not match original value');
-      assert.equal(cloneOne.created.getTime(), tcModel.created.getTime(), 'created did not match set value');
-      assert.notStrictEqual(cloneOne.created, tcModel.created, 'created matched strict equals');
-
-      sameDataDifferentObject(cloneOne, tcModel, 'TcModel');
-      sameDataDifferentObject(cloneOne.purposeConsents, tcModel.purposeConsents, 'purposeConsents');
-      assert.equal(cloneOne.purposeConsents.maxId, tcModel.purposeConsents.maxId, 'purposeConsents max id did not match set value');
-      sameDataDifferentObject(cloneOne.publisherRestrictions.getAllRestrictions(), tcModel.publisherRestrictions.getAllRestrictions(), 'PR Restrictions');
-      sameDataDifferentObject(cloneOne.gvl.specialFeatures, tcModel.gvl.specialFeatures, 'specialFeatures');
-      sameDataDifferentObject(cloneOne.gvl.vendors, tcModel.gvl.vendors, 'vendors');
-
-    });
-
-  });
-
-  const createValidTCModel = function() {
+  const createValidTCModel = (): TCModel => {
 
     const tcModel = new TCModel(gvl);
     tcModel.cmpId = 23;
@@ -105,9 +61,9 @@ describe('CmpApi', (): void => {
 
   };
 
-  const createGetTCDataCallback = function(done, eventStatus?: EventStatus) {
+  const createGetTCDataCallback = (done, eventStatus?: EventStatus): TCDataCallback => {
 
-    const getTCDataCallback: TCDataCallback = (tcData: TCData | null, success: boolean) => {
+    return (tcData: TCData | null, success: boolean): void => {
 
       assert.isTrue(success, 'getTCData was not successful');
       assert.isNotNull(tcData, 'getTCData returned null tcData');
@@ -120,8 +76,6 @@ describe('CmpApi', (): void => {
 
     };
 
-    return getTCDataCallback;
-
   };
 
   describe('Creation', (): void => {
@@ -132,7 +86,7 @@ describe('CmpApi', (): void => {
 
         assert.isFunction(win[API_FUNCTION_NAME], 'Stub is not a function.');
 
-        const callback: PingCallback = (pingReturn: Ping | null) => {
+        const callback: PingCallback = (pingReturn: Ping | null): void => {
 
           assert.isNotNull(pingReturn, 'Stub Ping return is null');
 
@@ -164,7 +118,7 @@ describe('CmpApi', (): void => {
 
       it('Creation of a new CmpApi instance throws an error', (): void => {
 
-        assert.throws(() => new CmpApi(1, 3), 'CMP Exists already – cannot create');
+        assert.throws((): CmpApi | never => new CmpApi(1, 3), 'CMP Exists already – cannot create');
 
       });
 
@@ -172,7 +126,7 @@ describe('CmpApi', (): void => {
 
         it('Command fails if command is not supported', (done): void => {
 
-          const callback: PingCallback = (pingReturn: Ping | null) => {
+          const callback: PingCallback = (pingReturn: Ping | null): void => {
 
             assert.isNull(pingReturn, 'Ping returned null');
             done();
@@ -185,7 +139,7 @@ describe('CmpApi', (): void => {
 
         it('Command fails if command is not a string', (done): void => {
 
-          const callback: PingCallback = (pingReturn: Ping | null) => {
+          const callback: PingCallback = (pingReturn: Ping | null): void => {
 
             assert.isNull(pingReturn, 'Ping returned null');
             done();
@@ -198,7 +152,7 @@ describe('CmpApi', (): void => {
 
         it('Command fails if version is an integer less than 2', (done): void => {
 
-          const callback: PingCallback = (pingReturn: Ping | null) => {
+          const callback: PingCallback = (pingReturn: Ping | null): void => {
 
             assert.isNull(pingReturn, 'Ping not null');
             done();
@@ -211,7 +165,7 @@ describe('CmpApi', (): void => {
 
         it('Command fails when using an object as version', (done): void => {
 
-          const callback: PingCallback = (pingReturn: Ping | null) => {
+          const callback: PingCallback = (pingReturn: Ping | null): void => {
 
             assert.isNull(pingReturn, 'Ping is not null');
             done();
@@ -240,7 +194,7 @@ describe('CmpApi', (): void => {
 
       it('ping works', (done): void => {
 
-        const callback: PingCallback = (pingReturn: Ping | null) => {
+        const callback: PingCallback = (pingReturn: Ping | null): void => {
 
           assert.isNotNull(pingReturn, 'Ping returned null');
           done();
@@ -255,13 +209,13 @@ describe('CmpApi', (): void => {
 
         const tcModel = new TCModel();
 
-        assert.throws(() => cmpApi.tcModel = tcModel, 'CMP Model is not in a valid state');
+        assert.throws((): never | TCModel => cmpApi.tcModel = tcModel, 'CMP Model is not in a valid state');
 
       });
 
       it('setTCModel works', (): void => {
 
-        assert.doesNotThrow(() => cmpApi.tcModel = createValidTCModel(), 'setTCModel threw an error');
+        assert.doesNotThrow((): TCModel => cmpApi.tcModel = createValidTCModel(), 'setTCModel threw an error');
 
       });
 
@@ -304,7 +258,7 @@ describe('CmpApi', (): void => {
 
         it('getTCData is queued if an invalid TcModel is set', (done): void => {
 
-          assert.throws(() => cmpApi.tcModel = new TCModel(), 'CMP Model is not in a valid state');
+          assert.throws((): TCModel => cmpApi.tcModel = new TCModel(), 'CMP Model is not in a valid state');
 
           const getTCDataCallback = createGetTCDataCallback(done);
 
@@ -316,7 +270,7 @@ describe('CmpApi', (): void => {
 
         it('getTCData works with vendor ids', (done): void => {
 
-          const callback: TCDataCallback = (tcData: TCData | null, success: boolean) => {
+          const callback: TCDataCallback = (tcData: TCData | null, success: boolean): void => {
 
             assert.isTrue(success, 'getTCData was not successful');
             assert.isNotNull(tcData, 'getTCData returned null tcData');
@@ -335,7 +289,7 @@ describe('CmpApi', (): void => {
 
         it('getTCData fails when using invalid vendor ids', (done): void => {
 
-          const callback: TCDataCallback = (tcData: TCData | null, success: boolean) => {
+          const callback: TCDataCallback = (tcData: TCData | null, success: boolean): void => {
 
             assert.isFalse(success, 'success was true');
             assert.isNull(tcData, 'tcData was not null');
@@ -355,7 +309,7 @@ describe('CmpApi', (): void => {
 
           cmpApi.tcModel = createValidTCModel();
 
-          const callback: IATCDataCallback = (inAppTcData: InAppTCData | null, success: boolean) => {
+          const callback: IATCDataCallback = (inAppTcData: InAppTCData | null, success: boolean): void => {
 
             assert.isTrue(success, 'getInAppTCData was not successful');
             assert.isNotNull(inAppTcData, 'getInAppTCData returned null tcData');
@@ -385,9 +339,9 @@ describe('CmpApi', (): void => {
 
         let addEventListenerCallback;
 
-        const getAddEventListenerCallback = (callCount: number, maxCallCount: number, done) => {
+        const getAddEventListenerCallback = (callCount: number, maxCallCount: number, done): TCDataCallback => {
 
-          const _addEventListenerCallback: TCDataCallback = (tcData: TCData | null, success: boolean) => {
+          return (tcData: TCData | null, success: boolean): void => {
 
             callCount++;
 
@@ -413,8 +367,6 @@ describe('CmpApi', (): void => {
             }
 
           };
-
-          return _addEventListenerCallback;
 
         };
 
@@ -451,7 +403,7 @@ describe('CmpApi', (): void => {
 
           it('removeEventListener works', (done): void => {
 
-            const callback: RemoveListenerCallback = (success: boolean | null) => {
+            const callback: RemoveListenerCallback = (success: boolean | null): void => {
 
               assert.isTrue(success, 'removeEventListener did not return successful');
 
@@ -486,7 +438,7 @@ describe('CmpApi', (): void => {
 
         it('getVendorList works', (done): void => {
 
-          const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean) => {
+          const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean): void => {
 
             assert.isTrue(success, 'success was false');
             assert.isNotNull(gvl, 'gvl was null');
@@ -500,7 +452,7 @@ describe('CmpApi', (): void => {
 
         it('getVendorList works using 5 as the version', (done): void => {
 
-          const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean) => {
+          const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean): void => {
 
             assert.isTrue(success, 'success was false');
             assert.isNotNull(gvl, 'gvl was null');
@@ -514,7 +466,7 @@ describe('CmpApi', (): void => {
 
         it('getVendorList works when using "LATEST as version"', (done): void => {
 
-          const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean) => {
+          const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean): void => {
 
             assert.isTrue(success, 'success was false');
             assert.isNotNull(gvl, 'gvl was null');
@@ -529,7 +481,7 @@ describe('CmpApi', (): void => {
         // Todo: this isn't correct. It is supposed to be 0 or greater is valid
         it('getVendorList fails when using 0 as version', (done): void => {
 
-          const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean) => {
+          const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean): void => {
 
             assert.isFalse(success, 'success was true');
             assert.isNull(gvl, 'gvl was not null');
@@ -543,7 +495,7 @@ describe('CmpApi', (): void => {
 
         it('getVendorList fails when using "SOMETHING" as version', (done): void => {
 
-          const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean) => {
+          const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean): void => {
 
             assert.isFalse(success, 'success was true');
             assert.isNull(gvl, 'gvl was not null');
@@ -563,7 +515,7 @@ describe('CmpApi', (): void => {
 
           cmpApi.disable();
 
-          const getTCDataCallback = createGetTCDataCallback(() => {
+          const getTCDataCallback = createGetTCDataCallback((): void => {
 
             assert.isFalse(true, 'getTCData works after setting disabled');
 
@@ -572,13 +524,13 @@ describe('CmpApi', (): void => {
           win[API_FUNCTION_NAME]('getTCData', 2, getTCDataCallback, [1, 2, 3, 12, 37, 48]);
 
           // wait one second and call it done
-          setTimeout(() => done(), 1000);
+          setTimeout((): void => done(), 1000);
 
         });
 
         it('ping still works after setting disabled', (done): void => {
 
-          const callback: PingCallback = (pingReturn: Ping | null) => {
+          const callback: PingCallback = (pingReturn: Ping | null): void => {
 
             assert.isNotNull(pingReturn, 'Ping returned null');
             assert.equal((pingReturn as Ping).cmpStatus, 'error', 'CmpStatus is not error');
@@ -594,7 +546,7 @@ describe('CmpApi', (): void => {
 
           cmpApi.disable();
 
-          assert.throws(() => cmpApi.tcModel = createValidTCModel(), 'CmpApi is Disabled');
+          assert.throws((): never | TCModel => cmpApi.tcModel = createValidTCModel(), 'CmpApi is Disabled');
 
         });
 
@@ -602,7 +554,7 @@ describe('CmpApi', (): void => {
 
           cmpApi.disable();
 
-          assert.throws(() => cmpApi.uiVisible = true, 'CmpApi is Disabled');
+          assert.throws((): never | boolean => cmpApi.uiVisible = true, 'CmpApi is Disabled');
 
         });
 
