@@ -3,6 +3,7 @@ import {CmpDataReader} from './CmpDataReader';
 import {CmpStatus, DisplayStatus, EventStatus} from '../status';
 import {TcModelChangeEventHandler} from '../types';
 import {ValidationMessages} from '../validation';
+import {settings} from '../settings';
 
 /**
  * Class holds shareable data across cmp api and provides change event listener for TcModel.
@@ -24,6 +25,7 @@ export class CmpData implements CmpDataReader {
   private displayStatus: DisplayStatus;
 
   private tcModelChangeEventCallback: TcModelChangeEventHandler;
+  private disabledByCmp: boolean;
 
   /**
    * Constructor
@@ -36,13 +38,13 @@ export class CmpData implements CmpDataReader {
     this.cmpVersion = cmpVersion;
 
     /**
-     * Defaults
-     * Todo: check these with chris and possibly have a settings/defaults class.
+     * Defaults from settings
      */
-    this.apiVersion = 3;
-    this.tcfPolicyVersion = 2;
-    this.cmpStatus = CmpStatus.LOADING;
-    this.displayStatus = DisplayStatus.HIDDEN;
+    this.apiVersion = settings.apiVersion;
+    this.tcfPolicyVersion = settings.tcfPolicyVersion;
+    this.cmpStatus = settings.defaults.cmpStatus;
+    this.displayStatus = settings.defaults.displayStatus;
+    this.eventStatus = settings.defaults.eventStatus || this.eventStatus;
 
   }
 
@@ -67,6 +69,15 @@ export class CmpData implements CmpDataReader {
   }
 
   /**
+   * Returns true if the TcModel is valid
+   */
+  public get tcModelIsValid(): boolean {
+
+    return this.tcModelIsSet && this.tcModel.isValid();
+
+  }
+
+  /**
    * Returns the current TcModel
    * @return {TCModel}
    */
@@ -77,18 +88,17 @@ export class CmpData implements CmpDataReader {
   }
 
   /**
-   * Sets clone of TcModel and EventStatus
-   * Todo: I think we might want to force the event status. Ask chris.
+   * Sets clone of TcModel
    * @param {TCModel} tcModel
-   * @param {EventStatus} eventStatus
    * @return {void}
    */
-  public setTCModel(tcModel: TCModel, eventStatus?: EventStatus): void {
+  public setTCModel(tcModel: TCModel): void {
 
-    if (tcModel.isValid()) {
+    const clonedTcModel = tcModel.clone();
 
-      this.tcModel = tcModel.clone();
-      this.eventStatus = eventStatus || this.eventStatus;
+    if (clonedTcModel.isValid()) {
+
+      this.tcModel = clonedTcModel;
 
       this.tcModelChangeEventCallback();
 
@@ -257,6 +267,26 @@ export class CmpData implements CmpDataReader {
   public setDisplayStatus(value: DisplayStatus): void {
 
     this.displayStatus = value;
+
+  }
+
+  /**
+   * Sets disabledByCmp
+   * @param {boolean} value
+   */
+  public setDisabledByCmp(value: boolean): void {
+
+    this.disabledByCmp = value;
+
+  }
+
+  /**
+   * Gets the value of disabledByCmp
+   * @return {boolean}
+   */
+  public getDisabledByCmp(): boolean {
+
+    return this.disabledByCmp;
 
   }
 

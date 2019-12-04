@@ -37,7 +37,7 @@ export class GetVendorListCommand extends BaseCommand implements Command, Valida
 
       (this.callback.function as VendorListCallback)(gvl.buildResponse(), true);
 
-    }, ((reason) => this.callback.fail(reason)));
+    }, ((reason) => this.callback.fail(reason))).catch((reason) => this.callback.fail(reason));
 
   }
 

@@ -1,7 +1,9 @@
 import {TCModel} from '@iabtcf/core';
+import {CmpService} from './cmp/CmpService';
 import {CmpData} from './cmpdata';
 import {CommandBroker, CustomCommandRegistration} from './command';
-import {CmpStatus, DisplayStatus, EventStatus} from './status';
+import {CmpStatus} from './status';
+import {CmpLog} from './utilities';
 
 /**
  * Consent Management Platform API
@@ -16,9 +18,14 @@ export class CmpApi {
   private readonly cmpData: CmpData;
 
   /**
-   * Command broker uses cmpData to facilitate page commands.
+   * Command broker uses cmpData to facilitate page requests as commands.
    */
   private readonly commandBroker: CommandBroker;
+
+  /**
+   * Cmp service handles the actions requested by the cmp
+   */
+  private readonly cmpService: CmpService;
 
   /**
    * Constructor
@@ -30,49 +37,60 @@ export class CmpApi {
 
     this.cmpData = new CmpData(cmpId, cmpVersion);
 
+    this.cmpService = new CmpService(this.cmpData);
+
     this.commandBroker = new CommandBroker(this.cmpData, customCommands);
 
   }
 
   /**
-   * Sets the TCModel
-   * Note: A clone will be used if the cloneable interface was implemented for the model.
-   * @param {TCModel} tcModel
-   * @param {EventStatus} eventStatus
+   * Sets the TCModel the commands will use to facilitate page requests
+   * @param {TCModel | null} tcModel
    */
-  public setTCModel(tcModel: TCModel, eventStatus?: EventStatus): void {
+  public set tcModel(tcModel: TCModel | null) {
 
-    this.cmpData.setTCModel(tcModel, eventStatus);
+    // Catch errors and set error cmp status and stop serving requests.
+    try {
+
+      this.cmpService.setTcModel(tcModel);
+
+    } catch (e) {
+
+      this.cmpData.setCmpStatus(CmpStatus.ERROR);
+      CmpLog.error(e);
+      throw e;
+
+    }
 
   }
 
   /**
-   * Sets the value for GDPR Applies
-   * @param {boolean} applies
+   * Sets whether or not the CMP is going to show the CMP UI to the user.
+   * @param {boolean} isVisible
    */
-  public setGdprApplies(applies: boolean): void {
+  public set uiVisible(isVisible: boolean) {
 
-    this.cmpData.setGdprApplies(applies);
+    // Catch errors and set error cmp status and stop serving requests.
+    try {
 
+      this.cmpService.setUiVisible(isVisible);
+
+    } catch (e) {
+
+      this.cmpData.setCmpStatus(CmpStatus.ERROR);
+      CmpLog.error(e);
+      throw e;
+
+    }
   }
 
   /**
-   * Sets the current status of the cmp
-   * @param {CmpStatus} cmpStatus
+   * Disables the CmpApi from serving anything but ping and custom commands
+   * Cannot be undone
    */
-  public setCmpStatus(cmpStatus: CmpStatus): void {
+  public disable(): void {
 
-    this.cmpData.setCmpStatus(cmpStatus);
-
-  }
-
-  /**
-   * Sets the current display status
-   * @param {DisplayStatus} displayStatus
-   */
-  public setDisplayStatus(displayStatus: DisplayStatus): void {
-
-    this.cmpData.setDisplayStatus(displayStatus);
+    this.cmpService.disable();
 
   }
 
