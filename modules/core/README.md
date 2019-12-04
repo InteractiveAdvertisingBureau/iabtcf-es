@@ -28,7 +28,7 @@ Ensures consistent encoding and decoding of [IAB's Transparency and Consent Fram
  - `GVL` - The [Global Vendor List](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#the-global-vendor-list) contains all of the information about vendors and legal language to display to users in a CMP user interface, this component helps manage it.
     - [filtering](#narrow-the-list-of-vendors) vendors for subsets of the GVL.
     - [sorting of vendors based on purpose legal bases](#get-only-vendors-with-a-specific-feature-or-purpose-under-legal-basis) that the CMP will need to show the vendors in.
-    - loading [GVL JSON files](#autoload-specific-vendor-list.json)
+    - loading [GVL JSON files](#autoload-specific-vendor-listjson)
     - loading [language translations](#change-gvl-language) of Purposes, Features, Special Features, Special Purposes, and Stacks
  - `TCString`
    - [Encodes a `TCModel` to an encoded IAB TC String](#encode-an-iab-tc-string)
@@ -112,8 +112,8 @@ tcModel.vendorConsents.set(7);
 # GVL
 
 * [API Docs](https://www.iabtcf.com/api/core/classes/gvl.html)
-* [Autoload latest vendor-list.json](#autoload-latest-vendor-list.json)
-* [Autoload specific vendor-list.json](#autoload-specific-vendor-list.json)
+* [Autoload latest vendor-list.json](#autoload-latest-vendor-listjson)
+* [Autoload specific vendor-list.json](#autoload-specific-vendor-listjson)
 * [Pass vendor-list.json object](#pass-vendor-list.json-object)
 * [Change GVL Language](#change-gvl-language)
 * [Get only vendors with a specific feature or purpose under legal basis](#get-only-vendors-with-a-specific-feature-or-purpose-under-legal-basis)
