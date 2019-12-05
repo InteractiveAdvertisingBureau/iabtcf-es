@@ -61,14 +61,14 @@ describe('CmpApi', (): void => {
 
   };
 
-  const createGetTCDataCallback = (done, eventStatus?: EventStatus): TCDataCallback => {
+  const createGetTCDataCallback = (done: () => void, eventStatus: EventStatus = EventStatus.USER_ACTION_COMPLETE): TCDataCallback => {
 
     return (tcData: TCData | null, success: boolean): void => {
 
       assert.isTrue(success, 'getTCData was not successful');
       assert.isNotNull(tcData, 'getTCData returned null tcData');
       // @ts-ignore
-      assert.equal(tcData.eventStatus, eventStatus ? eventStatus : EventStatus.USER_ACTION_COMPLETE, 'Event status did not match set value');
+      assert.equal(tcData.eventStatus, eventStatus, 'Event status did not match set value');
 
       // Todo: Check the object more thoroughly
 
