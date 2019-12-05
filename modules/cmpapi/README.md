@@ -274,7 +274,7 @@ import {TCModel} from '@iabtcf/core';
  */
 const cmpApi = new CmpApi(1, 3);
 
-cmpApi.gdprApplies = false;
+cmpApi.tcModel = null;
 
 // Done
 ````
