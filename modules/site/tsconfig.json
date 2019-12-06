@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "declaration": false,
+    "experimentalDecorators": true,
     "sourceMap": true, 
     "plugins": [
       { "name": "vue-ts-plugin" }
