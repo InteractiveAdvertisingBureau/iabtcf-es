@@ -1,6 +1,6 @@
 import {GVL, TCModel} from '@iabtcf/core';
 import {assert} from 'chai';
-import {createStub} from '../dev/stub';
+import {createStub} from '../../../dev/stub';
 import {
   CmpApi,
   EventStatus,

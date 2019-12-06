@@ -1,4 +1,4 @@
-import {GlobalVendorList, TCData} from '../src/model';
+import {GlobalVendorList, TCData} from '@iabtcf/cmpapi/lib/model';
 
 export const createStub = () => {
 
