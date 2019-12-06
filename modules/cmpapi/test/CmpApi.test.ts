@@ -27,14 +27,14 @@ const API_FUNCTION_NAME = '__tcfapi';
 
 const win: Window = window;
 
-const createGetTCDataCallback = (done, eventStatus?: EventStatus): TCDataCallback => {
+const createGetTCDataCallback = (done: () => void, eventStatus: EventStatus = EventStatus.USER_ACTION_COMPLETE): TCDataCallback => {
 
   return (tcData: TCData | null, success: boolean): void => {
 
     assert.isTrue(success, 'getTCData was not successful');
     assert.isNotNull(tcData, 'getTCData returned null tcData');
     // @ts-ignore
-    assert.equal(tcData.eventStatus, eventStatus ? eventStatus : EventStatus.USER_ACTION_COMPLETE, 'Event status did not match set value');
+    assert.equal(tcData.eventStatus, eventStatus, 'Event status did not match set value');
 
     // Todo: Check the object more thoroughly
 
@@ -43,6 +43,7 @@ const createGetTCDataCallback = (done, eventStatus?: EventStatus): TCDataCallbac
   };
 
 };
+  
 
 describe('CmpApi', (): void => {
 
@@ -50,6 +51,7 @@ describe('CmpApi', (): void => {
    * Create the __tcfapi stub
    */
   createStub();
+
 
   const custCommandTestData: TestData = {testString: 'There was a farmer who had a dog, and DOG_NAME was his name-o', testNum: 42};
 

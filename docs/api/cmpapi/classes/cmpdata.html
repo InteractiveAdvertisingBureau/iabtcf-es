@@ -103,6 +103,7 @@
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="cmpdata.html#tcmodelisset" class="tsd-kind-icon">tc<wbr>Model<wbr>IsSet</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="cmpdata.html#tcmodelisvalid" class="tsd-kind-icon">tc<wbr>Model<wbr>IsValid</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -112,6 +113,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cmpdata.html#getcmpid" class="tsd-kind-icon">get<wbr>Cmp<wbr>Id</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cmpdata.html#getcmpstatus" class="tsd-kind-icon">get<wbr>Cmp<wbr>Status</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cmpdata.html#getcmpversion" class="tsd-kind-icon">get<wbr>Cmp<wbr>Version</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cmpdata.html#getdisabledbycmp" class="tsd-kind-icon">get<wbr>Disabled<wbr>ByCmp</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cmpdata.html#getdisplaystatus" class="tsd-kind-icon">get<wbr>Display<wbr>Status</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cmpdata.html#geteventstatus" class="tsd-kind-icon">get<wbr>Event<wbr>Status</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cmpdata.html#getgdprapplies" class="tsd-kind-icon">get<wbr>Gdpr<wbr>Applies</a></li>
@@ -122,6 +124,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cmpdata.html#setcmpid" class="tsd-kind-icon">set<wbr>Cmp<wbr>Id</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cmpdata.html#setcmpstatus" class="tsd-kind-icon">set<wbr>Cmp<wbr>Status</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cmpdata.html#setcmpversion" class="tsd-kind-icon">set<wbr>Cmp<wbr>Version</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cmpdata.html#setdisabledbycmp" class="tsd-kind-icon">set<wbr>Disabled<wbr>ByCmp</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cmpdata.html#setdisplaystatus" class="tsd-kind-icon">set<wbr>Display<wbr>Status</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cmpdata.html#seteventstatus" class="tsd-kind-icon">set<wbr>Event<wbr>Status</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cmpdata.html#setgdprapplies" class="tsd-kind-icon">set<wbr>Gdpr<wbr>Applies</a></li>
@@ -144,7 +147,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L26">cmpdata/CmpData.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L28">cmpdata/CmpData.ts:28</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -182,12 +185,34 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L63">cmpdata/CmpData.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L65">cmpdata/CmpData.ts:65</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Returns true if the TcModel has been set</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="tcmodelisvalid" class="tsd-anchor"></a>
+					<h3>tc<wbr>Model<wbr>IsValid</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> tcModelIsValid<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L74">cmpdata/CmpData.ts:74</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns true if the TcModel is valid</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -208,7 +233,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/cmpdatareader.html">CmpDataReader</a>.<a href="../interfaces/cmpdatareader.html#getapiversion">getApiVersion</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L107">cmpdata/CmpData.ts:107</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L117">cmpdata/CmpData.ts:117</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -231,7 +256,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/cmpdatareader.html">CmpDataReader</a>.<a href="../interfaces/cmpdatareader.html#getcmpid">getCmpId</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L127">cmpdata/CmpData.ts:127</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L137">cmpdata/CmpData.ts:137</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -254,7 +279,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/cmpdatareader.html">CmpDataReader</a>.<a href="../interfaces/cmpdatareader.html#getcmpstatus">getCmpStatus</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L227">cmpdata/CmpData.ts:227</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L237">cmpdata/CmpData.ts:237</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -277,7 +302,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/cmpdatareader.html">CmpDataReader</a>.<a href="../interfaces/cmpdatareader.html#getcmpversion">getCmpVersion</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L147">cmpdata/CmpData.ts:147</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L157">cmpdata/CmpData.ts:157</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -286,6 +311,29 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getdisabledbycmp" class="tsd-anchor"></a>
+					<h3>get<wbr>Disabled<wbr>ByCmp</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Disabled<wbr>ByCmp<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/cmpdatareader.html">CmpDataReader</a>.<a href="../interfaces/cmpdatareader.html#getdisabledbycmp">getDisabledByCmp</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L287">cmpdata/CmpData.ts:287</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the value of disabledByCmp</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -300,7 +348,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/cmpdatareader.html">CmpDataReader</a>.<a href="../interfaces/cmpdatareader.html#getdisplaystatus">getDisplayStatus</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L247">cmpdata/CmpData.ts:247</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L257">cmpdata/CmpData.ts:257</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -323,7 +371,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/cmpdatareader.html">CmpDataReader</a>.<a href="../interfaces/cmpdatareader.html#geteventstatus">getEventStatus</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L207">cmpdata/CmpData.ts:207</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L217">cmpdata/CmpData.ts:217</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -346,7 +394,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/cmpdatareader.html">CmpDataReader</a>.<a href="../interfaces/cmpdatareader.html#getgdprapplies">getGdprApplies</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L187">cmpdata/CmpData.ts:187</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L197">cmpdata/CmpData.ts:197</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -369,7 +417,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/cmpdatareader.html">CmpDataReader</a>.<a href="../interfaces/cmpdatareader.html#gettcmodel">getTcModel</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L73">cmpdata/CmpData.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L84">cmpdata/CmpData.ts:84</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -392,7 +440,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/cmpdatareader.html">CmpDataReader</a>.<a href="../interfaces/cmpdatareader.html#gettcfpolicyversion">getTcfPolicyVersion</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L167">cmpdata/CmpData.ts:167</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L177">cmpdata/CmpData.ts:177</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -414,7 +462,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L54">cmpdata/CmpData.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L56">cmpdata/CmpData.ts:56</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -442,7 +490,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L117">cmpdata/CmpData.ts:117</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L127">cmpdata/CmpData.ts:127</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -472,7 +520,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L137">cmpdata/CmpData.ts:137</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L147">cmpdata/CmpData.ts:147</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -502,7 +550,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L237">cmpdata/CmpData.ts:237</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L247">cmpdata/CmpData.ts:247</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -532,7 +580,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L157">cmpdata/CmpData.ts:157</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L167">cmpdata/CmpData.ts:167</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -553,6 +601,36 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setdisabledbycmp" class="tsd-anchor"></a>
+					<h3>set<wbr>Disabled<wbr>ByCmp</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Disabled<wbr>ByCmp<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L277">cmpdata/CmpData.ts:277</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets disabledByCmp</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="setdisplaystatus" class="tsd-anchor"></a>
 					<h3>set<wbr>Display<wbr>Status</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -562,7 +640,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L257">cmpdata/CmpData.ts:257</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L267">cmpdata/CmpData.ts:267</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -592,7 +670,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L217">cmpdata/CmpData.ts:217</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L227">cmpdata/CmpData.ts:227</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -622,7 +700,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L197">cmpdata/CmpData.ts:197</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L207">cmpdata/CmpData.ts:207</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -646,28 +724,24 @@
 					<a name="settcmodel" class="tsd-anchor"></a>
 					<h3>setTCModel</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">setTCModel<span class="tsd-signature-symbol">(</span>tcModel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TCModel</span>, eventStatus<span class="tsd-signature-symbol">?: </span><a href="../enums/eventstatus.html" class="tsd-signature-type">EventStatus</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">setTCModel<span class="tsd-signature-symbol">(</span>tcModel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TCModel</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L86">cmpdata/CmpData.ts:86</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L95">cmpdata/CmpData.ts:95</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Sets clone of TcModel and EventStatus
-									Todo: I think we might want to force the event status. Ask chris.</p>
+									<p>Sets clone of TcModel</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>tcModel: <span class="tsd-signature-type">TCModel</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> eventStatus: <a href="../enums/eventstatus.html" class="tsd-signature-type">EventStatus</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -684,7 +758,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/b5ad738/modules/cmpapi/src/cmpdata/CmpData.ts#L177">cmpdata/CmpData.ts:177</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmpdata/CmpData.ts#L187">cmpdata/CmpData.ts:187</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -727,6 +801,9 @@
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="cmpdata.html#tcmodelisset" class="tsd-kind-icon">tc<wbr>Model<wbr>IsSet</a>
 							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="cmpdata.html#tcmodelisvalid" class="tsd-kind-icon">tc<wbr>Model<wbr>IsValid</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="cmpdata.html#getapiversion" class="tsd-kind-icon">get<wbr>Api<wbr>Version</a>
 							</li>
@@ -738,6 +815,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="cmpdata.html#getcmpversion" class="tsd-kind-icon">get<wbr>Cmp<wbr>Version</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="cmpdata.html#getdisabledbycmp" class="tsd-kind-icon">get<wbr>Disabled<wbr>ByCmp</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="cmpdata.html#getdisplaystatus" class="tsd-kind-icon">get<wbr>Display<wbr>Status</a>
@@ -768,6 +848,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="cmpdata.html#setcmpversion" class="tsd-kind-icon">set<wbr>Cmp<wbr>Version</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="cmpdata.html#setdisabledbycmp" class="tsd-kind-icon">set<wbr>Disabled<wbr>ByCmp</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="cmpdata.html#setdisplaystatus" class="tsd-kind-icon">set<wbr>Display<wbr>Status</a>

@@ -25,12 +25,11 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
   private cmpVersion_: number | string = 0;
   private vendorListVersion_: number | string = 0;
 
-  // automatically set when created, updated and gvl set
-  private created_: Date;
-  private lastUpdated_: Date;
-
   // Member Variable for GVL
   private gvl_: GVL;
+
+  public created: Date;
+  public lastUpdated: Date;
 
   /**
    * The TCF designates certain Features as special, that is, a CMP must afford
@@ -175,40 +174,6 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
   public get gvl(): GVL {
 
     return this.gvl_;
-
-  }
-
-  /**
-   * sets encoded created date.  Will auto convert to deciseconds as the encoding requires
-   *
-   * @param {Date} date - This will be set automatically
-   */
-  public set created(date: Date) {
-
-    this.created_ = date;
-
-  }
-
-  public get created(): Date {
-
-    return this.created_;
-
-  }
-
-  /**
-   * sets encoded last updated date.  Will auto convert to deciseconds as the encoding requires
-   *
-   * @param {Date} date - this is automatically updated on encoding
-   * */
-  public set lastUpdated(date: Date) {
-
-    this.lastUpdated_ = date;
-
-  }
-
-  public get lastUpdated(): Date {
-
-    return this.lastUpdated_;
 
   }
 

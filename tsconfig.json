@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
-    "moduleResolution": "node",
+    "target": "ES6",
     "module": "commonjs",
-    "target": "ESNext",
+    "moduleResolution": "node",
     "experimentalDecorators": true,
     "removeComments": true,
-    "resolveJsonModule": true,
     "downlevelIteration": true,
     "noImplicitAny": false,
     "esModuleInterop": true,

@@ -20,24 +20,6 @@ class Vector extends Cloneable<Vector> {
   private set_: Set<number> = new Set<number>();
 
   /**
-   * constructor
-   *
-   * @param {number[]} ids? - initialized set of `true` values
-   * @return {undefined}
-   */
-  public constructor(ids?: idOrIds) {
-
-    super();
-
-    if (ids !== undefined) {
-
-      this.set(ids);
-
-    }
-
-  }
-
-  /**
    * maxId
    *
    * @return {number} - the highest id in this Vector

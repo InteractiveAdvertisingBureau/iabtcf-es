@@ -1,1 +1,2 @@
 extends: "@istanbuljs/nyc-config-typescript"
+check-coverage: true

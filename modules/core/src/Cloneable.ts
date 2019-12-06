@@ -21,6 +21,7 @@ export abstract class Cloneable<T> {
 
     const myClone = new (this.constructor as {new(): T})();
     const keys = Object.keys(this);
+
     keys.forEach((key: string): void => {
 
       const value: unknown = this.deepClone(this[key]);

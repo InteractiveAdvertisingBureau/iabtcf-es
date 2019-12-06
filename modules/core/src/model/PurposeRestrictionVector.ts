@@ -54,11 +54,12 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
             case RestrictionType.REQUIRE_LI:
               return (vendor.flexiblePurposes.includes(purposeId) && vendor.purposes.includes(purposeId));
 
-          }
+            default:
+              // if we made it here, they passed something strange for the
+              // restriction type so we ain't gonna add it
+              return false;
 
-          // if we made it here, they passed something strange for the
-          // restriction type so we ain't gonna add it
-          return false;
+          }
 
         } else if (restrictionType === RestrictionType.NOT_ALLOWED) {
 
