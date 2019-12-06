@@ -3,4 +3,4 @@ require:
   - 'ts-node/register'
   - 'jsdom-global/register'
   - 'source-map-support/register'
-spec: ./test/**/*.ts
+spec: ./test/*.test.ts
