@@ -15,27 +15,52 @@ import {
   VendorListCallback,
 } from '../src';
 import {CustomCommandRegistration} from '../src/command';
+import {ValidationMessages} from '../src/validation';
+import {createValidTCModel, gvl} from './utils';
 
 interface TestData {
   testString: string;
   testNum: number;
 }
 
+const API_FUNCTION_NAME = '__tcfapi';
+
+const win: Window = window;
+
+const createGetTCDataCallback = (done, eventStatus?: EventStatus): TCDataCallback => {
+
+  return (tcData: TCData | null, success: boolean): void => {
+
+    assert.isTrue(success, 'getTCData was not successful');
+    assert.isNotNull(tcData, 'getTCData returned null tcData');
+    // @ts-ignore
+    assert.equal(tcData.eventStatus, eventStatus ? eventStatus : EventStatus.USER_ACTION_COMPLETE, 'Event status did not match set value');
+
+    // Todo: Check the object more thoroughly
+
+    done();
+
+  };
+
+};
+
 describe('CmpApi', (): void => {
 
-  const win: Window = window;
-  const API_FUNCTION_NAME = '__tcfapi';
+  /**
+   * Create the __tcfapi stub
+   */
+  createStub();
 
-  // eslint-disable-next-line
-  const vendorlistJson = require('../../../dev/vendor-list.json');
-  const gvl: GVL = new GVL(vendorlistJson);
+  const custCommandTestData: TestData = {testString: 'There was a farmer who had a dog, and DOG_NAME was his name-o', testNum: 42};
 
-  const testData: TestData = {testString: 'There was a farmer who had a dog, and DOG_NAME was his name-o', testNum: 42};
-
+  /**
+   * An array of custom commands
+   * @type {{customFunction: (version: string, callback: (obj: object) => void) => void; command: string}[]}
+   */
   const customCommands: CustomCommandRegistration[] = [
     {command: 'testCustomCommand', customFunction: (version: string, callback: (obj: object) => void): void => {
 
-      const _testData = testData;
+      const _testData = custCommandTestData;
       callback({..._testData, testString: _testData.testString.replace('DOG_NAME', 'BINGO')});
 
     }},
@@ -43,40 +68,6 @@ describe('CmpApi', (): void => {
 
   // eslint-disable-next-line no-unused-vars
   let cmpApi: CmpApi;
-
-  createStub();
-
-  const createValidTCModel = (): TCModel => {
-
-    const tcModel = new TCModel(gvl);
-    tcModel.cmpId = 23;
-    tcModel.cmpVersion = 1;
-
-    // full consent!
-    tcModel.setAll();
-
-    tcModel.purposeConsents.unset(2);
-    tcModel.vendorConsents.unset(37);
-    return tcModel;
-
-  };
-
-  const createGetTCDataCallback = (done, eventStatus?: EventStatus): TCDataCallback => {
-
-    return (tcData: TCData | null, success: boolean): void => {
-
-      assert.isTrue(success, 'getTCData was not successful');
-      assert.isNotNull(tcData, 'getTCData returned null tcData');
-      // @ts-ignore
-      assert.equal(tcData.eventStatus, eventStatus ? eventStatus : EventStatus.USER_ACTION_COMPLETE, 'Event status did not match set value');
-
-      // Todo: Check the object more thoroughly
-
-      done();
-
-    };
-
-  };
 
   describe('Creation', (): void => {
 
@@ -118,11 +109,55 @@ describe('CmpApi', (): void => {
 
       it('Creation of a new CmpApi instance throws an error', (): void => {
 
-        assert.throws((): CmpApi | never => new CmpApi(1, 3), 'CMP Exists already – cannot create');
+        assert.throws((): CmpApi | never => new CmpApi(1, 3), ValidationMessages.EXISTING_CMP);
 
       });
 
-      describe('Command Validation:', (): void => {
+      it('ping works', (done): void => {
+
+        const callback: PingCallback = (pingReturn: Ping | null): void => {
+
+          assert.isNotNull(pingReturn, 'Ping returned null');
+          done();
+
+        };
+
+        win[API_FUNCTION_NAME]('ping', 2, callback);
+
+      });
+
+      it('Setting invalid TcModel throws error', (): void => {
+
+        const tcModel = new TCModel();
+
+        assert.throws((): never | TCModel => cmpApi.tcModel = tcModel, ValidationMessages.TC_MODEL_INVALID);
+
+      });
+
+      it('setTCModel works', (): void => {
+
+        assert.doesNotThrow((): TCModel => cmpApi.tcModel = createValidTCModel(gvl), 'setTCModel threw an error');
+
+      });
+
+      describe('Custom Commands:', (): void => {
+
+        it('custom command works', (done): void => {
+
+          const param = 'BINGO';
+          const expectedTestString = custCommandTestData.testString.replace('DOG_NAME', param);
+
+          const callback = (data: TestData): void => {
+
+            assert.isNotNull(data, 'custom command returned null data');
+            assert.strictEqual(data.testString, expectedTestString);
+            done();
+
+          };
+
+          win[API_FUNCTION_NAME](customCommands[0].command, 2, callback, param);
+
+        });
 
         it('Command fails if command is not supported', (done): void => {
 
@@ -192,50 +227,6 @@ describe('CmpApi', (): void => {
 
       });
 
-      it('ping works', (done): void => {
-
-        const callback: PingCallback = (pingReturn: Ping | null): void => {
-
-          assert.isNotNull(pingReturn, 'Ping returned null');
-          done();
-
-        };
-
-        win[API_FUNCTION_NAME]('ping', 2, callback);
-
-      });
-
-      it('Setting invalid TcModel throws error', (): void => {
-
-        const tcModel = new TCModel();
-
-        assert.throws((): never | TCModel => cmpApi.tcModel = tcModel, 'CMP Model is not in a valid state');
-
-      });
-
-      it('setTCModel works', (): void => {
-
-        assert.doesNotThrow((): TCModel => cmpApi.tcModel = createValidTCModel(), 'setTCModel threw an error');
-
-      });
-
-      it('custom command works', (done): void => {
-
-        const param = 'BINGO';
-        const expectedTestString = testData.testString.replace('DOG_NAME', param);
-
-        const callback = (data: TestData): void => {
-
-          assert.isNotNull(data, 'custom command returned null data');
-          assert.strictEqual(data.testString, expectedTestString);
-          done();
-
-        };
-
-        win[API_FUNCTION_NAME](customCommands[0].command, 2, callback, param);
-
-      });
-
       describe('getTCData', (): void => {
 
         it('getTCData works and returns tc loaded for event status', (done): void => {
@@ -248,7 +239,7 @@ describe('CmpApi', (): void => {
 
         it('getTCData returns user action complete after setting TcData a second time', (done): void => {
 
-          cmpApi.tcModel = createValidTCModel();
+          cmpApi.tcModel = createValidTCModel(gvl);
 
           const getTCDataCallback = createGetTCDataCallback(done);
 
@@ -258,13 +249,13 @@ describe('CmpApi', (): void => {
 
         it('getTCData is queued if an invalid TcModel is set', (done): void => {
 
-          assert.throws((): TCModel => cmpApi.tcModel = new TCModel(), 'CMP Model is not in a valid state');
+          assert.throws((): TCModel => cmpApi.tcModel = new TCModel(), ValidationMessages.TC_MODEL_INVALID);
 
           const getTCDataCallback = createGetTCDataCallback(done);
 
           win[API_FUNCTION_NAME]('getTCData', 2, getTCDataCallback, [1, 2, 3, 12, 37, 48]);
 
-          cmpApi.tcModel = createValidTCModel();
+          cmpApi.tcModel = createValidTCModel(gvl);
 
         });
 
@@ -307,7 +298,7 @@ describe('CmpApi', (): void => {
 
         it('getInAppTCData works', (done): void => {
 
-          cmpApi.tcModel = createValidTCModel();
+          cmpApi.tcModel = createValidTCModel(gvl);
 
           const callback: IATCDataCallback = (inAppTcData: InAppTCData | null, success: boolean): void => {
 
@@ -382,7 +373,8 @@ describe('CmpApi', (): void => {
             win[API_FUNCTION_NAME]('addEventListener', 2, addEventListenerCallback);
 
             const tcModel = new TCModel(gvl);
-            tcModel.cmpId = 23;
+            tcModel.cmpId = 2
+            ;
             tcModel.cmpVersion = 1;
 
             // full consent!
@@ -409,7 +401,8 @@ describe('CmpApi', (): void => {
 
               // Try setting tc model to trigger addEventListenerCallback more times then it was expected
               const tcModel = new TCModel(gvl);
-              tcModel.cmpId = 23;
+              tcModel.cmpId = 2
+              ;
               tcModel.cmpVersion = 1;
 
               // full consent!
@@ -546,7 +539,10 @@ describe('CmpApi', (): void => {
 
           cmpApi.disable();
 
-          assert.throws((): never | TCModel => cmpApi.tcModel = createValidTCModel(), 'CmpApi is Disabled');
+          assert.throws(
+            (): never | TCModel => cmpApi.tcModel = createValidTCModel(gvl),
+            ValidationMessages.CMP_API_IN_DISABLED_STATE
+          );
 
         });
 
@@ -554,7 +550,7 @@ describe('CmpApi', (): void => {
 
           cmpApi.disable();
 
-          assert.throws((): never | boolean => cmpApi.uiVisible = true, 'CmpApi is Disabled');
+          assert.throws((): never | boolean => cmpApi.uiVisible = true, ValidationMessages.CMP_API_IN_DISABLED_STATE);
 
         });
 
