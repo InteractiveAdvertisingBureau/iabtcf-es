@@ -100,7 +100,11 @@ export class CmpData implements CmpDataReader {
 
       this.tcModel = clonedTcModel;
 
-      this.tcModelChangeEventCallback();
+      if (this.tcModelChangeEventCallback) {
+
+        this.tcModelChangeEventCallback();
+
+      }
 
     } else {
 
