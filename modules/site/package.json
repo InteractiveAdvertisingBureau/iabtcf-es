@@ -15,8 +15,8 @@
     "directory": "modules/tools"
   },
   "scripts": {
-    "start": "vue-cli-service serve",
-    "build": "echo 'disabled: vue-cli-service build --no-clean'",
+    "start": "webpack-dev-server",
+    "build": "webpack",
     "lint": "eslint ./src/**/*.ts ./src/**/*.vue",
     "test": "exit 0"
   },
@@ -32,27 +32,34 @@
     "vuejs-datepicker": "^1.6.2"
   },
   "devDependencies": {
+    "@types/webpack": "^4.41.0",
+    "@types/webpack-dev-server": "^3.9.0",
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^2.10.0",
     "@vue/cli-plugin-babel": "^3.12.0",
     "@vue/cli-plugin-eslint": "^3.12.0",
     "@vue/cli-plugin-typescript": "^3.12.0",
-    "@vue/cli-service": "^3.12.0",
     "@vue/eslint-config-typescript": "^5.0.1",
     "@vue/eslint-plugin": "^4.2.0",
     "babel-eslint": "^10.0.1",
+    "css-loader": "^3.2.1",
     "eslint": "^5",
     "eslint-plugin-vue": "^5.0.0",
     "fibers": "^4.0.1",
+    "html-webpack-plugin": "^3.2.0",
     "lint-staged": "^8.1.5",
     "mocha": "^6.2.2",
     "node-sass": "^4.12.0",
     "sass": "^1.23.0",
     "sass-loader": "^8.0.0",
+    "ts-loader": "^6.2.1",
     "typescript": "^3.7.0",
+    "vue-loader": "^15.7.2",
     "vue-template-compiler": "^2.6.10",
     "vue-ts-plugin": "^0.1.0",
-    "webpack": "^4.36.0"
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
