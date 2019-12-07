@@ -21,20 +21,37 @@ export class CmpService {
   }
 
   /**
-   * Sets the new TCModel and sets various states associated with the model
-   * @param {TCModel | null} tcModel
+   * Sets the new TCModel with side-effects: 
+   *    - sets gdprApplies to `true` or `false` depending on whether a
+   *      `TCModel` or `null` is passed.
+   *    - CMP Status set to 'loaded' if anything is set 
+   *    - Display Status set to 'disabled' or 'hidden' depending on whether a 
+   *      `TCModel` or `null` is passed.
+   *    - Event Status set to 'useractionscomplete' or 'tcloaded' only when a
+   *      `TCModel` is set.  Which one is determined by whether this is the
+   *      first or nth time a `TCModel` is set.
+   * @param {TCModel | null} tcModel - if null: gdprApplies = false and display
+   * status is 'disabled'. If a valid `TCModel` is set gdprApplies = true and
+   * display status is 'hidden'.  If this is the first time the valid `TCModel`
+   * is set Event is fired and EventStatus is 'tcloaded', subsequent sets event
+   * is fired and 'useractioncomplete' is the EventStatus 
+   * @return {void | never} - returns nothing, but throws an error if something
+   * other than `null` or a valid `TCModel` is set
    */
-  public setTcModel(tcModel: TCModel | null): void {
+  public setTcModel(tcModel: TCModel | null): void | never {
 
     this.throwIfCmpApiIsDisabled();
 
-    if (tcModel) {
-
-      if (tcModel.isValid()) {
+    /**
+     * if this is a TCModel, then we know that GDPRApplies.  Otherwise if they
+     * set explicitly to null then we know that they intend to state that GDPR
+     * does not apply.  If it's something else... Then blowup!
+     */
+    this.cmpData.setCmpStatus(CmpStatus.LOADED);
+    if (tcModel instanceof TCModel) {
 
         this.cmpData.setGdprApplies(true);
         this.cmpData.setDisplayStatus(DisplayStatus.HIDDEN);
-        this.cmpData.setCmpStatus(CmpStatus.LOADED);
 
         if (this.cmpData.tcModelIsSet) {
 
@@ -48,18 +65,15 @@ export class CmpService {
 
         this.cmpData.setTCModel(tcModel);
 
-      } else {
-
-        throw new Error(ValidationMessages.TC_MODEL_INVALID);
-
-      }
-
-    } else {
+    } else if(tcModel === null) {
 
       this.cmpData.setGdprApplies(false);
       this.cmpData.setDisplayStatus(DisplayStatus.DISABLED);
-      this.cmpData.setCmpStatus(CmpStatus.LOADED);
 
+    } else {
+
+      // awwwww hell no... what did you pass me?
+      throw new Error(`Invalid value (${tcModel}) passed for tcModel`);
     }
 
   }
@@ -87,8 +101,8 @@ export class CmpService {
   }
 
   /**
-   * Disables the CmpApi from serving anything but ping and custom commands by setting cmp status to error
-   * This can not be undone
+   * Disables the CmpApi from serving anything but ping and custom commands by
+   * setting cmp status to error This can not be undone
    */
   public disable(): void {
 

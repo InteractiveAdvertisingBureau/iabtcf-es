@@ -13,11 +13,12 @@ export interface StringBoolVector {
  */
 export const createStringBoolVector = function(ids: string[], vector: Vector): StringBoolVector {
 
-  return ids.reduce<StringBoolVector>((map, obj): StringBoolVector => {
+  const retr = {};
 
-    map[obj] = vector.has(+obj) ? '1' : '0';
-    return map;
+  vector.forEach((value: boolean, id: number): void => {
+    retr[id.toString(10)] = +value.toString();
+  });
 
-  }, {});
+  return retr;
 
 };

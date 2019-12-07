@@ -296,7 +296,7 @@ export class CommandBroker {
    */
   private get canProcessCommandQueue(): boolean {
 
-    return this.cmpData.tcModelIsValid && (this.cmpData.getCmpStatus() !== CmpStatus.ERROR);
+    return this.cmpData.tcModelIsSet && (this.cmpData.getCmpStatus() !== CmpStatus.ERROR);
 
   }
 

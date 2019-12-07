@@ -252,7 +252,6 @@ describe('TCModel', (): void => {
 
     const clone = tcModel.clone();
 
-    assert.equal(clone.isValid(), tcModel.isValid(), 'tcModel IsValid did not return the same value as original');
     assert.equal(clone.publisherRestrictions.isValid(), tcModel.publisherRestrictions.isValid(), 'PR IsValid did not return the same value as original');
 
     assert.equal(clone.cmpId, tcModel.cmpId, 'cmpId did not match original value');
@@ -460,46 +459,11 @@ describe('TCModel', (): void => {
       expect(tcModel.gvl).to.equal(gvl);
       tcModel.gvl.readyPromise.then((): void => {
 
-        expect(tcModel.isValid()).to.be.true;
         done();
 
       });
 
     });
-
-    const makeInvalidTest = (key: string): void => {
-
-      it(`should be invalid if ${key} is not set`, (): void => {
-
-        const tcModel = new TCModel();
-
-        if (key !== 'gvl') {
-
-          tcModel.gvl = gvl;
-
-        }
-
-        if (key !== 'cmpId') {
-
-          tcModel.cmpId = 23;
-
-        }
-
-        if (key !== 'cmpVersion') {
-
-          tcModel.cmpVersion = 1;
-
-        }
-
-        expect(tcModel.isValid()).to.be.false;
-
-      });
-
-    };
-
-    [
-      'gvl',
-    ].forEach(makeInvalidTest);
 
   });
 

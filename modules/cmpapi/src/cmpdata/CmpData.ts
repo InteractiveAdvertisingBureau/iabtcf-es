@@ -69,15 +69,6 @@ export class CmpData implements CmpDataReader {
   }
 
   /**
-   * Returns true if the TcModel is valid
-   */
-  public get tcModelIsValid(): boolean {
-
-    return this.tcModelIsSet && this.tcModel.isValid();
-
-  }
-
-  /**
    * Returns the current TcModel
    * @return {TCModel}
    */
@@ -96,17 +87,8 @@ export class CmpData implements CmpDataReader {
 
     const clonedTcModel = tcModel.clone();
 
-    if (clonedTcModel.isValid()) {
-
-      this.tcModel = clonedTcModel;
-
-      this.tcModelChangeEventCallback();
-
-    } else {
-
-      throw new Error(ValidationMessages.TC_MODEL_INVALID);
-
-    }
+    this.tcModel = clonedTcModel;
+    this.tcModelChangeEventCallback();
 
   }
 
