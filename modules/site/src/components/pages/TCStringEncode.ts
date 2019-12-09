@@ -6,7 +6,7 @@ import FormSelect from '../forms/FormSelect.vue';
 import BigFormSelect from '../forms/BigFormSelect.vue';
 
 import {Component, Vue} from 'vue-property-decorator';
-import {TCModel, GVL, TCString, Vendor, Purpose, Feature, ConsentLanguages, Json} from '@iabtcf/core';
+import {TCModel, GVL, TCString, Vendor, Purpose, Feature, Json} from '@iabtcf/core';
 import FormField from '../forms/FormField';
 import Countries from '../../model/Countries';
 
@@ -25,7 +25,6 @@ GVL.baseUrl = document.location.origin;
 export default class extends Vue {
 
   private tcModel: TCModel = new TCModel();
-  private consentLanguages: ConsentLanguages = new ConsentLanguages();
   private vendors_: FormField[] = [];
   private purposes_: FormField[] = [];
   private specialFeatures_: FormField[] = [];
@@ -44,17 +43,17 @@ export default class extends Vue {
   ];
   private isReady: boolean = false;
 
+  private created(): void {
+    this.tcModel.gvl = new GVL();
+    this.listenForGVLChanges();
+  }
+
   private listenForGVLChanges(): void {
 
+    this.isReady = false;
     this.tcModel.gvl.readyPromise.then((): void => {
 
       const vendors = this.tcModel.gvl.vendors;
-
-      this.tcModel.cmpVersion = 1 + Math.round(Math.random() * 40);
-      this.tcModel.policyVersion = 2;
-      this.tcModel.cmpId = 1 + Math.round(Math.random() * 100);
-      this.tcModel.consentScreen = 1 + Math.round(Math.random() * 5);
-      this.tcModel.publisherCountryCode = 'US';
 
       for (const id in vendors) {
 
@@ -103,39 +102,23 @@ export default class extends Vue {
 
       }
 
-      this.encodedTCString = TCString.encode(this.tcModel);
+      this.isReady = true;
 
     });
-
-  }
-
-  private update(): void {
-
-    try {
-
-      this.encodedTCString = TCString.encode(this.tcModel);
-
-    } catch (err) {
-
-      this.encodedTCString = 'ERROR... ' + err;
-
-    }
 
   }
 
   private onVendorListSet(selectedVersion: number): void {
 
     if(selectedVersion) {
-      this.tcModel.vendorListVersion = selectedVersion;
-      this.listenForGVLChanges();
-      // this.update();
-      // this.isReady = true;
-    }
 
+      this.listenForGVLChanges();
+
+    }
   }
   private get languages(): FormField[] {
 
-    return Array.from(this.consentLanguages).map((lang: string): FormField => {
+    return Array.from(this.tcModel.consentLanguages).map((lang: string): FormField => {
 
       return {
         text: lang,
@@ -172,7 +155,20 @@ export default class extends Vue {
 
   private get vendorListVersions(): FormField[] {
 
-    const vendorList = await Json.fetch('/vendor-list.json');
+    const latest = this.tcModel.gvl.vendorListVersion;
+    const retr:FormField[] = [];
+    
+    for(let i = 1; i <=latest; i++) {
+      const str = i.toString();
+      retr.push({
+        value: str,
+        text: str,
+      });
+
+    }
+
+    return retr;
+
   }
 
 }

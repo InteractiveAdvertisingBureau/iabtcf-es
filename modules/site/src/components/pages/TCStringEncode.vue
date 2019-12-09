@@ -1,11 +1,19 @@
 <template>
   <div>
+  <template v-if="!isReady">
+    <p>Loading...</p>
+  </template>
+  <template v-if="isReady">
     <form>
       <b-row>
         <b-col cols="12">
-          <tc-string-input
-            v-model="encodedTCString"
-          />
+          <b-card
+            bg-variant="light"
+            class="b-card">
+            <tc-string-input
+              :tcModel="tcModel"
+            />
+          </b-card>
         </b-col>
       </b-row>
       <b-row>
@@ -13,14 +21,6 @@
           <b-card
             bg-variant="light"
             class="b-card">
-            <form-select
-              label="Vendor List Version"
-              :tc-model="tcModel"
-              :options="vendorListVersions"
-              id="vendorListVersion"
-              @update="onVendorListSet"
-            />
-            <template v-if="isReady">
               <text-field
                 v-for="formField in formFields"
                 :label="formField.text"
@@ -28,6 +28,13 @@
                 :id="formField.value"
                 :key="formField.value"
                 @update="update"
+              />
+              <form-select
+                label="Vendor List Version"
+                :tc-model="tcModel"
+                :options="vendorListVersions"
+                id="vendorListVersion"
+                @update="onVendorListSet"
               />
               <form-select
                 label="Consent Language"
@@ -43,15 +50,6 @@
                 id="publisherCountryCode"
                 @update="update"
               />
-            </template>
-          </b-card>
-        </b-col>
-
-        <template v-if="isReady">
-          <b-col cols="3">
-            <b-card
-              bg-variant="light"
-              class="b-card">
               <date-field
                 id="created"
                 label="Created Date"
@@ -111,7 +109,7 @@
               />
             </b-card>
           </b-col>
-          <b-col cols="4">
+          <b-col cols="3">
             <b-card
               bg-variant="light"
               class="b-card">
@@ -138,9 +136,9 @@
               />
             </b-card>
           </b-col>
-        </template>
       </b-row>
     </form>
+  </template>
   </div>
 </template>
 

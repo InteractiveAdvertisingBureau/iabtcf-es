@@ -22,16 +22,16 @@ export class FormComponent extends Vue {
 
       this.tcModel[this.id].empty();
       this.tcModel[this.id].set(newIDs);
+      this.$emit('update', newVal);
 
     } else if (this.tcModel[this.id] !== newVal) {
 
       // this is a single value
 
       this.tcModel[this.id] = newVal;
+      this.$emit('update', newVal);
 
     }
-
-    this.$emit('update');
 
   }
 

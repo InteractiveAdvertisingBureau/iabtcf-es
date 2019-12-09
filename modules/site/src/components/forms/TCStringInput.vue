@@ -6,15 +6,23 @@
     plaintext
   />
 </template>
+
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator';
+
+import {TCString} from '@iabtcf/core';
+import {Component, Prop} from 'vue-property-decorator';
+import {FormComponent} from './FormComponent';
 
 @Component
+export default class extends FormComponent {
 
-export default class extends Vue {
+  private tcstring_: string;
 
-  @Prop()
-  public tcstring: string;
+  private get tcstring(): string {
+
+    return TCString.encode(this.tcModel);
+
+  }
 
   private selectContents(e: MouseEvent): void {
 
@@ -27,4 +35,5 @@ export default class extends Vue {
   }
 
 }
+
 </script>
