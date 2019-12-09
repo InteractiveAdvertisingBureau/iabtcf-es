@@ -71,8 +71,8 @@ export class TCDataBldr extends ResponseBuilder implements TCData {
     this.publisherCC = tcModel.publisherCountryCode;
 
     this.outOfBand = {
-      allowedVendors: createBooleanVector(vendorIds, tcModel.vendorsAllowed),
-      discloseVendors: createBooleanVector(vendorIds, tcModel.vendorsDisclosed),
+      allowedVendors: createBooleanVector(tcModel.vendorsAllowed),
+      discloseVendors: createBooleanVector(tcModel.vendorsDisclosed),
     };
 
     this.purpose = {
@@ -142,15 +142,16 @@ export class TCDataBldr extends ResponseBuilder implements TCData {
   };
 
   /**
-   * Creates a string bit field with a value for each id where each value is '1' if its id is in the passed in vector
-   * Can be overwritten to return a string
+   * Creates a string bit field with a value for each id where each value is
+   * '1' if its id is in the passed in vector Can be overwritten to return a
+   * string
    * @param {string[]} ids
    * @param {Vector }vector
    * @return {BooleanVector | string}
    */
   protected createVectorField(ids: string[], vector: Vector): BooleanVector | string {
 
-    return createBooleanVector(ids, vector);
+    return createBooleanVector(vector);
 
   }
 

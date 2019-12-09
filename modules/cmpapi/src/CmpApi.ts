@@ -36,9 +36,7 @@ export class CmpApi {
   public constructor(cmpId: number, cmpVersion: number, customCommands: CustomCommandRegistration[] = []) {
 
     this.cmpData = new CmpData(cmpId, cmpVersion);
-
     this.cmpService = new CmpService(this.cmpData);
-
     this.commandBroker = new CommandBroker(this.cmpData, customCommands);
 
   }

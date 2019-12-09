@@ -800,29 +800,4 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
     this.lastUpdated = new Date();
 
   }
-
-  /**
-   * isValid - returns whether all fields have a value
-   *
-   * @return {boolean}
-   */
-  public isValid(): boolean {
-
-    return (this.isServiceSpecific !== undefined
-      && this.useNonStandardStacks !== undefined
-      && this.cmpId !== undefined
-      && this.cmpVersion !== undefined
-      && this.consentLanguage !== undefined
-      && this.publisherCountryCode !== undefined
-      && this.purposeOneTreatment !== undefined
-      && this.consentScreen !== undefined
-      && this.created !== undefined
-      && this.gvl !== undefined
-      && this.lastUpdated !== undefined
-      && this.policyVersion !== undefined
-      && this.vendorListVersion !== undefined
-      && this.version !== undefined);
-
-  }
-
 }

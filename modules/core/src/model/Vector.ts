@@ -1,12 +1,14 @@
 import {Cloneable} from '../Cloneable';
 import {TCModelError} from '../errors';
 
-type idOrIds = number | number[];
+type IdOrIds = number | number[];
+type IdBoolTuple = [number, boolean];
 
 /**
  * Vector class is like a Set except it keeps track of a max id
  */
-class Vector extends Cloneable<Vector> {
+class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
+
 
   /**
    * if this originatd from an encoded string we'll need a place to store the
@@ -18,6 +20,12 @@ class Vector extends Cloneable<Vector> {
    * keep a set for faster lookup
    */
   private set_: Set<number> = new Set<number>();
+
+  public *[Symbol.iterator]() {
+    for (let i = 1; i <= this.maxId; i++) {
+      yield [i, this.has(i)] as IdBoolTuple; 
+    }
+  }
 
   /**
    * maxId
@@ -47,10 +55,10 @@ class Vector extends Cloneable<Vector> {
   /**
    * unset
    *
-   * @param {idOrIds} id - id or ids to unset
+   * @param {IdOrIds} id - id or ids to unset
    * @return {void}
    */
-  public unset(id: idOrIds): void {
+  public unset(id: IdOrIds): void {
 
     if (Array.isArray(id)) {
 
@@ -87,12 +95,12 @@ class Vector extends Cloneable<Vector> {
   /**
    * set - sets an id assumed to be a truthy value by its presence
    *
-   * @param {idOrIds} id - id to set a value for or array of ids to
+   * @param {IdOrIds} id - id to set a value for or array of ids to
    * include
    *
    * @return {void}
    */
-  public set(id: idOrIds): void {
+  public set(id: IdOrIds): void {
 
     if (Array.isArray(id)) {
 
@@ -138,10 +146,8 @@ class Vector extends Cloneable<Vector> {
    */
   public forEach(callback: (value: boolean, id: number) => void): void {
 
-    for (let i = 1; i <= this.maxId; i++) {
-
-      callback(this.has(i), i);
-
+    for(let kvp of this) {
+      callback(kvp[1], kvp[0]);
     }
 
   }

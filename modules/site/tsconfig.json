@@ -1,17 +1,10 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist",
-     "plugins": [
+    "declaration": false,
+    "sourceMap": true, 
+    "plugins": [
       { "name": "vue-ts-plugin" }
-    ],
-    "types": [
-      "webpack-env"
     ]
-  },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.vue"
-  ]
+  }
 }
