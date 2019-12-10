@@ -16,7 +16,9 @@ export const createStringBoolVector = function(ids: string[], vector: Vector): S
   const retr = {};
 
   vector.forEach((value: boolean, id: number): void => {
+
     retr[id.toString(10)] = +value.toString();
+
   });
 
   return retr;

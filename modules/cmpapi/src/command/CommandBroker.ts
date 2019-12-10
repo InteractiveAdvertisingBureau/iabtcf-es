@@ -178,8 +178,8 @@ export class CommandBroker {
       const validCommands = commandArgs
         .map((as: TcfApiArgSet): Command | Validatable | null => _this.createCommand(...as))
         .filter((command): boolean => command != null)
-        .filter((command): boolean => isValidatable(command as Command)
-          ? (command as Validatable).validate(true).isValid : true);
+        .filter((command): boolean => isValidatable(command as Command) ?
+          (command as Validatable).validate(true).isValid : true);
 
       /**
        * Add commands to queue and process/clear them if we can

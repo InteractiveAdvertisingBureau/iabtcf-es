@@ -14,7 +14,9 @@ export const createBooleanVector = function(vector: Vector): BooleanVector {
 
   const retr = {};
   vector.forEach((value: boolean, id: number): void => {
+
     retr[id.toString(10)] = value;
+
   });
 
   return retr;

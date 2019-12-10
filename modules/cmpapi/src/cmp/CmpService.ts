@@ -21,11 +21,11 @@ export class CmpService {
   }
 
   /**
-   * Sets the new TCModel with side-effects: 
+   * Sets the new TCModel with side-effects:
    *    - sets gdprApplies to `true` or `false` depending on whether a
    *      `TCModel` or `null` is passed.
-   *    - CMP Status set to 'loaded' if anything is set 
-   *    - Display Status set to 'disabled' or 'hidden' depending on whether a 
+   *    - CMP Status set to 'loaded' if anything is set
+   *    - Display Status set to 'disabled' or 'hidden' depending on whether a
    *      `TCModel` or `null` is passed.
    *    - Event Status set to 'useractionscomplete' or 'tcloaded' only when a
    *      `TCModel` is set.  Which one is determined by whether this is the
@@ -34,7 +34,7 @@ export class CmpService {
    * status is 'disabled'. If a valid `TCModel` is set gdprApplies = true and
    * display status is 'hidden'.  If this is the first time the valid `TCModel`
    * is set Event is fired and EventStatus is 'tcloaded', subsequent sets event
-   * is fired and 'useractioncomplete' is the EventStatus 
+   * is fired and 'useractioncomplete' is the EventStatus
    * @return {void | never} - returns nothing, but throws an error if something
    * other than `null` or a valid `TCModel` is set
    */
@@ -48,24 +48,25 @@ export class CmpService {
      * does not apply.  If it's something else... Then blowup!
      */
     this.cmpData.setCmpStatus(CmpStatus.LOADED);
+
     if (tcModel instanceof TCModel) {
 
-        this.cmpData.setGdprApplies(true);
-        this.cmpData.setDisplayStatus(DisplayStatus.HIDDEN);
+      this.cmpData.setGdprApplies(true);
+      this.cmpData.setDisplayStatus(DisplayStatus.HIDDEN);
 
-        if (this.cmpData.tcModelIsSet) {
+      if (this.cmpData.tcModelIsSet) {
 
-          this.cmpData.setEventStatus(EventStatus.USER_ACTION_COMPLETE);
+        this.cmpData.setEventStatus(EventStatus.USER_ACTION_COMPLETE);
 
-        } else {
+      } else {
 
-          this.cmpData.setEventStatus(EventStatus.TC_LOADED);
+        this.cmpData.setEventStatus(EventStatus.TC_LOADED);
 
-        }
+      }
 
-        this.cmpData.setTCModel(tcModel);
+      this.cmpData.setTCModel(tcModel);
 
-    } else if(tcModel === null) {
+    } else if (tcModel === null) {
 
       this.cmpData.setGdprApplies(false);
       this.cmpData.setDisplayStatus(DisplayStatus.DISABLED);
@@ -74,6 +75,7 @@ export class CmpService {
 
       // awwwww hell no... what did you pass me?
       throw new Error(`Invalid value (${tcModel}) passed for tcModel`);
+
     }
 
   }
