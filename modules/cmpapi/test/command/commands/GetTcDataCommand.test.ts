@@ -1,10 +1,13 @@
+import {sameDataDiffRef} from "@iabtcf/testing";
 import {assert} from 'chai';
 import {CmpData} from '../../../src/cmpdata';
 import {Callback} from '../../../src/command/callback/Callback';
 import {Commands, GetTcDataCommand} from '../../../src/command/commands';
 import {TCData} from '../../../src/model';
+import {EventStatus} from "../../../src/status";
 import {ValidationMessages} from '../../../src/validation';
 import {createValidTCModel, gvl} from '../../utils';
+import {tcDataModelTest} from "./TcDataTestData";
 
 export function run(): void {
 
@@ -13,7 +16,13 @@ export function run(): void {
     const cmpId = 2;
     const cmpVersion = 3;
     const cmpData = new CmpData(cmpId, cmpVersion);
-    cmpData.setTCModel(createValidTCModel(gvl));
+    const tcModel = createValidTCModel(gvl);
+    tcModel['created'] = new Date(2018, 11, 24, 10, 33, 30, 0);
+    tcModel['lastUpdated'] = new Date(2018, 11, 24, 10, 33, 30, 0);
+    cmpData.setTCModel(tcModel);
+    cmpData.setEventStatus(EventStatus.TC_LOADED);
+    cmpData.setGdprApplies(true);
+
 
     describe('Constructor', (): void => {
 
@@ -40,9 +49,13 @@ export function run(): void {
             assert.isTrue(success, 'getTCData was not successful');
             assert.isNotNull(tcData, 'getTCData returned null tcData');
 
-            console.log(tcData);
-
-            // Todo: Check the object more thoroughly
+            tcData = tcData as TCData;
+            sameDataDiffRef(tcData, tcDataModelTest, 'Tc Data');
+            sameDataDiffRef(tcData.purpose, tcDataModelTest.purpose, 'Tc Data - purpose');
+            sameDataDiffRef(tcData.vendor, tcDataModelTest.vendor, 'Tc Data - vendor');
+            sameDataDiffRef(tcData.publisher, tcDataModelTest.publisher, 'Tc Data - publisher');
+            sameDataDiffRef(tcData.publisher.restrictions, tcDataModelTest.publisher.restrictions, 'Tc Data - publisher restrictions');
+            sameDataDiffRef(tcData.publisher.customPurpose, tcDataModelTest.publisher.customPurpose, 'Tc Data - publisher customPurpose');
 
             done();
 

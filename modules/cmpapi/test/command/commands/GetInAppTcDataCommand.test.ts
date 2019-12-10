@@ -6,33 +6,7 @@ import {Commands, GetInAppTcDataCommand} from '../../../src/command/commands';
 import {InAppTCData} from '../../../src/model';
 import {EventStatus} from '../../../src/status';
 import {createValidTCModel, gvl} from '../../utils';
-
-const inAppTcDataTestModel: InAppTCData = {
-  tcString: 'COrXmLNOrXmLNACABAENAACMAL_AAP_AAAAAFWQB4ADAAYAA1ACCAGIATIA1wBwAFfAQIAmQBSACmQFSAKsAqyAQAAYACUAGAANQAggBiAEyANcAcABXwECAJkAUgApkBUgCrAAA',
-  eventStatus: EventStatus.TC_LOADED,
-  isServiceSpecific: false,
-  useNonStandardStacks: false,
-  purposeOneTreatment: false,
-  publisherCC: 'AA',
-  outOfBand: undefined,
-  purpose:
-    {consents: '1011111111', legitimateInterests: '1111111111'},
-  vendor:
-    {
-      consents: '1011111111111111',
-      legitimateInterests: '1111111111111111'},
-  specialFeatureOptins: '11',
-  publisher:
-    {
-      consents: '0000000000',
-      legitimateInterests: '0000000000',
-      customPurpose:
-        {consents: '0000000000', legitimateInterests: '0000000000'},
-      restrictions: {}},
-  cmpId: 2,
-  cmpVersion: 3,
-  gdprApplies: true,
-  tcfPolicyVersion: 3};
+import {inAppTcDataTestModel} from "./InAppTcDataTestData";
 
 export function run(): void {
 
@@ -41,7 +15,10 @@ export function run(): void {
     const cmpId = 2;
     const cmpVersion = 3;
     const cmpData = new CmpData(cmpId, cmpVersion);
-    cmpData.setTCModel(createValidTCModel(gvl));
+    const tcModel = createValidTCModel(gvl);
+    tcModel['created'] = new Date(2018, 11, 24, 10, 33, 30, 0);
+    tcModel['lastUpdated'] = new Date(2018, 11, 24, 10, 33, 30, 0);
+    cmpData.setTCModel(tcModel);
     cmpData.setEventStatus(EventStatus.TC_LOADED);
     cmpData.setGdprApplies(true);
 
@@ -72,8 +49,11 @@ export function run(): void {
             assert.isNotNull(iaTcData, 'GetInAppTcDataCommand returned null tcData');
             iaTcData = iaTcData as InAppTCData;
             sameDataDiffRef(iaTcData, inAppTcDataTestModel, 'In App Tc Data');
-
-            // Todo: Check the object more thoroughly
+            sameDataDiffRef(iaTcData.purpose, inAppTcDataTestModel.purpose, 'In App Tc Data - purpose');
+            sameDataDiffRef(iaTcData.vendor, inAppTcDataTestModel.vendor, 'In App Tc Data - vendor');
+            sameDataDiffRef(iaTcData.publisher, inAppTcDataTestModel.publisher, 'In App Tc Data - publisher');
+            sameDataDiffRef(iaTcData.publisher.restrictions, inAppTcDataTestModel.publisher.restrictions, 'In App Tc Data - publisher restrictions');
+            sameDataDiffRef(iaTcData.publisher.customPurpose, inAppTcDataTestModel.publisher.customPurpose, 'In App Tc Data - publisher customPurpose');
 
             done();
 
