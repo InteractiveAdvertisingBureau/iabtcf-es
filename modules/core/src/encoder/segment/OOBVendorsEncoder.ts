@@ -32,6 +32,7 @@ import {
 
 import {
 
+  Segments,
   Vector,
 
 } from '../../model';
@@ -89,6 +90,16 @@ export class OOBVendorsEncoder {
       }
 
     });
+
+    /**
+     * if a vendors allowed segment exists, then support for OOB signaling is
+     * implied
+     */
+    if(segmentName === Segments.vendorsAllowed) {
+
+      tcModel.supportOOB = true;
+
+    }
 
     return tcModel;
 

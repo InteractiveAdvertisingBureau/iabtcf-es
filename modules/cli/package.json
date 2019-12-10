@@ -1,25 +1,23 @@
 {
   "name": "@iabtcf/cli",
   "version": "1.0.0-beta.0",
-  "description": "Decode a iab TCF (Transparency and Consent String) via the command line",
+  "description": "Decode a iab TCF (Transparency and Consent Framework) TC String via the command line",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://github.com/chrispaterson/iabtcf/tree/master/modules/cli/",
   "license": {
     "type": "Apache-2.0",
     "url": "https://opensource.org/licenses/apache2.0.php"
   },
-  "main": "lib/index.js",
+  "bin": {
+    "tcstring": "./lib/index.js"
+  },
   "files": [
     "lib/**/*"
   ],
   "scripts": {
-    "test": "mocha",
-    "build": "rm -rf lib ; tsc",
-    "docs": "typedoc --ignoreCompilerErrors --tsconfig ./tsconfig.json  src",
+    "build": "rm -rf lib ; tsc ; chmod a+x lib/index.js",
     "prepare": "npm run build",
-    "debug": "ndb npm test",
-    "lint": "eslint ./src/**/*.ts",
-    "report-coverage": "nyc --reporter=lcov npm run test"
+    "lint": "eslint ./src/**/*.ts"
   },
   "dependencies": {
     "@iabtcf/core": "^1.0.0-beta.0"
@@ -67,7 +65,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/chrispaterson/iabtcf-es.git",
-    "directory": "modules/cmpapi"
+    "directory": "modules/cli"
   },
   "gitHead": "5b4d74172887c1c8301ae5d28027af810aa03272"
 }

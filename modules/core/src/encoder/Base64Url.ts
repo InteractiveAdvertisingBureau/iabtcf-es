@@ -1,3 +1,5 @@
+import {DecodingError, EncodingError} from '../errors';
+
 export class Base64Url {
 
   private static readonly ONE_BYTE: number = 8;
@@ -16,7 +18,7 @@ export class Base64Url {
      */
     if (!/^[0-1]+$/.test(str)) {
 
-      throw new Error('Invalid bitField');
+      throw new EncodingError('Base64url Encoding: Invalid bitField');
 
     }
 
@@ -47,7 +49,21 @@ export class Base64Url {
 
     }
 
-    return this.toURLENcoding(btoa(retr));
+    retr = btoa(retr);
+
+    // remove trailing '=' for url-safeness
+    while (retr.charAt(retr.length - 1) === '=') {
+
+      retr = retr.slice(0, -1);
+
+    }
+
+    // make it url safe by replacing slashes with underscores
+    retr = retr.replace(/\//g, '_');
+    // make it url safe by replacing pluses with dashes (or minuses)
+    retr = retr.replace(/\+/g, '-');
+
+    return retr;
 
   }
 
@@ -65,14 +81,41 @@ export class Base64Url {
      */
     if (!/^[A-Za-z0-9\-_]+$/.test(str)) {
 
-      throw new Error('Invalid Base64url Encoding');
+      throw new DecodingError('Invalid Base64url Encoding');
 
     }
 
     /**
-     * Convert from base64url to base64 and then decode it
+     * Replace url safe characters with url unsafe, but base64 correct encoding 
      */
-    str = atob(this.fromURLEncoding(str));
+    str = str.replace(/_/g, '/');
+    str = str.replace(/-/g, '\+');
+
+    /**
+     * we need at least two characters to be able to decode a Base64 string
+     */
+    if(str.length < 2) {
+      str += 'A'.repeat(2 - str.length);
+    }
+
+    /**
+     * Add back the padding characters if necessary
+     */
+    switch (str.length % 4) {
+      case 0:// No pad chars in this case
+        break;
+      case 2: // Two pad chars
+        str += "=="; 
+        break; 
+      case 3: // One pad char
+        str += "="; 
+        break;
+      default: 
+        throw new DecodingError('Invalidly encoded Base64URL string');
+    }
+
+    // Decode Base64
+    str = atob(str);
 
     const len: number = str.length;
     let bitField = '';
@@ -94,42 +137,6 @@ export class Base64Url {
     }
 
     return bitField;
-
-  }
-
-  private static fromURLEncoding(str: string): string {
-
-    str = str.replace(/_/g, '/');
-    str = str.replace(/-/g, '\+');
-
-    /**
-     * Add back the padding characters if necessary
-     */
-    while (str.length % 4 !== 0) {
-
-      str += '=';
-
-    }
-
-    return str;
-
-  }
-
-  private static toURLENcoding(str: string): string {
-
-    // remove trailing '=' for url-safeness
-    while (str.charAt(str.length - 1) === '=') {
-
-      str = str.slice(0, -1);
-
-    }
-
-    // make it url safe by replacing slashes with underscores
-    str = str.replace(/\//g, '_');
-    // make it url safe by replacing pluses with dashes (or minuses)
-    str = str.replace(/\+/g, '-');
-
-    return str;
 
   }
 
