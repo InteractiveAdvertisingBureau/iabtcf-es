@@ -12,7 +12,7 @@ const config: WebpackConfig = {
   entry: './src/main.ts',
   output: {
     filename: `site.js`,
-    path: path.resolve(__dirname, '../../docs/js'),
+    path: path.resolve(__dirname, '../../docs'),
   },
   mode: 'production',
   module: {

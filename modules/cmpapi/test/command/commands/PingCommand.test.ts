@@ -32,6 +32,7 @@ export function run(): void {
 
       it('should execute the command and return a Ping object', (done): void => {
 
+        debugger;
         const pingCommand = new PingCommand(cmpData, Commands.PING, 2, new Callback((pingReturn: Ping | null): void => {
 
           assert.isNotNull(pingReturn, 'Ping returned null');

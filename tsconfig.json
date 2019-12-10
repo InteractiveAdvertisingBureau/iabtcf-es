@@ -18,6 +18,6 @@
     "forceConsistentCasingInFileNames": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
-    "sourceMap": false
+    "sourceMap": true
   }
 }

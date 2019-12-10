@@ -3,7 +3,10 @@
   "description": "Official compliant tool suite for implementing the iab. Transparency and Consent Framework (TCF).",
   "private": true,
   "workspaces": [
-    "modules/*"
+    "modules/testing",
+    "modules/core",
+    "modules/cmpapi",
+    "modules/site"
   ],
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://github.com/chrispaterson/iabtcf",
@@ -16,8 +19,7 @@
     "lint": "yarn workspaces run lint",
     "test": "mocha",
     "debug": "ndb npm test",
-    "serve:coverage": "http-server coverage/ -o",
-    "coverage": "nyc --reporter html npm run test && npm run serve:coverage",
+    "coverage": "nyc --reporter html npm run test",
     "test:lcov": "nyc --reporter=lcov mocha",
     "upload:lcov": "cat coverage/lcov.info | coveralls"
   },

@@ -257,6 +257,25 @@ describe('CmpApi', (): void => {
 
         });
 
+        it('getTCData works with vendor ids', (done): void => {
+
+          const callback: TCDataCallback = (tcData: TCData | null, success: boolean): void => {
+
+            assert.isTrue(success, 'getTCData was not successful');
+            assert.isNotNull(tcData, 'getTCData returned null tcData');
+            // @ts-ignore
+            assert.equal(tcData.eventStatus, EventStatus.USER_ACTION_COMPLETE, 'Event status did not match set value');
+
+            // Todo: Check the object more thoroughly
+
+            done();
+
+          };
+
+          win[API_FUNCTION_NAME]('getTCData', 2, callback, [1, 2, 3, 12, 37, 48]);
+
+        });
+
         it('getTCData fails when using invalid vendor ids', (done): void => {
 
           const callback: TCDataCallback = (tcData: TCData | null, success: boolean): void => {
