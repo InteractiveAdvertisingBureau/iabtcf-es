@@ -86,7 +86,7 @@ export class Base64Url {
     }
 
     /**
-     * Replace url safe characters with url unsafe, but base64 correct encoding 
+     * Replace url safe characters with url unsafe, but base64 correct encoding
      */
     str = str.replace(/_/g, '/');
     str = str.replace(/-/g, '\+');
@@ -94,24 +94,28 @@ export class Base64Url {
     /**
      * we need at least two characters to be able to decode a Base64 string
      */
-    if(str.length < 2) {
+    if (str.length < 2) {
+
       str += 'A'.repeat(2 - str.length);
+
     }
 
     /**
      * Add back the padding characters if necessary
      */
     switch (str.length % 4) {
+
       case 0:// No pad chars in this case
         break;
       case 2: // Two pad chars
-        str += "=="; 
-        break; 
-      case 3: // One pad char
-        str += "="; 
+        str += '==';
         break;
-      default: 
+      case 3: // One pad char
+        str += '=';
+        break;
+      default:
         throw new DecodingError('Invalidly encoded Base64URL string');
+
     }
 
     // Decode Base64

@@ -5,7 +5,7 @@ export function run(): void {
 
   describe('BinarySearchTree', (): void => {
 
-    const getOrderedArray = (len: number, startNum: number = 1): number[] => {
+    const getOrderedArray = (len: number, startNum = 1): number[] => {
 
       const ar: number[] = [];
 
@@ -20,7 +20,7 @@ export function run(): void {
 
     };
 
-    const getRandomArray = (len: number, startNum: number = 1): number[] => {
+    const getRandomArray = (len: number, startNum = 1): number[] => {
 
       const ar: number[] = getOrderedArray(len, startNum);
 

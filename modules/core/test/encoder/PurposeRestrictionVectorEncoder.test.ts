@@ -53,8 +53,8 @@ export function run(): void {
 
       const purposeId = 2;
       const vendors: number[] = randomize([1, 2, 3, 4, 5, 7, 8, 9, 10, 11]);
-      const purposeRestriction: PurposeRestriction
-        = new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
+      const purposeRestriction: PurposeRestriction =
+        new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
 
       const prVector: PurposeRestrictionVector = new PurposeRestrictionVector();
 
@@ -110,8 +110,8 @@ export function run(): void {
 
       const purposeId = 2;
       const vendors: number[] = randomize([1, 2, 3, 4, 5, 7, 8, 9, 10, 11]);
-      const purposeRestriction: PurposeRestriction
-        = new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
+      const purposeRestriction: PurposeRestriction =
+        new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
 
       const prVector: PurposeRestrictionVector = new PurposeRestrictionVector();
 

@@ -9,22 +9,25 @@ type IdBoolTuple = [number, boolean];
  */
 class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
 
-
   /**
    * if this originatd from an encoded string we'll need a place to store the
    * bit length; it can be set and got from here
    */
-  public bitLength: number = 0;
-  private maxId_: number = 0;
+  public bitLength = 0;
+  private maxId_ = 0;
   /**
    * keep a set for faster lookup
    */
   private set_: Set<number> = new Set<number>();
 
-  public *[Symbol.iterator]() {
+  public* [Symbol.iterator](): Iterator<IdBoolTuple> {
+
     for (let i = 1; i <= this.maxId; i++) {
-      yield [i, this.has(i)] as IdBoolTuple; 
+
+      yield [i, this.has(i)] as IdBoolTuple;
+
     }
+
   }
 
   /**
@@ -146,8 +149,10 @@ class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
    */
   public forEach(callback: (value: boolean, id: number) => void): void {
 
-    for(let kvp of this) {
+    for (const kvp of this) {
+
       callback(kvp[1], kvp[0]);
+
     }
 
   }
