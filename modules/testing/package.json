@@ -17,7 +17,7 @@
   "scripts": {
     "docs": "typedoc --ignoreCompilerErrors --tsconfig ./tsconfig.json  src",
     "prepare": "npm run build",
-    "build": "rm -r lib ; tsc",
+    "build": "rm -rf lib ; tsc",
     "lint": "eslint ./src/**/*.ts",
     "report-coverage": ""
   },
