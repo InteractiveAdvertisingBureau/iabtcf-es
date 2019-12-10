@@ -10,8 +10,9 @@ export const sameDataDiffRef = (obj1: object, obj2: object, objName: string): vo
 
   for (const key of keySet) {
 
-    expect(obj1[key]).to.not.be.undefined;
-    expect(obj2[key]).to.not.be.undefined;
+    if (obj1[key] === undefined && obj2[key] === undefined) {
+      continue;
+    }
 
     if (isPrimitive(obj1[key])) {
 
