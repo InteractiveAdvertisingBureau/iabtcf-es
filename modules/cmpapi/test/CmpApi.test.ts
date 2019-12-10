@@ -127,14 +127,6 @@ describe('CmpApi', (): void => {
 
       });
 
-      it('Setting invalid TcModel throws error', (): void => {
-
-        const tcModel = new TCModel();
-
-        assert.throws((): never | TCModel => cmpApi.tcModel = tcModel, ValidationMessages.TC_MODEL_INVALID);
-
-      });
-
       it('setTCModel works', (): void => {
 
         assert.doesNotThrow((): TCModel => cmpApi.tcModel = createValidTCModel(gvl), 'setTCModel threw an error');
@@ -228,6 +220,23 @@ describe('CmpApi', (): void => {
 
       });
 
+      // it('custom command works', (done): void => {
+      //
+      //   const param = 'BINGO';
+      //   const expectedTestString = custCommandTestData.testString.replace('DOG_NAME', param);
+      //
+      //   const callback = (data: TestData): void => {
+      //
+      //     assert.isNotNull(data, 'custom command returned null data');
+      //     assert.strictEqual(data.testString, expectedTestString);
+      //     done();
+      //
+      //   };
+      //
+      //   win[API_FUNCTION_NAME](customCommands[0].command, 2, callback, param);
+      //
+      // });
+
       describe('getTCData', (): void => {
 
         it('getTCData works and returns tc loaded for event status', (done): void => {
@@ -245,37 +254,6 @@ describe('CmpApi', (): void => {
           const getTCDataCallback = createGetTCDataCallback(done);
 
           win[API_FUNCTION_NAME]('getTCData', 2, getTCDataCallback);
-
-        });
-
-        it('getTCData is queued if an invalid TcModel is set', (done): void => {
-
-          assert.throws((): TCModel => cmpApi.tcModel = new TCModel(), ValidationMessages.TC_MODEL_INVALID);
-
-          const getTCDataCallback = createGetTCDataCallback(done);
-
-          win[API_FUNCTION_NAME]('getTCData', 2, getTCDataCallback, [1, 2, 3, 12, 37, 48]);
-
-          cmpApi.tcModel = createValidTCModel(gvl);
-
-        });
-
-        it('getTCData works with vendor ids', (done): void => {
-
-          const callback: TCDataCallback = (tcData: TCData | null, success: boolean): void => {
-
-            assert.isTrue(success, 'getTCData was not successful');
-            assert.isNotNull(tcData, 'getTCData returned null tcData');
-            // @ts-ignore
-            assert.equal(tcData.eventStatus, EventStatus.USER_ACTION_COMPLETE, 'Event status did not match set value');
-
-            // Todo: Check the object more thoroughly
-
-            done();
-
-          };
-
-          win[API_FUNCTION_NAME]('getTCData', 2, callback, [1, 2, 3, 12, 37, 48]);
 
         });
 

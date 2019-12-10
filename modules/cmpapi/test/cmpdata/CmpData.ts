@@ -56,25 +56,9 @@ export function run(): void {
 
         });
 
-        describe('tcModelIsValid', (): void => {
-
-          it('should return false if not valid', (): void => {
-
-            assert.isFalse(cmpData.tcModelIsValid, `Did not return false`);
-
-          });
-
-        });
-
       });
 
       describe('setTCModel', (): void => {
-
-        it('should throw an error if TCModel is not valid', (): void => {
-
-          assert.throws(() => cmpData.setTCModel(new TCModel()), ValidationMessages.TC_MODEL_INVALID);
-
-        });
 
         it('should work with a valid TCModel', (): void => {
 
@@ -101,16 +85,6 @@ export function run(): void {
           it('should return true if set', (): void => {
 
             assert.isTrue(cmpData.tcModelIsSet, `Did not return true`);
-
-          });
-
-        });
-
-        describe('tcModelIsValid', (): void => {
-
-          it('should return true if valid', (): void => {
-
-            assert.isTrue(cmpData.tcModelIsValid, `Did not return true`);
 
           });
 

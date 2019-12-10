@@ -10,13 +10,13 @@ export interface BooleanVector {
  * @param {Vector} vector
  * @return {BooleanVector}
  */
-export const createBooleanVector = function(ids: string[], vector: Vector): BooleanVector {
+export const createBooleanVector = function(vector: Vector): BooleanVector {
 
-  return ids.reduce<BooleanVector>((map, obj): BooleanVector => {
+  const retr = {};
+  vector.forEach((value: boolean, id: number): void => {
+    retr[id.toString(10)] = value;
+  });
 
-    map[obj] = vector.has(+obj);
-    return map;
-
-  }, {});
+  return retr;
 
 };

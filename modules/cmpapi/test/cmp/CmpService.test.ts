@@ -84,16 +84,6 @@ export function run(): void {
 
       });
 
-      describe('When setting an invalid TCModel', (): void => {
-
-        it('should throw an error', (): void => {
-
-          assert.throws((): void => cmpService.setTcModel(new TCModel()), ValidationMessages.TC_MODEL_INVALID);
-
-        });
-
-      });
-
       describe('When in a disabled state', (): void => {
 
         it('should throw an error', (): void => {

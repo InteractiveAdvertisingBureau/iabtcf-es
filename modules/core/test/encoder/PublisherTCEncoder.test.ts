@@ -40,8 +40,6 @@ export function run(): void {
       expect(tcModel.gvl).to.equal(gvl);
       tcModel.gvl.readyPromise.then((): void => {
 
-        expect(tcModel.isValid(), 'input model is valid').to.be.true;
-
         expect(encodeIt, 'encode should not throw an error').not.to.throw();
         expect(encoded, 'shold not be empty').to.not.equal('');
 
@@ -77,8 +75,6 @@ export function run(): void {
 
       expect(tcModel.gvl).to.equal(gvl);
       tcModel.gvl.readyPromise.then((): void => {
-
-        expect(tcModel.isValid(), 'input model is valid').to.be.true;
 
         expect(encodeIt).not.to.throw();
         expect(decodeIt).not.to.throw();

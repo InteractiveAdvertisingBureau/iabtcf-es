@@ -7,7 +7,6 @@ import {CmpStatus, DisplayStatus, EventStatus} from '../status';
  */
 export interface CmpDataReader {
   readonly tcModelIsSet: boolean;
-  readonly tcModelIsValid: boolean;
 
   registerTcModelChangeEventCallback(tcModelChangeCallback: () => void): void;
 
