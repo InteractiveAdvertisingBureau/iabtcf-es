@@ -127,14 +127,6 @@ describe('CmpApi', (): void => {
 
       });
 
-      it('Setting invalid TcModel throws error', (): void => {
-
-        const tcModel = new TCModel();
-
-        assert.throws((): never | TCModel => cmpApi.tcModel = tcModel, ValidationMessages.TC_MODEL_INVALID);
-
-      });
-
       it('setTCModel works', (): void => {
 
         assert.doesNotThrow((): TCModel => cmpApi.tcModel = createValidTCModel(gvl), 'setTCModel threw an error');
@@ -245,18 +237,6 @@ describe('CmpApi', (): void => {
           const getTCDataCallback = createGetTCDataCallback(done);
 
           win[API_FUNCTION_NAME]('getTCData', 2, getTCDataCallback);
-
-        });
-
-        it('getTCData is queued if an invalid TcModel is set', (done): void => {
-
-          assert.throws((): TCModel => cmpApi.tcModel = new TCModel(), ValidationMessages.TC_MODEL_INVALID);
-
-          const getTCDataCallback = createGetTCDataCallback(done);
-
-          win[API_FUNCTION_NAME]('getTCData', 2, getTCDataCallback, [1, 2, 3, 12, 37, 48]);
-
-          cmpApi.tcModel = createValidTCModel(gvl);
 
         });
 

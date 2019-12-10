@@ -32,12 +32,13 @@ export function run(): void {
 
       it('should execute the command and return a Ping object', (done): void => {
 
+        debugger;
         const pingCommand = new PingCommand(cmpData, Commands.PING, 2, new Callback((pingReturn: Ping | null): void => {
 
           assert.isNotNull(pingReturn, 'Ping returned null');
           pingReturn = pingReturn as Ping;
           assert.equal(pingReturn.cmpId, cmpId, `cmpId did not equal ${cmpId}`);
-          assert.equal(pingReturn.cmpVersion, cmpId, `cmpVersion did not equal ${cmpVersion}`);
+          assert.equal(pingReturn.cmpVersion, cmpVersion, `cmpVersion did not equal ${cmpVersion}`);
           done();
 
         }));
