@@ -19,7 +19,7 @@
     "build": "rm -rf lib ; tsc",
     "test": "mocha",
     "debug": "ndb npm test",
-    "lint": "eslint ./src/**/*.ts",
+    "lint": "eslint --fix ./src/**/*.ts ./test/**/*.ts",
     "lint-fix": "eslint --fix ./src/**/*.ts",
     "report-coverage": "nyc --reporter=lcov npm run test"
   },

@@ -1,0 +1,71 @@
+{
+  "name": "@iabtcf/cli",
+  "version": "1.0.0-beta.0",
+  "description": "Decode a iab TCF (Transparency and Consent Framework) TC String via the command line",
+  "author": "Chris Paterson <tcf@chrispaterson.io>",
+  "homepage": "https://github.com/chrispaterson/iabtcf/tree/master/modules/cli/",
+  "license": {
+    "type": "Apache-2.0",
+    "url": "https://opensource.org/licenses/apache2.0.php"
+  },
+  "bin": {
+    "tcstring": "./lib/index.js"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "scripts": {
+    "build": "rm -rf lib ; tsc ; chmod a+x lib/index.js",
+    "prepare": "npm run build",
+    "lint": "eslint ./src/**/*.ts"
+  },
+  "dependencies": {
+    "@iabtcf/core": "^1.0.0-beta.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.10.0",
+    "@typescript-eslint/parser": "^2.10.0",
+    "eslint": "^5.0.0",
+    "source-map-support": "^0.5.12",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.0"
+  },
+  "eslintIgnore": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "interactive",
+    "advertising",
+    "bureau",
+    "iab",
+    "transparency",
+    "consent",
+    "consentstring",
+    "tcstring",
+    "gvl",
+    "vendor",
+    "framework",
+    "tcf",
+    "lib",
+    "library",
+    "cmp",
+    "2.0",
+    "v2.0",
+    "v2",
+    "software",
+    "development",
+    "api",
+    "kit",
+    "sdk",
+    "gdpr"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chrispaterson/iabtcf-es.git",
+    "directory": "modules/cli"
+  },
+  "gitHead": "5b4d74172887c1c8301ae5d28027af810aa03272"
+}

@@ -19,8 +19,8 @@ export function run(): void {
 
       const purposeId = 2;
       const vendors: number[] = [1, 44, 3, 5, 99, 22, 57, 2, 14, 28, 29, 33];
-      const purposeRestriction: PurposeRestriction
-        = new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
+      const purposeRestriction: PurposeRestriction =
+        new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
 
       const prVector: PurposeRestrictionVector = new PurposeRestrictionVector();
 
@@ -44,8 +44,8 @@ export function run(): void {
     it('should return an empty array if a purpose restriction hasen\'t been defined for a vendor', (): void => {
 
       const purposeId = 2;
-      const purposeRestriction: PurposeRestriction
-        = new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
+      const purposeRestriction: PurposeRestriction =
+        new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
       const prVector: PurposeRestrictionVector = new PurposeRestrictionVector();
 
       expect(prVector.getVendors(purposeRestriction)).to.be.empty;
@@ -223,8 +223,8 @@ export function run(): void {
 
       vendorIds.forEach((id: string): void => {
 
-        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId)
-          && vendorlistJson.vendors[id].legIntPurposes.includes(purposeId)) {
+        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId) &&
+          vendorlistJson.vendors[id].legIntPurposes.includes(purposeId)) {
 
           chosenVendorId = vendorlistJson.vendors[id].id;
 
@@ -260,8 +260,8 @@ export function run(): void {
 
       vendorIds.forEach((id: string): void => {
 
-        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId)
-          && vendorlistJson.vendors[id].purposes.includes(purposeId)) {
+        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId) &&
+          vendorlistJson.vendors[id].purposes.includes(purposeId)) {
 
           chosenVendorId = vendorlistJson.vendors[id].id;
 
@@ -298,8 +298,8 @@ export function run(): void {
 
       vendorIds.forEach((id: string): void => {
 
-        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId)
-          && vendorlistJson.vendors[id].legIntPurposes.includes(purposeId)) {
+        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId) &&
+          vendorlistJson.vendors[id].legIntPurposes.includes(purposeId)) {
 
           chosenVendorId = vendorlistJson.vendors[id].id;
 

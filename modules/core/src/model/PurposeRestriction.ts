@@ -4,7 +4,7 @@ import {RestrictionType} from './RestrictionType';
 
 export class PurposeRestriction extends Cloneable<PurposeRestriction> {
 
-  public static hashSeparator: string = '-';
+  public static hashSeparator = '-';
 
   private purposeId_: number;
   public restrictionType: RestrictionType;
@@ -93,8 +93,8 @@ export class PurposeRestriction extends Cloneable<PurposeRestriction> {
   }
   public isSameAs(otherPR: PurposeRestriction): boolean {
 
-    return (this.purposeId === otherPR.purposeId
-      && this.restrictionType === otherPR.restrictionType);
+    return (this.purposeId === otherPR.purposeId &&
+      this.restrictionType === otherPR.restrictionType);
 
   }
 

@@ -11,7 +11,7 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
    * if this originatd from an encoded string we'll need a place to store the
    * bit length; it can be set and got from here
    */
-  public bitLength: number = 0;
+  public bitLength = 0;
 
   /**
    * a map indexed by a string which will be a 'hash' of the purpose and

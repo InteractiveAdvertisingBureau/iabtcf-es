@@ -79,7 +79,6 @@ export function run(): void {
 
         const coreFieldSequence: CoreFieldSequence = new CoreFieldSequence();
 
-
         expect(encodeIt).not.to.throw();
         expect(decodeIt).not.to.throw();
 
