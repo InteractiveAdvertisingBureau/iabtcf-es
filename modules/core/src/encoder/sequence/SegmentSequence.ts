@@ -1,11 +1,11 @@
-import {VersionMap} from './VersionMap';
+import {SequenceVersionMap} from './SequenceVersionMap';
 import {TCModel} from '../../';
 import {
   Segments,
   Fields,
 } from '../../model';
 
-export class SegmentSequence implements VersionMap {
+export class SegmentSequence implements SequenceVersionMap {
 
   public '1': string[] = [
     Segments.core,

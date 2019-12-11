@@ -15,13 +15,14 @@
   ],
   "scripts": {
     "docs": "typedoc --ignoreCompilerErrors --tsconfig ./tsconfig.json  src",
-    "prepare": "npm run build",
-    "build": "rm -r lib ; tsc",
+    "prepare": "yarn run build",
+    "build": "rm -rf lib ; tsc",
+    "debug": "ndb yarn test",
+    "lint": "eslint ./src/**/*.ts ./test/**/*.ts",
+    "lint:fix": "yarn run lint -- --fix",
     "test": "mocha",
-    "debug": "ndb npm test",
-    "lint": "eslint --fix ./src/**/*.ts ./test/**/*.ts",
-    "lint-fix": "eslint --fix ./src/**/*.ts",
-    "report-coverage": "nyc --reporter=lcov npm run test"
+    "test:cov": "nyc mocha",
+    "test:lcov": "nyc --reporter=lcov mocha"
   },
   "devDependencies": {
     "@iabtcf/testing": "^1.0.0-beta.0",

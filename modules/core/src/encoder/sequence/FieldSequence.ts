@@ -1,9 +1,9 @@
-import {VersionMap, VMItem} from './VersionMap';
+import {SequenceVersionMap, SVMItem} from './SequenceVersionMap';
 import {Segments, Fields} from '../../model';
 
-export class FieldSequence implements VersionMap {
+export class FieldSequence implements SequenceVersionMap {
 
-  public readonly '1': VMItem = {
+  public readonly '1': SVMItem = {
     [Segments.core]: [
       Fields.version,
       Fields.created,
@@ -17,7 +17,7 @@ export class FieldSequence implements VersionMap {
       Fields.vendorConsents,
     ],
   };
-  public readonly '2': VMItem = {
+  public readonly '2': SVMItem = {
     [Segments.core]: [
       Fields.version,
       Fields.created,

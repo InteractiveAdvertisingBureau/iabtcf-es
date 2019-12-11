@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build": "rm -rf lib ; tsc ; chmod a+x lib/index.js",
-    "prepare": "npm run build",
+    "prepare": "yarn run build",
     "lint": "eslint ./src/**/*.ts"
   },
   "dependencies": {

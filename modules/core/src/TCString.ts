@@ -84,9 +84,8 @@ export class TCString {
         // first char will contain 6 bits, we only need the first 3
         const firstChar: string = Base64Url.decode(encodedString.charAt(0));
         const segTypeBits: string = firstChar.substr(0, BitLength.segmentType);
-        const segType: string = IntEncoder.decode(segTypeBits).toString();
 
-        segment = Segments[segType];
+        segment = Segments.ID_TO_KEY[IntEncoder.decode(segTypeBits).toString()];
 
       }
 

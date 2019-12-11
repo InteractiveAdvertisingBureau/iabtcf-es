@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SegmentEncoderMap | @iabtcf/core - API Documentation</title>
+	<title>KeyMap | @iabtcf/core - API Documentation</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,82 +56,57 @@
 					<a href="../index.html">Globals</a>
 				</li>
 				<li>
-					<a href="segmentencodermap.html">SegmentEncoderMap</a>
+					<a href="keymap.html">KeyMap</a>
 				</li>
 			</ul>
-			<h1>Class SegmentEncoderMap</h1>
+			<h1>Interface KeyMap&lt;T&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>KeyMap - A map of abstract type (defined by implementer) that is keyed by an
+						integer string id. Example <code>KeyMap&lt;number&gt;</code>:</p>
+						<pre><code><span class="hljs-keyword">const</span> myKeyMapOfNumbers: KeyMap&lt;<span class="hljs-built_in">number</span>&gt; = {
+  <span class="hljs-string">"1"</span>:<span class="hljs-number">2</span>,
+  <span class="hljs-string">"3"</span>:<span class="hljs-number">4</span>,
+}<span class="hljs-comment">;</span></code></pre>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>T</h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">SegmentEncoderMap</span>
+						<span class="target">KeyMap</span>
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel-group tsd-index-group">
-				<h2>Index</h2>
-				<section class="tsd-panel tsd-index-panel">
-					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="segmentencodermap.html#core" class="tsd-kind-icon">core</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="segmentencodermap.html#publishertc" class="tsd-kind-icon">publisherTC</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="segmentencodermap.html#vendorsallowed" class="tsd-kind-icon">vendors<wbr>Allowed</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="segmentencodermap.html#vendorsdisclosed" class="tsd-kind-icon">vendors<wbr>Disclosed</a></li>
-							</ul>
-						</section>
+			<section class="tsd-panel tsd-kind-interface tsd-has-type-parameter">
+				<h3 class="tsd-before-signature">Indexable</h3>
+				<div class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">T</span></div>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>KeyMap - A map of abstract type (defined by implementer) that is keyed by an
+						integer string id. Example <code>KeyMap&lt;number&gt;</code>:</p>
+						<pre><code><span class="hljs-keyword">const</span> myKeyMapOfNumbers: KeyMap&lt;<span class="hljs-built_in">number</span>&gt; = {
+  <span class="hljs-string">"1"</span>:<span class="hljs-number">2</span>,
+  <span class="hljs-string">"3"</span>:<span class="hljs-number">4</span>,
+}<span class="hljs-comment">;</span></code></pre>
 					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="core" class="tsd-anchor"></a>
-					<h3>core</h3>
-					<div class="tsd-signature tsd-kind-icon">core<span class="tsd-signature-symbol">:</span> <a href="coretcencoder.html" class="tsd-signature-type">CoreTCEncoder</a><span class="tsd-signature-symbol"> =&nbsp;CoreTCEncoder</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/encoder/segment/SegmentEncoderMap.ts#L11">src/encoder/segment/SegmentEncoderMap.ts:11</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="publishertc" class="tsd-anchor"></a>
-					<h3>publisherTC</h3>
-					<div class="tsd-signature tsd-kind-icon">publisherTC<span class="tsd-signature-symbol">:</span> <a href="publishertcencoder.html" class="tsd-signature-type">PublisherTCEncoder</a><span class="tsd-signature-symbol"> =&nbsp;PublisherTCEncoder</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/encoder/segment/SegmentEncoderMap.ts#L14">src/encoder/segment/SegmentEncoderMap.ts:14</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="vendorsallowed" class="tsd-anchor"></a>
-					<h3>vendors<wbr>Allowed</h3>
-					<div class="tsd-signature tsd-kind-icon">vendors<wbr>Allowed<span class="tsd-signature-symbol">:</span> <a href="oobvendorsencoder.html" class="tsd-signature-type">OOBVendorsEncoder</a><span class="tsd-signature-symbol"> =&nbsp;OOBVendorsEncoder</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/encoder/segment/SegmentEncoderMap.ts#L13">src/encoder/segment/SegmentEncoderMap.ts:13</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="vendorsdisclosed" class="tsd-anchor"></a>
-					<h3>vendors<wbr>Disclosed</h3>
-					<div class="tsd-signature tsd-kind-icon">vendors<wbr>Disclosed<span class="tsd-signature-symbol">:</span> <a href="oobvendorsencoder.html" class="tsd-signature-type">OOBVendorsEncoder</a><span class="tsd-signature-symbol"> =&nbsp;OOBVendorsEncoder</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/encoder/segment/SegmentEncoderMap.ts#L12">src/encoder/segment/SegmentEncoderMap.ts:12</a></li>
-						</ul>
-					</aside>
-				</section>
+				</div>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -146,22 +121,8 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class">
-						<a href="segmentencodermap.html" class="tsd-kind-icon">Segment<wbr>Encoder<wbr>Map</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="segmentencodermap.html#core" class="tsd-kind-icon">core</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="segmentencodermap.html#publishertc" class="tsd-kind-icon">publisherTC</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="segmentencodermap.html#vendorsallowed" class="tsd-kind-icon">vendors<wbr>Allowed</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="segmentencodermap.html#vendorsdisclosed" class="tsd-kind-icon">vendors<wbr>Disclosed</a>
-							</li>
-						</ul>
+					<li class="current tsd-kind-interface tsd-has-type-parameter">
+						<a href="keymap.html" class="tsd-kind-icon">Key<wbr>Map</a>
 					</li>
 				</ul>
 				<ul class="after-current">

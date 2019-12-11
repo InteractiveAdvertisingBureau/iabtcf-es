@@ -14,13 +14,15 @@
     "lib/**/*"
   ],
   "scripts": {
-    "test": "mocha",
-    "build": "rm -r lib ; tsc",
     "docs": "typedoc --ignoreCompilerErrors --tsconfig ./tsconfig.json  src",
-    "prepare": "npm run build",
-    "debug": "ndb npm test",
-    "lint": "eslint --fix ./src/**/*.ts ./test/**/*.ts",
-    "report-coverage": "nyc --reporter=lcov npm run test"
+    "prepare": "yarn run build",
+    "build": "rm -r lib ; tsc",
+    "lint": "eslint ./src/**/*.ts ./test/**/*.ts",
+    "lint:fix": "yarn run lint -- --fix",
+    "debug": "ndb yarn test",
+    "test": "mocha",
+    "test:cov": "nyc mocha",
+    "test:lcov": "nyc --reporter=lcov mocha"
   },
   "dependencies": {
     "@iabtcf/core": "^1.0.0-beta.0"

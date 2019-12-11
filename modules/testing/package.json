@@ -15,11 +15,10 @@
     "lib/**/*"
   ],
   "scripts": {
-    "docs": "typedoc --ignoreCompilerErrors --tsconfig ./tsconfig.json  src",
-    "prepare": "npm run build",
     "build": "rm -r lib ; tsc",
+    "prepare": "yarn run build",
     "lint": "eslint ./src/**/*.ts",
-    "report-coverage": ""
+    "lint:fix": "yarn run lint -- --fix"
   },
   "dependencies": {
     "@types/sinon": "^7.0.13",
@@ -37,13 +36,6 @@
   "eslintIgnore": [
     "lib"
   ],
-  "nyc": {
-    "extends": "@istanbuljs/nyc-config-typescript",
-    "check-coverage": true
-  },
-  "publishConfig": {
-    "access": "public"
-  },
   "keywords": [
     "interactive",
     "advertising",
@@ -73,7 +65,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/chrispaterson/iabtcf-es.git",
-    "directory": "modules/cmpapi"
+    "directory": "modules/testing"
   },
   "gitHead": "5b4d74172887c1c8301ae5d28027af810aa03272"
 }
