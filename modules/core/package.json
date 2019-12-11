@@ -3,7 +3,7 @@
   "version": "1.0.0-beta.0",
   "description": "Ensures consistent encoding and decoding of TC Signals for the iab. Transparency and Consent Framework (TCF).",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
-  "homepage": "https://github.com/chrispaterson/iabtcf",
+  "homepage": "https://github.com/chrispaterson/iabtcf/tree/master/modules/core/",
   "license": {
     "type": "Apache-2.0",
     "url": "https://opensource.org/licenses/apache2.0.php"
