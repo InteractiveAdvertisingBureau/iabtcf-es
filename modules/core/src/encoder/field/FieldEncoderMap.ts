@@ -7,6 +7,8 @@ import {LangEncoder} from './LangEncoder';
 import {PurposeRestrictionVectorEncoder} from './PurposeRestrictionVectorEncoder';
 import {VendorVectorEncoder} from './VendorVectorEncoder';
 
+/** TODO: Can we use the ./model/Fields for the keys? */
+
 export class FieldEncoderMap implements TCFields {
 
   public readonly version: typeof IntEncoder = IntEncoder;

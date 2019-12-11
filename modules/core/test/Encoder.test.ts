@@ -5,13 +5,9 @@ import * as int from './encoder/IntEncoder.test';
 import * as lang from './encoder/LangEncoder.test';
 import * as fixedVector from './encoder/FixedVectorEncoder.test';
 import * as vendorVector from './encoder/VendorVectorEncoder.test';
+import * as segmentEncoder from './encoder/SegmentEncoder.test';
 // import * as purposeRestrictions from './encoder/PurposeRestrictionVectorEncoder.test';
-import * as coreFieldSequence from './encoder/CoreFieldSequence.test';
-import * as segmentEncoderMap from './encoder/SegmentEncoderMap.test';
 import * as base64 from './encoder/Base64Url.test';
-import * as coreTC from './encoder/CoreTCEncoder.test';
-import * as oobVendorsEncoder from './encoder/OOBVendorsEncoder.test';
-import * as publisherTC from './encoder/PublisherTCEncoder.test';
 
 describe('Encoder', (): void => {
 
@@ -37,16 +33,13 @@ describe('Encoder', (): void => {
     // purposeRestrictions.run();
 
   });
-  describe('Segment Encoders', (): void => {
+  describe('Segment Encoder', (): void => {
 
-    coreTC.run();
-    oobVendorsEncoder.run();
-    publisherTC.run();
+    segmentEncoder.run();
 
   });
 
   // others
-  coreFieldSequence.run();
-  segmentEncoderMap.run();
+  // purposeRestrictions.run();
 
 });
