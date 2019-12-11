@@ -99,7 +99,9 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tcmodel.html#consentlanguages" class="tsd-kind-icon">consent<wbr>Languages</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tcmodel.html#created" class="tsd-kind-icon">created</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tcmodel.html#custompurposes" class="tsd-kind-icon">custom<wbr>Purposes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tcmodel.html#lastupdated" class="tsd-kind-icon">last<wbr>Updated</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tcmodel.html#publisherconsents" class="tsd-kind-icon">publisher<wbr>Consents</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tcmodel.html#publishercustomconsents" class="tsd-kind-icon">publisher<wbr>Custom<wbr>Consents</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="tcmodel.html#publishercustomlegitimateinterest" class="tsd-kind-icon">publisher<wbr>Custom<wbr>Legitimate<wbr>Interest</a></li>
@@ -121,10 +123,8 @@
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="tcmodel.html#cmpversion" class="tsd-kind-icon">cmp<wbr>Version</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="tcmodel.html#consentlanguage" class="tsd-kind-icon">consent<wbr>Language</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="tcmodel.html#consentscreen" class="tsd-kind-icon">consent<wbr>Screen</a></li>
-								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="tcmodel.html#created" class="tsd-kind-icon">created</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="tcmodel.html#gvl" class="tsd-kind-icon">gvl</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="tcmodel.html#isservicespecific" class="tsd-kind-icon">is<wbr>Service<wbr>Specific</a></li>
-								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="tcmodel.html#lastupdated" class="tsd-kind-icon">last<wbr>Updated</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="tcmodel.html#numcustompurposes" class="tsd-kind-icon">num<wbr>Custom<wbr>Purposes</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="tcmodel.html#policyversion" class="tsd-kind-icon">policy<wbr>Version</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="tcmodel.html#publishercountrycode" class="tsd-kind-icon">publisher<wbr>Country<wbr>Code</a></li>
@@ -139,7 +139,6 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="tcmodel.html#clone" class="tsd-kind-icon">clone</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tcmodel.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tcmodel.html#setall" class="tsd-kind-icon">set<wbr>All</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tcmodel.html#setallpurposeconsents" class="tsd-kind-icon">set<wbr>All<wbr>Purpose<wbr>Consents</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="tcmodel.html#setallpurposelegitimateinterest" class="tsd-kind-icon">set<wbr>All<wbr>Purpose<wbr>Legitimate<wbr>Interest</a></li>
@@ -172,7 +171,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L126">src/TCModel.ts:126</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L124">src/TCModel.ts:124</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -201,7 +200,7 @@
 					<div class="tsd-signature tsd-kind-icon">consent<wbr>Languages<span class="tsd-signature-symbol">:</span> <a href="consentlanguages.html" class="tsd-signature-type">ConsentLanguages</a><span class="tsd-signature-symbol"> =&nbsp;new ConsentLanguages()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L126">src/TCModel.ts:126</a></li>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L124">src/TCModel.ts:124</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -211,12 +210,23 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="created" class="tsd-anchor"></a>
+					<h3>created</h3>
+					<div class="tsd-signature tsd-kind-icon">created<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span></div>
+					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/tcfields.html">TCFields</a>.<a href="../interfaces/tcfields.html#created">created</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L30">src/TCModel.ts:30</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="custompurposes" class="tsd-anchor"></a>
 					<h3>custom<wbr>Purposes</h3>
 					<div class="tsd-signature tsd-kind-icon">custom<wbr>Purposes<span class="tsd-signature-symbol">:</span> <a href="../interfaces/intmap.html" class="tsd-signature-type">IntMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/purpose.html" class="tsd-signature-type">Purpose</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L75">src/TCModel.ts:75</a></li>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L73">src/TCModel.ts:73</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -227,13 +237,24 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="lastupdated" class="tsd-anchor"></a>
+					<h3>last<wbr>Updated</h3>
+					<div class="tsd-signature tsd-kind-icon">last<wbr>Updated<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span></div>
+					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/tcfields.html">TCFields</a>.<a href="../interfaces/tcfields.html#lastupdated">lastUpdated</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L31">src/TCModel.ts:31</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="publisherconsents" class="tsd-anchor"></a>
 					<h3>publisher<wbr>Consents</h3>
 					<div class="tsd-signature tsd-kind-icon">publisher<wbr>Consents<span class="tsd-signature-symbol">:</span> <a href="vector.html" class="tsd-signature-type">Vector</a><span class="tsd-signature-symbol"> =&nbsp;new Vector()</span></div>
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/tcfields.html">TCFields</a>.<a href="../interfaces/tcfields.html#publisherconsents">publisherConsents</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L55">src/TCModel.ts:55</a></li>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L53">src/TCModel.ts:53</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -251,7 +272,7 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/tcfields.html">TCFields</a>.<a href="../interfaces/tcfields.html#publishercustomconsents">publisherCustomConsents</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L82">src/TCModel.ts:82</a></li>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L80">src/TCModel.ts:80</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -269,7 +290,7 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/tcfields.html">TCFields</a>.<a href="../interfaces/tcfields.html#publishercustomlegitimateinterest">publisherCustomLegitimateInterest</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L89">src/TCModel.ts:89</a></li>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L87">src/TCModel.ts:87</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -287,7 +308,7 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/tcfields.html">TCFields</a>.<a href="../interfaces/tcfields.html#publisherlegitimateinterest">publisherLegitimateInterest</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L69">src/TCModel.ts:69</a></li>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L67">src/TCModel.ts:67</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -305,7 +326,7 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/tcfields.html">TCFields</a>.<a href="../interfaces/tcfields.html#publisherrestrictions">publisherRestrictions</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L121">src/TCModel.ts:121</a></li>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L119">src/TCModel.ts:119</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -316,7 +337,7 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/tcfields.html">TCFields</a>.<a href="../interfaces/tcfields.html#purposeconsents">purposeConsents</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L48">src/TCModel.ts:48</a></li>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L46">src/TCModel.ts:46</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -334,7 +355,7 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/tcfields.html">TCFields</a>.<a href="../interfaces/tcfields.html#purposelegitimateinterest">purposeLegitimateInterest</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L62">src/TCModel.ts:62</a></li>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L60">src/TCModel.ts:60</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -352,7 +373,7 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/tcfields.html">TCFields</a>.<a href="../interfaces/tcfields.html#specialfeatureoptins">specialFeatureOptIns</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L41">src/TCModel.ts:41</a></li>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L39">src/TCModel.ts:39</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -371,7 +392,7 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/tcfields.html">TCFields</a>.<a href="../interfaces/tcfields.html#vendorconsents">vendorConsents</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L95">src/TCModel.ts:95</a></li>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L93">src/TCModel.ts:93</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -388,7 +409,7 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/tcfields.html">TCFields</a>.<a href="../interfaces/tcfields.html#vendorlegitimateinterest">vendorLegitimateInterest</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L102">src/TCModel.ts:102</a></li>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L100">src/TCModel.ts:100</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -406,7 +427,7 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/tcfields.html">TCFields</a>.<a href="../interfaces/tcfields.html#vendorsallowed">vendorsAllowed</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L119">src/TCModel.ts:119</a></li>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L117">src/TCModel.ts:117</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -422,7 +443,7 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/tcfields.html">TCFields</a>.<a href="../interfaces/tcfields.html#vendorsdisclosed">vendorsDisclosed</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L114">src/TCModel.ts:114</a></li>
+							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L112">src/TCModel.ts:112</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -452,7 +473,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L235">src/TCModel.ts:235</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L199">src/TCModel.ts:199</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span>
@@ -463,7 +484,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L221">src/TCModel.ts:221</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L185">src/TCModel.ts:185</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -500,7 +521,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L263">src/TCModel.ts:263</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L227">src/TCModel.ts:227</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -518,7 +539,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L250">src/TCModel.ts:250</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L214">src/TCModel.ts:214</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -558,7 +579,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L326">src/TCModel.ts:326</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L290">src/TCModel.ts:290</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -566,7 +587,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L305">src/TCModel.ts:305</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L269">src/TCModel.ts:269</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -604,7 +625,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L292">src/TCModel.ts:292</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L256">src/TCModel.ts:256</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -623,7 +644,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L279">src/TCModel.ts:279</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L243">src/TCModel.ts:243</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -654,53 +675,6 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-					<a name="created" class="tsd-anchor"></a>
-					<h3>created</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> created<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> created<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L192">src/TCModel.ts:192</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>sets encoded created date.  Will auto convert to deciseconds as the encoding requires</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Date</span></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L186">src/TCModel.ts:186</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>sets encoded created date.  Will auto convert to deciseconds as the encoding requires</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>date: <span class="tsd-signature-type">Date</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>This will be set automatically</p>
-										</div>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
 					<a name="gvl" class="tsd-anchor"></a>
 					<h3>gvl</h3>
 					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
@@ -711,7 +685,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L175">src/TCModel.ts:175</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L173">src/TCModel.ts:173</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -725,7 +699,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L154">src/TCModel.ts:154</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L152">src/TCModel.ts:152</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -759,7 +733,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L477">src/TCModel.ts:477</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L441">src/TCModel.ts:441</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -776,7 +750,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L472">src/TCModel.ts:472</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L436">src/TCModel.ts:436</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -806,53 +780,6 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-					<a name="lastupdated" class="tsd-anchor"></a>
-					<h3>last<wbr>Updated</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> lastUpdated<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> lastUpdated<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L209">src/TCModel.ts:209</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>sets encoded last updated date.  Will auto convert to deciseconds as the encoding requires</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Date</span></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L203">src/TCModel.ts:203</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>sets encoded last updated date.  Will auto convert to deciseconds as the encoding requires</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>date: <span class="tsd-signature-type">Date</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>this is automatically updated on encoding</p>
-										</div>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
 					<a name="numcustompurposes" class="tsd-anchor"></a>
 					<h3>num<wbr>Custom<wbr>Purposes</h3>
 					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
@@ -863,7 +790,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L760">src/TCModel.ts:760</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L724">src/TCModel.ts:724</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -871,7 +798,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L773">src/TCModel.ts:773</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L737">src/TCModel.ts:737</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -895,7 +822,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L427">src/TCModel.ts:427</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L391">src/TCModel.ts:391</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -916,7 +843,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L414">src/TCModel.ts:414</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L378">src/TCModel.ts:378</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -961,7 +888,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L352">src/TCModel.ts:352</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L316">src/TCModel.ts:316</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -969,7 +896,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L339">src/TCModel.ts:339</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L303">src/TCModel.ts:303</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1007,7 +934,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L537">src/TCModel.ts:537</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L501">src/TCModel.ts:501</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1027,7 +954,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L532">src/TCModel.ts:532</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L496">src/TCModel.ts:496</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1067,7 +994,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L514">src/TCModel.ts:514</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L478">src/TCModel.ts:478</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1081,7 +1008,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L509">src/TCModel.ts:509</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L473">src/TCModel.ts:473</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1116,7 +1043,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L497">src/TCModel.ts:497</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L461">src/TCModel.ts:461</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1133,7 +1060,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L492">src/TCModel.ts:492</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L456">src/TCModel.ts:456</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1171,7 +1098,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L394">src/TCModel.ts:394</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L358">src/TCModel.ts:358</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1188,7 +1115,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L366">src/TCModel.ts:366</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L330">src/TCModel.ts:330</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1227,7 +1154,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L455">src/TCModel.ts:455</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L419">src/TCModel.ts:419</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1242,7 +1169,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L442">src/TCModel.ts:442</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L406">src/TCModel.ts:406</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1285,7 +1212,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="cloneable.html">Cloneable</a>.<a href="cloneable.html#clone">clone</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/Cloneable.ts#L20">src/Cloneable.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/Cloneable.ts#L20">src/Cloneable.ts:20</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1294,28 +1221,6 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <a href="tcmodel.html" class="tsd-signature-type">TCModel</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="isvalid" class="tsd-anchor"></a>
-					<h3>is<wbr>Valid</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Valid<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L844">src/TCModel.ts:844</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>isValid - returns whether all fields have a value</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -1329,7 +1234,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L726">src/TCModel.ts:726</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L690">src/TCModel.ts:690</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1357,7 +1262,7 @@ setAllVendorsDisclosed()<span class="hljs-comment">;</span></code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L650">src/TCModel.ts:650</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L614">src/TCModel.ts:614</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1379,7 +1284,7 @@ setAllVendorsDisclosed()<span class="hljs-comment">;</span></code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L673">src/TCModel.ts:673</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L637">src/TCModel.ts:637</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1401,7 +1306,7 @@ setAllVendorsDisclosed()<span class="hljs-comment">;</span></code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L696">src/TCModel.ts:696</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L660">src/TCModel.ts:660</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1423,7 +1328,7 @@ setAllVendorsDisclosed()<span class="hljs-comment">;</span></code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L581">src/TCModel.ts:581</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L545">src/TCModel.ts:545</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1445,7 +1350,7 @@ setAllVendorsDisclosed()<span class="hljs-comment">;</span></code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L627">src/TCModel.ts:627</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L591">src/TCModel.ts:591</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1467,7 +1372,7 @@ setAllVendorsDisclosed()<span class="hljs-comment">;</span></code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L604">src/TCModel.ts:604</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L568">src/TCModel.ts:568</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1489,7 +1394,7 @@ setAllVendorsDisclosed()<span class="hljs-comment">;</span></code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L749">src/TCModel.ts:749</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L713">src/TCModel.ts:713</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1517,7 +1422,7 @@ unsetAllVendorsDisclosed()<span class="hljs-comment">;</span></code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L662">src/TCModel.ts:662</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L626">src/TCModel.ts:626</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1539,7 +1444,7 @@ unsetAllVendorsDisclosed()<span class="hljs-comment">;</span></code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L685">src/TCModel.ts:685</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L649">src/TCModel.ts:649</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1561,7 +1466,7 @@ unsetAllVendorsDisclosed()<span class="hljs-comment">;</span></code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L708">src/TCModel.ts:708</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L672">src/TCModel.ts:672</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1583,7 +1488,7 @@ unsetAllVendorsDisclosed()<span class="hljs-comment">;</span></code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L593">src/TCModel.ts:593</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L557">src/TCModel.ts:557</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1605,7 +1510,7 @@ unsetAllVendorsDisclosed()<span class="hljs-comment">;</span></code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L639">src/TCModel.ts:639</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L603">src/TCModel.ts:603</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1627,7 +1532,7 @@ unsetAllVendorsDisclosed()<span class="hljs-comment">;</span></code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L616">src/TCModel.ts:616</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L580">src/TCModel.ts:580</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1649,7 +1554,7 @@ unsetAllVendorsDisclosed()<span class="hljs-comment">;</span></code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/ebe466f/modules/core/src/TCModel.ts#L833">src/TCModel.ts:833</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/9e8c20b/modules/core/src/TCModel.ts#L797">src/TCModel.ts:797</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1685,7 +1590,13 @@ unsetAllVendorsDisclosed()<span class="hljs-comment">;</span></code></pre>
 								<a href="tcmodel.html#consentlanguages" class="tsd-kind-icon">consent<wbr>Languages</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="tcmodel.html#created" class="tsd-kind-icon">created</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="tcmodel.html#custompurposes" class="tsd-kind-icon">custom<wbr>Purposes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="tcmodel.html#lastupdated" class="tsd-kind-icon">last<wbr>Updated</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="tcmodel.html#publisherconsents" class="tsd-kind-icon">publisher<wbr>Consents</a>
@@ -1736,16 +1647,10 @@ unsetAllVendorsDisclosed()<span class="hljs-comment">;</span></code></pre>
 								<a href="tcmodel.html#consentscreen" class="tsd-kind-icon">consent<wbr>Screen</a>
 							</li>
 							<li class=" tsd-kind-accessor tsd-parent-kind-class">
-								<a href="tcmodel.html#created" class="tsd-kind-icon">created</a>
-							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class">
 								<a href="tcmodel.html#gvl" class="tsd-kind-icon">gvl</a>
 							</li>
 							<li class=" tsd-kind-accessor tsd-parent-kind-class">
 								<a href="tcmodel.html#isservicespecific" class="tsd-kind-icon">is<wbr>Service<wbr>Specific</a>
-							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class">
-								<a href="tcmodel.html#lastupdated" class="tsd-kind-icon">last<wbr>Updated</a>
 							</li>
 							<li class=" tsd-kind-accessor tsd-parent-kind-class">
 								<a href="tcmodel.html#numcustompurposes" class="tsd-kind-icon">num<wbr>Custom<wbr>Purposes</a>
@@ -1773,9 +1678,6 @@ unsetAllVendorsDisclosed()<span class="hljs-comment">;</span></code></pre>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="tcmodel.html#clone" class="tsd-kind-icon">clone</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="tcmodel.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="tcmodel.html#setall" class="tsd-kind-icon">set<wbr>All</a>

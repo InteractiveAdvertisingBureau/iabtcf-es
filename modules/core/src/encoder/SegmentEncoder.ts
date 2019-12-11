@@ -45,7 +45,7 @@ export class SegmentEncoder {
      */
     if (segment !== Segments.core) {
 
-      bitField = IntEncoder.encode(Segments[segment], BitLength.segmentType);
+      bitField = IntEncoder.encode(Segments.KEY_TO_ID[segment], BitLength.segmentType);
 
     }
 

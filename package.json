@@ -18,8 +18,9 @@
     "build": "yarn workspaces run build",
     "lint": "yarn workspaces run lint",
     "test": "mocha",
-    "debug": "ndb npm test",
-    "coverage": "nyc --reporter html npm run test",
+    "debug": "ndb mocha",
+    "serve:cov": "npx http-server ./coverage/",
+    "test:cov": "rm -rf coverage; nyc --reporter html mocha",
     "test:lcov": "nyc --reporter=lcov mocha",
     "upload:lcov": "cat coverage/lcov.info | coveralls"
   },
@@ -50,6 +51,6 @@
     "gdpr"
   ],
   "devDependencies": {
-    "mocha": "^6.2.2"
+    "mocha": "6"
   }
 }

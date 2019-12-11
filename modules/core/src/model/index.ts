@@ -1,5 +1,6 @@
 export * from './BinarySearchTree';
 export * from './IntMap';
+export * from './KeyMap';
 export * from './PurposeRestriction';
 export * from './PurposeRestrictionVector';
 export * from './RestrictionType';

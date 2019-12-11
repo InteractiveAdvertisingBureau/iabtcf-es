@@ -1,3 +1,3 @@
 export * from './SegmentSequence';
-export * from './VersionMap';
+export * from './SequenceVersionMap';
 export * from './FieldSequence';
