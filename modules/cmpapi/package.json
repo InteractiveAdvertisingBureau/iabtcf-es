@@ -20,8 +20,9 @@
     "lint": "eslint ./src/**/*.ts ./test/**/*.ts",
     "lint:fix": "yarn run lint -- --fix",
     "debug": "ndb yarn test",
+    "serve:cov": "npx http-server ./coverage/",
     "test": "mocha",
-    "test:cov": "nyc mocha",
+    "test:cov": "rm -rf coverage; nyc --reporter html mocha",
     "test:lcov": "nyc --reporter=lcov mocha"
   },
   "dependencies": {
