@@ -11,16 +11,15 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
 
   private static readonly MAX_ENCODING_VERSION: number = 2;
 
-  // Defaults
+  private isServiceSpecific_ = false;
+  private useNonStandardStacks_ = false;
+  private purposeOneTreatment_ = false;
+  private publisherCountryCode_ = 'AA';
+  private supportOOB_ = false;
   private version_: number = TCModel.MAX_ENCODING_VERSION;
   private consentScreen_: number | string = 0;
   private policyVersion_: number | string = 2;
-  private isServiceSpecific_: boolean = false;
-  private useNonStandardStacks_: boolean = false;
-  private purposeOneTreatment_: boolean = false;
-  private publisherCountryCode_: string = 'AA';
-  private supportOOB_: boolean = false;
-  private consentLanguage_: string = 'EN';
+  private consentLanguage_ = 'EN';
   private cmpId_: number | string = 0;
   private cmpVersion_: number | string = 0;
   private vendorListVersion_: number | string = 0;
@@ -800,4 +799,5 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
     this.lastUpdated = new Date();
 
   }
+
 }

@@ -61,11 +61,11 @@ export class SegmentSequence implements VersionMap {
         }
 
         if (
-          tcModel[Fields.publisherConsents].size > 0
-          || tcModel[Fields.publisherLegitimateInterest].size > 0
-          || tcModel[Fields.numCustomPurposes] > 0
-          || tcModel[Fields.publisherCustomConsents].size > 0
-          || tcModel[Fields.publisherCustomLegitimateInterest].size > 0
+          tcModel[Fields.publisherConsents].size > 0 ||
+          tcModel[Fields.publisherLegitimateInterest].size > 0 ||
+          tcModel[Fields.numCustomPurposes] > 0 ||
+          tcModel[Fields.publisherCustomConsents].size > 0 ||
+          tcModel[Fields.publisherCustomLegitimateInterest].size > 0
         ) {
 
           this['2'].push(Segments.publisherTC);
