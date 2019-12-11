@@ -2,7 +2,7 @@ import {Cloneable} from '../Cloneable';
 import {TCModelError} from '../errors';
 
 type IdOrIds = number | number[];
-type IdBoolTuple = [number, boolean];
+export type IdBoolTuple = [number, boolean];
 
 /**
  * Vector class is like a Set except it keeps track of a max id

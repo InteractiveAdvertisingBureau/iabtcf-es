@@ -6,7 +6,7 @@ import {Commands, GetInAppTcDataCommand} from '../../../src/command/commands';
 import {InAppTCData} from '../../../src/model';
 import {EventStatus} from '../../../src/status';
 import {createValidTCModel, gvl} from '../../utils';
-import {inAppTcDataTestModel} from "./InAppTcDataTestData";
+import {inAppTcDataTestModel} from './InAppTcDataTestData';
 
 export function run(): void {
 
@@ -48,6 +48,7 @@ export function run(): void {
             assert.isTrue(success, 'GetInAppTcDataCommand was not successful');
             assert.isNotNull(iaTcData, 'GetInAppTcDataCommand returned null tcData');
             iaTcData = iaTcData as InAppTCData;
+            console.log(iaTcData);
             sameDataDiffRef(iaTcData, inAppTcDataTestModel, 'In App Tc Data');
             sameDataDiffRef(iaTcData.purpose, inAppTcDataTestModel.purpose, 'In App Tc Data - purpose');
             sameDataDiffRef(iaTcData.vendor, inAppTcDataTestModel.vendor, 'In App Tc Data - vendor');

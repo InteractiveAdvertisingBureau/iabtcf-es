@@ -50,6 +50,7 @@ export function run(): void {
             assert.isNotNull(tcData, 'getTCData returned null tcData');
 
             tcData = tcData as TCData;
+            console.log(tcData);
             sameDataDiffRef(tcData, tcDataModelTest, 'Tc Data');
             sameDataDiffRef(tcData.purpose, tcDataModelTest.purpose, 'Tc Data - purpose');
             sameDataDiffRef(tcData.vendor, tcDataModelTest.vendor, 'Tc Data - vendor');

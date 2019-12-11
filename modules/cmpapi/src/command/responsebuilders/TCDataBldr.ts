@@ -59,9 +59,9 @@ export class TCDataBldr extends ResponseBuilder implements TCData {
 
     super();
 
-    const vendorIds: string[] = this.getVendorIds(tcModel, _vendorIds);
-    const purposeIds: string[] = Object.keys(tcModel.gvl.purposes);
-    const specialFeatureIds: string[] = Object.keys(tcModel.gvl.specialFeatures);
+    // const vendorIds: string[] = this.getVendorIds(tcModel, _vendorIds);
+    // const purposeIds: string[] = Object.keys(tcModel.gvl.purposes);
+    // const specialFeatureIds: string[] = Object.keys(tcModel.gvl.specialFeatures);
 
     this.tcString = TCString.encode(tcModel);
     this.eventStatus = eventStatus;
@@ -77,26 +77,26 @@ export class TCDataBldr extends ResponseBuilder implements TCData {
 
     this.purpose = {
 
-      consents: this.createVectorField(purposeIds, tcModel.purposeConsents),
-      legitimateInterests: this.createVectorField(purposeIds, tcModel.purposeLegitimateInterest),
+      consents: this.createVectorField(tcModel.purposeConsents),
+      legitimateInterests: this.createVectorField(tcModel.purposeLegitimateInterest),
 
     };
 
     this.vendor = {
-      consents: this.createVectorField(vendorIds, tcModel.vendorConsents),
-      legitimateInterests: this.createVectorField(vendorIds, tcModel.vendorLegitimateInterest),
+      consents: this.createVectorField(tcModel.vendorConsents),
+      legitimateInterests: this.createVectorField(tcModel.vendorLegitimateInterest),
     };
 
-    this.specialFeatureOptins = this.createVectorField(specialFeatureIds, tcModel.specialFeatureOptIns);
+    this.specialFeatureOptins = this.createVectorField(tcModel.specialFeatureOptIns);
 
     this.publisher = {
 
-      consents: this.createVectorField(purposeIds, tcModel.publisherConsents),
-      legitimateInterests: this.createVectorField(purposeIds, tcModel.publisherLegitimateInterest),
+      consents: this.createVectorField(tcModel.publisherConsents),
+      legitimateInterests: this.createVectorField(tcModel.publisherLegitimateInterest),
       customPurpose: {
 
-        consents: this.createVectorField(purposeIds, tcModel.publisherCustomConsents),
-        legitimateInterests: this.createVectorField(purposeIds, tcModel.publisherCustomLegitimateInterest),
+        consents: this.createVectorField(tcModel.publisherCustomConsents),
+        legitimateInterests: this.createVectorField(tcModel.publisherCustomLegitimateInterest),
 
       },
       restrictions: this.createRestrictions(tcModel),
@@ -145,11 +145,10 @@ export class TCDataBldr extends ResponseBuilder implements TCData {
    * Creates a string bit field with a value for each id where each value is
    * '1' if its id is in the passed in vector Can be overwritten to return a
    * string
-   * @param {string[]} ids
    * @param {Vector }vector
    * @return {BooleanVector | string}
    */
-  protected createVectorField(ids: string[], vector: Vector): BooleanVector | string {
+  protected createVectorField(vector: Vector): BooleanVector | string {
 
     return createBooleanVector(vector);
 

@@ -1,5 +1,5 @@
-import {TCData} from "../../../src/model";
-import {EventStatus} from "../../../src/status";
+import {TCData} from '../../../src/model';
+import {EventStatus} from '../../../src/status';
 
 export const tcDataModelTest: TCData =
   {
@@ -698,8 +698,8 @@ export const tcDataModelTest: TCData =
             '681': false,
             '682': false,
             '683': false,
-            '684': true
-          }
+            '684': true,
+          },
       },
     purpose:
       {
@@ -714,7 +714,7 @@ export const tcDataModelTest: TCData =
             '7': true,
             '8': true,
             '9': true,
-            '10': true
+            '10': true,
           },
         legitimateInterests:
           {
@@ -727,8 +727,8 @@ export const tcDataModelTest: TCData =
             '7': true,
             '8': true,
             '9': true,
-            '10': true
-          }
+            '10': true,
+          },
       },
     vendor:
       {
@@ -1417,7 +1417,7 @@ export const tcDataModelTest: TCData =
             '681': false,
             '682': false,
             '683': false,
-            '684': true
+            '684': true,
           },
         legitimateInterests:
           {
@@ -2104,8 +2104,8 @@ export const tcDataModelTest: TCData =
             '681': false,
             '682': false,
             '683': false,
-            '684': true
-          }
+            '684': true,
+          },
       },
     specialFeatureOptins: {'1': true, '2': true},
     publisher:
@@ -2113,10 +2113,10 @@ export const tcDataModelTest: TCData =
         consents: {},
         legitimateInterests: {},
         customPurpose: {consents: {}, legitimateInterests: {}},
-        restrictions: {}
+        restrictions: {},
       },
     cmpId: 2,
     cmpVersion: 3,
     gdprApplies: true,
-    tcfPolicyVersion: 3
+    tcfPolicyVersion: 3,
   };

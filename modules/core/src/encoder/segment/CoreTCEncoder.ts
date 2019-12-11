@@ -30,6 +30,13 @@ export class CoreTCEncoder {
 
       try {
 
+        if (key === 'publisherRestrictions') {
+
+          // eslint-disable-next-line no-console
+          console.log(key);
+
+        }
+
         bitField += encoder.encode(value, numBits);
 
       } catch (err) {
