@@ -572,13 +572,32 @@
         7
       ],
       "legIntPurposes": [],
-      "flexiblePurposes": [],
+      "flexiblePurposes": [7],
       "specialPurposes": [],
       "features": [],
       "specialFeatures": [
         1
       ],
       "policyUrl": "https://www.beeswax.com/privacy/"
+    },
+    "13": {
+      "id": 13,
+      "name": "BeeswaxIO Corporation 2",
+      "purposes": [
+        1,
+        2,
+        3,
+        4,
+        7
+      ],
+      "legIntPurposes": [],
+      "flexiblePurposes": [7],
+      "specialPurposes": [],
+      "features": [],
+      "specialFeatures": [
+        1
+      ],
+      "policyUrl": "https://www.beeswaxTwo.com/privacy/"
     },
     "37": {
       "id": 37,

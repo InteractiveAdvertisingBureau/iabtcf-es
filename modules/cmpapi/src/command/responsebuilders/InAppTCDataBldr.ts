@@ -1,7 +1,12 @@
-import {IdBoolTuple, TCModel, Vector} from '@iabtcf/core';
+import {IdBoolTuple, PurposeRestriction, RestrictionType, TCModel, Vector} from '@iabtcf/core';
 import {BooleanVector, InAppTCData, Restrictions} from '../../model';
 import {EventStatus} from '../../status';
 import {TCDataBldr} from './TCDataBldr';
+
+interface VendorIdRestrictionType {
+  vendorId: number;
+  restrictionType: RestrictionType;
+}
 
 /**
  * InAppTCData response builder
@@ -47,15 +52,6 @@ export class InAppTCDataBldr extends TCDataBldr implements InAppTCData {
 
     }, '');
 
-    // return ids.reduce<StringBoolVector>((map, obj) => {
-    //
-    //   map[obj] = vector.has(+obj) ? '1' : '0';
-    //   return map;
-    //
-    // }, {});
-
-    // return ids.map((id: string): BoolString => vector.has(+id) ? '1' : '0').join('');
-
   }
 
   /**
@@ -66,25 +62,45 @@ export class InAppTCDataBldr extends TCDataBldr implements InAppTCData {
    */
   protected createRestrictions(tcModel: TCModel): Restrictions {
 
-    return tcModel.publisherRestrictions.getAllRestrictions().reduce((obj, pr): Restrictions => {
+    const tempObj = tcModel.publisherRestrictions.getAllRestrictions().reduce(
+      (obj, pr: PurposeRestriction): Restrictions => {
 
-      const purposeId = pr.purposeId.toString(10);
+        const purposeId = '' + pr.purposeId;
+        const restrictionType = pr.restrictionType;
 
-      if (!obj[purposeId]) {
+        return tcModel.publisherRestrictions.getVendors(pr).reduce((obj, vendorId: number) => {
 
-        obj[purposeId] = '';
+          obj[purposeId] = obj[purposeId] || [] as VendorIdRestrictionType[];
 
-      }
+          obj[purposeId].push({vendorId, restrictionType});
+          return obj;
 
-      tcModel.publisherRestrictions.getVendors(pr).forEach((vendorId: number): void => {
+        }, obj);
 
-        obj[purposeId] = obj[purposeId] + pr.restrictionType.toString(10);
+      }, {});
 
-      });
+    return Object.keys(tempObj).reduce<Restrictions>((restrictions: Restrictions, key: string) => {
 
-      return obj;
+      restrictions[key] = tempObj[key].
+        sort((o1: VendorIdRestrictionType, o2: VendorIdRestrictionType) => o1.vendorId > o2.vendorId).
+        reduce((str: string, keyVal: VendorIdRestrictionType, index) => {
 
-    }, {});
+          const paddingCount = index > 0 ? keyVal.vendorId - tempObj[key][index - 1].vendorId : keyVal.vendorId;
+
+          for (let i = 1; i < paddingCount; i++) {
+
+            str += RestrictionType.NO_RESTRICTION;
+
+          }
+
+          str += keyVal.restrictionType;
+          return str;
+
+        }, '');
+
+      return restrictions;
+
+    }, tempObj);
 
   };
 

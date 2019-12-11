@@ -1,10 +1,11 @@
+import {RestrictionType} from '@iabtcf/core';
 import {TCData} from '../../../src/model';
 import {EventStatus} from '../../../src/status';
 
 export const tcDataModelTest: TCData =
   {
     tcString:
-      'COZS4DEOZS4DEACABAENAACMAL_AAP_AAAAAFWQB4ADAAYAA1ACCAGIATIA1wBwAFfAQIAmQBSACmQFSAKsAqyAQAAYACUAGAANQAggBiAEyANcAcABXwECAJkAUgApkBUgCrAAA',
+      'COZS4DEOZS4DEACABAENAACMAL_AAP_AAAAAFWQB8ADAANABgADUAIIAYgBMgDXAHAAV8BAgCZAFIAKZAVIAqwCrIBCABgAGgAlABgADUAIIAYgBMgDXAHAAV8BAgCZAFIAKZAVIAqwAMcACgAYABoAYh4AEAcBEACAOAA.YAAAAAA',
     eventStatus: EventStatus.TC_LOADED,
     isServiceSpecific: false,
     useNonStandardStacks: false,
@@ -27,7 +28,7 @@ export const tcDataModelTest: TCData =
             '10': false,
             '11': false,
             '12': true,
-            '13': false,
+            '13': true,
             '14': false,
             '15': false,
             '16': false,
@@ -746,7 +747,7 @@ export const tcDataModelTest: TCData =
             '10': false,
             '11': false,
             '12': true,
-            '13': false,
+            '13': true,
             '14': false,
             '15': false,
             '16': false,
@@ -1433,7 +1434,7 @@ export const tcDataModelTest: TCData =
             '10': false,
             '11': false,
             '12': true,
-            '13': false,
+            '13': true,
             '14': false,
             '15': false,
             '16': false,
@@ -2110,11 +2111,40 @@ export const tcDataModelTest: TCData =
     specialFeatureOptins: {'1': true, '2': true},
     publisher:
       {
-        consents: {},
+        consents: {'1': false, '2': true, '3': false, '4': false, '5': true},
         legitimateInterests: {},
-        customPurpose: {consents: {}, legitimateInterests: {}},
-        restrictions: {},
+        customPurpose: {
+          consents: {
+            '1': false,
+            '2': true,
+            '3': true,
+            '4': false,
+            '5': false,
+            '6': false,
+            '7': false,
+            '8': false,
+            '9': false,
+            '10': false,
+            '11': false,
+            '12': true,
+          },
+          legitimateInterests: {
+            '1': false,
+            '2': false,
+            '3': true,
+          },
+        },
+        restrictions: {
+          '7': {
+            '12': RestrictionType.NOT_ALLOWED,
+            '13': RestrictionType.NOT_ALLOWED,
+            '98': RestrictionType.NOT_ALLOWED,
+            '224': RestrictionType.REQUIRE_LI,
+          },
+          '8': {'224': RestrictionType.REQUIRE_LI},
+        },
       },
+
     cmpId: 2,
     cmpVersion: 3,
     gdprApplies: true,

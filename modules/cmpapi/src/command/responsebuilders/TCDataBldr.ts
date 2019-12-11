@@ -59,10 +59,6 @@ export class TCDataBldr extends ResponseBuilder implements TCData {
 
     super();
 
-    // const vendorIds: string[] = this.getVendorIds(tcModel, _vendorIds);
-    // const purposeIds: string[] = Object.keys(tcModel.gvl.purposes);
-    // const specialFeatureIds: string[] = Object.keys(tcModel.gvl.specialFeatures);
-
     this.tcString = TCString.encode(tcModel);
     this.eventStatus = eventStatus;
     this.isServiceSpecific = tcModel.isServiceSpecific;
@@ -126,16 +122,22 @@ export class TCDataBldr extends ResponseBuilder implements TCData {
 
     return tcModel.publisherRestrictions.getAllRestrictions().reduce<Restrictions>((obj, pr): Restrictions => {
 
-      const purposeId = pr.purposeId.toString(10);
-      obj[purposeId] = {};
+      const purposeId = ''+pr.purposeId;
+      const restrictionType = pr.restrictionType;
 
-      tcModel.publisherRestrictions.getVendors(pr).forEach((vendorId: number): void => {
+      obj[purposeId] = obj[purposeId] || {};
 
-        obj[purposeId][vendorId.toString(10)] = pr.restrictionType;
+      return tcModel.publisherRestrictions.getVendors(pr).reduce(
+        (restrictions: Restrictions, vendorId: number): Restrictions => {
 
-      });
+          const vid = ''+vendorId;
 
-      return obj;
+          obj[purposeId][vid] = obj[purposeId][vid] || {};
+
+          obj[purposeId][vid] = restrictionType;
+          return obj;
+
+        }, obj);
 
     }, {});
 
