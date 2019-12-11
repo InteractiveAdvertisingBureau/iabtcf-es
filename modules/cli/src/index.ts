@@ -1,16 +1,21 @@
 #!/usr/bin/env node
 
-import {TCString, TCModel, Vector} from '@iabtcf/core';
+/* eslint no-console: 0 */
+
+import {TCString, Vector} from '@iabtcf/core';
 
 const args = process.argv;
-const yellow = "\x1b[33m%s: \x1b[0m%s";
 let encoded = '';
 
-for(let arg of args) {
-  if(arg.charAt(0) === "C") {
+for (const arg of args) {
+
+  if (arg.charAt(0) === 'C') {
+
     encoded = arg;
     break;
+
   }
+
 }
 
 global.btoa = (str: string | Buffer): string => {
@@ -29,43 +34,99 @@ global.btoa = (str: string | Buffer): string => {
 
   return buffer.toString('base64');
 
-}
+};
+
 global.atob = (str: string): string => {
 
   return Buffer.from(str, 'base64').toString('binary');
 
-}
+};
 
-const printVector = (vect: Vector, name: string): void => {
-  console.log(yellow, name, '');
-  vect.forEach((value: boolean, id: number): void => {
-    console.log(`  ${id}: ${value}`);  
-  });
-}
+const print = (key: string | number, value: string | number | boolean | object | undefined, indent = 0): void => {
 
-if(encoded) {
+  const indentString = '  '.repeat(indent);
+  key = '\x1b[33m' + key +'\x1b[0m';
 
-  console.log(yellow, 'encoded', encoded);
+  switch (typeof value) {
+
+    case 'string':
+      console.log(`${indentString}${key}: \x1b[32m"${value}"\x1b[0m`);
+      break;
+    case 'boolean':
+      console.log(`${indentString}${key}: \x1b[35m\x1b[1m${value}\x1b[0m`);
+      break;
+    case 'object':
+      if (value instanceof Date) {
+
+        console.log(`${indentString}${key}: \x1b[36m${(value as Date).toString()}\x1b[0m`);
+
+      } else if (value === null) {
+
+        console.log(`${indentString}${key}: '\x1b[1m' + value\x1b[0m`);
+
+      } else if (value instanceof Vector) {
+
+        console.log(`\x1b[1m${indentString}${key}\x1b[0m`);
+        value.forEach((bool: boolean, id: number): void => {
+
+          print(id, bool, indent + 1);
+
+        });
+
+      } else {
+
+        console.log(`\x1b[1m${indentString}${key}\x1b[0m`);
+        Object.keys(value).forEach((key: string): void => {
+
+          print(key, value[key], indent + 1);
+
+        });
+
+      }
+
+      break;
+    case 'number':
+      console.log(`${indentString}${key}: ${value}\x1b[0m`);
+      break;
+
+  }
+
+};
+
+if (encoded) {
+
+  print('encoded', encoded);
+
   try {
 
-    const tcModel = TCString.decode(encoded); 
-    console.log(yellow, "version", tcModel.version);
-    console.log(yellow, "cmpId", tcModel.cmpId);
-    console.log(yellow, "cmpVersion", tcModel.cmpVersion);
-    console.log(yellow, "consentScreen", tcModel.consentScreen);
-    console.log(yellow, "created", tcModel.created);
-    console.log(yellow, "lastUpdated", tcModel.lastUpdated);
-    console.log(yellow, "policyVersion", tcModel.policyVersion);
-    console.log(yellow, "isServiceSpecific", tcModel.isServiceSpecific);
-    console.log(yellow, "useNonStandardStacks", tcModel.useNonStandardStacks);
-    console.log(yellow, "purposeOneTreatment", tcModel.purposeOneTreatment);
-    console.log(yellow, "publisherCountryCode", tcModel.publisherCountryCode);
-    console.log(yellow, "supportOOB", tcModel.supportOOB);
-    console.log(yellow, "vendorListVersion", tcModel.vendorListVersion);
-    printVector(tcModel.purposeConsents,'purposeConsents');
-    printVector(tcModel.purposeLegitimateInterest,'purposeLegitimateInterest');
+    const tcModel = TCString.decode(encoded);
+    print('version', tcModel.version);
+    print('cmpId', tcModel.cmpId);
+    print('cmpVersion', tcModel.cmpVersion);
+    print('consentScreen', tcModel.consentScreen);
+    print('consentLanguage', tcModel.consentLanguage);
+    print('created', tcModel.created);
+    print('lastUpdated', tcModel.lastUpdated);
+    print('policyVersion', tcModel.policyVersion);
+    print('isServiceSpecific', tcModel.isServiceSpecific);
+    print('useNonStandardStacks', tcModel.useNonStandardStacks);
+    print('purposeOneTreatment', tcModel.purposeOneTreatment);
+    print('publisherCountryCode', tcModel.publisherCountryCode);
+    print('supportOOB', tcModel.supportOOB);
+    print('vendorListVersion', tcModel.vendorListVersion);
+    print('purposeConsents', tcModel.purposeConsents);
+    print('purposeLegitimateInterest', tcModel.purposeLegitimateInterest);
+    print('specialFeatureOptIns', tcModel.specialFeatureOptIns);
+    print('publisherCustomConsents', tcModel.publisherCustomConsents);
+    print('publisherLegitimateInterest', tcModel.publisherLegitimateInterest);
+    print('publisherCustomConsents', tcModel.publisherCustomConsents);
+    print('publisherCustomLegitimateInterest', tcModel.publisherCustomLegitimateInterest);
+    print('vendorConsents', tcModel.vendorConsents);
+    print('vendorLegitimateInterest', tcModel.vendorLegitimateInterest);
+    print('vendorsDisclosed', tcModel.vendorsDisclosed);
+    print('vendorsAllowed', tcModel.vendorsAllowed);
 
-  } catch(err) {
+  } catch (err) {
 
     console.error(`Unable to decode TC string: ${err.message}`);
 
@@ -73,6 +134,6 @@ if(encoded) {
 
 } else {
 
-  console.error("Please pass a TC string");
+  console.error('Please pass a TC string');
 
 }

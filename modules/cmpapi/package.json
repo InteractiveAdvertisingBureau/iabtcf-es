@@ -19,7 +19,7 @@
     "docs": "typedoc --ignoreCompilerErrors --tsconfig ./tsconfig.json  src",
     "prepare": "npm run build",
     "debug": "ndb npm test",
-    "lint": "eslint --fix ./src/**/*.ts",
+    "lint": "eslint --fix ./src/**/*.ts ./test/**/*.ts",
     "report-coverage": "nyc --reporter=lcov npm run test"
   },
   "dependencies": {

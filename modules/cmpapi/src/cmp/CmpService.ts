@@ -35,8 +35,6 @@ export class CmpService {
    * display status is 'hidden'.  If this is the first time the valid `TCModel`
    * is set Event is fired and EventStatus is 'tcloaded', subsequent sets event
    * is fired and 'useractioncomplete' is the EventStatus
-   * @return {void | never} - returns nothing, but throws an error if something
-   * other than `null` or a valid `TCModel` is set
    */
   public setTcModel(tcModel: TCModel | null): void | never {
 
