@@ -2,7 +2,6 @@ import {TCModel} from '@iabtcf/core';
 import {CmpDataReader} from './CmpDataReader';
 import {CmpStatus, DisplayStatus, EventStatus} from '../status';
 import {TcModelChangeEventHandler} from '../types';
-import {ValidationMessages} from '../validation';
 import {settings} from '../settings';
 
 /**
@@ -88,11 +87,11 @@ export class CmpData implements CmpDataReader {
     const clonedTcModel = tcModel.clone();
 
     this.tcModel = clonedTcModel;
-    
+
     if (this.tcModelChangeEventCallback) {
-        
-        this.tcModelChangeEventCallback();
-        
+
+      this.tcModelChangeEventCallback();
+
     }
 
   }

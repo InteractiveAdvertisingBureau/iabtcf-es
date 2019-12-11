@@ -23,9 +23,7 @@
     "report-coverage": "nyc --reporter=lcov npm run test"
   },
   "dependencies": {
-    "@iabtcf/core": "^1.0.0-beta.0",
-    "@typescript-eslint/eslint-plugin": "^2.10.0",
-    "@typescript-eslint/parser": "^2.10.0"
+    "@iabtcf/core": "^1.0.0-beta.0"
   },
   "devDependencies": {
     "@iabtcf/testing": "^1.0.0-beta.0",
@@ -33,9 +31,14 @@
     "@types/mocha": "^5.2.7",
     "@types/sinon": "^7.0.13",
     "@types/sinon-chai": "3.2.2",
+    "@typescript-eslint/eslint-plugin": "^2.10.0",
+    "@typescript-eslint/parser": "^2.10.0",
     "chai": "^4.2.0",
     "coveralls": "^3.0.4",
     "eslint": "^5.0.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-json": "^2.0.1",
     "jscover": "^1.0.0",
     "jsdom": "15.1.1",
     "jsdom-global": "3.0.2",

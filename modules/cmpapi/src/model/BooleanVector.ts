@@ -6,17 +6,18 @@ export interface BooleanVector {
 
 /**
  * Creates a boolean vector with a value for each id where each value is true if its id is in the passed in vector
- * @param {string[]} ids
  * @param {Vector} vector
  * @return {BooleanVector}
  */
 export const createBooleanVector = function(vector: Vector): BooleanVector {
 
-  const retr = {};
+  const booleanVector = {};
   vector.forEach((value: boolean, id: number): void => {
-    retr[id.toString(10)] = value;
+
+    booleanVector[id.toString(10)] = value;
+
   });
 
-  return retr;
+  return booleanVector;
 
 };
