@@ -48,7 +48,6 @@ export function run(): void {
             assert.isTrue(success, 'GetInAppTcDataCommand was not successful');
             assert.isNotNull(iaTcData, 'GetInAppTcDataCommand returned null tcData');
             iaTcData = iaTcData as InAppTCData;
-            console.log(iaTcData);
             sameDataDiffRef(iaTcData, inAppTcDataTestModel, 'In App Tc Data');
             sameDataDiffRef(iaTcData.purpose, inAppTcDataTestModel.purpose, 'In App Tc Data - purpose');
             sameDataDiffRef(iaTcData.vendor, inAppTcDataTestModel.vendor, 'In App Tc Data - vendor');

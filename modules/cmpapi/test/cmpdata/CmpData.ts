@@ -1,11 +1,9 @@
-import {TCModel} from '@iabtcf/core';
 import {sameDataDiffRef} from '@iabtcf/testing';
 import {assert} from 'chai';
 import {CmpData} from '../../src/cmpdata';
 import {settings} from '../../src/settings';
 import {CmpStatus, DisplayStatus, EventStatus} from '../../src/status';
 import {TcModelChangeEventHandler} from '../../src/types';
-import {ValidationMessages} from '../../src/validation';
 import {createValidTCModel, gvl} from '../utils';
 
 export function run(): void {

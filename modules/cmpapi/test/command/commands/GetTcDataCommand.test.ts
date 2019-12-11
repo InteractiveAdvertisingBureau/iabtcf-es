@@ -1,13 +1,13 @@
-import {sameDataDiffRef} from "@iabtcf/testing";
+import {sameDataDiffRef} from '@iabtcf/testing';
 import {assert} from 'chai';
 import {CmpData} from '../../../src/cmpdata';
 import {Callback} from '../../../src/command/callback/Callback';
 import {Commands, GetTcDataCommand} from '../../../src/command/commands';
 import {TCData} from '../../../src/model';
-import {EventStatus} from "../../../src/status";
+import {EventStatus} from '../../../src/status';
 import {ValidationMessages} from '../../../src/validation';
 import {createValidTCModel, gvl} from '../../utils';
-import {tcDataModelTest} from "./TcDataTestData";
+import {tcDataModelTest} from './TcDataTestData';
 
 export function run(): void {
 
@@ -22,7 +22,6 @@ export function run(): void {
     cmpData.setTCModel(tcModel);
     cmpData.setEventStatus(EventStatus.TC_LOADED);
     cmpData.setGdprApplies(true);
-
 
     describe('Constructor', (): void => {
 
@@ -50,7 +49,6 @@ export function run(): void {
             assert.isNotNull(tcData, 'getTCData returned null tcData');
 
             tcData = tcData as TCData;
-            console.log(tcData);
             sameDataDiffRef(tcData, tcDataModelTest, 'Tc Data');
             sameDataDiffRef(tcData.purpose, tcDataModelTest.purpose, 'Tc Data - purpose');
             sameDataDiffRef(tcData.vendor, tcDataModelTest.vendor, 'Tc Data - vendor');
