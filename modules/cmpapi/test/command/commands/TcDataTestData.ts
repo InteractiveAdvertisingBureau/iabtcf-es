@@ -2,6 +2,93 @@ import {RestrictionType} from '@iabtcf/core';
 import {TCData} from '../../../src/model';
 import {EventStatus} from '../../../src/status';
 
+export const tcDataModelTestFiltered: TCData = {
+  tcString: 'COZS4DEOZS4DEACABAENAACMAL_AAP_AAAAAFWQB8ADAANABgADUAIIAYgBMgDXAHAAV8BAgCZAFIAKZAVIAqwCrIBCABgAGgAlABgADUAIIAYgBMgDXAHAAV8BAgCZAFIAKZAVIAqwAMcACgAYABoAYh4AEAcBEACAOAA.YAAAAAA',
+  eventStatus: 'tcloaded',
+  isServiceSpecific: false,
+  useNonStandardStacks: false,
+  purposeOneTreatment: false,
+  publisherCC: 'AA',
+  outOfBand:
+      {
+        allowedVendors: {'1': false, '2': false, '3': false},
+        discloseVendors: {'1': false, '2': false, '3': false},
+      },
+  purpose:
+      {
+        consents:
+            {
+              '1': true,
+              '2': false,
+              '3': true,
+              '4': true,
+              '5': true,
+              '6': true,
+              '7': true,
+              '8': true,
+              '9': true,
+              '10': true,
+            },
+        legitimateInterests:
+            {
+              '1': true,
+              '2': true,
+              '3': true,
+              '4': true,
+              '5': true,
+              '6': true,
+              '7': true,
+              '8': true,
+              '9': true,
+              '10': true,
+            },
+      },
+  vendor:
+      {
+        consents: {'1': false, '2': false, '3': false},
+        legitimateInterests: {'1': false, '2': false, '3': false},
+      },
+  specialFeatureOptins: {'1': true, '2': true},
+  publisher:
+      {
+        consents: {'1': false, '2': true, '3': false, '4': false, '5': true},
+        legitimateInterests: {},
+        customPurpose: {
+          consents: {
+            '1': false,
+            '2': true,
+            '3': true,
+            '4': false,
+            '5': false,
+            '6': false,
+            '7': false,
+            '8': false,
+            '9': false,
+            '10': false,
+            '11': false,
+            '12': true,
+          },
+          legitimateInterests: {
+            '1': false,
+            '2': false,
+            '3': true,
+          },
+        },
+        restrictions: {
+          '7': {
+            '12': RestrictionType.NOT_ALLOWED,
+            '13': RestrictionType.NOT_ALLOWED,
+            '98': RestrictionType.NOT_ALLOWED,
+            '224': RestrictionType.REQUIRE_LI,
+          },
+          '8': {'224': RestrictionType.REQUIRE_LI},
+        },
+      },
+  cmpId: 2,
+  cmpVersion: 3,
+  gdprApplies: true,
+  tcfPolicyVersion: 3};
+
 export const tcDataModelTest: TCData =
   {
     tcString:

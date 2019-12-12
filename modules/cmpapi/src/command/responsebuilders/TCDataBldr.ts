@@ -67,8 +67,8 @@ export class TCDataBldr extends ResponseBuilder implements TCData {
     this.publisherCC = tcModel.publisherCountryCode;
 
     this.outOfBand = {
-      allowedVendors: createBooleanVector(tcModel.vendorsAllowed),
-      discloseVendors: createBooleanVector(tcModel.vendorsDisclosed),
+      allowedVendors: createBooleanVector(tcModel.vendorsAllowed, _vendorIds),
+      discloseVendors: createBooleanVector(tcModel.vendorsDisclosed, _vendorIds),
     };
 
     this.purpose = {
@@ -79,8 +79,8 @@ export class TCDataBldr extends ResponseBuilder implements TCData {
     };
 
     this.vendor = {
-      consents: this.createVectorField(tcModel.vendorConsents),
-      legitimateInterests: this.createVectorField(tcModel.vendorLegitimateInterest),
+      consents: this.createVectorField(tcModel.vendorConsents, _vendorIds),
+      legitimateInterests: this.createVectorField(tcModel.vendorLegitimateInterest, _vendorIds),
     };
 
     this.specialFeatureOptins = this.createVectorField(tcModel.specialFeatureOptIns);
@@ -148,11 +148,12 @@ export class TCDataBldr extends ResponseBuilder implements TCData {
    * '1' if its id is in the passed in vector Can be overwritten to return a
    * string
    * @param {Vector }vector
+   * @param {number[]} ids filter
    * @return {BooleanVector | string}
    */
-  protected createVectorField(vector: Vector): BooleanVector | string {
+  protected createVectorField(vector: Vector, ids?: number[]): BooleanVector | string {
 
-    return createBooleanVector(vector);
+    return createBooleanVector(vector, ids);
 
   }
 

@@ -7,7 +7,7 @@ import {TCData} from '../../../src/model';
 import {EventStatus} from '../../../src/status';
 import {ValidationMessages} from '../../../src/validation';
 import {createValidTCModel, gvl} from '../../utils';
-import {tcDataModelTest} from './TcDataTestData';
+import {tcDataModelTest, tcDataModelTestFiltered} from './TcDataTestData';
 
 export function run(): void {
 
@@ -55,6 +55,30 @@ export function run(): void {
             sameDataDiffRef(tcData.publisher, tcDataModelTest.publisher, 'Tc Data - publisher');
             sameDataDiffRef(tcData.publisher.restrictions, tcDataModelTest.publisher.restrictions, 'Tc Data - publisher restrictions');
             sameDataDiffRef(tcData.publisher.customPurpose, tcDataModelTest.publisher.customPurpose, 'Tc Data - publisher customPurpose');
+
+            done();
+
+          }));
+
+        getTcDataCommand.execute();
+
+      });
+
+      it('should execute the command and return a TCData object with vendor list filter', (done): void => {
+
+        const getTcDataCommand = new GetTcDataCommand(cmpData, Commands.GET_TC_DATA, 2, new Callback(
+          (tcData: TCData | null, success: boolean): void => {
+
+            assert.isTrue(success, 'getTCData was not successful');
+            assert.isNotNull(tcData, 'getTCData returned null tcData');
+
+            tcData = tcData as TCData;
+            sameDataDiffRef(tcData, tcDataModelTestFiltered, 'Tc Data');
+            sameDataDiffRef(tcData.purpose, tcDataModelTestFiltered.purpose, 'Tc Data - purpose');
+            sameDataDiffRef(tcData.vendor, tcDataModelTestFiltered.vendor, 'Tc Data - vendor');
+            sameDataDiffRef(tcData.publisher, tcDataModelTestFiltered.publisher, 'Tc Data - publisher');
+            sameDataDiffRef(tcData.publisher.restrictions, tcDataModelTestFiltered.publisher.restrictions, 'Tc Data - publisher restrictions');
+            sameDataDiffRef(tcData.publisher.customPurpose, tcDataModelTestFiltered.publisher.customPurpose, 'Tc Data - publisher customPurpose');
 
             done();
 

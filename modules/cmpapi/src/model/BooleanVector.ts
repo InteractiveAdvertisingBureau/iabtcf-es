@@ -1,4 +1,4 @@
-import {Vector} from '@iabtcf/core';
+import {IdBoolTuple, Vector} from '@iabtcf/core';
 
 export interface BooleanVector {
   [id: string]: boolean;
@@ -7,17 +7,27 @@ export interface BooleanVector {
 /**
  * Creates a boolean vector with a value for each id where each value is true if its id is in the passed in vector
  * @param {Vector} vector
+ * @param {number[]} ids filter used only by GetTcData not InApp
  * @return {BooleanVector}
  */
-export const createBooleanVector = function(vector: Vector): BooleanVector {
+export const createBooleanVector = function(vector: Vector, ids?: number[]): BooleanVector {
 
-  const booleanVector = {};
-  vector.forEach((value: boolean, id: number): void => {
+  if (ids) {
 
-    booleanVector[id.toString(10)] = value;
+    return ids.reduce<BooleanVector>((booleanVector, obj): BooleanVector => {
 
-  });
+      booleanVector[obj] = vector.has(+obj);
+      return booleanVector;
 
-  return booleanVector;
+    }, {});
+
+  }
+
+  return [...vector].reduce<BooleanVector>((booleanVector, keys: IdBoolTuple): BooleanVector => {
+
+    booleanVector[keys[0].toString(10)] = keys[1];
+    return booleanVector;
+
+  }, {});
 
 };
