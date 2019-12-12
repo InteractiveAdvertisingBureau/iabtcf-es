@@ -5,6 +5,7 @@
   "workspaces": [
     "modules/testing",
     "modules/core",
+    "modules/cli",
     "modules/cmpapi",
     "modules/site"
   ],

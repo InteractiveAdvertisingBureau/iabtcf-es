@@ -21,7 +21,8 @@
     "lint": "eslint ./src/**/*.ts ./test/**/*.ts",
     "lint:fix": "yarn run lint -- --fix",
     "test": "mocha",
-    "test:cov": "nyc mocha",
+    "serve:cov": "npx http-server ./coverage/",
+    "test:cov": "rm -rf coverage; nyc --reporter html mocha",
     "test:lcov": "nyc --reporter=lcov mocha"
   },
   "devDependencies": {
