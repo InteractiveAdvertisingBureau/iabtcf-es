@@ -220,6 +220,23 @@ describe('CmpApi', (): void => {
 
       });
 
+      // it('custom command works', (done): void => {
+      //
+      //   const param = 'BINGO';
+      //   const expectedTestString = custCommandTestData.testString.replace('DOG_NAME', param);
+      //
+      //   const callback = (data: TestData): void => {
+      //
+      //     assert.isNotNull(data, 'custom command returned null data');
+      //     assert.strictEqual(data.testString, expectedTestString);
+      //     done();
+      //
+      //   };
+      //
+      //   win[API_FUNCTION_NAME](customCommands[0].command, 2, callback, param);
+      //
+      // });
+
       describe('getTCData', (): void => {
 
         it('getTCData works and returns tc loaded for event status', (done): void => {

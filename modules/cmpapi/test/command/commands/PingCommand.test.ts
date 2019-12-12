@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import {CmpData} from '../../../src/cmpdata';
+import {CmpData, CmpDataReader} from '../../../src/cmpdata';
 import {Callback} from '../../../src/command/callback/Callback';
 import {Commands, PingCommand} from '../../../src/command/commands';
 import {Ping} from '../../../src/model';
@@ -11,7 +11,7 @@ export function run(): void {
 
     const cmpId = 2;
     const cmpVersion = 3;
-    const cmpData = new CmpData(cmpId, cmpVersion);
+    const cmpData: CmpDataReader = new CmpData(cmpId, cmpVersion);
 
     describe('Constructor', (): void => {
 

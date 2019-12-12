@@ -8,7 +8,7 @@ import {
 
 export class PurposeRestrictionVectorEncoder {
 
-  public static encode(value: PurposeRestrictionVector): string {
+  public static encode(value: PurposeRestrictionVector, numBits?: number | undefined): string {
 
     // start with the number of restrictions
     let bitString = IntEncoder.encode(value.numRestrictions, BitLength.numRestrictions);

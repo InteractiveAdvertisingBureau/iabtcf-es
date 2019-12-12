@@ -59,10 +59,6 @@ export class TCDataBldr extends ResponseBuilder implements TCData {
 
     super();
 
-    const vendorIds: string[] = this.getVendorIds(tcModel, _vendorIds);
-    const purposeIds: string[] = Object.keys(tcModel.gvl.purposes);
-    const specialFeatureIds: string[] = Object.keys(tcModel.gvl.specialFeatures);
-
     this.tcString = TCString.encode(tcModel);
     this.eventStatus = eventStatus;
     this.isServiceSpecific = tcModel.isServiceSpecific;
@@ -71,32 +67,32 @@ export class TCDataBldr extends ResponseBuilder implements TCData {
     this.publisherCC = tcModel.publisherCountryCode;
 
     this.outOfBand = {
-      allowedVendors: createBooleanVector(tcModel.vendorsAllowed),
-      discloseVendors: createBooleanVector(tcModel.vendorsDisclosed),
+      allowedVendors: createBooleanVector(tcModel.vendorsAllowed, _vendorIds),
+      discloseVendors: createBooleanVector(tcModel.vendorsDisclosed, _vendorIds),
     };
 
     this.purpose = {
 
-      consents: this.createVectorField(purposeIds, tcModel.purposeConsents),
-      legitimateInterests: this.createVectorField(purposeIds, tcModel.purposeLegitimateInterest),
+      consents: this.createVectorField(tcModel.purposeConsents),
+      legitimateInterests: this.createVectorField(tcModel.purposeLegitimateInterest),
 
     };
 
     this.vendor = {
-      consents: this.createVectorField(vendorIds, tcModel.vendorConsents),
-      legitimateInterests: this.createVectorField(vendorIds, tcModel.vendorLegitimateInterest),
+      consents: this.createVectorField(tcModel.vendorConsents, _vendorIds),
+      legitimateInterests: this.createVectorField(tcModel.vendorLegitimateInterest, _vendorIds),
     };
 
-    this.specialFeatureOptins = this.createVectorField(specialFeatureIds, tcModel.specialFeatureOptIns);
+    this.specialFeatureOptins = this.createVectorField(tcModel.specialFeatureOptIns);
 
     this.publisher = {
 
-      consents: this.createVectorField(purposeIds, tcModel.publisherConsents),
-      legitimateInterests: this.createVectorField(purposeIds, tcModel.publisherLegitimateInterest),
+      consents: this.createVectorField(tcModel.publisherConsents),
+      legitimateInterests: this.createVectorField(tcModel.publisherLegitimateInterest),
       customPurpose: {
 
-        consents: this.createVectorField(purposeIds, tcModel.publisherCustomConsents),
-        legitimateInterests: this.createVectorField(purposeIds, tcModel.publisherCustomLegitimateInterest),
+        consents: this.createVectorField(tcModel.publisherCustomConsents),
+        legitimateInterests: this.createVectorField(tcModel.publisherCustomLegitimateInterest),
 
       },
       restrictions: this.createRestrictions(tcModel),
@@ -126,16 +122,22 @@ export class TCDataBldr extends ResponseBuilder implements TCData {
 
     return tcModel.publisherRestrictions.getAllRestrictions().reduce<Restrictions>((obj, pr): Restrictions => {
 
-      const purposeId = pr.purposeId.toString(10);
-      obj[purposeId] = {};
+      const purposeId = ''+pr.purposeId;
+      const restrictionType = pr.restrictionType;
 
-      tcModel.publisherRestrictions.getVendors(pr).forEach((vendorId: number): void => {
+      obj[purposeId] = obj[purposeId] || {};
 
-        obj[purposeId][vendorId.toString(10)] = pr.restrictionType;
+      return tcModel.publisherRestrictions.getVendors(pr).reduce(
+        (restrictions: Restrictions, vendorId: number): Restrictions => {
 
-      });
+          const vid = ''+vendorId;
 
-      return obj;
+          obj[purposeId][vid] = obj[purposeId][vid] || {};
+
+          obj[purposeId][vid] = restrictionType;
+          return obj;
+
+        }, obj);
 
     }, {});
 
@@ -145,13 +147,13 @@ export class TCDataBldr extends ResponseBuilder implements TCData {
    * Creates a string bit field with a value for each id where each value is
    * '1' if its id is in the passed in vector Can be overwritten to return a
    * string
-   * @param {string[]} ids
    * @param {Vector }vector
+   * @param {number[]} ids filter
    * @return {BooleanVector | string}
    */
-  protected createVectorField(ids: string[], vector: Vector): BooleanVector | string {
+  protected createVectorField(vector: Vector, ids?: number[]): BooleanVector | string {
 
-    return createBooleanVector(vector);
+    return createBooleanVector(vector, ids);
 
   }
 

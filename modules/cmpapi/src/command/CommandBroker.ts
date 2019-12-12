@@ -98,6 +98,7 @@ export class CommandBroker {
 
     return (command: string, version: number, callback: CallbackFunction, param?: Param): void => {
 
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
       const _this = this;
 
       _this.pageCallHandler(command, version, callback, param);
@@ -170,6 +171,7 @@ export class CommandBroker {
 
     return (commandArgs: TcfApiArgSet[]): void => {
 
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
       const _this = this;
 
       /**
@@ -185,8 +187,7 @@ export class CommandBroker {
        * Add commands to queue and process/clear them if we can
        */
 
-      // @ts-ignore
-      _this.commandQueue.queueCommands(validCommands);
+      _this.commandQueue.queueCommands(validCommands as Command[]);
 
       if (_this.canProcessCommandQueue) {
 
@@ -308,6 +309,7 @@ export class CommandBroker {
 
     return (): void => {
 
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
       const _this = this;
       _this.commandQueue.executeAndClearCommands();
       _this.eventListenerQueue.executeCommands();

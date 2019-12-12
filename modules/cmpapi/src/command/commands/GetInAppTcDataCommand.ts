@@ -26,7 +26,10 @@ export class GetInAppTcDataCommand extends GetTcDataCommand implements Command, 
    */
   public execute(): void {
 
-    const iATCData = new InAppTCDataBldr(this.cmpData.getTcModel(), this.cmpData.getEventStatus(), this.param as number[]);
+    const iATCData = new InAppTCDataBldr(
+      this.cmpData.getTcModel(),
+      this.cmpData.getEventStatus(), this.param as number[]
+    );
     this.setBaseReturnFields(iATCData);
     (this.callback.function as IATCDataCallback)(iATCData.buildResponse(), true);
 

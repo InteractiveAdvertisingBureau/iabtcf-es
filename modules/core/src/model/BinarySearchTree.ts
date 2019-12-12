@@ -1,16 +1,18 @@
+import {Cloneable} from '../Cloneable';
+
 type TreeNodeMaybe = TreeNode | null;
 interface TreeNode {
   value: number;
   right: TreeNodeMaybe;
   left: TreeNodeMaybe;
 }
-export class BinarySearchTree {
+export class BinarySearchTree extends Cloneable<BinarySearchTree> {
 
-  private root: TreeNodeMaybe = null;;
+  private root: TreeNodeMaybe = null;
 
   public isEmpty(): boolean {
 
-    // if root is undefined or null thne by definition this is empty
+    // if root is undefined or null then by definition this is empty
     return !(this.root);
 
   }

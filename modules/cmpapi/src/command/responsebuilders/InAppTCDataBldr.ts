@@ -1,8 +1,12 @@
-import {TCModel, Vector} from '@iabtcf/core';
+import {IdBoolTuple, PurposeRestriction, RestrictionType, TCModel, Vector} from '@iabtcf/core';
 import {BooleanVector, InAppTCData, Restrictions} from '../../model';
 import {EventStatus} from '../../status';
-import {BoolString} from '../../types';
 import {TCDataBldr} from './TCDataBldr';
+
+interface VendorIdRestrictionType {
+  vendorId: number;
+  restrictionType: RestrictionType;
+}
 
 /**
  * InAppTCData response builder
@@ -25,25 +29,28 @@ export class InAppTCDataBldr extends TCDataBldr implements InAppTCData {
   /**
    * Creates a string bit field with a value for each id where each value is '1' if its id is in the passed in vector
    * @override
-   * @param {string[]} ids
    * @param {Vector }vector
    * @return {BooleanVector | string}
    */
-  protected createVectorField(ids: string[], vector: Vector): BooleanVector | string {
+  protected createVectorField(vector: Vector): BooleanVector | string {
 
-    return this.createBitFieldString(ids, vector);
+    return this.createBitFieldString(vector);
 
   }
 
   /**
    * Creates a string bit field with a value for each id where each value is '1' if its id is in the passed in vector
-   * @param {string[]} ids
    * @param {Vector }vector
    * @return {string}
    */
-  protected createBitFieldString(ids: string[], vector: Vector): string {
+  protected createBitFieldString(vector: Vector): string {
 
-    return ids.map((id: string): BoolString => vector.has(+id) ? '1' : '0').join('');
+    return [...vector].reduce<string>((str: string, tpl: IdBoolTuple): string => {
+
+      str += tpl[1] ? '1' : '0';
+      return str;
+
+    }, '');
 
   }
 
@@ -55,20 +62,45 @@ export class InAppTCDataBldr extends TCDataBldr implements InAppTCData {
    */
   protected createRestrictions(tcModel: TCModel): Restrictions {
 
-    return tcModel.publisherRestrictions.getAllRestrictions().reduce<Restrictions>((obj, pr): Restrictions => {
+    const tempObj = tcModel.publisherRestrictions.getAllRestrictions().reduce(
+      (obj, pr: PurposeRestriction): Restrictions => {
 
-      const purposeId = pr.purposeId.toString(10);
-      obj[purposeId] = '';
+        const purposeId = '' + pr.purposeId;
+        const restrictionType = pr.restrictionType;
 
-      tcModel.publisherRestrictions.getVendors(pr).forEach((): void => {
+        return tcModel.publisherRestrictions.getVendors(pr).reduce((obj, vendorId: number) => {
 
-        (obj[purposeId] as string).concat(pr.restrictionType.toString(10));
+          obj[purposeId] = obj[purposeId] || [] as VendorIdRestrictionType[];
 
-      });
+          obj[purposeId].push({vendorId, restrictionType});
+          return obj;
 
-      return obj;
+        }, obj);
 
-    }, {});
+      }, {});
+
+    return Object.keys(tempObj).reduce<Restrictions>((restrictions: Restrictions, key: string) => {
+
+      restrictions[key] = tempObj[key].
+        sort((o1: VendorIdRestrictionType, o2: VendorIdRestrictionType) => o1.vendorId > o2.vendorId).
+        reduce((str: string, keyVal: VendorIdRestrictionType, index) => {
+
+          const paddingCount = index > 0 ? keyVal.vendorId - tempObj[key][index - 1].vendorId : keyVal.vendorId;
+
+          for (let i = 1; i < paddingCount; i++) {
+
+            str += RestrictionType.NO_RESTRICTION;
+
+          }
+
+          str += keyVal.restrictionType;
+          return str;
+
+        }, '');
+
+      return restrictions;
+
+    }, tempObj);
 
   };
 
