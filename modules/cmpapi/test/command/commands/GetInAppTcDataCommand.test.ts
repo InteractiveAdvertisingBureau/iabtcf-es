@@ -6,7 +6,7 @@ import {Commands, GetInAppTcDataCommand} from '../../../src/command/commands';
 import {InAppTCData} from '../../../src/model';
 import {EventStatus} from '../../../src/status';
 import {createValidTCModel, gvl} from '../../utils';
-import {inAppTcDataTestModel} from './InAppTcDataTestData';
+import {inAppTcDataTestModel} from '../../mockdata/InAppTcDataTestData';
 
 export function run(): void {
 

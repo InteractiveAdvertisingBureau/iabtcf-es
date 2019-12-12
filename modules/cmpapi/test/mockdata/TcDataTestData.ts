@@ -1,6 +1,6 @@
 import {RestrictionType} from '@iabtcf/core';
-import {TCData} from '../../../src/model';
-import {EventStatus} from '../../../src/status';
+import {TCData} from '../../src/model';
+import {EventStatus} from '../../src/status';
 
 export const tcDataModelTestFiltered: TCData = {
   tcString: 'COZS4DEOZS4DEACABAENAACMAL_AAP_AAAAAFWQB8ADAANABgADUAIIAYgBMgDXAHAAV8BAgCZAFIAKZAVIAqwCrIBCABgAGgAlABgADUAIIAYgBMgDXAHAAV8BAgCZAFIAKZAVIAqwAMcACgAYABoAYh4AEAcBEACAOAA.YAAAAAA',

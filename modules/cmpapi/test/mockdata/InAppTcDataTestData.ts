@@ -1,5 +1,5 @@
-import {InAppTCData} from '../../../src/model';
-import {EventStatus} from '../../../src/status';
+import {InAppTCData} from '../../src/model';
+import {EventStatus} from '../../src/status';
 
 export const inAppTcDataTestModel: InAppTCData = {
   tcString: 'COZS4DEOZS4DEACABAENAACMAL_AAP_AAAAAFWQB8ADAANABgADUAIIAYgBMgDXAHAAV8BAgCZAFIAKZAVIAqwCrIBCABgAGgAlABgADUAIIAYgBMgDXAHAAV8BAgCZAFIAKZAVIAqwAMcACgAYABoAYh4AEAcBEACAOAA.YAAAAAA',

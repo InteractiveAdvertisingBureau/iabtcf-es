@@ -7,7 +7,7 @@ import {TCData} from '../../../src/model';
 import {EventStatus} from '../../../src/status';
 import {ValidationMessages} from '../../../src/validation';
 import {createValidTCModel, gvl} from '../../utils';
-import {tcDataModelTest, tcDataModelTestFiltered} from './TcDataTestData';
+import {tcDataModelTest, tcDataModelTestFiltered} from '../../mockdata/TcDataTestData';
 
 export function run(): void {
 
