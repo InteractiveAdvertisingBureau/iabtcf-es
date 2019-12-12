@@ -26,7 +26,7 @@ export class SegmentSequence implements SequenceVersionMap {
 
       if (isForSaving) {
 
-        this['2'].push(Segments.publisherTC);
+        this.addPublisherTCMaybe(tcModel, '2');
 
       }
 
@@ -60,19 +60,26 @@ export class SegmentSequence implements SequenceVersionMap {
 
         }
 
-        if (
-          tcModel[Fields.publisherConsents].size > 0 ||
-          tcModel[Fields.publisherLegitimateInterest].size > 0 ||
-          tcModel[Fields.numCustomPurposes] > 0 ||
-          tcModel[Fields.publisherCustomConsents].size > 0 ||
-          tcModel[Fields.publisherCustomLegitimateInterest].size > 0
-        ) {
-
-          this['2'].push(Segments.publisherTC);
-
-        }
+        this.addPublisherTCMaybe(tcModel, '2');
 
       }
+
+    }
+
+  }
+
+  private addPublisherTCMaybe(tcModel: TCModel, version: string): void {
+
+    // is there any reason to add this?
+    if (
+      tcModel[Fields.publisherConsents].size > 0 ||
+      tcModel[Fields.publisherLegitimateInterest].size > 0 ||
+      tcModel[Fields.numCustomPurposes] > 0 ||
+      tcModel[Fields.publisherCustomConsents].size > 0 ||
+      tcModel[Fields.publisherCustomLegitimateInterest].size > 0
+    ) {
+
+      this[version].push(Segments.publisherTC);
 
     }
 

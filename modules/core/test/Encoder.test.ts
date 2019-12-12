@@ -6,6 +6,7 @@ import * as lang from './encoder/LangEncoder.test';
 import * as fixedVector from './encoder/FixedVectorEncoder.test';
 import * as vendorVector from './encoder/VendorVectorEncoder.test';
 import * as segmentEncoder from './encoder/SegmentEncoder.test';
+import * as segmentSequence from './encoder/SegmentSequence.test';
 // import * as purposeRestrictions from './encoder/PurposeRestrictionVectorEncoder.test';
 import * as base64 from './encoder/Base64Url.test';
 
@@ -30,7 +31,12 @@ describe('Encoder', (): void => {
 
     fixedVector.run();
     vendorVector.run();
-    // purposeRestrictions.run();
+    //  purposeRestrictions.run();
+
+  });
+  describe('Sequence', (): void => {
+
+    segmentSequence.run();
 
   });
   describe('Segment Encoder', (): void => {
@@ -38,8 +44,5 @@ describe('Encoder', (): void => {
     segmentEncoder.run();
 
   });
-
-  // others
-  // purposeRestrictions.run();
 
 });
