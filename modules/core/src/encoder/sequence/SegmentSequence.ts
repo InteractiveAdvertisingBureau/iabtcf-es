@@ -39,7 +39,7 @@ export class SegmentSequence implements SequenceVersionMap {
        * be added to both the transmission string and the storage string
        */
 
-      if (tcModel[Fields.supportOOB] && tcModel[Fields.vendorsDisclosed].size > 0) {
+      if (tcModel[Fields.vendorsDisclosed].size > 0) {
 
         this['2'].push(Segments.vendorsDisclosed);
 

@@ -72,6 +72,13 @@ export function run(): void {
   powSet.forEach((boolSet: boolean[]): void => {
 
     const version = (+boolSet[0] + 1).toString();
+    const isServiceSpecific = boolSet[1];
+    const isForSaving = boolSet[2];
+    const hasVendorsAllowed = boolSet[3];
+    const hasVendorsDisclosed = boolSet[4];
+    const hasPublisherConsents = boolSet[5];
+
+    const boolStr = `version: ${version}, isServiceSpecific=${isServiceSpecific}, isForSaving=${isForSaving}, hasVendorsAllowed=${hasVendorsAllowed}, hasVendorsDisclosed=${hasVendorsDisclosed}, hasPublisherConsents=${hasPublisherConsents}`;
 
     runPerm(
       version,
@@ -83,11 +90,69 @@ export function run(): void {
       (sequence: string[]): void => {
 
         expect(sequence.length).to.be.above(0);
+        expect(sequence[0], `v${version} has the core segment as the first segment ${boolStr}`).to.equal(Segments.core);
 
         if (version === '1') {
 
-          expect(sequence.length, 'v1 sequences have 1 segment').to.equal(1);
-          expect(sequence[0], 'v1 sequences just the core segment').to.equal(Segments.core);
+          expect(sequence.length, `v${version} sequences have 1 segment ${boolStr}`).to.equal(1);
+
+        } else if (version === '2') {
+
+          if (isServiceSpecific) {
+
+            if (isForSaving) {
+
+              if (hasPublisherConsents) {
+
+                expect(sequence.length, `v${version} sequences have 2 segment ${boolStr}`).to.equal(2);
+                expect(sequence[1], `v${version} has the publisherTC segment at index 1 [${sequence}] ${boolStr}`).to.equal(Segments.publisherTC);
+
+              } else {
+
+                expect(sequence.length, `v${version} sequences have 1 segment ${boolStr}`).to.equal(1);
+
+              }
+
+            }
+
+          } else {
+
+            if (hasVendorsDisclosed) {
+
+              if (isForSaving) {
+
+                expect(sequence.length, `v${version} sequences have 2 segment ${boolStr}`).to.equal(2);
+
+              } else {
+
+                if (hasVendorsDisclosed) {
+
+                  expect(sequence[1], `v${version} has the vendorsDisclosed segment at index 1 [${sequence}] ${boolStr}`).to.equal(Segments.vendorsDisclosed);
+
+                }
+
+                if (hasVendorsAllowed) {
+
+                  if (hasPublisherConsents) {
+
+                    expect(sequence.length, `v${version} sequences have 4 segments ${boolStr}`).to.equal(4);
+                    expect(sequence[3], `v${version} has the publisherTC segment at index 3 [${sequence}] ${boolStr}`).to.equal(Segments.publisherTC);
+
+                  } else {
+
+                    expect(sequence.length, `v${version} sequences have 3 segments ${boolStr}`).to.equal(3);
+
+                  }
+
+                  expect(sequence[2], `v${version} has the vendorsAllowed segment at index 2 [${sequence}] ${boolStr}`).to.equal(Segments.vendorsAllowed);
+
+                }
+
+              }
+
+            }
+
+          }
 
         }
 
