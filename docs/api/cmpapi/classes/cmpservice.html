@@ -114,7 +114,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmp/CmpService.ts#L11">cmp/CmpService.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/cmp/CmpService.ts#L11">cmp/CmpService.ts:11</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -149,13 +149,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmp/CmpService.ts#L93">cmp/CmpService.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/cmp/CmpService.ts#L107">cmp/CmpService.ts:107</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Disables the CmpApi from serving anything but ping and custom commands by setting cmp status to error
-									This can not be undone</p>
+									<p>Disables the CmpApi from serving anything but ping and custom commands by
+									setting cmp status to error This can not be undone</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -166,18 +166,28 @@
 					<a name="settcmodel" class="tsd-anchor"></a>
 					<h3>set<wbr>TcModel</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>TcModel<span class="tsd-signature-symbol">(</span>tcModel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TCModel</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>TcModel<span class="tsd-signature-symbol">(</span>tcModel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TCModel</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">never</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmp/CmpService.ts#L27">cmp/CmpService.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/cmp/CmpService.ts#L39">cmp/CmpService.ts:39</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Sets the new TCModel and sets various states associated with the model</p>
+									<p>Sets the new TCModel with side-effects:</p>
+									<ul>
+										<li>sets gdprApplies to <code>true</code> or <code>false</code> depending on whether a
+										<code>TCModel</code> or <code>null</code> is passed.</li>
+										<li>CMP Status set to &#39;loaded&#39; if anything is set</li>
+										<li>Display Status set to &#39;disabled&#39; or &#39;hidden&#39; depending on whether a
+										<code>TCModel</code> or <code>null</code> is passed.</li>
+										<li>Event Status set to &#39;useractionscomplete&#39; or &#39;tcloaded&#39; only when a
+											<code>TCModel</code> is set.  Which one is determined by whether this is the
+										first or nth time a <code>TCModel</code> is set.</li>
+									</ul>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -185,10 +195,18 @@
 								<li>
 									<h5>tcModel: <span class="tsd-signature-type">TCModel</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
 									<div class="tsd-comment tsd-typography">
+										<p>if null: gdprApplies = false and display
+											status is &#39;disabled&#39;. If a valid <code>TCModel</code> is set gdprApplies = true and
+											display status is &#39;hidden&#39;.  If this is the first time the valid <code>TCModel</code>
+											is set Event is fired and EventStatus is &#39;tcloaded&#39;, subsequent sets event
+										is fired and &#39;useractioncomplete&#39; is the EventStatus</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">never</span>
+							</h4>
 						</li>
 					</ul>
 				</section>
@@ -202,7 +220,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/769726e/modules/cmpapi/src/cmp/CmpService.ts#L71">cmp/CmpService.ts:71</a></li>
+									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/cmp/CmpService.ts#L85">cmp/CmpService.ts:85</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
