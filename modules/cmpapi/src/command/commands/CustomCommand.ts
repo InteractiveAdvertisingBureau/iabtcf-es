@@ -2,6 +2,8 @@ import {Param} from '../../types';
 import {Callback} from '../callback/Callback';
 import {Command} from './Command';
 
+// One of the rare cases where you actually really do need an 'any'
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type CustomCommandFunction = (...args: any) => void;
 
 /**

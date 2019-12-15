@@ -18,7 +18,7 @@
     "prepare": "yarn run build",
     "build": "rm -rf lib ; tsc",
     "debug": "ndb yarn test",
-    "lint": "eslint ./src/**/*.ts ./test/**/*.ts",
+    "lint": "eslint `find test src -name '*.ts'`",
     "lint:fix": "yarn run lint -- --fix",
     "test": "mocha",
     "serve:cov": "npx http-server ./coverage/",

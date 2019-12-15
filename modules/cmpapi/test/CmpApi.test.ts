@@ -1,10 +1,11 @@
-import {GVL, TCModel} from '@iabtcf/core';
-import {assert} from 'chai';
+import {GVL, TCModel, VendorList} from '@iabtcf/core';
+import {assert, expect} from 'chai';
+import * as sinon from 'sinon';
 import {createStub} from '../../../dev/stub';
+import {XMLHttpTestTools, smellsLikeGVL} from '@iabtcf/testing';
 import {
   CmpApi,
   EventStatus,
-  GlobalVendorList,
   IATCDataCallback,
   InAppTCData,
   Ping,
@@ -32,10 +33,9 @@ const createGetTCDataCallback =
 
     return (tcData: TCData | null, success: boolean): void => {
 
-      assert.isTrue(success, 'getTCData was not successful');
-      assert.isNotNull(tcData, 'getTCData returned null tcData');
-      // @ts-ignore
-      assert.equal(tcData.eventStatus, eventStatus, 'Event status did not match set value');
+      expect(success, 'success').to.be.true;
+      expect(tcData, 'tcData').not.to.be.null;
+      expect((tcData as TCData).eventStatus, 'eventStatus').to.equal(eventStatus);
 
       // Todo: Check the object more thoroughly
 
@@ -74,7 +74,7 @@ describe('CmpApi', (): void => {
 
     describe('Before creation of a new instance of CmpApi:', (): void => {
 
-      it('Stub exists', (done): void => {
+      it('Stub exists', (done: () => void): void => {
 
         assert.isFunction(win[API_FUNCTION_NAME], 'Stub is not a function.');
 
@@ -114,7 +114,7 @@ describe('CmpApi', (): void => {
 
       });
 
-      it('ping works', (done): void => {
+      it('ping works', (done: () => void): void => {
 
         const callback: PingCallback = (pingReturn: Ping | null): void => {
 
@@ -135,7 +135,7 @@ describe('CmpApi', (): void => {
 
       describe('Custom Commands:', (): void => {
 
-        it('custom command works', (done): void => {
+        it('custom command works', (done: () => void): void => {
 
           const param = 'BINGO';
           const expectedTestString = custCommandTestData.testString.replace('DOG_NAME', param);
@@ -152,7 +152,7 @@ describe('CmpApi', (): void => {
 
         });
 
-        it('Command fails if command is not supported', (done): void => {
+        it('Command fails if command is not supported', (done: () => void): void => {
 
           const callback: PingCallback = (pingReturn: Ping | null): void => {
 
@@ -165,7 +165,7 @@ describe('CmpApi', (): void => {
 
         });
 
-        it('Command fails if command is not a string', (done): void => {
+        it('Command fails if command is not a string', (done: () => void): void => {
 
           const callback: PingCallback = (pingReturn: Ping | null): void => {
 
@@ -178,7 +178,7 @@ describe('CmpApi', (): void => {
 
         });
 
-        it('Command fails if version is an integer less than 2', (done): void => {
+        it('Command fails if version is an integer less than 2', (done: () => void): void => {
 
           const callback: PingCallback = (pingReturn: Ping | null): void => {
 
@@ -191,7 +191,7 @@ describe('CmpApi', (): void => {
 
         });
 
-        it('Command fails when using an object as version', (done): void => {
+        it('Command fails when using an object as version', (done: () => void): void => {
 
           const callback: PingCallback = (pingReturn: Ping | null): void => {
 
@@ -205,7 +205,7 @@ describe('CmpApi', (): void => {
         });
 
         // Todo: how to test this
-        // it('Command fails when callback is not a function', (done): void => {
+        // it('Command fails when callback is not a function', (done:() => void): void => {
         //
         //   const callback: PingCallback = (pingReturn: Ping | null) => {
         //
@@ -220,7 +220,7 @@ describe('CmpApi', (): void => {
 
       });
 
-      // it('custom command works', (done): void => {
+      // it('custom command works', (done:() => void): void => {
       //
       //   const param = 'BINGO';
       //   const expectedTestString = custCommandTestData.testString.replace('DOG_NAME', param);
@@ -239,7 +239,7 @@ describe('CmpApi', (): void => {
 
       describe('getTCData', (): void => {
 
-        it('getTCData works and returns tc loaded for event status', (done): void => {
+        it('getTCData works and returns tc loaded for event status', (done: () => void): void => {
 
           const getTCDataCallback = createGetTCDataCallback(done, EventStatus.TC_LOADED);
 
@@ -247,7 +247,7 @@ describe('CmpApi', (): void => {
 
         });
 
-        it('getTCData returns user action complete after setting TcData a second time', (done): void => {
+        it('getTCData returns user action complete after setting TcData a second time', (done: () => void): void => {
 
           cmpApi.tcModel = createValidTCModel(gvl);
 
@@ -257,14 +257,13 @@ describe('CmpApi', (): void => {
 
         });
 
-        it('getTCData works with vendor ids', (done): void => {
+        it('getTCData works with vendor ids', (done: () => void): void => {
 
           const callback: TCDataCallback = (tcData: TCData | null, success: boolean): void => {
 
-            assert.isTrue(success, 'getTCData was not successful');
-            assert.isNotNull(tcData, 'getTCData returned null tcData');
-            // @ts-ignore
-            assert.equal(tcData.eventStatus, EventStatus.USER_ACTION_COMPLETE, 'Event status did not match set value');
+            expect(success, 'success').to.be.true;
+            expect(tcData, 'tcData').not.to.be.null;
+            expect((tcData as TCData).eventStatus, 'eventStatus').to.equal(EventStatus.USER_ACTION_COMPLETE);
 
             // Todo: Check the object more thoroughly
 
@@ -276,7 +275,7 @@ describe('CmpApi', (): void => {
 
         });
 
-        it('getTCData fails when using invalid vendor ids', (done): void => {
+        it('getTCData fails when using invalid vendor ids', (done: () => void): void => {
 
           const callback: TCDataCallback = (tcData: TCData | null, success: boolean): void => {
 
@@ -294,7 +293,7 @@ describe('CmpApi', (): void => {
 
       describe('getInAppTCData', (): void => {
 
-        it('getInAppTCData works', (done): void => {
+        it('getInAppTCData works', (done: () => void): void => {
 
           cmpApi.tcModel = createValidTCModel(gvl);
 
@@ -305,10 +304,9 @@ describe('CmpApi', (): void => {
 
             if (inAppTcData) {
 
-              assert.equal((inAppTcData.purpose.consents as string).charAt(0), '1', 'Purpose Consent did not match set value');
-              assert.equal((inAppTcData.purpose.consents as string).charAt(1), '0', 'Purpose Consent did not match set value');
-              // @ts-ignore
-              assert.equal(inAppTcData.eventStatus, EventStatus.USER_ACTION_COMPLETE, 'Event status did not match set value');
+              expect((inAppTcData.purpose.consents as string).charAt(0), 'inAppTcData.purpose.consents.charAt(0)').to.equal( '1');
+              expect((inAppTcData.purpose.consents as string).charAt(1), 'inAppTcData.purpose.consents.charAt(1)').to.equal( '0');
+              expect((inAppTcData as InAppTCData).eventStatus, 'eventStatus').to.equal(EventStatus.USER_ACTION_COMPLETE);
 
             }
 
@@ -339,10 +337,9 @@ describe('CmpApi', (): void => {
 
             if (tcData) {
 
-              assert.equal(tcData.purpose.consents['3'], true, 'Purpose Consent did not match set value');
-              assert.equal(tcData.purpose.consents['2'], false, 'Purpose Consent did not match set value');
-              // @ts-ignore
-              assert.equal(tcData.eventStatus, EventStatus.USER_ACTION_COMPLETE, 'Event status did not match set value');
+              expect(tcData.purpose.consents['3'], 'tcData.purpose.consents["3"]').to.be.true;
+              expect(tcData.purpose.consents['2'], 'tcData.purpose.consents["2"]').to.be.false;
+              expect((tcData as TCData).eventStatus, 'eventStatus').to.equal(EventStatus.USER_ACTION_COMPLETE);
 
             }
 
@@ -361,7 +358,7 @@ describe('CmpApi', (): void => {
 
         describe('addEventListener', (): void => {
 
-          it('addEventListener works', (done): void => {
+          it('addEventListener works', (done: () => void): void => {
 
             const callCount = 0;
             const maxCallCount = 3;
@@ -371,8 +368,8 @@ describe('CmpApi', (): void => {
             win[API_FUNCTION_NAME]('addEventListener', 2, addEventListenerCallback);
 
             const tcModel = new TCModel(gvl);
-            tcModel.cmpId = 2
-            ;
+
+            tcModel.cmpId = 2;
             tcModel.cmpVersion = 1;
 
             // full consent!
@@ -391,7 +388,7 @@ describe('CmpApi', (): void => {
 
         describe('removeEventListener', (): void => {
 
-          it('removeEventListener works', (done): void => {
+          it('removeEventListener works', (done: () => void): void => {
 
             const callback: RemoveListenerCallback = (success: boolean | null): void => {
 
@@ -425,84 +422,92 @@ describe('CmpApi', (): void => {
 
       describe('getVendorList', (): void => {
 
-        GVL.baseUrl = 'https://vendorlist.consensu.org/v2';
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        const vendorlistJson: VendorList = require('../../../dev/vendor-list.json');
 
-        it('getVendorList works', (done): void => {
+        beforeEach(XMLHttpTestTools.beforeEach);
+        afterEach(XMLHttpTestTools.afterEach);
 
-          const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean): void => {
+        GVL.baseUrl = 'https://super-rad-cmp.mgr.consensu.org/vendorlist';
 
-            assert.isTrue(success, 'success was false');
-            assert.isNotNull(gvl, 'gvl was null');
+        const getSuccesfulCallback = (done: () => void): VendorListCallback => {
+
+          return (gvl: VendorList | null, success: boolean): void => {
+
+            expect(success, 'success').to.be.true;
+            expect(gvl, 'gvl').not.to.be.null;
+            smellsLikeGVL(gvl as object);
+
             done();
 
           };
 
-          win[API_FUNCTION_NAME]('getVendorList', 2, callback, 2);
+        };
 
-        });
+        const getUnsuccesfulCallback = (done: () => void): VendorListCallback => {
 
-        it('getVendorList works using 5 as the version', (done): void => {
+          return (gvl: VendorList | null, success: boolean): void => {
 
-          const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean): void => {
-
-            assert.isTrue(success, 'success was false');
-            assert.isNotNull(gvl, 'gvl was null');
+            expect(success, 'success').to.be.false;
+            expect(gvl, 'gvl').to.be.null;
             done();
 
           };
 
-          win[API_FUNCTION_NAME]('getVendorList', 2, callback, 5);
+        };
 
-        });
+        const expectRequest = (url: string): void => {
 
-        it('getVendorList works when using "LATEST as version"', (done): void => {
+          expect(XMLHttpTestTools.requests.length).to.equal(1);
 
-          const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean): void => {
+          const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
 
-            assert.isTrue(success, 'success was false');
-            assert.isNotNull(gvl, 'gvl was null');
-            done();
+          expect(req, 'req').not.to.be.undefined;
+          expect(req.method, 'req.method').to.equal('GET');
+          expect(req.url, 'req.url').to.equal(url);
 
-          };
+          // respond to the request
+          req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(vendorlistJson));
 
-          win[API_FUNCTION_NAME]('getVendorList', 2, callback, 'LATEST');
+        };
 
-        });
+        const expectNoRequest = (): void => {
 
-        // Todo: this isn't correct. It is supposed to be 0 or greater is valid
-        it('getVendorList fails when using 0 as version', (done): void => {
+          expect(XMLHttpTestTools.requests.length).to.equal(0);
 
-          const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean): void => {
+        };
 
-            assert.isFalse(success, 'success was true');
-            assert.isNull(gvl, 'gvl was not null');
-            done();
+        const runTest = (shouldSucceed: boolean, param?: string | number, requestURL?: string): void => {
 
-          };
+          it(`will ${requestURL ? '' : 'not '}make an HTTPrequest and should ${shouldSucceed ? '' : 'not '}succeed when the param is ${param}`, (done: () => void): void => {
 
-          win[API_FUNCTION_NAME]('getVendorList', 2, callback, 0);
+            win[API_FUNCTION_NAME]('getVendorList', 2, shouldSucceed ? getSuccesfulCallback(done) : getUnsuccesfulCallback(done), param);
 
-        });
+            if (requestURL) {
 
-        it('getVendorList fails when using "SOMETHING" as version', (done): void => {
+              expectRequest(requestURL);
 
-          const callback: VendorListCallback = (gvl: GlobalVendorList | null, success: boolean): void => {
+            } else {
 
-            assert.isFalse(success, 'success was true');
-            assert.isNull(gvl, 'gvl was not null');
-            done();
+              expectNoRequest();
 
-          };
+            }
 
-          win[API_FUNCTION_NAME]('getVendorList', 2, callback, 'SOMETHING');
+          });
 
-        });
+        };
+
+        runTest(true);
+        runTest(true, 5, `${GVL.baseUrl}/archives/vendor-list-v5.json`);
+        runTest(true, 'LATEST', `${GVL.baseUrl}/vendor-list.json`);
+        runTest(false, 0);
+        runTest(false, 'SOMETHING');
 
       });
 
       describe('Disable CmpApi', (): void => {
 
-        it('getTCData does not work after setting disabled', (done): void => {
+        it('getTCData does not work after setting disabled', (done: () => void): void => {
 
           cmpApi.disable();
 
@@ -519,7 +524,7 @@ describe('CmpApi', (): void => {
 
         });
 
-        it('ping still works after setting disabled', (done): void => {
+        it('ping still works after setting disabled', (done: () => void): void => {
 
           const callback: PingCallback = (pingReturn: Ping | null): void => {
 

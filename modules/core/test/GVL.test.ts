@@ -5,9 +5,9 @@ import {Vendor} from '../src/model/gvl';
 import {IntMap} from '../src/model/IntMap';
 import {XMLHttpTestTools} from '@iabtcf/testing';
 
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const vendorlistJson = require('../../../dev/vendor-list.json');
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const translationJson = require(`../../../dev/purposes-fr.json`);
 
 const gvlKeys: string[] = [
@@ -68,6 +68,41 @@ describe('GVL', (): void => {
     }).to.throw('must specify GVL.baseUrl before loading GVL json');
 
   });
+  it('should fail to set baseUrl to http://vendorlist.consensu.org/', (): void => {
+
+    // calls constructor
+    expect((): void => {
+
+      GVL.baseUrl = 'http://vendorlist.consensu.org/';
+
+    }).to.throw('Invalid baseUrl!  You may not pull directly from vendorlist.consensu.org and must provide your own cache');
+
+  });
+  it('should add a trailing slash to baseUrl if one is not there', (): void => {
+
+    const myURL = 'http://vendorlist.mysweetcmp.mgr.consensu.org';
+
+    // calls constructor
+    expect((): void => {
+
+      GVL.baseUrl = myURL;
+
+    }).not.to.throw();
+
+    expect(GVL.baseUrl).to.equal(myURL + '/');
+
+  });
+
+  it('should fail to set baseUrl to https://vendorlist.consensu.org/ (secure url)', (): void => {
+
+    // calls constructor
+    expect((): void => {
+
+      GVL.baseUrl = 'https://vendorlist.consensu.org/';
+
+    }).to.throw('Invalid baseUrl!  You may not pull directly from vendorlist.consensu.org and must provide your own cache');
+
+  });
 
   it('should propogate all values with passed in json', (): void => {
 
@@ -89,7 +124,7 @@ describe('GVL', (): void => {
 
   it('should get latest GVL if nothing is passed to the constructor', (done): void => {
 
-    GVL.baseUrl = 'http://sweetcmp.com';
+    GVL.baseUrl = 'http://sweetcmp.com/';
 
     const gvl: GVL = new GVL();
 
@@ -98,7 +133,7 @@ describe('GVL', (): void => {
     const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
 
     expect(req.method).to.equal('GET');
-    expect(req.url).to.equal(`${GVL.baseUrl}/vendor-list.json`);
+    expect(req.url).to.equal(`${GVL.baseUrl}vendor-list.json`);
 
     gvl.readyPromise
       .then((): void => {
@@ -118,7 +153,7 @@ describe('GVL', (): void => {
 
   it('should get versioned GVL if version number is passed', (done): void => {
 
-    GVL.baseUrl = 'http://sweetcmp.com';
+    GVL.baseUrl = 'http://sweetcmp.com/';
 
     const version = 23;
     const gvl: GVL = new GVL(version);
@@ -128,7 +163,7 @@ describe('GVL', (): void => {
     const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
 
     expect(req.method).to.equal('GET');
-    expect(req.url).to.equal(`${GVL.baseUrl}/archives/vendor-list-v${version}.json`);
+    expect(req.url).to.equal(`${GVL.baseUrl}archives/vendor-list-v${version}.json`);
 
     gvl.readyPromise
       .then((): void => {
@@ -148,7 +183,7 @@ describe('GVL', (): void => {
 
   it('should get versioned GVL if version number as string is passed', (done): void => {
 
-    GVL.baseUrl = 'http://sweetcmp.com';
+    GVL.baseUrl = 'http://sweetcmp.com/';
 
     const version = '23';
     const gvl: GVL = new GVL(version);
@@ -158,7 +193,7 @@ describe('GVL', (): void => {
     const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
 
     expect(req.method).to.equal('GET');
-    expect(req.url).to.equal(`${GVL.baseUrl}/archives/vendor-list-v${version}.json`);
+    expect(req.url).to.equal(`${GVL.baseUrl}archives/vendor-list-v${version}.json`);
 
     gvl.readyPromise
       .then((): void => {
@@ -231,7 +266,7 @@ describe('GVL', (): void => {
     const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
 
     expect(req.method).to.equal('GET');
-    expect(req.url).to.equal(GVL.baseUrl + '/' + GVL.languageFilename.replace('[LANG]', language));
+    expect(req.url).to.equal(GVL.baseUrl + GVL.languageFilename.replace('[LANG]', language));
 
     req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(translationJson));
 
@@ -332,7 +367,7 @@ describe('GVL', (): void => {
     const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
 
     expect(req.method).to.equal('GET');
-    expect(req.url).to.equal(GVL.baseUrl + '/' + GVL.languageFilename.replace('[LANG]', language));
+    expect(req.url).to.equal(GVL.baseUrl + GVL.languageFilename.replace('[LANG]', language));
 
     req.respond(404, XMLHttpTestTools.JSON_HEADER, JSON.stringify({}));
 
@@ -392,8 +427,8 @@ describe('GVL', (): void => {
         }
 
         const gvlMethodName: string = 'getVendorsWith' + specialOrSubType + cappedPORF;
-        const gvlMap: IntMap<Vendor>
-          = gvl[gvlMethodName](intId);
+        const gvlMap: IntMap<Vendor> =
+          gvl[gvlMethodName](intId);
 
         Object.keys(vendorlistJson.vendors).forEach((vendorId: string): void => {
 

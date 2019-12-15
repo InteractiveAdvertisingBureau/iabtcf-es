@@ -9,9 +9,8 @@ export const sameDataDiffRef = (obj1: object, obj2: object, objName: string): vo
 
   }
 
-  expect(typeof obj1, `objects are not both ${objName}s!`).to.equal(typeof obj2);
-
-  expect(obj1, 'these are the same reference...').not.to.equal(obj2);
+  expect(typeof obj1, `typeof ${objName}`).to.equal(typeof obj2);
+  expect(obj1).not.to.equal(obj2);
 
   const keySet = new Set<string>(Object.keys(obj1).concat(Object.keys(obj2)));
 
@@ -25,7 +24,7 @@ export const sameDataDiffRef = (obj1: object, obj2: object, objName: string): vo
 
     if (isPrimitive(obj1[key])) {
 
-      expect(obj2[key], `${objName}:${key} is not equal`).to.equal(obj1[key]);
+      expect(obj2[key], `${objName}:${key}`).to.equal(obj1[key]);
 
     } else {
 
@@ -35,7 +34,7 @@ export const sameDataDiffRef = (obj1: object, obj2: object, objName: string): vo
 
           if (isPrimitive(value)) {
 
-            expect(obj2[key2], `${objName}:${key2} is not equal`).to.equal(obj1[key2]);
+            expect(obj2[key2], `${objName}:${key2}`).to.equal(obj1[key2]);
 
           } else {
 
@@ -48,7 +47,6 @@ export const sameDataDiffRef = (obj1: object, obj2: object, objName: string): vo
       } else {
 
         sameDataDiffRef(obj1[key], obj2[key], key);
-        // expect(obj2[key], `${key} is not deep equal`).to.deep.equal(obj1[key]);
 
       }
 

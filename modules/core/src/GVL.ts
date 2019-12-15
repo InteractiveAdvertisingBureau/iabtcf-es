@@ -22,23 +22,71 @@ type PurposeSubType = 'consent' | 'legInt' | 'flexible';
 export class GVL extends Cloneable<GVL> implements VendorList, Declarations {
 
   private static LANGUAGE_CACHE: Map<string, Declarations> = new Map<string, Declarations>();
-
   public static readonly DEFAULT_LANGUAGE: string = 'EN';
+  private static baseUrl_: string;
 
   /**
+   * baseUrl - Entities using the vendor-list.json are required by the iab to
+   * host their own copy of it to reduce the load on the iab's infrastructure
+   * so a 'base' url must be set to be put together with the versioning scheme
+   * of the filenames.
+   *
    * @static
-   * @param {string} - the base url to load the vendor-list.json from.  This is
+   * @param {string} url - the base url to load the vendor-list.json from.  This is
    * broken out from the filename because it follows a different scheme for
    * latest file vs versioned files.
+   *
+   * @throws {GVLError} - If the url is http[s]://vendorlist.consensu.org/...
+   * this will throw an error.  IAB Europe requires that that CMPs and Vendors
+   * cache their own copies of the GVL to minimize load on their
+   * infrastructure.  For more information regarding caching of the
+   * vendor-list.json, please see [the TCF documentation on 'Caching the Global
+   * Vendor List'
+   * ](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#caching-the-global-vendor-list)
    */
-  public static baseUrl: string;
+  public static set baseUrl(url: string) {
+
+    const notValid = /^https?:\/\/vendorlist\.consensu\.org\//;
+
+    if (notValid.test(url)) {
+
+      throw new GVLError('Invalid baseUrl!  You may not pull directly from vendorlist.consensu.org and must provide your own cache');
+
+    }
+
+    // if a trailing slash was forgotten
+    if (url.length > 0 && url[url.length - 1] !== '/') {
+
+      url += '/';
+
+    }
+
+    this.baseUrl_ = url;
+
+  };
+
+  /**
+   * baseUrl - Entities using the vendor-list.json are required by the iab to
+   * host their own copy of it to reduce the load on the iab's infrastructure
+   * so a 'base' url must be set to be put together with the versioning scheme
+   * of the filenames.
+   *
+   * @static
+   * @return {string} - returns the previously set baseUrl, the default is
+   * `undefined`
+   */
+  public static get baseUrl(): string {
+
+    return this.baseUrl_;
+
+  }
 
   /**
    * @static
    * @param {string} - the latest is assumed to be vendor-list.json because
    * that is what the iab uses, but it could be different... if you want
    */
-  public static latestFilename: string = 'vendor-list.json';
+  public static latestFilename = 'vendor-list.json';
 
   /**
    * @static
@@ -54,7 +102,7 @@ export class GVL extends Cloneable<GVL> implements VendorList, Declarations {
    * GVL.versionedFilename = "vendorlist?getVersion=[VERSION]";
    * ```
    */
-  public static versionedFilename: string = 'archives/vendor-list-v[VERSION].json';
+  public static versionedFilename = 'archives/vendor-list-v[VERSION].json';
 
   /**
    * @param {string} - Translations of the names and descriptions for Purposes,
@@ -71,11 +119,11 @@ export class GVL extends Cloneable<GVL> implements VendorList, Declarations {
    * GVL.languageFilename = "purposes?getPurposes=[LANG]";
    * ```
    */
-  public static languageFilename: string = 'purposes-[LANG].json';
+  public static languageFilename = 'purposes-[LANG].json';
 
   /**
    * @param {Promise} resolved when this GVL object is populated with the data
-   * or rejected if there is an error
+   * or rejected if there is an error.
    */
   public readyPromise: Promise<void | GVLError>;
 
@@ -200,8 +248,6 @@ export class GVL extends Cloneable<GVL> implements VendorList, Declarations {
 
       }
 
-      url = this.addTrailingSlashMaybe(url);
-
       if (versionOrVendorList as number > 0) {
 
         // load version specified
@@ -267,18 +313,6 @@ export class GVL extends Cloneable<GVL> implements VendorList, Declarations {
       specialFeatures: this.specialFeatures,
       stacks: this.stacks,
     });
-
-  }
-  private addTrailingSlashMaybe(url: string): string {
-
-    // if a trailing slash was forgotten
-    if (url[url.length - 1] !== '/') {
-
-      url += '/';
-
-    }
-
-    return url;
 
   }
 
@@ -362,18 +396,14 @@ export class GVL extends Cloneable<GVL> implements VendorList, Declarations {
 
           } else {
 
-            let url = GVL.baseUrl;
-
-            if (!url) {
+            if (!GVL.baseUrl) {
 
               throw new GVLError('must specify GVL.baseUrl before changing the language');
 
             }
 
-            url = this.addTrailingSlashMaybe(url);
-
-            // load version specified
-            url += GVL.languageFilename.replace('[LANG]', lang);
+            // load Language specified
+            const url = GVL.baseUrl + GVL.languageFilename.replace('[LANG]', lang);
 
             // hooks onto readyPromise
             this.fetchJson(url).then((): void => {

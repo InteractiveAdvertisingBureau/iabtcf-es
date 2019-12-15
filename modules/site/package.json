@@ -18,7 +18,7 @@
     "start": "webpack-dev-server",
     "build": "webpack",
     "prepare": "yarn run build",
-    "lint": "eslint ./src/**/*.ts ./src/**/*.vue",
+    "lint": "eslint `find src -type f ( -name '*.ts' -name '*.vue' )`",
     "lint:fix": "yarn run lint -- --fix",
     "test": "exit 0"
   },

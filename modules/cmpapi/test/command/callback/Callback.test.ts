@@ -10,7 +10,8 @@ export function run(): void {
 
     describe('Constructor', (): void => {
 
-      const callbackFunction = (tcData: TCData | null, success: boolean) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+      const callbackFunction = (tcData: TCData | null, success: boolean): void => {
       };
 
       it('should create a new instance of a CallBack', (): void => {
@@ -27,6 +28,7 @@ export function run(): void {
 
       it('should return true if the callback function is invalid', (): void => {
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
         callback = new Callback((tcData: TCData | null, success: boolean): void => {});
 
         assert.isTrue(callback.isValid, `Did not return true if the callback function is valid`);
@@ -35,9 +37,9 @@ export function run(): void {
 
       it('should return false if the callback function is not valid', (): void => {
 
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         // @ts-ignore
         callback = new Callback(0);
-
         assert.isFalse(callback.isValid, `Did not return false if the callback function is not valid`);
 
       });

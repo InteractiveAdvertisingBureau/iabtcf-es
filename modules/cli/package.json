@@ -17,7 +17,8 @@
   "scripts": {
     "build": "rm -rf lib ; tsc ; chmod a+x lib/index.js",
     "prepare": "yarn run build",
-    "lint": "eslint ./src/**/*.ts"
+    "lint": "eslint `find src -name '*.ts'`",
+    "lint:fix": "yarn run lint -- --fix"
   },
   "dependencies": {
     "@iabtcf/core": "^1.0.0-beta.0"

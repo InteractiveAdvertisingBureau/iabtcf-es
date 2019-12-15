@@ -31,7 +31,7 @@ export class GetTcDataCommand extends BaseCommand implements Command, Validatabl
    * @param {boolean} failCallbackIfNotValid
    * @return {ValidationResult}
    */
-  public validate(failCallbackIfNotValid: boolean = false): ValidationResult {
+  public validate(failCallbackIfNotValid = false): ValidationResult {
 
     const validationResult = super.validate(failCallbackIfNotValid);
 

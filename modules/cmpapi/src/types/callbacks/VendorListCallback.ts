@@ -1,3 +1,3 @@
-import {GlobalVendorList} from '../../model';
+import {VendorList} from '@iabtcf/core';
 
-export type VendorListCallback = (gvl: GlobalVendorList | null, success: boolean) => void;
+export type VendorListCallback = (gvl: VendorList | null, success: boolean) => void;

@@ -3,7 +3,6 @@ import {CmpDataReader} from '../../cmpdata';
 import {Param, VendorListCallback} from '../../types';
 import {Validatable, ValidationMessages, ValidationResult} from '../../validation';
 import {Callback} from '../callback/Callback';
-import {GlobalVendorListBldr} from '../responsebuilders';
 import {BaseCommand} from './BaseCommand';
 import {Command} from './Command';
 
@@ -28,14 +27,11 @@ export class GetVendorListCommand extends BaseCommand implements Command, Valida
      * specific version.
      */
 
-    const _gvl: GVL = this.param ? new GVL(this.param as string | number) : this.cmpData.getTcModel().gvl.clone();
+    const gvl: GVL = this.param ? new GVL(this.param as string | number) : this.cmpData.getTcModel().gvl.clone();
 
-    _gvl.readyPromise.then(() => {
+    gvl.readyPromise.then(() => {
 
-      const gvl = new GlobalVendorListBldr(_gvl);
-      this.setBaseReturnFields(gvl);
-
-      (this.callback.function as VendorListCallback)(gvl.buildResponse(), true);
+      (this.callback.function as VendorListCallback)(gvl.getJson(), true);
 
     }, ((reason) => this.callback.fail(reason))).catch((reason) => this.callback.fail(reason));
 
@@ -47,7 +43,7 @@ export class GetVendorListCommand extends BaseCommand implements Command, Valida
    * @param {boolean} failCallbackIfNotValid
    * @return {ValidationResult}
    */
-  public validate(failCallbackIfNotValid: boolean = false): ValidationResult {
+  public validate(failCallbackIfNotValid = false): ValidationResult {
 
     const validationResult = super.validate(failCallbackIfNotValid);
 

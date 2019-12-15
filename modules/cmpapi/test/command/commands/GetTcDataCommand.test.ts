@@ -1,5 +1,5 @@
 import {sameDataDiffRef} from '@iabtcf/testing';
-import {assert} from 'chai';
+import {assert, expect} from 'chai';
 import {CmpData} from '../../../src/cmpdata';
 import {Callback} from '../../../src/command/callback/Callback';
 import {Commands, GetTcDataCommand} from '../../../src/command/commands';
@@ -27,12 +27,20 @@ export function run(): void {
 
       it('should create a new instance of GetTcDataCommand', (): void => {
 
-        const getTcDataCommand = new GetTcDataCommand(
-          cmpData,
-          Commands.GET_TC_DATA,
-          2,
-          new Callback((tcData: TCData | null, success: boolean): void => {}));
-        assert.isNotNull(getTcDataCommand, 'Did not create a new instance of GetTcDataCommand');
+        const createCommand = (): void => {
+
+          const getTcDataCommand = new GetTcDataCommand(
+            cmpData,
+            Commands.GET_TC_DATA,
+            2,
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+            new Callback((tcData: TCData | null, success: boolean): void => {}));
+
+          expect(getTcDataCommand, 'getTcDataCommand is null').not.to.be.null;
+
+        };
+
+        expect(createCommand, 'getTcDataCommand threw').not.to.throw();
 
       });
 
@@ -45,16 +53,11 @@ export function run(): void {
         const getTcDataCommand = new GetTcDataCommand(cmpData, Commands.GET_TC_DATA, 2, new Callback(
           (tcData: TCData | null, success: boolean): void => {
 
-            assert.isTrue(success, 'getTCData was not successful');
-            assert.isNotNull(tcData, 'getTCData returned null tcData');
+            expect(success, 'success').to.be.true;
+            expect(tcData, 'tcData').not.to.be.null;
 
             tcData = tcData as TCData;
-            sameDataDiffRef(tcData, tcDataModelTest, 'Tc Data');
-            sameDataDiffRef(tcData.purpose, tcDataModelTest.purpose, 'Tc Data - purpose');
-            sameDataDiffRef(tcData.vendor, tcDataModelTest.vendor, 'Tc Data - vendor');
-            sameDataDiffRef(tcData.publisher, tcDataModelTest.publisher, 'Tc Data - publisher');
-            sameDataDiffRef(tcData.publisher.restrictions, tcDataModelTest.publisher.restrictions, 'Tc Data - publisher restrictions');
-            sameDataDiffRef(tcData.publisher.customPurpose, tcDataModelTest.publisher.customPurpose, 'Tc Data - publisher customPurpose');
+            sameDataDiffRef(tcData, tcDataModelTest, 'TCData');
 
             done();
 
@@ -98,6 +101,7 @@ export function run(): void {
           cmpData,
           Commands.GET_TC_DATA,
           2,
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
           new Callback((tcData: TCData | null, success: boolean): void => {}));
 
         const validationResult = getTcDataCommand.validate();
@@ -113,6 +117,7 @@ export function run(): void {
           cmpData,
           Commands.GET_TC_DATA,
           2,
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
           new Callback((tcData: TCData | null, success: boolean): void => {}),
           [1.5, 2]);
 

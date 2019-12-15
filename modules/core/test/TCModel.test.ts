@@ -183,35 +183,12 @@ describe('TCModel', (): void => {
 
   it('should clone a TCModel', (): void => {
 
-    // eslint-disable-next-line
-    const vendorlistJson = require('../../../dev/vendor-list.json');
-    const gvl: GVL = new GVL(vendorlistJson);
-    const tcModel = new TCModel(gvl);
+    const tcModel = new TCModel();
     tcModel.cmpId = 23;
     tcModel.cmpVersion = 1;
 
-    // full consent!
-    tcModel.setAll();
-
-    tcModel.purposeConsents.unset(2);
-    tcModel.vendorConsents.unset(37);
-
     const clone = tcModel.clone();
-
-    assert.equal(clone.publisherRestrictions.isValid(), tcModel.publisherRestrictions.isValid(), 'PR IsValid did not return the same value as original');
-
-    assert.equal(clone.cmpId, tcModel.cmpId, 'cmpId did not match original value');
-    assert.equal(clone.created.getTime(), tcModel.created.getTime(), 'created did not match set value');
-    assert.notStrictEqual(clone.created, tcModel.created, 'created matched strict equals');
-
-    // expect(JSON.stringify(tcModel, null, 2)).to.equal(JSON.stringify(clone, null, 2));
-
-    sameDataDiffRef(clone, tcModel, 'TcModel');
-    sameDataDiffRef(clone.purposeConsents, tcModel.purposeConsents, 'purposeConsents');
-    assert.equal(clone.purposeConsents.maxId, tcModel.purposeConsents.maxId, 'purposeConsents max id did not match set value');
-    sameDataDiffRef(clone.publisherRestrictions.getAllRestrictions(), tcModel.publisherRestrictions.getAllRestrictions(), 'PR Restrictions');
-    sameDataDiffRef(clone.gvl.specialFeatures, tcModel.gvl.specialFeatures, 'specialFeatures');
-    sameDataDiffRef(clone.gvl.vendors, tcModel.gvl.vendors, 'vendors');
+    sameDataDiffRef(tcModel, clone, 'TCModel');
 
   });
 
@@ -389,35 +366,9 @@ describe('TCModel', (): void => {
 
   });
 
-  describe('isValid()', (): void => {
-
-    // eslint-disable-next-line
-  const vendorlistJson = require('../../../dev/vendor-list.json');
-    const gvl: GVL = new GVL(vendorlistJson);
-
-    it('should be valid if everything is set', (done: () => void ): void => {
-
-      const tcModel = new TCModel(gvl);
-
-      tcModel.cmpId = 23;
-      tcModel.cmpVersion = 1;
-
-      expect(tcModel.gvl).to.equal(gvl);
-      tcModel.gvl.readyPromise.then((): void => {
-
-        done();
-
-      });
-
-    });
-
-  });
-
   const runSetAllAndUnsetAll = (): void => {
 
-    // eslint-disable-next-line
-  const vendorlistJson = require('../../../dev/vendor-list.json');
-    const gvl: GVL = new GVL(vendorlistJson);
+    const gvl: GVL = new GVL(require('../../../dev/vendor-list.json'));
 
     const loopGVLMap = (gvlKey: string, cb ): void => {
 

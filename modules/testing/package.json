@@ -12,12 +12,12 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
-    "lib/**/*"
+    "lib/*"
   ],
   "scripts": {
     "build": "rm -rf lib ; tsc",
     "prepare": "yarn run build",
-    "lint": "eslint ./src/**/*.ts",
+    "lint": "eslint `find src -name '*.ts'`",
     "lint:fix": "yarn run lint -- --fix"
   },
   "dependencies": {

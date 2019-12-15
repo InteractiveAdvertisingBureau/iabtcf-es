@@ -21,6 +21,7 @@ export function run(): void {
           cmpData,
           Commands.PING,
           2,
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
           new Callback((pingReturn: Ping | null): void => {}));
         assert.isNotNull(pingCommand, 'Did not create a new instance of PingCommand');
 
@@ -32,7 +33,6 @@ export function run(): void {
 
       it('should execute the command and return a Ping object', (done): void => {
 
-        debugger;
         const pingCommand = new PingCommand(cmpData, Commands.PING, 2, new Callback((pingReturn: Ping | null): void => {
 
           assert.isNotNull(pingReturn, 'Ping returned null');
@@ -56,6 +56,7 @@ export function run(): void {
           cmpData,
           Commands.PING,
           2,
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
           new Callback((pingReturn: Ping | null): void => {}));
 
         const validationResult = pingCommand.validate();
@@ -71,6 +72,7 @@ export function run(): void {
           cmpData,
           Commands.PING,
           0,
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
           new Callback((pingReturn: Ping | null): void => {}));
 
         const validationResult = pingCommand.validate(true);
@@ -82,9 +84,10 @@ export function run(): void {
 
       it('should return false if the callback is not valid', (): void => {
 
+        // Intentionally passing something broken
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         // @ts-ignore
         const pingCommand = new PingCommand(cmpData, Commands.PING, 2, new Callback({}));
-
         const validationResult = pingCommand.validate();
 
         assert.isFalse(validationResult.isValid, `did not return false if the command is valid`);

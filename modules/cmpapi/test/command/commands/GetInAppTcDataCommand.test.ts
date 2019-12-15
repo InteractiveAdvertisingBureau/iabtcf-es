@@ -30,6 +30,7 @@ export function run(): void {
           cmpData,
           Commands.GET_IN_APP_TC_DATA,
           2,
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
           new Callback((iaTcData: InAppTCData | null, success: boolean): void => {
           }));
         assert.isNotNull(getInAppTcDataCommand, 'Did not create a new instance of GetInAppTcDataCommand');
