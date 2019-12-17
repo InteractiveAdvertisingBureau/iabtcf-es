@@ -15,7 +15,7 @@ import {
 
 const getMinimalModel = (): TCModel => {
 
-  const vendorlistJson = require('../../../dev/vendor-list.json'); // eslint-disable-line
+  const vendorlistJson = require('../../../vendorlist/vendor-list.json'); // eslint-disable-line
   const model = new TCModel(new GVL(vendorlistJson));
 
   model.cmpId = 123;

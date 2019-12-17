@@ -1,5 +1,5 @@
 import {sameDataDiffRef} from '@iabtcf/testing';
-import {expect, assert} from 'chai';
+import {expect} from 'chai';
 import {TCModel} from '../src/TCModel';
 
 import {Vector} from '../src/model/Vector';
@@ -110,7 +110,7 @@ describe('TCModel', (): void => {
     describe(fieldName, (): void => {
 
       // eslint-disable-next-line
-    const vendorlistJson = require('../../../dev/vendor-list.json');
+    const vendorlistJson = require('../../../vendorlist/vendor-list.json');
       const gvl: GVL = new GVL(vendorlistJson);
 
       it(`should create an instance of ${instanceName} as ${fieldName} on init`, (): void => {
@@ -153,7 +153,7 @@ describe('TCModel', (): void => {
   it('should construct a TCModel with a GVL argument', (done: () => void): void => {
 
     // eslint-disable-next-line
-    const vendorlistJson = require('../../../dev/vendor-list.json');
+    const vendorlistJson = require('../../../vendorlist/vendor-list.json');
     const gvl: GVL = new GVL(vendorlistJson);
 
     expect((): void => {
@@ -368,7 +368,7 @@ describe('TCModel', (): void => {
 
   const runSetAllAndUnsetAll = (): void => {
 
-    const gvl: GVL = new GVL(require('../../../dev/vendor-list.json'));
+    const gvl: GVL = new GVL(require('../../../vendorlist/vendor-list.json'));
 
     const loopGVLMap = (gvlKey: string, cb ): void => {
 

@@ -14,7 +14,7 @@ import {
 export function run(): void {
 
   // eslint-disable-next-line
-  const vendorlistJson = require('../../../../dev/vendor-list.json');
+  const vendorlistJson = require('../../../../vendorlist/vendor-list.json');
   const gvl: GVL = new GVL(vendorlistJson);
 
   it('should encode a core segment', (done: () => void): void => {

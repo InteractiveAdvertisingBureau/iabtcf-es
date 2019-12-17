@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@iabtcf/testing": "^1.0.0-beta.0",
+    "@iabtcf/stub": "^1.0.0-beta.0",
     "@istanbuljs/nyc-config-typescript": "^0.1.3",
     "@types/mocha": "^5.2.7",
     "@types/sinon": "7.0.13",
@@ -90,7 +91,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/chrispaterson/iabtcf-es.git",
+    "url": "https://github.com/chrispaterson/iabtcf.git",
     "directory": "modules/cmpapi"
   },
   "gitHead": "5b4d74172887c1c8301ae5d28027af810aa03272"

@@ -6,9 +6,9 @@ import {IntMap} from '../src/model/IntMap';
 import {XMLHttpTestTools} from '@iabtcf/testing';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const vendorlistJson = require('../../../dev/vendor-list.json');
+const vendorlistJson = require('../../../vendorlist/vendor-list.json');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const translationJson = require(`../../../dev/purposes-fr.json`);
+const translationJson = require(`../../../vendorlist/purposes-fr.json`);
 
 const gvlKeys: string[] = [
   'gvlSpecificationVersion',

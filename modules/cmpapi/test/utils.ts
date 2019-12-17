@@ -1,7 +1,7 @@
 import {GVL, PurposeRestriction, RestrictionType, TCModel} from '@iabtcf/core';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-export const vendorListJson = require('../../../dev/vendor-list.json');
+export const vendorListJson = require('../../../vendorlist/vendor-list.json');
 export const gvl: GVL = new GVL(vendorListJson);
 
 /**
