@@ -7,7 +7,6 @@
     "modules/core",
     "modules/cli",
     "modules/cmpapi",
-    "modules/site",
     "modules/stub"
   ],
   "author": "Chris Paterson <tcf@chrispaterson.io>",
