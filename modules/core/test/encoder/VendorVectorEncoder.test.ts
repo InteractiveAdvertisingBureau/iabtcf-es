@@ -19,13 +19,15 @@ import {
 
 import {Vector} from '../../src/model';
 
+const HEADER_LENGTH = 17;
+const RANGE_NUM_ENTRIES = 12;
+const SINGLE_RANGE = 33;
+
 export function run(): void {
 
   describe('VendorVectorEncoder', (): void => {
 
     describe('encode', (): void => {
-
-      const headerLength = BitLength.maxId + BitLength.encodingType;
 
       const pad = (value: string, numBits: number): string => {
 
@@ -33,7 +35,7 @@ export function run(): void {
 
       };
 
-      const getVector = (maxId: number): Vector => {
+      const getFullySetVector = (maxId: number): Vector => {
 
         const vector: Vector = new Vector();
 
@@ -47,41 +49,64 @@ export function run(): void {
 
       };
 
-      it('should encode a vector of length 10 with no gaps as a bitfield', (): void => {
+      it(`should encode a vector of length 10 with no gaps as a bitfield`, (): void => {
 
         const numVendors = 10;
-        const vector: Vector = getVector(numVendors);
+        const vector: Vector = getFullySetVector(numVendors);
         const result: string = VendorVectorEncoder.encode(vector);
 
-        expect(result.length).to.equal(headerLength + numVendors);
+        expect(result.length, 'length is HEADER_LENGTH + numVendors').to.equal(HEADER_LENGTH + numVendors);
 
         // first bits should be the max id
-        expect(result.substr(0, BitLength.maxId)).to.equal(pad((numVendors).toString(2), BitLength.maxId));
-        expect(result.substr(BitLength.maxId, 1)).to.equal('0');
-        const bitField = result.substr(headerLength);
+        expect(result.substr(0, BitLength.maxId), `starts with maxId`).to.equal(pad((numVendors).toString(2), BitLength.maxId));
+        expect(result.substr(BitLength.maxId, 1), 'BitField encoding type is 0').to.equal('0');
+        const bitField = result.substr(HEADER_LENGTH);
 
         for (let i=0; i < bitField.length; i ++) {
 
-          expect(bitField[i]).to.equal(vector.has(i+1) ? '1': '0');
+          expect(bitField[i], `vendor #${i+1} should be 1 if true, 0 if false at index ${i}`).to.equal(vector.has(i+1) ? '1': '0');
+
+        }
+
+      });
+      /**
+       * At maxId 45, sequential vendors a bitfield should be exactly equal in
+       * length to a range encoding, but a bitfield has preference for
+       * the sake of simplicity
+       */
+      it(`should encode a vector of length 45 with no gaps as a bitfield`, (): void => {
+
+        const numVendors = 45;
+        const vector: Vector = getFullySetVector(numVendors);
+        const result: string = VendorVectorEncoder.encode(vector);
+
+        expect(result.length, 'length is HEADER_LENGTH + numVendors').to.equal(HEADER_LENGTH + numVendors);
+
+        // first bits should be the max id
+        expect(result.substr(0, BitLength.maxId), `starts with maxId`).to.equal(pad((numVendors).toString(2), BitLength.maxId));
+        expect(result.substr(BitLength.maxId, 1), 'BitField encoding type is 0').to.equal('0');
+        const bitField = result.substr(HEADER_LENGTH);
+
+        for (let i=0; i < bitField.length; i ++) {
+
+          expect(bitField[i], `vendor #${i+1} should be 1 if true, 0 if false at index ${i}`).to.equal(vector.has(i+1) ? '1': '0');
 
         }
 
       });
 
       /**
-       * a single range is 46, if they are both 47 then it defaults to bitfield
-       * encoding so for it to kick over to a range encoding there must be a
-       * sequence of at least 48 vendors without gaps.
+       * At maxId 46, sequential vendors a range should be 1 bit less than a
+       * bitfield encoding and so it should encode as a range
        */
-      it('should encode a vector with 48 vendors and no gaps as a range', (): void => {
+      it(`should encode a vector with 46 vendors and no gaps as a range`, (): void => {
 
-        const numVendors = 48;
-        const singleRangeLength = 46;
-        const vector: Vector = getVector(numVendors);
+        const numVendors = 46;
+        const vector: Vector = getFullySetVector(numVendors);
         const result: string = VendorVectorEncoder.encode(vector);
 
-        // bitfield would be numVendors + headerLength
-        expect(result.length).to.equal(headerLength + singleRangeLength);
+        // bitfield would be numVendors + HEADER_LENGTH
+        expect(result.length, 'length: header + num entries + 1 range').to.equal(HEADER_LENGTH + RANGE_NUM_ENTRIES + SINGLE_RANGE);
 
         let index = 0;
 
@@ -96,19 +121,13 @@ export function run(): void {
 
         index += BitLength.encodingType;
 
-        expect(result.length - index).to.equal(1 + BitLength.numEntries + 1 + 2* BitLength.vendorId);
-
-        // Range headers
-        // default encoding bit for range;
-        expect(result.substr(index, 1)).to.equal('0');
-
-        index += 1;
+        expect(result.length - index).to.equal(SINGLE_RANGE + RANGE_NUM_ENTRIES);
 
         // should only be one entry
-        expect(result.substr(index, BitLength.numEntries))
-          .to.equal(pad('1', BitLength.numEntries));
+        expect(parseInt(result.substr(index, RANGE_NUM_ENTRIES), 2))
+          .to.equal(1);
 
-        index += BitLength.numEntries;
+        index += RANGE_NUM_ENTRIES;
 
         // each range
 
@@ -128,19 +147,19 @@ export function run(): void {
       it('should encode a vector of length 48 1 gap as a bitfield since a that would be shorter', (): void => {
 
         const numVendors = 48;
-        const vector: Vector = getVector(numVendors);
+        const vector: Vector = getFullySetVector(numVendors);
 
         // gap something in the middle
         vector.unset(Math.round(numVendors/2));
 
         const result: string = VendorVectorEncoder.encode(vector);
 
-        expect(result.length).to.equal(headerLength + numVendors);
+        expect(result.length).to.equal(HEADER_LENGTH + numVendors);
 
         // first bits should be the max id
         expect(result.substr(0, BitLength.maxId)).to.equal(pad((numVendors).toString(2), BitLength.maxId));
         expect(result.substr(BitLength.maxId, 1)).to.equal('0');
-        const bitField = result.substr(headerLength);
+        const bitField = result.substr(HEADER_LENGTH);
 
         for (let i=0; i < bitField.length; i ++) {
 
@@ -153,82 +172,69 @@ export function run(): void {
       it('should encode a vector of length 100 1 gap as a range since a that would be shorter', (): void => {
 
         const numVendors = 100;
-        const vector: Vector = getVector(numVendors);
+        const vector: Vector = getFullySetVector(numVendors);
         const vendorWithNo: number = numVendors/2;
 
         vector.unset(vendorWithNo);
 
         const result: string = VendorVectorEncoder.encode(vector);
-        const range = result.substr(headerLength);
-        const rangeLength: number = 1 + BitLength.numEntries + 2*(1 + 2* BitLength.vendorId);
         let index = 0;
 
-        // check overall legnths
-        expect(result.length, `legnth of the result should be ${headerLength + rangeLength}`)
-          .to.equal(headerLength + rangeLength);
-        expect(range.length, `legnth of the range should be ${rangeLength}`)
-          .to.equal(rangeLength);
+        // check overall legnth
+        expect(result.length, `length of the result should be ${HEADER_LENGTH + RANGE_NUM_ENTRIES + SINGLE_RANGE * 2}`)
+          .to.equal(HEADER_LENGTH + RANGE_NUM_ENTRIES + SINGLE_RANGE * 2);
 
-        // first bits should be the max id
-        const binMaxId: string = pad((numVendors).toString(2), BitLength.maxId);
+        // check the max id
+        expect(parseInt(result.substr(index, BitLength.maxId), 2), `maxId should be ${vector.maxId}`)
+          .to.equal(vector.maxId);
 
-        expect(result.substr(index, BitLength.maxId), `maxId should be ${binMaxId}`)
-          .to.equal(binMaxId);
         index += BitLength.maxId;
 
         // encoding type 1 = range, 0 = bitfield
         expect(result.substr(index, 1), 'Encoding type should be 1').to.equal('1');
         index += 1;
 
-        index = 0;
+        expect(parseInt(result.substr(index, RANGE_NUM_ENTRIES), 2), `numEntries should be 2`)
+          .to.equal(2);
 
-        // default encoding bit for range;
-        expect(range.substr(0, 1), 'default range encoding should be 0').to.equal('0');
-        index += 1;
+        index += RANGE_NUM_ENTRIES;
 
-        const rangeEntries: number = BitLength.numEntries;
-        const expectedNumEntries: string = pad((2).toString(2), rangeEntries);
-
-        expect(range.substr(index, rangeEntries), `numEntries should be ${expectedNumEntries}`)
-          .to.equal(expectedNumEntries);
-
-        index += rangeEntries;
-
-        // each range
+        // Ranges
 
         // --------------------- RANGE 1
         // should be a range singleOrRange 1 bit
-        expect(range.substr(index, 1), 'singeOrRange should be 1').to.equal('1');
+        expect(result.substr(index, 1), 'first singeOrRange should be 1').to.equal('1');
         index += 1;
 
         // first ID should be 1
-        expect(range.substr(index, BitLength.vendorId), 'first range id should be 1')
-          .to.equal(pad('1', BitLength.vendorId));
-        index += BitLength.vendorId;
+        expect(parseInt(result.substr(index, BitLength.vendorId), 2), 'first range first id should be 1')
+          .to.equal(1);
+        index += BitLength.vendorId; // +16
 
-        // second ID should be numVendors
-        expect(range.substr(index, BitLength.vendorId), `second range entry should be ${vendorWithNo - 1}`)
-          .to.equal(pad((vendorWithNo - 1).toString(2), BitLength.vendorId));
-        index += BitLength.vendorId;
+        // second ID should be vendorWithNo - 1
+        expect(parseInt(result.substr(index, BitLength.vendorId), 2), `first range last id should be ${vendorWithNo - 1}`)
+          .to.equal(vendorWithNo - 1);
+        index += BitLength.vendorId; // +16
 
         // --------------------- RANGE 2
         // should be a range singleOrRange 1 bit
-        expect(range.substr(index, 1), 'singeOrRange should be 1').to.equal('1');
+        expect(result.substr(index, 1), 'second singeOrRange should be 1').to.equal('1');
         index += 1;
 
         // first ID should be vendorIdWithNo + 1
-        expect(range.substr(index, BitLength.vendorId), `first range entry should be ${vendorWithNo + 1}`)
-          .to.equal(pad((vendorWithNo + 1).toString(2), BitLength.vendorId));
-        index += BitLength.vendorId;
+        expect(parseInt(result.substr(index, BitLength.vendorId), 2), `second range first id should be ${vendorWithNo + 1}`)
+          .to.equal(vendorWithNo + 1);
+        index += BitLength.vendorId; // +16
 
         // second ID should be numVendors
-        expect(range.substr(index, BitLength.vendorId), `first range entry should be ${numVendors}`)
-          .to.equal(pad((numVendors).toString(2), BitLength.vendorId));
-        index += BitLength.vendorId;
+        expect(parseInt(result.substr(index, BitLength.vendorId), 2), `second range last id should be ${numVendors}`)
+          .to.equal(numVendors);
+        index += BitLength.vendorId; // +16
 
       });
 
     });
+
     describe('decode', (): void => {
 
       const testIt = (numVendors: number, gaps: boolean): void => {
@@ -240,13 +246,11 @@ export function run(): void {
 
           const vector: Vector = new Vector();
 
-          for (let i = 0; i < numVendors; i ++) {
+          for (let i = 1; i <= numVendors; i ++) {
 
-            const id: number = i + 1;
+            if (!gaps || i % numGaps !== 0) {
 
-            if (!gaps || id % numGaps !== 0) {
-
-              vector.set(id);
+              vector.set(i);
 
             }
 
@@ -275,36 +279,6 @@ export function run(): void {
       testIt(50, true);
       testIt(400, true);
 
-      it('should decode a range with true as default value', (): void => {
-
-        const vector: Vector = new Vector();
-        const numVendors = 100;
-
-        for (let i = 0; i < numVendors; i ++) {
-
-          // putta gap in dere
-          if (i !== 50) {
-
-            vector.set(i + 1);
-
-          }
-
-        }
-
-        let encoded = VendorVectorEncoder.encode(vector);
-        const index = BitLength.maxId + 1;
-
-        encoded = encoded.substr(0, index) + '1' + encoded.substr(index + 1);
-        const decodedVector = VendorVectorEncoder.decode(encoded);
-
-        vector.forEach((value: boolean, id: number): void => {
-
-          expect(decodedVector.has(id)).to.equal(!value);
-
-        });
-
-      });
-
       it('should decode a range with a single id', (): void => {
 
         const vector: Vector = new Vector();
@@ -327,36 +301,6 @@ export function run(): void {
         vector.forEach((value: boolean, id: number): void => {
 
           expect(decodedVector.has(id)).to.equal(value);
-
-        });
-
-      });
-
-      it('should decode a range with true as default value and a single id range', (): void => {
-
-        const vector: Vector = new Vector();
-        const numVendors = 100;
-
-        for (let i = 0; i < numVendors; i ++) {
-
-          // should give us a single entry on id 52
-          if (i !== 50 && i !== 52) {
-
-            vector.set(i + 1);
-
-          }
-
-        }
-
-        let encoded = VendorVectorEncoder.encode(vector);
-        const index = BitLength.maxId + 1;
-
-        encoded = encoded.substr(0, index) + '1' + encoded.substr(index + 1);
-        const decodedVector = VendorVectorEncoder.decode(encoded);
-
-        vector.forEach((value: boolean, id: number): void => {
-
-          expect(decodedVector.has(id)).to.equal(!value);
 
         });
 

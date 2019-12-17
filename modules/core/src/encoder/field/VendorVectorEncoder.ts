@@ -7,26 +7,51 @@ import {VectorEncodingType} from './VectorEncodingType';
 
 export class VendorVectorEncoder {
 
-  public static readonly RANGE_DEFAULT: boolean = false;
-
   public static encode(value: Vector): string {
 
+    // collectors for range encoding
+    const ranges: number[][] = [];
     let range: number[] = [];
-    let bitField = '';
+
+    // since both encodings need the maxId, start with that
     let retrString = IntEncoder.encode(value.maxId, BitLength.maxId);
 
-    const ranges: number[][] = [];
+    // bit field will be just the vendors as we walk through the vector
+    let bitField = '';
+    let rangeIsSmaller;
 
+    // some math
+    const headerLength = BitLength.maxId + BitLength.encodingType;
+    const bitFieldLength = headerLength + value.maxId;
+    const minRangeLength = (BitLength.vendorId*2 + BitLength.singleOrRange + BitLength.numEntries);
+
+    // gets larger as we walk through the vector
+    let rangeLength = headerLength + BitLength.numEntries;
+
+    // walk through every value in the vector
     value.forEach((curValue: boolean, i): void => {
 
       // build our bitfield no matter what
       bitField += BooleanEncoder.encode(curValue);
 
       /**
-       * if our value is positive and we're still assuming range encoding we
-       * may want to start building a range or add this to an existing range
+       * A range is a minimum of 45 bits, if the number of vendors in this
+       * vector is less than 45 then we know that a bitfield encoding will be
+       * shorter than any range encoding.
+       *
+       * The second check checks while we walk through the vector and abandons
+       * building the ranges once it becomes larger
        */
-      if (curValue) {
+      rangeIsSmaller = (value.maxId > minRangeLength && rangeLength < bitFieldLength);
+
+      /**
+       * if the curValue is true and our rangeLength is less than the bitField
+       * length, we'll continue to push these ranges into the array.  Once the
+       * ranges become a larger encoding there is no reason to continue
+       * building the structure because we will be choosing the bitfield
+       * encoding
+       */
+      if (rangeIsSmaller && curValue) {
 
         /**
          * Look ahead to see if this is the last value in our range
@@ -42,6 +67,9 @@ export class VendorVectorEncoder {
            */
           range.push(i);
 
+          // add to the range length the additional vendorId
+          rangeLength += BitLength.vendorId;
+
           // store the array in our bigger array
           ranges.push(range);
 
@@ -53,13 +81,17 @@ export class VendorVectorEncoder {
           // this is the first  value for this range
           range.push(i);
 
+          // update our count with new range overhead
+          rangeLength += BitLength.singleOrRange;
+          rangeLength += BitLength.vendorId;
+
         }
 
       }
 
     });
 
-    if (this.rangeIsSmaller(ranges, value.maxId)) {
+    if (rangeIsSmaller) {
 
       retrString += VectorEncodingType.RANGE + '';
       retrString += this.buildRangeEncoding(ranges);
@@ -89,21 +121,7 @@ export class VendorVectorEncoder {
      */
     if (encodingType === VectorEncodingType.RANGE) {
 
-      const defaultValue: boolean = BooleanEncoder.decode(value.charAt(index));
-
-      index += BitLength.encodingType;
       vector = new Vector();
-
-      // if default is true we need to set all the values and unset the ones listed in the ranges
-      if (defaultValue) {
-
-        for (let i = 1; i <= maxId; i ++) {
-
-          vector.set(i);
-
-        }
-
-      }
 
       const numEntries: number = IntEncoder.decode(value.substr(index, BitLength.numEntries));
 
@@ -135,38 +153,13 @@ export class VendorVectorEncoder {
           // we'll need to set or unset all the vendor ids between the first and second
           for (let j = firstId; j <= secondId; j++) {
 
-            /**
-             * if defaultValue is === true, then we'll need to unset this
-             * exception list otherwise, what I think will be really the only
-             * case, we'll set the bit because nothing is set yet
-             */
-            if (defaultValue) {
-
-              vector.unset(j);
-
-            } else {
-
-              vector.set(j);
-
-            }
+            vector.set(j);
 
           }
 
         } else {
 
-          /**
-           * this is a single id so we'll set or unset it depending on what the
-           * default value is
-           */
-          if (defaultValue) {
-
-            vector.unset(firstId);
-
-          } else {
-
-            vector.set(firstId);
-
-          }
+          vector.set(firstId);
 
         }
 
@@ -189,13 +182,9 @@ export class VendorVectorEncoder {
 
   private static buildRangeEncoding(ranges: number[][]): string {
 
-    const numEntries = ranges.length;
-
-    // set with range default (always 0 because there is no practical case for a default of 1)
-    let rangeString = BooleanEncoder.encode(VendorVectorEncoder.RANGE_DEFAULT);
-
     // describe the number of entries to follow
-    rangeString += IntEncoder.encode(numEntries, BitLength.numEntries);
+    const numEntries = ranges.length;
+    let rangeString = IntEncoder.encode(numEntries, BitLength.numEntries);
 
     // each range
     ranges.forEach((range: number[]): void => {
@@ -220,30 +209,6 @@ export class VendorVectorEncoder {
     });
 
     return rangeString;
-
-  }
-
-  private static rangeIsSmaller(ranges: number[][], maxId: number): boolean {
-
-    // the boolean value is for the default consent value
-    let rLength = BitLength.anyBoolean + BitLength.numEntries;
-
-    ranges.forEach((range: number[]): void => {
-
-      const single = (range.length === 1);
-
-      rLength += BitLength.singleOrRange;
-      rLength += BitLength.vendorId;
-
-      if (!single) {
-
-        rLength += BitLength.vendorId;
-
-      }
-
-    });
-
-    return rLength < maxId;
 
   }
 
