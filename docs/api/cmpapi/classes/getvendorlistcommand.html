@@ -77,7 +77,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="basecommand.html" class="tsd-signature-type">BaseCommand</a>
+						<a href="command.html" class="tsd-signature-type">Command</a>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">GetVendorListCommand</span>
@@ -86,79 +86,58 @@
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel">
-				<h3>Implements</h3>
-				<ul class="tsd-hierarchy">
-					<li><a href="../interfaces/command.html" class="tsd-signature-type">Command</a></li>
-					<li><a href="../interfaces/validatable.html" class="tsd-signature-type">Validatable</a></li>
-				</ul>
-			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="getvendorlistcommand.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><a href="getvendorlistcommand.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-inherited tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="getvendorlistcommand.html#callback" class="tsd-kind-icon">callback</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="getvendorlistcommand.html#cmpdata" class="tsd-kind-icon">cmp<wbr>Data</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="getvendorlistcommand.html#command" class="tsd-kind-icon">command</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="getvendorlistcommand.html#param" class="tsd-kind-icon">param</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="getvendorlistcommand.html#version" class="tsd-kind-icon">version</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="getvendorlistcommand.html#versionstring" class="tsd-kind-icon">version<wbr>String</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-private-protected">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="getvendorlistcommand.html#execute" class="tsd-kind-icon">execute</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="getvendorlistcommand.html#isvalidvendorlistversion" class="tsd-kind-icon">is<wbr>Valid<wbr>Vendor<wbr>List<wbr>Version</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="getvendorlistcommand.html#isvendorslistvalid" class="tsd-kind-icon">is<wbr>Vendors<wbr>List<wbr>Valid</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="getvendorlistcommand.html#setbasereturnfields" class="tsd-kind-icon">set<wbr>Base<wbr>Return<wbr>Fields</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="getvendorlistcommand.html#validate" class="tsd-kind-icon">validate</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="getvendorlistcommand.html#fail" class="tsd-kind-icon">fail</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected"><a href="getvendorlistcommand.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected"><a href="getvendorlistcommand.html#success" class="tsd-kind-icon">success</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Get<wbr>Vendor<wbr>List<wbr>Command<span class="tsd-signature-symbol">(</span>cmpData<span class="tsd-signature-symbol">: </span><a href="../interfaces/cmpdatareader.html" class="tsd-signature-type">CmpDataReader</a>, command<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, callback<span class="tsd-signature-symbol">: </span><a href="callback.html" class="tsd-signature-type">Callback</a>, param<span class="tsd-signature-symbol">?: </span><a href="../index.html#param" class="tsd-signature-type">Param</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="getvendorlistcommand.html" class="tsd-signature-type">GetVendorListCommand</a></li>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Get<wbr>Vendor<wbr>List<wbr>Command<span class="tsd-signature-symbol">(</span>callback<span class="tsd-signature-symbol">: </span><a href="../index.html#callback" class="tsd-signature-type">Callback</a>, param<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="getvendorlistcommand.html" class="tsd-signature-type">GetVendorListCommand</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Overrides <a href="basecommand.html">BaseCommand</a>.<a href="basecommand.html#constructor">constructor</a></p>
+								<p>Inherited from <a href="command.html">Command</a>.<a href="command.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/command/commands/GetVendorListCommand.ts#L13">command/commands/GetVendorListCommand.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/InteractiveAdvertisingBureau/iabtcf-es/blob/a2bd504/modules/cmpapi/src/command/Command.ts#L12">command/Command.ts:12</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>cmpData: <a href="../interfaces/cmpdatareader.html" class="tsd-signature-type">CmpDataReader</a></h5>
+									<h5>callback: <a href="../index.html#callback" class="tsd-signature-type">Callback</a></h5>
 								</li>
 								<li>
-									<h5>command: <span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li>
-									<h5>version: <span class="tsd-signature-type">number</span></h5>
-								</li>
-								<li>
-									<h5>callback: <a href="callback.html" class="tsd-signature-type">Callback</a></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> param: <a href="../index.html#param" class="tsd-signature-type">Param</a></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> param: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="getvendorlistcommand.html" class="tsd-signature-type">GetVendorListCommand</a></h4>
@@ -171,55 +150,22 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a name="callback" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> callback</h3>
-					<div class="tsd-signature tsd-kind-icon">callback<span class="tsd-signature-symbol">:</span> <a href="callback.html" class="tsd-signature-type">Callback</a></div>
+					<div class="tsd-signature tsd-kind-icon">callback<span class="tsd-signature-symbol">:</span> <a href="../index.html#callback" class="tsd-signature-type">Callback</a></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="basecommand.html">BaseCommand</a>.<a href="basecommand.html#callback">callback</a></p>
+						<p>Inherited from <a href="command.html">Command</a>.<a href="command.html#callback">callback</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/command/commands/BaseCommand.ts#L18">command/commands/BaseCommand.ts:18</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-					<a name="cmpdata" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> cmp<wbr>Data</h3>
-					<div class="tsd-signature tsd-kind-icon">cmp<wbr>Data<span class="tsd-signature-symbol">:</span> <a href="../interfaces/cmpdatareader.html" class="tsd-signature-type">CmpDataReader</a></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="basecommand.html">BaseCommand</a>.<a href="basecommand.html#cmpdata">cmpData</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/command/commands/BaseCommand.ts#L13">command/commands/BaseCommand.ts:13</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-					<a name="command" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> command</h3>
-					<div class="tsd-signature tsd-kind-icon">command<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="basecommand.html">BaseCommand</a>.<a href="basecommand.html#command">command</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/command/commands/BaseCommand.ts#L15">command/commands/BaseCommand.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/InteractiveAdvertisingBureau/iabtcf-es/blob/a2bd504/modules/cmpapi/src/command/Command.ts#L9">command/Command.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a name="param" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span class="tsd-flag ts-flagOptional">Optional</span> param</h3>
-					<div class="tsd-signature tsd-kind-icon">param<span class="tsd-signature-symbol">:</span> <a href="../index.html#param" class="tsd-signature-type">Param</a></div>
+					<div class="tsd-signature tsd-kind-icon">param<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="basecommand.html">BaseCommand</a>.<a href="basecommand.html#param">param</a></p>
+						<p>Inherited from <a href="command.html">Command</a>.<a href="command.html#param">param</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/command/commands/BaseCommand.ts#L19">command/commands/BaseCommand.ts:19</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-					<a name="version" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> version</h3>
-					<div class="tsd-signature tsd-kind-icon">version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="basecommand.html">BaseCommand</a>.<a href="basecommand.html#version">version</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/command/commands/BaseCommand.ts#L16">command/commands/BaseCommand.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/InteractiveAdvertisingBureau/iabtcf-es/blob/a2bd504/modules/cmpapi/src/command/Command.ts#L12">command/Command.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -228,138 +174,66 @@
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> version<wbr>String</h3>
 					<div class="tsd-signature tsd-kind-icon">version<wbr>String<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="basecommand.html">BaseCommand</a>.<a href="basecommand.html#versionstring">versionString</a></p>
+						<p>Inherited from <a href="command.html">Command</a>.<a href="command.html#versionstring">versionString</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/command/commands/BaseCommand.ts#L17">command/commands/BaseCommand.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/InteractiveAdvertisingBureau/iabtcf-es/blob/a2bd504/modules/cmpapi/src/command/Command.ts#L8">command/Command.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-private-protected">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="execute" class="tsd-anchor"></a>
-					<h3>execute</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">execute<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a name="fail" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> fail</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">fail<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/command.html">Command</a>.<a href="../interfaces/command.html#execute">execute</a></p>
+								<p>Inherited from <a href="command.html">Command</a>.<a href="command.html#fail">fail</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/command/commands/GetVendorListCommand.ts#L24">command/commands/GetVendorListCommand.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/InteractiveAdvertisingBureau/iabtcf-es/blob/a2bd504/modules/cmpapi/src/command/Command.ts#L39">command/Command.ts:39</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Executes the get vendors list command</p>
-								</div>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-					<a name="isvalidvendorlistversion" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> is<wbr>Valid<wbr>Vendor<wbr>List<wbr>Version</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Valid<wbr>Vendor<wbr>List<wbr>Version<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected">
+					<a name="isvalid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> is<wbr>Valid</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Valid<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="basecommand.html">BaseCommand</a>.<a href="basecommand.html#isvalidvendorlistversion">isValidVendorListVersion</a></p>
+								<p>Overrides <a href="command.html">Command</a>.<a href="command.html#isvalid">isValid</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/command/commands/BaseCommand.ts#L115">command/commands/BaseCommand.ts:115</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Validates the current vendor list id version</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-					<a name="isvendorslistvalid" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> is<wbr>Vendors<wbr>List<wbr>Valid</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Vendors<wbr>List<wbr>Valid<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from <a href="basecommand.html">BaseCommand</a>.<a href="basecommand.html#isvendorslistvalid">isVendorsListValid</a></p>
-								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/command/commands/BaseCommand.ts#L93">command/commands/BaseCommand.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/InteractiveAdvertisingBureau/iabtcf-es/blob/a2bd504/modules/cmpapi/src/command/GetVendorListCommand.ts#L43">command/GetVendorListCommand.ts:43</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-					<a name="setbasereturnfields" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> set<wbr>Base<wbr>Return<wbr>Fields</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Base<wbr>Return<wbr>Fields<span class="tsd-signature-symbol">(</span>returnObj<span class="tsd-signature-symbol">: </span><a href="responsebuilder.html" class="tsd-signature-type">ResponseBuilder</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected">
+					<a name="success" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> success</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">success<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="basecommand.html">BaseCommand</a>.<a href="basecommand.html#setbasereturnfields">setBaseReturnFields</a></p>
+								<p>Overrides <a href="command.html">Command</a>.<a href="command.html#success">success</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/command/commands/BaseCommand.ts#L35">command/commands/BaseCommand.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/InteractiveAdvertisingBureau/iabtcf-es/blob/a2bd504/modules/cmpapi/src/command/GetVendorListCommand.ts#L11">command/GetVendorListCommand.ts:11</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Sets all the fields on a Return object using current cmp api data</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>returnObj: <a href="responsebuilder.html" class="tsd-signature-type">ResponseBuilder</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>a Return object</p>
-									</div>
-								</li>
-							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-					<a name="validate" class="tsd-anchor"></a>
-					<h3>validate</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">validate<span class="tsd-signature-symbol">(</span>failCallbackIfNotValid<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/validationresult.html" class="tsd-signature-type">ValidationResult</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Overrides <a href="basecommand.html">BaseCommand</a>.<a href="basecommand.html#validate">validate</a></p>
-								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/command/commands/GetVendorListCommand.ts#L50">command/commands/GetVendorListCommand.ts:50</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Validates the vendor list version was valid and returns the result.
-									Base class validation is also handled.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> failCallbackIfNotValid: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/validationresult.html" class="tsd-signature-type">ValidationResult</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -375,51 +249,132 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="../enums/cmpstatus.html" class="tsd-kind-icon">Cmp<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="../enums/displaystatus.html" class="tsd-kind-icon">Display<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="../enums/eventstatus.html" class="tsd-kind-icon">Event<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="addeventlistenercommand.html" class="tsd-kind-icon">Add<wbr>Event<wbr>Listener<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="cmpapi.html" class="tsd-kind-icon">Cmp<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="cmpapimodel.html" class="tsd-kind-icon">Cmp<wbr>Api<wbr>Model</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="command.html" class="tsd-kind-icon">Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="commandmap.html" class="tsd-kind-icon">Command<wbr>Map</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="eventlistenerqueue.html" class="tsd-kind-icon">Event<wbr>Listener<wbr>Queue</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="getinapptcdatacommand.html" class="tsd-kind-icon">Get<wbr>InApp<wbr>TcData<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="gettcdatacommand.html" class="tsd-kind-icon">Get<wbr>TcData<wbr>Command</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
 						<a href="getvendorlistcommand.html" class="tsd-kind-icon">Get<wbr>Vendor<wbr>List<wbr>Command</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
 								<a href="getvendorlistcommand.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 								<a href="getvendorlistcommand.html#callback" class="tsd-kind-icon">callback</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-								<a href="getvendorlistcommand.html#cmpdata" class="tsd-kind-icon">cmp<wbr>Data</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-								<a href="getvendorlistcommand.html#command" class="tsd-kind-icon">command</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 								<a href="getvendorlistcommand.html#param" class="tsd-kind-icon">param</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-								<a href="getvendorlistcommand.html#version" class="tsd-kind-icon">version</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 								<a href="getvendorlistcommand.html#versionstring" class="tsd-kind-icon">version<wbr>String</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="getvendorlistcommand.html#execute" class="tsd-kind-icon">execute</a>
-							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-								<a href="getvendorlistcommand.html#isvalidvendorlistversion" class="tsd-kind-icon">is<wbr>Valid<wbr>Vendor<wbr>List<wbr>Version</a>
+								<a href="getvendorlistcommand.html#fail" class="tsd-kind-icon">fail</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-								<a href="getvendorlistcommand.html#isvendorslistvalid" class="tsd-kind-icon">is<wbr>Vendors<wbr>List<wbr>Valid</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected">
+								<a href="getvendorlistcommand.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-								<a href="getvendorlistcommand.html#setbasereturnfields" class="tsd-kind-icon">set<wbr>Base<wbr>Return<wbr>Fields</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-								<a href="getvendorlistcommand.html#validate" class="tsd-kind-icon">validate</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected">
+								<a href="getvendorlistcommand.html#success" class="tsd-kind-icon">success</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="inapptcdata.html" class="tsd-kind-icon">In<wbr>AppTCData</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="ping.html" class="tsd-kind-icon">Ping</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="pingcommand.html" class="tsd-kind-icon">Ping<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="removeeventlistenercommand.html" class="tsd-kind-icon">Remove<wbr>Event<wbr>Listener<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="response.html" class="tsd-kind-icon">Response</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="tcdata.html" class="tsd-kind-icon">TCData</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/booleanvector.html" class="tsd-kind-icon">Boolean<wbr>Vector</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/customcommands.html" class="tsd-kind-icon">Custom<wbr>Commands</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/restrictions.html" class="tsd-kind-icon">Restrictions</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-not-exported">
+						<a href="../interfaces/vendoridrestrictiontype.html" class="tsd-kind-icon">Vendor<wbr>IdRestriction<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#callback" class="tsd-kind-icon">Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#errorcallback" class="tsd-kind-icon">Error<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#failcallback" class="tsd-kind-icon">Fail<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-not-exported">
+						<a href="../index.html#getqueuefunction" class="tsd-kind-icon">Get<wbr>Queue<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#iatcdatacallback" class="tsd-kind-icon">IATCData<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#pingcallback" class="tsd-kind-icon">Ping<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#removelistenercallback" class="tsd-kind-icon">Remove<wbr>Listener<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#tcdatacallback" class="tsd-kind-icon">TCData<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-not-exported">
+						<a href="../index.html#tcfapiargs" class="tsd-kind-icon">Tcf<wbr>Api<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-not-exported">
+						<a href="../index.html#tcfapifunction" class="tsd-kind-icon">Tcf<wbr>Api<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#vendorlistcallback" class="tsd-kind-icon">Vendor<wbr>List<wbr>Callback</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

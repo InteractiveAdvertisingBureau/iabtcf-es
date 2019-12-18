@@ -114,13 +114,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Cmp<wbr>Api<span class="tsd-signature-symbol">(</span>cmpId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, cmpVersion<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, customCommands<span class="tsd-signature-symbol">?: </span><a href="../interfaces/customcommandregistration.html" class="tsd-signature-type">CustomCommandRegistration</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="cmpapi.html" class="tsd-signature-type">CmpApi</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Cmp<wbr>Api<span class="tsd-signature-symbol">(</span>cmpId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, cmpVersion<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, customCommands<span class="tsd-signature-symbol">?: </span><a href="../interfaces/customcommands.html" class="tsd-signature-type">CustomCommands</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="cmpapi.html" class="tsd-signature-type">CmpApi</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/CmpApi.ts#L28">CmpApi.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/InteractiveAdvertisingBureau/iabtcf-es/blob/a2bd504/modules/cmpapi/src/CmpApi.ts#L22">CmpApi.ts:22</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -137,7 +137,7 @@
 									<h5>cmpVersion: <span class="tsd-signature-type">number</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> customCommands: <a href="../interfaces/customcommandregistration.html" class="tsd-signature-type">CustomCommandRegistration</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> customCommands: <a href="../interfaces/customcommands.html" class="tsd-signature-type">CustomCommands</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
 										</div>
@@ -161,7 +161,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/CmpApi.ts#L48">CmpApi.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/InteractiveAdvertisingBureau/iabtcf-es/blob/a2bd504/modules/cmpapi/src/CmpApi.ts#L92">CmpApi.ts:92</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -193,7 +193,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/CmpApi.ts#L69">CmpApi.ts:69</a></li>
+									<li>Defined in <a href="https://github.com/InteractiveAdvertisingBureau/iabtcf-es/blob/a2bd504/modules/cmpapi/src/CmpApi.ts#L103">CmpApi.ts:103</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -228,7 +228,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/CmpApi.ts#L89">CmpApi.ts:89</a></li>
+									<li>Defined in <a href="https://github.com/InteractiveAdvertisingBureau/iabtcf-es/blob/a2bd504/modules/cmpapi/src/CmpApi.ts#L114">CmpApi.ts:114</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -253,6 +253,18 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="../enums/cmpstatus.html" class="tsd-kind-icon">Cmp<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="../enums/displaystatus.html" class="tsd-kind-icon">Display<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="../enums/eventstatus.html" class="tsd-kind-icon">Event<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="addeventlistenercommand.html" class="tsd-kind-icon">Add<wbr>Event<wbr>Listener<wbr>Command</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
@@ -274,6 +286,90 @@
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="cmpapimodel.html" class="tsd-kind-icon">Cmp<wbr>Api<wbr>Model</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="command.html" class="tsd-kind-icon">Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="commandmap.html" class="tsd-kind-icon">Command<wbr>Map</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="eventlistenerqueue.html" class="tsd-kind-icon">Event<wbr>Listener<wbr>Queue</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="getinapptcdatacommand.html" class="tsd-kind-icon">Get<wbr>InApp<wbr>TcData<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="gettcdatacommand.html" class="tsd-kind-icon">Get<wbr>TcData<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="getvendorlistcommand.html" class="tsd-kind-icon">Get<wbr>Vendor<wbr>List<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="inapptcdata.html" class="tsd-kind-icon">In<wbr>AppTCData</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="ping.html" class="tsd-kind-icon">Ping</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="pingcommand.html" class="tsd-kind-icon">Ping<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="removeeventlistenercommand.html" class="tsd-kind-icon">Remove<wbr>Event<wbr>Listener<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="response.html" class="tsd-kind-icon">Response</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="tcdata.html" class="tsd-kind-icon">TCData</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/booleanvector.html" class="tsd-kind-icon">Boolean<wbr>Vector</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/customcommands.html" class="tsd-kind-icon">Custom<wbr>Commands</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/restrictions.html" class="tsd-kind-icon">Restrictions</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-not-exported">
+						<a href="../interfaces/vendoridrestrictiontype.html" class="tsd-kind-icon">Vendor<wbr>IdRestriction<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#callback" class="tsd-kind-icon">Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#errorcallback" class="tsd-kind-icon">Error<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#failcallback" class="tsd-kind-icon">Fail<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-not-exported">
+						<a href="../index.html#getqueuefunction" class="tsd-kind-icon">Get<wbr>Queue<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#iatcdatacallback" class="tsd-kind-icon">IATCData<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#pingcallback" class="tsd-kind-icon">Ping<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#removelistenercallback" class="tsd-kind-icon">Remove<wbr>Listener<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#tcdatacallback" class="tsd-kind-icon">TCData<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-not-exported">
+						<a href="../index.html#tcfapiargs" class="tsd-kind-icon">Tcf<wbr>Api<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-not-exported">
+						<a href="../index.html#tcfapifunction" class="tsd-kind-icon">Tcf<wbr>Api<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#vendorlistcallback" class="tsd-kind-icon">Vendor<wbr>List<wbr>Callback</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

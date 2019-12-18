@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CommandBroker | @iabtcf/cmpapi - API Documentation</title>
+	<title>CustomCommands | @iabtcf/cmpapi - API Documentation</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,82 +56,66 @@
 					<a href="../index.html">Globals</a>
 				</li>
 				<li>
-					<a href="commandbroker.html">CommandBroker</a>
+					<a href="customcommands.html">CustomCommands</a>
 				</li>
 			</ul>
-			<h1>Class CommandBroker</h1>
+			<h1>Interface CustomCommands</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>CommandBroker handles setup, routing, calling validation and facilitating the execution of default and custom.
-						The class handles all the commands the page will issue.</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">CommandBroker</span>
+						<span class="target">CustomCommands</span>
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel-group tsd-index-group">
-				<h2>Index</h2>
-				<section class="tsd-panel tsd-index-panel">
-					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Constructors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="commandbroker.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Command<wbr>Broker<span class="tsd-signature-symbol">(</span>cmpData<span class="tsd-signature-symbol">: </span><a href="../interfaces/cmpdatareader.html" class="tsd-signature-type">CmpDataReader</a>, customCommands<span class="tsd-signature-symbol">?: </span><a href="../interfaces/customcommandregistration.html" class="tsd-signature-type">CustomCommandRegistration</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="commandbroker.html" class="tsd-signature-type">CommandBroker</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/command/CommandBroker.ts#L43">command/CommandBroker.ts:43</a></li>
+			<section class="tsd-panel tsd-kind-interface">
+				<h3 class="tsd-before-signature">Indexable</h3>
+				<div class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">[</span>commandName: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">function</span></div>
+				<ul class="tsd-parameters">
+					<li class="tsd-parameter-siganture">
+						<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+							<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span>, param<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						</ul>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<h4 class="tsd-parameters-title">Parameters</h4>
+								<ul class="tsd-parameters">
+									<li>
+										<h5>callback: <span class="tsd-signature-type">function</span></h5>
+										<ul class="tsd-parameters">
+											<li class="tsd-parameter-siganture">
+												<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+													<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+												</ul>
+												<ul class="tsd-descriptions">
+													<li class="tsd-description">
+														<h4 class="tsd-parameters-title">Parameters</h4>
+														<ul class="tsd-parameters">
+															<li>
+																<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>params: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+															</li>
+														</ul>
+														<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<h5><span class="tsd-flag ts-flagOptional">Optional</span> param: <span class="tsd-signature-type">any</span></h5>
+									</li>
 								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Constructor</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>cmpData: <a href="../interfaces/cmpdatareader.html" class="tsd-signature-type">CmpDataReader</a></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> customCommands: <a href="../interfaces/customcommandregistration.html" class="tsd-signature-type">CustomCommandRegistration</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-										</div>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="commandbroker.html" class="tsd-signature-type">CommandBroker</a></h4>
-						</li>
-					</ul>
-				</section>
+								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							</li>
+						</ul>
+					</li>
+				</ul>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -144,18 +128,109 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="../enums/cmpstatus.html" class="tsd-kind-icon">Cmp<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="../enums/displaystatus.html" class="tsd-kind-icon">Display<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="../enums/eventstatus.html" class="tsd-kind-icon">Event<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/addeventlistenercommand.html" class="tsd-kind-icon">Add<wbr>Event<wbr>Listener<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/cmpapi.html" class="tsd-kind-icon">Cmp<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/cmpapimodel.html" class="tsd-kind-icon">Cmp<wbr>Api<wbr>Model</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/command.html" class="tsd-kind-icon">Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/commandmap.html" class="tsd-kind-icon">Command<wbr>Map</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/eventlistenerqueue.html" class="tsd-kind-icon">Event<wbr>Listener<wbr>Queue</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/getinapptcdatacommand.html" class="tsd-kind-icon">Get<wbr>InApp<wbr>TcData<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/gettcdatacommand.html" class="tsd-kind-icon">Get<wbr>TcData<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/getvendorlistcommand.html" class="tsd-kind-icon">Get<wbr>Vendor<wbr>List<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/inapptcdata.html" class="tsd-kind-icon">In<wbr>AppTCData</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/ping.html" class="tsd-kind-icon">Ping</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/pingcommand.html" class="tsd-kind-icon">Ping<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/removeeventlistenercommand.html" class="tsd-kind-icon">Remove<wbr>Event<wbr>Listener<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/response.html" class="tsd-kind-icon">Response</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/tcdata.html" class="tsd-kind-icon">TCData</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="booleanvector.html" class="tsd-kind-icon">Boolean<wbr>Vector</a>
+					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class">
-						<a href="commandbroker.html" class="tsd-kind-icon">Command<wbr>Broker</a>
-						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="commandbroker.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-						</ul>
+					<li class="current tsd-kind-interface">
+						<a href="customcommands.html" class="tsd-kind-icon">Custom<wbr>Commands</a>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface">
+						<a href="restrictions.html" class="tsd-kind-icon">Restrictions</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-not-exported">
+						<a href="vendoridrestrictiontype.html" class="tsd-kind-icon">Vendor<wbr>IdRestriction<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#callback" class="tsd-kind-icon">Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#errorcallback" class="tsd-kind-icon">Error<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#failcallback" class="tsd-kind-icon">Fail<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-not-exported">
+						<a href="../index.html#getqueuefunction" class="tsd-kind-icon">Get<wbr>Queue<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#iatcdatacallback" class="tsd-kind-icon">IATCData<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#pingcallback" class="tsd-kind-icon">Ping<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#removelistenercallback" class="tsd-kind-icon">Remove<wbr>Listener<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#tcdatacallback" class="tsd-kind-icon">TCData<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-not-exported">
+						<a href="../index.html#tcfapiargs" class="tsd-kind-icon">Tcf<wbr>Api<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-not-exported">
+						<a href="../index.html#tcfapifunction" class="tsd-kind-icon">Tcf<wbr>Api<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#vendorlistcallback" class="tsd-kind-icon">Vendor<wbr>List<wbr>Callback</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

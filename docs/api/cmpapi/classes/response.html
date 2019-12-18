@@ -59,20 +59,13 @@
 					<a href="response.html">Response</a>
 				</li>
 			</ul>
-			<h1>Interface Response</h1>
+			<h1>Class Response</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Base response model to be returned to TCF Api Command issuer</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -83,26 +76,10 @@
 								<a href="tcdata.html" class="tsd-signature-type">TCData</a>
 							</li>
 							<li>
-								<a href="globalvendorlist.html" class="tsd-signature-type">GlobalVendorList</a>
-							</li>
-							<li>
-								<a href="inapptcdata.html" class="tsd-signature-type">InAppTCData</a>
-							</li>
-							<li>
 								<a href="ping.html" class="tsd-signature-type">Ping</a>
 							</li>
 						</ul>
 					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel">
-				<h3>Implemented by</h3>
-				<ul class="tsd-hierarchy">
-					<li><a href="../classes/globalvendorlistbldr.html" class="tsd-signature-type">GlobalVendorListBldr</a></li>
-					<li><a href="../classes/inapptcdatabldr.html" class="tsd-signature-type">InAppTCDataBldr</a></li>
-					<li><a href="../classes/pingbldr.html" class="tsd-signature-type">PingBldr</a></li>
-					<li><a href="../classes/responsebuilder.html" class="tsd-signature-type">ResponseBuilder</a></li>
-					<li><a href="../classes/tcdatabldr.html" class="tsd-signature-type">TCDataBldr</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -112,10 +89,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="response.html#cmpid" class="tsd-kind-icon">cmp<wbr>Id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="response.html#cmpversion" class="tsd-kind-icon">cmp<wbr>Version</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="response.html#gdprapplies" class="tsd-kind-icon">gdpr<wbr>Applies</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="response.html#tcfpolicyversion" class="tsd-kind-icon">tcf<wbr>Policy<wbr>Version</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="response.html#cmpid" class="tsd-kind-icon">cmp<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="response.html#cmpversion" class="tsd-kind-icon">cmp<wbr>Version</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="response.html#gdprapplies" class="tsd-kind-icon">gdpr<wbr>Applies</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="response.html#tcfpolicyversion" class="tsd-kind-icon">tcf<wbr>Policy<wbr>Version</a></li>
 							</ul>
 						</section>
 					</div>
@@ -123,43 +100,43 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="cmpid" class="tsd-anchor"></a>
 					<h3>cmp<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">cmp<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<div class="tsd-signature tsd-kind-icon">cmp<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;CmpApiModel.cmpId</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/model/responses/Response.ts#L7">model/responses/Response.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/InteractiveAdvertisingBureau/iabtcf-es/blob/a2bd504/modules/cmpapi/src/response/Response.ts#L5">response/Response.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="cmpversion" class="tsd-anchor"></a>
 					<h3>cmp<wbr>Version</h3>
-					<div class="tsd-signature tsd-kind-icon">cmp<wbr>Version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<div class="tsd-signature tsd-kind-icon">cmp<wbr>Version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;CmpApiModel.cmpVersion</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/model/responses/Response.ts#L8">model/responses/Response.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/InteractiveAdvertisingBureau/iabtcf-es/blob/a2bd504/modules/cmpapi/src/response/Response.ts#L6">response/Response.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="gdprapplies" class="tsd-anchor"></a>
 					<h3>gdpr<wbr>Applies</h3>
-					<div class="tsd-signature tsd-kind-icon">gdpr<wbr>Applies<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><a href="../index.html#boolint" class="tsd-signature-type">BoolInt</a></div>
+					<div class="tsd-signature tsd-kind-icon">gdpr<wbr>Applies<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;CmpApiModel.gdprApplies</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/model/responses/Response.ts#L9">model/responses/Response.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/InteractiveAdvertisingBureau/iabtcf-es/blob/a2bd504/modules/cmpapi/src/response/Response.ts#L7">response/Response.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="tcfpolicyversion" class="tsd-anchor"></a>
 					<h3>tcf<wbr>Policy<wbr>Version</h3>
-					<div class="tsd-signature tsd-kind-icon">tcf<wbr>Policy<wbr>Version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<div class="tsd-signature tsd-kind-icon">tcf<wbr>Policy<wbr>Version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;CmpApiModel.tcfPolicyVersion</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/chrispaterson/iabtcf/blob/37181f7/modules/cmpapi/src/model/responses/Response.ts#L10">model/responses/Response.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/InteractiveAdvertisingBureau/iabtcf-es/blob/a2bd504/modules/cmpapi/src/response/Response.ts#L8">response/Response.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -175,27 +152,123 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="../enums/cmpstatus.html" class="tsd-kind-icon">Cmp<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="../enums/displaystatus.html" class="tsd-kind-icon">Display<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="../enums/eventstatus.html" class="tsd-kind-icon">Event<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="addeventlistenercommand.html" class="tsd-kind-icon">Add<wbr>Event<wbr>Listener<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="cmpapi.html" class="tsd-kind-icon">Cmp<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="cmpapimodel.html" class="tsd-kind-icon">Cmp<wbr>Api<wbr>Model</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="command.html" class="tsd-kind-icon">Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="commandmap.html" class="tsd-kind-icon">Command<wbr>Map</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="eventlistenerqueue.html" class="tsd-kind-icon">Event<wbr>Listener<wbr>Queue</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="getinapptcdatacommand.html" class="tsd-kind-icon">Get<wbr>InApp<wbr>TcData<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="gettcdatacommand.html" class="tsd-kind-icon">Get<wbr>TcData<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="getvendorlistcommand.html" class="tsd-kind-icon">Get<wbr>Vendor<wbr>List<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="inapptcdata.html" class="tsd-kind-icon">In<wbr>AppTCData</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="ping.html" class="tsd-kind-icon">Ping</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="pingcommand.html" class="tsd-kind-icon">Ping<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="removeeventlistenercommand.html" class="tsd-kind-icon">Remove<wbr>Event<wbr>Listener<wbr>Command</a>
+					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface">
+					<li class="current tsd-kind-class">
 						<a href="response.html" class="tsd-kind-icon">Response</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="response.html#cmpid" class="tsd-kind-icon">cmp<wbr>Id</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="response.html#cmpversion" class="tsd-kind-icon">cmp<wbr>Version</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="response.html#gdprapplies" class="tsd-kind-icon">gdpr<wbr>Applies</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="response.html#tcfpolicyversion" class="tsd-kind-icon">tcf<wbr>Policy<wbr>Version</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="tcdata.html" class="tsd-kind-icon">TCData</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/booleanvector.html" class="tsd-kind-icon">Boolean<wbr>Vector</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/customcommands.html" class="tsd-kind-icon">Custom<wbr>Commands</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/restrictions.html" class="tsd-kind-icon">Restrictions</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-not-exported">
+						<a href="../interfaces/vendoridrestrictiontype.html" class="tsd-kind-icon">Vendor<wbr>IdRestriction<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#callback" class="tsd-kind-icon">Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#errorcallback" class="tsd-kind-icon">Error<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#failcallback" class="tsd-kind-icon">Fail<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-not-exported">
+						<a href="../index.html#getqueuefunction" class="tsd-kind-icon">Get<wbr>Queue<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#iatcdatacallback" class="tsd-kind-icon">IATCData<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#pingcallback" class="tsd-kind-icon">Ping<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#removelistenercallback" class="tsd-kind-icon">Remove<wbr>Listener<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#tcdatacallback" class="tsd-kind-icon">TCData<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-not-exported">
+						<a href="../index.html#tcfapiargs" class="tsd-kind-icon">Tcf<wbr>Api<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-not-exported">
+						<a href="../index.html#tcfapifunction" class="tsd-kind-icon">Tcf<wbr>Api<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../index.html#vendorlistcallback" class="tsd-kind-icon">Vendor<wbr>List<wbr>Callback</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
