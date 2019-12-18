@@ -11,7 +11,7 @@ export enum CmpStatus{
    * CMP not yet loaded – stub still in place
    * @type {string}
    */
-  STUB = 'stubCMP',
+  STUB = 'stub',
   /**
    * CMP is loading
    * @type {string}

@@ -1,22 +1,21 @@
 import {GVL, TCModel, VendorList} from '@iabtcf/core';
-import {assert, expect} from 'chai';
-import * as sinon from 'sinon';
+import {expect} from 'chai';
 import {XMLHttpTestTools, smellsLikeGVL} from '@iabtcf/testing';
 import {
   CmpApi,
+  CustomCommands,
+  Callback,
   EventStatus,
-  IATCDataCallback,
-  InAppTCData,
-  Ping,
   PingCallback,
   RemoveListenerCallback,
-  TCData,
   TCDataCallback,
   VendorListCallback,
 } from '../src';
-import {CustomCommandRegistration} from '../src/command';
-import {ValidationMessages} from '../src/validation';
-import {createValidTCModel, gvl} from './utils';
+
+import {
+  TCData,
+  Ping,
+} from '../src/response';
 
 interface TestData {
   testString: string;
@@ -24,14 +23,7 @@ interface TestData {
 }
 
 const API_FUNCTION_NAME = '__tcfapi';
-
 const win: Window = window;
-
-const createStub = (): void => {
-
-  require('@iabtcf/stub');
-
-};
 
 const createGetTCDataCallback = (done: () => void, eventStatus: EventStatus): TCDataCallback => {
 
@@ -54,67 +46,48 @@ describe('CmpApi', (): void => {
     /**
      * Create the __tcfapi stub
      */
-    createStub();
+    require('@iabtcf/stub');
     XMLHttpTestTools.beforeEach();
 
   });
   afterEach((): void => {
 
     XMLHttpTestTools.afterEach();
+
     // clean up that junk
-    window[API_FUNCTION_NAME] = null;
+    if (typeof window[API_FUNCTION_NAME] === 'function') {
+
+      delete window[API_FUNCTION_NAME];
+
+    }
+
+    const iframes = document.querySelectorAll('iframe');
+
+    for (let i = 0; i < iframes.length; i++) {
+
+      const frame: HTMLElement = iframes[i];
+
+      if (frame !== null && frame.parentNode) {
+
+        frame.parentNode.removeChild(frame);
+
+      }
+
+    }
 
   });
 
-  const custCommandTestData: TestData = {testString: 'There was a farmer who had a dog, and DOG_NAME was his name-o', testNum: 42};
-
-  /**
-   * An array of custom commands
-   * @type {{customFunction: (version: string, callback: (obj: object) => void) => void; command: string}[]}
-   */
-  const customCommands: CustomCommandRegistration[] = [
-    {command: 'testCustomCommand', customFunction: (version: string, callback: (obj: object) => void): void => {
-
-      const _testData = custCommandTestData;
-      callback({..._testData, testString: _testData.testString.replace('DOG_NAME', 'BINGO')});
-
-    }},
-  ];
-
   describe('After creation of a new instance of CmpApi:', (): void => {
-
-    it('Page handler is created and is a function', (): void => {
-
-      // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-      const cmpApi = new CmpApi(1, 3);
-
-      expect(win[API_FUNCTION_NAME], `window.${API_FUNCTION_NAME}`).to.be.a('function');
-
-    });
-
-    it('Creation of a duplicate CmpApi instance throws an error', (): void => {
-
-      const createNewCMP = (): void => {
-
-        debugger;
-        // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-        const cmpApi = new CmpApi(1, 3);
-
-      };
-
-      createNewCMP();
-      expect(createNewCMP).to.throw(ValidationMessages.EXISTING_CMP);
-
-    });
 
     it('ping returns', (done: () => void): void => {
 
       // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-      const cmpApi = new CmpApi(1, 3);
+      const cmpApi = new CmpApi(2, 3);
 
-      const callback: PingCallback = (pingReturn: Ping | null): void => {
+      const callback: PingCallback = (pingReturn: Ping): void => {
 
         expect(pingReturn, 'pingReturn').not.to.be.null;
+        expect(pingReturn.cmpLoaded, 'cmpLoaded').to.be.true;
         done();
 
       };
@@ -123,12 +96,13 @@ describe('CmpApi', (): void => {
 
     });
 
+    /*
     it('setTCModel does not throw an error', (): void => {
 
       // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-      const cmpApi = new CmpApi(1, 3);
+      const cmpApi = new CmpApi(2, 3);
 
-      expect((): TCModel => cmpApi.tcModel = createValidTCModel(gvl)).not.to.throw();
+      expect((): TCModel => cmpApi.tcModel = new TCModel()).not.to.throw();
 
     });
 
@@ -136,12 +110,28 @@ describe('CmpApi', (): void => {
 
       it('envokes a custom command successfully with data', (done: () => void): void => {
 
+        const custCommandTestData: TestData = {testString: 'There was a farmer who had a dog, and DOG_NAME was his name-o', testNum: 42};
+
+        /**
+         * An array of custom commands
+         * @type {{customFunction: (version: string, callback: (obj: object) => void) => void; command: string}[]}
+         */
+    /*
+        const customCommands: CustomCommands = {
+          testCustomCommand: (callback: (testData: TestData) => void): void => {
+
+            const _testData = custCommandTestData;
+            callback({..._testData, testString: _testData.testString.replace('DOG_NAME', 'BINGO')});
+
+          },
+        };
+
         // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
         const cmpApi = new CmpApi(1, 3, customCommands);
         const param = 'BINGO';
         const expectedTestString = custCommandTestData.testString.replace('DOG_NAME', param);
 
-        win[API_FUNCTION_NAME](customCommands[0].command, 2, (data: TestData): void => {
+        win[API_FUNCTION_NAME]('testCustomCommand', 2, (data: TestData): void => {
 
           expect(data, 'data').not.to.be.null;
           expect(data.testString).to.equal(expectedTestString);
@@ -157,7 +147,7 @@ describe('CmpApi', (): void => {
         it(`returns null and success=false null if command ${command} and version is ${version}`, (done: () => void): void => {
 
           // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-          const cmpApi = new CmpApi(1, 3, customCommands);
+          const cmpApi = new CmpApi(1, 3);
 
           win[API_FUNCTION_NAME](command, version, (returnObject: null, success: boolean): void => {
 
@@ -186,38 +176,39 @@ describe('CmpApi', (): void => {
       it(`has an initial event status of ${EventStatus.TC_LOADED}`, (done: () => void): void => {
 
         // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-        const cmpApi = new CmpApi(1, 3);
+        const cmpApi = new CmpApi(2, 3);
 
+        cmpApi.tcModel = new TCModel();
         win[API_FUNCTION_NAME]('getTCData', 2, createGetTCDataCallback(done, EventStatus.TC_LOADED));
 
       });
 
       it(`has an event status of ${EventStatus.USER_ACTION_COMPLETE} if tcModel is set twice`, (done: () => void): void => {
 
-        const cmpApi = new CmpApi(1, 3);
+        const cmpApi = new CmpApi(2, 3);
 
-        cmpApi.tcModel = createValidTCModel(gvl);
-        cmpApi.tcModel = createValidTCModel(gvl);
+        cmpApi.tcModel = new TCModel();
+        cmpApi.tcModel = new TCModel();
         win[API_FUNCTION_NAME]('getTCData', 2, createGetTCDataCallback(done, EventStatus.USER_ACTION_COMPLETE));
 
       });
 
       it(`still has an event status of ${EventStatus.USER_ACTION_COMPLETE} if tcModel is set three times`, (done: () => void): void => {
 
-        const cmpApi = new CmpApi(1, 3);
+        const cmpApi = new CmpApi(2, 3);
 
-        cmpApi.tcModel = createValidTCModel(gvl);
-        cmpApi.tcModel = createValidTCModel(gvl);
-        cmpApi.tcModel = createValidTCModel(gvl);
+        cmpApi.tcModel = new TCModel();
+        cmpApi.tcModel = new TCModel();
+        cmpApi.tcModel = new TCModel();
         win[API_FUNCTION_NAME]('getTCData', 2, createGetTCDataCallback(done, EventStatus.USER_ACTION_COMPLETE));
 
       });
 
       it('filters vendors with array of integer vendorIds passed in', (done: () => void): void => {
 
-        const cmpApi = new CmpApi(1, 3);
+        const cmpApi = new CmpApi(2, 3);
         const vendors = [1, 2, 3, 12, 37, 48];
-        const tcModel = createValidTCModel(gvl);
+        const tcModel = new TCModel(require('../../../vendorlist/vendor-list.json'));
 
         tcModel.vendorConsents.set(vendors);
         tcModel.vendorLegitimateInterest.set(vendors);
@@ -228,11 +219,11 @@ describe('CmpApi', (): void => {
 
           expect(success, 'success').to.be.true;
           expect(tcData, 'tcData').not.to.be.null;
-          expect((tcData as TCData).eventStatus, 'eventStatus').to.equal(EventStatus.USER_ACTION_COMPLETE);
 
           vendors.forEach((id: number): void => {
 
             const strId = id.toString();
+
             expect((tcData as TCData).vendor.consents[strId]).to.be.true;
             expect((tcData as TCData).vendor.legitimateInterests[strId]).to.be.true;
 
@@ -253,7 +244,9 @@ describe('CmpApi', (): void => {
         it(`returns null and success=false null if vendorIds=${vendorIds}`, (done: () => void): void => {
 
           // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-          const cmpApi = new CmpApi(1, 3);
+          const cmpApi = new CmpApi(2, 3);
+
+          cmpApi.tcModel = new TCModel(new GVL(require('../../../vendorlist/vendor-list.json')));
 
           win[API_FUNCTION_NAME]('getTCData', 2, (returnObject: null, success: boolean): void => {
 
@@ -279,7 +272,7 @@ describe('CmpApi', (): void => {
 
       it('getInAppTCData works', (done: () => void): void => {
 
-        cmpApi.tcModel = createValidTCModel(gvl);
+        cmpApi.tcModel = createValidTCModel(require('../../../vendorlist/vendor-list.json'));
 
         const callback: IATCDataCallback = (inAppTcData: InAppTCData | null, success: boolean): void => {
 
@@ -351,7 +344,7 @@ describe('CmpApi', (): void => {
 
           win[API_FUNCTION_NAME]('addEventListener', 2, addEventListenerCallback);
 
-          const tcModel = new TCModel(gvl);
+          const tcModel = new TCModel(require('../../../vendorlist/vendor-list.json'));
 
           tcModel.cmpId = 2;
           tcModel.cmpVersion = 1;
@@ -379,7 +372,7 @@ describe('CmpApi', (): void => {
             assert.isTrue(success, 'removeEventListener did not return successful');
 
             // Try setting tc model to trigger addEventListenerCallback more times then it was expected
-            const tcModel = new TCModel(gvl);
+            const tcModel = new TCModel(require('../../../vendorlist/vendor-list.json'));
             tcModel.cmpId = 2
             ;
             tcModel.cmpVersion = 1;

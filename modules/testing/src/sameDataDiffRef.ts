@@ -16,37 +16,31 @@ export const sameDataDiffRef = (obj1: object, obj2: object, objName: string): vo
 
   for (const key of keySet) {
 
-    if (obj1[key] === undefined && obj2[key] === undefined) {
+    const item1 = obj1[key];
+    const item2 = obj2[key];
+    const itsType = typeof item1;
+    
+    expect(typeof item2).to.equal(itsType);
+
+    if (item1 === undefined && item2 === undefined) {
 
       continue;
 
     }
 
-    if (isPrimitive(obj1[key])) {
+    if (isPrimitive(item1)) {
 
-      expect(obj2[key], `${objName}:${key}`).to.equal(obj1[key]);
+      expect(item2, `${objName}:${key}`).to.equal(item1);
 
     } else {
 
-      if (typeof obj1[key].forEach === 'function') {
+      if (item1 instanceof Date) {
 
-        obj1[key].forEach((value: unknown, key2: string): void => {
-
-          if (isPrimitive(value)) {
-
-            expect(obj2[key2], `${objName}:${key2}`).to.equal(obj1[key2]);
-
-          } else {
-
-            sameDataDiffRef(obj1[key2], obj2[key2], key2);
-
-          }
-
-        });
+        expect(item1.getTime()).to.equal(item2.getTime());
 
       } else {
 
-        sameDataDiffRef(obj1[key], obj2[key], key);
+        sameDataDiffRef(item1, item2, key);
 
       }
 

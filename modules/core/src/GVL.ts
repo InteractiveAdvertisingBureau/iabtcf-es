@@ -19,7 +19,7 @@ type PurposeSubType = 'consent' | 'legInt' | 'flexible';
  * object and provide accessors.  Provides ways to group vendors on the list by
  * purpose and feature.
  */
-export class GVL extends Cloneable<GVL> implements VendorList, Declarations {
+export class GVL extends Cloneable<GVL> implements VendorList {
 
   private static LANGUAGE_CACHE: Map<string, Declarations> = new Map<string, Declarations>();
   public static readonly DEFAULT_LANGUAGE: string = 'EN';

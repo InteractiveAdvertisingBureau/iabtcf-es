@@ -1,11 +1,13 @@
 (function() {
 
   const TCF_LOCATOR_NAME = '__tcfapiLocator';
+  const win = window;
+  let cmpFrame;
 
   function addFrame() {
 
-    const doc = cmpFrame.document;
-    const otherCMP = !!(cmpFrame.frames[TCF_LOCATOR_NAME]);
+    const doc = win.document;
+    const otherCMP = !!(win.frames[TCF_LOCATOR_NAME]);
 
     if (!otherCMP) {
 
@@ -156,9 +158,6 @@
 
   }
 
-  const win = window;
-  let cmpFrame;
-
   /**
    * Iterate up to the top window checking for an already-created
    * "__tcfapilLocator" frame on every level. If one exists already then we are
@@ -194,9 +193,9 @@
     // we have recur'd up the windows and have found no __tcfapiLocator frame
 
     addFrame();
-    window.__tcfapi = tcfAPIHandler;
-    window.addEventListener('message', postMessageEventHandler, false);
+    win.__tcfapi = tcfAPIHandler;
+    win.addEventListener('message', postMessageEventHandler, false);
 
   }
 
-});
+}());
