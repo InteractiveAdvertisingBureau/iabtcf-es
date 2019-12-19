@@ -6,7 +6,7 @@ export class Json {
    * @param {number} [timeout] - optional timeout in milliseconds
    * @return {Promise} - resolves with parsed JSON
    */
-  public static fetch(jsonURL: string, sendCookies: boolean = false, timeout: number = 0): Promise<object> {
+  public static fetch(jsonURL: string, sendCookies = false, timeout = 0): Promise<object> {
 
     return new Promise((resolve: (response: object) => void, reject: (error: Error) => void): void => {
 
@@ -21,10 +21,10 @@ export class Json {
            * anything that is not in the two hundreds is an error and if the
            * responseText is null that means it failed
            */
-          if (req.status >= 200
-            && req.status < 300
-            && req.responseType === 'json'
-            && req.response) {
+          if (req.status >= 200 &&
+            req.status < 300 &&
+            req.responseType === 'json' &&
+            req.response) {
 
             resolve(req.response);
 

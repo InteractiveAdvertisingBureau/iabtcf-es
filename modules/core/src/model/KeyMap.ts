@@ -8,8 +8,5 @@
  * };
  * ```
  */
-export interface KeyMap<T> {
-
-  // Keystring id
-  [key: string]: T;
-}
+import {IntMap} from './IntMap';
+export type KeyMap<T> = IntMap<T>

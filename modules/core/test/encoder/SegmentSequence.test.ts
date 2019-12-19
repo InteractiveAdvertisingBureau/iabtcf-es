@@ -20,6 +20,7 @@ export function run(): void {
     hasPublisherConsents: boolean,
     callback: (sequence: string[]) => void): void => {
 
+    // eslint-disable-next-line max-len
     it(`should be this when: v${version}, isServiceSpecific=${isServiceSpecific}, isForSaving=${isForSaving}, hasVendorsAllowed=${hasVendorsAllowed}, hasVendorsDisclosed=${hasVendorsDisclosed}, hasPublisherConsents=${hasPublisherConsents}`, (): void => {
 
       const tcModel = new TCModel();
@@ -159,88 +160,5 @@ export function run(): void {
       });
 
   });
-
-  /**
-  it('should return only core for v1 when isForSaving=true & isServiceSpecific=true', (): void => {
-
-    const tcModel = new TCModel();
-    tcModel.isServiceSpecific = true;
-    const sSequence = new SegmentSequence(tcModel, true);
-
-    expect(sSequence['1'].length, 'v1 length').to.equal(1);
-    expect(sSequence['1'][0]).to.equal(Segments.core);
-
-  });
-
-  it('should return only core for v1 when isForSaving=true & isServiceSpecific=false', (): void => {
-
-    const tcModel = new TCModel();
-    tcModel.isServiceSpecific = false;
-    const sSequence = new SegmentSequence(tcModel, true);
-
-    expect(sSequence['1'].length, 'v1 length').to.equal(1);
-    expect(sSequence['1'][0]).to.equal(Segments.core);
-
-  });
-
-  it('should return only core for v1 when isForSaving=false & isServiceSpecific=true', (): void => {
-
-    const tcModel = new TCModel();
-    tcModel.isServiceSpecific = true;
-    const sSequence = new SegmentSequence(tcModel, false);
-
-    expect(sSequence['1'].length, 'v1 length').to.equal(1);
-    expect(sSequence['1'][0]).to.equal(Segments.core);
-
-  });
-
-  it('should return only core for v1 when isForSaving=false & isServiceSpecific=false', (): void => {
-
-    const tcModel = new TCModel();
-    tcModel.isServiceSpecific = false;
-    const sSequence = new SegmentSequence(tcModel, false);
-
-    expect(sSequence['1'].length, 'v1 length').to.equal(1);
-    expect(sSequence['1'][0]).to.equal(Segments.core);
-
-  });
-
-  it('should be this when: v2, isServiceSpecific=true, isForSaving=true, vendorsAllowed=empty, vendorsDisclosed=empty, publisherConsents=empty', (): void => {
-
-    const tcModel = new TCModel();
-    tcModel.isServiceSpecific = true;
-    const sSequence = new SegmentSequence(tcModel, true);
-
-    expect(sSequence['2'].length, 'v2 length').to.equal(1);
-    expect(sSequence['2'][0]).to.equal(Segments.core);
-
-  });
-
-  it('should be this when: v2, isServiceSpecific=true, isForSaving=true, vendorsAllowed=empty, vendorsDisclosed=empty, publisherConsents=something', (): void => {
-
-    const tcModel = new TCModel();
-
-    tcModel.isServiceSpecific = true;
-    tcModel.publisherConsents.set(1);
-
-    const sSequence = new SegmentSequence(tcModel, true);
-
-    expect(sSequence['2'].length, 'v2 length').to.equal(2);
-    expect(sSequence['2'][0]).to.equal(Segments.core);
-    expect(sSequence['2'][1]).to.equal(Segments.publisherTC);
-
-  });
-
-  it('should be this when: v2, isServiceSpecific=true, isForSaving=true, vendorsAllowed=empty, vendorsDisclosed=something, publisherConsents=empty', (): void => {
-
-    const tcModel = new TCModel();
-    tcModel.isServiceSpecific = true;
-    const sSequence = new SegmentSequence(tcModel, true);
-
-    expect(sSequence['2'].length, 'v2 length').to.equal(1);
-    expect(sSequence['2'][0]).to.equal(Segments.core);
-
-  });
-  */
 
 }
