@@ -1,5 +1,6 @@
 import {Cloneable} from '../Cloneable';
 import {TCModelError} from '../errors';
+import {IntMap} from './IntMap';
 
 type IdOrIds = number | number[];
 export type IdBoolTuple = [number, boolean];
@@ -160,6 +161,16 @@ class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
   public get size(): number {
 
     return this.set_.size;
+
+  }
+
+  public setAll<T>(intMap: IntMap<T>): void {
+
+    Object.keys(intMap).forEach((strId: string): void => {
+
+      this.set(+strId);
+
+    });
 
   }
 

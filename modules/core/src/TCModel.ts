@@ -3,7 +3,7 @@ import {TCModelError} from './errors';
 import {GVL} from './GVL';
 
 import {ConsentLanguages, Fields, IntMap, PurposeRestrictionVector, TCFields, Vector} from './model';
-import {GVLMapItem, Purpose} from './model/gvl';
+import {GVLMapItem, Purpose, Vendor, Feature} from './model/gvl';
 
 export type TCModelPropType = number | Date | string | boolean | Vector | PurposeRestrictionVector;
 
@@ -499,47 +499,13 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
   };
 
   /**
-   * Sets all items on the vector
-   *
-   * @param {IntMap<T>} gvlMap - this will be one of the maps defined in the [[IntMap]]
-   * @param {Vector} vector - vector to affect
-   * @return {void}
-   */
-  private setAllOnVector<T>(gvlMap: IntMap<T>, vector: Vector): void {
-
-    if (!this.gvl) {
-
-      throw new TCModelError('setAll', '' + this.gvl, 'No GVL!');
-
-    }
-
-    for (const id in gvlMap) {
-
-      if (gvlMap.hasOwnProperty(id)) {
-
-        const pathItem = gvlMap[id];
-
-        if (this.isGVLMapItem(pathItem)) {
-
-          vector.set(pathItem.id);
-
-        }
-
-      }
-
-    }
-
-  }
-
-  /**
    * setAllVendorConsents - sets all vendors on the GVL Consent (true)
    *
    * @return {void}
    */
   public setAllVendorConsents(): void {
 
-    this.vendorConsents.empty();
-    this.setAllOnVector(this.gvl.vendors, this.vendorConsents);
+    this.vendorConsents.setAll<Vendor>(this.gvl.vendors);
 
   }
 
@@ -555,14 +521,13 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
   }
 
   /**
-   * setAllVendorsDisclosed - sets all vendors on the GVL Consent (true)
+   * setAllVendorsDisclosed - sets all vendors on the GVL Vendors Disclosed (true)
    *
    * @return {void}
    */
   public setAllVendorsDisclosed(): void {
 
-    this.vendorsDisclosed.empty();
-    this.setAllOnVector(this.gvl.vendors, this.vendorsDisclosed);
+    this.vendorsDisclosed.setAll<Vendor>(this.gvl.vendors);
 
   }
 
@@ -578,14 +543,35 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
   }
 
   /**
+   * setAllVendorsAllowed - sets all vendors on the GVL Consent (true)
+   *
+   * @return {void}
+   */
+  public setAllVendorsAllowed(): void {
+
+    this.vendorsAllowed.setAll<Vendor>(this.gvl.vendors);
+
+  }
+
+  /**
+   * unsetAllVendorsAllowed - unsets all vendors on the GVL Consent (false)
+   *
+   * @return {void}
+   */
+  public unsetAllVendorsAllowed(): void {
+
+    this.vendorsAllowed.empty();
+
+  }
+
+  /**
    * setAllVendorLegitimateInterest - sets all vendors on the GVL LegitimateInterest (true)
    *
    * @return {void}
    */
   public setAllVendorLegitimateInterest(): void {
 
-    this.vendorLegitimateInterest.empty();
-    this.setAllOnVector(this.gvl.vendors, this.vendorLegitimateInterest);
+    this.vendorLegitimateInterest.setAll<Vendor>(this.gvl.vendors);
 
   }
 
@@ -607,8 +593,7 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
    */
   public setAllPurposeConsents(): void {
 
-    this.purposeConsents.empty();
-    this.setAllOnVector(this.gvl.purposes, this.purposeConsents);
+    this.purposeConsents.setAll<Purpose>(this.gvl.purposes);
 
   }
 
@@ -630,8 +615,7 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
    */
   public setAllPurposeLegitimateInterest(): void {
 
-    this.purposeLegitimateInterest.empty();
-    this.setAllOnVector(this.gvl.purposes, this.purposeLegitimateInterest);
+    this.purposeLegitimateInterest.setAll<Purpose>(this.gvl.purposes);
 
   }
 
@@ -653,8 +637,7 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
    */
   public setAllSpecialFeatureOptIns(): void {
 
-    this.specialFeatureOptIns.empty();
-    this.setAllOnVector(this.gvl.specialFeatures, this.specialFeatureOptIns);
+    this.specialFeatureOptIns.setAll<Feature>(this.gvl.specialFeatures);
 
   }
 
@@ -677,7 +660,6 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
     setAllSpecialFeatureOptIns();
     setAllPurposeConsents();
     setAllVendorLegitimateInterest();
-    setAllVendorsDisclosed();
    * ```
    * @return {void}
    */
@@ -688,7 +670,6 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
     this.setAllSpecialFeatureOptIns();
     this.setAllPurposeConsents();
     this.setAllVendorLegitimateInterest();
-    this.setAllVendorsDisclosed();
 
   }
 
@@ -700,7 +681,6 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
     unsetAllSpecialFeatureOptIns();
     unsetAllPurposeConsents();
     unsetAllVendorLegitimateInterest();
-    unsetAllVendorsDisclosed();
    * ```
    * @return {void}
    */
@@ -711,7 +691,6 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
     this.unsetAllSpecialFeatureOptIns();
     this.unsetAllPurposeConsents();
     this.unsetAllVendorLegitimateInterest();
-    this.unsetAllVendorsDisclosed();
 
   }
 
@@ -728,6 +707,7 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
     return len;
 
   }
+
   public set numCustomPurposes(num: number) {
 
     if (!this.customPurposes) {
