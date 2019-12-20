@@ -1,7 +1,7 @@
 import {CmpStatus} from '../../src/status/CmpStatus';
 import {expect} from 'chai';
 
-describe('CmpStatus', (): void => {
+describe('status/CmpStatus', (): void => {
 
   it('has a stub unit test', (done: () => void): void => {
 

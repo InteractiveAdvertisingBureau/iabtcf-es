@@ -1,7 +1,7 @@
 import {PingCommand} from '../../src/command/PingCommand';
 import {expect} from 'chai';
 
-describe('PingCommand', (): void => {
+describe('command/PingCommand', (): void => {
 
   it('has a stub unit test', (done: () => void): void => {
 

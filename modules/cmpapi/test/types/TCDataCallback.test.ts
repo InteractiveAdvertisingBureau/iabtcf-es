@@ -1,7 +1,7 @@
 import {TCDataCallback} from '../../src/types/TCDataCallback';
 import {expect} from 'chai';
 
-describe('TCDataCallback', (): void => {
+describe('types/TCDataCallback', (): void => {
 
   it('has a stub unit test', (done: () => void): void => {
 

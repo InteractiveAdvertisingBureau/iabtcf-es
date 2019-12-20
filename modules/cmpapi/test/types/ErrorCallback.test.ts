@@ -1,7 +1,7 @@
 import {ErrorCallback} from '../../src/types/ErrorCallback';
 import {expect} from 'chai';
 
-describe('ErrorCallback', (): void => {
+describe('types/ErrorCallback', (): void => {
 
   it('has a stub unit test', (done: () => void): void => {
 

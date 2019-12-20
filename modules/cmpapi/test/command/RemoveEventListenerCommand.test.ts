@@ -1,7 +1,7 @@
 import {RemoveEventListenerCommand} from '../../src/command/RemoveEventListenerCommand';
 import {expect} from 'chai';
 
-describe('RemoveEventListenerCommand', (): void => {
+describe('command/RemoveEventListenerCommand', (): void => {
 
   it('has a stub unit test', (done: () => void): void => {
 

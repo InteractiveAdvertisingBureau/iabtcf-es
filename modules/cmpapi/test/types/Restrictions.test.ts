@@ -1,7 +1,7 @@
 import {Restrictions} from '../../src/types/Restrictions';
 import {expect} from 'chai';
 
-describe('Restrictions', (): void => {
+describe('types/Restrictions', (): void => {
 
   it('has a stub unit test', (done: () => void): void => {
 

@@ -1,7 +1,7 @@
 import {GetInAppTcDataCommand} from '../../src/command/GetInAppTcDataCommand';
 import {expect} from 'chai';
 
-describe('GetInAppTcDataCommand', (): void => {
+describe('command/GetInAppTcDataCommand', (): void => {
 
   it('has a stub unit test', (done: () => void): void => {
 

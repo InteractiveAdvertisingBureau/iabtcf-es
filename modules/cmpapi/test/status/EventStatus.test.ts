@@ -1,7 +1,7 @@
 import {EventStatus} from '../../src/status/EventStatus';
 import {expect} from 'chai';
 
-describe('EventStatus', (): void => {
+describe('status/EventStatus', (): void => {
 
   it('has a stub unit test', (done: () => void): void => {
 
