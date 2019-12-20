@@ -39,7 +39,7 @@ export class Ping extends Response {
     super();
 
     // only if the tcModel is defined
-    if (CmpApiModel.tcModel) {
+    if (CmpApiModel.tcModel && CmpApiModel.tcModel.vendorListVersion) {
 
       this.gvlVersion = +CmpApiModel.tcModel.vendorListVersion;
 

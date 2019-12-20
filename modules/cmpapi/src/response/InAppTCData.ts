@@ -12,7 +12,12 @@ interface VendorIdRestrictionType {
  */
 export class InAppTCData extends TCData {
 
-  public outOfBand: undefined;
+  public constructor(vendorIds?: number[]) {
+
+    super(vendorIds);
+    delete this.outOfBand;
+
+  }
 
   /**
    * Creates a string bit field with a value for each id where each value is '1' if its id is in the passed in vector

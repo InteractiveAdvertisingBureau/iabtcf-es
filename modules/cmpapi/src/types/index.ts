@@ -1,4 +1,5 @@
 export * from './BooleanVector';
+export {Booleany} from './Booleany';
 export * from './Callback';
 export * from './CustomCommands';
 export * from './ErrorCallback';

@@ -10,6 +10,10 @@ export type TCModelPropType = number | Date | string | boolean | Vector | Purpos
 export class TCModel extends Cloneable<TCModel> implements TCFields {
 
   private static readonly MAX_ENCODING_VERSION: number = 2;
+  /**
+   * Set of available consent languages published by the IAB
+   */
+  public static readonly consentLanguages: ConsentLanguages = GVL.consentLanguages;
 
   private isServiceSpecific_ = false;
   private useNonStandardStacks_ = false;
@@ -117,11 +121,6 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
   public readonly [Fields.vendorsAllowed]: Vector = new Vector();
 
   public readonly [Fields.publisherRestrictions]: PurposeRestrictionVector = new PurposeRestrictionVector();
-
-  /**
-   * Set of available consent languages published by the IAB
-   */
-  public readonly consentLanguages: ConsentLanguages = new ConsentLanguages();
 
   /**
    * Constructs the TCModel. Passing a [[GVL]] is optional when constructing
@@ -270,7 +269,7 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
 
     lang = lang.toUpperCase();
 
-    if (this.consentLanguages.has(lang)) {
+    if (TCModel.consentLanguages.has(lang)) {
 
       this.consentLanguage_ = lang;
 

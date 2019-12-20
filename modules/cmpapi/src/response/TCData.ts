@@ -1,23 +1,26 @@
 import {TCModel, TCString, Vector, IdBoolTuple} from '@iabtcf/core';
+
 import {CmpApiModel} from '../CmpApiModel';
-import {BooleanVector, Restrictions} from '../types';
+import {BooleanVector, Restrictions, Booleany} from '../types';
 import {Response} from './Response';
+import {EventStatus, CmpStatus} from '../status';
 
 export class TCData extends Response {
 
   public tcString: string;
-  public eventStatus: string;
-  public isServiceSpecific: boolean | 0 | 1;
-  public useNonStandardStacks: boolean | 0 | 1;
+  public eventStatus: EventStatus;
+  public cmpStatus: CmpStatus;
+  public isServiceSpecific: Booleany;
+  public useNonStandardStacks: Booleany;
   public publisherCC: string;
-  public purposeOneTreatment: boolean | 0 | 1;
+  public purposeOneTreatment: Booleany;
 
   public outOfBand: {
 
-    allowedVendors: BooleanVector;
-    discloseVendors: BooleanVector;
+    allowedVendors: BooleanVector | string;
+    disclosedVendors: BooleanVector | string;
 
-  } | undefined;
+  };
   public purpose: {
 
     consents: BooleanVector | string;
@@ -62,8 +65,8 @@ export class TCData extends Response {
     this.publisherCC = tcModel.publisherCountryCode;
 
     this.outOfBand = {
-      allowedVendors: this.createBooleanVector(tcModel.vendorsAllowed, vendorIds),
-      discloseVendors: this.createBooleanVector(tcModel.vendorsDisclosed, vendorIds),
+      allowedVendors: this.createVectorField(tcModel.vendorsAllowed, vendorIds),
+      disclosedVendors: this.createVectorField(tcModel.vendorsDisclosed, vendorIds),
     };
 
     this.purpose = {
@@ -92,19 +95,6 @@ export class TCData extends Response {
       },
       restrictions: this.createRestrictions(tcModel),
     };
-
-  }
-
-  /**
-   * Returns a string[] of vendor ids to be used when creating the TCData instance.
-   * If vendorIds param is not undefined, its converted to a string[] and returned, if not the ids from the gvl is used.
-   * @param {TCModel} tcModel
-   * @param {number[]} vendorIds
-   * @return {string[]}
-   */
-  private getVendorIds(tcModel: TCModel, vendorIds?: number[], ): string[] {
-
-    return vendorIds ? vendorIds.map((id): string => id.toString(10)) : Object.keys(tcModel.gvl.vendors);
 
   }
 
@@ -138,12 +128,6 @@ export class TCData extends Response {
 
   };
 
-  protected createVectorField(vector: Vector, ids?: number[]): BooleanVector | string {
-
-    return this.createBooleanVector(vector, ids);
-
-  }
-
   /**
    * Creates a string bit field with a value for each id where each value is
    * '1' if its id is in the passed in vector Can be overwritten to return a
@@ -152,13 +136,13 @@ export class TCData extends Response {
    * @param {number[]} ids filter
    * @return {BooleanVector | string}
    */
-  private createBooleanVector(vector: Vector, ids?: number[]): BooleanVector {
+  protected createVectorField(vector: Vector, ids?: number[]): BooleanVector | string {
 
     if (ids) {
 
       return ids.reduce<BooleanVector>((booleanVector, obj): BooleanVector => {
 
-        booleanVector[obj] = vector.has(+obj);
+        booleanVector[obj + ''] = vector.has(+obj);
         return booleanVector;
 
       }, {});

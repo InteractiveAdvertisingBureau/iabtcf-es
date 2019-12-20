@@ -1,11 +1,13 @@
 import {DisplayStatus} from '../../src/status/DisplayStatus';
 import {expect} from 'chai';
 
-describe('status/DisplayStatus', (): void => {
+describe('status->DisplayStatus', (): void => {
 
-  it('has a stub unit test', (done: () => void): void => {
+  it('should have these values', (done: () => void): void => {
 
-    expect(true).to.be.true;
+    expect(DisplayStatus.VISIBLE).to.equal('visible');
+    expect(DisplayStatus.HIDDEN).to.equal('hidden');
+    expect(DisplayStatus.DISABLED).to.equal('disabled');
     done();
 
   });

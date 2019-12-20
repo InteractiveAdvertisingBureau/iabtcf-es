@@ -1,8 +1,10 @@
 import {expect} from 'chai';
+
 import {
   FieldSequence,
   SegmentEncoder,
 } from '../../src/encoder';
+
 import {
   TCModel,
   GVL,
@@ -14,7 +16,7 @@ import {
 export function run(): void {
 
   // eslint-disable-next-line
-  const vendorlistJson = require('../../../../vendorlist/vendor-list.json');
+  const vendorlistJson = require('@iabtcf/testing/lib/vendorlist/vendor-list.json');
   const gvl: GVL = new GVL(vendorlistJson);
 
   it('should encode a core segment', (done: () => void): void => {

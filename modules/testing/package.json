@@ -12,15 +12,17 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
-    "lib/*"
+    "lib/*",
+    "lib/**/*"
   ],
   "scripts": {
-    "build": "rm -rf lib ; tsc",
+    "build": "rm -rf lib ; tsc && cp -r src/vendorlist lib/",
     "prepare": "yarn run build",
     "lint": "eslint `find src -name '*.ts'`",
-    "lint:fix": "yarn run lint -- --fix"
+    "lint:fix": "yarn run lint --fix"
   },
   "dependencies": {
+    "@iabtcf/core": "^1.0.0-beta.0",
     "@types/sinon": "^7.0.13",
     "@types/sinon-chai": "3.2.2",
     "sinon": "^7.3.2",

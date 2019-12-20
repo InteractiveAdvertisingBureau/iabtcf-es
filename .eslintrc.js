@@ -23,7 +23,6 @@ module.exports = {
   },
   rules: {
     'import/no-cycle': ['error', { maxDepth: 1 }],
-    '@typescript-eslint/indent': ['error', 2],
     'max-len': ['error', {
       'ignoreUrls': true,
       'ignoreStrings': true,
@@ -37,7 +36,6 @@ module.exports = {
     'padded-blocks': ['error', 'always'],
     'no-console': 'error',
     'no-debugger': 'error',
-    '@typescript-eslint/indent': ['error', 2],
     'indent': [
       'error', 2, {
         'ArrayExpression': 'first',

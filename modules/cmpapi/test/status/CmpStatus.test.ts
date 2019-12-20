@@ -1,11 +1,14 @@
 import {CmpStatus} from '../../src/status/CmpStatus';
 import {expect} from 'chai';
 
-describe('status/CmpStatus', (): void => {
+describe('status->CmpStatus', (): void => {
 
-  it('has a stub unit test', (done: () => void): void => {
+  it('should have these values', (done: () => void): void => {
 
-    expect(true).to.be.true;
+    expect(CmpStatus.STUB).to.be.equal('stub');
+    expect(CmpStatus.LOADING).to.be.equal('loading');
+    expect(CmpStatus.LOADED).to.be.equal('loaded');
+    expect(CmpStatus.ERROR).to.be.equal('error');
     done();
 
   });

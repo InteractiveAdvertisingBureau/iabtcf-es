@@ -85,10 +85,10 @@ export class CmpApiModel {
 
   /**
    * Sets clone of TcModel
-   * @param {TCModel} tcModel
+   * @param {TCModel} model
    * @return {void}
    */
-  public static set tcModel(tcModel: TCModel | null) {
+  public static set tcModel(model: TCModel | null) {
 
     /**
      * if this is a TCModel, then we know that GDPRApplies.  Otherwise if they
@@ -96,7 +96,7 @@ export class CmpApiModel {
      * does not apply.  If it's something else... Then blowup!
      */
 
-    if (tcModel instanceof TCModel) {
+    if (model instanceof TCModel) {
 
       this.gdprApplies = true;
       this.displayStatus = DisplayStatus.HIDDEN;
@@ -111,9 +111,7 @@ export class CmpApiModel {
 
       }
 
-      this.tcModel = tcModel;
-
-    } else if (tcModel === null) {
+    } else if (model === null) {
 
       this.gdprApplies = false;
       this.displayStatus = DisplayStatus.DISABLED;
@@ -122,12 +120,12 @@ export class CmpApiModel {
 
       this.cmpStatus = CmpStatus.ERROR;
       // awwwww hell no... what did you pass me?
-      throw new Error(`Invalid value (${tcModel}) passed for tcModel`);
+      throw new Error(`Invalid value (${model}) passed for model`);
 
     }
 
     this.cmpStatus = CmpStatus.LOADED;
-    this.tcModel_ = (tcModel as TCModel).clone();
+    this.tcModel_ = (model as TCModel).clone();
 
     if (this.changeEventCallback) {
 

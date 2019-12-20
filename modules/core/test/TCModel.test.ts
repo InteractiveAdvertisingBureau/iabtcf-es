@@ -109,9 +109,7 @@ describe('TCModel', (): void => {
 
     describe(fieldName, (): void => {
 
-      // eslint-disable-next-line
-    const vendorlistJson = require('../../../vendorlist/vendor-list.json');
-      const gvl: GVL = new GVL(vendorlistJson);
+      const gvl: GVL = new GVL(require('@iabtcf/testing/lib/vendorlist/vendor-list.json'));
 
       it(`should create an instance of ${instanceName} as ${fieldName} on init`, (): void => {
 
@@ -144,17 +142,15 @@ describe('TCModel', (): void => {
 
     // since we didn't construct with a gvl we should
     // have empty fields here
-    expect(tcModel.vendorListVersion).to.equal(0);
-    expect(tcModel.policyVersion).to.equal(2);
+    expect(tcModel.vendorListVersion).to.equal(0); expect(tcModel.policyVersion).to.equal(2);
     expect(tcModel.gvl).to.be.undefined;
 
   });
 
   it('should construct a TCModel with a GVL argument', (done: () => void): void => {
 
-    // eslint-disable-next-line
-    const vendorlistJson = require('../../../vendorlist/vendor-list.json');
-    const gvl: GVL = new GVL(vendorlistJson);
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const gvl: GVL = new GVL(require('@iabtcf/testing/lib/vendorlist/vendor-list.json'));
 
     expect((): void => {
 
@@ -342,8 +338,7 @@ describe('TCModel', (): void => {
       it(`should not be ok with ${value}`, (): void => {
 
         const tcModel = new TCModel();
-
-        const defaultVersion: number = tcModel.version;
+        const defaultVersion: number | string = tcModel.version;
 
         expect((): void => {
 
@@ -368,7 +363,7 @@ describe('TCModel', (): void => {
 
   const runSetAllAndUnsetAll = (): void => {
 
-    const gvl: GVL = new GVL(require('../../../vendorlist/vendor-list.json'));
+    const gvl: GVL = new GVL(require('@iabtcf/testing/lib/vendorlist/vendor-list.json'));
 
     const loopGVLMap = (gvlKey: string, cb ): void => {
 

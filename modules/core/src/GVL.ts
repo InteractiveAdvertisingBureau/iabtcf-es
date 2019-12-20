@@ -23,6 +23,12 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
   private static LANGUAGE_CACHE: Map<string, Declarations> = new Map<string, Declarations>();
   public static readonly DEFAULT_LANGUAGE: string = 'EN';
+
+  /**
+   * Set of available consent languages published by the IAB
+   */
+  public static readonly consentLanguages: ConsentLanguages = new ConsentLanguages();
+
   private static baseUrl_: string;
 
   /**
@@ -213,11 +219,6 @@ export class GVL extends Cloneable<GVL> implements VendorList {
   private lang_: string;
 
   /**
-   * Set of available consent languages published by the IAB
-   */
-  private consentLanguages: ConsentLanguages = new ConsentLanguages();
-
-  /**
    * @param {VersionOrVendorList} [versionOrVendorList] - can be either a
    * [[VendorList]] object or a version number represented as a string or
    * number to download.  If nothing is passed the latest version of the GVL
@@ -374,7 +375,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
     return new Promise((resolve: Function, reject: Function): void => {
 
-      if (this.consentLanguages.has(lang)) {
+      if (GVL.consentLanguages.has(lang)) {
 
         if (lang !== this.lang_) {
 

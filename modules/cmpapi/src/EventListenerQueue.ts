@@ -19,9 +19,13 @@ export class EventListenerQueue {
 
   public static executeCommands(): void {
 
-    for (const callback of this.callbacks) {
+    if (this.callbacks && this.callbacks.size > 0) {
 
-      new GetTcDataCommand(callback);
+      for (const callback of this.callbacks) {
+
+        new GetTcDataCommand(callback);
+
+      }
 
     }
 
