@@ -1,5 +1,5 @@
 import {TCData} from '../../src/response/TCData';
-import {TCModelFactory, makeRandomInt} from '@iabtcf/testing';
+import {TCModelFactory, makeRandomInt, makeRandomIntArray} from '@iabtcf/testing';
 import {TCString, Vector, PurposeRestriction} from '@iabtcf/core';
 import {CmpApiModel} from '../../src/CmpApiModel';
 import {BooleanVector} from '../../src/types';
@@ -70,7 +70,7 @@ describe('response->TCData', (): void => {
   it('should create a TCData based on the TCModel with vendors', (done: () => void): void => {
 
     const tcModel = TCModelFactory.noGVL();
-    const vendorIds = [1, 2, 3];
+    const vendorIds = makeRandomIntArray(1, 25, 10);
 
     CmpApiModel.tcModel = tcModel;
 
