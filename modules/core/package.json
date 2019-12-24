@@ -20,7 +20,7 @@
     "debug": "ndb yarn test",
     "lint": "eslint `find test src -name '*.ts'`",
     "lint:fix": "yarn run lint -- --fix",
-    "test": "mocha",
+    "test": "mocha `find test -name '*.test.ts'`",
     "serve:cov": "npx http-server ./coverage/",
     "test:cov": "rm -rf coverage; nyc --reporter html mocha",
     "test:lcov": "nyc --reporter=lcov mocha"
