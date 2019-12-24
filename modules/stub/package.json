@@ -13,8 +13,7 @@
     "lib/stub.js"
   ],
   "scripts": {
-    "build:clean": "rm -rf lib && mkdir lib",
-    "build": "yarn run build:clean ; babel src/stub.js | terser -m -o lib/stub.js",
+    "build": "rm -rf lib && mkdir lib ; babel src/stub.js | terser -m -o lib/stub.js",
     "prepare": "yarn run build",
     "lint": "exit 0"
   },

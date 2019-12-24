@@ -16,12 +16,12 @@
   "scripts": {
     "docs": "typedoc --ignoreCompilerErrors --tsconfig ./tsconfig.json  src",
     "prepare": "yarn run build",
-    "build": "rm -r lib ; tsc",
+    "build": "rm -rf lib ; tsc",
     "lint": "eslint `find test src -name '*.ts'`",
     "lint:fix": "yarn run lint -- --fix",
     "debug": "ndb yarn test",
     "serve:cov": "npx http-server ./coverage/",
-    "test": "mocha",
+    "test": "mocha `find test -name '*.test.ts'`",
     "test:cov": "rm -rf coverage; nyc --reporter html mocha",
     "test:lcov": "nyc --reporter=lcov mocha"
   },
