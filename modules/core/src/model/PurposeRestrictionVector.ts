@@ -99,6 +99,21 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
       }
 
+      const currentRestrictions = this.getRestriction(vendorId);
+      currentRestrictions.forEach((curRestriction: PurposeRestriction): void => {
+
+        /**
+         * if this vendor is already restricted under this purpose they can only
+         * be restricted in one way so we'll remove them from the other one
+         */
+        if (curRestriction.purposeId === purposeRestriction.purposeId) {
+
+          this.remove(vendorId, curRestriction);
+
+        }
+
+      });
+
       (this.map.get(hash) as BinarySearchTree).add(vendorId);
 
     }
@@ -110,6 +125,35 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
     const hash: string = purposeRestriction.hash;
 
     return this.has(hash) ? (this.map.get(hash) as BinarySearchTree).get() : [];
+
+  }
+
+  public vendorHasRestriction(vendorId: number, purposeRestriction: PurposeRestriction): boolean {
+
+    let retr = false;
+    const restrictions = this.getRestriction(vendorId);
+
+    for (let i = 0; i < restrictions.length && !retr; i++) {
+
+      retr = purposeRestriction.isSameAs(restrictions[i]);
+
+    }
+
+    return retr;
+
+  }
+
+  public getMaxVendorId(): number {
+
+    let retr = 0;
+
+    this.map.forEach((bst: BinarySearchTree): void => {
+
+      retr = Math.max(bst.max(), retr);
+
+    });
+
+    return retr;
 
   }
 

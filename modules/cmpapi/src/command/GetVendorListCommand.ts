@@ -11,6 +11,7 @@ export class GetVendorListCommand extends Command {
   protected success(): void {
 
     let gvl: GVL;
+    const callback = this.callback as VendorListCallback;
 
     if (!this.param) {
 
@@ -18,11 +19,16 @@ export class GetVendorListCommand extends Command {
 
       if (tcModel.gvl) {
 
-        gvl = tcModel.gvl.clone();
+        callback(tcModel.gvl.getJson(), true);
 
       } else {
 
-        gvl = new GVL(tcModel.vendorListVersion);
+        tcModel.gvl = new GVL(tcModel.vendorListVersion);
+        tcModel.gvl.readyPromise.then(() => {
+
+          callback(tcModel.gvl.getJson(), true);
+
+        }, this.fail).catch(this.fail);
 
       }
 
@@ -30,14 +36,19 @@ export class GetVendorListCommand extends Command {
 
       gvl = new GVL(this.param);
 
+      const woops = (): void => {
+
+        this.fail();
+
+      };
+
+      gvl.readyPromise.then(() => {
+
+        callback(gvl.getJson(), true);
+
+      }, woops).catch(woops);
+
     }
-
-    gvl.readyPromise.then(() => {
-
-      const callback = this.callback as VendorListCallback;
-      callback(gvl.getJson(), true);
-
-    }, this.fail).catch(this.fail);
 
   }
   protected isValid(): boolean {
@@ -46,11 +57,19 @@ export class GetVendorListCommand extends Command {
 
     if (this.param !== undefined) {
 
-      retr = (
-        Number.isInteger(+this.param) &&
-        this.param > 0 ||
-        this.param === 'LATEST'
-      );
+      if (typeof this.param === 'string' || typeof this.param === 'number') {
+
+        retr = (
+          Number.isInteger(+this.param) &&
+            +this.param > 0 ||
+            this.param === 'LATEST'
+        );
+
+      } else {
+
+        retr = false;
+
+      }
 
     }
 

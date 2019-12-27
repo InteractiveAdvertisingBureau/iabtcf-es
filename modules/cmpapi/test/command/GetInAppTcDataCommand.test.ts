@@ -1,13 +1,55 @@
-import {GetInAppTcDataCommand} from '../../src/command/GetInAppTcDataCommand';
+import {GetInAppTCDataCommand} from '../../src/command/GetInAppTCDataCommand';
+import {InAppTCDataCallback} from '../../src/types/InAppTCDataCallback';
+import {CmpApiModel} from '../../src/CmpApiModel';
+import {TCModelFactory} from '@iabtcf/testing';
+import {InAppTCData} from '../../src/response/InAppTCData';
 import {expect} from 'chai';
 
-describe('command->GetInAppTcDataCommand', (): void => {
+describe('command->GetInAppTCDataCommand', (): void => {
 
-  it('\x1b[36mNeeds Unit Tests\x1b[0m', (done: () => void): void => {
+  it('should return a InAppTCData object when called', (done: () => void): void => {
 
-    expect(true).to.be.true;
-    done();
+    CmpApiModel.reset();
+    CmpApiModel.tcModel = TCModelFactory.noGVL();
+
+    const tcDataCallback: InAppTCDataCallback = function(tcData: InAppTCData): void {
+
+      expect(tcData instanceof InAppTCData, 'tcData instanceof InAppTCData').to.be.true;
+      expect(arguments.length, 'arguments.length').to.equal(2);
+
+      done();
+
+    };
+
+    new GetInAppTCDataCommand(tcDataCallback);
 
   });
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const runFailWithParam = (badParam: any): void => {
+
+    it(`should return result=null and success=false for param=${badParam}`, (done: () => void): void => {
+
+      new GetInAppTCDataCommand((result: null, success: boolean): void => {
+
+        expect(result).to.be.null;
+        expect(success).to.be.false;
+        done();
+
+      }, badParam);
+
+    });
+
+  };
+
+  runFailWithParam(null);
+  runFailWithParam({});
+  runFailWithParam('banana');
+  runFailWithParam(['banana', 'apple', 'cake']);
+  runFailWithParam(1);
+  runFailWithParam(true);
+  runFailWithParam(0);
+  runFailWithParam(1.1);
+  runFailWithParam([1.7, 1.34]);
 
 });

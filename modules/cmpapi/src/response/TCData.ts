@@ -1,4 +1,4 @@
-import {TCModel, TCString, Vector, IdBoolTuple} from '@iabtcf/core';
+import {TCModel, TCString, PurposeRestriction, PurposeRestrictionVector, Vector, IdBoolTuple} from '@iabtcf/core';
 
 import {CmpApiModel} from '../CmpApiModel';
 import {BooleanVector, Restrictions, Booleany} from '../types';
@@ -93,38 +93,47 @@ export class TCData extends Response {
         legitimateInterests: this.createVectorField(tcModel.publisherCustomLegitimateInterest),
 
       },
-      restrictions: this.createRestrictions(tcModel),
+      restrictions: this.createRestrictions(tcModel.publisherRestrictions),
     };
 
   }
 
   /**
-   * Creates a restrictions object given a TCModel
-   * @param {TCModel} tcModel
+   * Creates a restrictions object given a PurposeRestrictionVector
+   * @param {PurposeRestrictionVector} purpRestrictions
    * @return {Restrictions}
    */
-  protected createRestrictions(tcModel: TCModel): Restrictions {
+  protected createRestrictions(purpRestrictions: PurposeRestrictionVector): Restrictions {
 
-    return tcModel.publisherRestrictions.getAllRestrictions().reduce<Restrictions>((obj, pr): Restrictions => {
+    const retr = {};
 
-      const purposeId = ''+pr.purposeId;
-      const restrictionType = pr.restrictionType;
+    if (purpRestrictions.numRestrictions > 0) {
 
-      obj[purposeId] = obj[purposeId] || {};
+      const max = purpRestrictions.getMaxVendorId();
 
-      return tcModel.publisherRestrictions.getVendors(pr).reduce(
-        (restrictions: Restrictions, vendorId: number): Restrictions => {
+      for (let vendorId = 1; vendorId <= max; vendorId++) {
 
-          const vid = ''+vendorId;
+        const strVendorId = vendorId.toString();
+        // vendors restrictions
+        purpRestrictions.getRestriction(vendorId).forEach((pRestrict: PurposeRestriction): void => {
 
-          obj[purposeId][vid] = obj[purposeId][vid] || {};
+          const strPurpId = pRestrict.purposeId.toString();
 
-          obj[purposeId][vid] = restrictionType;
-          return obj;
+          if (!retr[strPurpId]) {
 
-        }, obj);
+            retr[strPurpId] = {};
 
-    }, {});
+          }
+
+          retr[strPurpId][strVendorId] = pRestrict.restrictionType;
+
+        });
+
+      }
+
+    }
+
+    return retr;
 
   };
 

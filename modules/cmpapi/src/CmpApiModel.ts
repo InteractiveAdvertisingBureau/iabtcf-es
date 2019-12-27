@@ -135,4 +135,19 @@ export class CmpApiModel {
 
   }
 
+  public static reset(): void {
+
+    delete this.tcModel_;
+    delete this.cmpId;
+    delete this.cmpVersion;
+    delete this.gdprApplies;
+    delete this.eventStatus;
+    delete this.changeEventCallback;
+    delete this.uiVisible_;
+    delete this.disabled_;
+    this.cmpStatus = CmpStatus.LOADING;
+    this.displayStatus = DisplayStatus.HIDDEN;
+
+  }
+
 }

@@ -2,7 +2,7 @@ import {TCDataCallback} from '../types';
 import {TCData} from '../response';
 import {Command} from './Command';
 
-export class GetTcDataCommand extends Command {
+export class GetTCDataCommand extends Command {
 
   protected success(): void {
 

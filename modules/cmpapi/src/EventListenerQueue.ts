@@ -1,5 +1,5 @@
 import {TCDataCallback} from './types';
-import {GetTcDataCommand} from './command/GetTcDataCommand';
+import {GetTCDataCommand} from './command/GetTCDataCommand';
 
 export class EventListenerQueue {
 
@@ -23,11 +23,23 @@ export class EventListenerQueue {
 
       for (const callback of this.callbacks) {
 
-        new GetTcDataCommand(callback);
+        new GetTCDataCommand(callback);
 
       }
 
     }
+
+  }
+
+  public static get size(): number {
+
+    return this.callbacks.size;
+
+  }
+
+  public static clear(): void {
+
+    this.callbacks.clear();
 
   }
 

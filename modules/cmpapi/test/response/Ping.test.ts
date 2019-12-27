@@ -10,16 +10,17 @@ describe('response->Ping', (): void => {
 
   it('populates a response with CmpApiModel values', (done: () => void): void => {
 
+    CmpApiModel.reset();
     CmpApiModel.cmpId = makeRandomInt(2, 500);
     CmpApiModel.cmpStatus = CmpStatus.LOADED;
     CmpApiModel.displayStatus = DisplayStatus.VISIBLE;
 
     const ping = new Ping();
-    expect(ping.cmpLoaded).to.be.true;
-    expect(ping.cmpStatus).to.equal(CmpApiModel.cmpStatus);
-    expect(ping.displayStatus).to.equal(CmpApiModel.displayStatus);
-    expect(ping.apiVersion).to.equal(2);
-    expect(ping.gvlVersion).to.be.undefined;
+    expect(ping.cmpLoaded, 'ping.cmpLoaded').to.be.true;
+    expect(ping.cmpStatus, 'ping.cmpStatus').to.equal(CmpApiModel.cmpStatus);
+    expect(ping.displayStatus, 'ping.displayStatus').to.equal(CmpApiModel.displayStatus);
+    expect(ping.gvlVersion, 'ping.gvlVersion').to.be.undefined;
+    expect(ping.apiVersion, 'ping.apiVersion').to.equal(2);
 
     done();
 
@@ -30,17 +31,18 @@ describe('response->Ping', (): void => {
     const tcModel = new TCModel();
     tcModel.vendorListVersion = makeRandomInt(1, 100);
 
+    CmpApiModel.reset();
     CmpApiModel.cmpId = makeRandomInt(2, 500);
     CmpApiModel.cmpStatus = CmpStatus.LOADED;
     CmpApiModel.displayStatus = DisplayStatus.VISIBLE;
     CmpApiModel.tcModel = tcModel;
 
     const ping = new Ping();
-    expect(ping.cmpLoaded).to.be.true;
-    expect(ping.cmpStatus).to.equal(CmpApiModel.cmpStatus);
-    expect(ping.displayStatus).to.equal(CmpApiModel.displayStatus);
-    expect(ping.apiVersion).to.equal(2);
-    expect(ping.gvlVersion).to.equal(tcModel.vendorListVersion);
+    expect(ping.cmpLoaded, 'ping.cmpLoaded').to.be.true;
+    expect(ping.cmpStatus, 'ping.cmpStatus').to.equal(CmpApiModel.cmpStatus);
+    expect(ping.displayStatus, 'ping.displayStatus').to.equal(CmpApiModel.displayStatus);
+    expect(ping.apiVersion, 'ping.apiVersion').to.equal(2);
+    expect(ping.gvlVersion, 'ping.gvlVersion').to.equal(tcModel.vendorListVersion);
 
     done();
 

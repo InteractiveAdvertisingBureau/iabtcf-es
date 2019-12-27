@@ -22,7 +22,7 @@ export class RemoveEventListenerCommand extends Command {
 
   protected isValid(): boolean {
 
-    return EventListenerQueue.remove(this.param);
+    return (typeof this.param === 'function' && EventListenerQueue.remove(this.param));
 
   }
 

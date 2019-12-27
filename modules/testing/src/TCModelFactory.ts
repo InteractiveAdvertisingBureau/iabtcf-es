@@ -7,7 +7,7 @@ export class TCModelFactory {
 
   public static noGVL(): TCModel {
 
-    const latestGVL = GVLFactory.getJSONLatest();
+    const latestGVL = GVLFactory.getLatest();
 
     const numPurposes = Object.keys(latestGVL.purposes).length;
     const numVendors = Object.keys(latestGVL.vendors).length;
@@ -19,6 +19,7 @@ export class TCModelFactory {
     tcModel.cmpVersion = makeRandomInt(1,10);
     tcModel.consentScreen = makeRandomInt(1,5);
     tcModel.isServiceSpecific = !!makeRandomInt(0,1);
+    tcModel.vendorListVersion = makeRandomInt(1, latestGVL.vendorListVersion);
 
     let counter = 0;
     const rand = makeRandomInt(1, TCModel.consentLanguages.size);

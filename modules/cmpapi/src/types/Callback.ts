@@ -1,4 +1,4 @@
-import {IATCDataCallback} from './IATCDataCallback';
+import {InAppTCDataCallback} from './InAppTCDataCallback';
 import {PingCallback} from './PingCallback';
 import {RemoveListenerCallback} from './RemoveListenerCallback';
 import {TCDataCallback} from './TCDataCallback';
@@ -11,7 +11,7 @@ import {FailCallback} from './FailCallback';
  */
 export type Callback =
   TCDataCallback |
-  IATCDataCallback |
+  InAppTCDataCallback |
   PingCallback |
   VendorListCallback |
   RemoveListenerCallback |

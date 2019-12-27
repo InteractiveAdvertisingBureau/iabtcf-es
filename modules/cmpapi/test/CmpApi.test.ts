@@ -274,16 +274,16 @@ describe('CmpApi', (): void => {
 
         cmpApi.tcModel = createValidTCModel(require('../../../vendorlist/vendor-list.json'));
 
-        const callback: IATCDataCallback = (inAppTcData: InAppTCData | null, success: boolean): void => {
+        const callback: InAppTCDataCallback = (inAppTCData: InAppTCData | null, success: boolean): void => {
 
           assert.isTrue(success, 'getInAppTCData was not successful');
-          assert.isNotNull(inAppTcData, 'getInAppTCData returned null tcData');
+          assert.isNotNull(inAppTCData, 'getInAppTCData returned null tcData');
 
-          if (inAppTcData) {
+          if (inAppTCData) {
 
-            expect((inAppTcData.purpose.consents as string).charAt(0), 'inAppTcData.purpose.consents.charAt(0)').to.equal( '1');
-            expect((inAppTcData.purpose.consents as string).charAt(1), 'inAppTcData.purpose.consents.charAt(1)').to.equal( '0');
-            expect((inAppTcData as InAppTCData).eventStatus, 'eventStatus').to.equal(EventStatus.USER_ACTION_COMPLETE);
+            expect((inAppTCData.purpose.consents as string).charAt(0), 'inAppTCData.purpose.consents.charAt(0)').to.equal( '1');
+            expect((inAppTCData.purpose.consents as string).charAt(1), 'inAppTCData.purpose.consents.charAt(1)').to.equal( '0');
+            expect((inAppTCData as InAppTCData).eventStatus, 'eventStatus').to.equal(EventStatus.USER_ACTION_COMPLETE);
 
           }
 
@@ -525,7 +525,7 @@ describe('CmpApi', (): void => {
 
       });
 
-      it('Set TcData throws error', (): void => {
+      it('Set TCData throws error', (): void => {
 
         cmpApi.disable();
 

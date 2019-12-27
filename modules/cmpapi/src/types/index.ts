@@ -4,7 +4,7 @@ export * from './Callback';
 export * from './CustomCommands';
 export * from './ErrorCallback';
 export * from './FailCallback';
-export * from './IATCDataCallback';
+export * from './InAppTCDataCallback';
 export * from './PingCallback';
 export * from './RemoveListenerCallback';
 export * from './Restrictions';

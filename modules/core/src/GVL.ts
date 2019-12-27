@@ -269,7 +269,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
       this.cacheLanguage(GVL.DEFAULT_LANGUAGE);
 
-    });
+    }).catch((): void => {});// eslint-disable-line @typescript-eslint/no-empty-function
 
   }
 

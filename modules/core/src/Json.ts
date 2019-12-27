@@ -30,7 +30,7 @@ export class Json {
 
           } else {
 
-            reject(new Error(`JSON Error Status: ${req.status} responseType: ${req.responseType} (should be json)`));
+            reject(new Error(`HTTP Status: ${req.status} response type: ${req.responseType}`));
 
           }
 
