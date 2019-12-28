@@ -88,7 +88,15 @@ export class PurposeRestriction extends Cloneable<PurposeRestriction> {
 
   public isValid(): boolean {
 
-    return !!(this.purposeId && this.restrictionType !== undefined);
+    return (
+      Number.isInteger(this.purposeId) &&
+      this.purposeId > 0 &&
+      (
+        this.restrictionType === RestrictionType.NOT_ALLOWED ||
+        this.restrictionType === RestrictionType.REQUIRE_CONSENT ||
+        this.restrictionType === RestrictionType.REQUIRE_LI
+      )
+    );
 
   }
   public isSameAs(otherPR: PurposeRestriction): boolean {

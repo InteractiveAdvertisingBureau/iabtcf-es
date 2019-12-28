@@ -46,25 +46,33 @@ export class InAppTCDataToTCModel {
     if (tcModel.publisherRestrictions.numRestrictions) {
 
       expect(inAppTCData.publisher.restrictions, 'inAppTCData.publisher.restrictions').not.to.be.undefined;
-      const purpRestrictions = tcModel.publisherRestrictions;
 
-      const max = purpRestrictions.getMaxVendorId();
-      purpRestrictions.getAllRestrictions().forEach((pRestrict: PurposeRestriction): void => {
+      const prVector = tcModel.publisherRestrictions;
+      const maxVendorId = prVector.getMaxVendorId();
+      const purposeIds = prVector.getPurposes();
+      const restrictions = inAppTCData.publisher.restrictions;
 
-        const strPurpId = pRestrict.purposeId.toString();
+      purposeIds.forEach((purposeId: number): void => {
 
-        for (let vendorId = 1; vendorId <= max; vendorId++) {
+        const strPurposeID = purposeId.toString();
+        const purposeVector: string = restrictions[strPurposeID] as string;
+        expect(typeof purposeVector, `restrictions[${strPurposeID}]`).to.equal('string');
+        expect(purposeVector.length, 'Restrictions keys length').to.equal(maxVendorId);
 
-          const rValue = (inAppTCData.publisher.restrictions[strPurpId] as string).charAt(vendorId - 1);
-          const testStr = `vendor ${vendorId} purpose ${strPurpId}`;
+        for (let i = 0; i < maxVendorId; i ++) {
 
-          if (purpRestrictions.vendorHasRestriction(vendorId, pRestrict)) {
+          const rValue = purposeVector.charAt(i);
+          const vendorId = i + 1;
+          const restrictionType = prVector.getRestrictionType(vendorId, purposeId);
+          const testStr = `inAppTCData.publisher.restrictions[${strPurposeID}].charAt(${i})`;
 
-            expect(rValue, testStr).to.equal(pRestrict.restrictionType.toString());
+          if (restrictionType !== undefined) {
+
+            expect(rValue, testStr).to.equal(restrictionType.toString());
 
           } else {
 
-            expect(rValue, testStr).to.equal('-');
+            expect(rValue, testStr).to.equal('_');
 
           }
 

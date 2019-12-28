@@ -20,8 +20,4 @@ export enum RestrictionType {
    */
   REQUIRE_LI = 2,
 
-  /**
-   * No restriction. Fully allowed.
-   */
-  NO_RESTRICTION = 3,
 }

@@ -31,10 +31,10 @@ export class TCDataToTCModel {
     }
 
   }
-  public static equal(vendorsList?: number[]): void {
+  public static equal(vendors?: number[]): void {
 
     const tcModel = CmpApiModel.tcModel;
-    const tcData = new TCData(vendorsList);
+    const tcData = new TCData(vendors);
 
     expect(tcData.tcString, 'tcString').to.equal(TCString.encode(tcModel));
     expect(tcData.eventStatus, 'eventStatus').to.equal(CmpApiModel.eventStatus);
@@ -45,21 +45,21 @@ export class TCDataToTCModel {
 
     if (tcModel.vendorsAllowed.size) {
 
-      this.checkVectorToBooleanVector('outOfBand.allowedVendors', tcModel.vendorsAllowed, tcData.outOfBand.allowedVendors as BooleanVector, vendorsList);
+      this.checkVectorToBooleanVector('outOfBand.allowedVendors', tcModel.vendorsAllowed, tcData.outOfBand.allowedVendors as BooleanVector, vendors);
 
     }
 
     if (tcModel.vendorsDisclosed.size) {
 
-      this.checkVectorToBooleanVector('outOfBand.disclosedVendors', tcModel.vendorsDisclosed, tcData.outOfBand.disclosedVendors as BooleanVector, vendorsList);
+      this.checkVectorToBooleanVector('outOfBand.disclosedVendors', tcModel.vendorsDisclosed, tcData.outOfBand.disclosedVendors as BooleanVector, vendors);
 
     }
 
     this.checkVectorToBooleanVector('purpose.consents', tcModel.purposeConsents, tcData.purpose.consents as BooleanVector);
     this.checkVectorToBooleanVector('purpose.legitimateInterests', tcModel.purposeLegitimateInterest, tcData.purpose.legitimateInterests as BooleanVector);
 
-    this.checkVectorToBooleanVector('vendor.consents', tcModel.vendorConsents, tcData.vendor.consents as BooleanVector, vendorsList);
-    this.checkVectorToBooleanVector('vendor.legitimateInterests', tcModel.vendorLegitimateInterest, tcData.vendor.legitimateInterests as BooleanVector, vendorsList);
+    this.checkVectorToBooleanVector('vendor.consents', tcModel.vendorConsents, tcData.vendor.consents as BooleanVector, vendors);
+    this.checkVectorToBooleanVector('vendor.legitimateInterests', tcModel.vendorLegitimateInterest, tcData.vendor.legitimateInterests as BooleanVector, vendors);
 
     this.checkVectorToBooleanVector('specialFeatureOptIns', tcModel.specialFeatureOptIns, tcData.specialFeatureOptins as BooleanVector);
 
@@ -71,7 +71,7 @@ export class TCDataToTCModel {
     if (tcModel.publisherRestrictions.numRestrictions) {
 
       expect(tcData.publisher.restrictions, 'tcData.publisher.restrictions').not.to.be.undefined;
-      tcModel.publisherRestrictions.getAllRestrictions().forEach((purpRestriction: PurposeRestriction): void => {
+      tcModel.publisherRestrictions.getRestrictions().forEach((purpRestriction: PurposeRestriction): void => {
 
         const strPurpId = purpRestriction.purposeId.toString();
 

@@ -48,29 +48,37 @@ export class InAppTCData extends TCData {
 
     if (purpRestrictions.numRestrictions > 0) {
 
-      const max = purpRestrictions.getMaxVendorId();
+      const maxVendorId = purpRestrictions.getMaxVendorId();
 
-      for (let vendorId = 1; vendorId <= max; vendorId++) {
+      /**
+       * First create a string of empty values for each purpose that is long
+       * enough to contain up to the max vendor id
+       */
+      purpRestrictions.getRestrictions().forEach((pRestrict: PurposeRestriction): void => {
 
-        purpRestrictions.getAllRestrictions().forEach((pRestrict: PurposeRestriction): void => {
+        retr[pRestrict.purposeId.toString()] = '_'.repeat(maxVendorId);
 
-          const strPurpId = pRestrict.purposeId.toString();
+      });
 
-          if (retr[strPurpId] === undefined) {
+      /**
+       * go through all of the vendor ids and insert their restriction type
+       * number at the index of their vendor id on the purposeID string
+       */
+      for (let i = 0; i < maxVendorId; i++) {
 
-            retr[strPurpId] = '';
+        // offset by one
+        const vendorId = i + 1;
 
-          }
+        // Gets a list of purpose restrictions for this vendor
+        purpRestrictions.getRestrictions(vendorId).forEach((pRestrict: PurposeRestriction): void => {
 
-          if (purpRestrictions.vendorHasRestriction(vendorId, pRestrict)) {
+          const strType = pRestrict.restrictionType.toString();
+          const strPurp = pRestrict.purposeId.toString();
 
-            retr[strPurpId] += pRestrict.restrictionType.toString();
-
-          } else {
-
-            retr[strPurpId] += '-';
-
-          }
+          // insert the restriction type at the index of the vendor ID
+          const firstPart = retr[strPurp].substr(0, i);
+          const lastPart = retr[strPurp].substr(i + 1);
+          retr[strPurp] = firstPart + strType + lastPart;
 
         });
 

@@ -1,13 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {TCModel} from '@iabtcf/core';
 import {CmpApiModel} from './CmpApiModel';
 import {CustomCommands, Callback, ErrorCallback} from './types';
 import {EventListenerQueue} from './EventListenerQueue';
 import {CommandMap} from './command';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export type PageCallHandler = (
+  command: string,
+  version: number,
+  callback: (response?: any, success?: any) => void,
+  param?: any
+) => void;
 type TcfApiArgs = [string, number, Callback, any];
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type TcfApiFunction = (command: string, version: number, callback: Callback, param?: any) => void | TcfApiArgs[];
 type GetQueueFunction = () => TcfApiArgs[];
 
 /**
@@ -18,8 +23,9 @@ type GetQueueFunction = () => TcfApiArgs[];
 export class CmpApi {
 
   private readonly customCommands: CustomCommands;
-  private readonly API_FUNCTION_NAME: string = `__tcfapi`;
+  private readonly API_FUNCTION_NAME: string = '__tcfapi';
   private win: Window = window;
+  private stubQueue: TcfApiArgs[];
 
   /**
    * Constructor
@@ -28,6 +34,9 @@ export class CmpApi {
    * @param {CustomCommandRegistration[]} customCommands
    */
   public constructor(cmpId: number, cmpVersion: number, customCommands?: CustomCommands) {
+
+    this.throwIfInvalidInt(cmpId, 'cmpId', 2);
+    this.throwIfInvalidInt(cmpVersion, 'cmpVersion', 0);
 
     CmpApiModel.cmpId = cmpId;
     CmpApiModel.cmpVersion = cmpVersion;
@@ -39,22 +48,6 @@ export class CmpApi {
     }
 
     CmpApiModel.changeEventCallback = EventListenerQueue.executeCommands;
-    this.reassignPageHandler();
-
-  }
-
-  private get tcfapi(): TcfApiFunction {
-
-    return window[this.API_FUNCTION_NAME];
-
-  }
-  private set tcfapi(func: TcfApiFunction) {
-
-    window[this.API_FUNCTION_NAME] = func;
-
-  }
-
-  private reassignPageHandler(): void {
 
     /**
      * Attempt to grab the queue – we could call ping and see if it is the stub,
@@ -67,11 +60,7 @@ export class CmpApi {
     try {
 
       // get queued commands
-      (this.tcfapi as GetQueueFunction)().forEach((queued: TcfApiArgs): void => {
-
-        this.pageCallHandler(...queued);
-
-      });
+      this.stubQueue = (this.tcfapi as GetQueueFunction)();
 
     } catch (err) {
 
@@ -79,9 +68,43 @@ export class CmpApi {
 
     } finally {
 
-      this.tcfapi = this.pageCallHandler;
+      this.tcfapi = this.wrapPageCallHandler();
 
     }
+
+  }
+
+  private throwIfInvalidInt(value: number, name: string, minValue: number): void | never {
+
+    if (!(typeof value === 'number' && Number.isInteger(value) && value >= minValue)) {
+
+      throw new Error(`Invalid ${name}: ${value}`);
+
+    }
+
+  }
+
+  /**
+   * Throws an error if the Cmp has disabled the CmpApi
+   */
+  private throwIfCmpApiIsDisabled(): void {
+
+    if (CmpApiModel.disabled) {
+
+      throw new Error('CmpApi Disabled');
+
+    }
+
+  }
+
+  private get tcfapi(): PageCallHandler {
+
+    return window[this.API_FUNCTION_NAME];
+
+  }
+  private set tcfapi(func: PageCallHandler) {
+
+    window[this.API_FUNCTION_NAME] = func;
 
   }
 
@@ -93,6 +116,18 @@ export class CmpApi {
 
     this.throwIfCmpApiIsDisabled();
     CmpApiModel.tcModel = tcModel;
+
+    if (this.stubQueue) {
+
+      this.stubQueue.forEach((args: TcfApiArgs): void =>{
+
+        this.wrapPageCallHandler()(...args);
+
+      });
+
+      delete this.stubQueue;
+
+    }
 
   }
 
@@ -117,16 +152,16 @@ export class CmpApi {
 
   }
 
-  /**
-   * Throws an error if the Cmp has disabled the CmpApi
-   */
-  private throwIfCmpApiIsDisabled(): void {
+  private wrapPageCallHandler(): PageCallHandler {
 
-    if (CmpApiModel.disabled) {
+    return (command: string, version: number, callback: Callback, param?: any): void => {
 
-      throw new Error('CmpApi Disabled');
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
+      const _this = this;
 
-    }
+      _this.pageCallHandler(command, version, callback, param);
+
+    };
 
   }
 
@@ -137,7 +172,6 @@ export class CmpApi {
    * @param {CallbackFunction} callback
    * @param {any} [param]
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private pageCallHandler(command: string, version: number, callback: Callback, param?: any): void | never {
 
     if (typeof command !== 'string') {

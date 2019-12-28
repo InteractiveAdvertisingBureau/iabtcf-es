@@ -29,11 +29,10 @@ describe('response->InAppTCData', (): void => {
   it('should encode purpose restrictions', (done: () => void): void => {
 
     const tcModel = TCModelFactory.noGVL();
-    const vendorLength = tcModel.vendorConsents.size;
 
-    for (let i =1; i <= vendorLength; i++) {
+    for (let i =1; i <= 20; i++) {
 
-      tcModel.publisherRestrictions.add(i, new PurposeRestriction(makeRandomInt(1, 12), makeRandomInt(0, 2)));
+      tcModel.publisherRestrictions.add(i, new PurposeRestriction(makeRandomInt(1, 3), makeRandomInt(0, 2)));
 
     }
 

@@ -1,4 +1,5 @@
 import {TCDataCallback} from '../types';
+import {CmpApiModel} from '../CmpApiModel';
 import {TCData} from '../response';
 import {Command} from './Command';
 
@@ -14,13 +15,13 @@ export class GetTCDataCommand extends Command {
 
   protected isValid(): boolean {
 
-    let retr = true;
+    // start with this... if it doesn't apply then they get nothing
+    let retr = CmpApiModel.gdprApplies;
 
     // if the array is undefined, then we're good
-    if (this.param !== undefined) {
+    if ( retr && this.param !== undefined) {
 
       // if the array is not undefined and is an array of integers
-
       retr = Array.isArray(this.param);
       retr = (retr && this.param.every((item: number): boolean => Number.isInteger(item)));
 

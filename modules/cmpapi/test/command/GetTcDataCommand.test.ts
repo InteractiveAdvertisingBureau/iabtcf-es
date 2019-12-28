@@ -9,7 +9,6 @@ describe('command->GetTCDataCommand', (): void => {
 
   it('should return a TCData object when called', (done: () => void): void => {
 
-    CmpApiModel.reset();
     CmpApiModel.tcModel = TCModelFactory.noGVL();
 
     const tcDataCallback: TCDataCallback = function(tcData: TCData): void {

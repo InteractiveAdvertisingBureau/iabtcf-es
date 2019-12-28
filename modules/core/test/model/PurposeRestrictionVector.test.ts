@@ -48,7 +48,7 @@ export function run(): void {
         new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
       const prVector: PurposeRestrictionVector = new PurposeRestrictionVector();
 
-      expect(prVector.getVendors(purposeRestriction)).to.be.empty;
+      expect(prVector.getVendors(purposeRestriction), 'prVector.getVendors(purposeRestriction)').to.be.empty;
 
     });
 
@@ -72,7 +72,7 @@ export function run(): void {
 
       }
 
-      const result: string[] = prv.getAllRestrictions().map((pr: PurposeRestriction): string => {
+      const result: string[] = prv.getRestrictions().map((pr: PurposeRestriction): string => {
 
         return pr.hash;
 
@@ -96,7 +96,7 @@ export function run(): void {
 
       prv.add(vendorId, purpRestriction);
 
-      const prvRestrictions: PurposeRestriction[] = prv.getRestriction(vendorId);
+      const prvRestrictions: PurposeRestriction[] = prv.getRestrictions(vendorId);
 
       expect(purpRestriction.isSameAs(prvRestrictions[0])).to.be.true;
 
@@ -125,12 +125,12 @@ export function run(): void {
       // select random one
       const targetVendor: number = vendors[Math.floor(Math.random() * vendors.length)];
 
-      expect(prv.getRestriction(targetVendor)).not.to.be.empty;
+      expect(prv.getRestrictions(targetVendor)).not.to.be.empty;
       expect(prv.getVendors(purpRestriction)).to.include(targetVendor);
 
       prv.remove(targetVendor, purpRestriction);
 
-      expect(prv.getRestriction(targetVendor)).to.be.empty;
+      expect(prv.getRestrictions(targetVendor)).to.be.empty;
       expect(prv.getVendors(purpRestriction)).not.to.include(targetVendor);
 
     });
@@ -161,13 +161,13 @@ export function run(): void {
 
       prv.add(vendorId, purpRestriction);
 
-      expect(prv.getRestriction(vendorId)).not.to.be.empty;
+      expect(prv.getRestrictions(vendorId)).not.to.be.empty;
       expect(prv.getVendors(purpRestriction)).to.include(vendorId);
       expect(prv.isEmpty()).to.be.false;
 
       prv.remove(vendorId, purpRestriction);
 
-      expect(prv.getRestriction(vendorId)).to.be.empty;
+      expect(prv.getRestrictions(vendorId)).to.be.empty;
       expect(prv.getVendors(purpRestriction)).not.to.include(vendorId);
       expect(prv.isEmpty()).to.be.true;
 
@@ -204,7 +204,7 @@ export function run(): void {
 
       prv.add(chosenVendorId, purpRestriction);
 
-      expect(prv.getRestriction(chosenVendorId)).not.to.be.empty;
+      expect(prv.getRestrictions(chosenVendorId)).not.to.be.empty;
       expect(prv.getVendors(purpRestriction)).to.include(chosenVendorId);
       expect(prv.isEmpty()).to.be.false;
 
@@ -241,7 +241,7 @@ export function run(): void {
       prv.gvl = vendorlistJson;
       prv.add(chosenVendorId, purpRestriction);
 
-      expect(prv.getRestriction(chosenVendorId)).to.be.empty;
+      expect(prv.getRestrictions(chosenVendorId)).to.be.empty;
       expect(prv.getVendors(purpRestriction)).not.to.include(chosenVendorId);
       expect(prv.isEmpty()).to.be.true;
 
@@ -278,10 +278,10 @@ export function run(): void {
       prv.gvl = vendorlistJson;
       prv.add(chosenVendorId, purpRestriction);
 
-      expect(prv.getRestriction(chosenVendorId)).to.be.empty;
+      expect(prv.getRestrictions(chosenVendorId)).to.be.empty;
       expect(prv.getVendors(purpRestriction)).not.to.include(chosenVendorId);
       expect(prv.isEmpty()).to.be.true;
-      expect(prv.isValid()).to.be.true;
+      expect(prv.isEncodable()).to.be.true;
 
     });
 
@@ -316,7 +316,7 @@ export function run(): void {
       prv.gvl = vendorlistJson;
       prv.add(chosenVendorId, purpRestriction);
 
-      expect(prv.getRestriction(chosenVendorId)).not.to.be.empty;
+      expect(prv.getRestrictions(chosenVendorId)).not.to.be.empty;
       expect(prv.getVendors(purpRestriction)).to.include(chosenVendorId);
       expect(prv.isEmpty()).to.be.false;
 

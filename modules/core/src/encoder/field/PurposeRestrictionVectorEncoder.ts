@@ -8,23 +8,23 @@ import {
 
 export class PurposeRestrictionVectorEncoder {
 
-  public static encode(value: PurposeRestrictionVector): string {
+  public static encode(prVector: PurposeRestrictionVector): string {
 
     // start with the number of restrictions
-    let bitString = IntEncoder.encode(value.numRestrictions, BitLength.numRestrictions);
+    let bitString = IntEncoder.encode(prVector.numRestrictions, BitLength.numRestrictions);
 
     // if the vector is empty we'll just return a string with just the numRestricitons being 0
-    if (!value.isEmpty()) {
+    if (!prVector.isEncodable()) {
 
       // create each restriction group
-      value.getAllRestrictions().forEach((purpRestriction: PurposeRestriction): void => {
+      prVector.getRestrictions().forEach((purpRestriction: PurposeRestriction): void => {
 
         // every restriction group has the purposeId and the restrictionType;
         bitString += IntEncoder.encode(purpRestriction.purposeId, BitLength.purposeId);
         bitString += IntEncoder.encode(purpRestriction.restrictionType, BitLength.restrictionType);
 
         // now get all the vendors under that restriction
-        const vendors: number[] = value.getVendors(purpRestriction);
+        const vendors: number[] = prVector.getVendors(purpRestriction);
         const len: number = vendors.length;
 
         /**
@@ -87,36 +87,36 @@ export class PurposeRestrictionVectorEncoder {
 
   }
 
-  public static decode(value: string): PurposeRestrictionVector {
+  public static decode(encodedString: string): PurposeRestrictionVector {
 
     let index = 0;
     const vector: PurposeRestrictionVector = new PurposeRestrictionVector();
-    const numRestrictions: number = IntEncoder.decode(value.substr(index, BitLength.numRestrictions));
+    const numRestrictions: number = IntEncoder.decode(encodedString.substr(index, BitLength.numRestrictions));
     index += BitLength.numRestrictions;
 
     for (let i = 0; i < numRestrictions; i++) {
 
       // First is purpose ID
-      const purposeId = IntEncoder.decode(value.substr(index, BitLength.purposeId));
+      const purposeId = IntEncoder.decode(encodedString.substr(index, BitLength.purposeId));
       index += BitLength.purposeId;
       // Second Restriction Type
-      const restrictionType = IntEncoder.decode(value.substr(index, BitLength.restrictionType));
+      const restrictionType = IntEncoder.decode(encodedString.substr(index, BitLength.restrictionType));
       index += BitLength.restrictionType;
 
       const purposeRestriction: PurposeRestriction = new PurposeRestriction(purposeId, restrictionType);
       // Num Entries (number of vendors)
-      const numEntries: number = IntEncoder.decode(value.substr(index, BitLength.numEntries));
+      const numEntries: number = IntEncoder.decode(encodedString.substr(index, BitLength.numEntries));
       index += BitLength.numEntries;
 
       for (let j = 0; j < numEntries; j++) {
 
-        const isARange: boolean = BooleanEncoder.decode(value.substr(index, BitLength.anyBoolean));
-        const startOrOnlyVendorId: number = IntEncoder.decode(value.substr(index, BitLength.vendorId));
+        const isARange: boolean = BooleanEncoder.decode(encodedString.substr(index, BitLength.anyBoolean));
+        const startOrOnlyVendorId: number = IntEncoder.decode(encodedString.substr(index, BitLength.vendorId));
         index += BitLength.vendorId;
 
         if (isARange) {
 
-          const endVendorId: number = IntEncoder.decode(value.substr(index, BitLength.vendorId));
+          const endVendorId: number = IntEncoder.decode(encodedString.substr(index, BitLength.vendorId));
           index += BitLength.vendorId;
 
           for ( let k: number = startOrOnlyVendorId; k < startOrOnlyVendorId + endVendorId; k++) {

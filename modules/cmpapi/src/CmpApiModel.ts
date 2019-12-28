@@ -20,19 +20,13 @@ export class CmpApiModel {
 
   public static changeEventCallback: () => void;
 
-  private static uiVisible_: boolean;
-  private static disabled_: boolean;
+  private static uiVisible_ = false;
+  private static disabled_ = false;
   private static tcModel_: TCModel;
 
   /**
    * Returns true if the TcModel has been set
    */
-  public static get tcModelIsSet(): boolean {
-
-    return (this.tcModel_ !== undefined);
-
-  }
-
   public static get disabled(): boolean {
 
     return this.disabled_;
@@ -101,7 +95,8 @@ export class CmpApiModel {
       this.gdprApplies = true;
       this.displayStatus = DisplayStatus.HIDDEN;
 
-      if (this.tcModelIsSet) {
+      // Have we set a TCModel before?
+      if (this.tcModel_ !== undefined) {
 
         this.eventStatus = EventStatus.USER_ACTION_COMPLETE;
 
@@ -111,21 +106,23 @@ export class CmpApiModel {
 
       }
 
+      this.tcModel_ = (model as TCModel).clone();
+
     } else if (model === null) {
 
       this.gdprApplies = false;
       this.displayStatus = DisplayStatus.DISABLED;
+      this.tcModel_ = null;
 
     } else {
 
       this.cmpStatus = CmpStatus.ERROR;
       // awwwww hell no... what did you pass me?
-      throw new Error(`Invalid value (${model}) passed for model`);
+      throw new Error(`Invalid value (${model}) passed for tcModel`);
 
     }
 
     this.cmpStatus = CmpStatus.LOADED;
-    this.tcModel_ = (model as TCModel).clone();
 
     if (this.changeEventCallback) {
 
@@ -143,8 +140,9 @@ export class CmpApiModel {
     delete this.gdprApplies;
     delete this.eventStatus;
     delete this.changeEventCallback;
-    delete this.uiVisible_;
-    delete this.disabled_;
+
+    this.uiVisible_ = false;
+    this.disabled_ = false;
     this.cmpStatus = CmpStatus.LOADING;
     this.displayStatus = DisplayStatus.HIDDEN;
 

@@ -10,3 +10,4 @@ export * from './RemoveListenerCallback';
 export * from './Restrictions';
 export * from './TCDataCallback';
 export * from './VendorListCallback';
+export * from './Commands';

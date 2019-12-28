@@ -33,7 +33,9 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
     const vIDStr: string = vendorId.toString();
 
     /**
-     * without a gvl set, there's no way to know...
+     * without a gvl set, there's no way to know... in that case we'll return
+     * true but once the GVL is set later we'll go through these and clean up
+     * the mess.
      */
     if (this.gvl) {
 
@@ -86,6 +88,13 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
   }
 
+  /**
+   * add - adds a given Vendor ID under a given Purpose Restriction
+   *
+   * @param {number} vendorId
+   * @param {PurposeRestriction} purposeRestriction
+   * @return {void}
+   */
   public add(vendorId: number, purposeRestriction: PurposeRestriction): void {
 
     if (this.isOkToHave(purposeRestriction.restrictionType, purposeRestriction.purposeId, vendorId)) {
@@ -99,12 +108,13 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
       }
 
-      const currentRestrictions = this.getRestriction(vendorId);
+      const currentRestrictions = this.getRestrictions(vendorId);
       currentRestrictions.forEach((curRestriction: PurposeRestriction): void => {
 
         /**
          * if this vendor is already restricted under this purpose they can only
-         * be restricted in one way so we'll remove them from the other one
+         * be restricted in one way so we'll remove them from the other one.
+         * It's a last value wins result
          */
         if (curRestriction.purposeId === purposeRestriction.purposeId) {
 
@@ -120,29 +130,104 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
   }
 
-  public getVendors(purposeRestriction: PurposeRestriction): number[] {
+  /**
+   * getVendors - returns array of vendor ids optionally narrowed by a given
+   * Purpose Restriction.  If no purpose restriction is passed then all vendor
+   * ids will be returned.  One can expect this result to be a unique set of
+   * ids no duplicates.
+   *
+   * @param {PurposeRestriction} [purposeRestriction] - optionally passed to
+   * get only Vendor IDs restricted under the given Purpose Restriction
+   * @return {number[]} - Unique ID set of vendors
+   */
+  public getVendors(purposeRestriction?: PurposeRestriction): number[] {
 
-    const hash: string = purposeRestriction.hash;
+    let vendorIds: number[] = [];
 
-    return this.has(hash) ? (this.map.get(hash) as BinarySearchTree).get() : [];
+    if (purposeRestriction) {
 
-  }
+      const hash: string = purposeRestriction.hash;
 
-  public vendorHasRestriction(vendorId: number, purposeRestriction: PurposeRestriction): boolean {
+      if (this.has(hash)) {
 
-    let retr = false;
-    const restrictions = this.getRestriction(vendorId);
+        vendorIds = (this.map.get(hash) as BinarySearchTree).get();
 
-    for (let i = 0; i < restrictions.length && !retr; i++) {
+      }
 
-      retr = purposeRestriction.isSameAs(restrictions[i]);
+    } else {
+
+      const vendorSet = new Set<number>();
+
+      this.map.forEach((bst: BinarySearchTree): void => {
+
+        bst.get().forEach((vendorId: number): void => {
+
+          vendorSet.add(vendorId);
+
+        });
+
+      });
+
+      vendorIds = Array.from(vendorSet);
 
     }
 
-    return retr;
+    return vendorIds;
 
   }
 
+  public getRestrictionType(vendorId: number, purposeId: number): RestrictionType | undefined {
+
+    let rType: RestrictionType;
+
+    this.getRestrictions(vendorId).forEach((purposeRestriction: PurposeRestriction): void => {
+
+      if (purposeRestriction.purposeId === purposeId) {
+
+        if (rType === undefined || rType > purposeRestriction.restrictionType) {
+
+          rType = purposeRestriction.restrictionType;
+
+        }
+
+      }
+
+    });
+
+    return rType;
+
+  }
+
+  /**
+   * vendorHasRestriction - determines whether a given Vendor ID is under a
+   * given Purpose Restriction
+   *
+   * @param {number} vendorId
+   * @param {PurposeRestriction} purposeRestriction
+   * @return {boolean} - true if the give Vendor ID is under the given Purpose
+   * Restriction
+   */
+  public vendorHasRestriction(vendorId: number, purposeRestriction: PurposeRestriction): boolean {
+
+    let has = false;
+    const restrictions = this.getRestrictions(vendorId);
+
+    for (let i = 0; i < restrictions.length && !has; i++) {
+
+      has = purposeRestriction.isSameAs(restrictions[i]);
+
+    }
+
+    return has;
+
+  }
+
+  /**
+   * getMaxVendorId - gets the Maximum Vendor ID regardless of Purpose
+   * Restriction
+   *
+   * @return {number} - maximum Vendor ID
+   */
   public getMaxVendorId(): number {
 
     let retr = 0;
@@ -157,13 +242,21 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
   }
 
-  public getRestriction(vendorId: number): PurposeRestriction[] {
+  public getRestrictions(vendorId?: number): PurposeRestriction[] {
 
     const retr: PurposeRestriction[] = [];
 
     this.map.forEach((bst: BinarySearchTree, hash: string): void => {
 
-      if (bst.contains(vendorId)) {
+      if (vendorId) {
+
+        if (bst.contains(vendorId)) {
+
+          retr.push(PurposeRestriction.unHash(hash));
+
+        }
+
+      } else {
 
         retr.push(PurposeRestriction.unHash(hash));
 
@@ -175,20 +268,27 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
   }
 
-  public getAllRestrictions(): PurposeRestriction[] {
+  public getPurposes(): number[] {
 
-    const retr: PurposeRestriction[] = [];
+    const purposeIds = new Set<number>();
 
     this.map.forEach((bst: BinarySearchTree, hash: string): void => {
 
-      retr.push(PurposeRestriction.unHash(hash));
+      purposeIds.add(PurposeRestriction.unHash(hash).purposeId);
 
     });
 
-    return retr;
+    return Array.from(purposeIds);
 
   }
 
+  /**
+   * remove - removes Vendor ID from a Purpose Restriction
+   *
+   * @param {number} vendorId
+   * @param {PurposeRestriction} purposeRestriction
+   * @return {void}
+   */
   public remove(vendorId: number, purposeRestriction: PurposeRestriction): void {
 
     const hash: string = purposeRestriction.hash;
@@ -251,23 +351,48 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
   }
 
+  /**
+   * gvl returns local copy of the GVL these restrictions apply to
+   *
+   * @return {GVL}
+   */
   public get gvl(): GVL {
 
     return this.gvl_;
 
   }
 
+  /**
+   * isEmpty - whether or not this vector has any restrictions in it
+   *
+   * @return {boolean}
+   */
   public isEmpty(): boolean {
 
     return this.map.size === 0;
 
   };
-  public isValid(): boolean {
 
-    return this.gvl_ !== undefined;
+  /**
+   * isEncodable - The Vector will add restrictions even if they are not
+   * allowed by the GVL until it can verify that the GVL permits them to be
+   * added. This check determines if Vector is ready to be encoded. Another
+   * case is that this vector is empty and does not need a GVL instance
+   * because there's nothing to check.
+   *
+   * @return {boolean}
+   */
+  public isEncodable(): boolean {
+
+    return this.gvl_ !== undefined || this.isEmpty();
 
   }
 
+  /**
+   * numRestrictions - returns the number of Purpose Restrictions.
+   *
+   * @return {number}
+   */
   public get numRestrictions(): number {
 
     return this.map.size;

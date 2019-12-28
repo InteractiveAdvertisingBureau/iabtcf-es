@@ -140,12 +140,12 @@ export function run(): void {
       expect(decodedPRV.numRestrictions).to.equal(prVector.numRestrictions);
       expect(decodedPRV.isEmpty()).to.equal(prVector.isEmpty());
 
-      expect(decodedPRV.getAllRestrictions()).to.deep.equal(prVector.getAllRestrictions());
+      expect(decodedPRV.getRestrictions()).to.deep.equal(prVector.getRestrictions());
       expect(decodedPRV.getVendors(purposeRestriction)).to.deep.equal(prVector.getVendors(purposeRestriction));
 
       vendors.forEach((id: number): void => {
 
-        expect(decodedPRV.getRestriction(id)).to.deep.equal(prVector.getRestriction(id));
+        expect(decodedPRV.getRestrictions(id)).to.deep.equal(prVector.getRestrictions(id));
 
       });
 

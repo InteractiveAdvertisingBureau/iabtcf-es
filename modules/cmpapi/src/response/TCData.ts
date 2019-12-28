@@ -115,7 +115,7 @@ export class TCData extends Response {
 
         const strVendorId = vendorId.toString();
         // vendors restrictions
-        purpRestrictions.getRestriction(vendorId).forEach((pRestrict: PurposeRestriction): void => {
+        purpRestrictions.getRestrictions(vendorId).forEach((pRestrict: PurposeRestriction): void => {
 
           const strPurpId = pRestrict.purposeId.toString();
 
