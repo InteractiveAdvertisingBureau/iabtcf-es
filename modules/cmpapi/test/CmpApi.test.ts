@@ -1,4 +1,5 @@
-import {CmpApi, PageCallHandler} from '../src/';
+import {CmpApi, CustomCommands} from '../src/';
+import {CmpApiModel} from '../src/CmpApiModel';
 import {Ping} from '../src/response/Ping';
 import {TCData} from '../src/response/TCData';
 import {CmpStatus} from '../src/status/CmpStatus';
@@ -12,7 +13,13 @@ import {TCDataToTCModel} from './TCDataToTCModel';
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars, no-unused-vars, @typescript-eslint/no-var-requires */
 declare global {
   interface Window {
-    __tcfapi: PageCallHandler;
+    __tcfapi: (
+      command: any,
+      version: any,
+      callback: (response?: any, success?: any) => void,
+      param?: any
+    ) => void;
+
   }
 }
 
@@ -133,6 +140,14 @@ describe('CmpApi', (): void => {
   runContructionFail(2, 'banana');
   runContructionFail(2, null);
 
+  const getCmpApi = (customCommands?: CustomCommands): CmpApi => {
+
+    const cmpId = makeRandomInt(2, 100);
+    const cmpVersion = makeRandomInt(0, 15);
+    return new CmpApi(cmpId, cmpVersion, customCommands);
+
+  };
+
   it('should pick up a queued stub function an excecute it if it can', (done: () => void): void => {
 
     assertStub();
@@ -145,11 +160,150 @@ describe('CmpApi', (): void => {
 
     });
 
-    const cmpId = makeRandomInt(2, 100);
-    const cmpVersion = makeRandomInt(0, 15);
-    const cmpApi = new CmpApi(cmpId, cmpVersion);
+    const cmpApi = getCmpApi();
 
     cmpApi.tcModel = TCModelFactory.noGVL();
+
+  });
+
+  it('should set CmpApiModel.uiVisible to passed in value when CmpApi.uiVisible is set', (done: () => void): void => {
+
+    const cmpApi = getCmpApi();
+
+    expect(CmpApiModel.uiVisible, 'CmpApiModel.uiVisible - initial').to.be.false;
+
+    cmpApi.uiVisible = true;
+
+    expect(CmpApiModel.uiVisible, 'CmpApiModel.uiVisible after set cmpApi.uiVisible to true').to.be.true;
+
+    cmpApi.uiVisible = false;
+
+    expect(CmpApiModel.uiVisible, 'CmpApiModel.uiVisible after set cmpApi.uiVisible to false').to.be.false;
+
+    done();
+
+  });
+
+  it('should set CmpApiModel.dsiabled to true when CmpApi.disable() is called', (done: () => void): void => {
+
+    const cmpApi = getCmpApi();
+
+    expect(CmpApiModel.disabled, 'CmpApiModel.disabled - initial').to.be.false;
+
+    cmpApi.disable();
+
+    expect(CmpApiModel.disabled, 'CmpApiModel.disabled - after cmpApi.disable() is called').to.be.true;
+
+    done();
+
+  });
+
+  it('should throw errors when disabled and tcModel or uiVisible are set', (done: () => void): void => {
+
+    const cmpApi = getCmpApi();
+
+    expect(CmpApiModel.disabled, 'CmpApiModel.disabled - initial').to.be.false;
+
+    cmpApi.disable();
+
+    expect(CmpApiModel.disabled, 'CmpApiModel.disabled - after cmpApi.disable() is called').to.be.true;
+
+    expect((): void => {
+
+      cmpApi.tcModel = TCModelFactory.noGVL();
+
+    }, 'cmpApi.tcModel after disabled').to.throw();
+
+    expect((): void => {
+
+      cmpApi.uiVisible = true;
+
+    }, 'cmpApi.uiVisible after disabled').to.throw();
+
+    done();
+
+  });
+
+  const runFailCommand = (command: any, version: any, because = ''): void => {
+
+    it(`should callback with success=false and result=error message if command=${command} and version=${version} because ${because}`, (done: () => void): void => {
+
+      const cmpApi = getCmpApi();
+      window[API_FUNCTION_NAME](command, version, (result: string, success: boolean): void => {
+
+        expect(result, 'result').to.be.a('string');
+        expect(success, 'success').to.be.false;
+
+        done();
+
+      });
+
+    });
+
+  };
+
+  runFailCommand('foo', 2, 'it\'s and unknown command');
+  runFailCommand(5, 2, 'command is a number');
+  runFailCommand({}, 2, 'command is an object');
+  runFailCommand(null, 2, 'command is null');
+  runFailCommand(true, 2, 'command is a boolean');
+  runFailCommand(false, 2, 'command is a boolean');
+
+  runFailCommand('getTCData', '2', 'version is a string');
+  runFailCommand('getTCData', 2.1, 'version is a floating point number');
+  runFailCommand('getTCData', 1, 'version is not supported');
+  runFailCommand('getTCData', null, 'version is null');
+  runFailCommand('getTCData', true, 'version is a boolean');
+  runFailCommand('getTCData', false, 'version is a boolean');
+  runFailCommand('getTCData', {}, 'version is an object');
+
+  const runFailCallback = (callback: any, because = ''): void => {
+
+    it(`should throw an error if with callback ${callback} because it\'s ${because}`, (done: () => void): void => {
+
+      const cmpApi = getCmpApi();
+      expect((): void => {
+
+        window[API_FUNCTION_NAME]('getTCData', 2, callback);
+
+      }).to.throw();
+      done();
+
+    });
+
+  };
+
+  runFailCallback(undefined, 'undefined');
+  runFailCallback(true, 'a boolean');
+  runFailCallback(false, 'a boolean');
+  runFailCallback({}, 'an object');
+  runFailCallback('foo', 'a string');
+  runFailCallback(2, 'a number');
+  runFailCallback(null, 'null');
+
+  it('should call a custom command through the page interface', (done: () => void): void => {
+
+    const commandName = 'superRadCommand';
+    const passParam = true;
+    const cmpApi = getCmpApi({
+      [commandName]: (callback: (...params) => void, param?: any): void => {
+
+        expect(callback, 'callback').to.be.a('function');
+        expect(param, 'param').to.be.a('boolean');
+        expect(param, 'param').to.equal(passParam);
+
+        callback(param);
+
+      },
+
+    });
+    window[API_FUNCTION_NAME](commandName, 2, (param: boolean): void => {
+
+      expect(param, 'param').to.be.a('boolean');
+      expect(param, 'param').to.equal(passParam);
+      done();
+
+    }, passParam);
 
   });
 

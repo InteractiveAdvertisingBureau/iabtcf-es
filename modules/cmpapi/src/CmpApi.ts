@@ -3,7 +3,7 @@ import {TCModel} from '@iabtcf/core';
 import {CmpApiModel} from './CmpApiModel';
 import {CustomCommands, Callback, ErrorCallback} from './types';
 import {EventListenerQueue} from './EventListenerQueue';
-import {CommandMap} from './command';
+import {CommandMap} from './command/CommandMap';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type PageCallHandler = (
@@ -31,7 +31,7 @@ export class CmpApi {
    * Constructor
    * @param {number} cmpId
    * @param {number} cmpVersion
-   * @param {CustomCommandRegistration[]} customCommands
+   * @param {CustomCommands} customCommands
    */
   public constructor(cmpId: number, cmpVersion: number, customCommands?: CustomCommands) {
 
@@ -176,13 +176,15 @@ export class CmpApi {
 
     if (typeof command !== 'string') {
 
-      throw new Error('invalid command');
+      (callback as ErrorCallback)(`invalid command: ${command}`, false);
+      return;
 
     }
 
     if (version !== 2) {
 
-      throw new Error('invalid version');
+      (callback as ErrorCallback)(`unsupported version: ${version}`, false);
+      return;
 
     }
 

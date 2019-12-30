@@ -11,16 +11,39 @@ describe('command->GetTCDataCommand', (): void => {
 
     CmpApiModel.tcModel = TCModelFactory.noGVL();
 
-    const tcDataCallback: TCDataCallback = function(tcData: TCData): void {
+    const tcDataCallback: TCDataCallback = (tcData: TCData, success: boolean): void => {
 
+      expect(success, 'success').to.be.true;
       expect(tcData instanceof TCData, 'tcData instanceof TCData').to.be.true;
-      expect(arguments.length, 'arguments.length').to.equal(2);
 
       done();
 
     };
 
     new GetTCDataCommand(tcDataCallback);
+
+  });
+
+  it('should return a TCData object with a subset of vendors if a list of ids are passed', (done: () => void): void => {
+
+    const vendors = [16, 18];
+    CmpApiModel.tcModel = TCModelFactory.noGVL();
+
+    new GetTCDataCommand((tcData: TCData, success: boolean): void => {
+
+      expect(success, 'success').to.be.true;
+      expect(tcData instanceof TCData, 'tcData instanceof TCData').to.be.true;
+
+      expect(Object.keys(tcData.vendor.consents), 'tcData.vendor.consents').to.have.lengthOf(vendors.length);
+      vendors.forEach((vendorId: number): void => {
+
+        expect(tcData.vendor.consents, 'tcData.vendor.consents').to.have.property(vendorId.toString());
+
+      });
+
+      done();
+
+    }, vendors);
 
   });
 
