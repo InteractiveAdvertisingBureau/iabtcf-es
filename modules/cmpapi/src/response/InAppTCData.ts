@@ -1,5 +1,5 @@
 import {IdBoolTuple, PurposeRestriction, PurposeRestrictionVector, RestrictionType, Vector} from '@iabtcf/core';
-import {Restrictions} from '../types';
+import {Restrictions} from './Restrictions';
 import {TCData} from './TCData';
 
 interface VendorIdRestrictionType {

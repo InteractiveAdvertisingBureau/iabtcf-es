@@ -1,4 +1,4 @@
-import {PingCallback} from '../types';
+import {PingCallback} from '../callback';
 import {Ping} from '../response';
 import {Command} from './Command';
 

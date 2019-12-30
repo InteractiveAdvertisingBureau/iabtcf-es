@@ -1,4 +1,4 @@
-import {Callback, FailCallback} from '../types';
+import {Callback, FailCallback} from '../callback';
 /**
  * Base command class holds basic command parameters and has functionality to
  * handle basic validation.

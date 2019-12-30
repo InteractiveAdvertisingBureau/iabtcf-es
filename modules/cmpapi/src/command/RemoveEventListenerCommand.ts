@@ -1,5 +1,5 @@
 import {Command} from './Command';
-import {RemoveListenerCallback} from '../types/RemoveListenerCallback';
+import {RemoveListenerCallback} from '../callback';
 import {EventListenerQueue} from '../EventListenerQueue';
 
 export class RemoveEventListenerCommand extends Command {

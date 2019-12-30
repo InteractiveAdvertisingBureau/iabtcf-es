@@ -1,5 +1,5 @@
 import {PingCommand} from '../../src/command/PingCommand';
-import {PingCallback} from '../../src/types/PingCallback';
+import {PingCallback} from '../../src/callback';
 import {Ping} from '../../src/response/Ping';
 import {expect} from 'chai';
 

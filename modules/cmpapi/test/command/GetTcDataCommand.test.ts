@@ -1,5 +1,5 @@
 import {GetTCDataCommand} from '../../src/command/GetTCDataCommand';
-import {TCDataCallback} from '../../src/types/TCDataCallback';
+import {TCDataCallback} from '../../src/callback';
 import {CmpApiModel} from '../../src/CmpApiModel';
 import {TCModelFactory} from '@iabtcf/testing';
 import {TCData} from '../../src/response/TCData';

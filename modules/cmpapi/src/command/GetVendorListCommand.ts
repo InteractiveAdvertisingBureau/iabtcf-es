@@ -1,6 +1,6 @@
 import {GVL, TCModel} from '@iabtcf/core';
 import {Command} from './Command';
-import {VendorListCallback} from '../types';
+import {VendorListCallback} from '../callback';
 import {CmpApiModel} from '../CmpApiModel';
 
 /**

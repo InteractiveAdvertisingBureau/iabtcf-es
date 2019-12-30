@@ -1,6 +1,6 @@
 import {AddEventListenerCommand} from '../../src/command/AddEventListenerCommand';
 import {EventListenerQueue} from '../../src/EventListenerQueue';
-import {TCDataCallback} from '../../src/types/TCDataCallback';
+import {TCDataCallback} from '../../src/callback';
 import {CmpApiModel} from '../../src/CmpApiModel';
 import {TCModelFactory} from '@iabtcf/testing';
 import {TCData} from '../../src/response/TCData';

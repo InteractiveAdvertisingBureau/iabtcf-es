@@ -1,7 +1,9 @@
 import {TCModel, TCString, PurposeRestriction, PurposeRestrictionVector, Vector, IdBoolTuple} from '@iabtcf/core';
 
 import {CmpApiModel} from '../CmpApiModel';
-import {BooleanVector, Restrictions, Booleany} from '../types';
+import {BooleanVector} from './BooleanVector';
+import {Restrictions} from './Restrictions';
+import {Booleany} from './Booleany';
 import {Response} from './Response';
 import {EventStatus, CmpStatus} from '../status';
 

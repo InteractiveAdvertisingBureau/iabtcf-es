@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {TCModel} from '@iabtcf/core';
 import {CmpApiModel} from './CmpApiModel';
-import {CustomCommands, Callback, ErrorCallback} from './types';
+import {CustomCommands} from './CustomCommands';
+import {Callback, ErrorCallback} from './callback';
 import {EventListenerQueue} from './EventListenerQueue';
 import {CommandMap} from './command/CommandMap';
 

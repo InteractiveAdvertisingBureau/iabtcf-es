@@ -1,6 +1,6 @@
 import {TCString, Vector, PurposeRestriction} from '@iabtcf/core';
 import {TCData} from '../src/response/TCData';
-import {BooleanVector} from '../src/types/BooleanVector';
+import {BooleanVector} from '../src/response/BooleanVector';
 import {CmpApiModel} from '../src/CmpApiModel';
 import {expect} from 'chai';
 

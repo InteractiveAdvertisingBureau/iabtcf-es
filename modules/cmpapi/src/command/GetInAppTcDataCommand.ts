@@ -1,5 +1,5 @@
 import {GetTCDataCommand} from './GetTCDataCommand';
-import {InAppTCDataCallback} from '../types';
+import {InAppTCDataCallback} from '../callback';
 import {InAppTCData} from '../response';
 
 export class GetInAppTCDataCommand extends GetTCDataCommand {

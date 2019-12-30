@@ -4,7 +4,7 @@ import {Ping} from '../src/response/Ping';
 import {TCData} from '../src/response/TCData';
 import {CmpStatus} from '../src/status/CmpStatus';
 import {DisplayStatus} from '../src/status/DisplayStatus';
-import {Commands} from '../src/types/Commands';
+import {TCFCommands} from '../src/command/TCFCommands';
 import {expect} from 'chai';
 import {makeRandomInt, TCModelFactory} from '@iabtcf/testing';
 import {TCDataToTCModel} from './TCDataToTCModel';
@@ -152,7 +152,7 @@ describe('CmpApi', (): void => {
 
     assertStub();
 
-    window[API_FUNCTION_NAME](Commands.GET_TC_DATA, API_VERSION, (tcData: TCData, success: boolean): void => {
+    window[API_FUNCTION_NAME](TCFCommands.GET_TC_DATA, API_VERSION, (tcData: TCData, success: boolean): void => {
 
       expect(success).to.be.true;
       TCDataToTCModel.equal();
@@ -249,13 +249,13 @@ describe('CmpApi', (): void => {
   runFailCommand(true, 2, 'command is a boolean');
   runFailCommand(false, 2, 'command is a boolean');
 
-  runFailCommand('getTCData', '2', 'version is a string');
-  runFailCommand('getTCData', 2.1, 'version is a floating point number');
-  runFailCommand('getTCData', 1, 'version is not supported');
-  runFailCommand('getTCData', null, 'version is null');
-  runFailCommand('getTCData', true, 'version is a boolean');
-  runFailCommand('getTCData', false, 'version is a boolean');
-  runFailCommand('getTCData', {}, 'version is an object');
+  runFailCommand(TCFCommands.GET_TC_DATA, '2', 'version is a string');
+  runFailCommand(TCFCommands.GET_TC_DATA, 2.1, 'version is a floating point number');
+  runFailCommand(TCFCommands.GET_TC_DATA, 1, 'version is not supported');
+  runFailCommand(TCFCommands.GET_TC_DATA, null, 'version is null');
+  runFailCommand(TCFCommands.GET_TC_DATA, true, 'version is a boolean');
+  runFailCommand(TCFCommands.GET_TC_DATA, false, 'version is a boolean');
+  runFailCommand(TCFCommands.GET_TC_DATA, {}, 'version is an object');
 
   const runFailCallback = (callback: any, because = ''): void => {
 
@@ -264,7 +264,7 @@ describe('CmpApi', (): void => {
       const cmpApi = getCmpApi();
       expect((): void => {
 
-        window[API_FUNCTION_NAME]('getTCData', 2, callback);
+        window[API_FUNCTION_NAME](TCFCommands.GET_TC_DATA, 2, callback);
 
       }).to.throw();
       done();

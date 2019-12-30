@@ -1,4 +1,4 @@
-import {TCDataCallback} from '../types';
+import {TCDataCallback} from '../callback';
 import {CmpApiModel} from '../CmpApiModel';
 import {TCData} from '../response';
 import {Command} from './Command';

@@ -1,4 +1,4 @@
-export class Commands {
+export class TCFCommands {
 
   public static readonly PING: 'ping' = 'ping';
   public static readonly GET_TC_DATA: 'getTCData' = 'getTCData';

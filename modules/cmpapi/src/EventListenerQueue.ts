@@ -1,4 +1,4 @@
-import {TCDataCallback} from './types';
+import {TCDataCallback} from './callback';
 import {GetTCDataCommand} from './command/GetTCDataCommand';
 
 export class EventListenerQueue {

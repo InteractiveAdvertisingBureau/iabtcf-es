@@ -1,5 +1,5 @@
 import {GetInAppTCDataCommand} from '../../src/command/GetInAppTCDataCommand';
-import {InAppTCDataCallback} from '../../src/types/InAppTCDataCallback';
+import {InAppTCDataCallback} from '../../src/callback';
 import {CmpApiModel} from '../../src/CmpApiModel';
 import {TCModelFactory} from '@iabtcf/testing';
 import {InAppTCData} from '../../src/response/InAppTCData';
