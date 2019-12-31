@@ -112,7 +112,6 @@ if (encoded) {
     print('useNonStandardStacks', tcModel.useNonStandardStacks);
     print('purposeOneTreatment', tcModel.purposeOneTreatment);
     print('publisherCountryCode', tcModel.publisherCountryCode);
-    print('supportOOB', tcModel.supportOOB);
     print('vendorListVersion', tcModel.vendorListVersion);
     print('purposeConsents', tcModel.purposeConsents);
     print('purposeLegitimateInterest', tcModel.purposeLegitimateInterest);
