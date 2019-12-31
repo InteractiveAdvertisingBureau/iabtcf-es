@@ -111,6 +111,8 @@ export class PurposeRestrictionVectorEncoder {
       for (let j = 0; j < numEntries; j++) {
 
         const isARange: boolean = BooleanEncoder.decode(encodedString.substr(index, BitLength.anyBoolean));
+        index += BitLength.anyBoolean;
+
         const startOrOnlyVendorId: number = IntEncoder.decode(encodedString.substr(index, BitLength.vendorId));
         index += BitLength.vendorId;
 

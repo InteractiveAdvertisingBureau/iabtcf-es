@@ -1,34 +1,17 @@
 import {expect} from 'chai';
+import {GVLFactory, TCModelFactory, sameDataDiffRef} from '@iabtcf/testing';
+import {SegmentEncoder} from '../../src/encoder';
+import {TCModel, GVL} from '../../src';
+import {Segments} from '../../src/model';
 
-import {
-  FieldSequence,
-  SegmentEncoder,
-} from '../../src/encoder';
+const gvl: GVL = GVLFactory.getLatest() as unknown as GVL;
 
-import {
-  TCModel,
-  GVL,
-  Vector,
-  Segments,
-  PurposeRestrictionVector,
-} from '../../src';
-
-export function run(): void {
-
-  // eslint-disable-next-line
-  const vendorlistJson = require('@iabtcf/testing/lib/vendorlist/vendor-list.json');
-  const gvl: GVL = new GVL(vendorlistJson);
+describe('encoder->SegmentEncoder', (): void => {
 
   it('should encode a core segment', (done: () => void): void => {
 
-    const tcModel: TCModel = new TCModel(gvl);
+    const tcModel: TCModel = TCModelFactory.withGVL() as unknown as TCModel;
     let encoded = '';
-
-    tcModel.cmpId = 23;
-    tcModel.cmpVersion = 1;
-
-    // full consent!
-    tcModel.setAll();
 
     const encodeIt = (): void => {
 
@@ -36,7 +19,6 @@ export function run(): void {
 
     };
 
-    expect(tcModel.gvl).to.equal(gvl);
     tcModel.gvl.readyPromise.then((): void => {
 
       expect(encodeIt, 'encode should not throw an error').not.to.throw();
@@ -50,93 +32,16 @@ export function run(): void {
 
   it('TCModel->Core TC String->TCModel and should be equal', (done: () => void): void => {
 
-    const tcModel: TCModel = new TCModel(gvl);
+    const tcModel: TCModel = TCModelFactory.withGVL() as unknown as TCModel;
     const decodedModel: TCModel = new TCModel();
     let encoded = '';
 
-    tcModel.cmpId = 23;
-    tcModel.cmpVersion = 1;
+    encoded = SegmentEncoder.encode(tcModel, Segments.core);
+    SegmentEncoder.decode(encoded, decodedModel, Segments.core);
 
-    // full consent!
-    tcModel.setAll();
+    sameDataDiffRef(tcModel, decodedModel, 'TCModel', ['bitLength']);
 
-    const encodeIt = (): void => {
-
-      encoded = SegmentEncoder.encode(tcModel, Segments.core);
-
-    };
-
-    const decodeIt = (): TCModel => {
-
-      return SegmentEncoder.decode(encoded, decodedModel, Segments.core);
-
-    };
-
-    expect(tcModel.gvl).to.equal(gvl);
-    tcModel.gvl.readyPromise.then((): void => {
-
-      const fieldSequence: FieldSequence = new FieldSequence();
-      const sequence = fieldSequence['2'][Segments.core];
-
-      expect(encodeIt).not.to.throw();
-      expect(decodeIt).not.to.throw();
-
-      encodeIt();
-
-      sequence.forEach((key: string): void => {
-
-        // the same in every way :-)
-        // except dates
-        switch (key) {
-
-          case 'lastUpdated':
-          case 'created':
-
-            // should round of the last two digits
-            expect(decodedModel[key].getTime(), `${key} should be equal`)
-              .to.equal(Math.round(tcModel[key].getTime()/100)*100);
-            break;
-
-          case 'specialFeatureOptIns':
-          case 'purposeConsents':
-          case 'publisherConsents':
-          case 'purposeLegitimateInterest':
-          case 'publisherLegitimateInterest':
-          case 'publisherCustomConsents':
-          case 'publisherCustomLegitimateInterest':
-          case 'vendorConsents':
-          case 'vendorLegitimateInterest':
-          case 'vendorsDisclosed':
-          case 'vendorsAllowed':
-
-            const oldVector: Vector = tcModel[key];
-            const newVector: Vector = decodedModel[key];
-
-            expect(newVector.maxId).to.equal(oldVector.maxId);
-            expect(newVector.size).to.equal(oldVector.size);
-            oldVector.forEach((value: boolean, id: number): void => {
-
-              expect(newVector.has(id)).to.equal(value);
-
-            });
-            break;
-          case 'publisherRestrictions':
-            const oldPRVector: PurposeRestrictionVector = tcModel[key];
-            const newPRVector: PurposeRestrictionVector = decodedModel[key];
-
-            expect(newPRVector.isEmpty()).to.equal(oldPRVector.isEmpty());
-            expect(newPRVector.numRestrictions).to.equal(oldPRVector.numRestrictions);
-            break;
-          default:
-            expect(decodedModel[key], `${key} should be equal`).to.equal(tcModel[key]);
-
-        }
-
-      });
-
-      done();
-
-    });
+    done();
 
   });
 
@@ -210,4 +115,4 @@ export function run(): void {
 
   });
 
-}
+});

@@ -1,18 +1,13 @@
 import {
   BitLength,
-  IntEncoder,
   SegmentEncoder,
   SegmentSequence,
   Base64Url,
 } from './encoder';
 
-import {
-  TCModel,
-} from './TCModel';
-
-import {
-  Segments,
-} from './model';
+import {IntEncoder} from './encoder/field/IntEncoder';
+import {TCModel} from './TCModel';
+import {Segments} from './model';
 
 /**
  * Main class for encoding and decoding a
@@ -33,7 +28,7 @@ export class TCString {
   public static encode(tcModel: TCModel, isForSaving?: boolean): string {
 
     let out = '';
-    const segSequence: SegmentSequence = new SegmentSequence(tcModel, isForSaving || false);
+    const segSequence: SegmentSequence = new SegmentSequence(tcModel, !!isForSaving);
     const sequence: string[] = segSequence[tcModel.version.toString()];
 
     const len: number = sequence.length;
@@ -59,19 +54,19 @@ export class TCString {
   /**
    * Decodes a string into a TCModel
    *
-   * @param {string} encodedString - base64url encoded Transparency and
+   * @param {string} encodedTCString - base64url encoded Transparency and
    * Consent String to decode
    * @return {TCModel} - Returns populated TCModel
    */
-  public static decode(encodedString: string): TCModel {
+  public static decode(encodedTCString: string): TCModel {
 
     const tcModel: TCModel = new TCModel();
-    const segments: string[] = encodedString.split('.');
+    const segments: string[] = encodedTCString.split('.');
     const len: number = segments.length;
 
     for (let i = 0; i < len; i ++) {
 
-      const encodedString: string = segments[i];
+      const segString: string = segments[i];
       let segment: string;
 
       // first is always core
@@ -82,14 +77,14 @@ export class TCString {
       } else {
 
         // first char will contain 6 bits, we only need the first 3
-        const firstChar: string = Base64Url.decode(encodedString.charAt(0));
+        const firstChar: string = Base64Url.decode(segString.charAt(0));
         const segTypeBits: string = firstChar.substr(0, BitLength.segmentType);
 
         segment = Segments.ID_TO_KEY[IntEncoder.decode(segTypeBits).toString()];
 
       }
 
-      SegmentEncoder.decode(encodedString, tcModel, segment);
+      SegmentEncoder.decode(segString, tcModel, segment);
 
     }
 

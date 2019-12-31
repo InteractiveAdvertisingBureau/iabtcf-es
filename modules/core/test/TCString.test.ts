@@ -1,93 +1,26 @@
-import {
-
-  expect,
-
-} from 'chai';
-
-import {
-
-  GVL,
-  Vector,
-  TCString,
-  TCModel,
-
-} from '../src';
-
-const getMinimalModel = (): TCModel => {
-
-  const vendorlistJson = require('@iabtcf/testing/lib/vendorlist/vendor-list.json'); // eslint-disable-line
-  const model = new TCModel(new GVL(vendorlistJson));
-
-  model.cmpId = 123;
-  model.cmpVersion = 1;
-  model.consentLanguage = 'en';
-  return model;
-
-};
-
-const doEncode = (): Promise<string> => {
-
-  const model = getMinimalModel();
-
-  return new Promise((resolve: (string) => void): void => {
-
-    model.gvl.readyPromise.then((): void => {
-
-      resolve(TCString.encode(model));
-
-    });
-
-  });
-
-};
-
-const truncDate = (date: Date): number => {
-
-  return Math.round(date.getTime() / 100) * 100;
-
-};
-
-const compareModels = (actual: TCModel, expected: TCModel): void => {
-
-  const compareProp = (propName: string, transform = (_): void => _): void => {
-
-    const actualValue = transform(actual[propName]);
-    const expectedValue = transform(expected[propName]);
-
-    expect(actualValue, `Error while comparing '${propName}'`).to.eq(expectedValue);
-
-  };
-
-  compareProp('cmpId');
-  compareProp('cmpVersion');
-  compareProp('consentLanguage');
-  compareProp('consentScreen');
-  compareProp('created', truncDate);
-  compareProp('lastUpdated', truncDate);
-  compareProp('policyVersion');
-  compareProp('useNonStandardStacks');
-  compareProp('version');
-
-};
+import {expect} from 'chai';
+import {Vector, TCString, TCModel} from '../src';
+import {TCModelFactory, sameDataDiffRef} from '@iabtcf/testing';
 
 describe('TCString', (): void => {
 
+  const getTCModel = (): TCModel => {
+
+    return TCModelFactory.withGVL() as unknown as TCModel;
+
+  };
+
   describe('.encode(tcModel)', (): void => {
-
-    it('does not throw if a valid TCModel is passed', (): void => {
-
-      expect(doEncode).not.to.throw();
-
-    });
 
     it('returns a string with 4 segments when TCModel version is 2', (done: () => void): void => {
 
-      doEncode().then((encodedString): void => {
+      const tcModel = getTCModel();
+      tcModel.isServiceSpecific = false;
 
-        expect(encodedString.split('.')).to.be.lengthOf(1);
-        done();
+      const encodedStr = TCString.encode(tcModel);
 
-      });
+      expect(encodedStr.split('.'), 'encodedStr.split(".")').to.be.lengthOf(4);
+      done();
 
     });
 
@@ -97,17 +30,12 @@ describe('TCString', (): void => {
 
     it('returns an equivalent model if encoded and decoded', (done: () => void): void => {
 
-      const model = getMinimalModel();
+      const tcModel = TCModelFactory.withGVL() as unknown as TCModel;
+      const encodedString = TCString.encode(tcModel);
+      const decodedModel = TCString.decode(encodedString);
 
-      model.gvl.readyPromise.then((): void => {
-
-        const encodedString = TCString.encode(model);
-        const decodedModel = TCString.decode(encodedString);
-
-        compareModels(decodedModel, model);
-        done();
-
-      });
+      sameDataDiffRef(decodedModel, tcModel, 'TCModel', ['bitLength']);
+      done();
 
     });
 
@@ -151,7 +79,6 @@ describe('TCString', (): void => {
       expect(tcModel.vendorListVersion).to.equal(7);
       expect(tcModel.consentLanguage).to.equal('EN');
       expect(tcModel.publisherCountryCode).to.equal('AQ');
-      expect(tcModel.supportOOB).to.be.true;
 
       expect(tcModel.created).to.be.a('Date');
       expect(tcModel.created.getFullYear(), 'Created Year').to.equal(2019);
@@ -170,7 +97,6 @@ describe('TCString', (): void => {
       expect(tcModel.specialFeatureOptIns.has(2), 'specialFeatureOptIn 2').to.be.false;
 
       testVectorRang(tcModel.purposeConsents, 3, 9, 'purposeConsents');
-      // testVectorRang(tcModel.purposeLegitimateInterest, 2, 7, 'purposeLegitimateInterest');
 
     });
 

@@ -1,15 +1,9 @@
+import {SegmentSequence} from '../../../src/encoder/sequence/SegmentSequence';
+import {TCModel} from '../../../src/TCModel';
+import {Segments} from '../../../src/model';
 import {expect} from 'chai';
-import {
-  TCModel,
-} from '../../src/TCModel';
-import {
-  SegmentSequence,
-} from '../../src/encoder';
-import {
-  Segments,
-} from '../../src/model';
 
-export function run(): void {
+describe('encoder/sequence->SegmentSequence', (): void => {
 
   const runPerm = (
     version: string,
@@ -161,4 +155,4 @@ export function run(): void {
 
   });
 
-}
+});

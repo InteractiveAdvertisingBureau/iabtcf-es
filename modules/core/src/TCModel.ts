@@ -2,12 +2,12 @@ import {Cloneable} from './Cloneable';
 import {TCModelError} from './errors';
 import {GVL} from './GVL';
 
-import {ConsentLanguages, Fields, IntMap, PurposeRestrictionVector, TCFields, Vector} from './model';
+import {ConsentLanguages, Fields, IntMap, PurposeRestrictionVector, Vector} from './model';
 import {GVLMapItem, Purpose, Vendor, Feature} from './model/gvl';
 
 export type TCModelPropType = number | Date | string | boolean | Vector | PurposeRestrictionVector;
 
-export class TCModel extends Cloneable<TCModel> implements TCFields {
+export class TCModel extends Cloneable<TCModel> {
 
   private static readonly MAX_ENCODING_VERSION: number = 2;
   /**
@@ -19,7 +19,6 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
   private useNonStandardStacks_ = false;
   private purposeOneTreatment_ = false;
   private publisherCountryCode_ = 'AA';
-  private supportOOB_ = false;
   private version_: number = TCModel.MAX_ENCODING_VERSION;
   private consentScreen_: number | string = 0;
   private policyVersion_: number | string = 2;
@@ -454,23 +453,6 @@ export class TCModel extends Cloneable<TCModel> implements TCFields {
   public get [Fields.useNonStandardStacks](): boolean {
 
     return this.useNonStandardStacks_;
-
-  };
-
-  /**
-   * Whether or not this publisher supports out-of-band legal basis default is
-   * `true`
-   *
-   * @param {boolean} bool - value to set
-   */
-  public set [Fields.supportOOB](bool: boolean) {
-
-    this.supportOOB_ = bool;
-
-  };
-  public get [Fields.supportOOB](): boolean {
-
-    return this.supportOOB_;
 
   };
 

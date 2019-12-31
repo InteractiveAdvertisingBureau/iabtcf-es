@@ -25,7 +25,6 @@ import {
 
 export class SegmentEncoder {
 
-  private static fieldEncoderMap: FieldEncoderMap = new FieldEncoderMap();
   private static fieldSequence: FieldSequence = new FieldSequence();
 
   public static encode(tcModel: TCModel, segment: string): string {
@@ -53,7 +52,7 @@ export class SegmentEncoder {
 
       const value: TCModelPropType = tcModel[key];
       const numBits: number = BitLength[key];
-      const encoder = this.fieldEncoderMap[key];
+      const encoder = FieldEncoderMap[key];
 
       try {
 
@@ -85,7 +84,7 @@ export class SegmentEncoder {
 
     sequence.forEach((key: string): void => {
 
-      const encoder = this.fieldEncoderMap[key];
+      const encoder = FieldEncoderMap[key];
       const bits = bitField.substr(bStringIdx, BitLength[key]);
 
       tcModel[key] = encoder.decode(bits);
@@ -105,16 +104,6 @@ export class SegmentEncoder {
       }
 
     });
-
-    /**
-     * if a vendors allowed segment exists, then support for OOB signaling is
-     * implied
-     */
-    if (segment === Segments.vendorsAllowed) {
-
-      tcModel.supportOOB = true;
-
-    }
 
     return tcModel;
 

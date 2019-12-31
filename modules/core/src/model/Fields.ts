@@ -19,7 +19,6 @@ export class Fields {
   public static readonly purposeLegitimateInterest: 'purposeLegitimateInterest' = 'purposeLegitimateInterest';
   public static readonly purposeOneTreatment: 'purposeOneTreatment' = 'purposeOneTreatment';
   public static readonly specialFeatureOptIns: 'specialFeatureOptIns' = 'specialFeatureOptIns';
-  public static readonly supportOOB: 'supportOOB' = 'supportOOB';
   public static readonly useNonStandardStacks: 'useNonStandardStacks' = 'useNonStandardStacks';
   public static readonly vendorConsents: 'vendorConsents' = 'vendorConsents';
   public static readonly vendorLegitimateInterest: 'vendorLegitimateInterest' = 'vendorLegitimateInterest';
