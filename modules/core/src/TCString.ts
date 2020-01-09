@@ -1,13 +1,14 @@
 import {
+  Base64Url,
   BitLength,
   SegmentEncoder,
   SegmentSequence,
-  Base64Url,
 } from './encoder';
 
+import {EncodingError} from './errors';
 import {IntEncoder} from './encoder/field/IntEncoder';
+import {Fields, Segments} from './model';
 import {TCModel} from './TCModel';
-import {Segments} from './model';
 
 /**
  * Main class for encoding and decoding a
@@ -15,8 +16,37 @@ import {Segments} from './model';
  */
 export class TCString {
 
+  private static preEncode(tcModel: TCModel): TCModel | never {
+
+    tcModel = tcModel.clone();
+
+    if (!tcModel.gvl) {
+
+      throw new EncodingError('Unable to encode TCModel without a GVL');
+
+    }
+
+    if (!tcModel.isServiceSpecific) {
+
+      /**
+       * Sets vendorsDisclosed
+       *
+       * If this is a globally-scoped string (not service-specific) then we
+       * will set the vendorsDisclosed segement with all the vendors that were
+       * disclosed to the user
+       */
+
+      const vIds: number[] = Object.keys(tcModel.gvl.vendors).map((vId: string): number => parseInt(vId, 10));
+      tcModel[Fields.vendorsDisclosed].set(vIds);
+
+    }
+
+    return tcModel;
+
+  }
+
   /**
-   *  encodes a model into a TCString
+   * encodes a model into a TCString
    *
    * @param {TCModel} tcModel - model to convert into encoded string
    * @param {boolean} isForSaving = false - Defaults to false.  Whether a TC
@@ -27,10 +57,11 @@ export class TCString {
    */
   public static encode(tcModel: TCModel, isForSaving?: boolean): string {
 
+    tcModel = this.preEncode(tcModel);
+
     let out = '';
     const segSequence: SegmentSequence = new SegmentSequence(tcModel, !!isForSaving);
     const sequence: string[] = segSequence[tcModel.version.toString()];
-
     const len: number = sequence.length;
 
     for (let i = 0; i < len; i ++) {

@@ -76,7 +76,7 @@ describe('EventListenerQueue', (): void => {
     expect(inc, 'inc after add').to.equal(0);
 
     // needs to have a model in order to generate the callback response
-    CmpApiModel.tcModel = TCModelFactory.noGVL();
+    CmpApiModel.tcModel = TCModelFactory.withGVL();
     EventListenerQueue.executeCommands();
 
     expect(EventListenerQueue.size, 'EventListenerQueue.size after remove').to.equal(loops);

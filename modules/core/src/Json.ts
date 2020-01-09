@@ -56,7 +56,6 @@ export class Json {
 
       };
 
-      req.responseType = 'json';
       req.withCredentials = sendCookies;
 
       req.addEventListener('load', onLoad);
@@ -64,6 +63,7 @@ export class Json {
       req.addEventListener('abort', onAbort);
 
       req.open('GET', jsonURL, true);
+      req.responseType = 'json';
 
       // IE has a problem if this is before the open
       req.timeout = timeout;

@@ -1,33 +1,47 @@
-export class ConsentLanguages extends Set {
+export class ConsentLanguages {
 
-  public constructor() {
+  private static readonly langSet: Set<string> = new Set([
+    'EN',
+    'BG',
+    'CS',
+    'DA',
+    'DE',
+    'EL',
+    'ES',
+    'ET',
+    'FI',
+    'FR',
+    'GA',
+    'HR',
+    'HU',
+    'IT',
+    'LT',
+    'LV',
+    'MT',
+    'NL',
+    'PL',
+    'PT',
+    'RO',
+    'SK',
+    'SL',
+    'SV',
+  ]);
 
-    super();
+  public has(key: string): boolean {
 
-    this.add('EN');
-    this.add('BG');
-    this.add('CS');
-    this.add('DA');
-    this.add('DE');
-    this.add('EL');
-    this.add('ES');
-    this.add('ET');
-    this.add('FI');
-    this.add('FR');
-    this.add('GA');
-    this.add('HR');
-    this.add('HU');
-    this.add('IT');
-    this.add('LT');
-    this.add('LV');
-    this.add('MT');
-    this.add('NL');
-    this.add('PL');
-    this.add('PT');
-    this.add('RO');
-    this.add('SK');
-    this.add('SL');
-    this.add('SV');
+    return ConsentLanguages.langSet.has(key);
+
+  }
+
+  public forEach(callback: (key: string) => void): void {
+
+    ConsentLanguages.langSet.forEach(callback);
+
+  }
+
+  public get size(): number {
+
+    return ConsentLanguages.langSet.size;
 
   }
 

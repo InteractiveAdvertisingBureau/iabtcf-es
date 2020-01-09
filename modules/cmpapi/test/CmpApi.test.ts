@@ -162,7 +162,7 @@ describe('CmpApi', (): void => {
 
     const cmpApi = getCmpApi();
 
-    cmpApi.tcModel = TCModelFactory.noGVL();
+    cmpApi.tcModel = TCModelFactory.withGVL();
 
   });
 
@@ -210,7 +210,7 @@ describe('CmpApi', (): void => {
 
     expect((): void => {
 
-      cmpApi.tcModel = TCModelFactory.noGVL();
+      cmpApi.tcModel = TCModelFactory.withGVL();
 
     }, 'cmpApi.tcModel after disabled').to.throw();
 

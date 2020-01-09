@@ -8,7 +8,7 @@ describe('response->InAppTCData', (): void => {
   it('should create a InAppTCData based on the TCModel with unrestricted vendors', (done: () => void): void => {
 
     CmpApiModel.reset();
-    CmpApiModel.tcModel = TCModelFactory.noGVL();
+    CmpApiModel.tcModel = TCModelFactory.withGVL();
     InAppTCDataToTCModel.equal();
 
     done();
@@ -18,7 +18,7 @@ describe('response->InAppTCData', (): void => {
   it('should create a InAppTCData based on the TCModel with vendors', (done: () => void): void => {
 
     CmpApiModel.reset();
-    CmpApiModel.tcModel = TCModelFactory.noGVL();
+    CmpApiModel.tcModel = TCModelFactory.withGVL();
 
     InAppTCDataToTCModel.equal(makeRandomIntArray(1, 25, 10));
 
@@ -28,7 +28,7 @@ describe('response->InAppTCData', (): void => {
 
   it('should encode purpose restrictions', (done: () => void): void => {
 
-    const tcModel = TCModelFactory.noGVL();
+    const tcModel = TCModelFactory.withGVL();
 
     for (let i =1; i <= 20; i++) {
 

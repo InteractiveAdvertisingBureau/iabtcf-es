@@ -10,7 +10,7 @@ describe('command->GetInAppTCDataCommand', (): void => {
   it('should return a InAppTCData object when called', (done: () => void): void => {
 
     CmpApiModel.reset();
-    CmpApiModel.tcModel = TCModelFactory.noGVL();
+    CmpApiModel.tcModel = TCModelFactory.withGVL();
 
     const tcDataCallback: InAppTCDataCallback = function(tcData: InAppTCData): void {
 

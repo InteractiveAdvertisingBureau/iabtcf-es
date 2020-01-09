@@ -9,7 +9,7 @@ describe('command->GetTCDataCommand', (): void => {
 
   it('should return a TCData object when called', (done: () => void): void => {
 
-    CmpApiModel.tcModel = TCModelFactory.noGVL();
+    CmpApiModel.tcModel = TCModelFactory.withGVL();
 
     const tcDataCallback: TCDataCallback = (tcData: TCData, success: boolean): void => {
 
@@ -27,7 +27,7 @@ describe('command->GetTCDataCommand', (): void => {
   it('should return a TCData object with a subset of vendors if a list of ids are passed', (done: () => void): void => {
 
     const vendors = [16, 18];
-    CmpApiModel.tcModel = TCModelFactory.noGVL();
+    CmpApiModel.tcModel = TCModelFactory.withGVL();
 
     new GetTCDataCommand((tcData: TCData, success: boolean): void => {
 
