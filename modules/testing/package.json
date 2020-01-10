@@ -29,7 +29,7 @@
     "sinon-chai": "^3.3.0"
   },
   "devDependencies": {
-    "eslint": "^4.0.0",
+    "eslint": "6.8.0",
     "mocha": "^6.2.2",
     "source-map-support": "^0.5.12",
     "ts-node": "^8.3.0",

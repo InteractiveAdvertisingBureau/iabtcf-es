@@ -33,7 +33,7 @@
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^2.10.0",
     "coveralls": "^3.0.4",
-    "eslint": "^5.0.0",
+    "eslint": "6.8.0",
     "jscover": "^1.0.0",
     "jsdom": "15.1.1",
     "jsdom-global": "3.0.2",

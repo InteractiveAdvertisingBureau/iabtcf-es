@@ -577,7 +577,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
     purposeOrFeature: PurposeOrFeature,
     id: number,
     subType?: PurposeSubType,
-    special?: boolean
+    special?: boolean,
   ): IntMap<Vendor> {
 
     const properPurposeOrFeature: string = purposeOrFeature.charAt(0).toUpperCase() + purposeOrFeature.slice(1);
