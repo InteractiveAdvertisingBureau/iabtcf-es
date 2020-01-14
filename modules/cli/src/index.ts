@@ -62,7 +62,7 @@ const print = (key: string | number, value: string | number | boolean | object |
 
       } else if (value === null) {
 
-        console.log(`${indentString}${key}: '\x1b[1m' + value\x1b[0m`);
+        console.log(`${indentString}${key}: \x1b[1m${value}\x1b[0m`);
 
       } else if (value instanceof Vector) {
 
