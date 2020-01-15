@@ -1,0 +1,284 @@
+{
+  "gvlSpecificationVersion": 2,
+  "vendorListVersion": 1,
+  "tcfPolicyVersion": 2,
+  "lastUpdated": "2018-05-28T00:00:00Z",
+  "purposes": {
+    "1": {
+      "id": 1,
+      "name": "Really Important Legal Purpose 1",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla volutpat lacinia sapien sed auctor. Donec lacus leo, tincidunt a efficitur vitae, auctor in leo. Duis non cursus purus. Fusce aliquam lorem id tristique feugiat. Cras sollicitudin orci vel tristique efficitur. Quisque porta sem at sapien rutrum, porta cursus purus tincidunt. Nunc ac ligula ex. Proin accumsan lectus vel metus dapibus fringilla. Pellentesque libero massa, ornare quis sodales sit amet, consequat et metus. Donec sed lacus gravida, hendrerit eros vitae, gravida libero. Nam tempor vestibulum elit ac varius. Morbi id volutpat dui, at malesuada augue. Donec suscipit eget ipsum sed feugiat. Fusce ultricies, dolor eget venenatis fringilla, nisl elit fringilla diam, id eleifend tellus erat ut orci. Sed et blandit nibh.",
+      "descriptionLegal": "Sed ultricies, lacus et sagittis pharetra, nisl nisi cursus erat, sed iaculis sem lectus sit amet magna. Proin fringilla hendrerit fermentum. Sed viverra tristique felis, in pellentesque leo luctus at. Nam orci nunc, efficitur tincidunt purus et, vestibulum scelerisque augue. Proin lectus arcu, pellentesque sit amet diam nec, elementum blandit sem. Vivamus et massa enim. Suspendisse quis augue leo. Ut pharetra feugiat turpis sit amet varius. Curabitur feugiat elit vel imperdiet rutrum. Suspendisse ac dolor vel ex fringilla tempus a nec lacus. Cras luctus a tortor eu dictum. Maecenas eu lacus ac arcu ultrices bibendum. Nullam neque magna, lobortis vel nibh eget, rhoncus mattis arcu. Aliquam erat volutpat. Duis rhoncus, nisl et euismod posuere, lacus turpis dictum arcu, ut semper nulla est at metus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
+    },
+    "2": {
+      "id": 2,
+      "name": "Really Important Legal Purpose 2",
+      "description": "Phasellus efficitur sem ac efficitur faucibus. Fusce lacinia tellus quis dignissim tincidunt. Ut ut maximus justo, id porttitor sem. Nulla non nisl magna. Ut fringilla a dui eget ornare. Morbi pharetra semper tellus sit amet tincidunt. Ut nibh lacus, fermentum lacinia rhoncus non, dictum in turpis. Mauris gravida nibh est, sed suscipit mi venenatis congue. Donec tincidunt, purus at pulvinar hendrerit, lectus lectus dictum metus, at pulvinar neque tellus sit amet arcu. Phasellus id semper quam. In cursus volutpat ipsum pretium commodo. Sed neque lorem, fringilla et egestas et, tristique a augue.",
+      "descriptionLegal": "Curabitur tristique metus sapien, ut sollicitudin purus fringilla at. Aliquam tincidunt risus nec orci imperdiet, sit amet dictum diam pretium. Suspendisse viverra lacinia massa non ultricies. Duis tellus massa, viverra id maximus eu, malesuada nec arcu. Integer suscipit, metus id porta auctor, lacus sapien imperdiet tortor, accumsan dapibus neque elit vitae lectus. Aenean sollicitudin sit amet massa at vulputate. Sed id pretium augue."
+    },
+    "3": {
+      "id": 3,
+      "name": "Really Important Legal Purpose 3",
+      "description": "Suspendisse sodales vel erat sed congue. Phasellus et nisl lacinia enim euismod rutrum. Phasellus eget lobortis lectus. Aenean eleifend urna at finibus convallis. Vestibulum eget nunc quis eros facilisis fermentum dictum sit amet lorem. Fusce sem libero, cursus vitae felis eu, laoreet luctus ligula. Proin ultrices dignissim sem, eget eleifend felis dictum ac. Proin tempus neque sed arcu vestibulum, eget pretium lacus rhoncus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin malesuada elit eget arcu semper, in tristique nisl pretiumjkjkj",
+      "descriptionLegal": "Fusce commodo, quam a venenatis ornare, tellus nibh molestie nunc, vel vestibulum nunc est sit amet tellus. Aliquam lobortis, dui mattis pulvinar dapibus, dolor erat accumsan ligula, ac elementum nunc dolor sed leo. Ut pharetra pulvinar orci eget blandit. Aliquam porta ullamcorper metus dignissim congue. "
+    },
+    "4": {
+      "id": 4,
+      "name": "Really Important Legal Purpose 4",
+      "description": "Maecenas id eros ut tellus tincidunt iaculis. Aenean erat odio, sollicitudin id tincidunt vitae, bibendum at eros. Cras iaculis metus et nibh laoreet efficitur et et nisi. Praesent quis interdum elit. Aenean rhoncus condimentum volutpat. Nunc eget justo faucibus, scelerisque magna id, tempor tortor. Quisque rhoncus fermentum nisl, nec porttitor magna convallis in. Morbi ac erat ultrices, lobortis augue vitae, volutpat quam. Ut eros sapien, ultrices non lacinia id, semper et augue.",
+      "descriptionLegal": "Curabitur tristique metus sapien, ut sollicitudin purus fringilla at. Aliquam tincidunt risus nec orci imperdiet, sit amet dictum diam pretium. Suspendisse viverra lacinia massa non ultricies. Duis tellus massa, viverra id maximus eu, malesuada nec arcu. Integer suscipit, metus id porta auctor, lacus sapien imperdiet tortor, accumsan dapibus neque elit vitae lectus. Aenean sollicitudin sit amet massa at vulputate. Sed id pretium augue."
+    },
+    "5": {
+      "id": 5,
+      "name": "Really Important Legal Purpose 5",
+      "description": "Sed rutrum tempor varius. Morbi facilisis dignissim massa vel tincidunt. Etiam condimentum tortor eu est luctus luctus. Integer et velit euismod est laoreet sodales.",
+      "descriptionLegal": "Cras finibus tellus faucibus orci laoreet, ut congue erat vehicula. Integer euismod lobortis tellus, vel varius ante cursus eget. Aliquam eget libero porta dolor iaculis pretium. Sed rutrum tempor varius. Morbi facilisis dignissim massa vel tincidunt. Etiam condimentum tortor eu est luctus luctus. Integer et velit euismod est laoreet sodales. Ut consequat finibus nibh vel rhoncus. Pellentesque a laoreet lacus, quis ullamcorper leo. Mauris vulputate magna nec odio viverra, sit amet rutrum mauris aliquam."
+    },
+    "6": {
+      "id": 6,
+      "name": "Really Important Legal Purpose 6",
+      "description": "Nunc purus purus, congue a pulvinar at, iaculis sit amet tellus.",
+      "descriptionLegal": "Maecenas venenatis ullamcorper nisi vel scelerisque. Proin pharetra consequat mauris blandit pellentesque. Mauris tristique justo iaculis libero ultricies, non auctor ante tincidunt. Aliquam dictum, massa nec placerat pharetra, metus urna pellentesque lacus, eu semper odio odio vitae est. Mauris auctor et libero et accumsan. Nunc purus purus, congue a pulvinar at, iaculis sit amet tellus. Pellentesque lacinia in sem id lobortis. Duis sem tortor, efficitur id tincidunt sit amet, auctor quis turpis. In accumsan, tortor a congue accumsan, odio eros vestibulum purus, ut dictum ante enim eget magna. Nullam cursus accumsan vulputate. Nunc sit amet ipsum sed purus interdum pretium ac sed neque. Sed eleifend ipsum sit amet viverra blandit. Donec sed lacus mollis, laoreet magna sed, viverra mauris. Aliquam non mi sed lacus sollicitudin auctor. Nulla metus tellus, eleifend non ornare a, dapibus a lectus. Maecenas quis ligula lorem."
+    },
+    "7": {
+      "id": 7,
+      "name": "Really Important Legal Purpose 7",
+      "description": "Fusce tempus ex id dui hendrerit consequat. Sed fringilla libero eu lacus ullamcorper, nec vestibulum sem sodales. Suspendisse eu facilisis dolor.",
+      "descriptionLegal": "Nunc faucibus vestibulum sodales. Fusce eget massa luctus, fringilla tellus eget, dictum nisi. In rutrum sed sapien id vehicula. Integer maximus sapien purus, eu placerat nisi dignissim et. Integer accumsan velit orci, aliquet accumsan mi placerat id. Nullam eleifend libero id metus convallis tristique. Fusce tempus ex id dui hendrerit consequat. Sed fringilla libero eu lacus ullamcorper, nec vestibulum sem sodales. Suspendisse eu facilisis dolor. Maecenas imperdiet consequat purus at venenatis. Suspendisse mi ex, finibus id dictum et, pretium et justo. Pellentesque sit amet eros diam. Quisque eget euismod urna. Donec consequat libero sed egestas consectetur. Nunc non enim posuere, cursus nisi in, vestibulum libero."
+    },
+    "8": {
+      "id": 8,
+      "name": "Really Important Legal Purpose 8",
+      "description": "Integer turpis metus, laoreet a rutrum in, pharetra sit amet ipsum. Duis eleifend augue ut eros pulvinar, a vehicula massa interdum. Aenean cursus lorem id augue volutpat venenatis. Aenean auctor et odio a placerat. Praesent suscipit ullamcorper nunc, sit amet molestie nulla mattis nec. Praesent eget orci venenatis, iaculis sem quis, consectetur enim.",
+      "descriptionLegal": "Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque vehicula pharetra tortor at tincidunt. Donec facilisis, nisl eget gravida suscipit, sem neque aliquet nisi, ac ornare libero nisl quis lacus. Quisque ultricies ornare malesuada. In ut leo sagittis, varius nisl sed, ultrices orci. Phasellus eget maximus risus. Integer turpis metus, laoreet a rutrum in, pharetra sit amet ipsum. Duis eleifend augue ut eros pulvinar, a vehicula massa interdum. Aenean cursus lorem id augue volutpat venenatis. Aenean auctor et odio a placerat. Praesent suscipit ullamcorper nunc, sit amet molestie nulla mattis nec. Praesent eget orci venenatis, iaculis sem quis, consectetur enim. Praesent efficitur accumsan rutrum. Mauris vestibulum vehicula massa pretium iaculis."
+    },
+    "9": {
+      "id": 9,
+      "name": "Really Important Legal Purpose 9",
+      "description": "Sed viverra ligula nisl, sit amet accumsan quam tempus at.",
+      "descriptionLegal": "In hac habitasse platea dictumst. Vestibulum ornare sapien vitae nibh congue, eget pellentesque lorem accumsan. Donec at diam sit amet diam tincidunt facilisis. Suspendisse pharetra a justo eget gravida. Vestibulum vitae ligula vitae turpis faucibus pellentesque. Phasellus turpis velit, vestibulum et imperdiet vel, semper sed sem. Morbi at lobortis metus, dignissim facilisis mauris. Proin volutpat fringilla urna aliquam ullamcorper. Nulla ac ante pellentesque, ornare felis eget, mollis velit. Sed viverra ligula nisl, sit amet accumsan quam tempus at. Sed id dignissim nisi, a mollis nibh. Proin eleifend augue tortor, non dapibus lectus dignissim quis. In faucibus lectus vel diam ornare pharetra. Fusce luctus nisi gravida porta sodales."
+    },
+    "10": {
+      "id": 10,
+      "name": "Really Important Legal Purpose 10",
+      "description": "Nulla in blandit mauris. Donec rutrum tristique maximus. Aenean sit amet risus nec arcu maximus vulputate ut id turpis.",
+      "descriptionLegal": "In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin eu elit vel neque sollicitudin rhoncus sit amet et turpis. Etiam id faucibus ante, at tincidunt urna. Curabitur nisi enim, efficitur et volutpat in, eleifend vitae augue. Nam egestas condimentum urna, eu imperdiet tellus rutrum nec. Nulla in blandit mauris. Donec rutrum tristique maximus. Aenean sit amet risus nec arcu maximus vulputate ut id turpis. Aenean condimentum non justo ac congue. Proin eu augue quis nibh luctus maximus quis eget est. Maecenas in dapibus urna, sit amet vehicula mauris. Curabitur diam arcu, ultricies sed scelerisque vel, efficitur at diam. Vestibulum est augue, vulputate at tempus nec, lacinia et augue."
+    },
+    "11": {
+      "id": 11,
+      "name": "Really Important Legal Purpose 11",
+      "description": "Praesent a tellus non tellus porttitor tempus. Suspendisse volutpat justo elit, id rhoncus leo hendrerit id.",
+      "descriptionLegal": "Nulla vestibulum imperdiet erat at ultricies. Vivamus nec placerat nibh. Quisque ac pharetra lectus. Cras fermentum, erat id cursus sagittis, erat est fermentum lorem, sed laoreet ante magna eget nunc. Sed felis purus, volutpat et consectetur quis, mattis nec nisl. Aliquam non rhoncus justo, a placerat tortor. Praesent a tellus non tellus porttitor tempus. Suspendisse volutpat justo elit, id rhoncus leo hendrerit id. Cras aliquet sagittis est sed convallis."
+    },
+    "12": {
+      "id": 12,
+      "name": "Really Important Legal Purpose 12",
+      "description": "Cras suscipit lorem dictum tellus luctus fermentum. Maecenas pellentesque vulputate dui vel consequat.",
+      "descriptionLegal": "Nulla ac felis auctor, sagittis lectus eu, mollis elit. Cras suscipit lorem dictum tellus luctus fermentum. Maecenas pellentesque vulputate dui vel consequat. Fusce eget risus non est pellentesque tempus. Ut eget sagittis velit, et sollicitudin nisl. Nam erat quam, fringilla vitae faucibus a, mattis vitae tellus. Praesent quam diam, pellentesque quis nunc hendrerit, vestibulum efficitur augue. Aliquam tincidunt nisi eu nulla tincidunt, in scelerisque arcu accumsan. Integer non velit scelerisque, venenatis nulla a, condimentum diam."
+    }
+  },
+  "specialPurposes" : {
+	"1": {
+      "id": 1,
+      "name": "Really Super Duper Important Special Purpose 1",
+      "description": "Ut sodales eget magna vel bibendum. Cras non erat vel mauris ultrices tempus. Integer in est sed purus posuere scelerisque in id lacus. Curabitur imperdiet ut sapien ut efficitur.",
+      "descriptionLegal": "Aliquam eu elementum eros. Aliquam egestas velit vel rhoncus accumsan. Curabitur cursus pharetra nisi, eget mattis urna accumsan volutpat. Etiam hendrerit nibh vitae orci efficitur consequat. Praesent venenatis elementum tristique. Suspendisse vulputate porttitor massa eget ultricies. Ut sodales eget magna vel bibendum. Cras non erat vel mauris ultrices tempus. Integer in est sed purus posuere scelerisque in id lacus. Curabitur imperdiet ut sapien ut efficitur. Vivamus eu maximus dolor, finibus aliquet nulla. Vestibulum sed tortor dui. Morbi luctus est id auctor accumsan. Nullam maximus augue metus, nec porta velit facilisis at.",
+      "consentable": false,
+      "rightToObject": false
+	},
+	"2": {
+      "id": 2,
+      "name": "Really Super Duper Important Special Purpose 2",
+      "description": "Nulla laoreet justo erat, sit amet lacinia erat euismod a. Duis a nulla augue.",
+      "descriptionLegal": "Proin facilisis neque at nibh porttitor, eu suscipit erat gravida. Aenean porta scelerisque enim vel bibendum. Duis ante dolor, malesuada quis accumsan sit amet, tempus eget massa. Suspendisse tempus tortor quis mi venenatis, ut euismod mauris elementum. Vivamus vestibulum sem eu placerat euismod. Nulla laoreet justo erat, sit amet lacinia erat euismod a. Duis a nulla augue. Ut porta nulla elementum nunc volutpat imperdiet. In hac habitasse platea dictumst. Integer ut tempor mi. Aenean condimentum ut urna sed gravida.",
+      "consentable": false,
+      "rightToObject": false
+	}
+  },
+  "features": {
+    "1":{
+      "id": 1,
+      "name": "Matching Data to Offline Sources",
+      "description": "Combining data from offline sources that were initially collected in other contexts.",
+      "descriptionLegal": "A deeper more legal way of explaining Feature 1"
+    },
+    "2":{
+      "id": 2,
+      "name": "Linking Devices",
+      "description": "Allow processing of a user's data to connect such user across multiple devices.",
+      "descriptionLegal": "A deeper more legal way of explaining Feature 2"
+    },
+    "3":{
+      "id": 3,
+      "name": "Precise Geographic Location Data",
+      "description": "Allow processing of a user's precise geographic location data in support of a purpose for which that certain third party has consent.",
+      "descriptionLegal": "A deeper more legal way of explaining Feature 3"
+    }
+  },
+  "specialFeatures" : {
+    "1":{
+      "id": 1,
+      "name": "Matching Data to Offline Sources -- sepcial",
+      "description": "Combining data from offline sources that were initially collected in other contexts.",
+      "descriptionLegal": "A deeper more legal way of explaining Special Feature 1"
+    },
+    "2":{
+      "id": 2,
+      "name": "Linking Devices -- special",
+      "description": "Allow processing of a user's data to connect such user across multiple devices.",
+      "descriptionLegal": "A deeper more legal way of explaining Special Feature 2"
+    },
+    "3":{
+      "id": 3,
+      "name": "Precise Geographic Location Data -- special",
+      "description": "Allow processing of a user's precise geographic location data in support of a purpose for which that certain third party has consent.",
+      "descriptionLegal": "A deeper more legal way of explaining Special Feature 3"
+    }
+  },
+  "vendors": {
+    "2": {
+      "id": 2,
+      "name": "Super (R)ad Tech Company",
+      "purposes": [1],
+      "specialPurposes": [1],
+      "legIntPurposes": [2, 3],
+      "flexiblePurposes": [1, 2],
+      "features": [1, 2],
+      "specialFeatures": [1, 2],
+      "policyUrl": "https://superradtechcorp.com/gdpr.html",
+      "overflow": {
+        "httpGetLimit": 32
+      }
+    },
+    "8": {
+      "id": 8,
+      "name": "Emerse Sverige AB",
+      "policyUrl": "https://www.emerse.com/privacy-policy/",
+      "purposes": [1, 2, 4],
+      "specialPurposes": [1],
+      "flexiblePurposes": [1, 4],
+      "specialFeatures": [1, 2],
+      "legIntPurposes": [3, 5],
+      "features": [1, 2]
+    },
+    "12": {
+      "id": 12,
+      "name": "BeeswaxIO Corporation",
+      "policyUrl": "https://www.beeswax.com/privacy.html",
+      "purposes": [1, 3, 5],
+      "specialPurposes": [1],
+      "flexiblePurposes": [1, 3],
+      "specialFeatures": [1, 2],
+      "legIntPurposes": [],
+      "features": [3]
+    },
+    "28": {
+      "id": 28,
+      "name": "TripleLift, Inc.",
+      "policyUrl": "https://triplelift.com/privacy/",
+      "purposes": [1, 3],
+      "specialPurposes": [1],
+      "flexiblePurposes": [1],
+      "specialFeatures": [1, 2],
+      "legIntPurposes": [],
+      "features": [3]
+    },
+    "27": {
+      "id": 27,
+      "name": "ADventori SAS",
+      "policyUrl": "https://www.adventori.com/with-us/legal-notice/",
+      "purposes": [1, 3],
+      "specialPurposes": [1],
+      "flexiblePurposes": [1],
+      "specialFeatures": [1, 2],
+      "legIntPurposes": [],
+      "features": []
+    },
+    "25": {
+      "id": 25,
+      "name": "Oath (EMEA) Limited",
+      "policyUrl": "https://policies.oath.com/ie/en/oath/privacy/index.html",
+      "purposes": [1, 2],
+      "specialPurposes": [1],
+      "flexiblePurposes": [1],
+      "specialFeatures": [1, 2],
+      "legIntPurposes": [3, 5],
+      "features": [1, 2, 3]
+    },
+    "26": {
+      "id": 26,
+      "name": "Venatus Media Limited",
+      "policyUrl": "https://www.venatusmedia.com/privacy/",
+      "purposes": [1, 2, 3, 4, 5],
+      "specialPurposes": [1],
+      "flexiblePurposes": [1, 4],
+      "specialFeatures": [1, 2],
+      "legIntPurposes": [],
+      "features": []
+    },
+    "1": {
+      "id": 1,
+      "name": "Exponential Interactive, Inc",
+      "policyUrl": "http://exponential.com/privacy",
+      "specialPurposes": [1],
+      "specialFeatures": [1, 2],
+      "flexiblePurposes": [3, 4],
+      "purposes": [1, 2, 3, 4, 5],
+      "legIntPurposes": [],
+      "features": []
+    },
+    "6": {
+      "id": 6,
+      "name": "AdSpirit GmbH",
+      "policyUrl": "http://www.adspirit.de/privacy",
+      "purposes": [1, 2, 3, 4, 5],
+      "specialPurposes": [1],
+      "flexiblePurposes": [5],
+      "specialFeatures": [1, 2],
+      "legIntPurposes": [],
+      "features": []
+    },
+    "30": {
+      "id": 30,
+      "name": "BidTheatre AB",
+      "policyUrl": "https://www.bidtheatre.com/privacy-policy",
+      "specialFeatures": [1, 2],
+      "specialPurposes": [1],
+      "flexiblePurposes": [2],
+      "purposes": [2],
+      "legIntPurposes": [1, 3],
+      "features": [2, 3]
+    },
+    "24": {
+      "id": 24,
+      "name": "Conversant Europe Ltd.",
+      "policyUrl": "https://www.conversantmedia.eu/legal/privacy-policy",
+      "purposes": [1],
+      "specialPurposes": [1],
+      "flexiblePurposes": [],
+      "specialFeatures": [1, 2],
+      "legIntPurposes": [2, 3, 4, 5],
+      "features": [1, 2, 3]
+    },
+    "29": {
+      "id": 29,
+      "name": "Etarget SE",
+      "policyUrl": "https://www.etarget.sk/privacy.php",
+      "purposes": [1, 2, 3, 4, 5],
+      "specialPurposes": [1],
+      "flexiblePurposes": [3],
+      "specialFeatures": [1, 2],
+      "legIntPurposes": [],
+      "features": [1]
+    }
+  },
+ "stacks": {
+    "1": {
+      "id": 1,
+      "purposes" : [1,2,3],
+      "specialPurposes" : [1,2,3],
+      "name" : "...",
+      "description" : "..."
+    }
+ }
+}
