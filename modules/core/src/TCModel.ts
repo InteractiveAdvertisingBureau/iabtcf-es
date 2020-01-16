@@ -49,6 +49,13 @@ export class TCModel extends Cloneable<TCModel> {
   public readonly [Fields.purposeConsents]: Vector = new Vector();
 
   /**
+   * The user’s permission for each Purpose established on the legal basis of
+   * legitimate interest. If the user has exercised right-to-object for a
+   * purpose.
+   */
+  public readonly [Fields.purposeLegitimateInterest]: Vector = new Vector();
+
+  /**
    * The user’s consent value for each Purpose established on the legal basis
    * of consent, for the publisher.  Purposes are published in the Global
    * Vendor List.
@@ -57,23 +64,10 @@ export class TCModel extends Cloneable<TCModel> {
 
   /**
    * The user’s permission for each Purpose established on the legal basis of
-   * legitimate interest. If the user has exercised right-to-object for a
-   * purpose.
-   */
-  public readonly [Fields.purposeLegitimateInterest]: Vector = new Vector();
-
-  /**
-   * The user’s permission for each Purpose established on the legal basis of
    * legitimate interest.  If the user has exercised right-to-object for a
    * purpose.
    */
   public readonly [Fields.publisherLegitimateInterest]: Vector = new Vector();
-
-  /**
-   * set by a publisher if they wish to collect consent and LI Transparency for
-   * purposes outside of the TCF
-   */
-  public customPurposes: IntMap<Purpose>;
 
   /**
    * The user’s consent value for each Purpose established on the legal basis
@@ -88,6 +82,12 @@ export class TCModel extends Cloneable<TCModel> {
    * purpose that is established in the publisher's custom purposes.
    */
   public readonly [Fields.publisherCustomLegitimateInterest]: Vector = new Vector();
+
+  /**
+   * set by a publisher if they wish to collect consent and LI Transparency for
+   * purposes outside of the TCF
+   */
+  public customPurposes: IntMap<Purpose>;
 
   /**
    * Each [[Vendor]] is keyed by id. Their consent value is true if it is in

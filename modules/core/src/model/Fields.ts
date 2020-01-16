@@ -9,11 +9,11 @@ export class Fields {
   public static readonly lastUpdated: 'lastUpdated' = 'lastUpdated';
   public static readonly numCustomPurposes: 'numCustomPurposes' = 'numCustomPurposes';
   public static readonly policyVersion: 'policyVersion' = 'policyVersion';
-  public static readonly publisherConsents: 'publisherConsents' = 'publisherConsents';
   public static readonly publisherCountryCode: 'publisherCountryCode' = 'publisherCountryCode';
   public static readonly publisherCustomConsents: 'publisherCustomConsents' = 'publisherCustomConsents';
   public static readonly publisherCustomLegitimateInterest: 'publisherCustomLegitimateInterest' = 'publisherCustomLegitimateInterest';
   public static readonly publisherLegitimateInterest: 'publisherLegitimateInterest' = 'publisherLegitimateInterest';
+  public static readonly publisherConsents: 'publisherConsents' = 'publisherConsents';
   public static readonly publisherRestrictions: 'publisherRestrictions' = 'publisherRestrictions';
   public static readonly purposeConsents: 'purposeConsents' = 'purposeConsents';
   public static readonly purposeLegitimateInterest: 'purposeLegitimateInterest' = 'purposeLegitimateInterest';
