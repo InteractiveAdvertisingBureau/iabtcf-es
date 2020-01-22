@@ -124,44 +124,39 @@ cmpApi.disable();
 
 
 ## Custom Commands
-The [Constructor]([TCModel](https://www.iabtcf.com/api/core/classes/tcmodel.html)) for CmpApi has an optional parameter to pass in your array of custom commands.
+The [Constructor]([TCModel](https://www.iabtcf.com/api/core/classes/tcmodel.html)) for CmpApi has an optional parameter to pass in your map of custom commands.
 CmpApi will not perform any validation custom commands. The CMP is responsible for handling validations and errors. Custom function signatures
-must have parameters (version, callback, param). What the CMP does with the parameters passed to it is for the CMP to decide.
-
-##### Custom Command Array Definition
-````javascript
-{command: string, customFunction: (version, callback, param) => void}[]
-````
+must have parameters at least a callback and any additonal params will be passed to the custom command.
 
 ### Example
 ##### - CMP SIDE
 ````javascript
-//File: MyCustomCommands.ts
 
-  export const MyCustomCommands = [
-    {command: 'bingo', customFunction: (version, callback, param) => {
-      // should validate param is a string
-      callback(`There was a farmer who had a dog, and ${param} was his name-o`, true);
-    }},
-    {command: 'wheelsOnTheBus', customFunction: (version, callback, param) => {
-      // should validate param is an object {thing: string, sound: string}
-      callback(`The ${param.thing} on the bus goes ${param.sound} ${param.sound} ${param.sound}!`, true);
-    }},
-  ];
-````
-````javascript
 // MyCmp.ts
 import {CmpApi} from '@iabtcf/cmpapi';
-import {TCModel} from '@iabtcf/core';
-import {MyCustomCommands} from './MyCustomCommands';
 
-const cmpApi = new CmpApi(1, 3, MyCustomCommands);
+const cmpApi = new CmpApi(1, 3, {
+
+  'bingo': (callback, dogName) => {
+
+    callback(`There was a farmer who had a dog, and ${dogName} was his name-o`);
+
+  },
+
+  'connectBones': (callback, startBone, endBone) => {
+
+    callback(`The ${startBone} bone is connected to the ${endBone} bone.`);
+
+  },
+
+});
+
 ...
 ````
 ##### - PAGE SCRIPT SIDE
 ````javascript
 // AdScript.ts
-const songLyricCallback = (lyrics, success) => {
+const songLyricCallback = (lyrics) => {
 
   if(success) {
 
@@ -175,9 +170,10 @@ const songLyricCallback = (lyrics, success) => {
 
 }
 __tcfapi('bingo', 2, songLyricCallback, 'Bingo');
-// Console Output: There was a farmer who had a dog, and Bingo was his name-o
-__tcfapi('wheelsOnTheBus', 2, songLyricCallback, {thing: 'Doggy', sound: 'bark'});
-// Console Output: The Doggy on the bus goes bark bark bark!
+// There was a farmer who had a dog, and Bingo was his name-o
+
+__tcfapi('connectBones', 2, songLyricCallback, 'knee', 'thigh');
+// The knee bone is connected to the thigh bone
 ...
 ````
 
