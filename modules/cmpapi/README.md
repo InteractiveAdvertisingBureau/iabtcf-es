@@ -129,10 +129,7 @@ CmpApi will not perform any validation custom commands. The CMP is responsible f
 must have parameters at least a callback and any additonal params will be passed to the custom command.
 
 ### Example
-##### - CMP SIDE
 ````javascript
-
-// MyCmp.ts
 import {CmpApi} from '@iabtcf/cmpapi';
 
 const cmpApi = new CmpApi(1, 3, {
@@ -151,11 +148,6 @@ const cmpApi = new CmpApi(1, 3, {
 
 });
 
-...
-````
-##### - PAGE SCRIPT SIDE
-````javascript
-// AdScript.ts
 const songLyricCallback = (lyrics) => {
 
   if(success) {
@@ -169,12 +161,12 @@ const songLyricCallback = (lyrics) => {
   }
 
 }
+
 __tcfapi('bingo', 2, songLyricCallback, 'Bingo');
-// There was a farmer who had a dog, and Bingo was his name-o
+// ouput: There was a farmer who had a dog, and Bingo was his name-o
 
 __tcfapi('connectBones', 2, songLyricCallback, 'knee', 'thigh');
-// The knee bone is connected to the thigh bone
-...
+// ouput: The knee bone is connected to the thigh bone
 ````
 
 ## CmpApi Examples
