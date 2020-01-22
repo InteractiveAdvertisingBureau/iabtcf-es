@@ -10,7 +10,6 @@ describe('response->Ping', (): void => {
 
   it('populates a response with CmpApiModel values', (done: () => void): void => {
 
-    CmpApiModel.reset();
     CmpApiModel.cmpId = makeRandomInt(2, 500);
     CmpApiModel.cmpStatus = CmpStatus.LOADED;
     CmpApiModel.displayStatus = DisplayStatus.VISIBLE;
@@ -31,7 +30,6 @@ describe('response->Ping', (): void => {
     const tcModel = new TCModel();
     tcModel.vendorListVersion = makeRandomInt(1, 100);
 
-    CmpApiModel.reset();
     CmpApiModel.cmpId = makeRandomInt(2, 500);
     CmpApiModel.cmpStatus = CmpStatus.LOADED;
     CmpApiModel.displayStatus = DisplayStatus.VISIBLE;

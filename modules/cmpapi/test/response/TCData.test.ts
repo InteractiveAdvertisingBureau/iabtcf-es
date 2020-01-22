@@ -7,7 +7,6 @@ describe('response->TCData', (): void => {
 
   it('should create a TCData based on the TCModel with unrestricted vendors', (done: () => void): void => {
 
-    CmpApiModel.reset();
     CmpApiModel.tcModel = TCModelFactory.withGVL();
     TCDataToTCModel.equal();
 
@@ -17,7 +16,6 @@ describe('response->TCData', (): void => {
 
   it('should create a TCData based on the TCModel with vendors', (done: () => void): void => {
 
-    CmpApiModel.reset();
     CmpApiModel.tcModel = TCModelFactory.withGVL();
 
     TCDataToTCModel.equal(makeRandomIntArray(1, 25, 10));
@@ -37,7 +35,6 @@ describe('response->TCData', (): void => {
 
     }
 
-    CmpApiModel.reset();
     CmpApiModel.tcModel = tcModel;
 
     TCDataToTCModel.equal();

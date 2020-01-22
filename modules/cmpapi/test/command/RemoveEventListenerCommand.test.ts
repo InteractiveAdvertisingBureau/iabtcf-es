@@ -1,6 +1,5 @@
 import {AddEventListenerCommand} from '../../src/command/AddEventListenerCommand';
 import {RemoveEventListenerCommand} from '../../src/command/RemoveEventListenerCommand';
-import {EventListenerQueue} from '../../src/EventListenerQueue';
 import {TCDataCallback} from '../../src/callback';
 import {CmpApiModel} from '../../src/CmpApiModel';
 import {TCModelFactory} from '@iabtcf/testing';
@@ -10,8 +9,6 @@ describe('command->RemoveEventListenerCommand', (): void => {
 
   it('should remove a queued TCDataCallback', (done: () => void): void => {
 
-    EventListenerQueue.clear();
-    CmpApiModel.reset();
     CmpApiModel.tcModel = TCModelFactory.noGVL();
 
     const tcDataCallback: TCDataCallback = function(): void {
@@ -25,13 +22,13 @@ describe('command->RemoveEventListenerCommand', (): void => {
     new AddEventListenerCommand(tcDataCallback);
 
     // is queued
-    expect(EventListenerQueue.size, 'EventListenerQueue.size after AddEventListenerCommand').to.equal(1);
+    expect(CmpApiModel.eventQueue.size, 'CmpApiModel.eventQueue.size after AddEventListenerCommand').to.equal(1);
 
     new RemoveEventListenerCommand((success: boolean): void => {
 
       expect(success, 'success').to.be.true;
       // is dequeued
-      expect(EventListenerQueue.size, 'EventListenerQueue.size after RemoveEventListenerCommand').to.equal(0);
+      expect(CmpApiModel.eventQueue.size, 'CmpApiModel.eventQueue.size after RemoveEventListenerCommand').to.equal(0);
 
     }, tcDataCallback);
 
@@ -44,8 +41,6 @@ describe('command->RemoveEventListenerCommand', (): void => {
 
     it(`should return result=null and success=false for param=${badParam}`, (done: () => void): void => {
 
-      EventListenerQueue.clear();
-      CmpApiModel.reset();
       CmpApiModel.tcModel = TCModelFactory.noGVL();
 
       const tcDataCallback: TCDataCallback = function(): void {
@@ -59,11 +54,10 @@ describe('command->RemoveEventListenerCommand', (): void => {
       new AddEventListenerCommand(tcDataCallback);
 
       // is queued
-      expect(EventListenerQueue.size, 'EventListenerQueue.size after AddEventListenerCommand').to.equal(1);
+      expect(CmpApiModel.eventQueue.size, 'CmpApiModel.eventQueue.size after AddEventListenerCommand').to.equal(1);
       new RemoveEventListenerCommand((success: boolean): void => {
 
         expect(success).to.be.false;
-        EventListenerQueue.clear();
         done();
 
       }, badParam);

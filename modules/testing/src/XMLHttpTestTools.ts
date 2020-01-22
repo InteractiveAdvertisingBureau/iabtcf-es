@@ -8,19 +8,14 @@ export class XMLHttpTestTools {
 
   public static beforeEach(): void {
 
-    XMLHttpTestTools.xhr = sinon.useFakeXMLHttpRequest();
-    XMLHttpTestTools.requests = [];
+    this.xhr = sinon.useFakeXMLHttpRequest();
+    this.requests = [];
 
-    XMLHttpTestTools.xhr.onCreate = (xhr: sinon.SinonFakeXMLHttpRequest): void => {
+    this.xhr.onCreate = (xhr: sinon.SinonFakeXMLHttpRequest): void => {
 
-      XMLHttpTestTools.requests.push(xhr);
+      this.requests.push(xhr);
 
     };
-
-  }
-  public static afterEach(): void {
-
-    XMLHttpTestTools.xhr.restore();
 
   }
 

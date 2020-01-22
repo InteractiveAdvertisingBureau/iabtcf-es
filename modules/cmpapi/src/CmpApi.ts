@@ -3,8 +3,10 @@ import {TCModel} from '@iabtcf/core';
 import {CmpApiModel} from './CmpApiModel';
 import {CustomCommands} from './CustomCommands';
 import {Callback, ErrorCallback} from './callback';
-import {EventListenerQueue} from './EventListenerQueue';
+
 import {CommandMap} from './command/CommandMap';
+import {GetTCDataCommand} from './command/GetTCDataCommand';
+import {TCDataCallback} from './callback/TCDataCallback';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type PageCallHandler = (
@@ -48,7 +50,7 @@ export class CmpApi {
 
     }
 
-    CmpApiModel.changeEventCallback = EventListenerQueue.executeCommands;
+    CmpApiModel.changeEventCallback = this.executeEvents;
 
     /**
      * Attempt to grab the queue – we could call ping and see if it is the stub,
@@ -150,6 +152,16 @@ export class CmpApi {
   public disable(): void {
 
     CmpApiModel.disabled = true;
+
+  }
+
+  private executeEvents(): void {
+
+    CmpApiModel.eventQueue.forEach((callback: TCDataCallback): void => {
+
+      new GetTCDataCommand(callback);
+
+    });
 
   }
 

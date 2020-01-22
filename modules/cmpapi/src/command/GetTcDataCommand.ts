@@ -1,7 +1,8 @@
-import {TCDataCallback} from '../callback';
 import {CmpApiModel} from '../CmpApiModel';
-import {TCData} from '../response';
 import {Command} from './Command';
+import {GVL, TCModel} from '@iabtcf/core';
+import {TCDataCallback} from '../callback';
+import {TCData} from '../response';
 
 export class GetTCDataCommand extends Command {
 
@@ -9,7 +10,20 @@ export class GetTCDataCommand extends Command {
 
     const callback = this.callback as TCDataCallback;
 
-    callback(new TCData(this.param), true);
+    const tcModel = CmpApiModel.tcModel as TCModel;
+
+    if (!tcModel.gvl) {
+
+      tcModel.gvl = new GVL(tcModel.vendorListVersion);
+
+    }
+
+    tcModel.gvl.readyPromise
+      .then(
+        (): void => callback(new TCData(this.param), true),
+        this.fail,
+      )
+      .catch(this.fail);
 
   }
 

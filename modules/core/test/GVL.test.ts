@@ -53,10 +53,8 @@ describe('GVL', (): void => {
   beforeEach((): void => {
 
     GVL.baseUrl = '';
-    XMLHttpTestTools.beforeEach();
 
   });
-  afterEach(XMLHttpTestTools.afterEach);
 
   it('should fail to build without setting baseUrl', (): void => {
 

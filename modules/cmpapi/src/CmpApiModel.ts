@@ -1,4 +1,5 @@
 import {TCModel} from '@iabtcf/core';
+import {TCDataCallback} from './callback';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
 
 /**
@@ -17,6 +18,7 @@ export class CmpApiModel {
   public static cmpVersion: number;
   public static gdprApplies: boolean;
   public static eventStatus: EventStatus;
+  public static eventQueue: Set<TCDataCallback> = new Set<TCDataCallback>();
 
   public static changeEventCallback: () => void;
 
@@ -145,6 +147,7 @@ export class CmpApiModel {
     this.disabled_ = false;
     this.cmpStatus = CmpStatus.LOADING;
     this.displayStatus = DisplayStatus.HIDDEN;
+    this.eventQueue.clear();
 
   }
 

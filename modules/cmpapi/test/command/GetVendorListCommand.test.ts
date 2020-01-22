@@ -1,20 +1,11 @@
-import {VendorList, GVL} from '@iabtcf/core';
 import * as sinon from 'sinon';
-import {GetVendorListCommand} from '../../src/command/GetVendorListCommand';
 import {CmpApiModel} from '../../src/CmpApiModel';
+import {GetVendorListCommand} from '../../src/command/GetVendorListCommand';
 import {TCModelFactory, XMLHttpTestTools, GVLFactory, makeRandomInt} from '@iabtcf/testing';
+import {VendorList} from '@iabtcf/core';
 import {expect} from 'chai';
 
 describe('command->GetVendorListCommand', (): void => {
-
-  GVL.baseUrl = 'http://sweetcmp.mgr.consensu.org';
-  beforeEach((): void => {
-
-    CmpApiModel.reset();
-    XMLHttpTestTools.beforeEach();
-
-  });
-  afterEach(XMLHttpTestTools.afterEach);
 
   it('should return version of TCModel.vendorListVersion if TCModel has a gvl and no parameter is passed', (done: () => void): void => {
 

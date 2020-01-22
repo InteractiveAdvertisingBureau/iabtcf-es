@@ -60,7 +60,7 @@ describe('TCString', (): void => {
 
     };
 
-    it('succesfully decodes a valid encoded TC string', (): void => {
+    it('succesfully decodes a validly encoded TC string', (): void => {
 
       let tcModel;
 

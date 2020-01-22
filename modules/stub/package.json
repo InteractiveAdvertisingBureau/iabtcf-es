@@ -1,6 +1,6 @@
 {
   "name": "@iabtcf/stub",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0-beta.5",
   "description": "CMP API Stub code",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://github.com/chrispaterson/iabtcf/tree/master/modules/cli/",
@@ -13,13 +13,13 @@
     "lib/stub.js"
   ],
   "scripts": {
-    "build": "rm -rf lib && mkdir lib ; babel src/stub.js | terser -m --source-map -o lib/stub.js",
+    "build": "rm -rf lib && mkdir lib ; babel src/stub.js | terser -m -c --source-map url='stub.js.map' -o lib/stub.js",
     "build:dev": "rm -rf lib && ln -s src lib",
-    "prepare": "yarn run build",
+    "prepack": "yarn run build",
     "lint": "exit 0"
   },
   "dependencies": {
-    "@iabtcf/core": "^1.0.0-beta.4"
+    "@iabtcf/core": "^1.0.0-beta.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",

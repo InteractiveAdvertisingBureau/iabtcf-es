@@ -1,5 +1,4 @@
-import {TCModelFactory, makeRandomInt, makeRandomIntArray} from '@iabtcf/testing';
-import {PurposeRestriction} from '@iabtcf/core';
+import {TCModelFactory, makeRandomIntArray} from '@iabtcf/testing';
 import {CmpApiModel} from '../../src/CmpApiModel';
 import {InAppTCDataToTCModel} from '../InAppTCDataToTCModel';
 
@@ -7,7 +6,6 @@ describe('response->InAppTCData', (): void => {
 
   it('should create a InAppTCData based on the TCModel with unrestricted vendors', (done: () => void): void => {
 
-    CmpApiModel.reset();
     CmpApiModel.tcModel = TCModelFactory.withGVL();
     InAppTCDataToTCModel.equal();
 
@@ -17,7 +15,6 @@ describe('response->InAppTCData', (): void => {
 
   it('should create a InAppTCData based on the TCModel with vendors', (done: () => void): void => {
 
-    CmpApiModel.reset();
     CmpApiModel.tcModel = TCModelFactory.withGVL();
 
     InAppTCDataToTCModel.equal(makeRandomIntArray(1, 25, 10));
@@ -30,14 +27,7 @@ describe('response->InAppTCData', (): void => {
 
     const tcModel = TCModelFactory.withGVL();
 
-    for (let i =1; i <= 20; i++) {
-
-      tcModel.publisherRestrictions.add(i, new PurposeRestriction(makeRandomInt(1, 3), makeRandomInt(0, 2)));
-
-    }
-
-    CmpApiModel.reset();
-    CmpApiModel.tcModel = tcModel;
+    CmpApiModel.tcModel = TCModelFactory.addPublisherRestrictions(tcModel);
 
     InAppTCDataToTCModel.equal();
 

@@ -1,6 +1,6 @@
 import {Command} from './Command';
 import {RemoveListenerCallback} from '../callback';
-import {EventListenerQueue} from '../EventListenerQueue';
+import {CmpApiModel} from '../CmpApiModel';
 
 export class RemoveEventListenerCommand extends Command {
 
@@ -22,7 +22,7 @@ export class RemoveEventListenerCommand extends Command {
 
   protected isValid(): boolean {
 
-    return (typeof this.param === 'function' && EventListenerQueue.remove(this.param));
+    return (typeof this.param === 'function' && CmpApiModel.eventQueue.delete(this.param));
 
   }
 

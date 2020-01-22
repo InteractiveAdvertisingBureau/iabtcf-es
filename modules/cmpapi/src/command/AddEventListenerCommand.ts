@@ -1,12 +1,18 @@
 import {GetTCDataCommand} from './GetTCDataCommand';
 import {TCDataCallback} from '../callback';
-import {EventListenerQueue} from '../EventListenerQueue';
+import {CmpApiModel} from '../CmpApiModel';
 
 export class AddEventListenerCommand extends GetTCDataCommand {
 
   protected success(): void {
 
-    EventListenerQueue.add(this.callback as TCDataCallback);
+    CmpApiModel.eventQueue.add(this.callback as TCDataCallback);
+
+    if (CmpApiModel.tcModel) {
+
+      new GetTCDataCommand(this.callback);
+
+    }
 
   }
 

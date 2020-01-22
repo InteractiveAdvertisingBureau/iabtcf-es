@@ -9,9 +9,6 @@ describe('Json->fetch', (): void => {
     foo: 'bar',
   };
 
-  beforeEach(XMLHttpTestTools.beforeEach);
-  afterEach(XMLHttpTestTools.afterEach);
-
   it('should fetch and parse a json with only a url', (done: () => void): void => {
 
     Json.fetch('blah')
