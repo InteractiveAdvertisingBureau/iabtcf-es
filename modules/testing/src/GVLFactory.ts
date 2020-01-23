@@ -1,5 +1,4 @@
 import {GVL} from '@iabtcf/core';
-import {VendorList} from '@iabtcf/core';
 
 export class GVLFactory {
 
