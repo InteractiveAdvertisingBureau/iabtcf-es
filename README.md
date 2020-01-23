@@ -4,11 +4,11 @@ Official JavaScript / TypeScript compliant tool suite for implementing the iab. 
 
 This is a mono repo containing 5 modules:
 
-[Core](./modules/core/) – For encoding/decoding TC strings and tools for handling the Global Vendor List (GVL).
+[Core](./modules/core#iabtcfcore) - For encoding/decoding TC strings and tools for handling the Global Vendor List (GVL).
 
-[CmpApi](./modules/cmpapi/) - CMP in-page API (`__tcfapi()`) tool that works with the core library.
+[CmpApi](./modules/cmpapi#iabtcfcmpapi) - CMP in-page API (`__tcfapi()`) tool that works with the core library.
 
-[cli](./modules/cli/) - Tool to decode a TC string on the command line interface (cli).
+[cli](./modules/cli#iabtcfcli) - Tool to decode a TC string on the command line interface (cli).
 
 [Testing](./modules/testing/) - Tools for testing the core library including random TCModel and GVL generators.
 
