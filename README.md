@@ -1,12 +1,15 @@
-[![Build](https://travis-ci.org/chrispaterson/iabtcf.svg?branch=master)](https://travis-ci.org/chrispaterson/iabtcf)
-[![Coverage Status](https://coveralls.io/repos/github/chrispaterson/iabtcf/badge.svg?branch=master)](https://coveralls.io/github/chrispaterson/iabtcf?branch=master)
-
 # @iabtcf
 
 Official JavaScript / TypeScript compliant tool suite for implementing the iab. Transparency and Consent Framework (TCF).  The essential toolkit for CMPs.
 
-## Modules
+This is a mono repo containing 5 modules:
 
-[Core](./modules/core/)
+[Core](./modules/core/) – For encoding/decoding TC strings and tools for handling the Global Vendor List (GVL).
 
-[CmpApi](./modules/cmpapi/)
+[CmpApi](./modules/cmpapi/) - CMP in-page API (`__tcfapi()`) tool that works with the core library.
+
+[cli](./modules/cli/) - Tool to decode a TC string on the command line interface (cli).
+
+[Testing](./modules/testing/) - Tools for testing the core library including random TCModel and GVL generators.
+
+[Stub](./modules/stub/) - Code for the on-page `__tcfapi()` CMP stub.
