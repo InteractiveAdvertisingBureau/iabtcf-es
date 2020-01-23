@@ -13,3 +13,16 @@ yarn
 ```
 yarn add -g @iabtcf/stub
 ```
+
+to drop on a page
+```
+git clone https://github.com/InteractiveAdvertisingBureau/iabtcf-es.git
+
+cd iabtcf-es/modules/stub/
+
+yarn // or npm install
+
+yarn build // or npm run build
+```
+
+Built stub will be output to ./lib

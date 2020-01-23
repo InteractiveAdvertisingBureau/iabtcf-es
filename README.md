@@ -12,4 +12,4 @@ This is a mono repo containing 5 modules:
 
 [Testing](./modules/testing/) - Tools for testing the core library including random TCModel and GVL generators.
 
-[Stub](./modules/stub/) - Code for the on-page `__tcfapi()` CMP stub.
+[Stub](./modules/stub#iabtcfstub) - Code for the on-page `__tcfapi()` CMP stub.
