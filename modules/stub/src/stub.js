@@ -153,7 +153,7 @@
             event.source.postMessage(returnMsg, '*');
 
           },
-          payload.parameter
+          payload.parameter,
         );
 
       }
@@ -202,7 +202,7 @@
 
   };
 
-  if (module && module.exports) {
+  if (typeof module !== 'undefined') {
 
     module.exports = makeStub;
 
