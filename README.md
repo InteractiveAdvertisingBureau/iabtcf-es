@@ -10,6 +10,6 @@ This is a mono repo containing 5 modules:
 
 [cli](./modules/cli#iabtcfcli) - Tool to decode a TC string on the command line interface (cli).
 
-[Testing](./modules/testing/) - Tools for testing the core library including random TCModel and GVL generators.
+[Testing](./modules/testing#iabtcftesting) - Tools for testing the core library including random TCModel and GVL generators.
 
 [Stub](./modules/stub#iabtcfstub) - Code for the on-page `__tcfapi()` CMP stub.
