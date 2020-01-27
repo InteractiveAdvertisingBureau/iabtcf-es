@@ -4,6 +4,7 @@
   "description": "Official compliant tool suite for implementing the iab. Transparency and Consent Framework (TCF).",
   "private": true,
   "workspaces": [
+    "modules/util",
     "modules/core",
     "modules/testing",
     "modules/cmpapi",

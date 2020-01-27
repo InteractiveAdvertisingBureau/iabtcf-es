@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {TCModel} from '@iabtcf/core';
-import {CmpApiModel} from './CmpApiModel';
-import {CustomCommands} from './CustomCommands';
 import {Callback, ErrorCallback} from './callback';
-
+import {CmpApiModel} from './CmpApiModel';
 import {CommandMap} from './command/CommandMap';
+import {CustomCommands} from './CustomCommands';
 import {GetTCDataCommand} from './command/GetTCDataCommand';
+import {PolyFill} from '@iabtcf/util';
 import {TCDataCallback} from './callback/TCDataCallback';
+import {TCModel} from '@iabtcf/core';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type PageCallHandler = (
@@ -37,6 +37,8 @@ export class CmpApi {
    * @param {CustomCommands} customCommands
    */
   public constructor(cmpId: number, cmpVersion: number, customCommands?: CustomCommands) {
+
+    new PolyFill();
 
     this.throwIfInvalidInt(cmpId, 'cmpId', 2);
     this.throwIfInvalidInt(cmpVersion, 'cmpVersion', 0);

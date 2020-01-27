@@ -1,10 +1,20 @@
 import {CmpApiModel} from '../CmpApiModel';
 import {Command} from './Command';
 import {GVL, TCModel} from '@iabtcf/core';
-import {TCDataCallback} from '../callback';
+import {PolyFill} from '@iabtcf/util';
+import {TCDataCallback, Callback} from '../callback';
 import {TCData} from '../response';
 
 export class GetTCDataCommand extends Command {
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public constructor(callback: Callback, param?: any) {
+
+    super(callback, param);
+
+    new PolyFill();
+
+  }
 
   protected success(): void {
 

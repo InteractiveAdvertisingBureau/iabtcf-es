@@ -1,7 +1,7 @@
 {
-  "name": "@iabtcf/core",
+  "name": "@iabtcf/util",
   "version": "1.0.0-beta.5",
-  "description": "Ensures consistent encoding and decoding of TC Signals for the iab. Transparency and Consent Framework (TCF).",
+  "description": "Shared Utilties for the iabtcf",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://github.com/chrispaterson/iabtcf/tree/master/modules/core/",
   "license": {
@@ -14,7 +14,6 @@
     "lib/**/*"
   ],
   "scripts": {
-    "docs": "typedoc --ignoreCompilerErrors --tsconfig ./tsconfig.json  src",
     "prepack": "yarn run build",
     "build": "../build",
     "lint": "eslint `find test src -name '*.ts'`",
@@ -25,11 +24,7 @@
     "test:cov": "rm -rf coverage; nyc --reporter=html mocha `find test -name '*.test.ts'`",
     "test:lcov": "nyc --reporter=lcov mocha `find test -name '*.test.ts'`"
   },
-  "dependencies": {
-    "@iabtcf/util": "^1.0.0-beta.5"
-  },
   "devDependencies": {
-    "@iabtcf/testing": "^1.0.0-beta.5",
     "@istanbuljs/nyc-config-typescript": "^0.1.3",
     "@types/sinon": "^7.0.13",
     "@types/sinon-chai": "3.2.2",
@@ -49,7 +44,6 @@
     "source-map-support": "^0.5.12",
     "terser": "^4.6.3",
     "ts-node": "^8.3.0",
-    "typedoc": "^0.15.0",
     "typescript": "^3.7.0"
   },
   "eslintIgnore": [

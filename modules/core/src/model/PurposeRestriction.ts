@@ -1,6 +1,7 @@
 import {Cloneable} from '../Cloneable';
 import {TCModelError} from '../errors';
 import {RestrictionType} from './RestrictionType';
+import {PolyFill} from '@iabtcf/util';
 
 export class PurposeRestriction extends Cloneable<PurposeRestriction> {
 
@@ -21,6 +22,7 @@ export class PurposeRestriction extends Cloneable<PurposeRestriction> {
   public constructor(purposeId?: number, restrictionType?: RestrictionType) {
 
     super();
+    new PolyFill();
 
     if (purposeId !== undefined) {
 

@@ -26,7 +26,8 @@
     "test:lcov": "nyc --reporter=lcov mocha `find test -name '*.test.ts'`"
   },
   "dependencies": {
-    "@iabtcf/core": "^1.0.0-beta.5"
+    "@iabtcf/core": "^1.0.0-beta.5",
+    "@iabtcf/util": "^1.0.0-beta.5"
   },
   "devDependencies": {
     "@iabtcf/stub": "^1.0.0-beta.5",
