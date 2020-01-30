@@ -1,6 +1,6 @@
 # @iabtcf
 
-Official JavaScript / TypeScript compliant tool suite for implementing the iab. Transparency and Consent Framework (TCF).  The essential toolkit for CMPs.
+Official JavaScript / TypeScript compliant tool suite for implementing the Transparency and Consent Framework (TCF) v2.0.  The essential toolkit for CMPs.
 
 This is a mono repo containing 5 modules:
 
