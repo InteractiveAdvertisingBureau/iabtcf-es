@@ -26,7 +26,7 @@ export class SegmentSequence implements SequenceVersionMap {
 
       if (isForSaving) {
 
-        this.addPublisherTCMaybe(tcModel, '2');
+        this['2'].push(Segments.publisherTC);
 
       }
 
@@ -35,8 +35,8 @@ export class SegmentSequence implements SequenceVersionMap {
       /**
        * this is a globally scoped string.
        *
-       * If the publisher supports OOB, then the disclosed vendors vector will
-       * be added to both the transmission string and the storage string
+       * The disclosed vendors vector will be added to both the transmission
+       * string and the storage string
        */
 
       if (tcModel[Fields.vendorsDisclosed].size > 0) {
@@ -54,32 +54,16 @@ export class SegmentSequence implements SequenceVersionMap {
 
       if (!isForSaving) {
 
+        // if there is a vendorsAllowed then we should add it
         if (tcModel[Fields.vendorsAllowed].size > 0) {
 
           this['2'].push(Segments.vendorsAllowed);
 
         }
 
-        this.addPublisherTCMaybe(tcModel, '2');
+        this['2'].push(Segments.publisherTC);
 
       }
-
-    }
-
-  }
-
-  private addPublisherTCMaybe(tcModel: TCModel, version: string): void {
-
-    // is there any reason to add this?
-    if (
-      tcModel[Fields.publisherConsents].size > 0 ||
-      tcModel[Fields.publisherLegitimateInterest].size > 0 ||
-      tcModel[Fields.numCustomPurposes] > 0 ||
-      tcModel[Fields.publisherCustomConsents].size > 0 ||
-      tcModel[Fields.publisherCustomLegitimateInterest].size > 0
-    ) {
-
-      this[version].push(Segments.publisherTC);
 
     }
 
