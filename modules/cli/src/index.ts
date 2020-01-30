@@ -116,9 +116,9 @@ if (encoded) {
     print('purposeConsents', tcModel.purposeConsents);
     print('purposeLegitimateInterest', tcModel.purposeLegitimateInterest);
     print('specialFeatureOptIns', tcModel.specialFeatureOptIns);
-    print('publisherCustomConsents', tcModel.publisherCustomConsents);
     print('publisherLegitimateInterest', tcModel.publisherLegitimateInterest);
     print('publisherCustomConsents', tcModel.publisherCustomConsents);
+    print('publisherConsents', tcModel.publisherConsents);
     print('publisherCustomLegitimateInterest', tcModel.publisherCustomLegitimateInterest);
     print('vendorConsents', tcModel.vendorConsents);
     print('vendorLegitimateInterest', tcModel.vendorLegitimateInterest);
