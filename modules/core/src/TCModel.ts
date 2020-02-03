@@ -158,13 +158,23 @@ export class TCModel extends Cloneable<TCModel> {
     this.gvl_ = gvl;
     this.publisherRestrictions.gvl = gvl;
 
-    gvl.readyPromise.then((): void => {
+    if (gvl.readyPromise) {
+
+      gvl.readyPromise.then((): void => {
+
+        this.vendorListVersion_ = gvl.vendorListVersion;
+        this.policyVersion_ = gvl.tcfPolicyVersion;
+        this.consentLanguage_ = gvl.language;
+
+      });
+
+    } else {
 
       this.vendorListVersion_ = gvl.vendorListVersion;
       this.policyVersion_ = gvl.tcfPolicyVersion;
       this.consentLanguage_ = gvl.language;
 
-    });
+    }
 
   }
 
