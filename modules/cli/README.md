@@ -17,7 +17,7 @@ yarn add -g @iabtcf/cli
 #### Using
 
 ```
-! tcsting COrVd1pOrVd1pACABCENAHCAAAAAAAAAAAiQAAAAAAAA
+! tcstring COrVd1pOrVd1pACABCENAHCAAAAAAAAAAAiQAAAAAAAA
 encoded: "COrVd1pOrVd1pACABCENAHCAAAAAAAAAAAiQAAAAAAAA"
 version: 2
 cmpId: 2
