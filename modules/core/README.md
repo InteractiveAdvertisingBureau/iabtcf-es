@@ -47,13 +47,13 @@ import {TCModel, TCString, GVL} from '@iabtcf/core';
  *  the IAB requires CMPs to host their own vendor-list.json files.  This must
  *  be set before creating any instance of the GVL class.
  */
-GVL.baseURL = "http://mydomain.com/cmp/vendorlist";
+GVL.baseUrl = "http://mydomain.com/cmp/vendorlist";
 
 // create a new TC string
 const tcModel = new TCModel(new GVL());
 
 // Some fields will not be populated until a GVL is loaded
-tcModel.gvl.readPromise.then(() => {
+tcModel.gvl.readyPromise.then(() => {
 
   // Set values on tcModel...
 
@@ -213,7 +213,7 @@ GVL.baseUrl = 'http://cmp.mysupercoolcmp.com/cmp/';
 // loads 'http://cmp.mysupercoolcmp.com/cmp/vendor-list.json'
 const gvl = new GVL();
 
-gvl.readyPomise.then(() => {
+gvl.readyPromise.then(() => {
 
   // GVL has loaded and it's ready to use
 
@@ -232,7 +232,7 @@ GVL.latestFilename = 'latest/vendorlist.js';
 // loads 'http://cmp.mysupercoolcmp.com/cmp/latest/vendorlist.json'
 const gvl = new GVL();
 
-gvl.readyPomise.then(() => {
+gvl.readyPromise.then(() => {
 
   // GVL has loaded and it's ready to use
 
@@ -253,7 +253,7 @@ GVL.baseUrl = 'http://cmp.mysupercoolcmp.com/cmp/';
 // loads 'http://cmp.mysupercoolcmp.com/cmp/archives/vendor-list-v23.json'
 const gvl = new GVL(23);
 
-gvl.readyPomise.then(() => {
+gvl.readyPromise.then(() => {
 
   // GVL has loaded and it's ready to use
 
@@ -272,7 +272,7 @@ GVL.versionedFilename = 'vendorlist[VERSION].json';
 // loads 'http://cmp.mysupercoolcmp.com/cmp/vendorlist23.json'
 const gvl = new GVL(23);
 
-gvl.readyPomise.then(() => {
+gvl.readyPromise.then(() => {
 
   // GVL has loaded and it's ready to use
 
@@ -351,7 +351,7 @@ GVL.baseUrl = 'http://cmp.mysupercoolcmp.com/cmp/';
 // loads 'http://cmp.mysupercoolcmp.com/cmp/vendor-list.json'
 const gvl = new GVL();
 
-gvl.readyPomise.then(() => {
+gvl.readyPromise.then(() => {
 
   const vendorMap = gvl.getVendorsWithConsentPurpose(1);
 
@@ -373,7 +373,7 @@ GVL.baseUrl = 'http://cmp.mysupercoolcmp.com/cmp/';
 // loads 'http://cmp.mysupercoolcmp.com/cmp/vendor-list.json'
 const gvl = new GVL();
 
-gvl.readyPomise.then(() => {
+gvl.readyPromise.then(() => {
 
   // now this gvl instance only has these 3 vendors
   gvl.narrowVendorsTo([1,2,3]);
@@ -424,7 +424,7 @@ GVL.baseURL = "http://mydomain.com/cmp/vendorlist";
 const gvl = new GVL("LATEST");
 
 // have to wait for it to fetch the json
-gvl.readPromise.then(() => {
+gvl.readyPromise.then(() => {
 
   const tcModel = new TCModel(gvl);
   const encodedTCString = TCString.encode(tcModel);
