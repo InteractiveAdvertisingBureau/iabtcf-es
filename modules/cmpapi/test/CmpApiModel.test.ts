@@ -141,7 +141,7 @@ describe('CmpApiModel', (): void => {
 
     expect((): void => {
 
-      CmpApiModel.tcModel = undefined;
+      (CmpApiModel.tcModel as unknown as boolean) = true;
 
     }, 'CmpApiModel.tcModel = undefined').to.throw();
 

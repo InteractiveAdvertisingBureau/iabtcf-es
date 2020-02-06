@@ -1,4 +1,4 @@
-import {TCModel} from '@iabtcf/core';
+import {TCModel, Vector, PurposeRestrictionVector} from '@iabtcf/core';
 import {TCDataCallback} from './callback';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
 
@@ -92,7 +92,13 @@ export class CmpApiModel {
      * does not apply.  If it's something else... Then blowup!
      */
 
-    if (model instanceof TCModel) {
+    if (model === null) {
+
+      this.gdprApplies = false;
+      this.displayStatus = DisplayStatus.DISABLED;
+      this.tcModel_ = null;
+
+    } else if (this.isTCModel(model)) {
 
       this.gdprApplies = true;
       this.displayStatus = DisplayStatus.HIDDEN;
@@ -110,12 +116,6 @@ export class CmpApiModel {
 
       this.tcModel_ = (model as TCModel).clone();
 
-    } else if (model === null) {
-
-      this.gdprApplies = false;
-      this.displayStatus = DisplayStatus.DISABLED;
-      this.tcModel_ = null;
-
     } else {
 
       this.cmpStatus = CmpStatus.ERROR;
@@ -131,6 +131,67 @@ export class CmpApiModel {
       this.changeEventCallback();
 
     }
+
+  }
+
+  private static isPurposeRestrictionVector(potentialVector: unknown): potentialVector is PurposeRestrictionVector {
+
+    let retr = false;
+    const subject = potentialVector as PurposeRestrictionVector;
+
+    retr = (typeof subject.add === 'function');
+    retr = (retr && typeof subject.getVendors === 'function');
+    retr = (retr && typeof subject.getRestrictionType === 'function');
+    retr = (retr && typeof subject.vendorHasRestriction === 'function');
+    retr = (retr && typeof subject.getMaxVendorId === 'function');
+    retr = (retr && typeof subject.getRestrictions === 'function');
+    retr = (retr && typeof subject.getPurposes === 'function');
+    retr = (retr && typeof subject.isEmpty === 'function');
+    retr = (retr && typeof subject.isEncodable === 'function');
+
+    return retr;
+
+  }
+
+  private static isVector(potentialVector: unknown): potentialVector is Vector {
+
+    let retr = false;
+    const subject = potentialVector as Vector;
+
+    retr = (typeof subject.maxId === 'number');
+    retr = (retr && typeof subject.has === 'function');
+    retr = (retr && typeof subject.set === 'function');
+    retr = (retr && typeof subject.empty === 'function');
+    retr = (retr && typeof subject.forEach === 'function');
+    retr = (retr && typeof subject.size === 'number');
+    retr = (retr && typeof subject.setAll === 'function');
+
+    return retr;
+
+  }
+
+  private static isTCModel(potentialTCModel: unknown): potentialTCModel is TCModel {
+
+    let retr = false;
+    const subject = potentialTCModel as TCModel;
+    retr = (typeof subject.isServiceSpecific === 'boolean');
+    retr = (retr && typeof subject.useNonStandardStacks === 'boolean');
+    retr = (retr && typeof subject.purposeOneTreatment === 'boolean');
+    retr = (retr && typeof subject.publisherCountryCode === 'string');
+    retr = (retr && this.isVector(subject.vendorsAllowed));
+    retr = (retr && this.isVector(subject.vendorsDisclosed));
+    retr = (retr && this.isVector(subject.purposeConsents));
+    retr = (retr && this.isVector(subject.purposeLegitimateInterest));
+    retr = (retr && this.isVector(subject.vendorConsents));
+    retr = (retr && this.isVector(subject.vendorLegitimateInterest));
+    retr = (retr && this.isVector(subject.specialFeatureOptIns));
+    retr = (retr && this.isVector(subject.publisherConsents));
+    retr = (retr && this.isVector(subject.publisherLegitimateInterest));
+    retr = (retr && this.isVector(subject.publisherCustomConsents));
+    retr = (retr && this.isVector(subject.publisherCustomLegitimateInterest));
+    retr = (retr && this.isPurposeRestrictionVector(subject.publisherRestrictions));
+
+    return retr;
 
   }
 
