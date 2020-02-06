@@ -1,6 +1,6 @@
 {
   "name": "@iabtcf/testing",
-  "version": "1.0.0-beta.6",
+  "version": "1.0.0-beta.7",
   "description": "Shared testing utilities",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://github.com/chrispaterson/iabtcf",
@@ -21,7 +21,7 @@
     "lint:fix": "yarn run lint --fix"
   },
   "dependencies": {
-    "@iabtcf/core": "^1.0.0-beta.6",
+    "@iabtcf/core": "1.0.0-beta.7",
     "@types/sinon": "^7.0.13",
     "@types/sinon-chai": "3.2.2",
     "sinon": "^7.3.2",
