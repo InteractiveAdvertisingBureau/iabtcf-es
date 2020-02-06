@@ -720,7 +720,7 @@ export class TCModel extends Cloneable<TCModel> {
    * @param {any} obj
    * @return {boolean}
    */
-  // eslint-disable-next-line
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private isGVLMapItem(obj: any): obj is GVLMapItem {
 
     return typeof obj.id === 'number' && typeof obj.name === 'string';

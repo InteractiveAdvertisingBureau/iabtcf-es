@@ -1,6 +1,6 @@
 {
   "name": "iabtcf",
-  "version": "1.0.0-beta.6",
+  "version": "1.0.0-beta.7",
   "description": "Official compliant tool suite for implementing the iab. Transparency and Consent Framework (TCF).",
   "private": true,
   "workspaces": [
@@ -23,7 +23,7 @@
     "tidy": "rm -rf modules/**/lib coverage modules/**/coverage .nyc_output modules/**/.nyc_output modules/**/*.log",
     "clean": "rm -rf node_modules modules/**/node_modules && yarn run tidy",
     "lint": "yarn workspaces run lint",
-    "test": "mocha",
+    "test": "yarn && mocha",
     "debug": "ndb mocha",
     "serve:cov": "npx http-server ./coverage/",
     "test:cov": "rm -rf coverage; nyc --reporter html mocha",

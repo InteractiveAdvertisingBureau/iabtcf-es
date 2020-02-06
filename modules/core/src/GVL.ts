@@ -4,11 +4,6 @@ import {Json} from './Json';
 import {ConsentLanguages, IntMap} from './model';
 import {ByPurposeVendorMap, Declarations, Feature, IDSetMap, Purpose, Stack, Vendor, VendorList} from './model/gvl';
 
-/**
- * TODO: make map to cache language translations under language so if a
- * language is loaded twice it won't go and get it more than once
- */
-
 export type VersionOrVendorList = string | number | VendorList;
 type PurposeOrFeature = 'purpose' | 'feature';
 type PurposeSubType = 'consent' | 'legInt' | 'flexible';
@@ -182,6 +177,10 @@ export class GVL extends Cloneable<GVL> implements VendorList {
   public specialFeatures: IntMap<Feature>;
 
   /**
+   * @param {boolean} internal reference of when the GVL is ready to be used
+   */
+  private isReady_ = false;
+  /**
    * @param {IntMap<Vendor>} a collection of [[Vendor]]s
    */
   private vendors_: IntMap<Vendor>;
@@ -239,6 +238,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
     if (this.isVendorList(versionOrVendorList as GVL)) {
 
       this.deserialize(versionOrVendorList as GVL);
+      this.isReady_ = true;
       this.readyPromise = Promise.resolve();
 
     } else {
@@ -268,6 +268,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
     this.readyPromise.then((): void => {
 
       this.cacheLanguage(GVL.DEFAULT_LANGUAGE);
+      this.isReady_ = true;
 
     }).catch((): void => {});// eslint-disable-line @typescript-eslint/no-empty-function
 
@@ -703,6 +704,20 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
     });
     this.mapVendors();
+
+  }
+
+  /**
+   * isReady - Whether or not this instance is ready to be used.  This will be
+   * immediately and synchronously true if a vnedorlist object is passed into
+   * the constructor or once the JSON vendorllist is retrieved.
+   *
+   * @return {boolean} whether or not the instance is ready to be interacted
+   * with and all the data is populated
+   */
+  public get isReady(): boolean {
+
+    return this.isReady_;
 
   }
 
