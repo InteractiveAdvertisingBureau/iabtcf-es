@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES5",
-    "lib": ["ES6", "DOM"],
+    "lib": ["ES6", "DOM", "ES2015.Symbol"],
     "module": "commonjs",
     "moduleResolution": "node",
     "downlevelIteration": true,
