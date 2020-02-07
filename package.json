@@ -1,6 +1,6 @@
 {
   "name": "iabtcf",
-  "version": "1.0.0-beta.7",
+  "version": "1.0.0-beta.8",
   "description": "Official compliant tool suite for implementing the iab. Transparency and Consent Framework (TCF).",
   "private": true,
   "workspaces": [
@@ -18,6 +18,8 @@
     "url": "https://opensource.org/licenses/apache2.0.php"
   },
   "scripts": {
+    "bump": "./bin/create-version",
+    "deploy": "./bin/publish-version",
     "build": "yarn workspaces run build",
     "docs": "yarn workspace @iabtcf/core run docs && yarn workspace @iabtcf/cmpapi run docs",
     "tidy": "rm -rf modules/**/lib coverage modules/**/coverage .nyc_output modules/**/.nyc_output modules/**/*.log",

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+VERSION=$($DIR/branch-version)
+
+if [[ -n $VERSION ]]; then
+
+  # cd to root of repo
+  cd $(git rev-parse --show-toplevel)
+
+  for pkg in ./modules/*; do
+    if [[ -d $pkg ]]; then
+      yarn publish --access public --new-version $VERSION $pkg
+    fi
+  done
+else
+  echo "Unable to publish version because no version can be determined"
+  exit 1
+fi

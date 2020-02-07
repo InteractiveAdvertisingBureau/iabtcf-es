@@ -1,0 +1,35 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+VERSION=$($DIR/branch-version)
+
+if [[ -n $VERSION ]]; then
+
+  # cd to root of repo
+  cd $(git rev-parse --show-toplevel)
+
+  # Increment the base package.json version to the new one
+  echo "Changing package.json to version $VERSION"
+  json -I -f package.json -e "this.version=\"$VERSION\""
+
+  for pkg in ./modules/*; do
+    if [[ -d $pkg ]]; then
+      cd $pkg
+      echo "Changing $pkg/package.json to version $VERSION"
+      json -I -f package.json -e "this.version=\"$VERSION\""
+      cd -
+    fi
+  done
+
+  # cd to root of repo
+  cd $(git rev-parse --show-toplevel)
+
+  # Updated references to other iab libs
+  sed -i '' 's/\(\@iabtcf\/.*\)":\s*.*"/\1": "'$VERSION'"/g' ./modules/**/package.json
+
+  git add -A
+  git commit -m "Bumping to $VERSION"
+else
+  echo "Unable to create version because no version can be determined"
+  exit 1
+fi
