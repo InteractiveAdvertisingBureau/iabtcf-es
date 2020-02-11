@@ -8,6 +8,16 @@ export class AddEventListenerCommand extends GetTCDataCommand {
 
     CmpApiModel.eventQueue.add(this.callback as TCDataCallback);
 
+    if (! CmpApiModel.queueCommand) {
+
+      CmpApiModel.queueCommand = (callback: TCDataCallback): void => {
+
+        new GetTCDataCommand(callback);
+
+      };
+
+    }
+
     if (CmpApiModel.tcModel) {
 
       new GetTCDataCommand(this.callback);

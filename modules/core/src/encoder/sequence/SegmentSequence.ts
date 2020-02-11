@@ -16,52 +16,55 @@ export class SegmentSequence implements SequenceVersionMap {
 
   public constructor(tcModel: TCModel, isForSaving: boolean) {
 
-    if (tcModel.isServiceSpecific) {
+    if (+tcModel.version === 2) {
 
-      /**
-       * If it's service specific only, then the publisher TC String can be
-       * stored in the cookie and would be transmitted if it's not for
-       * storage
-       */
+      if (tcModel.isServiceSpecific) {
 
-      if (isForSaving) {
+        /**
+         * If it's service specific only, then the publisher TC String can be
+         * stored in the cookie and would be transmitted if it's not for
+         * storage
+         */
 
         this['2'].push(Segments.publisherTC);
 
-      }
+      } else {
 
-    } else {
+        /**
+         * including vendors disclosed only if it is for saving (to the global
+         * scope) or supportOOB is turned on (either or both).  The compliment
+         * of this being not for saving (surfaced to CMP) and no support of
+         * OOB.
+         */
+        if (isForSaving || tcModel[Fields.supportOOB]) {
 
-      /**
-       * this is a globally scoped string.
-       *
-       * The disclosed vendors vector will be added to both the transmission
-       * string and the storage string
-       */
-
-      if (tcModel[Fields.vendorsDisclosed].size > 0) {
-
-        this['2'].push(Segments.vendorsDisclosed);
-
-      }
-
-      /**
-       * If this string is not for saving then the vendors allowed vector can
-       * be added – Otherwise, it should be omitted because this is a publisher
-       * specific setting and we don't want to store publisher-specific
-       * settings in the global cookie.
-       */
-
-      if (!isForSaving) {
-
-        // if there is a vendorsAllowed then we should add it
-        if (tcModel[Fields.vendorsAllowed].size > 0) {
-
-          this['2'].push(Segments.vendorsAllowed);
+          this['2'].push(Segments.vendorsDisclosed);
 
         }
 
-        this['2'].push(Segments.publisherTC);
+        if (!isForSaving) {
+
+          /**
+           * If a publisher does support OOB and they have narrowed the allowed
+           * vendors to utilize it, then we should include the vendors allowed
+           * segment.  If it is empty then there are no restrictions, if that
+           * is intended to mean no support for OOB, then the flag should be
+           * set for that instead.
+           *
+           */
+          if (tcModel[Fields.supportOOB] && tcModel[Fields.vendorsAllowed].size > 0) {
+
+            this['2'].push(Segments.vendorsAllowed);
+
+          }
+
+          /**
+           * Always include the publisher TC segment as long as this TC string
+           * is not intended to be saved in the global scope.
+           */
+          this['2'].push(Segments.publisherTC);
+
+        }
 
       }
 

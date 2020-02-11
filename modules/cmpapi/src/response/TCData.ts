@@ -59,7 +59,17 @@ export class TCData extends Response {
 
     const tcModel = CmpApiModel.tcModel as TCModel;
 
-    this.tcString = TCString.encode(tcModel);
+    if (CmpApiModel.tcString) {
+
+      this.tcString = CmpApiModel.tcString;
+
+    } else {
+
+      this.tcString = TCString.encode(tcModel);
+      CmpApiModel.cacheTCString(this.tcString);
+
+    }
+
     this.eventStatus = CmpApiModel.eventStatus;
     this.isServiceSpecific = tcModel.isServiceSpecific;
     this.useNonStandardStacks = tcModel.useNonStandardStacks;

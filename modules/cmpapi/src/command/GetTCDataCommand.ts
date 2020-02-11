@@ -19,21 +19,23 @@ export class GetTCDataCommand extends Command {
   protected success(): void {
 
     const callback = this.callback as TCDataCallback;
-
     const tcModel = CmpApiModel.tcModel as TCModel;
 
-    if (!tcModel.gvl) {
+    if (!tcModel.gvl && !CmpApiModel.tcString) {
 
       tcModel.gvl = new GVL(tcModel.vendorListVersion);
+      tcModel.gvl.readyPromise
+        .then(
+          (): void => callback(new TCData(this.param), true),
+          this.fail,
+        )
+        .catch(this.fail);
+
+    } else {
+
+      callback(new TCData(this.param), true);
 
     }
-
-    tcModel.gvl.readyPromise
-      .then(
-        (): void => callback(new TCData(this.param), true),
-        this.fail,
-      )
-      .catch(this.fail);
 
   }
 

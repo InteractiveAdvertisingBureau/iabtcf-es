@@ -6,7 +6,7 @@ import {CmpStatus} from '../src/status/CmpStatus';
 import {DisplayStatus} from '../src/status/DisplayStatus';
 import {TCFCommands} from '../src/command/TCFCommands';
 import {expect} from 'chai';
-import {makeRandomInt, TCModelFactory} from '@iabtcf/testing';
+import {makeRandomInt, TCModelFactory, TCStringFactory} from '@iabtcf/testing';
 import {TCDataToTCModel} from './TCDataToTCModel';
 
 // eslint-disable-next-line max-len
@@ -148,7 +148,7 @@ describe('CmpApi', (): void => {
 
   };
 
-  it('should pick up a queued stub function an excecute it if it can', (done: () => void): void => {
+  it('should pick up a queued stub function an excecute it if it can when tcModel is set', (done: () => void): void => {
 
     assertStub();
 
@@ -163,6 +163,25 @@ describe('CmpApi', (): void => {
     const cmpApi = getCmpApi();
 
     cmpApi.tcModel = TCModelFactory.withGVL();
+
+  });
+
+  it('should pick up a queued stub function an excecute it if it can when tcString is set', (done: () => void): void => {
+
+    assertStub();
+    const tcString = TCStringFactory.base();
+
+    window[API_FUNCTION_NAME](TCFCommands.GET_TC_DATA, API_VERSION, (tcData: TCData, success: boolean): void => {
+
+      expect(success).to.be.true;
+      expect(tcData.tcString, 'tcString').to.equal(tcString);
+      done();
+
+    });
+
+    const cmpApi = getCmpApi();
+
+    cmpApi.tcString = tcString;
 
   });
 
@@ -198,7 +217,7 @@ describe('CmpApi', (): void => {
 
   });
 
-  it('should throw errors when disabled and tcModel or uiVisible are set', (done: () => void): void => {
+  it('should throw errors when disabled and tcModel, tcString, or uiVisible are set', (done: () => void): void => {
 
     const cmpApi = getCmpApi();
 
@@ -219,6 +238,12 @@ describe('CmpApi', (): void => {
       cmpApi.uiVisible = true;
 
     }, 'cmpApi.uiVisible after disabled').to.throw();
+
+    expect((): void => {
+
+      cmpApi.tcString = TCStringFactory.base();
+
+    }, 'cmpApi.tcString after disabled').to.throw();
 
     done();
 

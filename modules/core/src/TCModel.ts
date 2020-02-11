@@ -17,6 +17,7 @@ export class TCModel extends Cloneable<TCModel> {
   public static readonly consentLanguages: ConsentLanguages = GVL.consentLanguages;
 
   private isServiceSpecific_ = false;
+  private supportOOB_ = true;
   private useNonStandardStacks_ = false;
   private purposeOneTreatment_ = false;
   private publisherCountryCode_ = 'AA';
@@ -456,6 +457,24 @@ export class TCModel extends Cloneable<TCModel> {
   public get [Fields.useNonStandardStacks](): boolean {
 
     return this.useNonStandardStacks_;
+
+  };
+
+  /**
+   * Whether or not this publisher supports OOB signaling.  On Global TC String
+   * OOB Vendors Disclosed will be included if the publish wishes to no allow
+   * these vendors they should set this to false.
+   * @param {boolean} bool - value to set
+   */
+  public set [Fields.supportOOB](bool: boolean) {
+
+    this.supportOOB_ = bool;
+
+  };
+
+  public get [Fields.supportOOB](): boolean {
+
+    return this.supportOOB_;
 
   };
 

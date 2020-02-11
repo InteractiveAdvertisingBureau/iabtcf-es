@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {isPrimitive} from './isPrimitive';
 
-export const sameDataDiffRef = (obj1: object, obj2: object, objName: string, ignore?: string[]): void => {
+export const sameDataDiffRef = (obj1: object, obj2: object, objName: string, ignoreKeys?: string[]): void => {
 
   if (obj1 === undefined && obj2 === undefined) {
 
@@ -10,23 +10,23 @@ export const sameDataDiffRef = (obj1: object, obj2: object, objName: string, ign
   }
 
   expect(typeof obj1, `typeof ${objName}`).to.equal(typeof obj2);
-  expect(obj1).not.to.equal(obj2);
+  expect(obj1, objName).not.to.equal(obj2);
 
   const keySet = new Set<string>(
     Object.keys(obj1)
-    .concat(Object.keys(obj2))
+      .concat(Object.keys(obj2))
     /**
      * filter out all of the keys that end with an underscore since those are
      * private members
      */
-    .filter((key: string) => (key.indexOf('_') !== key.length - 1))
+      .filter((key: string) => (key.indexOf('_') !== key.length - 1)),
   );
 
-  if(Array.isArray(ignore)) {
+  if (Array.isArray(ignoreKeys)) {
 
-    ignore.forEach((item: string): void => {
+    ignoreKeys.forEach((item: string): void => {
 
-      if(keySet.has(item)) {
+      if (keySet.has(item)) {
 
         keySet.delete(item);
 
@@ -38,13 +38,13 @@ export const sameDataDiffRef = (obj1: object, obj2: object, objName: string, ign
 
   for (const key of keySet) {
 
-    if(key.indexOf('_') !== key.length - 1) {
+    if (key.indexOf('_') !== key.length - 1) {
 
       const item1 = obj1[key];
       const item2 = obj2[key];
       const itsType = typeof item1;
-      
-      expect(typeof item2).to.equal(itsType);
+
+      expect(typeof item2, `typeof ${objName}->${key}`).to.equal(itsType);
 
       if (item1 === undefined && item2 === undefined) {
 
@@ -67,12 +67,13 @@ export const sameDataDiffRef = (obj1: object, obj2: object, objName: string, ign
 
         } else {
 
-          sameDataDiffRef(item1, item2, key, ignore);
+          sameDataDiffRef(item1, item2, key, ignoreKeys);
 
         }
 
       }
-      }
+
+    }
 
   }
 
