@@ -99,7 +99,7 @@ describe('CmpApi', (): void => {
       expect(ping.cmpLoaded, 'ping.cmpLoaded after cmpApi created').to.be.true;
       expect(ping.gdprApplies, 'ping.gdprApplies after cmpApi created').to.be.undefined;
       expect(ping.cmpStatus, 'ping.cmpStatus after cmpApi created').to.equal(CmpStatus.LOADING);
-      expect(ping.apiVersion, 'ping.apiVersion after cmpApi created').to.equal(2);
+      expect(ping.apiVersion, 'ping.apiVersion after cmpApi created').to.equal('2');
       expect(ping.displayStatus, 'ping.displayStatus after cmpApi created').to.equal(DisplayStatus.HIDDEN);
       expect(ping.gvlVersion, 'ping.gvlVersion after cmpApi created').to.be.undefined;
 

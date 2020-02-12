@@ -80,7 +80,7 @@
           gdprApplies: gdprApplies,
           cmpLoaded: false,
           cmpStatus: 'stubCMP',
-          apiVersion: 2,
+          apiVersion: '2',
         };
 
         if (typeof args[2] === 'function') {
