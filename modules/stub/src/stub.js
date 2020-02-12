@@ -79,7 +79,7 @@
         const retr = {
           gdprApplies: gdprApplies,
           cmpLoaded: false,
-          cmpStatus: 'stubCMP',
+          cmpStatus: 'stub',
           apiVersion: '2',
         };
 
