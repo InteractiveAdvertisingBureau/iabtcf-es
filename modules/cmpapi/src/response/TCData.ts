@@ -71,6 +71,7 @@ export class TCData extends Response {
     }
 
     this.eventStatus = CmpApiModel.eventStatus;
+    this.cmpStatus = CmpApiModel.cmpStatus;
     this.isServiceSpecific = tcModel.isServiceSpecific;
     this.useNonStandardStacks = tcModel.useNonStandardStacks;
     this.purposeOneTreatment = tcModel.purposeOneTreatment;

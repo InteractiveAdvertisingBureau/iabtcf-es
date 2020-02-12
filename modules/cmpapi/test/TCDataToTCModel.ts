@@ -38,6 +38,7 @@ export class TCDataToTCModel {
 
     expect(tcData.tcString, 'tcString').to.equal(TCString.encode(tcModel));
     expect(tcData.eventStatus, 'eventStatus').to.equal(CmpApiModel.eventStatus);
+    expect(tcData.cmpStatus, 'cmpStatus').to.equal(CmpApiModel.cmpStatus);
     expect(tcData.isServiceSpecific, 'isServiceSpecific').to.equal(tcModel.isServiceSpecific);
     expect(tcData.useNonStandardStacks, 'useNonStandardStacks').to.equal(tcModel.useNonStandardStacks);
     expect(tcData.purposeOneTreatment, 'purposeOneTreatment').to.equal(tcModel.purposeOneTreatment);
