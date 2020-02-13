@@ -10,6 +10,7 @@ import {EventStatus, CmpStatus} from '../status';
 export class TCData extends Response {
 
   public tcString: string;
+  public listenerId: number;
   public eventStatus: EventStatus;
   public cmpStatus: CmpStatus;
   public isServiceSpecific: Booleany;
@@ -23,80 +24,110 @@ export class TCData extends Response {
     disclosedVendors: BooleanVector | string;
 
   };
+
   public purpose: {
 
     consents: BooleanVector | string;
     legitimateInterests: BooleanVector | string;
 
   };
+
   public vendor: {
 
     consents: BooleanVector | string;
     legitimateInterests: BooleanVector | string;
 
   };
+
   public specialFeatureOptins: BooleanVector | string;
+
   public publisher: {
 
     consents: BooleanVector | string;
     legitimateInterests: BooleanVector | string;
+
     customPurpose: {
 
       consents: BooleanVector | string;
       legitimateInterests: BooleanVector | string;
 
     };
+
     restrictions: Restrictions;
+
   };
 
   /**
    * Constructor to create a TCData object from a TCModel
    * @param {number[]} vendorIds - if not undefined, will be used to filter vendor ids
+   * @param {number} listenerId - if there is a listenerId to add
    */
-  public constructor(vendorIds?: number[]) {
+  public constructor(vendorIds?: number[], listenerId?: number) {
 
     super();
 
-    const tcModel = CmpApiModel.tcModel as TCModel;
-
-    this.tcString = TCString.encode(tcModel);
     this.eventStatus = CmpApiModel.eventStatus;
-    this.isServiceSpecific = tcModel.isServiceSpecific;
-    this.useNonStandardStacks = tcModel.useNonStandardStacks;
-    this.purposeOneTreatment = tcModel.purposeOneTreatment;
-    this.publisherCC = tcModel.publisherCountryCode;
+    this.cmpStatus = CmpApiModel.cmpStatus;
+    this.listenerId = listenerId;
 
-    this.outOfBand = {
-      allowedVendors: this.createVectorField(tcModel.vendorsAllowed, vendorIds),
-      disclosedVendors: this.createVectorField(tcModel.vendorsDisclosed, vendorIds),
-    };
+    if (CmpApiModel.gdprApplies) {
 
-    this.purpose = {
+      const tcModel = CmpApiModel.tcModel as TCModel;
 
-      consents: this.createVectorField(tcModel.purposeConsents),
-      legitimateInterests: this.createVectorField(tcModel.purposeLegitimateInterest),
+      if (CmpApiModel.tcString) {
 
-    };
+        this.tcString = CmpApiModel.tcString;
 
-    this.vendor = {
-      consents: this.createVectorField(tcModel.vendorConsents, vendorIds),
-      legitimateInterests: this.createVectorField(tcModel.vendorLegitimateInterest, vendorIds),
-    };
+      } else {
 
-    this.specialFeatureOptins = this.createVectorField(tcModel.specialFeatureOptIns);
+        this.tcString = TCString.encode(tcModel);
+        CmpApiModel.cacheTCString(this.tcString);
 
-    this.publisher = {
+      }
 
-      consents: this.createVectorField(tcModel.publisherConsents),
-      legitimateInterests: this.createVectorField(tcModel.publisherLegitimateInterest),
-      customPurpose: {
+      this.isServiceSpecific = tcModel.isServiceSpecific;
+      this.useNonStandardStacks = tcModel.useNonStandardStacks;
+      this.purposeOneTreatment = tcModel.purposeOneTreatment;
+      this.publisherCC = tcModel.publisherCountryCode;
 
-        consents: this.createVectorField(tcModel.publisherCustomConsents),
-        legitimateInterests: this.createVectorField(tcModel.publisherCustomLegitimateInterest),
+      this.outOfBand = {
 
-      },
-      restrictions: this.createRestrictions(tcModel.publisherRestrictions),
-    };
+        allowedVendors: this.createVectorField(tcModel.vendorsAllowed, vendorIds),
+        disclosedVendors: this.createVectorField(tcModel.vendorsDisclosed, vendorIds),
+
+      };
+
+      this.purpose = {
+
+        consents: this.createVectorField(tcModel.purposeConsents),
+        legitimateInterests: this.createVectorField(tcModel.purposeLegitimateInterest),
+
+      };
+
+      this.vendor = {
+
+        consents: this.createVectorField(tcModel.vendorConsents, vendorIds),
+        legitimateInterests: this.createVectorField(tcModel.vendorLegitimateInterest, vendorIds),
+
+      };
+
+      this.specialFeatureOptins = this.createVectorField(tcModel.specialFeatureOptIns);
+
+      this.publisher = {
+
+        consents: this.createVectorField(tcModel.publisherConsents),
+        legitimateInterests: this.createVectorField(tcModel.publisherLegitimateInterest),
+        customPurpose: {
+
+          consents: this.createVectorField(tcModel.publisherCustomConsents),
+          legitimateInterests: this.createVectorField(tcModel.publisherCustomLegitimateInterest),
+
+        },
+        restrictions: this.createRestrictions(tcModel.publisherRestrictions),
+
+      };
+
+    }
 
   }
 
@@ -143,7 +174,7 @@ export class TCData extends Response {
    * Creates a string bit field with a value for each id where each value is
    * '1' if its id is in the passed in vector Can be overwritten to return a
    * string
-   * @param {Vector }vector
+   * @param {Vector} vector
    * @param {number[]} ids filter
    * @return {BooleanVector | string}
    */

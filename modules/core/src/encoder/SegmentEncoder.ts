@@ -1,27 +1,10 @@
-import {
-  Base64Url,
-} from './Base64Url';
-import {
-  BitLength,
-} from './BitLength';
-import {
-  FieldEncoderMap,
-  IntEncoder,
-} from './field';
-import {
-  FieldSequence,
-} from './sequence';
-import {
-  TCModel,
-  TCModelPropType,
-} from '../';
-import {
-  EncodingError,
-  DecodingError,
-} from '../errors';
-import {
-  Segments,
-} from '../model';
+import {Base64Url} from './Base64Url';
+import {BitLength} from './BitLength';
+import {FieldEncoderMap, IntEncoder} from './field';
+import {FieldSequence} from './sequence';
+import {TCModel, TCModelPropType} from '../';
+import {EncodingError, DecodingError} from '../errors';
+import {Segments} from '../model';
 
 export class SegmentEncoder {
 

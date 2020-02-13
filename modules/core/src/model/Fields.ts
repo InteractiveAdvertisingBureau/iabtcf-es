@@ -5,6 +5,7 @@ export class Fields {
   public static readonly consentLanguage: 'consentLanguage' = 'consentLanguage';
   public static readonly consentScreen: 'consentScreen' = 'consentScreen';
   public static readonly created: 'created' = 'created';
+  public static readonly supportOOB: 'supportOOB' = 'supportOOB';
   public static readonly isServiceSpecific: 'isServiceSpecific' = 'isServiceSpecific';
   public static readonly lastUpdated: 'lastUpdated' = 'lastUpdated';
   public static readonly numCustomPurposes: 'numCustomPurposes' = 'numCustomPurposes';

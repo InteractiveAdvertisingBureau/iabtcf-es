@@ -1,13 +1,14 @@
 import {CmpApiModel} from '../src/CmpApiModel';
 import {CmpStatus, DisplayStatus, EventStatus} from '../src/status';
-import {TCModelFactory} from '@iabtcf/testing';
+import {TCModelFactory, TCStringFactory, sameDataDiffRef} from '@iabtcf/testing';
+import {TCString} from '@iabtcf/core';
 import {expect} from 'chai';
 
 describe('CmpApiModel', (): void => {
 
   const assertDefault = (): void => {
 
-    expect(CmpApiModel.apiVersion, 'assert default apiVersion').to.equal(2);
+    expect(CmpApiModel.apiVersion, 'assert default apiVersion').to.equal('2');
     expect(CmpApiModel.tcfPolicyVersion, 'assert default tcfPolicyVersion').to.equal(2);
     expect(CmpApiModel.cmpStatus, 'assert default cmpStatus').to.equal(CmpStatus.LOADING);
     expect(CmpApiModel.displayStatus, 'assert default displayStatus').to.equal(DisplayStatus.HIDDEN);
@@ -88,6 +89,21 @@ describe('CmpApiModel', (): void => {
 
   });
 
+  it(`should set gdprApplies to true, displayStatus to "${DisplayStatus.HIDDEN}", eventStatus to "${EventStatus.TC_LOADED}", cmpStatus to "${CmpStatus.LOADED} when tcString is set for the first time`, (done: () => void): void => {
+
+    assertDefault();
+
+    CmpApiModel.tcString = TCStringFactory.base();
+
+    expect(CmpApiModel.gdprApplies, 'gdprApplies after').to.be.true;
+    expect(CmpApiModel.displayStatus, 'displayStatus after').to.equal(DisplayStatus.HIDDEN);
+    expect(CmpApiModel.eventStatus, 'eventStatus after').to.equal(EventStatus.TC_LOADED);
+    expect(CmpApiModel.tcModel, 'tcModel after should exist').not.to.be.undefined;
+
+    done();
+
+  });
+
   it(`should set eventStatus to "${EventStatus.USER_ACTION_COMPLETE}" when tcModel is set for a second time`, (done: () => void): void => {
 
     assertDefault();
@@ -101,20 +117,52 @@ describe('CmpApiModel', (): void => {
 
   });
 
-  it(`should call the changeEventCallback when a tcModel is set`, (done: () => void): void => {
+  it(`should set eventStatus to "${EventStatus.USER_ACTION_COMPLETE}" when tcString is set for a second time`, (done: () => void): void => {
 
     assertDefault();
-    let callbackCalled = false;
 
-    CmpApiModel.changeEventCallback = (): void => {
+    CmpApiModel.tcString = TCStringFactory.base();
+    CmpApiModel.tcString = TCStringFactory.base();
 
-      callbackCalled = true;
+    expect(CmpApiModel.eventStatus, 'eventStatus after').to.equal(EventStatus.USER_ACTION_COMPLETE);
 
-    };
+    done();
 
-    CmpApiModel.tcModel = TCModelFactory.noGVL();
+  });
 
-    expect(callbackCalled, 'callbackCalled').to.be.true;
+  it(`should set eventStatus to "${EventStatus.USER_ACTION_COMPLETE}" when tcString is first for and tcModel was set the second time and tcString to be empty`, (done: () => void): void => {
+
+    assertDefault();
+
+    const tcModel = TCModelFactory.withGVL();
+    const tcString = TCStringFactory.base();
+
+    CmpApiModel.tcString = tcString;
+    CmpApiModel.tcModel = tcModel;
+
+    expect(CmpApiModel.eventStatus, 'eventStatus after').to.equal(EventStatus.USER_ACTION_COMPLETE);
+    expect(CmpApiModel.tcString, 'CmpApiModel.tcString after').to.equal('');
+    expect(CmpApiModel, 'first tcString').not.to.equal(tcString);
+
+    done();
+
+  });
+
+  it(`should set eventStatus to "${EventStatus.USER_ACTION_COMPLETE}" when tcModel is first for and tcString was set the second time and tcString should be the latest value`, (done: () => void): void => {
+
+    assertDefault();
+
+    const tcString = TCStringFactory.base();
+
+    CmpApiModel.tcModel = TCModelFactory.withGVL();
+    CmpApiModel.tcString = tcString;
+
+    expect(CmpApiModel.eventStatus, 'eventStatus after').to.equal(EventStatus.USER_ACTION_COMPLETE);
+
+    expect(CmpApiModel.tcString, 'CmpApiModel.tcString after').to.equal(tcString);
+
+    const newTCModel = TCString.decode(tcString);
+    sameDataDiffRef(newTCModel, CmpApiModel.tcModel, 'TCModel', ['bitLength', 'customPurposes']);
 
     done();
 

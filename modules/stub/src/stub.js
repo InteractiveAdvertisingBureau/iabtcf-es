@@ -79,8 +79,8 @@
         const retr = {
           gdprApplies: gdprApplies,
           cmpLoaded: false,
-          cmpStatus: 'stubCMP',
-          apiVersion: 2,
+          cmpStatus: 'stub',
+          apiVersion: '2',
         };
 
         if (typeof args[2] === 'function') {

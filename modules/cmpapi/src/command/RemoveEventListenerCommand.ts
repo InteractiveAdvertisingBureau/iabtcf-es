@@ -22,7 +22,7 @@ export class RemoveEventListenerCommand extends Command {
 
   protected isValid(): boolean {
 
-    return (typeof this.param === 'function' && CmpApiModel.eventQueue.delete(this.param));
+    return (typeof this.param === 'number' && CmpApiModel.eventQueue.remove(this.param));
 
   }
 

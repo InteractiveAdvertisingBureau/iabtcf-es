@@ -18,10 +18,10 @@ describe('command->AddEventListenerCommand', (): void => {
 
       callsReceived++;
       // only set after call is queued
-      expect(callsMade, 'callsMade = callsReceived').to.equal(callsReceived);
+      expect(callsMade, 'callsReceived').to.equal(callsReceived);
       expect(tcData instanceof TCData).to.be.true;
 
-      if (callsReceived === 3) {
+      if (callsReceived === 4) {
 
         done();
 
@@ -29,6 +29,7 @@ describe('command->AddEventListenerCommand', (): void => {
 
     };
 
+    callsMade++;
     new AddEventListenerCommand(tcDataCallback);
 
     // is queued
