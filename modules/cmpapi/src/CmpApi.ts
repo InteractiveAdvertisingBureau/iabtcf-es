@@ -3,9 +3,7 @@ import {Callback, ErrorCallback} from './callback';
 import {CmpApiModel} from './CmpApiModel';
 import {CommandMap} from './command/CommandMap';
 import {CustomCommands} from './CustomCommands';
-import {GetTCDataCommand} from './command/GetTCDataCommand';
 import {PolyFill} from '@iabtcf/util';
-import {TCDataCallback} from './callback/TCDataCallback';
 import {TCModel} from '@iabtcf/core';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -51,8 +49,6 @@ export class CmpApi {
       this.customCommands = customCommands;
 
     }
-
-    CmpApiModel.changeEventCallback = this.executeEvents;
 
     /**
      * Attempt to grab the queue – we could call ping and see if it is the stub,
@@ -113,14 +109,7 @@ export class CmpApi {
 
   }
 
-  /**
-   * Sets the TCModel the commands will use to facilitate page requests
-   * @param {TCModel | null} tcModel
-   */
-  public set tcModel(tcModel: TCModel | null) {
-
-    this.throwIfCmpApiIsDisabled();
-    CmpApiModel.tcModel = tcModel;
+  private purgeStubQueue(): void {
 
     if (this.stubQueue) {
 
@@ -133,6 +122,40 @@ export class CmpApi {
       delete this.stubQueue;
 
     }
+
+  }
+
+  /**
+   * On may choose to either set the TCModel directly (tcModel)  or set an
+   * encoded tc string (tcString) that will become. On the first set, CmpApi
+   * will set Event status to 'tcloaded' and gdprApplies to true.  On the
+   * second set of CmpApi the eventStatus will be set to 'useractionscomplete'.
+   * If tcString is set explicitly to null that indicates gdprApplies == false.
+   * @param {string | null} encodedString
+   */
+  public set tcString(encodedString: string | null) {
+
+    this.throwIfCmpApiIsDisabled();
+    CmpApiModel.tcString = encodedString;
+
+    this.purgeStubQueue();
+
+  }
+
+  /**
+   * On may choose to either set the TCModel directly (tcModel)  or set an
+   * encoded tc string (tcString) that will become. On the first set, CmpApi
+   * will set Event status to 'tcloaded' and gdprApplies to true.  On the
+   * second set of CmpApi the eventStatus will be set to 'useractionscomplete'.
+   * If tcModel is set explicitly to null that indicates gdprApplies == false.
+   * @param {TCModel | null} tcModel
+   */
+  public set tcModel(tcModel: TCModel | null) {
+
+    this.throwIfCmpApiIsDisabled();
+    CmpApiModel.tcModel = tcModel;
+
+    this.purgeStubQueue();
 
   }
 
@@ -154,16 +177,6 @@ export class CmpApi {
   public disable(): void {
 
     CmpApiModel.disabled = true;
-
-  }
-
-  private executeEvents(): void {
-
-    CmpApiModel.eventQueue.forEach((callback: TCDataCallback): void => {
-
-      new GetTCDataCommand(callback);
-
-    });
 
   }
 

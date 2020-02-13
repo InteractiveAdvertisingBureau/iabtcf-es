@@ -2,6 +2,7 @@
 
 export * from './GVLFactory';
 export * from './TCModelFactory';
+export * from './TCStringFactory';
 export * from './XMLHttpTestTools';
 export * from './isPrimitive';
 export * from './makeRandomInt';

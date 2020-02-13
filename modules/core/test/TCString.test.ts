@@ -12,10 +12,12 @@ describe('TCString', (): void => {
 
   describe('.encode(tcModel)', (): void => {
 
-    it('returns a string with 4 segments when TCModel version is 2', (done: () => void): void => {
+    it('returns a string with 4 segments if isServiceSpecific=true, supportOOB = true, and tcModel.setAllVendorsAllowed()', (done: () => void): void => {
 
       const tcModel = getTCModel();
       tcModel.isServiceSpecific = false;
+      tcModel.supportOOB = true;
+      tcModel.setAllVendorsAllowed();
 
       const encodedStr = TCString.encode(tcModel);
 
@@ -28,13 +30,13 @@ describe('TCString', (): void => {
 
   describe('.decode(encodedString)', (): void => {
 
-    it('returns an equivalent model if encoded and decoded', (done: () => void): void => {
+    it('returns an equivalent model if encoded and decoded, except for the added bitLength property', (done: () => void): void => {
 
       const tcModel = TCModelFactory.withGVL() as unknown as TCModel;
       const encodedString = TCString.encode(tcModel);
       const decodedModel = TCString.decode(encodedString);
 
-      sameDataDiffRef(decodedModel, tcModel, 'TCModel', ['bitLength']);
+      sameDataDiffRef(decodedModel, tcModel, 'TCModel', ['bitLength', 'customPurposes']);
       done();
 
     });

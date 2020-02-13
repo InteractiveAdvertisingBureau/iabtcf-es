@@ -8,6 +8,15 @@ import {expect} from 'chai';
 
 describe('response->Ping', (): void => {
 
+  const isAGoodPing = (ping: Ping): void => {
+
+    expect(ping.cmpLoaded, 'ping.cmpLoaded').to.be.true;
+    expect(ping.cmpStatus, 'ping.cmpStatus').to.equal(CmpApiModel.cmpStatus);
+    expect(ping.displayStatus, 'ping.displayStatus').to.equal(CmpApiModel.displayStatus);
+    expect(ping.apiVersion, 'ping.apiVersion').to.equal('2');
+
+  };
+
   it('populates a response with CmpApiModel values', (done: () => void): void => {
 
     CmpApiModel.cmpId = makeRandomInt(2, 500);
@@ -15,12 +24,10 @@ describe('response->Ping', (): void => {
     CmpApiModel.displayStatus = DisplayStatus.VISIBLE;
 
     const ping = new Ping();
-    expect(ping.cmpLoaded, 'ping.cmpLoaded').to.be.true;
-    expect(ping.cmpStatus, 'ping.cmpStatus').to.equal(CmpApiModel.cmpStatus);
-    expect(ping.displayStatus, 'ping.displayStatus').to.equal(CmpApiModel.displayStatus);
-    expect(ping.gvlVersion, 'ping.gvlVersion').to.be.undefined;
-    expect(ping.apiVersion, 'ping.apiVersion').to.equal(2);
 
+    isAGoodPing(ping);
+
+    expect(ping.gvlVersion, 'ping.gvlVersion').to.be.undefined;
     done();
 
   });
@@ -36,10 +43,8 @@ describe('response->Ping', (): void => {
     CmpApiModel.tcModel = tcModel;
 
     const ping = new Ping();
-    expect(ping.cmpLoaded, 'ping.cmpLoaded').to.be.true;
-    expect(ping.cmpStatus, 'ping.cmpStatus').to.equal(CmpApiModel.cmpStatus);
-    expect(ping.displayStatus, 'ping.displayStatus').to.equal(CmpApiModel.displayStatus);
-    expect(ping.apiVersion, 'ping.apiVersion').to.equal(2);
+
+    isAGoodPing(ping);
     expect(ping.gvlVersion, 'ping.gvlVersion').to.equal(tcModel.vendorListVersion);
 
     done();

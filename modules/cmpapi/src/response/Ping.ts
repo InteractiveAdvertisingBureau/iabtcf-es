@@ -26,7 +26,7 @@ export class Ping extends Response {
   /**
    * version of the CMP API that is supported; e.g. “2”
    */
-  public apiVersion: number = CmpApiModel.apiVersion;
+  public apiVersion: string = '' + CmpApiModel.apiVersion;
 
   /**
    * Version of the GVL currently loaded by the CMP
