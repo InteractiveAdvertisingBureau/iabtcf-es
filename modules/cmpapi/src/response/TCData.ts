@@ -10,6 +10,7 @@ import {EventStatus, CmpStatus} from '../status';
 export class TCData extends Response {
 
   public tcString: string;
+  public listenerId: number;
   public eventStatus: EventStatus;
   public cmpStatus: CmpStatus;
   public isServiceSpecific: Booleany;
@@ -59,13 +60,15 @@ export class TCData extends Response {
   /**
    * Constructor to create a TCData object from a TCModel
    * @param {number[]} vendorIds - if not undefined, will be used to filter vendor ids
+   * @param {number} listenerId - if there is a listenerId to add
    */
-  public constructor(vendorIds?: number[]) {
+  public constructor(vendorIds?: number[], listenerId?: number) {
 
     super();
 
     this.eventStatus = CmpApiModel.eventStatus;
     this.cmpStatus = CmpApiModel.cmpStatus;
+    this.listenerId = listenerId;
 
     if (CmpApiModel.gdprApplies) {
 
@@ -171,7 +174,7 @@ export class TCData extends Response {
    * Creates a string bit field with a value for each id where each value is
    * '1' if its id is in the passed in vector Can be overwritten to return a
    * string
-   * @param {Vector }vector
+   * @param {Vector} vector
    * @param {number[]} ids filter
    * @return {BooleanVector | string}
    */

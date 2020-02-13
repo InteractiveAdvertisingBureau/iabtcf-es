@@ -2,37 +2,37 @@ import {AddEventListenerCommand} from '../../src/command/AddEventListenerCommand
 import {RemoveEventListenerCommand} from '../../src/command/RemoveEventListenerCommand';
 import {TCDataCallback} from '../../src/callback';
 import {CmpApiModel} from '../../src/CmpApiModel';
-import {TCModelFactory} from '@iabtcf/testing';
+import {TCData} from '../../src/response';
+import {TCStringFactory} from '@iabtcf/testing';
 import {expect} from 'chai';
 
 describe('command->RemoveEventListenerCommand', (): void => {
 
   it('should remove a queued TCDataCallback', (done: () => void): void => {
 
-    CmpApiModel.tcModel = TCModelFactory.noGVL();
+    CmpApiModel.tcString = TCStringFactory.base();
 
-    const tcDataCallback: TCDataCallback = function(): void {
+    const tcDataCallback: TCDataCallback = function(tcData: TCData): void {
 
-      expect.fail('Should not have been called'); ;
+      expect(tcData.listenerId, 'listenerId').to.equal(1);
 
-      done();
+      const listenerId = tcData.listenerId;
+
+      // is queued
+      expect(CmpApiModel.eventQueue.size, 'CmpApiModel.eventQueue.size after AddEventListenerCommand').to.equal(1);
+
+      new RemoveEventListenerCommand((success: boolean): void => {
+
+        expect(success, 'success').to.be.true;
+        // is dequeued
+        expect(CmpApiModel.eventQueue.size, 'CmpApiModel.eventQueue.size after RemoveEventListenerCommand').to.equal(0);
+        done();
+
+      }, listenerId);
 
     };
 
     new AddEventListenerCommand(tcDataCallback);
-
-    // is queued
-    expect(CmpApiModel.eventQueue.size, 'CmpApiModel.eventQueue.size after AddEventListenerCommand').to.equal(1);
-
-    new RemoveEventListenerCommand((success: boolean): void => {
-
-      expect(success, 'success').to.be.true;
-      // is dequeued
-      expect(CmpApiModel.eventQueue.size, 'CmpApiModel.eventQueue.size after RemoveEventListenerCommand').to.equal(0);
-
-    }, tcDataCallback);
-
-    done();
 
   });
 
@@ -41,26 +41,25 @@ describe('command->RemoveEventListenerCommand', (): void => {
 
     it(`should return result=null and success=false for param=${badParam}`, (done: () => void): void => {
 
-      CmpApiModel.tcModel = TCModelFactory.noGVL();
-
       const tcDataCallback: TCDataCallback = function(): void {
 
-        expect.fail('Should not have been called'); ;
+        // is queued
+        expect(CmpApiModel.eventQueue.size, 'CmpApiModel.eventQueue.size after AddEventListenerCommand').to.equal(1);
 
-        done();
+        new RemoveEventListenerCommand((success: boolean): void => {
+
+          expect(success).to.be.false;
+          expect(CmpApiModel.eventQueue.size, 'CmpApiModel.eventQueue.size after RemoveEventListenerCommand').to.equal(1);
+
+          done();
+
+        }, badParam);
 
       };
 
+      CmpApiModel.tcString = TCStringFactory.base();
+
       new AddEventListenerCommand(tcDataCallback);
-
-      // is queued
-      expect(CmpApiModel.eventQueue.size, 'CmpApiModel.eventQueue.size after AddEventListenerCommand').to.equal(1);
-      new RemoveEventListenerCommand((success: boolean): void => {
-
-        expect(success).to.be.false;
-        done();
-
-      }, badParam);
 
     });
 

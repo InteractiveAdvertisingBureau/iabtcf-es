@@ -8,7 +8,7 @@ describe('CmpApiModel', (): void => {
 
   const assertDefault = (): void => {
 
-    expect(CmpApiModel.apiVersion, 'assert default apiVersion').to.equal(2);
+    expect(CmpApiModel.apiVersion, 'assert default apiVersion').to.equal('2');
     expect(CmpApiModel.tcfPolicyVersion, 'assert default tcfPolicyVersion').to.equal(2);
     expect(CmpApiModel.cmpStatus, 'assert default cmpStatus').to.equal(CmpStatus.LOADING);
     expect(CmpApiModel.displayStatus, 'assert default displayStatus').to.equal(DisplayStatus.HIDDEN);

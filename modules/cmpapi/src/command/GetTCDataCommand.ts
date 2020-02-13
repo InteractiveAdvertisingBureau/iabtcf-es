@@ -7,16 +7,27 @@ import {TCData} from '../response';
 
 export class GetTCDataCommand extends Command {
 
+  private listenerId: number;
+  private isSuccess: boolean;
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public constructor(callback: Callback, param?: any) {
+  public constructor(callback: Callback, param?: any, listenerId?: number) {
 
     super(callback, param);
 
+    this.listenerId = listenerId;
+
     new PolyFill();
+
+    if (this.isSuccess) {
+
+      this.sendData();
+
+    }
 
   }
 
-  protected success(): void {
+  private sendData(): void {
 
     const callback = this.callback as TCDataCallback;
     const tcModel = CmpApiModel.tcModel as TCModel;
@@ -26,16 +37,22 @@ export class GetTCDataCommand extends Command {
       tcModel.gvl = new GVL(tcModel.vendorListVersion);
       tcModel.gvl.readyPromise
         .then(
-          (): void => callback(new TCData(this.param), true),
+          (): void => callback(new TCData(this.param, this.listenerId), true),
           this.fail,
         )
         .catch(this.fail);
 
     } else {
 
-      callback(new TCData(this.param), true);
+      callback(new TCData(this.param, this.listenerId), true);
 
     }
+
+  }
+
+  protected success(): void {
+
+    this.isSuccess = true;
 
   }
 

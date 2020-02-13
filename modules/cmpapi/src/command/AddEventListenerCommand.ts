@@ -6,21 +6,11 @@ export class AddEventListenerCommand extends GetTCDataCommand {
 
   protected success(): void {
 
-    CmpApiModel.eventQueue.add(this.callback as TCDataCallback);
+    const listenerId = CmpApiModel.eventQueue.add(this.callback as TCDataCallback);
 
-    if (! CmpApiModel.queueCommand) {
+    if (CmpApiModel.tcModel !== undefined) {
 
-      CmpApiModel.queueCommand = (callback: TCDataCallback): void => {
-
-        new GetTCDataCommand(callback);
-
-      };
-
-    }
-
-    if (CmpApiModel.tcModel) {
-
-      new GetTCDataCommand(this.callback);
+      new GetTCDataCommand(this.callback, undefined, listenerId);
 
     }
 

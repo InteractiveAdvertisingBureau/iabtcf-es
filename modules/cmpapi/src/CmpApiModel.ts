@@ -1,6 +1,6 @@
-import {TCModel, TCString, Vector, PurposeRestrictionVector} from '@iabtcf/core';
-import {TCDataCallback} from './callback';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
+import {EventListenerQueue} from './EventListenerQueue';
+import {TCModel, TCString, Vector, PurposeRestrictionVector} from '@iabtcf/core';
 
 /**
  * Class holds shareable data across cmp api and provides change event listener for TcModel.
@@ -9,7 +9,7 @@ import {CmpStatus, DisplayStatus, EventStatus} from './status';
  */
 export class CmpApiModel {
 
-  public static apiVersion = 2;
+  public static apiVersion = '2';
   public static tcfPolicyVersion = 2;
   public static cmpStatus: CmpStatus = CmpStatus.LOADING;
   public static displayStatus: DisplayStatus = DisplayStatus.HIDDEN;
@@ -18,10 +18,7 @@ export class CmpApiModel {
   public static cmpVersion: number;
   public static gdprApplies: boolean;
   public static eventStatus: EventStatus;
-  public static eventQueue: Set<TCDataCallback> = new Set<TCDataCallback>();
-  public static queueCommand: (TCDataCallback) => void;
-
-  public static changeEventCallback: () => void;
+  public static eventQueue = new EventListenerQueue();
 
   private static uiVisible_ = false;
   private static disabled_ = false;
@@ -145,12 +142,7 @@ export class CmpApiModel {
     }
 
     this.cmpStatus = CmpStatus.LOADED;
-
-    if (this.queueCommand) {
-
-      this.eventQueue.forEach(this.queueCommand);
-
-    }
+    this.eventQueue.exec();
 
   }
 
@@ -223,7 +215,6 @@ export class CmpApiModel {
     delete this.cmpVersion;
     delete this.gdprApplies;
     delete this.eventStatus;
-    delete this.changeEventCallback;
 
     this.uiVisible_ = false;
     this.disabled_ = false;
