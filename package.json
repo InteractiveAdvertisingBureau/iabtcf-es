@@ -13,10 +13,7 @@
   ],
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://github.com/chrispaterson/iabtcf",
-  "license": {
-    "type": "Apache-2.0",
-    "url": "https://opensource.org/licenses/apache2.0.php"
-  },
+  "license": "Apache-2.0",
   "scripts": {
     "bump": "./bin/create-version",
     "deploy": "./bin/publish-version",
