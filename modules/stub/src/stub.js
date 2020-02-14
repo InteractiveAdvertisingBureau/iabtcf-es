@@ -3,8 +3,8 @@
   const makeStub = () => {
 
     const TCF_LOCATOR_NAME = '__tcfapiLocator';
-    const win = window;
     const queue = [];
+    let win = window;
     let cmpFrame;
 
     function addFrame() {
