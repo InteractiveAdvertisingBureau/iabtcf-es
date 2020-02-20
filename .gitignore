@@ -5,6 +5,8 @@ modules/**/dist
 modules/**/coverage
 modules/**/node_modules
 modules/**/.nyc_output
+modules/**/package-lock.json
+package-lock.json
 .nyc_output
 coverage
 .nyc_output
