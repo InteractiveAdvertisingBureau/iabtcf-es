@@ -74,10 +74,10 @@ describe('CmpApi', (): void => {
       expect(ping.cmpVersion, 'ping.cmpVersion with stub').to.be.undefined;
       expect(ping.cmpLoaded, 'ping.cmpLoaded with stub').to.be.false;
       expect(ping.gdprApplies, 'ping.gdprApplies with stub').to.be.undefined;
-      expect(ping.cmpStatus, 'ping.cmpStatus with stub').to.equal('stubCMP');
+      expect(ping.cmpStatus, 'ping.cmpStatus with stub').to.equal('stub');
       expect(ping.displayStatus, 'ping.displayStatus with stub').to.be.undefined;
       expect(ping.gvlVersion, 'ping.gvlVersion with stub').to.be.undefined;
-      expect(ping.apiVersion, 'ping.apiVersion with stub').to.equal(2);
+      expect(ping.apiVersion, 'ping.apiVersion with stub').to.equal('2');
 
     });
 
