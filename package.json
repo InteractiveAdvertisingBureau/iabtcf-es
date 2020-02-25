@@ -20,6 +20,7 @@
   "scripts": {
     "build": "yarn workspaces run build",
     "version": "./bin/update-version $npm_package_version",
+    "prepublishOnly": "./bin/publish-version $npm_package_version",
     "docs": "yarn workspace @iabtcf/core run docs && yarn workspace @iabtcf/cmpapi run docs",
     "tidy": "rm -rf modules/**/lib coverage modules/**/coverage .nyc_output modules/**/.nyc_output modules/**/*.log",
     "clean": "rm -rf node_modules modules/**/node_modules && yarn run tidy",
