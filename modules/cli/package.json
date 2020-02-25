@@ -4,10 +4,7 @@
   "description": "Decode a iab TCF (Transparency and Consent Framework) TC String via the command line",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://github.com/chrispaterson/iabtcf/tree/master/modules/cli/",
-  "license": {
-    "type": "Apache-2.0",
-    "url": "https://opensource.org/licenses/apache2.0.php"
-  },
+  "license": "Apache-2.0",
   "bin": {
     "tcstring": "./lib/index.js"
   },

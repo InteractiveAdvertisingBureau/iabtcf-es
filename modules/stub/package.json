@@ -4,10 +4,7 @@
   "description": "CMP API Stub code",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://github.com/chrispaterson/iabtcf/tree/master/modules/cli/",
-  "license": {
-    "type": "Apache-2.0",
-    "url": "https://opensource.org/licenses/apache2.0.php"
-  },
+  "license": "Apache-2.0",
   "main": "lib/stub.js",
   "files": [
     "lib/stub.js"
