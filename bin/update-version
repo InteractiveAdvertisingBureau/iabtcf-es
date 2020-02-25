@@ -1,0 +1,30 @@
+#!/bin/bash
+
+VERSION=$1
+
+if [[ -n $VERSION ]]; then
+
+  # cd to root of repo
+  cd $(git rev-parse --show-toplevel)
+
+  for pkg in ./modules/*; do
+    if [[ -d $pkg ]]; then
+      cd $pkg
+      echo "Changing $pkg/package.json to version $VERSION"
+      json -I -f package.json -e "this.version=\"$VERSION\""
+      cd -
+    fi
+  done
+
+  # cd to root of repo
+  cd $(git rev-parse --show-toplevel)
+
+  # Updated references to other iab libs
+  sed -i '' 's/\(\@iabtcf\/.*\)":\s*.*"/\1": "'$VERSION'"/g' ./modules/**/package.json
+
+  git add -A
+  git commit -m "Bumping to $VERSION"
+else
+  echo "Version was not passed"
+  exit 1
+fi
