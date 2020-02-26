@@ -84,7 +84,7 @@
 
         if (typeof args[2] === 'function') {
 
-          args[2](retr, true);
+          args[2](retr);
 
         }
 
