@@ -182,12 +182,12 @@ export class CmpApi {
 
   private wrapPageCallHandler(): PageCallHandler {
 
-    return (command: string, version: number, callback: Callback, param?: any): void => {
+    return (command: string, version: number, callback: Callback, ...params: any): void => {
 
       // eslint-disable-next-line @typescript-eslint/no-this-alias
       const _this = this;
 
-      _this.pageCallHandler(command, version, callback, param);
+      _this.pageCallHandler(command, version, callback, ...params);
 
     };
 
@@ -200,7 +200,7 @@ export class CmpApi {
    * @param {CallbackFunction} callback
    * @param {any} [param]
    */
-  private pageCallHandler(command: string, version: number, callback: Callback, param?: any): void | never {
+  private pageCallHandler(command: string, version: number, callback: Callback, ...params: any): void | never {
 
     if (typeof command !== 'string') {
 
@@ -224,11 +224,11 @@ export class CmpApi {
 
     if (this.customCommands && this.customCommands[command]) {
 
-      this.customCommands[command](callback, param);
+      this.customCommands[command](callback, ...params);
 
     } else if (CommandMap[command]) {
 
-      new CommandMap[command](callback, param);
+      new CommandMap[command](callback, params[0]);
 
     } else {
 
