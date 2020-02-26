@@ -47,6 +47,10 @@ if [[ -n $VERSION ]]; then
   git tag -a $VERSION -m "Released $VERSION"
   git push origin $VERSION
 
+  git checkout develop
+  git merge master
+  git push
+
 else
   echo "No version passed"
   exit 1
