@@ -55,7 +55,7 @@ export class TCModel extends Cloneable<TCModel> {
    * legitimate interest. If the user has exercised right-to-object for a
    * purpose.
    */
-  public readonly [Fields.purposeLegitimateInterest]: Vector = new Vector();
+  public readonly [Fields.purposeLegitimateInterests]: Vector = new Vector();
 
   /**
    * The user’s consent value for each Purpose established on the legal basis
@@ -69,7 +69,7 @@ export class TCModel extends Cloneable<TCModel> {
    * legitimate interest.  If the user has exercised right-to-object for a
    * purpose.
    */
-  public readonly [Fields.publisherLegitimateInterest]: Vector = new Vector();
+  public readonly [Fields.publisherLegitimateInterests]: Vector = new Vector();
 
   /**
    * The user’s consent value for each Purpose established on the legal basis
@@ -83,7 +83,7 @@ export class TCModel extends Cloneable<TCModel> {
    * legitimate interest.  If the user has exercised right-to-object for a
    * purpose that is established in the publisher's custom purposes.
    */
-  public readonly [Fields.publisherCustomLegitimateInterest]: Vector = new Vector();
+  public readonly [Fields.publisherCustomLegitimateInterests]: Vector = new Vector();
 
   /**
    * set by a publisher if they wish to collect consent and LI Transparency for
@@ -98,11 +98,11 @@ export class TCModel extends Cloneable<TCModel> {
   public readonly [Fields.vendorConsents]: Vector = new Vector();
 
   /**
-   * Each [[Vendor]] is keyed by id. Whether their Legitimate Interest
+   * Each [[Vendor]] is keyed by id. Whether their Legitimate Interests
    * Disclosures have been established is stored as boolean.
    * see: [[Vector]]
    */
-  public readonly [Fields.vendorLegitimateInterest]: Vector = new Vector();
+  public readonly [Fields.vendorLegitimateInterests]: Vector = new Vector();
 
   /**
    * The value included for disclosed vendors signals which vendors have been
@@ -568,24 +568,24 @@ export class TCModel extends Cloneable<TCModel> {
   }
 
   /**
-   * setAllVendorLegitimateInterest - sets all vendors on the GVL LegitimateInterest (true)
+   * setAllVendorLegitimateInterests - sets all vendors on the GVL LegitimateInterests (true)
    *
    * @return {void}
    */
-  public setAllVendorLegitimateInterest(): void {
+  public setAllVendorLegitimateInterests(): void {
 
-    this.vendorLegitimateInterest.setAll<Vendor>(this.gvl.vendors);
+    this.vendorLegitimateInterests.setAll<Vendor>(this.gvl.vendors);
 
   }
 
   /**
-   * unsetAllVendorLegitimateInterest - unsets all vendors on the GVL LegitimateInterest (false)
+   * unsetAllVendorLegitimateInterests - unsets all vendors on the GVL LegitimateInterests (false)
    *
    * @return {void}
    */
-  public unsetAllVendorLegitimateInterest(): void {
+  public unsetAllVendorLegitimateInterests(): void {
 
-    this.vendorLegitimateInterest.empty();
+    this.vendorLegitimateInterests.empty();
 
   }
 
@@ -612,24 +612,24 @@ export class TCModel extends Cloneable<TCModel> {
   }
 
   /**
-   * setAllPurposeLegitimateInterest - sets all purposes on the GVL LI Transparency (true)
+   * setAllPurposeLegitimateInterests - sets all purposes on the GVL LI Transparency (true)
    *
    * @return {void}
    */
-  public setAllPurposeLegitimateInterest(): void {
+  public setAllPurposeLegitimateInterests(): void {
 
-    this.purposeLegitimateInterest.setAll<Purpose>(this.gvl.purposes);
+    this.purposeLegitimateInterests.setAll<Purpose>(this.gvl.purposes);
 
   }
 
   /**
-   * unsetAllPurposeLegitimateInterest - unsets all purposes on the GVL LI Transparency (false)
+   * unsetAllPurposeLegitimateInterests - unsets all purposes on the GVL LI Transparency (false)
    *
    * @return {void}
    */
-  public unsetAllPurposeLegitimateInterest(): void {
+  public unsetAllPurposeLegitimateInterests(): void {
 
-    this.purposeLegitimateInterest.empty();
+    this.purposeLegitimateInterests.empty();
 
   }
 
@@ -655,45 +655,23 @@ export class TCModel extends Cloneable<TCModel> {
 
   }
 
-  /**
-   * setAll - calls:
-   * ```
-    setAllVendorConsents();
-    setAllPurposeLegitimateInterest();
-    setAllSpecialFeatureOptIns();
-    setAllPurposeConsents();
-    setAllVendorLegitimateInterest();
-   * ```
-   * @return {void}
-   */
   public setAll(): void {
 
     this.setAllVendorConsents();
-    this.setAllPurposeLegitimateInterest();
+    this.setAllPurposeLegitimateInterests();
     this.setAllSpecialFeatureOptIns();
     this.setAllPurposeConsents();
-    this.setAllVendorLegitimateInterest();
+    this.setAllVendorLegitimateInterests();
 
   }
 
-  /**
-   * unsetAll - calls:
-   * ```
-    unsetAllVendorConsents();
-    unsetAllPurposeLegitimateInterest();
-    unsetAllSpecialFeatureOptIns();
-    unsetAllPurposeConsents();
-    unsetAllVendorLegitimateInterest();
-   * ```
-   * @return {void}
-   */
   public unsetAll(): void {
 
     this.unsetAllVendorConsents();
-    this.unsetAllPurposeLegitimateInterest();
+    this.unsetAllPurposeLegitimateInterests();
     this.unsetAllSpecialFeatureOptIns();
     this.unsetAllPurposeConsents();
-    this.unsetAllVendorLegitimateInterest();
+    this.unsetAllVendorLegitimateInterests();
 
   }
 

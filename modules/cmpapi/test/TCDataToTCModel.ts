@@ -57,17 +57,17 @@ export class TCDataToTCModel {
     }
 
     this.checkVectorToBooleanVector('purpose.consents', tcModel.purposeConsents, tcData.purpose.consents as BooleanVector);
-    this.checkVectorToBooleanVector('purpose.legitimateInterests', tcModel.purposeLegitimateInterest, tcData.purpose.legitimateInterests as BooleanVector);
+    this.checkVectorToBooleanVector('purpose.legitimateInterests', tcModel.purposeLegitimateInterests, tcData.purpose.legitimateInterests as BooleanVector);
 
     this.checkVectorToBooleanVector('vendor.consents', tcModel.vendorConsents, tcData.vendor.consents as BooleanVector, vendors);
-    this.checkVectorToBooleanVector('vendor.legitimateInterests', tcModel.vendorLegitimateInterest, tcData.vendor.legitimateInterests as BooleanVector, vendors);
+    this.checkVectorToBooleanVector('vendor.legitimateInterests', tcModel.vendorLegitimateInterests, tcData.vendor.legitimateInterests as BooleanVector, vendors);
 
     this.checkVectorToBooleanVector('specialFeatureOptIns', tcModel.specialFeatureOptIns, tcData.specialFeatureOptins as BooleanVector);
 
     this.checkVectorToBooleanVector('publisher.consents', tcModel.publisherConsents, tcData.publisher.consents as BooleanVector);
-    this.checkVectorToBooleanVector('publisher.legitimateInterests', tcModel.publisherLegitimateInterest, tcData.publisher.legitimateInterests as BooleanVector);
+    this.checkVectorToBooleanVector('publisher.legitimateInterests', tcModel.publisherLegitimateInterests, tcData.publisher.legitimateInterests as BooleanVector);
     this.checkVectorToBooleanVector('publisher.customPurpose.consents', tcModel.publisherCustomConsents, tcData.publisher.customPurpose.consents as BooleanVector);
-    this.checkVectorToBooleanVector('publisher.customPurpose.legitimateInterests', tcModel.publisherCustomLegitimateInterest, tcData.publisher.customPurpose.legitimateInterests as BooleanVector);
+    this.checkVectorToBooleanVector('publisher.customPurpose.legitimateInterests', tcModel.publisherCustomLegitimateInterests, tcData.publisher.customPurpose.legitimateInterests as BooleanVector);
 
     if (tcModel.publisherRestrictions.numRestrictions) {
 

@@ -199,10 +199,10 @@ describe('TCModel', (): void => {
   testBoolean('useNonStandardStacks');
 
   testInstanceOf('purposeConsents', Vector);
-  testInstanceOf('purposeLegitimateInterest', Vector);
+  testInstanceOf('purposeLegitimateInterests', Vector);
 
   testInstanceOf('vendorConsents', Vector);
-  testInstanceOf('vendorLegitimateInterest', Vector);
+  testInstanceOf('vendorLegitimateInterests', Vector);
   testInstanceOf('specialFeatureOptIns', Vector);
 
   describe('consentLanguage', (): void => {
@@ -381,9 +381,9 @@ describe('TCModel', (): void => {
 
     const setUnSetAlls = {
       vendorConsents: {gvlKey: 'vendors'},
-      vendorLegitimateInterest: {gvlKey: 'vendors'},
+      vendorLegitimateInterests: {gvlKey: 'vendors'},
       purposeConsents: {gvlKey: 'purposes'},
-      purposeLegitimateInterest: {gvlKey: 'purposes'},
+      purposeLegitimateInterests: {gvlKey: 'purposes'},
       specialFeatureOptIns: {gvlKey: 'specialFeatures'},
     };
 

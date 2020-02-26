@@ -193,14 +193,14 @@ export class CmpApiModel {
     retr = (retr && this.isVector(subject.vendorsAllowed));
     retr = (retr && this.isVector(subject.vendorsDisclosed));
     retr = (retr && this.isVector(subject.purposeConsents));
-    retr = (retr && this.isVector(subject.purposeLegitimateInterest));
+    retr = (retr && this.isVector(subject.purposeLegitimateInterests));
     retr = (retr && this.isVector(subject.vendorConsents));
-    retr = (retr && this.isVector(subject.vendorLegitimateInterest));
+    retr = (retr && this.isVector(subject.vendorLegitimateInterests));
     retr = (retr && this.isVector(subject.specialFeatureOptIns));
     retr = (retr && this.isVector(subject.publisherConsents));
-    retr = (retr && this.isVector(subject.publisherLegitimateInterest));
+    retr = (retr && this.isVector(subject.publisherLegitimateInterests));
     retr = (retr && this.isVector(subject.publisherCustomConsents));
-    retr = (retr && this.isVector(subject.publisherCustomLegitimateInterest));
+    retr = (retr && this.isVector(subject.publisherCustomLegitimateInterests));
     retr = (retr && this.isPurposeRestrictionVector(subject.publisherRestrictions));
 
     return retr;
