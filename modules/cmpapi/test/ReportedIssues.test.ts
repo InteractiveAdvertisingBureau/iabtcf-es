@@ -74,6 +74,7 @@ describe('Reported github issues', (): void => {
         expect(tcData, 'tcData').not.to.be.null;
 
       });
+      done();
 
     };
 
