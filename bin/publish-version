@@ -42,6 +42,11 @@ if [[ -n $VERSION ]]; then
       yarn publish --access public --new-version $VERSION $pkg
     fi
   done
+
+  git push
+  git tag -a $VERSION -m "Released $VERSION"
+  git push origin $VERSION
+
 else
   echo "No version passed"
   exit 1
