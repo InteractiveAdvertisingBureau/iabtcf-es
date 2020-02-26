@@ -77,7 +77,7 @@ describe('CmpApi', (): void => {
       expect(ping.cmpStatus, 'ping.cmpStatus with stub').to.equal('stub');
       expect(ping.displayStatus, 'ping.displayStatus with stub').to.be.undefined;
       expect(ping.gvlVersion, 'ping.gvlVersion with stub').to.be.undefined;
-      expect(ping.apiVersion, 'ping.apiVersion with stub').to.equal('2');
+      expect(ping.apiVersion, 'ping.apiVersion with stub').to.be.undefined;
 
     });
 
