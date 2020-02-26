@@ -95,7 +95,7 @@ describe('encoder/field->PurposeRestrictionVectorEncoder', (): void => {
 
     for (let i =1; i <= vendorLength; i++) {
 
-      prVector.add(i, new PurposeRestriction(makeRandomInt(1, 12), makeRandomInt(0, 2)));
+      prVector.add(i, new PurposeRestriction(makeRandomInt(1, 10), makeRandomInt(0, 2)));
 
     }
 

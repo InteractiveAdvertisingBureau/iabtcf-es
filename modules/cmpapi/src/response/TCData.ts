@@ -100,14 +100,14 @@ export class TCData extends Response {
       this.purpose = {
 
         consents: this.createVectorField(tcModel.purposeConsents),
-        legitimateInterests: this.createVectorField(tcModel.purposeLegitimateInterest),
+        legitimateInterests: this.createVectorField(tcModel.purposeLegitimateInterests),
 
       };
 
       this.vendor = {
 
         consents: this.createVectorField(tcModel.vendorConsents, vendorIds),
-        legitimateInterests: this.createVectorField(tcModel.vendorLegitimateInterest, vendorIds),
+        legitimateInterests: this.createVectorField(tcModel.vendorLegitimateInterests, vendorIds),
 
       };
 
@@ -116,11 +116,11 @@ export class TCData extends Response {
       this.publisher = {
 
         consents: this.createVectorField(tcModel.publisherConsents),
-        legitimateInterests: this.createVectorField(tcModel.publisherLegitimateInterest),
+        legitimateInterests: this.createVectorField(tcModel.publisherLegitimateInterests),
         customPurpose: {
 
           consents: this.createVectorField(tcModel.publisherCustomConsents),
-          legitimateInterests: this.createVectorField(tcModel.publisherCustomLegitimateInterest),
+          legitimateInterests: this.createVectorField(tcModel.publisherCustomLegitimateInterests),
 
         },
         restrictions: this.createRestrictions(tcModel.publisherRestrictions),

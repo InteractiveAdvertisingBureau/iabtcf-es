@@ -44,13 +44,13 @@ export class TCModelFactory {
     tcModel.lastUpdated = new Date(makeRandomInt(tcModel.created.getTime(), now));
 
     tcModel.publisherConsents.set(makeRandomIntArray(1, numPurposes, makeRandomInt(0, numPurposes)));
-    tcModel.publisherLegitimateInterest.set(makeRandomIntArray(1, numPurposes, makeRandomInt(0, numPurposes)));
+    tcModel.publisherLegitimateInterests.set(makeRandomIntArray(1, numPurposes, makeRandomInt(0, numPurposes)));
 
     tcModel.purposeConsents.set(makeRandomIntArray(1, numPurposes, makeRandomInt(0, numPurposes)));
-    tcModel.purposeLegitimateInterest.set(makeRandomIntArray(1, numPurposes, makeRandomInt(0, numPurposes)));
+    tcModel.purposeLegitimateInterests.set(makeRandomIntArray(1, numPurposes, makeRandomInt(0, numPurposes)));
 
     tcModel.vendorConsents.set(makeRandomIntArray(1, numVendors, makeRandomInt(0, numVendors)));
-    tcModel.vendorLegitimateInterest.set(makeRandomIntArray(1, numVendors, makeRandomInt(0, numVendors)));
+    tcModel.vendorLegitimateInterests.set(makeRandomIntArray(1, numVendors, makeRandomInt(0, numVendors)));
 
     tcModel.specialFeatureOptIns.set(makeRandomIntArray(1, numSpecialFeatures, makeRandomInt(0, numSpecialFeatures)));
 

@@ -10,12 +10,12 @@ export class BitLength {
   public static readonly [Fields.lastUpdated]: number = 36;
   public static readonly [Fields.policyVersion]: number = 6;
   public static readonly [Fields.publisherCountryCode]: number = 12;
-  public static readonly [Fields.publisherCustomLegitimateInterest]: number = 24;
+  public static readonly [Fields.publisherCustomLegitimateInterests]: number = 24;
   public static readonly [Fields.publisherCustomConsents]: number = 24;
-  public static readonly [Fields.publisherLegitimateInterest]: number = 24;
+  public static readonly [Fields.publisherLegitimateInterests]: number = 24;
   public static readonly [Fields.publisherConsents]: number = 24;
   public static readonly [Fields.purposeConsents]: number = 24;
-  public static readonly [Fields.purposeLegitimateInterest]: number = 24;
+  public static readonly [Fields.purposeLegitimateInterests]: number = 24;
   public static readonly [Fields.purposeOneTreatment]: number = 1;
   public static readonly [Fields.specialFeatureOptIns]: number = 12;
   public static readonly [Fields.useNonStandardStacks]: number = 1;

@@ -1,4 +1,4 @@
-import {TCString, Vector, PurposeRestriction} from '@iabtcf/core';
+import {TCString, Vector} from '@iabtcf/core';
 import {InAppTCData} from '../src/response/InAppTCData';
 import {CmpApiModel} from '../src/CmpApiModel';
 import {expect} from 'chai';
@@ -31,17 +31,17 @@ export class InAppTCDataToTCModel {
     expect(inAppTCData.outOfBand, 'outOfBand').to.be.undefined;
 
     this.checkVectorToBitField('purpose.consents', tcModel.purposeConsents, inAppTCData.purpose.consents as string);
-    this.checkVectorToBitField('purpose.legitimateInterests', tcModel.purposeLegitimateInterest, inAppTCData.purpose.legitimateInterests as string);
+    this.checkVectorToBitField('purpose.legitimateInterests', tcModel.purposeLegitimateInterests, inAppTCData.purpose.legitimateInterests as string);
 
     this.checkVectorToBitField('vendor.consents', tcModel.vendorConsents, inAppTCData.vendor.consents as string);
-    this.checkVectorToBitField('vendor.legitimateInterests', tcModel.vendorLegitimateInterest, inAppTCData.vendor.legitimateInterests as string);
+    this.checkVectorToBitField('vendor.legitimateInterests', tcModel.vendorLegitimateInterests, inAppTCData.vendor.legitimateInterests as string);
 
     this.checkVectorToBitField('specialFeatureOptIns', tcModel.specialFeatureOptIns, inAppTCData.specialFeatureOptins as string);
 
     this.checkVectorToBitField('publisher.consents', tcModel.publisherConsents, inAppTCData.publisher.consents as string);
-    this.checkVectorToBitField('publisher.legitimateInterests', tcModel.publisherLegitimateInterest, inAppTCData.publisher.legitimateInterests as string);
+    this.checkVectorToBitField('publisher.legitimateInterests', tcModel.publisherLegitimateInterests, inAppTCData.publisher.legitimateInterests as string);
     this.checkVectorToBitField('publisher.customPurpose.consents', tcModel.publisherCustomConsents, inAppTCData.publisher.customPurpose.consents as string);
-    this.checkVectorToBitField('publisher.customPurpose.legitimateInterests', tcModel.publisherCustomLegitimateInterest, inAppTCData.publisher.customPurpose.legitimateInterests as string);
+    this.checkVectorToBitField('publisher.customPurpose.legitimateInterests', tcModel.publisherCustomLegitimateInterests, inAppTCData.publisher.customPurpose.legitimateInterests as string);
 
     if (tcModel.publisherRestrictions.numRestrictions) {
 

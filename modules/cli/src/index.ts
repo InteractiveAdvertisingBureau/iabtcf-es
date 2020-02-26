@@ -114,14 +114,14 @@ if (encoded) {
     print('publisherCountryCode', tcModel.publisherCountryCode);
     print('vendorListVersion', tcModel.vendorListVersion);
     print('purposeConsents', tcModel.purposeConsents);
-    print('purposeLegitimateInterest', tcModel.purposeLegitimateInterest);
+    print('purposeLegitimateInterests', tcModel.purposeLegitimateInterests);
     print('specialFeatureOptIns', tcModel.specialFeatureOptIns);
-    print('publisherLegitimateInterest', tcModel.publisherLegitimateInterest);
+    print('publisherLegitimateInterests', tcModel.publisherLegitimateInterests);
     print('publisherCustomConsents', tcModel.publisherCustomConsents);
     print('publisherConsents', tcModel.publisherConsents);
-    print('publisherCustomLegitimateInterest', tcModel.publisherCustomLegitimateInterest);
+    print('publisherCustomLegitimateInterests', tcModel.publisherCustomLegitimateInterests);
     print('vendorConsents', tcModel.vendorConsents);
-    print('vendorLegitimateInterest', tcModel.vendorLegitimateInterest);
+    print('vendorLegitimateInterests', tcModel.vendorLegitimateInterests);
     print('vendorsDisclosed', tcModel.vendorsDisclosed);
     print('vendorsAllowed', tcModel.vendorsAllowed);
 

@@ -29,9 +29,9 @@ export class TCString {
     /**
      * Purpose 1 is never allowed to be true for legitimate interest
      */
-    if (tcModel[Fields.purposeLegitimateInterest].has(1)) {
+    if (tcModel[Fields.purposeLegitimateInterests].has(1)) {
 
-      tcModel[Fields.purposeLegitimateInterest].unset(1);
+      tcModel[Fields.purposeLegitimateInterests].unset(1);
 
     }
 

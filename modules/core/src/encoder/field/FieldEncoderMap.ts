@@ -22,20 +22,20 @@ export class FieldEncoderMap {
   public static readonly [Fields.useNonStandardStacks]: typeof BooleanEncoder = BooleanEncoder;
   public static readonly [Fields.specialFeatureOptIns]: typeof FixedVectorEncoder = FixedVectorEncoder;
   public static readonly [Fields.purposeConsents]: typeof FixedVectorEncoder = FixedVectorEncoder;
-  public static readonly [Fields.purposeLegitimateInterest]: typeof FixedVectorEncoder = FixedVectorEncoder;
+  public static readonly [Fields.purposeLegitimateInterests]: typeof FixedVectorEncoder = FixedVectorEncoder;
   public static readonly [Fields.purposeOneTreatment]: typeof BooleanEncoder = BooleanEncoder;
   public static readonly [Fields.publisherCountryCode]: typeof LangEncoder = LangEncoder;
   public static readonly [Fields.vendorConsents]: typeof VendorVectorEncoder = VendorVectorEncoder;
-  public static readonly [Fields.vendorLegitimateInterest]: typeof VendorVectorEncoder = VendorVectorEncoder;
+  public static readonly [Fields.vendorLegitimateInterests]: typeof VendorVectorEncoder = VendorVectorEncoder;
   public static readonly [Fields.publisherRestrictions]: typeof PurposeRestrictionVectorEncoder
   = PurposeRestrictionVectorEncoder;
   public static readonly segmentType: typeof IntEncoder = IntEncoder;
   public static readonly [Fields.vendorsDisclosed]: typeof VendorVectorEncoder = VendorVectorEncoder;
   public static readonly [Fields.vendorsAllowed]: typeof VendorVectorEncoder = VendorVectorEncoder;
   public static readonly [Fields.publisherConsents]: typeof FixedVectorEncoder = FixedVectorEncoder;
-  public static readonly [Fields.publisherLegitimateInterest]: typeof FixedVectorEncoder = FixedVectorEncoder;
+  public static readonly [Fields.publisherLegitimateInterests]: typeof FixedVectorEncoder = FixedVectorEncoder;
   public static readonly [Fields.numCustomPurposes]: typeof IntEncoder = IntEncoder;
   public static readonly [Fields.publisherCustomConsents]: typeof FixedVectorEncoder = FixedVectorEncoder;
-  public static readonly [Fields.publisherCustomLegitimateInterest]: typeof FixedVectorEncoder = FixedVectorEncoder;
+  public static readonly [Fields.publisherCustomLegitimateInterests]: typeof FixedVectorEncoder = FixedVectorEncoder;
 
 }
