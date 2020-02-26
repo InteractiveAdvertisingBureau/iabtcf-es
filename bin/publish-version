@@ -11,6 +11,10 @@ if [[ -n $VERSION ]]; then
   git checkout master
   git merge develop
 
+  echo
+  echo "Changing package.json to version $VERSION"
+  json -I -f package.json -e "this.version=\"$VERSION\""
+
   for pkg in ./modules/*; do
     if [[ -d $pkg ]]; then
 
@@ -38,6 +42,11 @@ if [[ -n $VERSION ]]; then
       yarn publish --access public --new-version $VERSION $pkg
     fi
   done
+
+  git push
+  git tag -a $VERSION -m "Released $VERSION"
+  git push origin $VERSION
+
 else
   echo "No version passed"
   exit 1
