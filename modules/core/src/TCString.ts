@@ -26,7 +26,16 @@ export class TCString {
 
     }
 
-    if (!tcModel.isServiceSpecific || includeDisclosedVendors) {
+    /**
+     * Purpose 1 is never allowed to be true for legitimate interest
+     */
+    if (tcModel[Fields.purposeLegitimateInterest].has(1)) {
+
+      tcModel[Fields.purposeLegitimateInterest].unset(1);
+
+    }
+
+    if (!tcModel[Fields.isServiceSpecific] || includeDisclosedVendors) {
 
       /**
        * Sets vendorsDisclosed
