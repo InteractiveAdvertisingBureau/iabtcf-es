@@ -7,15 +7,12 @@ import {TCData} from '../response';
 
 export class GetTCDataCommand extends Command {
 
-  private listenerId: number;
   private isSuccess: boolean;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public constructor(callback: Callback, param?: any, listenerId?: number) {
 
-    super(callback, param);
-
-    this.listenerId = listenerId;
+    super(callback, param, listenerId);
 
     new PolyFill();
 

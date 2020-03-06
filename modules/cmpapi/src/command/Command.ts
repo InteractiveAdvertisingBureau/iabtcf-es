@@ -7,15 +7,17 @@ export abstract class Command {
 
   protected versionString: string;
   protected callback: Callback;
+  protected listenerId: number;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected param?: any;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public constructor(callback: Callback, param?: any) {
+  public constructor(callback: Callback, param?: any, listenerId?: number) {
 
     this.callback = callback;
     this.param = param;
+    this.listenerId = listenerId;
 
     if (this.isValid()) {
 

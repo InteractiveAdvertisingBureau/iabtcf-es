@@ -11,9 +11,8 @@ describe('command->RemoveEventListenerCommand', (): void => {
   it('should remove a queued TCDataCallback', (done: () => void): void => {
 
     CmpApiModel.tcString = TCStringFactory.base();
-    debugger;
 
-    const tcDataCallback: TCDataCallback = function(tcData: TCData): void {
+    new AddEventListenerCommand(function(tcData: TCData): void {
 
       expect(tcData.listenerId, 'listenerId').to.equal(1);
 
@@ -31,9 +30,7 @@ describe('command->RemoveEventListenerCommand', (): void => {
 
       }, listenerId);
 
-    };
-
-    new AddEventListenerCommand(tcDataCallback);
+    });
 
   });
 
