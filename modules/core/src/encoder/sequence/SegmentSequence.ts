@@ -14,7 +14,7 @@ export class SegmentSequence implements SequenceVersionMap {
     Segments.core,
   ]
 
-  public constructor(tcModel: TCModel, isForSaving: boolean) {
+  public constructor(tcModel: TCModel, isForSaving = false, includeDisclosedVendors = false) {
 
     if (+tcModel.version === 2) {
 
@@ -25,6 +25,12 @@ export class SegmentSequence implements SequenceVersionMap {
          * stored in the cookie and would be transmitted if it's not for
          * storage
          */
+
+        if (includeDisclosedVendors) {
+
+          this['2'].push(Segments.vendorsDisclosed);
+
+        }
 
         this['2'].push(Segments.publisherTC);
 

@@ -31,10 +31,10 @@ export function run(): void {
       expect(BitLength.numRestrictions, 'numRestrictions').to.equal(12);
       expect(BitLength.policyVersion, 'policyVersion').to.equal(6);
       expect(BitLength.publisherCountryCode, 'publisherCountryCode').to.equal(12);
-      expect(BitLength.publisherLegitimateInterest, 'publisherLegitimateInterest').to.equal(24);
+      expect(BitLength.publisherLegitimateInterests, 'publisherLegitimateInterests').to.equal(24);
       expect(BitLength.purposeConsents, 'purposeConsents').to.equal(24);
       expect(BitLength.purposeId, 'purposeId').to.equal(6);
-      expect(BitLength.purposeLegitimateInterest, 'purposeLegitimateInterest').to.equal(24);
+      expect(BitLength.purposeLegitimateInterests, 'purposeLegitimateInterests').to.equal(24);
       expect(BitLength.purposeOneTreatment, 'purposeOneTreatment').to.equal(1);
       expect(BitLength.restrictionType, 'restrictionType').to.equal(2);
       expect(BitLength.segmentType, 'segmentType').to.equal(3);

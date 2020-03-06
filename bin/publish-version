@@ -4,14 +4,53 @@ VERSION=$1
 
 if [[ -n $VERSION ]]; then
 
-  # cd to root of repo
-  cd $(git rev-parse --show-toplevel)
+  ROOT=$(git rev-parse --show-toplevel)
+
+  cd $ROOT
+
+  git checkout master
+  git merge develop
+
+  echo
+  echo "Changing package.json to version $VERSION"
+  json -I -f package.json -e "this.version=\"$VERSION\""
+
+  for pkg in ./modules/*; do
+    if [[ -d $pkg ]]; then
+
+      echo
+      cd $pkg
+      echo "Changing $pkg/package.json to version $VERSION"
+      json -I -f package.json -e "this.version=\"$VERSION\""
+      cd -
+    fi
+  done
+
+  cd $ROOT
+
+  # Updated references to other iab libs
+  sed -i '' 's/\(\@iabtcf\/.*\)":\s*.*"/\1": "'$VERSION'"/g' ./modules/**/package.json
+
+  yarn build
+  yarn test
+
+  git add -A
+  git commit -m "Bumping to $VERSION"
 
   for pkg in ./modules/*; do
     if [[ -d $pkg ]]; then
       yarn publish --access public --new-version $VERSION $pkg
     fi
   done
+
+  git push
+  git tag -a $VERSION -m "Released $VERSION"
+  git push origin $VERSION
+
+  git checkout develop
+  git merge master
+  git push
+
 else
   echo "No version passed"
   exit 1

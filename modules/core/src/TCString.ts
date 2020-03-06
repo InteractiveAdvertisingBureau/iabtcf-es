@@ -16,7 +16,7 @@ import {TCModel} from './TCModel';
  */
 export class TCString {
 
-  private static preEncode(tcModel: TCModel): TCModel | never {
+  private static preEncode(tcModel: TCModel, includeDisclosedVendors: boolean): TCModel | never {
 
     tcModel = tcModel.clone();
 
@@ -26,14 +26,23 @@ export class TCString {
 
     }
 
-    if (!tcModel.isServiceSpecific) {
+    /**
+     * Purpose 1 is never allowed to be true for legitimate interest
+     */
+    if (tcModel[Fields.purposeLegitimateInterests].has(1)) {
+
+      tcModel[Fields.purposeLegitimateInterests].unset(1);
+
+    }
+
+    if (!tcModel[Fields.isServiceSpecific] || includeDisclosedVendors) {
 
       /**
        * Sets vendorsDisclosed
        *
-       * If this is a globally-scoped string (not service-specific) then we
-       * will set the vendorsDisclosed segement with all the vendors that were
-       * disclosed to the user
+       * If this is a globally-scoped string (not service-specific) or they
+       * want to explicitly include it then we will set the vendorsDisclosed
+       * segement with all the vendors that were disclosed to the user
        */
 
       const vIds: number[] = Object.keys(tcModel.gvl.vendors).map((vId: string): number => parseInt(vId, 10));
@@ -53,14 +62,16 @@ export class TCString {
    * String is meant for storage (true) or meant to be handed to AdTech through
    * the tcfapi (true).  This will modify which segments are handed back with
    * the string.
+   * @param {boolean} includeDisclosedVendors - whether or not to include
+   * disclosedVendors when the serviceSpecific flag is true
    * @return {string} - base64url encoded Transparency and Consent String
    */
-  public static encode(tcModel: TCModel, isForSaving?: boolean): string {
+  public static encode(tcModel: TCModel, isForSaving = false, includeDisclosedVendors = false): string {
 
-    tcModel = this.preEncode(tcModel);
+    tcModel = this.preEncode(tcModel, includeDisclosedVendors);
 
     let out = '';
-    const segSequence: SegmentSequence = new SegmentSequence(tcModel, !!isForSaving);
+    const segSequence: SegmentSequence = new SegmentSequence(tcModel, isForSaving, includeDisclosedVendors);
     const sequence: string[] = segSequence[tcModel.version.toString()];
     const len: number = sequence.length;
 

@@ -11,10 +11,11 @@ describe('encoder/sequence->SegmentSequence', (): void => {
     isForSaving: boolean,
     hasVendorsAllowed: boolean,
     supportOOB: boolean,
+    includeDisclosedVendors: boolean,
     callback: (sequence: string[]) => void): void => {
 
     // eslint-disable-next-line max-len
-    it(`should be this when: v${version}, isServiceSpecific=${isServiceSpecific}, isForSaving=${isForSaving}, hasVendorsAllowed=${hasVendorsAllowed}, supportOOB=${supportOOB}`, (): void => {
+    it(`should be this when: v${version}, isServiceSpecific=${isServiceSpecific}, isForSaving=${isForSaving}, hasVendorsAllowed=${hasVendorsAllowed}, supportOOB=${supportOOB}, includeDisclosedVendors=${includeDisclosedVendors}`, (): void => {
 
       const tcModel = new TCModel();
 
@@ -27,14 +28,14 @@ describe('encoder/sequence->SegmentSequence', (): void => {
 
       }
 
-      const sSequence = new SegmentSequence(tcModel, isForSaving);
+      const sSequence = new SegmentSequence(tcModel, isForSaving, includeDisclosedVendors);
       callback(sSequence[version]);
 
     });
 
   };
 
-  const numValues = 5;
+  const numValues = 6;
   const total = 1 << numValues;
   const powSet: boolean[][] = [];
 
@@ -59,8 +60,9 @@ describe('encoder/sequence->SegmentSequence', (): void => {
     const isForSaving = boolSet[2];
     const hasVendorsAllowed = boolSet[3];
     const supportOOB = boolSet[4];
+    const includeDisclosedVendors = boolSet[5];
 
-    const boolStr = `version: ${version}, isServiceSpecific=${isServiceSpecific}, isForSaving=${isForSaving}, hasVendorsAllowed=${hasVendorsAllowed}, supportOOB=${supportOOB}`;
+    const boolStr = `version: ${version}, isServiceSpecific=${isServiceSpecific}, isForSaving=${isForSaving}, hasVendorsAllowed=${hasVendorsAllowed}, supportOOB=${supportOOB}, includeDisclosedVendors=${includeDisclosedVendors}`;
 
     runPerm(
       version,
@@ -68,6 +70,7 @@ describe('encoder/sequence->SegmentSequence', (): void => {
       isForSaving,
       hasVendorsAllowed,
       supportOOB,
+      includeDisclosedVendors,
       (sequence: string[]): void => {
 
         expect(sequence.length, `sequence.length - ${boolStr}`).to.not.equal(0);
@@ -81,8 +84,18 @@ describe('encoder/sequence->SegmentSequence', (): void => {
 
           if (isServiceSpecific) {
 
-            expect(sequence.length, `sequence.length - ${boolStr}`).to.equal(2);
-            expect(sequence[1], `sequence[1] - ${boolStr}`).to.equal(Segments.publisherTC);
+            if (includeDisclosedVendors) {
+
+              expect(sequence.length, `sequence.length - ${boolStr}`).to.equal(3);
+              expect(sequence[1], `sequence[1] - ${boolStr}`).to.equal(Segments.vendorsDisclosed);
+              expect(sequence[2], `sequence[2] - ${boolStr}`).to.equal(Segments.publisherTC);
+
+            } else {
+
+              expect(sequence.length, `sequence.length - ${boolStr}`).to.equal(2);
+              expect(sequence[1], `sequence[1] - ${boolStr}`).to.equal(Segments.publisherTC);
+
+            }
 
           } else {
 
