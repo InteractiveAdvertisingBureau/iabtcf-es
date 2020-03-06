@@ -8,20 +8,7 @@ import {TCFCommands} from '../src/command/TCFCommands';
 import {expect} from 'chai';
 import {makeRandomInt, TCModelFactory, TCStringFactory} from '@iabtcf/testing';
 import {TCDataToTCModel} from './TCDataToTCModel';
-
-// eslint-disable-next-line max-len
-/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars, no-unused-vars, @typescript-eslint/no-var-requires */
-declare global {
-  interface Window {
-    __tcfapi: (
-      command: any,
-      version: any,
-      callback: (...params: any) => void,
-      ...param: any
-    ) => void;
-
-  }
-}
+import * as stub from '@iabtcf/stub';
 
 const API_FUNCTION_NAME = '__tcfapi';
 const API_VERSION = 2;
@@ -55,7 +42,7 @@ describe('CmpApi', (): void => {
 
   beforeEach((): void => {
 
-    require('@iabtcf/stub')();
+    stub.default();
 
   });
   afterEach((): void => {

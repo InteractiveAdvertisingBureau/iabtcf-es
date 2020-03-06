@@ -1,23 +1,9 @@
 import {CmpApi} from '../src/';
 import {TCData} from '../src/response';
 import {expect} from 'chai';
-
-// eslint-disable-next-line max-len
-/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars, no-unused-vars, @typescript-eslint/no-var-requires */
-declare global {
-  interface Window {
-    __tcfapi: (
-      command: any,
-      version: any,
-      callback: (response?: any, success?: any) => void,
-      param?: any
-    ) => void;
-
-  }
-}
+import * as stub from '@iabtcf/stub';
 
 const API_FUNCTION_NAME = '__tcfapi';
-const API_VERSION = 2;
 
 describe('Reported github issues', (): void => {
 
@@ -48,7 +34,7 @@ describe('Reported github issues', (): void => {
 
   beforeEach((): void => {
 
-    require('@iabtcf/stub')();
+    stub.default();
 
   });
   afterEach((): void => {
@@ -57,7 +43,7 @@ describe('Reported github issues', (): void => {
 
   });
 
-  it('81 Should not throw an exception if TCModel is set to null and getTCData is called', (done: () => void): void => {
+  it('Issue 81 Should not throw an exception if TCModel is set to null and getTCData is called', (done: () => void): void => {
 
     const cmpApi = new CmpApi(100, 105);
 
@@ -69,7 +55,7 @@ describe('Reported github issues', (): void => {
 
     const callGetTCData = (): void => {
 
-      window.__tcfapi('getTCData', 2, (tcData: TCData): void => {
+      window[API_FUNCTION_NAME]('getTCData', 2, (tcData: TCData): void => {
 
         expect(tcData, 'tcData').not.to.be.null;
 
