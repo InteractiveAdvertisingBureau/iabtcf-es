@@ -12,7 +12,7 @@ describe('command->RemoveEventListenerCommand', (): void => {
 
     CmpApiModel.tcString = TCStringFactory.base();
 
-    const tcDataCallback: TCDataCallback = function(tcData: TCData): void {
+    new AddEventListenerCommand(function(tcData: TCData): void {
 
       expect(tcData.listenerId, 'listenerId').to.equal(1);
 
@@ -30,9 +30,7 @@ describe('command->RemoveEventListenerCommand', (): void => {
 
       }, listenerId);
 
-    };
-
-    new AddEventListenerCommand(tcDataCallback);
+    });
 
   });
 
