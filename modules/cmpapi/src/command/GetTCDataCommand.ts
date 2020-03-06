@@ -27,20 +27,27 @@ export class GetTCDataCommand extends Command {
 
   }
 
-  private sendData(): void {
+  private async sendData(): Promise<void> {
 
     const callback = this.callback as TCDataCallback;
     const tcModel = CmpApiModel.tcModel as TCModel;
 
     if (!tcModel.gvl && !CmpApiModel.tcString) {
 
+      debugger;
       tcModel.gvl = new GVL(tcModel.vendorListVersion);
-      tcModel.gvl.readyPromise
-        .then(
-          (): void => callback(new TCData(this.param, this.listenerId), true),
-          this.fail,
-        )
-        .catch(this.fail);
+
+      try {
+
+        await tcModel.gvl.readyPromise;
+
+      } catch (err) {
+
+        this.fail();
+
+      }
+
+      callback(new TCData(this.param, this.listenerId), true);
 
     } else {
 

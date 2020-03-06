@@ -126,7 +126,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    * @param {Promise} resolved when this GVL object is populated with the data
    * or rejected if there is an error.
    */
-  public readyPromise: Promise<void | GVLError>;
+  public readonly readyPromise: Promise<void | GVLError>;
 
   /**
    * @param {number} gvlSpecificationVersion - schema version for the GVL that is used
@@ -267,74 +267,23 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
     this.readyPromise.then((): void => {
 
-      this.cacheLanguage(GVL.DEFAULT_LANGUAGE);
       this.isReady_ = true;
 
     }).catch((): void => {});// eslint-disable-line @typescript-eslint/no-empty-function
 
   }
 
-  /**
-   * emptyLanguageCache
-   *
-   * @param {string} [lang] - Optional ISO 639-1 langauge code to remove from
-   * the cache.  If a falsy value is passed it will empty the entire cache.
-   * @return {boolean} - whether or not the item specified was in the cache and
-   * subsequently removed
-   */
-  public emptyLanguageCache(lang?: string): boolean {
+  private async fetchJson(url: string): Promise<void | Error> {
 
-    let retr = false;
+    try {
 
-    if (lang) {
+      this.deserialize(await Json.fetch(url) as GVL);
 
-      GVL.LANGUAGE_CACHE = new Map<string, Declarations>();
-      retr = true;
+    } catch (err) {
 
-    } else if (GVL.LANGUAGE_CACHE.has(lang as string)) {
-
-      GVL.LANGUAGE_CACHE.delete(lang as string);
-      retr = true;
+      throw new GVLError(err.message);
 
     }
-
-    return retr;
-
-  }
-
-  private cacheLanguage(lang: string): void {
-
-    GVL.LANGUAGE_CACHE.set(lang, {
-      gvlSpecificationVersion: this.gvlSpecificationVersion,
-      vendorListVersion: this.vendorListVersion,
-      tcfPolicyVersion: this.tcfPolicyVersion,
-      lastUpdated: this.lastUpdated,
-      purposes: this.purposes,
-      specialPurposes: this.specialPurposes,
-      features: this.features,
-      specialFeatures: this.specialFeatures,
-      stacks: this.stacks,
-    });
-
-  }
-
-  private fetchJson(url: string): Promise<void | Error> {
-
-    return new Promise((resolve: Function, reject: Function): void => {
-
-      Json.fetch(url).then((response: object): void => {
-
-        this.deserialize(response as GVL);
-        resolve();
-
-      })
-        .catch((err: Error): void => {
-
-          reject(new GVLError(err.message));
-
-        });
-
-    });
 
   }
 
@@ -370,73 +319,39 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    * @return {Promise<void | GVLError>} - returns the `readyPromise` and
    * resolves when this GVL is populated with the data from the language file.
    */
-  public changeLanguage(lang: string): Promise<void | GVLError> {
+  public async changeLanguage(lang: string): Promise<void | GVLError> {
 
     lang = lang.toUpperCase();
 
-    return new Promise((resolve: Function, reject: Function): void => {
+    if (GVL.consentLanguages.has(lang)) {
 
-      if (GVL.consentLanguages.has(lang)) {
+      if (lang !== this.lang_) {
 
-        if (lang !== this.lang_) {
+        if (!GVL.baseUrl) {
 
-          if (GVL.LANGUAGE_CACHE.get(lang) !== undefined) {
+          throw new GVLError('must specify GVL.baseUrl before changing the language');
 
-            const cached: Declarations = GVL.LANGUAGE_CACHE.get(lang) as Declarations;
+        }
 
-            for (const prop in cached) {
+        try {
 
-              if (cached.hasOwnProperty(prop)) {
+          await this.fetchJson(GVL.baseUrl + GVL.languageFilename.replace('[LANG]', lang));
 
-                this[prop] = cached[prop];
+        } catch (err) {
 
-              }
-
-            }
-
-            resolve();
-
-          } else {
-
-            if (!GVL.baseUrl) {
-
-              throw new GVLError('must specify GVL.baseUrl before changing the language');
-
-            }
-
-            // load Language specified
-            const url = GVL.baseUrl + GVL.languageFilename.replace('[LANG]', lang);
-
-            // hooks onto readyPromise
-            this.fetchJson(url).then((): void => {
-
-              this.cacheLanguage(lang);
-              resolve();
-
-            })
-              .catch((err): void => {
-
-                reject(new GVLError('unable to load language: ' + err.message));
-
-              });
-
-          }
-
-        } else {
-
-          resolve();
+          throw new GVLError('unable to load language: ' + err.message);
 
         }
 
         this.lang_ = lang;
 
-      } else {
-
-        throw new GVLError('invalid language');
-
       }
 
-    });
+    } else {
+
+      throw new GVLError('invalid language');
+
+    }
 
   }
 
