@@ -86,4 +86,21 @@ describe('Reported github issues', (): void => {
 
   });
 
+  it('Issue 95 TCString passed into cmpApi should be the same as what comes in a getTCData response', (done: () => void): void => {
+
+    const cmpApi = new CmpApi(makeRandomInt(2, 500), makeRandomInt(2, 500));
+
+    const tcString = 'COv1p75Ov1p75AcABBENAcCMAP_AAAAAAAAAF0EWSQgAYWwho0QUBzBAIYAfJgSCAMgSAAQIoCkFQICERBAEKiAQHAEQJAAAGBAAkACAAQAoHCBMCQABgAARiRCEQECIDRNABIBAggAKYQFAAARmikHC3ZCY702yOmQAAAAA.IF0EWSQgAYWwho0QUBzBAIYAfJgSCAMgSAAQIoCkFQICERBAEKiAQHAEQJAAAGBAAkACAAQAoHCBMCQABgAARiRCEQECIDRNABIBAggAKYQFAAARmikHC3ZCY702yOmQ.YAAAAAAAAAAAAAAAAAA';
+    cmpApi.tcString = tcString;
+
+    window[API_FUNCTION_NAME]('getTCData', 2, (tcData: TCData): void => {
+
+      expect(tcData.tcString, 'tcData.tcString').to.equal(tcString);
+
+      done();
+
+    });
+
+  });
+
 });
