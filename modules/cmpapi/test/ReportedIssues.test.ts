@@ -1,5 +1,6 @@
 import {CmpApi} from '../src/';
-import {TCData} from '../src/response';
+import {Disabled, Response, TCData} from '../src/response';
+import {makeRandomInt} from '@iabtcf/testing';
 import {expect} from 'chai';
 import * as stub from '@iabtcf/stub';
 
@@ -66,6 +67,22 @@ describe('Reported github issues', (): void => {
 
     expect(setTCModelToNull, 'set TCModel to null').not.to.throw();
     expect(callGetTCData, 'getTCData').not.to.throw();
+
+  });
+
+  it('Issue 96 CmpApi should respond to addEventListener call with an error object when in an Error state', (done: () => void): void => {
+
+    const cmpApi = new CmpApi(makeRandomInt(2, 500), makeRandomInt(2, 500));
+
+    cmpApi.disable();
+
+    window[API_FUNCTION_NAME]('addEventListener', 2, (response: Response): void => {
+
+      expect(response instanceof Disabled, 'response instanceof Disabled').to.be.true;
+
+      done();
+
+    });
 
   });
 

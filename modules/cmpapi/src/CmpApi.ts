@@ -2,6 +2,7 @@
 import {Callback, ErrorCallback} from './callback';
 import {CmpApiModel} from './CmpApiModel';
 import {CommandMap} from './command/CommandMap';
+import {DisabledCommand} from './command/DisabledCommand';
 import {CustomCommands} from './CustomCommands';
 import {PolyFill} from '@iabtcf/util';
 import {TCModel} from '@iabtcf/core';
@@ -222,17 +223,25 @@ export class CmpApi {
 
     }
 
-    if (this.customCommands && this.customCommands[command]) {
+    if (!CmpApiModel.disabled) {
 
-      this.customCommands[command](callback, ...params);
+      if (this.customCommands && this.customCommands[command]) {
 
-    } else if (CommandMap[command]) {
+        this.customCommands[command](callback, ...params);
 
-      new CommandMap[command](callback, params[0]);
+      } else if (CommandMap[command]) {
+
+        new CommandMap[command](callback, params[0]);
+
+      } else {
+
+        (callback as ErrorCallback)(`CmpApi does not support the "${command}" command`, false);
+
+      }
 
     } else {
 
-      (callback as ErrorCallback)(`CmpApi does not support the "${command}" command`, false);
+      new DisabledCommand(callback);
 
     }
 
