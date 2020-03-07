@@ -120,14 +120,17 @@ export class CmpApiModel {
       this.gdprApplies = true;
       this.displayStatus = DisplayStatus.HIDDEN;
 
-      // Have we set a TCModel before?
-      if (this.tcModel_ !== undefined) {
+      switch (this.eventStatus) {
 
-        this.eventStatus = EventStatus.USER_ACTION_COMPLETE;
-
-      } else {
-
-        this.eventStatus = EventStatus.TC_LOADED;
+        case undefined:
+          this.eventStatus = EventStatus.TC_LOADED;
+          break;
+        case EventStatus.TC_LOADED:
+          this.eventStatus = EventStatus.CMP_UI_SHOWN;
+          break;
+        case EventStatus.CMP_UI_SHOWN:
+          this.eventStatus = EventStatus.USER_ACTION_COMPLETE;
+          break;
 
       }
 

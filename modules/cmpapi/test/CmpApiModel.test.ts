@@ -104,39 +104,106 @@ describe('CmpApiModel', (): void => {
 
   });
 
-  it(`should set eventStatus to "${EventStatus.USER_ACTION_COMPLETE}" when tcModel is set for a second time`, (done: () => void): void => {
+  it(`should set eventStatus to "${EventStatus.CMP_UI_SHOWN}" when tcModel is set for a second time`, (done: () => void): void => {
 
     assertDefault();
 
     CmpApiModel.tcModel = TCModelFactory.noGVL();
     CmpApiModel.tcModel = TCModelFactory.noGVL();
 
-    expect(CmpApiModel.eventStatus, 'eventStatus after').to.equal(EventStatus.USER_ACTION_COMPLETE);
+    expect(CmpApiModel.eventStatus, 'eventStatus after').to.equal(EventStatus.CMP_UI_SHOWN);
 
     done();
 
   });
 
-  it(`should set eventStatus to "${EventStatus.USER_ACTION_COMPLETE}" when tcString is set for a second time`, (done: () => void): void => {
+  it(`should set eventStatus to "${EventStatus.CMP_UI_SHOWN}" when tcString is set for a second time`, (done: () => void): void => {
 
     assertDefault();
 
     CmpApiModel.tcString = TCStringFactory.base();
     CmpApiModel.tcString = TCStringFactory.base();
 
-    expect(CmpApiModel.eventStatus, 'eventStatus after').to.equal(EventStatus.USER_ACTION_COMPLETE);
+    expect(CmpApiModel.eventStatus, 'eventStatus after').to.equal(EventStatus.CMP_UI_SHOWN);
 
     done();
 
   });
 
-  it(`should set eventStatus to "${EventStatus.USER_ACTION_COMPLETE}" when tcString is first for and tcModel was set the second time and tcString to be empty`, (done: () => void): void => {
+  it(`should set eventStatus to "${EventStatus.CMP_UI_SHOWN}" when tcString is first for and tcModel was set the second time and tcString to be empty`, (done: () => void): void => {
 
     assertDefault();
 
     const tcModel = TCModelFactory.withGVL();
     const tcString = TCStringFactory.base();
 
+    CmpApiModel.tcString = tcString;
+    CmpApiModel.tcModel = tcModel;
+
+    expect(CmpApiModel.eventStatus, 'eventStatus after').to.equal(EventStatus.CMP_UI_SHOWN);
+    expect(CmpApiModel.tcString, 'CmpApiModel.tcString after').to.equal('');
+    expect(CmpApiModel, 'first tcString').not.to.equal(tcString);
+
+    done();
+
+  });
+
+  it(`should set eventStatus to "${EventStatus.CMP_UI_SHOWN}" when tcModel is first for and tcString was set the second time and tcString should be the latest value`, (done: () => void): void => {
+
+    assertDefault();
+
+    const tcString = TCStringFactory.base();
+
+    CmpApiModel.tcModel = TCModelFactory.withGVL();
+    CmpApiModel.tcString = tcString;
+
+    expect(CmpApiModel.eventStatus, 'eventStatus after').to.equal(EventStatus.CMP_UI_SHOWN);
+
+    expect(CmpApiModel.tcString, 'CmpApiModel.tcString after').to.equal(tcString);
+
+    const newTCModel = TCString.decode(tcString);
+    sameDataDiffRef(newTCModel, CmpApiModel.tcModel, 'TCModel', ['bitLength', 'customPurposes']);
+
+    done();
+
+  });
+
+  it(`should set eventStatus to "${EventStatus.USER_ACTION_COMPLETE}" when tcModel is set for a third time`, (done: () => void): void => {
+
+    assertDefault();
+
+    CmpApiModel.tcModel = TCModelFactory.noGVL();
+    CmpApiModel.tcModel = TCModelFactory.noGVL();
+    CmpApiModel.tcModel = TCModelFactory.noGVL();
+
+    expect(CmpApiModel.eventStatus, 'eventStatus after').to.equal(EventStatus.USER_ACTION_COMPLETE);
+
+    done();
+
+  });
+
+  it(`should set eventStatus to "${EventStatus.CMP_UI_SHOWN}" when tcString is set for a third time`, (done: () => void): void => {
+
+    assertDefault();
+
+    CmpApiModel.tcString = TCStringFactory.base();
+    CmpApiModel.tcString = TCStringFactory.base();
+    CmpApiModel.tcString = TCStringFactory.base();
+
+    expect(CmpApiModel.eventStatus, 'eventStatus after').to.equal(EventStatus.USER_ACTION_COMPLETE);
+
+    done();
+
+  });
+
+  it(`should set eventStatus to "${EventStatus.USER_ACTION_COMPLETE}" when tcString is first and second, and tcModel was set on the third time and tcString to be empty`, (done: () => void): void => {
+
+    assertDefault();
+
+    const tcModel = TCModelFactory.withGVL();
+    const tcString = TCStringFactory.base();
+
+    CmpApiModel.tcString = tcString;
     CmpApiModel.tcString = tcString;
     CmpApiModel.tcModel = tcModel;
 
@@ -148,12 +215,13 @@ describe('CmpApiModel', (): void => {
 
   });
 
-  it(`should set eventStatus to "${EventStatus.USER_ACTION_COMPLETE}" when tcModel is first for and tcString was set the second time and tcString should be the latest value`, (done: () => void): void => {
+  it(`should set eventStatus to "${EventStatus.USER_ACTION_COMPLETE}" when tcModel is first and second, and tcString was set the third time and tcString should be the latest value`, (done: () => void): void => {
 
     assertDefault();
 
     const tcString = TCStringFactory.base();
 
+    CmpApiModel.tcModel = TCModelFactory.withGVL();
     CmpApiModel.tcModel = TCModelFactory.withGVL();
     CmpApiModel.tcString = tcString;
 
