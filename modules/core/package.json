@@ -22,9 +22,7 @@
     "test:cov": "rm -rf coverage; nyc --reporter=html mocha `find test -name '*.test.ts'`",
     "test:lcov": "nyc --reporter=lcov mocha `find test -name '*.test.ts'`"
   },
-  "dependencies": {
-    "@iabtcf/util": "1.0.0-beta.16"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@iabtcf/testing": "1.0.0-beta.16",
     "@istanbuljs/nyc-config-typescript": "^0.1.3",

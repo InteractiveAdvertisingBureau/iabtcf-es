@@ -1,7 +1,6 @@
 import {Cloneable} from '../Cloneable';
 import {TCModelError} from '../errors';
 import {IntMap} from './IntMap';
-import {PolyFill} from '@iabtcf/util';
 
 type IdOrIds = number | number[];
 export type IdBoolTuple = [number, boolean];
@@ -11,13 +10,6 @@ export type IdBoolTuple = [number, boolean];
  */
 class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
 
-  public constructor() {
-
-    super();
-
-    new PolyFill();
-
-  }
   /**
    * if this originatd from an encoded string we'll need a place to store the
    * bit length; it can be set and got from here

@@ -1,12 +1,31 @@
 #!/bin/bash
 
 VERSION=$1
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
-if [[ -n $VERSION ]]; then
+if [[ -n $VERSION && $BRANCH == 'develop' ]]; then
 
   ROOT=$(git rev-parse --show-toplevel)
 
   cd $ROOT
+
+  yarn build
+
+  if [[ $? != 0 ]]; then
+    echo
+    echo "Unsuccessful build... Bailing"
+    echo
+    exit 1
+  fi
+
+  yarn test
+
+  if [[ $? != 0 ]]; then
+    echo
+    echo "Unsuccessful tests... Bailing"
+    echo
+    exit 1
+  fi
 
   git checkout master
   git merge develop
