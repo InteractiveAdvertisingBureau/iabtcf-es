@@ -305,10 +305,6 @@ export class GVL extends Cloneable<GVL> implements VendorList {
   private cacheLanguage(lang: string): void {
 
     GVL.LANGUAGE_CACHE.set(lang, {
-      gvlSpecificationVersion: this.gvlSpecificationVersion,
-      vendorListVersion: this.vendorListVersion,
-      tcfPolicyVersion: this.tcfPolicyVersion,
-      lastUpdated: this.lastUpdated,
       purposes: this.purposes,
       specialPurposes: this.specialPurposes,
       features: this.features,
@@ -397,12 +393,6 @@ export class GVL extends Cloneable<GVL> implements VendorList {
             resolve();
 
           } else {
-
-            if (!GVL.baseUrl) {
-
-              throw new GVLError('must specify GVL.baseUrl before changing the language');
-
-            }
 
             // load Language specified
             const url = GVL.baseUrl + GVL.languageFilename.replace('[LANG]', lang);
