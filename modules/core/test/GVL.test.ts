@@ -56,7 +56,7 @@ describe('GVL', (): void => {
 
   });
 
-  it('should fail to build without setting baseUrl', (): void => {
+  it('should fail to intialize without setting baseUrl', (): void => {
 
     // calls constructor
     expect((): void => {
@@ -66,6 +66,7 @@ describe('GVL', (): void => {
     }).to.throw('must specify GVL.baseUrl before loading GVL json');
 
   });
+
   it('should fail to set baseUrl to http://vendorlist.consensu.org/', (): void => {
 
     // calls constructor
@@ -76,6 +77,7 @@ describe('GVL', (): void => {
     }).to.throw('Invalid baseUrl!  You may not pull directly from vendorlist.consensu.org and must provide your own cache');
 
   });
+
   it('should add a trailing slash to baseUrl if one is not there', (): void => {
 
     const myURL = 'http://vendorlist.mysweetcmp.mgr.consensu.org';
@@ -298,30 +300,6 @@ describe('GVL', (): void => {
   langNotOk('US');
   langNotOk('usa');
   langNotOk('..');
-
-  it(`should throw an error if GVL.baseUrl isn't set before changeLaguage() is called`, (done: () => void): void => {
-
-    const gvl: GVL = new GVL(vendorlistJson);
-
-    // must remove it otherwise it won't work
-    gvl.emptyLanguageCache('FR');
-
-    gvl.changeLanguage('FR')
-      .then((): void => {
-
-        expect.fail(`without setting GVL.baseURL, this should have failed: ${GVL.baseUrl}`);
-        done();
-
-      })
-      .catch((err): void => {
-
-        // expect(err).to.be.an.instanceof(GVLError);
-        expect(err.message).to.contain('GVL.baseUrl');
-        done();
-
-      });
-
-  });
 
   it('should not request a file if the language is the same', (): void => {
 

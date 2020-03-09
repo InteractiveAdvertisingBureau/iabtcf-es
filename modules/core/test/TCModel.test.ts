@@ -154,8 +154,7 @@ describe('TCModel', (): void => {
 
     expect((): void => {
 
-      // disabling because it's upset that I'm not doing anything with this
-      // eslint-disable-next-line
+      // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
       const tcModel: TCModel = new TCModel(gvl);
 
     }).to.not.throw();

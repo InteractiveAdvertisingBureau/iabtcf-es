@@ -1,22 +1,12 @@
 import {CmpApiModel} from '../CmpApiModel';
 import {Command} from './Command';
 import {GVL} from '@iabtcf/core';
-import {PolyFill} from '@iabtcf/util';
-import {TCDataCallback, Callback} from '../callback';
+import {TCDataCallback} from '../callback';
 import {TCData} from '../response';
 
 export class GetTCDataCommand extends Command {
 
   private isSuccess: boolean;
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public constructor(callback: Callback, param?: any, listenerId?: number) {
-
-    super(callback, param, listenerId);
-
-    new PolyFill();
-
-  }
 
   /**
    * because the success is an override method and we want to perform some

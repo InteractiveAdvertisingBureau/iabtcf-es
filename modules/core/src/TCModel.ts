@@ -1,7 +1,6 @@
 import {Cloneable} from './Cloneable';
 import {TCModelError} from './errors';
 import {GVL} from './GVL';
-import {PolyFill} from '@iabtcf/util';
 
 import {ConsentLanguages, Fields, IntMap, PurposeRestrictionVector, Vector} from './model';
 import {GVLMapItem, Purpose, Vendor, Feature} from './model/gvl';
@@ -133,8 +132,6 @@ export class TCModel extends Cloneable<TCModel> {
   public constructor(gvl?: GVL) {
 
     super();
-
-    new PolyFill();
 
     if (gvl) {
 
