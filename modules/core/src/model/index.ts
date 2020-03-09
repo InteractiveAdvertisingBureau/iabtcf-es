@@ -1,4 +1,3 @@
-export * from './gvl';
 export * from './BinarySearchTree';
 export * from './ConsentLanguages';
 export * from './Fields';
@@ -7,5 +6,7 @@ export * from './KeyMap';
 export * from './PurposeRestriction';
 export * from './PurposeRestrictionVector';
 export * from './RestrictionType';
-export * from './Segments';
+export * from './Segment';
+export * from './SegmentIDs';
 export * from './Vector';
+export * from './gvl';

@@ -312,54 +312,6 @@ describe('TCModel', (): void => {
 
   });
 
-  describe('version', (): void => {
-
-    const shouldBeOk: (value: number) => void = (value: number): void => {
-
-      it(`should be ok with ${value}`, (): void => {
-
-        const tcModel = new TCModel();
-
-        expect((): void => {
-
-          tcModel.version = value;
-
-        }).not.to.throw();
-
-        expect(tcModel.version).to.equal(value);
-
-      });
-
-    };
-
-    const shouldBeNotOk: (value: number) => void = (value: number): void => {
-
-      it(`should not be ok with ${value}`, (): void => {
-
-        const tcModel = new TCModel();
-        const defaultVersion: number | string = tcModel.version;
-
-        expect((): void => {
-
-          tcModel.version = value;
-
-        }).to.throw();
-
-        // should not be changed
-        expect(tcModel.version).to.equal(defaultVersion);
-
-      });
-
-    };
-
-    shouldBeOk(1);
-    shouldBeOk(2);
-    shouldBeNotOk(0);
-    shouldBeNotOk(3);
-    shouldBeNotOk(1.1);
-
-  });
-
   const runSetAllAndUnsetAll = (): void => {
 
     const gvl: GVL = new GVL(require('@iabtcf/testing/lib/vendorlist/vendor-list.json'));

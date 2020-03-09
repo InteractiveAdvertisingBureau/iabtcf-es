@@ -1,6 +1,6 @@
 import * as sinon from 'sinon';
 import {GVL, TCString, TCModel} from '../src';
-import {GVLFactory, XMLHttpTestTools} from '@iabtcf/testing';
+import {XMLHttpTestTools} from '@iabtcf/testing';
 
 import {expect} from 'chai';
 
@@ -8,25 +8,37 @@ describe('Issues Reported', (): void => {
 
   it('91 TCString.encode use 0 as vendorListVersion instead of gvl', (done: () => void): void => {
 
-    const gvl = GVLFactory.getLatest();
-    gvl.readyPromise.then((): void => {
+    const CMPID = 23;
+    const CMPVERSION = 3;
+    const CONSENTSCREEN = 1;
 
-      const tcModel = new TCModel(gvl as unknown as GVL);
-      tcModel.cmpId = 123;
-      tcModel.cmpVersion = 1;
-      tcModel.consentScreen = 3;
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const vendorlist = require('@iabtcf/testing/lib/vendorlist/vendor-list.json');
+
+    GVL.baseUrl = 'http://mydomain.com/cmp/vendorlist';
+    GVL.latestFilename = 'vendor-list.json';
+    const gvl = new GVL('LATEST');
+    gvl.readyPromise.then(() => {
+
+      const tcModel = new TCModel(gvl);
+      tcModel.cmpId = CMPID;
+      tcModel.cmpVersion = CMPVERSION;
+      tcModel.consentScreen = CONSENTSCREEN;
       const encodedTCString = TCString.encode(tcModel);
 
-      const decodeIt = (): void => {
+      const decodeFunc = (): void => {
 
         TCString.decode(encodedTCString);// Throw error
 
       };
 
-      expect(decodeIt, 'decoding it').not.to.throw;
+      expect(decodeFunc, 'decodeFunc').not.to.throw();
       done();
 
     });
+
+    const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+    req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(vendorlist));
 
   });
 

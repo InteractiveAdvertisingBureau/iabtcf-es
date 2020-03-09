@@ -1,22 +1,23 @@
 import {SequenceVersionMap} from './SequenceVersionMap';
 import {TCModel} from '../../';
+import {EncodingOptions} from '../EncodingOptions';
 import {
-  Segments,
+  Segment,
   Fields,
 } from '../../model';
 
 export class SegmentSequence implements SequenceVersionMap {
 
-  public '1': string[] = [
-    Segments.core,
+  public '1': Segment[] = [
+    Segment.CORE,
   ]
-  public '2': string[] = [
-    Segments.core,
+  public '2': Segment[] = [
+    Segment.CORE,
   ]
 
-  public constructor(tcModel: TCModel, isForSaving = false, includeDisclosedVendors = false) {
+  public constructor(tcModel: TCModel, version: number, options?: EncodingOptions) {
 
-    if (+tcModel.version === 2) {
+    if (version === 2) {
 
       if (tcModel.isServiceSpecific) {
 
@@ -26,15 +27,11 @@ export class SegmentSequence implements SequenceVersionMap {
          * storage
          */
 
-        if (includeDisclosedVendors) {
-
-          this['2'].push(Segments.vendorsDisclosed);
-
-        }
-
-        this['2'].push(Segments.publisherTC);
+        this['2'].push(Segment.PUBLISHER_TC);
 
       } else {
+
+        const isForSaving = (options && options.isForSaving);
 
         /**
          * including vendors disclosed only if it is for saving (to the global
@@ -44,7 +41,7 @@ export class SegmentSequence implements SequenceVersionMap {
          */
         if (isForSaving || tcModel[Fields.supportOOB]) {
 
-          this['2'].push(Segments.vendorsDisclosed);
+          this['2'].push(Segment.VENDORS_DISCLOSED);
 
         }
 
@@ -60,7 +57,7 @@ export class SegmentSequence implements SequenceVersionMap {
            */
           if (tcModel[Fields.supportOOB] && tcModel[Fields.vendorsAllowed].size > 0) {
 
-            this['2'].push(Segments.vendorsAllowed);
+            this['2'].push(Segment.VENDORS_ALLOWED);
 
           }
 
@@ -68,7 +65,7 @@ export class SegmentSequence implements SequenceVersionMap {
            * Always include the publisher TC segment as long as this TC string
            * is not intended to be saved in the global scope.
            */
-          this['2'].push(Segments.publisherTC);
+          this['2'].push(Segment.PUBLISHER_TC);
 
         }
 

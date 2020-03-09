@@ -3,13 +3,12 @@ import {TCModelError} from './errors';
 import {GVL} from './GVL';
 
 import {ConsentLanguages, Fields, IntMap, PurposeRestrictionVector, Vector} from './model';
-import {GVLMapItem, Purpose, Vendor, Feature} from './model/gvl';
+import {Feature, Purpose, Vendor} from './model/gvl';
 
 export type TCModelPropType = number | Date | string | boolean | Vector | PurposeRestrictionVector;
 
 export class TCModel extends Cloneable<TCModel> {
 
-  private static readonly MAX_ENCODING_VERSION: number = 2;
   /**
    * Set of available consent languages published by the IAB
    */
@@ -20,7 +19,7 @@ export class TCModel extends Cloneable<TCModel> {
   private useNonStandardStacks_ = false;
   private purposeOneTreatment_ = false;
   private publisherCountryCode_ = 'AA';
-  private version_: number = TCModel.MAX_ENCODING_VERSION;
+  private version_: number;
   private consentScreen_: number | string = 0;
   private policyVersion_: number | string = 2;
   private consentLanguage_ = 'EN';
@@ -156,14 +155,6 @@ export class TCModel extends Cloneable<TCModel> {
     this.gvl_ = gvl;
     this.publisherRestrictions.gvl = gvl;
 
-    gvl.readyPromise.then((): void => {
-
-      this.vendorListVersion_ = gvl.vendorListVersion;
-      this.policyVersion_ = gvl.tcfPolicyVersion;
-      this.consentLanguage_ = gvl.language;
-
-    });
-
   }
 
   /**
@@ -267,25 +258,33 @@ export class TCModel extends Cloneable<TCModel> {
    */
   public set [Fields.consentLanguage](lang: string) {
 
-    lang = lang.toUpperCase();
+    if (this.gvl) {
 
-    if (TCModel.consentLanguages.has(lang)) {
+      this.gvl.changeLanguage(lang)
+        .then((newLang: string): void => {
 
-      this.consentLanguage_ = lang;
+          this.consentLanguage_ = newLang;
 
-      if (this.gvl && GVL.baseUrl !== undefined) {
-
-        this.gvl.changeLanguage(lang);
-
-      }
+        });
 
     } else {
 
-      throw new TCModelError('consentLanguage', lang);
+      lang = lang.toUpperCase();
+
+      if (TCModel.consentLanguages.has(lang)) {
+
+        this.consentLanguage_ = lang;
+
+      } else {
+
+        throw new TCModelError('consentLanguage', lang);
+
+      }
 
     }
 
   }
+
   public get [Fields.consentLanguage](): string {
 
     return this.consentLanguage_;
@@ -381,34 +380,13 @@ export class TCModel extends Cloneable<TCModel> {
     }
 
   }
+
   public get [Fields.policyVersion](): number | string {
 
     return this.policyVersion_;
 
   }
 
-  /**
-   * Incremented when TC String format changes. Indicates
-   * what encoding format the TCString will follow v1 or v2.  v1 fields will
-   * omit fields.
-   *
-   * @param {number | string} integer
-   *
-   * @throws {TCModelError} if the value is not either 1 or 2
-   */
-  public set [Fields.version](integer: number | string) {
-
-    if (Number.isInteger(+integer) && +integer > 0 && +integer <= TCModel.MAX_ENCODING_VERSION) {
-
-      this.version_ = +integer;
-
-    } else {
-
-      throw new TCModelError('version', integer, `min is 1, max version is ${TCModel.MAX_ENCODING_VERSION}`);
-
-    }
-
-  }
   public get [Fields.version](): number | string {
 
     return this.version_;
@@ -492,6 +470,7 @@ export class TCModel extends Cloneable<TCModel> {
     this.purposeOneTreatment_ = bool;
 
   };
+
   public get [Fields.purposeOneTreatment](): boolean {
 
     return this.purposeOneTreatment_;
@@ -706,18 +685,6 @@ export class TCModel extends Cloneable<TCModel> {
       }
 
     }
-
-  }
-
-  /**
-   * This is a type check I need it to be an 'any'
-   * @param {any} obj
-   * @return {boolean}
-   */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private isGVLMapItem(obj: any): obj is GVLMapItem {
-
-    return typeof obj.id === 'number' && typeof obj.name === 'string';
 
   }
 
