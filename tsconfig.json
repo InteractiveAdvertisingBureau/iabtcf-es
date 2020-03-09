@@ -1,14 +1,12 @@
 {
   "compilerOptions": {
     "target": "ES5",
-    "lib": ["ES6", "DOM", "ES2015.Symbol"],
     "module": "commonjs",
     "moduleResolution": "node",
     "downlevelIteration": true,
     "esModuleInterop": true,
     "preserveConstEnums": true,
     "declaration": true,
-    "forceConsistentCasingInFileNames": true,
-    "sourceMap": true
+    "forceConsistentCasingInFileNames": true
   }
 }

@@ -3,6 +3,23 @@ import {DecodingError, EncodingError} from '../errors';
 export class Base64Url {
 
   private static readonly ONE_BYTE: number = 8;
+  private static btoa(str: string | Buffer): string {
+
+    let buffer;
+
+    if (str instanceof Buffer) {
+
+      buffer = str;
+
+    } else {
+
+      buffer = Buffer.from(str.toString(), 'binary');
+
+    }
+
+    return buffer.toString('base64');
+
+  };
 
   /**
    * encodes an arbitrary-length bitfield string into base64url
@@ -49,7 +66,7 @@ export class Base64Url {
 
     }
 
-    retr = btoa(retr);
+    retr = this.btoa(retr);
 
     // remove trailing '=' for url-safeness
     while (retr.charAt(retr.length - 1) === '=') {
@@ -118,8 +135,8 @@ export class Base64Url {
 
     }
 
-    // Decode Base64
-    str = atob(str);
+    // Decode Base64 – same as atob
+    str = Buffer.from(str, 'base64').toString('binary');
 
     const len: number = str.length;
     let bitField = '';

@@ -4,7 +4,6 @@ import {CmpApiModel} from './CmpApiModel';
 import {CommandMap} from './command/CommandMap';
 import {DisabledCommand} from './command/DisabledCommand';
 import {CustomCommands} from './CustomCommands';
-import {PolyFill} from '@iabtcf/util';
 import {TCModel} from '@iabtcf/core';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -36,8 +35,6 @@ export class CmpApi {
    * @param {CustomCommands} customCommands
    */
   public constructor(cmpId: number, cmpVersion: number, customCommands?: CustomCommands) {
-
-    new PolyFill();
 
     this.throwIfInvalidInt(cmpId, 'cmpId', 2);
     this.throwIfInvalidInt(cmpVersion, 'cmpVersion', 0);

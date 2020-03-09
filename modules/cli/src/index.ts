@@ -18,30 +18,6 @@ for (const arg of args) {
 
 }
 
-global.btoa = (str: string | Buffer): string => {
-
-  let buffer;
-
-  if (str instanceof Buffer) {
-
-    buffer = str;
-
-  } else {
-
-    buffer = Buffer.from(str.toString(), 'binary');
-
-  }
-
-  return buffer.toString('base64');
-
-};
-
-global.atob = (str: string): string => {
-
-  return Buffer.from(str, 'base64').toString('binary');
-
-};
-
 const print = (key: string | number, value: string | number | boolean | object | undefined, indent = 0): void => {
 
   const indentString = '  '.repeat(indent);
