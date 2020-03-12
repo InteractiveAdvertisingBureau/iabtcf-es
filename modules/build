@@ -9,18 +9,6 @@ FILES=$(find lib -name "*.js")
 
 for FILE in $FILES; do
 
-  MAP="$FILE.map"
-  MAP_URL=$(basename $MAP)
-
-  if [ -f $MAP ]; then
-
-    SOURCEMAP_OPTIONS="content='$MAP',url='$MAP_URL'"
-
-  else
-
-    SOURCEMAP_OPTIONS="url='$MAP_URL'"
-
-  fi
-  terser $FILE --ecma 5 -m -c --source-map $SOURCEMAP_OPTIONS -o $FILE
+  terser $FILE --ecma 5 -m -c -o $FILE
 
 done

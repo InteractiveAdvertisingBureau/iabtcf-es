@@ -44,28 +44,26 @@ describe('CmpApiModel', (): void => {
 
   });
 
-  it(`should set displayStatus to "${DisplayStatus.VISIBLE}" and eventStatus to "${EventStatus.CMP_UI_SHOWN}" when uiVisible is set to true`, (done: () => void): void => {
+  it(`should set displayStatus to "${DisplayStatus.VISIBLE}" when uiVisible is set to true`, (done: () => void): void => {
 
     assertDefault();
 
     CmpApiModel.uiVisible = true;
 
     expect(CmpApiModel.displayStatus, 'displayStatus after').to.equal(DisplayStatus.VISIBLE);
-    expect(CmpApiModel.eventStatus, 'eventStatus after').to.equal(EventStatus.CMP_UI_SHOWN);
     expect(CmpApiModel.uiVisible, 'uiVisible after').to.true;
 
     done();
 
   });
 
-  it(`should set displayStatus to "${DisplayStatus.DISABLED}" and eventStatus to "${EventStatus.TC_LOADED}" when uiVisible is set to false`, (done: () => void): void => {
+  it(`should set displayStatus to "${DisplayStatus.DISABLED}" when uiVisible is set to false`, (done: () => void): void => {
 
     assertDefault();
 
     CmpApiModel.uiVisible = false;
 
     expect(CmpApiModel.displayStatus, 'displayStatus after').to.equal(DisplayStatus.DISABLED);
-    expect(CmpApiModel.eventStatus, 'eventStatus after').to.equal(EventStatus.TC_LOADED);
     expect(CmpApiModel.uiVisible, 'uiVisible after').to.false;
 
     done();

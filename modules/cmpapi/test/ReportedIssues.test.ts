@@ -1,6 +1,7 @@
 import {CmpApi} from '../src/';
+import {CmpApiModel} from '../src/CmpApiModel';
 import {Disabled, Response, TCData} from '../src/response';
-import {makeRandomInt} from '@iabtcf/testing';
+import {makeRandomInt, TCModelFactory} from '@iabtcf/testing';
 import {expect} from 'chai';
 import * as stub from '@iabtcf/stub';
 
@@ -41,6 +42,7 @@ describe('Reported github issues', (): void => {
   afterEach((): void => {
 
     removeStub();
+    CmpApiModel.reset();
 
   });
 
@@ -83,6 +85,27 @@ describe('Reported github issues', (): void => {
       done();
 
     });
+
+  });
+
+  it('Should not throw an error if getTCData is called before a tcModel is set', (done: () => void): void => {
+
+    const cmpAPI = new CmpApi(makeRandomInt(2, 500), makeRandomInt(2, 500));
+
+    const callDatFunc = (): void => {
+
+      window[API_FUNCTION_NAME]('getTCData', 2, (response: Response): void => {
+
+        expect(response instanceof TCData, 'response instanceof TCData').to.be.true;
+
+        done();
+
+      });
+
+    };
+
+    expect(callDatFunc, 'call getTCData').not.to.throw();
+    cmpAPI.tcModel = TCModelFactory.withGVL();
 
   });
 
