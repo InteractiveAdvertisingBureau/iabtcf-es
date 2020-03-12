@@ -267,8 +267,6 @@ export class TCModel extends Cloneable<TCModel> {
    */
   public set [Fields.consentLanguage](lang: string) {
 
-    lang = lang.toUpperCase();
-
     if (TCModel.consentLanguages.has(lang)) {
 
       this.consentLanguage_ = lang;

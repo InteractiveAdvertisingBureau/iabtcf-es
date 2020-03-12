@@ -368,8 +368,6 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    */
   public changeLanguage(lang: string): Promise<void | GVLError> {
 
-    lang = lang.toUpperCase();
-
     return new Promise((resolve: Function, reject: Function): void => {
 
       if (GVL.consentLanguages.has(lang)) {
