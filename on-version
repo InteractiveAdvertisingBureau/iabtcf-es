@@ -1,0 +1,22 @@
+#!/bin/bash
+
+ROOT=$(git rev-parse --show-toplevel)
+
+cd $ROOT
+
+for pkg in ./modules/*; do
+  if [[ -d $pkg ]]; then
+
+    echo
+    cd $pkg
+    echo "Changing $pkg/package.json to version $npm_package_version"
+    json -I -f package.json -e "this.version=\"$npm_package_version\""
+    cd -
+  fi
+done
+
+# Updated references to other iab libs
+sed -i '' 's/\(\@iabtcf\/.*\)":\s*.*"/\1": "'$npm_package_version'"/g' ./modules/**/package.json
+
+git add -A
+git commit --amend --no-edit

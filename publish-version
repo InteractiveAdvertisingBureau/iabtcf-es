@@ -1,76 +1,60 @@
 #!/bin/bash
 
-VERSION=$1
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
+DIFF=$(git diff HEAD)
+ROOT=$(git rev-parse --show-toplevel)
+CWD=$(pwd)
 
-if [[ -n $VERSION && $BRANCH == 'develop' ]]; then
 
-  ROOT=$(git rev-parse --show-toplevel)
+if [[ -n $DIFF ]]; then
 
-  cd $ROOT
-
-  yarn build
-
-  if [[ $? != 0 ]]; then
-    echo
-    echo "Unsuccessful build... Bailing"
-    echo
-    exit 1
-  fi
-
-  yarn test
-
-  if [[ $? != 0 ]]; then
-    echo
-    echo "Unsuccessful tests... Bailing"
-    echo
-    exit 1
-  fi
-
-  git checkout master
-  git merge develop
-
-  echo
-  echo "Changing package.json to version $VERSION"
-  json -I -f package.json -e "this.version=\"$VERSION\""
-
-  for pkg in ./modules/*; do
-    if [[ -d $pkg ]]; then
-
-      echo
-      cd $pkg
-      echo "Changing $pkg/package.json to version $VERSION"
-      json -I -f package.json -e "this.version=\"$VERSION\""
-      cd -
-    fi
-  done
-
-  cd $ROOT
-
-  # Updated references to other iab libs
-  sed -i '' 's/\(\@iabtcf\/.*\)":\s*.*"/\1": "'$VERSION'"/g' ./modules/**/package.json
-
-  yarn build
-  yarn test
-
-  git add -A
-  git commit -m "Bumping to $VERSION"
-
-  for pkg in ./modules/*; do
-    if [[ -d $pkg ]]; then
-      yarn publish --access public --new-version $VERSION $pkg
-    fi
-  done
-
-  git push
-  git tag -a $VERSION -m "Released $VERSION"
-  git push origin $VERSION
-
-  git checkout develop
-  git merge master
-  git push
-
-else
-  echo "No version passed"
+  echo 'There are unstaged changed, please commit changes before publishing'
   exit 1
 fi
+
+if [[ -z $npm_package_version ]]; then
+
+  echo 'Unable to determine package version to publish'
+  exit 1
+fi
+
+cd $ROOT
+
+if [[ $BRANCH != 'develop' ]]; then
+  git checkout develop
+fi
+
+yarn build
+
+if [[ $? != 0 ]]; then
+  echo
+  echo "Unsuccessful build... Bailing"
+  echo
+  exit 1
+fi
+
+yarn test
+
+if [[ $? != 0 ]]; then
+  echo
+  echo "Unsuccessful tests... Bailing"
+  echo
+  exit 1
+fi
+
+git push
+git checkout master
+git merge develop
+
+for pkg in ./modules/*; do
+  if [[ -d $pkg ]]; then
+    yarn publish --access public --new-version $npm_package_version $pkg
+  fi
+done
+
+git push
+git tag -a $npm_package_version -m "Released $npm_package_version"
+git push origin $npm_package_version
+
+git checkout $BRANCH
+cd $CWD
