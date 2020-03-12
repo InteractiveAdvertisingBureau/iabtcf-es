@@ -366,67 +366,56 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    * @return {Promise<void | GVLError>} - returns the `readyPromise` and
    * resolves when this GVL is populated with the data from the language file.
    */
-  public changeLanguage(lang: string): Promise<void | GVLError> {
+  public async changeLanguage(lang: string): Promise<void | GVLError> {
 
-    lang = lang.toUpperCase();
+    const langUpper = lang.toUpperCase();
 
-    return new Promise((resolve: Function, reject: Function): void => {
+    if (GVL.consentLanguages.has(langUpper)) {
 
-      if (GVL.consentLanguages.has(lang)) {
+      if (langUpper !== this.lang_) {
 
-        if (lang !== this.lang_) {
+        if (GVL.LANGUAGE_CACHE.get(langUpper) !== undefined) {
 
-          if (GVL.LANGUAGE_CACHE.get(lang) !== undefined) {
+          const cached: Declarations = GVL.LANGUAGE_CACHE.get(langUpper) as Declarations;
 
-            const cached: Declarations = GVL.LANGUAGE_CACHE.get(lang) as Declarations;
+          for (const prop in cached) {
 
-            for (const prop in cached) {
+            if (cached.hasOwnProperty(prop)) {
 
-              if (cached.hasOwnProperty(prop)) {
-
-                this[prop] = cached[prop];
-
-              }
+              this[prop] = cached[prop];
 
             }
-
-            resolve();
-
-          } else {
-
-            // load Language specified
-            const url = GVL.baseUrl + GVL.languageFilename.replace('[LANG]', lang);
-
-            // hooks onto readyPromise
-            this.fetchJson(url).then((): void => {
-
-              this.cacheLanguage(lang);
-              resolve();
-
-            })
-              .catch((err): void => {
-
-                reject(new GVLError('unable to load language: ' + err.message));
-
-              });
 
           }
 
         } else {
 
-          resolve();
+          // load Language specified
+          const url = GVL.baseUrl + GVL.languageFilename.replace('[LANG]', lang);
+
+          try {
+
+            await this.fetchJson(url);
+
+            this.cacheLanguage(langUpper);
+
+          } catch (err) {
+
+            throw new GVLError('unable to load language: ' + err.message);
+
+          }
 
         }
 
-        this.lang_ = lang;
-
-      } else {
-
-        throw new GVLError('invalid language');
-
       }
 
-    });
+      this.lang_ = langUpper;
+
+    } else {
+
+      throw new GVLError(`unsupported language ${lang}`);
+
+    }
 
   }
 

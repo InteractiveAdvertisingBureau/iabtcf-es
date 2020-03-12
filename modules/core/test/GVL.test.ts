@@ -232,25 +232,26 @@ describe('GVL', (): void => {
     GVL.baseUrl = 'http://sweetcmp.com';
 
     const gvl: GVL = new GVL(vendorlistJson);
-    const language = 'FR';
+    const language = 'fr';
+    const languageUpperCase = language.toUpperCase();
 
     expect(gvl.language).to.equal(GVL.DEFAULT_LANGUAGE);
 
     gvl.changeLanguage(language)
       .then((): void => {
 
-        expect(gvl.purposes, 'purposes should match').to.deep.equal(translationJson.purposes);
-        expect(gvl.specialPurposes, 'specialPurposes should match').to.deep.equal(translationJson.specialPurposes);
-        expect(gvl.features, 'features should match').to.deep.equal(translationJson.features);
-        expect(gvl.specialFeatures, 'specialFeatures should match').to.deep.equal(translationJson.specialFeatures);
-        expect(gvl.stacks, 'stacks should match').to.deep.equal(translationJson.stacks);
+        expect(gvl.purposes, 'gvl.purposes').to.deep.equal(translationJson.purposes);
+        expect(gvl.specialPurposes, 'gvl.specialPurposes').to.deep.equal(translationJson.specialPurposes);
+        expect(gvl.features, 'gvl.features').to.deep.equal(translationJson.features);
+        expect(gvl.specialFeatures, 'gvl.specialFeatures').to.deep.equal(translationJson.specialFeatures);
+        expect(gvl.stacks, 'gvl.stacks').to.deep.equal(translationJson.stacks);
 
-        expect(gvl.purposes, 'purposes should match').to.not.deep.equal(vendorlistJson.purposes);
-        expect(gvl.specialPurposes, 'specialPurposes should match').to.not.deep.equal(vendorlistJson.specialPurposes);
-        expect(gvl.features, 'features should match').to.not.deep.equal(vendorlistJson.features);
-        expect(gvl.specialFeatures, 'specialFeatures should match').to.not.deep.equal(vendorlistJson.specialFeatures);
+        expect(gvl.purposes, 'gvl.purposes').to.not.deep.equal(vendorlistJson.purposes);
+        expect(gvl.specialPurposes, 'gvl.specialPurposes').to.not.deep.equal(vendorlistJson.specialPurposes);
+        expect(gvl.features, 'gvl.features').to.not.deep.equal(vendorlistJson.features);
+        expect(gvl.specialFeatures, 'gvl.specialFeatures').to.not.deep.equal(vendorlistJson.specialFeatures);
 
-        expect(gvl.language).to.equal(language);
+        expect(gvl.language, 'gvl.language').to.equal(languageUpperCase);
 
         done();
 
@@ -283,7 +284,7 @@ describe('GVL', (): void => {
       gvl.changeLanguage(language)
         .catch((err): void => {
 
-          expect(err.message).to.contain('invalid');
+          expect(err.message).to.contain('unsupported');
 
           done();
 
