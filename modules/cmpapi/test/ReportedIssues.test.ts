@@ -1,11 +1,13 @@
-import {CmpApi} from '../src/';
-import {CmpApiModel} from '../src/CmpApiModel';
-import {Disabled, Response, TCData} from '../src/response';
-import {makeRandomInt, TCModelFactory} from '@iabtcf/testing';
-import {expect} from 'chai';
 import * as stub from '@iabtcf/stub';
+import {CmpApiModel} from '../src/CmpApiModel';
+import {CmpApi} from '../src/';
+import {Disabled, Response, TCData} from '../src/response';
+import {TCString} from '@iabtcf/core';
+import {expect} from 'chai';
+import {makeRandomInt, GVLFactory, TCModelFactory, XMLHttpTestTools} from '@iabtcf/testing';
 
 const API_FUNCTION_NAME = '__tcfapi';
+const API_VERSION = 2;
 
 describe('Reported github issues', (): void => {
 
@@ -106,6 +108,32 @@ describe('Reported github issues', (): void => {
 
     expect(callDatFunc, 'call getTCData').not.to.throw();
     cmpAPI.tcModel = TCModelFactory.withGVL();
+
+  });
+
+  it('Issue 72 TCString from getTCData does not match TCString used to decode TCModel', (done: () => void): void => {
+
+    const cmpId = makeRandomInt(2, 100);
+    const cmpVersion = makeRandomInt(0, 15);
+    const cmpApi = new CmpApi(cmpId, cmpVersion);
+    const encodedString = 'COvZp2vOvZp2vDIAAAFRAPCMAFIAAEoAAAAAAVEUQQgAIQCBgBgAGACRAIAAgQAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw.YAAAAAAAAAAAAAAAAAA';
+    const tcModel = TCString.decode(encodedString);
+    const json = GVLFactory.getVersion(+tcModel.vendorListVersion).getJson();
+
+    cmpApi.tcModel = tcModel;
+
+    window[API_FUNCTION_NAME]('getTCData', API_VERSION, (tcData: TCData): void => {
+
+      expect(tcData.tcString, 'tcData.tcString').to.equal(encodedString);
+      done();
+
+    });
+
+    expect(XMLHttpTestTools.requests.length).to.equal(1);
+
+    const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+
+    req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(json));
 
   });
 
