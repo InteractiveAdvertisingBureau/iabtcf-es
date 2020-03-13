@@ -11,13 +11,13 @@ export class CmpApiModel {
 
   public static apiVersion = '2';
   public static tcfPolicyVersion = 2;
+  public static eventStatus: EventStatus;
   public static cmpStatus: CmpStatus = CmpStatus.LOADING;
   public static displayStatus: DisplayStatus = DisplayStatus.HIDDEN;
 
   public static cmpId: number;
   public static cmpVersion: number;
   public static gdprApplies: boolean;
-  public static eventStatus: EventStatus;
   public static eventQueue = new EventListenerQueue();
 
   private static uiVisible_ = false;
@@ -55,12 +55,10 @@ export class CmpApiModel {
     if (bool) {
 
       this.displayStatus = DisplayStatus.VISIBLE;
-      this.eventStatus = EventStatus.CMP_UI_SHOWN;
 
     } else {
 
       this.displayStatus = DisplayStatus.DISABLED;
-      this.eventStatus = EventStatus.TC_LOADED;
 
     }
 
@@ -120,14 +118,17 @@ export class CmpApiModel {
       this.gdprApplies = true;
       this.displayStatus = DisplayStatus.HIDDEN;
 
-      // Have we set a TCModel before?
-      if (this.tcModel_ !== undefined) {
+      switch (this.eventStatus) {
 
-        this.eventStatus = EventStatus.USER_ACTION_COMPLETE;
-
-      } else {
-
-        this.eventStatus = EventStatus.TC_LOADED;
+        case undefined:
+          this.eventStatus = EventStatus.TC_LOADED;
+          break;
+        case EventStatus.TC_LOADED:
+          this.eventStatus = EventStatus.CMP_UI_SHOWN;
+          break;
+        case EventStatus.CMP_UI_SHOWN:
+          this.eventStatus = EventStatus.USER_ACTION_COMPLETE;
+          break;
 
       }
 

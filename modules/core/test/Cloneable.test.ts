@@ -1,4 +1,4 @@
-import {Cloneable} from '../src/Cloneable';
+// import {Cloneable} from '../src/Cloneable';
 import {expect} from 'chai';
 
 describe('Cloneable', (): void => {

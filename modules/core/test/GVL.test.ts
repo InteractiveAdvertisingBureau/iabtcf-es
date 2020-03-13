@@ -10,26 +10,13 @@ const vendorlistJson = require('@iabtcf/testing/lib/vendorlist/vendor-list.json'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const translationJson = require('@iabtcf/testing/lib/vendorlist/purposes-fr.json');
 
-const gvlKeys: string[] = [
-  'gvlSpecificationVersion',
-  'vendorListVersion',
-  'tcfPolicyVersion',
-  'lastUpdated',
-  'purposes',
-  'specialPurposes',
-  'features',
-  'specialFeatures',
-  'vendors',
-  'stacks',
-];
-
 describe('GVL', (): void => {
 
   const assertPopulated = (gvl: GVL): void => {
 
-    gvlKeys.forEach((key: string): void => {
+    Object.keys(vendorlistJson).forEach((key: string): void => {
 
-      const msg = `${key} should match`;
+      const msg = `gvl["${key}"]`;
 
       if (key === 'lastUpdated') {
 
@@ -56,7 +43,7 @@ describe('GVL', (): void => {
 
   });
 
-  it('should fail to build without setting baseUrl', (): void => {
+  it('should fail to intialize without setting baseUrl', (): void => {
 
     // calls constructor
     expect((): void => {
@@ -66,6 +53,7 @@ describe('GVL', (): void => {
     }).to.throw('must specify GVL.baseUrl before loading GVL json');
 
   });
+
   it('should fail to set baseUrl to http://vendorlist.consensu.org/', (): void => {
 
     // calls constructor
@@ -76,6 +64,7 @@ describe('GVL', (): void => {
     }).to.throw('Invalid baseUrl!  You may not pull directly from vendorlist.consensu.org and must provide your own cache');
 
   });
+
   it('should add a trailing slash to baseUrl if one is not there', (): void => {
 
     const myURL = 'http://vendorlist.mysweetcmp.mgr.consensu.org';
@@ -230,25 +219,26 @@ describe('GVL', (): void => {
     GVL.baseUrl = 'http://sweetcmp.com';
 
     const gvl: GVL = new GVL(vendorlistJson);
-    const language = 'FR';
+    const language = 'fr';
+    const languageUpperCase = language.toUpperCase();
 
     expect(gvl.language).to.equal(GVL.DEFAULT_LANGUAGE);
 
     gvl.changeLanguage(language)
       .then((): void => {
 
-        expect(gvl.purposes, 'purposes should match').to.deep.equal(translationJson.purposes);
-        expect(gvl.specialPurposes, 'specialPurposes should match').to.deep.equal(translationJson.specialPurposes);
-        expect(gvl.features, 'features should match').to.deep.equal(translationJson.features);
-        expect(gvl.specialFeatures, 'specialFeatures should match').to.deep.equal(translationJson.specialFeatures);
-        expect(gvl.stacks, 'stacks should match').to.deep.equal(translationJson.stacks);
+        expect(gvl.purposes, 'gvl.purposes').to.deep.equal(translationJson.purposes);
+        expect(gvl.specialPurposes, 'gvl.specialPurposes').to.deep.equal(translationJson.specialPurposes);
+        expect(gvl.features, 'gvl.features').to.deep.equal(translationJson.features);
+        expect(gvl.specialFeatures, 'gvl.specialFeatures').to.deep.equal(translationJson.specialFeatures);
+        expect(gvl.stacks, 'gvl.stacks').to.deep.equal(translationJson.stacks);
 
-        expect(gvl.purposes, 'purposes should match').to.not.deep.equal(vendorlistJson.purposes);
-        expect(gvl.specialPurposes, 'specialPurposes should match').to.not.deep.equal(vendorlistJson.specialPurposes);
-        expect(gvl.features, 'features should match').to.not.deep.equal(vendorlistJson.features);
-        expect(gvl.specialFeatures, 'specialFeatures should match').to.not.deep.equal(vendorlistJson.specialFeatures);
+        expect(gvl.purposes, 'gvl.purposes').to.not.deep.equal(vendorlistJson.purposes);
+        expect(gvl.specialPurposes, 'gvl.specialPurposes').to.not.deep.equal(vendorlistJson.specialPurposes);
+        expect(gvl.features, 'gvl.features').to.not.deep.equal(vendorlistJson.features);
+        expect(gvl.specialFeatures, 'gvl.specialFeatures').to.not.deep.equal(vendorlistJson.specialFeatures);
 
-        expect(gvl.language).to.equal(language);
+        expect(gvl.language, 'gvl.language').to.equal(languageUpperCase);
 
         done();
 
@@ -281,7 +271,7 @@ describe('GVL', (): void => {
       gvl.changeLanguage(language)
         .catch((err): void => {
 
-          expect(err.message).to.contain('invalid');
+          expect(err.message).to.contain('unsupported');
 
           done();
 
@@ -298,30 +288,6 @@ describe('GVL', (): void => {
   langNotOk('US');
   langNotOk('usa');
   langNotOk('..');
-
-  it(`should throw an error if GVL.baseUrl isn't set before changeLaguage() is called`, (done: () => void): void => {
-
-    const gvl: GVL = new GVL(vendorlistJson);
-
-    // must remove it otherwise it won't work
-    gvl.emptyLanguageCache('FR');
-
-    gvl.changeLanguage('FR')
-      .then((): void => {
-
-        expect.fail(`without setting GVL.baseURL, this should have failed: ${GVL.baseUrl}`);
-        done();
-
-      })
-      .catch((err): void => {
-
-        // expect(err).to.be.an.instanceof(GVLError);
-        expect(err.message).to.contain('GVL.baseUrl');
-        done();
-
-      });
-
-  });
 
   it('should not request a file if the language is the same', (): void => {
 

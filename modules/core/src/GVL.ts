@@ -126,7 +126,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    * @param {Promise} resolved when this GVL object is populated with the data
    * or rejected if there is an error.
    */
-  public readonly readyPromise: Promise<void | GVLError>;
+  public readyPromise: Promise<void | GVLError>;
 
   /**
    * @param {number} gvlSpecificationVersion - schema version for the GVL that is used
@@ -237,7 +237,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
     if (this.isVendorList(versionOrVendorList as GVL)) {
 
-      this.deserialize(versionOrVendorList as GVL);
+      this.deserialize(versionOrVendorList as Declarations);
       this.isReady_ = true;
       this.readyPromise = Promise.resolve();
 
@@ -267,9 +267,50 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
     this.readyPromise.then((): void => {
 
+      this.cacheLanguage(GVL.DEFAULT_LANGUAGE);
       this.isReady_ = true;
 
     }).catch((): void => {});// eslint-disable-line @typescript-eslint/no-empty-function
+
+  }
+
+  /**
+   * emptyLanguageCache
+   *
+   * @param {string} [lang] - Optional ISO 639-1 langauge code to remove from
+   * the cache.  If a falsy value is passed it will empty the entire cache.
+   * @return {boolean} - whether or not the item specified was in the cache and
+   * subsequently removed
+   */
+  public emptyLanguageCache(lang?: string): boolean {
+
+    let retr = false;
+
+    if (lang) {
+
+      GVL.LANGUAGE_CACHE = new Map<string, Declarations>();
+      retr = true;
+
+    } else if (GVL.LANGUAGE_CACHE.has(lang as string)) {
+
+      GVL.LANGUAGE_CACHE.delete(lang as string);
+      retr = true;
+
+    }
+
+    return retr;
+
+  }
+
+  private cacheLanguage(lang: string): void {
+
+    GVL.LANGUAGE_CACHE.set(lang, {
+      purposes: this.purposes,
+      specialPurposes: this.specialPurposes,
+      features: this.features,
+      specialFeatures: this.specialFeatures,
+      stacks: this.stacks,
+    });
 
   }
 
@@ -321,35 +362,52 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    */
   public async changeLanguage(lang: string): Promise<void | GVLError> {
 
-    lang = lang.toUpperCase();
+    const langUpper = lang.toUpperCase();
 
-    if (GVL.consentLanguages.has(lang)) {
+    if (GVL.consentLanguages.has(langUpper)) {
 
-      if (lang !== this.lang_) {
+      if (langUpper !== this.lang_) {
 
-        if (!GVL.baseUrl) {
+        if (GVL.LANGUAGE_CACHE.has(langUpper)) {
 
-          throw new GVLError('must specify GVL.baseUrl before changing the language');
+          const cached: Declarations = GVL.LANGUAGE_CACHE.get(langUpper) as Declarations;
+
+          for (const prop in cached) {
+
+            if (cached.hasOwnProperty(prop)) {
+
+              this[prop] = cached[prop];
+
+            }
+
+          }
+
+        } else {
+
+          // load Language specified
+          const url = GVL.baseUrl + GVL.languageFilename.replace('[LANG]', lang);
+
+          try {
+
+            await this.fetchJson(url);
+
+            this.cacheLanguage(langUpper);
+
+          } catch (err) {
+
+            throw new GVLError('unable to load language: ' + err.message);
+
+          }
 
         }
-
-        try {
-
-          await this.fetchJson(GVL.baseUrl + GVL.languageFilename.replace('[LANG]', lang));
-
-        } catch (err) {
-
-          throw new GVLError('unable to load language: ' + err.message);
-
-        }
-
-        this.lang_ = lang;
 
       }
 
+      this.lang_ = langUpper;
+
     } else {
 
-      throw new GVLError('invalid language');
+      throw new GVLError(`unsupported language ${lang}`);
 
     }
 
@@ -367,19 +425,12 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
   }
 
-  private deserialize(gvlObject: GVL): void {
+  private deserialize(gvlObject: Declarations): void {
 
-    this.gvlSpecificationVersion = gvlObject.gvlSpecificationVersion;
-    this.vendorListVersion = gvlObject.vendorListVersion;
-    this.tcfPolicyVersion = gvlObject.tcfPolicyVersion;
-    this.lastUpdated = gvlObject.lastUpdated;
-
-    if (typeof this.lastUpdated === 'string') {
-
-      this.lastUpdated = new Date(this.lastUpdated);
-
-    }
-
+    /**
+     * these are deserialized regardless of whether it's a Declarations file or
+     * a VendorList
+     */
     this.purposes = gvlObject.purposes;
     this.specialPurposes = gvlObject.specialPurposes;
     this.features = gvlObject.features;
@@ -387,6 +438,17 @@ export class GVL extends Cloneable<GVL> implements VendorList {
     this.stacks = gvlObject.stacks;
 
     if (this.isVendorList(gvlObject)) {
+
+      this.gvlSpecificationVersion = gvlObject.gvlSpecificationVersion;
+      this.tcfPolicyVersion = gvlObject.tcfPolicyVersion;
+      this.vendorListVersion = gvlObject.vendorListVersion;
+      this.lastUpdated = gvlObject.lastUpdated;
+
+      if (typeof this.lastUpdated === 'string') {
+
+        this.lastUpdated = new Date(this.lastUpdated);
+
+      }
 
       this.vendors_ = gvlObject.vendors;
       this.fullVendorList = gvlObject.vendors;

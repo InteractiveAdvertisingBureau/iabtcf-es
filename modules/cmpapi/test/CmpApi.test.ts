@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {CmpApi, CustomCommands} from '../src/';
 import {CmpApiModel} from '../src/CmpApiModel';
 import {Ping} from '../src/response/Ping';
@@ -8,20 +9,7 @@ import {TCFCommands} from '../src/command/TCFCommands';
 import {expect} from 'chai';
 import {makeRandomInt, TCModelFactory, TCStringFactory} from '@iabtcf/testing';
 import {TCDataToTCModel} from './TCDataToTCModel';
-
-// eslint-disable-next-line max-len
-/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars, no-unused-vars, @typescript-eslint/no-var-requires */
-declare global {
-  interface Window {
-    __tcfapi: (
-      command: any,
-      version: any,
-      callback: (...params: any) => void,
-      ...param: any
-    ) => void;
-
-  }
-}
+import * as stub from '@iabtcf/stub';
 
 const API_FUNCTION_NAME = '__tcfapi';
 const API_VERSION = 2;
@@ -55,7 +43,7 @@ describe('CmpApi', (): void => {
 
   beforeEach((): void => {
 
-    require('@iabtcf/stub')();
+    stub.default();
 
   });
   afterEach((): void => {
@@ -68,7 +56,7 @@ describe('CmpApi', (): void => {
 
     expect(window[API_FUNCTION_NAME], `window.${API_FUNCTION_NAME} while stub`).to.be.a('function');
 
-    window[API_FUNCTION_NAME]('ping', 2, (ping: Ping): void => {
+    window[API_FUNCTION_NAME](TCFCommands.PING, 2, (ping: Ping): void => {
 
       expect(ping.cmpId, 'ping.cmpId with stub').to.be.undefined;
       expect(ping.cmpVersion, 'ping.cmpVersion with stub').to.be.undefined;
@@ -89,7 +77,7 @@ describe('CmpApi', (): void => {
 
     const cmpId = makeRandomInt(2, 100);
     const cmpVersion = makeRandomInt(0, 15);
-    const cmpApi = new CmpApi(cmpId, cmpVersion);
+    new CmpApi(cmpId, cmpVersion);
 
     expect(window[API_FUNCTION_NAME], `window.${API_FUNCTION_NAME} after cmpApi created`).to.be.a('function');
     window[API_FUNCTION_NAME]('ping', 2, (ping: Ping): void => {
@@ -115,7 +103,7 @@ describe('CmpApi', (): void => {
 
       expect((): void => {
 
-        const cmpApi = new CmpApi(cmpId, cmpVersion);
+        new CmpApi(cmpId, cmpVersion);
 
       }).to.throw();
 
@@ -249,11 +237,37 @@ describe('CmpApi', (): void => {
 
   });
 
+  const runSucceedCommand = (command: any, version: any, because = ''): void => {
+
+    it(`should callback with success=true and result=something if command=${command} and version=${version} because ${because}`, (done: () => void): void => {
+
+      const cmpApi = getCmpApi();
+      cmpApi.tcModel = TCModelFactory.withGVL();
+
+      const callDat = (): void => {
+
+        window[API_FUNCTION_NAME](command, version, (result: any, success: boolean): void => {
+
+          expect(result, 'result').not.to.be.undefined;
+          expect(success, 'success').to.be.true;
+
+          done();
+
+        });
+
+      };
+
+      expect(callDat, 'calling the function with command').not.to.throw();
+
+    });
+
+  };
+
   const runFailCommand = (command: any, version: any, because = ''): void => {
 
     it(`should callback with success=false and result=error message if command=${command} and version=${version} because ${because}`, (done: () => void): void => {
 
-      const cmpApi = getCmpApi();
+      getCmpApi();
       window[API_FUNCTION_NAME](command, version, (result: string, success: boolean): void => {
 
         expect(result, 'result').to.be.a('string');
@@ -274,19 +288,23 @@ describe('CmpApi', (): void => {
   runFailCommand(true, 2, 'command is a boolean');
   runFailCommand(false, 2, 'command is a boolean');
 
-  runFailCommand(TCFCommands.GET_TC_DATA, '2', 'version is a string');
-  runFailCommand(TCFCommands.GET_TC_DATA, 2.1, 'version is a floating point number');
+  runFailCommand(TCFCommands.GET_TC_DATA, 2.1, 'version is a floating point number that is greater than 2');
+  runFailCommand(TCFCommands.GET_TC_DATA, '2.1', 'version is a floating point that doesn\'t evaluate to 2');
   runFailCommand(TCFCommands.GET_TC_DATA, 1, 'version is not supported');
   runFailCommand(TCFCommands.GET_TC_DATA, null, 'version is null');
   runFailCommand(TCFCommands.GET_TC_DATA, true, 'version is a boolean');
   runFailCommand(TCFCommands.GET_TC_DATA, false, 'version is a boolean');
   runFailCommand(TCFCommands.GET_TC_DATA, {}, 'version is an object');
 
+  runSucceedCommand(TCFCommands.GET_TC_DATA, '2', 'is a string but still 2');
+  runSucceedCommand(TCFCommands.GET_TC_DATA, '2.0', 'is a string but still 2');
+  runSucceedCommand(TCFCommands.GET_TC_DATA, 2.0, 'version is a floating point number that evaluates to 2');
+
   const runFailCallback = (callback: any, because = ''): void => {
 
     it(`should throw an error if with callback ${callback} because it\'s ${because}`, (done: () => void): void => {
 
-      const cmpApi = getCmpApi();
+      getCmpApi();
       expect((): void => {
 
         window[API_FUNCTION_NAME](TCFCommands.GET_TC_DATA, 2, callback);
@@ -330,6 +348,8 @@ describe('CmpApi', (): void => {
 
     }, passParam);
 
+    cmpApi.tcModel = TCModelFactory.withGVL();
+
   });
 
   it('should call a custom command through the page interface with multiple parameters', (done: () => void): void => {
@@ -365,6 +385,8 @@ describe('CmpApi', (): void => {
       done();
 
     }, passParam, passParam2, passParam3);
+
+    cmpApi.tcModel = TCModelFactory.withGVL();
 
   });
 

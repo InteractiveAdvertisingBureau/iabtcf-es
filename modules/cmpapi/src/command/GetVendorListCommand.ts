@@ -1,22 +1,12 @@
 import {CmpApiModel} from '../CmpApiModel';
 import {Command} from './Command';
 import {GVL, TCModel} from '@iabtcf/core';
-import {PolyFill} from '@iabtcf/util';
-import {VendorListCallback, Callback} from '../callback';
+import {VendorListCallback} from '../callback';
 
 /**
  * Gets a version of the Global Vendors List
  */
 export class GetVendorListCommand extends Command {
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public constructor(callback: Callback, param?: any) {
-
-    super(callback, param);
-
-    new PolyFill();
-
-  }
 
   protected success(): void {
 

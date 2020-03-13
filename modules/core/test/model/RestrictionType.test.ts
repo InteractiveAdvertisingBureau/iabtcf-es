@@ -1,5 +1,5 @@
+// import {RestrictionType} from '../../src/model/RestrictionType';
 import {expect} from 'chai';
-import {RestrictionType} from '../../src/model/RestrictionType';
 
 describe('model->RestrictionType', (): void => {
 

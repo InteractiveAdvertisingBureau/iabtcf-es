@@ -1,6 +1,6 @@
 {
   "name": "@iabtcf/testing",
-  "version": "1.0.0-beta.13",
+  "version": "1.0.0-beta.19",
   "description": "Shared testing utilities",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://github.com/chrispaterson/iabtcf",
@@ -13,12 +13,11 @@
   ],
   "scripts": {
     "build": "../build ; cp -r src/vendorlist lib/",
-    "prepack": "yarn run build",
     "lint": "eslint `find src -name '*.ts'`",
     "lint:fix": "yarn run lint --fix"
   },
   "dependencies": {
-    "@iabtcf/core": "1.0.0-beta.13",
+    "@iabtcf/core": "1.0.0-beta.19",
     "@types/sinon": "^7.0.13",
     "@types/sinon-chai": "3.2.2",
     "sinon": "^7.3.2",

@@ -130,8 +130,8 @@ The [`TCModel`](https://www.iabtcf.com/api/core/classes/tcmodel.html) leverages 
 The `vendorConsents` property on the `TCModel` is a [`Vector`](https://www.iabtcf.com/api/core/classes/vector.html).  This example illustrates the methods of a [`Vector`](https://www.iabtcf.com/api/core/classes/vector.html). With the exception of the `publisherRestrictions`, which implements a different type of [`PurposeRestrictionVector`](https://www.iabtcf.com/api/core/classes/purposerestrictionvector.html), all of the above Vectors will have this interface and functionality.
 
 ```javascript
-// Give Vendor ID 23 consent
-tcModel.vendorConsents.set(23);
+// Give Vendor ID 24 consent
+tcModel.vendorConsents.set(24);
 
 console.log(tcModel.vendorConsents.has(24)); // true
 console.log(tcModel.vendorConsents.maxId); // 24
@@ -177,7 +177,7 @@ A [Publisher Restriction](https://github.com/InteractiveAdvertisingBureau/GDPR-T
 import {TCModel, PurposeRestriction, RestrictionType} from '@iabtcf/core';
 
 // first you must create a PurposeRestriction
-const purposeRestriction = PurposeRestriction();
+const purposeRestriction = new PurposeRestriction();
 
 purposeRestriction.purposeId = 2;
 purposeRestriction.restrictionType = RestrictionType.NOT_ALLOWED;
@@ -433,5 +433,5 @@ gvl.readyPromise.then(() => {
    * this will output a default all "no" encoded string to the console at the
    * lastest GVL version.
    */
-  comsole.log(encodedTCString);
+  console.log(encodedTCString);
 });

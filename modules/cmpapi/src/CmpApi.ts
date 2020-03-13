@@ -2,8 +2,9 @@
 import {Callback, ErrorCallback} from './callback';
 import {CmpApiModel} from './CmpApiModel';
 import {CommandMap} from './command/CommandMap';
+import {TCFCommands} from './command/TCFCommands';
+import {DisabledCommand} from './command/DisabledCommand';
 import {CustomCommands} from './CustomCommands';
-import {PolyFill} from '@iabtcf/util';
 import {TCModel} from '@iabtcf/core';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -11,7 +12,7 @@ export type PageCallHandler = (
   command: string,
   version: number,
   callback: (response?: any, success?: any) => void,
-  param?: any
+  ...param: any
 ) => void;
 type TcfApiArgs = [string, number, Callback, any];
 type GetQueueFunction = () => TcfApiArgs[];
@@ -26,7 +27,7 @@ export class CmpApi {
   private readonly customCommands: CustomCommands;
   private readonly API_FUNCTION_NAME: string = '__tcfapi';
   private win: Window = window;
-  private stubQueue: TcfApiArgs[];
+  private queuedCalls: TcfApiArgs[];
 
   /**
    * Constructor
@@ -35,8 +36,6 @@ export class CmpApi {
    * @param {CustomCommands} customCommands
    */
   public constructor(cmpId: number, cmpVersion: number, customCommands?: CustomCommands) {
-
-    new PolyFill();
 
     this.throwIfInvalidInt(cmpId, 'cmpId', 2);
     this.throwIfInvalidInt(cmpVersion, 'cmpVersion', 0);
@@ -61,15 +60,15 @@ export class CmpApi {
     try {
 
       // get queued commands
-      this.stubQueue = (this.tcfapi as GetQueueFunction)();
+      this.queuedCalls = (window[this.API_FUNCTION_NAME] as GetQueueFunction)();
 
     } catch (err) {
 
-      // nothing to do here
+      // nothing to do here - we tried... no harm no foul
 
     } finally {
 
-      this.tcfapi = this.wrapPageCallHandler();
+      window[this.API_FUNCTION_NAME] = this.pageCallHandler.bind(this);
 
     }
 
@@ -98,28 +97,28 @@ export class CmpApi {
 
   }
 
-  private get tcfapi(): PageCallHandler {
+  private purgeQueuedCalls(): void {
 
-    return window[this.API_FUNCTION_NAME];
+    if (this.queuedCalls) {
 
-  }
-  private set tcfapi(func: PageCallHandler) {
+      const apiCall = this.pageCallHandler.bind(this);
+      this.queuedCalls.forEach((args: TcfApiArgs): void =>{
 
-    window[this.API_FUNCTION_NAME] = func;
+        const [command, version, callback, params] = args;
 
-  }
+        if (params !== undefined) {
 
-  private purgeStubQueue(): void {
+          apiCall(command, version, callback, ...params);
 
-    if (this.stubQueue) {
+        } else {
 
-      this.stubQueue.forEach((args: TcfApiArgs): void =>{
+          apiCall(command, version, callback);
 
-        this.wrapPageCallHandler()(...args);
+        }
 
       });
 
-      delete this.stubQueue;
+      delete this.queuedCalls;
 
     }
 
@@ -138,7 +137,7 @@ export class CmpApi {
     this.throwIfCmpApiIsDisabled();
     CmpApiModel.tcString = encodedString;
 
-    this.purgeStubQueue();
+    this.purgeQueuedCalls();
 
   }
 
@@ -155,7 +154,7 @@ export class CmpApi {
     this.throwIfCmpApiIsDisabled();
     CmpApiModel.tcModel = tcModel;
 
-    this.purgeStubQueue();
+    this.purgeQueuedCalls();
 
   }
 
@@ -180,16 +179,17 @@ export class CmpApi {
 
   }
 
-  private wrapPageCallHandler(): PageCallHandler {
+  /**
+   * Checks to see if the command exists in either the set of TCF Commands or
+   * if custom commands
+   *
+   * @param {string} command - command to check
+   * @return {boolean} - whether or not this command is known
+   */
+  private isKnownCommand(command: string): boolean {
 
-    return (command: string, version: number, callback: Callback, ...params: any): void => {
-
-      // eslint-disable-next-line @typescript-eslint/no-this-alias
-      const _this = this;
-
-      _this.pageCallHandler(command, version, callback, ...params);
-
-    };
+    return ((this.customCommands !== undefined && this.customCommands[command] !== undefined) ||
+      (CommandMap[command] !== undefined));
 
   }
 
@@ -205,34 +205,72 @@ export class CmpApi {
     if (typeof command !== 'string') {
 
       (callback as ErrorCallback)(`invalid command: ${command}`, false);
-      return;
 
-    }
+    } else if (version != 2) {
 
-    if (version !== 2) {
+      /**
+       * Loosely checking version here on purpose.  If a string is passed
+       * that's probably ok, we don't need strict adherence here.
+       */
 
       (callback as ErrorCallback)(`unsupported version: ${version}`, false);
-      return;
 
-    }
-
-    if (typeof callback !== 'function') {
+    } else if (typeof callback !== 'function') {
 
       throw new Error('invalid callback function');
 
-    }
+    } else if (CmpApiModel.disabled) {
 
-    if (this.customCommands && this.customCommands[command]) {
+      new DisabledCommand(callback);
 
-      this.customCommands[command](callback, ...params);
+    } else if (!this.isKnownCommand(command)) {
 
-    } else if (CommandMap[command]) {
+      /**
+       * This check is here just because the call shouldn't be queued if it's
+       * something we know isn't going to work.  It's kind of like breaking off a bad
+       * relationshipthe instant you know things are not going to work out
+       * instead of letting it linger.
+       */
 
+      (callback as ErrorCallback)(`CmpApi does not support the "${command}" command`, false);
+
+    } else if (command === TCFCommands.PING) {
+
+      /**
+       * if it's a ping we always respond right away regardless of our tcModel
+       * status or other things.
+       */
       new CommandMap[command](callback, params[0]);
+
+    } else if (CmpApiModel.tcModel === undefined) {
+
+      /**
+       * If we are still waiting for the TC data to be set we can push this
+       * onto the queue that we have and once the model is set it'll be called
+       */
+      this.queuedCalls.push([command, version, callback, params]);
 
     } else {
 
-      (callback as ErrorCallback)(`CmpApi does not support the "${command}" command`, false);
+      /**
+       * we've passed the checks and we're firing on all cylinders; now lets
+       * get the appropriate command
+       */
+
+      if (this.customCommands && this.customCommands[command]) {
+
+        this.customCommands[command](callback, ...params);
+
+      } else if (CommandMap[command]) {
+
+        new CommandMap[command](callback, params[0]);
+
+      } else {
+
+        // hopefully this isn't possible
+        throw new Error('unknown error');
+
+      }
 
     }
 
