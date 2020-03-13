@@ -17,6 +17,3 @@ done
 
 # Updated references to other iab libs
 sed -i '' 's/\(\@iabtcf\/.*\)":\s*.*"/\1": "'$npm_package_version'"/g' ./modules/**/package.json
-
-git add -A
-git commit --amend --no-edit
