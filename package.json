@@ -21,7 +21,7 @@
     "lint": "yarn workspaces run lint",
     "test": "yarn && mocha",
     "debug": "ndb mocha",
-    "version": "./bin/version && git add -A && git commit --amend --no-edit",
+    "version": "./bin/version && git add -A && git commit -m $npm_package_version",
     "deploy": "./bin/publish-version",
     "serve:cov": "npx http-server ./coverage/",
     "test:cov": "rm -rf coverage; nyc --reporter html mocha",
