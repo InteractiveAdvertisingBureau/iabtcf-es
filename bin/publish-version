@@ -23,6 +23,14 @@ if [[ $BRANCH != 'develop' ]]; then
   git checkout develop
 fi
 
+yarn lint:fix
+if [[ $? != 0 ]]; then
+  echo
+  echo "Fix yo lint errors"
+  echo
+  exit 1
+fi
+
 yarn build
 
 if [[ $? != 0 ]]; then

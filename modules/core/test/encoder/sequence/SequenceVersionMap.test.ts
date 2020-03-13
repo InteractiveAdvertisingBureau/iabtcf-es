@@ -1,4 +1,4 @@
-import {SequenceVersionMap} from '../../../src/encoder/sequence/SequenceVersionMap';
+// import {SequenceVersionMap} from '../../../src/encoder/sequence/SequenceVersionMap';
 import {expect} from 'chai';
 
 describe('encoder/sequence->SequenceVersionMap', (): void => {

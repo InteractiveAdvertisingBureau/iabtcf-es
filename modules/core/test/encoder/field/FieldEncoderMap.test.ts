@@ -1,4 +1,4 @@
-import {FieldEncoderMap} from '../../../src/encoder/field/FieldEncoderMap';
+// import {FieldEncoderMap} from '../../../src/encoder/field/FieldEncoderMap';
 import {expect} from 'chai';
 
 describe('encoder/field->FieldEncoderMap', (): void => {

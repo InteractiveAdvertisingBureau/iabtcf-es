@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {CmpApi, CustomCommands} from '../src/';
 import {CmpApiModel} from '../src/CmpApiModel';
 import {Ping} from '../src/response/Ping';
@@ -76,7 +77,7 @@ describe('CmpApi', (): void => {
 
     const cmpId = makeRandomInt(2, 100);
     const cmpVersion = makeRandomInt(0, 15);
-    const cmpApi = new CmpApi(cmpId, cmpVersion);
+    new CmpApi(cmpId, cmpVersion);
 
     expect(window[API_FUNCTION_NAME], `window.${API_FUNCTION_NAME} after cmpApi created`).to.be.a('function');
     window[API_FUNCTION_NAME]('ping', 2, (ping: Ping): void => {
@@ -139,7 +140,6 @@ describe('CmpApi', (): void => {
 
     assertStub();
 
-    debugger;
     window[API_FUNCTION_NAME](TCFCommands.GET_TC_DATA, API_VERSION, (tcData: TCData, success: boolean): void => {
 
       expect(success).to.be.true;
@@ -304,7 +304,7 @@ describe('CmpApi', (): void => {
 
     it(`should throw an error if with callback ${callback} because it\'s ${because}`, (done: () => void): void => {
 
-      const cmpApi = getCmpApi();
+      getCmpApi();
       expect((): void => {
 
         window[API_FUNCTION_NAME](TCFCommands.GET_TC_DATA, 2, callback);
