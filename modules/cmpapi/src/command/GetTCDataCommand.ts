@@ -26,8 +26,10 @@ export class GetTCDataCommand extends Command {
 
     if (CmpApiModel.tcModel !== null && !tcModel.gvl && !CmpApiModel.tcString) {
 
+      const consentLanguage = tcModel.consentLanguage;
       tcModel.gvl = new GVL(tcModel.vendorListVersion);
       await tcModel.gvl.readyPromise;
+      tcModel.consentLanguage = consentLanguage;
 
     }
 

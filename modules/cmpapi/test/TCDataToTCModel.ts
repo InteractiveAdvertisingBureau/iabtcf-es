@@ -31,10 +31,15 @@ export class TCDataToTCModel {
     }
 
   }
-  public static equal(vendors?: number[]): void {
+  public static equal(vendors?: number[], tcData?: TCData): void {
 
     const tcModel = CmpApiModel.tcModel;
-    const tcData = new TCData(vendors);
+
+    if (!tcData) {
+
+      tcData = new TCData(vendors);
+
+    }
 
     expect(tcData.tcString, 'tcString').to.equal(TCString.encode(tcModel));
     expect(tcData.eventStatus, 'eventStatus').to.equal(CmpApiModel.eventStatus);
