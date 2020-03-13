@@ -237,7 +237,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
     if (this.isVendorList(versionOrVendorList as GVL)) {
 
-      this.deserialize(versionOrVendorList as GVL);
+      this.deserialize(versionOrVendorList as Declarations);
       this.isReady_ = true;
       this.readyPromise = Promise.resolve();
 
@@ -314,23 +314,17 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
   }
 
-  private fetchJson(url: string): Promise<void | Error> {
+  private async fetchJson(url: string): Promise<void | Error> {
 
-    return new Promise((resolve: Function, reject: Function): void => {
+    try {
 
-      Json.fetch(url).then((response: object): void => {
+      this.deserialize(await Json.fetch(url) as GVL);
 
-        this.deserialize(response as GVL);
-        resolve();
+    } catch (err) {
 
-      })
-        .catch((err: Error): void => {
+      throw new GVLError(err.message);
 
-          reject(new GVLError(err.message));
-
-        });
-
-    });
+    }
 
   }
 
@@ -374,7 +368,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
       if (langUpper !== this.lang_) {
 
-        if (GVL.LANGUAGE_CACHE.get(langUpper) !== undefined) {
+        if (GVL.LANGUAGE_CACHE.has(langUpper)) {
 
           const cached: Declarations = GVL.LANGUAGE_CACHE.get(langUpper) as Declarations;
 
@@ -431,19 +425,12 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
   }
 
-  private deserialize(gvlObject: GVL): void {
+  private deserialize(gvlObject: Declarations): void {
 
-    this.gvlSpecificationVersion = gvlObject.gvlSpecificationVersion;
-    this.vendorListVersion = gvlObject.vendorListVersion;
-    this.tcfPolicyVersion = gvlObject.tcfPolicyVersion;
-    this.lastUpdated = gvlObject.lastUpdated;
-
-    if (typeof this.lastUpdated === 'string') {
-
-      this.lastUpdated = new Date(this.lastUpdated);
-
-    }
-
+    /**
+     * these are deserialized regardless of whether it's a Declarations file or
+     * a VendorList
+     */
     this.purposes = gvlObject.purposes;
     this.specialPurposes = gvlObject.specialPurposes;
     this.features = gvlObject.features;
@@ -451,6 +438,17 @@ export class GVL extends Cloneable<GVL> implements VendorList {
     this.stacks = gvlObject.stacks;
 
     if (this.isVendorList(gvlObject)) {
+
+      this.gvlSpecificationVersion = gvlObject.gvlSpecificationVersion;
+      this.tcfPolicyVersion = gvlObject.tcfPolicyVersion;
+      this.vendorListVersion = gvlObject.vendorListVersion;
+      this.lastUpdated = gvlObject.lastUpdated;
+
+      if (typeof this.lastUpdated === 'string') {
+
+        this.lastUpdated = new Date(this.lastUpdated);
+
+      }
 
       this.vendors_ = gvlObject.vendors;
       this.fullVendorList = gvlObject.vendors;
