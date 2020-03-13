@@ -9,13 +9,16 @@ describe('Issues Reported', (): void => {
 
     GVL.baseUrl = 'http://sweetcmp.com';
 
-    const language = 'FR';
+    const language = 'fr';
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const translationJson = require('@iabtcf/testing/lib/vendorlist/purposes-fr.json');
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const gvl = new GVL(require('@iabtcf/testing/lib/vendorlist/vendor-list.json'));
     const {tcfPolicyVersion, gvlSpecificationVersion} = gvl;
+
+    expect(tcfPolicyVersion, 'tcfPolicyVersion').to.equal(2);
+    expect(gvlSpecificationVersion, 'gvlSpecificationVersion').to.equal(2);
 
     gvl.changeLanguage(language).then((): void => {
 

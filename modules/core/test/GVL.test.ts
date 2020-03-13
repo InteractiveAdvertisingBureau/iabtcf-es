@@ -10,26 +10,13 @@ const vendorlistJson = require('@iabtcf/testing/lib/vendorlist/vendor-list.json'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const translationJson = require('@iabtcf/testing/lib/vendorlist/purposes-fr.json');
 
-const gvlKeys: string[] = [
-  'gvlSpecificationVersion',
-  'vendorListVersion',
-  'tcfPolicyVersion',
-  'lastUpdated',
-  'purposes',
-  'specialPurposes',
-  'features',
-  'specialFeatures',
-  'vendors',
-  'stacks',
-];
-
 describe('GVL', (): void => {
 
   const assertPopulated = (gvl: GVL): void => {
 
-    gvlKeys.forEach((key: string): void => {
+    Object.keys(vendorlistJson).forEach((key: string): void => {
 
-      const msg = `${key} should match`;
+      const msg = `gvl["${key}"]`;
 
       if (key === 'lastUpdated') {
 
