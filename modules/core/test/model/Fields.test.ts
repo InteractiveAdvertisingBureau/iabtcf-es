@@ -1,4 +1,4 @@
-import {Fields} from '../../src/model/Fields';
+// import {Fields} from '../../src/model/Fields';
 import {expect} from 'chai';
 
 describe('model->Fields', (): void => {

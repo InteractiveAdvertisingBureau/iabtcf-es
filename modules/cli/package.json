@@ -1,6 +1,6 @@
 {
   "name": "@iabtcf/cli",
-  "version": "1.0.0-beta.18",
+  "version": "1.0.0-beta.19",
   "description": "Decode a iab TCF (Transparency and Consent Framework) TC String via the command line",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://github.com/chrispaterson/iabtcf/tree/master/modules/cli/",
@@ -13,12 +13,11 @@
   ],
   "scripts": {
     "build": "rm -rf lib ; tsc ; chmod a+x lib/index.js",
-    "prepare": "yarn run build",
     "lint": "eslint `find src -name '*.ts'`",
     "lint:fix": "yarn run lint -- --fix"
   },
   "dependencies": {
-    "@iabtcf/core": "1.0.0-beta.18"
+    "@iabtcf/core": "1.0.0-beta.19"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.10.0",

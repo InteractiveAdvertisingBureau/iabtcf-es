@@ -1,4 +1,4 @@
-import {FieldSequence} from '../../../src/encoder/sequence/FieldSequence';
+// import {FieldSequence} from '../../../src/encoder/sequence/FieldSequence';
 import {expect} from 'chai';
 
 describe('encoder/sequence->FieldSequence', (): void => {

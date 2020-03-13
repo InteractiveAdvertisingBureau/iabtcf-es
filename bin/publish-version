@@ -3,7 +3,6 @@
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 DIFF=$(git diff HEAD)
 ROOT=$(git rev-parse --show-toplevel)
-CWD=$(pwd)
 
 
 if [[ -n $DIFF ]]; then
@@ -22,6 +21,14 @@ cd $ROOT
 
 if [[ $BRANCH != 'develop' ]]; then
   git checkout develop
+fi
+
+yarn lint:fix
+if [[ $? != 0 ]]; then
+  echo
+  echo "Fix yo lint errors"
+  echo
+  exit 1
 fi
 
 yarn build
@@ -48,8 +55,7 @@ git merge develop
 
 for pkg in ./modules/*; do
   if [[ -d $pkg ]]; then
-    #yarn publish --access public --new-version $npm_package_version $pkg
-    echo "would publish $npm_package_version of $pkg"
+    yarn publish --access public --new-version $npm_package_version $pkg
   fi
 done
 
@@ -58,4 +64,3 @@ git tag -a $npm_package_version -m "Released $npm_package_version"
 git push origin $npm_package_version
 
 git checkout $BRANCH
-cd $CWD
