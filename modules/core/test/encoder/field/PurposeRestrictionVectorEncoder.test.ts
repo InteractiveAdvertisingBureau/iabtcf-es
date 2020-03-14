@@ -2,7 +2,8 @@ import {PurposeRestrictionVectorEncoder, IntEncoder} from '../../../src/encoder/
 import {expect} from 'chai';
 import {PurposeRestrictionVector, PurposeRestriction, RestrictionType} from '../../../src/model';
 import {BitLength} from '../../../src/encoder';
-import {makeRandomInt, sameDataDiffRef} from '@iabtcf/testing';
+import {GVL} from '../../../src/GVL';
+import {makeRandomInt, sameDataDiffRef, GVLFactory} from '@iabtcf/testing';
 
 const randomize = (ar: number[]): number[] => {
 
@@ -40,6 +41,8 @@ describe('encoder/field->PurposeRestrictionVectorEncoder', (): void => {
 
     const prVector: PurposeRestrictionVector = new PurposeRestrictionVector();
 
+    prVector.gvl = GVLFactory.getLatest() as unknown as GVL;
+
     for (let i = 0; i < vendors.length; i++) {
 
       prVector.add(vendors[i], purposeRestriction);
@@ -60,30 +63,30 @@ describe('encoder/field->PurposeRestrictionVectorEncoder', (): void => {
     const encoded: string = PurposeRestrictionVectorEncoder.encode(prVector);
     let index = 0;
 
-    expect(encoded).not.to.be.empty;
+    expect(encoded, 'encoded string').not.to.be.empty;
 
     // num restrictions
     const numRestrictions: number = IntEncoder.decode(encoded.substr(index, BitLength.numRestrictions));
 
-    expect(numRestrictions).to.equal(prVector.numRestrictions);
+    expect(numRestrictions, 'numRestrictions').to.equal(prVector.numRestrictions);
     index += BitLength.numRestrictions;
 
     // purposeId
     const purpId: number = IntEncoder.decode(encoded.substr(index, BitLength.purposeId));
 
-    expect(purpId).to.equal(purposeId);
+    expect(purpId, 'purpId').to.equal(purposeId);
     index += BitLength.purposeId;
 
     // restrictionType
     const restrictionType: number = IntEncoder.decode(encoded.substr(index, BitLength.restrictionType));
 
-    expect(restrictionType).to.equal(RestrictionType.NOT_ALLOWED);
+    expect(restrictionType, 'restrictionType').to.equal(RestrictionType.NOT_ALLOWED);
     index += BitLength.restrictionType;
 
     // numEntries
     const numEntries: number = IntEncoder.decode(encoded.substr(index, BitLength.numEntries));
 
-    expect(numEntries).to.equal(2);
+    expect(numEntries, 'numEntries').to.equal(2);
     index += BitLength.numEntries;
 
   });
@@ -92,6 +95,8 @@ describe('encoder/field->PurposeRestrictionVectorEncoder', (): void => {
 
     const vendorLength = 80;
     const prVector: PurposeRestrictionVector = new PurposeRestrictionVector();
+
+    prVector.gvl = GVLFactory.getLatest() as unknown as GVL;
 
     for (let i =1; i <= vendorLength; i++) {
 
