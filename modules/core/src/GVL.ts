@@ -237,7 +237,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
     if (this.isVendorList(versionOrVendorList as GVL)) {
 
-      this.deserialize(versionOrVendorList as GVL);
+      this.deserialize(versionOrVendorList as Declarations);
       this.isReady_ = true;
       this.readyPromise = Promise.resolve();
 
@@ -314,23 +314,17 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
   }
 
-  private fetchJson(url: string): Promise<void | Error> {
+  private async fetchJson(url: string): Promise<void | Error> {
 
-    return new Promise((resolve: Function, reject: Function): void => {
+    try {
 
-      Json.fetch(url).then((response: object): void => {
+      this.deserialize(await Json.fetch(url) as GVL);
 
-        this.deserialize(response as GVL);
-        resolve();
+    } catch (err) {
 
-      })
-        .catch((err: Error): void => {
+      throw new GVLError(err.message);
 
-          reject(new GVLError(err.message));
-
-        });
-
-    });
+    }
 
   }
 
@@ -363,22 +357,20 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    * internal language variable
    *
    * @param {string} lang - ISO 639-1 langauge code to change language to
-   * @return {Promise<string | GVLError>} - returns Promise resolved with the
-   * final setting of the language value.  Languages are stored in uppercase so
-   * if lower case is passed to this function it will convert it to upper case
-   * and return that.
+   * @return {Promise<void | GVLError>} - returns the `readyPromise` and
+   * resolves when this GVL is populated with the data from the language file.
    */
-  public async changeLanguage(lang: string): Promise<string | GVLError> {
+  public async changeLanguage(lang: string): Promise<void | GVLError> {
 
-    lang = lang.toUpperCase();
+    const langUpper = lang.toUpperCase();
 
-    if (GVL.consentLanguages.has(lang)) {
+    if (GVL.consentLanguages.has(langUpper)) {
 
-      if (lang !== this.lang_) {
+      if (langUpper !== this.lang_) {
 
-        if (GVL.LANGUAGE_CACHE.has(lang)) {
+        if (GVL.LANGUAGE_CACHE.has(langUpper)) {
 
-          const cached: Declarations = GVL.LANGUAGE_CACHE.get(lang) as Declarations;
+          const cached: Declarations = GVL.LANGUAGE_CACHE.get(langUpper) as Declarations;
 
           for (const prop in cached) {
 
@@ -399,11 +391,11 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
             await this.fetchJson(url);
 
-            this.cacheLanguage(lang);
+            this.cacheLanguage(langUpper);
 
           } catch (err) {
 
-            throw new GVLError(`unable to load language: ${err.message}`);
+            throw new GVLError('unable to load language: ' + err.message);
 
           }
 
@@ -411,12 +403,11 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
       }
 
-      this.lang_ = lang;
-      return this.lang_;
+      this.lang_ = langUpper;
 
     } else {
 
-      throw new GVLError('invalid language');
+      throw new GVLError(`unsupported language ${lang}`);
 
     }
 
@@ -434,19 +425,12 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
   }
 
-  private deserialize(gvlObject: GVL): void {
+  private deserialize(gvlObject: Declarations): void {
 
-    this.gvlSpecificationVersion = gvlObject.gvlSpecificationVersion;
-    this.vendorListVersion = gvlObject.vendorListVersion;
-    this.tcfPolicyVersion = gvlObject.tcfPolicyVersion;
-    this.lastUpdated = gvlObject.lastUpdated;
-
-    if (typeof this.lastUpdated === 'string') {
-
-      this.lastUpdated = new Date(this.lastUpdated);
-
-    }
-
+    /**
+     * these are deserialized regardless of whether it's a Declarations file or
+     * a VendorList
+     */
     this.purposes = gvlObject.purposes;
     this.specialPurposes = gvlObject.specialPurposes;
     this.features = gvlObject.features;
@@ -454,6 +438,17 @@ export class GVL extends Cloneable<GVL> implements VendorList {
     this.stacks = gvlObject.stacks;
 
     if (this.isVendorList(gvlObject)) {
+
+      this.gvlSpecificationVersion = gvlObject.gvlSpecificationVersion;
+      this.tcfPolicyVersion = gvlObject.tcfPolicyVersion;
+      this.vendorListVersion = gvlObject.vendorListVersion;
+      this.lastUpdated = gvlObject.lastUpdated;
+
+      if (typeof this.lastUpdated === 'string') {
+
+        this.lastUpdated = new Date(this.lastUpdated);
+
+      }
 
       this.vendors_ = gvlObject.vendors;
       this.fullVendorList = gvlObject.vendors;

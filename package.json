@@ -1,6 +1,6 @@
 {
   "name": "iabtcf",
-  "version": "1.0.0-beta.18",
+  "version": "1.0.0-beta.19",
   "description": "Official compliant tool suite for implementing the iab. Transparency and Consent Framework (TCF).",
   "private": true,
   "workspaces": [
@@ -15,14 +15,14 @@
   "license": "Apache-2.0",
   "scripts": {
     "build": "yarn workspaces run build",
-    "version": "./bin/update-version $npm_package_version",
-    "prepublishOnly": "./bin/publish-version $npm_package_version",
-    "docs": "yarn workspace @iabtcf/core run docs && yarn workspace @iabtcf/cmpapi run docs",
     "tidy": "rm -rf modules/**/lib coverage modules/**/coverage .nyc_output modules/**/.nyc_output modules/**/*.log",
     "clean": "rm -rf node_modules modules/**/node_modules && yarn run tidy",
     "lint": "yarn workspaces run lint",
+    "lint:fix": "yarn workspaces run lint:fix",
     "test": "yarn && mocha",
     "debug": "ndb mocha",
+    "version": "./bin/version && git add -A && git commit -m $npm_package_version",
+    "deploy": "./bin/publish-version",
     "serve:cov": "npx http-server ./coverage/",
     "test:cov": "rm -rf coverage; nyc --reporter html mocha",
     "test:lcov": "nyc --reporter=lcov mocha",

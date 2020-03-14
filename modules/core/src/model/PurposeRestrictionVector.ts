@@ -384,7 +384,7 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
    */
   public isEncodable(): boolean {
 
-    return this.gvl_ !== undefined || this.isEmpty();
+    return (this.gvl_ !== undefined && !this.isEmpty());
 
   }
 
