@@ -17,7 +17,15 @@ describe('Issues Reported', (): void => {
 
     }, 'constructing a tcmodel with vendorlist').not.to.throw();
 
-    expect(XMLHttpTestTools.requests.length, 'requests length').to.equal(0);
+    expect(XMLHttpTestTools.requests.length, 'requests length after constructing TCModel').to.equal(0);
+
+    expect((): void => {
+
+      new GVL(vendorlist);
+
+    }, 'constructing a GVL with vendorlist').not.to.throw();
+
+    expect(XMLHttpTestTools.requests.length, 'requests length after constructing GVL').to.equal(0);
 
   });
 
