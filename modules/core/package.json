@@ -16,7 +16,7 @@
     "lint:fix": "yarn run lint -- --fix",
     "debug": "ndb yarn test --no-timeouts",
     "serve:cov": "npx http-server ./coverage/",
-    "test": "cd ../testing && yarn build && cd - && mocha `find test -name '*.test.ts'`",
+    "test": "mocha `find test -name '*.test.ts'`",
     "test:cov": "rm -rf coverage; nyc --reporter=html mocha `find test -name '*.test.ts'`",
     "test:lcov": "nyc --reporter=lcov mocha `find test -name '*.test.ts'`"
   },

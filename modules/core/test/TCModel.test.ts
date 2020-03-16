@@ -4,6 +4,7 @@ import {TCModel} from '../src/TCModel';
 
 import {Vector} from '../src/model/Vector';
 import {GVL} from '../src/GVL';
+import {GVLFactory} from '../../testing/lib/GVLFactory';
 
 describe('TCModel', (): void => {
 
@@ -147,32 +148,29 @@ describe('TCModel', (): void => {
 
   });
 
-  it('should construct a TCModel with a GVL argument', (done: () => void): void => {
+  it('should construct a TCModel with a GVL argument', async (): Promise<void> => {
 
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const gvl: GVL = new GVL(require('@iabtcf/testing/lib/vendorlist/vendor-list.json'));
+    const gvl: GVL = GVLFactory.getLatest() as unknown as GVL;
 
+    let tcModel: TCModel;
     expect((): void => {
 
-      // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-      const tcModel: TCModel = new TCModel(gvl);
+      tcModel = new TCModel(gvl);
 
     }).to.not.throw();
 
-    const tcModel = new TCModel(gvl);
+    expect(tcModel.gvl, 'tcModel.gvl').to.equal(gvl);
 
-    expect(tcModel.gvl).to.equal(gvl);
-    tcModel.gvl.readyPromise.then((): void => {
+    await gvl.readyPromise;
 
-      expect(tcModel.policyVersion, 'policyVersion should be picked up from gvl')
-        .to.equal(gvl.tcfPolicyVersion);
-      expect(tcModel.vendorListVersion, 'vendorListVersion should be picked up from gvl')
-        .to.equal(gvl.vendorListVersion);
-      expect(tcModel.gvl, 'should save and make accessible the gvl')
-        .to.equal(gvl);
-      done();
+    expect(tcModel.policyVersion, 'tcModel.policyVersion')
+      .to.equal(gvl.tcfPolicyVersion);
 
-    });
+    expect(tcModel.vendorListVersion, 'tcModel.vendorListVersion')
+      .to.equal(gvl.vendorListVersion);
+
+    expect(tcModel.gvl, 'tcModel.gvl')
+      .to.equal(gvl);
 
   });
 
@@ -309,54 +307,6 @@ describe('TCModel', (): void => {
     shouldBeNotOk('@#');
     shouldBeNotOk('15');
     shouldBeNotOk('{{');
-
-  });
-
-  describe('version', (): void => {
-
-    const shouldBeOk: (value: number) => void = (value: number): void => {
-
-      it(`should be ok with ${value}`, (): void => {
-
-        const tcModel = new TCModel();
-
-        expect((): void => {
-
-          tcModel.version = value;
-
-        }).not.to.throw();
-
-        expect(tcModel.version).to.equal(value);
-
-      });
-
-    };
-
-    const shouldBeNotOk: (value: number) => void = (value: number): void => {
-
-      it(`should not be ok with ${value}`, (): void => {
-
-        const tcModel = new TCModel();
-        const defaultVersion: number | string = tcModel.version;
-
-        expect((): void => {
-
-          tcModel.version = value;
-
-        }).to.throw();
-
-        // should not be changed
-        expect(tcModel.version).to.equal(defaultVersion);
-
-      });
-
-    };
-
-    shouldBeOk(1);
-    shouldBeOk(2);
-    shouldBeNotOk(0);
-    shouldBeNotOk(3);
-    shouldBeNotOk(1.1);
 
   });
 

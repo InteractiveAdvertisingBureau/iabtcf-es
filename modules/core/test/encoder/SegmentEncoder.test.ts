@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {GVLFactory, TCModelFactory, sameDataDiffRef} from '@iabtcf/testing';
 import {SegmentEncoder} from '../../src/encoder';
 import {TCModel, GVL} from '../../src';
-import {Segments} from '../../src/model';
+import {Segment} from '../../src/model';
 
 const gvl: GVL = GVLFactory.getLatest() as unknown as GVL;
 
@@ -15,7 +15,7 @@ describe('encoder->SegmentEncoder', (): void => {
 
     const encodeIt = (): void => {
 
-      encoded = SegmentEncoder.encode(tcModel, Segments.core);
+      encoded = SegmentEncoder.encode(tcModel, '2', Segment.CORE);
 
     };
 
@@ -36,8 +36,8 @@ describe('encoder->SegmentEncoder', (): void => {
     const decodedModel: TCModel = new TCModel();
     let encoded = '';
 
-    encoded = SegmentEncoder.encode(tcModel, Segments.core);
-    SegmentEncoder.decode(encoded, decodedModel, Segments.core);
+    encoded = SegmentEncoder.encode(tcModel, '2', Segment.CORE);
+    SegmentEncoder.decode(encoded, decodedModel, '2', Segment.CORE);
 
     sameDataDiffRef(tcModel, decodedModel, 'TCModel', ['bitLength']);
 
@@ -58,7 +58,7 @@ describe('encoder->SegmentEncoder', (): void => {
 
     const encodeIt = (): void => {
 
-      encoded = SegmentEncoder.encode(tcModel, Segments.vendorsAllowed);
+      encoded = SegmentEncoder.encode(tcModel, '2', Segment.VENDORS_ALLOWED);
 
     };
 
@@ -92,13 +92,13 @@ describe('encoder->SegmentEncoder', (): void => {
 
     const encodeIt = (): void => {
 
-      encoded = SegmentEncoder.encode(tcModel, Segments.vendorsAllowed);
+      encoded = SegmentEncoder.encode(tcModel, '2', Segment.VENDORS_ALLOWED);
 
     };
 
     const decodeIt = (): void => {
 
-      SegmentEncoder.decode(encoded, decodedModel, Segments.vendorsAllowed);
+      SegmentEncoder.decode(encoded, decodedModel, '2', Segment.VENDORS_ALLOWED);
 
     };
 

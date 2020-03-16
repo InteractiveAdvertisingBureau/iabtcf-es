@@ -1,40 +1,39 @@
 import {SequenceVersionMap} from './SequenceVersionMap';
 import {TCModel} from '../../';
+import {EncodingOptions} from '../EncodingOptions';
 import {
-  Segments,
+  Segment,
   Fields,
 } from '../../model';
 
 export class SegmentSequence implements SequenceVersionMap {
 
-  public '1': string[] = [
-    Segments.core,
-  ]
-  public '2': string[] = [
-    Segments.core,
+  public '1': Segment[] = [
+    Segment.CORE,
   ]
 
-  public constructor(tcModel: TCModel, isForSaving = false, includeDisclosedVendors = false) {
+  public '2': Segment[] = [
+    Segment.CORE,
+  ]
 
-    if (+tcModel.version === 2) {
+  public constructor(tcModel: TCModel, version: number, options?: EncodingOptions) {
+
+    if (version === 2) {
 
       if (tcModel.isServiceSpecific) {
 
         /**
          * If it's service specific only, then the publisher TC String can be
          * stored in the cookie and would be transmitted if it's not for
-         * storage
+         * storage.  So it's included regardless of whether or not it's for
+         * saving or the cmp api to surface.
          */
 
-        if (includeDisclosedVendors) {
-
-          this['2'].push(Segments.vendorsDisclosed);
-
-        }
-
-        this['2'].push(Segments.publisherTC);
+        this['2'].push(Segment.PUBLISHER_TC);
 
       } else {
+
+        const isForSaving = !!(options && options.isForSaving);
 
         /**
          * including vendors disclosed only if it is for saving (to the global
@@ -42,9 +41,9 @@ export class SegmentSequence implements SequenceVersionMap {
          * of this being not for saving (surfaced to CMP) and no support of
          * OOB.
          */
-        if (isForSaving || tcModel[Fields.supportOOB]) {
+        if (isForSaving || tcModel[Fields.supportOOB] === true) {
 
-          this['2'].push(Segments.vendorsDisclosed);
+          this['2'].push(Segment.VENDORS_DISCLOSED);
 
         }
 
@@ -60,7 +59,7 @@ export class SegmentSequence implements SequenceVersionMap {
            */
           if (tcModel[Fields.supportOOB] && tcModel[Fields.vendorsAllowed].size > 0) {
 
-            this['2'].push(Segments.vendorsAllowed);
+            this['2'].push(Segment.VENDORS_ALLOWED);
 
           }
 
@@ -68,7 +67,7 @@ export class SegmentSequence implements SequenceVersionMap {
            * Always include the publisher TC segment as long as this TC string
            * is not intended to be saved in the global scope.
            */
-          this['2'].push(Segments.publisherTC);
+          this['2'].push(Segment.PUBLISHER_TC);
 
         }
 

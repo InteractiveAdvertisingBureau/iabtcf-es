@@ -1,13 +1,14 @@
 import {
   Base64Url,
   BitLength,
+  EncodingOptions,
   SegmentEncoder,
   SegmentSequence,
 } from './encoder';
 
 import {EncodingError} from './errors';
 import {IntEncoder} from './encoder/field/IntEncoder';
-import {Fields, Segments} from './model';
+import {Fields, Segment, SegmentIDs} from './model';
 import {TCModel} from './TCModel';
 
 /**
@@ -16,7 +17,8 @@ import {TCModel} from './TCModel';
  */
 export class TCString {
 
-  private static preEncode(tcModel: TCModel, includeDisclosedVendors: boolean): TCModel | never {
+  private static readonly MAX_ENCODING_VERSION: number = 2;
+  private static preEncode(tcModel: TCModel): TCModel | never {
 
     tcModel = tcModel.clone();
 
@@ -35,7 +37,7 @@ export class TCString {
 
     }
 
-    if (!tcModel[Fields.isServiceSpecific] || includeDisclosedVendors) {
+    if (!tcModel[Fields.isServiceSpecific]) {
 
       /**
        * Sets vendorsDisclosed
@@ -50,6 +52,8 @@ export class TCString {
 
     }
 
+    tcModel['version_'] = TCString.MAX_ENCODING_VERSION;
+
     return tcModel;
 
   }
@@ -58,21 +62,48 @@ export class TCString {
    * encodes a model into a TCString
    *
    * @param {TCModel} tcModel - model to convert into encoded string
-   * @param {boolean} isForSaving = false - Defaults to false.  Whether a TC
-   * String is meant for storage (true) or meant to be handed to AdTech through
-   * the tcfapi (true).  This will modify which segments are handed back with
-   * the string.
-   * @param {boolean} includeDisclosedVendors - whether or not to include
-   * disclosedVendors when the serviceSpecific flag is true
+   * @param {EncodingOptions} options - for encoding options other than default
    * @return {string} - base64url encoded Transparency and Consent String
    */
-  public static encode(tcModel: TCModel, isForSaving = false, includeDisclosedVendors = false): string {
+  public static encode(tcModel: TCModel, options?: EncodingOptions): string {
 
-    tcModel = this.preEncode(tcModel, includeDisclosedVendors);
+    tcModel = this.preEncode(tcModel);
 
     let out = '';
-    const segSequence: SegmentSequence = new SegmentSequence(tcModel, isForSaving, includeDisclosedVendors);
-    const sequence: string[] = segSequence[tcModel.version.toString()];
+    let sequence: Segment[]; ;
+
+    /**
+     * If they pass in a special segment sequence.  The only requirement we
+     * have here is that the CORE string is first if it's included. So first we
+     * check that the segments option exists and is an array then if it
+     * contains the CORE segment then move it to the front of the sequence
+     */
+    if (options && Array.isArray(options.segments)) {
+
+      if (options.segments[0] !== Segment.CORE) {
+
+        for (let i =0; i< options.segments.length; i ++) {
+
+          if (options.segments[i] === Segment.CORE) {
+
+            options.segments.splice(i, 1);
+            options.segments.unshift(Segment.CORE);
+
+          }
+
+        }
+
+      }
+
+      sequence = options.segments;
+
+    } else {
+
+      const segSequence: SegmentSequence = new SegmentSequence(tcModel, TCString.MAX_ENCODING_VERSION, options);
+      sequence = segSequence[''+TCString.MAX_ENCODING_VERSION];
+
+    }
+
     const len: number = sequence.length;
 
     for (let i = 0; i < len; i ++) {
@@ -85,7 +116,7 @@ export class TCString {
 
       }
 
-      out += SegmentEncoder.encode(tcModel, sequence[i]) + dotMaybe;
+      out += SegmentEncoder.encode(tcModel, ''+TCString.MAX_ENCODING_VERSION, sequence[i]) + dotMaybe;
 
     }
 
@@ -109,12 +140,12 @@ export class TCString {
     for (let i = 0; i < len; i ++) {
 
       const segString: string = segments[i];
-      let segment: string;
+      let segment: Segment;
 
       // first is always core
       if ( i === 0 ) {
 
-        segment = Segments.core;
+        segment = Segment.CORE;
 
       } else {
 
@@ -122,11 +153,11 @@ export class TCString {
         const firstChar: string = Base64Url.decode(segString.charAt(0));
         const segTypeBits: string = firstChar.substr(0, BitLength.segmentType);
 
-        segment = Segments.ID_TO_KEY[IntEncoder.decode(segTypeBits).toString()];
+        segment = SegmentIDs.ID_TO_KEY[IntEncoder.decode(segTypeBits).toString()];
 
       }
 
-      SegmentEncoder.decode(segString, tcModel, segment);
+      SegmentEncoder.decode(segString, tcModel, ''+TCString.MAX_ENCODING_VERSION, segment);
 
     }
 

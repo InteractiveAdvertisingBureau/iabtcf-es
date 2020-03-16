@@ -4,30 +4,24 @@ import {FieldEncoderMap, IntEncoder} from './field';
 import {FieldSequence} from './sequence';
 import {TCModel, TCModelPropType} from '../';
 import {EncodingError, DecodingError} from '../errors';
-import {Segments} from '../model';
+import {Segment, SegmentIDs} from '../model';
 
 export class SegmentEncoder {
 
   private static fieldSequence: FieldSequence = new FieldSequence();
 
-  public static encode(tcModel: TCModel, segment: string): string {
+  public static encode(tcModel: TCModel, version: string, segment: Segment): string {
 
-    if (!Segments[segment]) {
-
-      throw new EncodingError(`invalid segment type: ${segment}`);
-
-    }
-
-    const sequence = this.fieldSequence[tcModel.version.toString()][segment];
+    const sequence = this.fieldSequence[version][segment];
     let bitField = '';
 
     /**
      * If this is anything other than the core segment we have a "segment id"
      * to append to the front of the string
      */
-    if (segment !== Segments.core) {
+    if (segment !== Segment.CORE) {
 
-      bitField = IntEncoder.encode(Segments.KEY_TO_ID[segment], BitLength.segmentType);
+      bitField = IntEncoder.encode(SegmentIDs.KEY_TO_ID[segment], BitLength.segmentType);
 
     }
 
@@ -53,13 +47,13 @@ export class SegmentEncoder {
     return Base64Url.encode(bitField);
 
   }
-  public static decode(encodedString: string, tcModel: TCModel, segment: string): TCModel {
+  public static decode(encodedString: string, tcModel: TCModel, version: string, segment: string): TCModel {
 
-    const sequence = this.fieldSequence[tcModel.version.toString()][segment];
+    const sequence = this.fieldSequence[version][segment];
     const bitField = Base64Url.decode(encodedString);
     let bStringIdx = 0;
 
-    if (segment !== Segments.core) {
+    if (segment !== Segment.CORE) {
 
       bStringIdx += BitLength.segmentType;
 

@@ -1,21 +1,20 @@
 import {SegmentSequence} from '../../../src/encoder/sequence/SegmentSequence';
 import {TCModel} from '../../../src/TCModel';
-import {Segments} from '../../../src/model';
+import {Segment} from '../../../src/model';
 import {expect} from 'chai';
 
 describe('encoder/sequence->SegmentSequence', (): void => {
 
   const runPerm = (
-    version: string,
+    version: number,
     isServiceSpecific: boolean,
     isForSaving: boolean,
     hasVendorsAllowed: boolean,
     supportOOB: boolean,
-    includeDisclosedVendors: boolean,
     callback: (sequence: string[]) => void): void => {
 
     // eslint-disable-next-line max-len
-    it(`should be this when: v${version}, isServiceSpecific=${isServiceSpecific}, isForSaving=${isForSaving}, hasVendorsAllowed=${hasVendorsAllowed}, supportOOB=${supportOOB}, includeDisclosedVendors=${includeDisclosedVendors}`, (): void => {
+    it(`v${version}:  isServiceSpecific=${isServiceSpecific}, isForSaving=${isForSaving}, hasVendorsAllowed=${hasVendorsAllowed}, and supportOOB=${supportOOB}`, (): void => {
 
       const tcModel = new TCModel();
 
@@ -28,14 +27,14 @@ describe('encoder/sequence->SegmentSequence', (): void => {
 
       }
 
-      const sSequence = new SegmentSequence(tcModel, isForSaving, includeDisclosedVendors);
+      const sSequence = new SegmentSequence(tcModel, 2, {isForSaving: isForSaving});
       callback(sSequence[version]);
 
     });
 
   };
 
-  const numValues = 6;
+  const numValues = 5;
   const total = 1 << numValues;
   const powSet: boolean[][] = [];
 
@@ -55,14 +54,11 @@ describe('encoder/sequence->SegmentSequence', (): void => {
 
   powSet.forEach((boolSet: boolean[]): void => {
 
-    const version = (+boolSet[0] + 1).toString();
+    const version = (+boolSet[0] + 1);
     const isServiceSpecific = boolSet[1];
     const isForSaving = boolSet[2];
     const hasVendorsAllowed = boolSet[3];
     const supportOOB = boolSet[4];
-    const includeDisclosedVendors = boolSet[5];
-
-    const boolStr = `version: ${version}, isServiceSpecific=${isServiceSpecific}, isForSaving=${isForSaving}, hasVendorsAllowed=${hasVendorsAllowed}, supportOOB=${supportOOB}, includeDisclosedVendors=${includeDisclosedVendors}`;
 
     runPerm(
       version,
@@ -70,52 +66,77 @@ describe('encoder/sequence->SegmentSequence', (): void => {
       isForSaving,
       hasVendorsAllowed,
       supportOOB,
-      includeDisclosedVendors,
       (sequence: string[]): void => {
 
-        expect(sequence.length, `sequence.length - ${boolStr}`).to.not.equal(0);
-        expect(sequence[0], `sequence[0] - ${boolStr}`).to.equal(Segments.core);
+        expect(sequence.length, `sequence.length`).to.not.equal(0);
+        expect(sequence[0], `sequence[0]`).to.equal(Segment.CORE);
 
-        if (version === '1') {
+        if (version === 1) {
 
-          expect(sequence.length, `sequence.length - ${boolStr}`).to.equal(1);
+          expect(sequence.length, `sequence.length`).to.equal(1);
 
-        } else if (version === '2') {
+        } else if (version === 2) {
 
           if (isServiceSpecific) {
 
-            if (includeDisclosedVendors) {
+            /**
+             * v2:  isServiceSpecific=true, isForSaving=true, hasVendorsAllowed=true, and supportOOB=true
+             * v2:  isServiceSpecific=true, isForSaving=true, hasVendorsAllowed=false, and supportOOB=true
+             * v2:  isServiceSpecific=true, isForSaving=true, hasVendorsAllowed=true, and supportOOB=false
+             * v2:  isServiceSpecific=true, isForSaving=true, hasVendorsAllowed=false, and supportOOB=false
+             * v2:  isServiceSpecific=true, isForSaving=false, hasVendorsAllowed=true, and supportOOB=true
+             * v2:  isServiceSpecific=true, isForSaving=false, hasVendorsAllowed=false, and supportOOB=true
+             * v2:  isServiceSpecific=true, isForSaving=false, hasVendorsAllowed=true, and supportOOB=false
+             * v2:  isServiceSpecific=true, isForSaving=false, hasVendorsAllowed=false, and supportOOB=false
+             */
 
-              expect(sequence.length, `sequence.length - ${boolStr}`).to.equal(3);
-              expect(sequence[1], `sequence[1] - ${boolStr}`).to.equal(Segments.vendorsDisclosed);
-              expect(sequence[2], `sequence[2] - ${boolStr}`).to.equal(Segments.publisherTC);
-
-            } else {
-
-              expect(sequence.length, `sequence.length - ${boolStr}`).to.equal(2);
-              expect(sequence[1], `sequence[1] - ${boolStr}`).to.equal(Segments.publisherTC);
-
-            }
+            expect(sequence.length, `sequence.length`).to.equal(2);
+            expect(sequence[1], `sequence[1]`).to.equal(Segment.PUBLISHER_TC);
 
           } else {
 
-            if (isForSaving || supportOOB) {
-
-              expect(sequence[1], `sequence[1] - ${boolStr}`).to.equal(Segments.vendorsDisclosed);
-
-            }
-
             if (!isForSaving) {
 
-              if (supportOOB && hasVendorsAllowed) {
+              if (supportOOB) {
 
-                expect(sequence[2], `sequence[2] - ${boolStr}`).to.equal(Segments.vendorsAllowed);
-                expect(sequence[3], `sequence[3] - ${boolStr}`).to.equal(Segments.publisherTC);
-                expect(sequence.length, `sequence.length - ${boolStr}`).to.equal(4);
+                if (hasVendorsAllowed) {
+
+                  // v2:  isServiceSpecific=false, isForSaving=false, hasVendorsAllowed=true, and supportOOB=true
+                  expect(sequence.length, `sequence.length`).to.equal(4);
+                  expect(sequence[1], `sequence[1]`).to.equal(Segment.VENDORS_DISCLOSED);
+                  expect(sequence[2], `sequence[2]`).to.equal(Segment.VENDORS_ALLOWED);
+                  expect(sequence[3], `sequence[3]`).to.equal(Segment.PUBLISHER_TC);
+
+                } else {
+
+                  // v2:  isServiceSpecific=false, isForSaving=false, hasVendorsAllowed=false, and supportOOB=true
+                  expect(sequence.length, `sequence.length`).to.equal(3);
+                  expect(sequence[1], `sequence[1]`).to.equal(Segment.VENDORS_DISCLOSED);
+                  expect(sequence[2], `sequence[2]`).to.equal(Segment.PUBLISHER_TC);
+
+                }
+
+              } else {
+
+                // v2:  isServiceSpecific=false, isForSaving=false, hasVendorsAllowed=false, and supportOOB=false
+                // v2:  isServiceSpecific=false, isForSaving=false, hasVendorsAllowed=true, and supportOOB=false
+                expect(sequence.length, `sequence.length`).to.equal(2);
+                expect(sequence[1], `sequence[1]`).to.equal(Segment.PUBLISHER_TC);
 
               }
 
-              expect(sequence[sequence.length - 1], `sequence[sequence.length - 1] - ${boolStr}`).to.equal(Segments.publisherTC);
+            } else {
+
+              /**
+               * globally scoped strings for saving should only contain core
+               * and vendors disclosed
+               * v2:  isServiceSpecific=false, isForSaving=true, hasVendorsAllowed=true, and supportOOB=true
+               * v2:  isServiceSpecific=false, isForSaving=true, hasVendorsAllowed=false, and supportOOB=true
+               * v2:  isServiceSpecific=false, isForSaving=true, hasVendorsAllowed=true, and supportOOB=false
+               * v2:  isServiceSpecific=false, isForSaving=true, hasVendorsAllowed=false, and supportOOB=false
+               */
+              expect(sequence.length, `sequence.length`).to.equal(2);
+              expect(sequence[1], `sequence[1]`).to.equal(Segment.VENDORS_DISCLOSED);
 
             }
 
