@@ -6,6 +6,21 @@ import {expect} from 'chai';
 
 describe('Issues Reported', (): void => {
 
+  it('99 Cannot pass json object to ctor', (): void => {
+
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const vendorlist = require('@iabtcf/testing/lib/vendorlist/vendor-list.json');
+
+    expect((): void => {
+
+      new TCModel(vendorlist);
+
+    }, 'constructing a tcmodel with vendorlist').not.to.throw();
+
+    expect(XMLHttpTestTools.requests.length, 'requests length').to.equal(0);
+
+  });
+
   it('91 TCString.encode use 0 as vendorListVersion instead of gvl', (done: () => void): void => {
 
     const CMPID = 23;
