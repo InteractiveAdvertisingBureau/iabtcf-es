@@ -19,7 +19,7 @@ export class Fields {
   public static readonly purposeConsents: 'purposeConsents' = 'purposeConsents';
   public static readonly purposeLegitimateInterests: 'purposeLegitimateInterests' = 'purposeLegitimateInterests';
   public static readonly purposeOneTreatment: 'purposeOneTreatment' = 'purposeOneTreatment';
-  public static readonly specialFeatureOptIns: 'specialFeatureOptIns' = 'specialFeatureOptIns';
+  public static readonly specialFeatureOptins: 'specialFeatureOptins' = 'specialFeatureOptins';
   public static readonly useNonStandardStacks: 'useNonStandardStacks' = 'useNonStandardStacks';
   public static readonly vendorConsents: 'vendorConsents' = 'vendorConsents';
   public static readonly vendorLegitimateInterests: 'vendorLegitimateInterests' = 'vendorLegitimateInterests';

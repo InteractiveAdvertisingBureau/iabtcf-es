@@ -30,7 +30,7 @@ export class FieldSequence implements SequenceVersionMap {
       Fields.policyVersion,
       Fields.isServiceSpecific,
       Fields.useNonStandardStacks,
-      Fields.specialFeatureOptIns,
+      Fields.specialFeatureOptins,
       Fields.purposeConsents,
       Fields.purposeLegitimateInterests,
       Fields.purposeOneTreatment,

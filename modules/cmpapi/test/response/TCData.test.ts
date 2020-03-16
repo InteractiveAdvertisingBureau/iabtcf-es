@@ -44,7 +44,7 @@ describe('response->TCData', (): void => {
     expect(tcData.outOfBand, 'outOfBand').to.be.undefined;
     expect(tcData.purpose, 'purpose').to.be.undefined;
     expect(tcData.vendor, 'vendor').to.be.undefined;
-    expect(tcData.specialFeatureOptins, 'specialFeatureOptIns').to.be.undefined;
+    expect(tcData.specialFeatureOptins, 'specialFeatureOptins').to.be.undefined;
     expect(tcData.publisher, 'publisher').to.be.undefined;
 
     done();

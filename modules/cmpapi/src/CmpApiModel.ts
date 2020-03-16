@@ -197,7 +197,7 @@ export class CmpApiModel {
     retr = (retr && this.isVector(subject.purposeLegitimateInterests));
     retr = (retr && this.isVector(subject.vendorConsents));
     retr = (retr && this.isVector(subject.vendorLegitimateInterests));
-    retr = (retr && this.isVector(subject.specialFeatureOptIns));
+    retr = (retr && this.isVector(subject.specialFeatureOptins));
     retr = (retr && this.isVector(subject.publisherConsents));
     retr = (retr && this.isVector(subject.publisherLegitimateInterests));
     retr = (retr && this.isVector(subject.publisherCustomConsents));

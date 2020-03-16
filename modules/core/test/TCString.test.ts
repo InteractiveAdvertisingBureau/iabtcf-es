@@ -94,9 +94,9 @@ describe('TCString', (): void => {
 
       expect(tcModel.gvl).to.be.undefined;
 
-      expect(tcModel.specialFeatureOptIns).not.to.be.undefined;
-      expect(tcModel.specialFeatureOptIns.has(1), 'specialFeatureOptIn 1').to.be.true;
-      expect(tcModel.specialFeatureOptIns.has(2), 'specialFeatureOptIn 2').to.be.false;
+      expect(tcModel.specialFeatureOptins).not.to.be.undefined;
+      expect(tcModel.specialFeatureOptins.has(1), 'specialFeatureOptIn 1').to.be.true;
+      expect(tcModel.specialFeatureOptins.has(2), 'specialFeatureOptIn 2').to.be.false;
 
       testVectorRang(tcModel.purposeConsents, 3, 9, 'purposeConsents');
 

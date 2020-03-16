@@ -111,7 +111,7 @@ export class TCData extends Response {
 
       };
 
-      this.specialFeatureOptins = this.createVectorField(tcModel.specialFeatureOptIns);
+      this.specialFeatureOptins = this.createVectorField(tcModel.specialFeatureOptins);
 
       this.publisher = {
 

@@ -39,7 +39,7 @@ export class TCModel extends Cloneable<TCModel> {
    * published and numbered in the GVL separately from normal Features.
    * Provides for up to 12 special features.
    */
-  public readonly [Fields.specialFeatureOptIns]: Vector = new Vector();
+  public readonly [Fields.specialFeatureOptins]: Vector = new Vector();
 
   /**
    * Renamed from `PurposesAllowed` in TCF v1.1
@@ -623,24 +623,24 @@ export class TCModel extends Cloneable<TCModel> {
   }
 
   /**
-   * setAllSpecialFeatureOptIns - sets all special featuresOptins on the GVL (true)
+   * setAllSpecialFeatureOptins - sets all special featuresOptins on the GVL (true)
    *
    * @return {void}
    */
-  public setAllSpecialFeatureOptIns(): void {
+  public setAllSpecialFeatureOptins(): void {
 
-    this.specialFeatureOptIns.setAll<Feature>(this.gvl.specialFeatures);
+    this.specialFeatureOptins.setAll<Feature>(this.gvl.specialFeatures);
 
   }
 
   /**
-   * unsetAllSpecialFeatureOptIns - unsets all special featuresOptins on the GVL (true)
+   * unsetAllSpecialFeatureOptins - unsets all special featuresOptins on the GVL (true)
    *
    * @return {void}
    */
-  public unsetAllSpecialFeatureOptIns(): void {
+  public unsetAllSpecialFeatureOptins(): void {
 
-    this.specialFeatureOptIns.empty();
+    this.specialFeatureOptins.empty();
 
   }
 
@@ -648,7 +648,7 @@ export class TCModel extends Cloneable<TCModel> {
 
     this.setAllVendorConsents();
     this.setAllPurposeLegitimateInterests();
-    this.setAllSpecialFeatureOptIns();
+    this.setAllSpecialFeatureOptins();
     this.setAllPurposeConsents();
     this.setAllVendorLegitimateInterests();
 
@@ -658,7 +658,7 @@ export class TCModel extends Cloneable<TCModel> {
 
     this.unsetAllVendorConsents();
     this.unsetAllPurposeLegitimateInterests();
-    this.unsetAllSpecialFeatureOptIns();
+    this.unsetAllSpecialFeatureOptins();
     this.unsetAllPurposeConsents();
     this.unsetAllVendorLegitimateInterests();
 
