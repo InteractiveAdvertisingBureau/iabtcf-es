@@ -4,6 +4,7 @@ import {TCModel} from '../src/TCModel';
 
 import {Vector} from '../src/model/Vector';
 import {GVL} from '../src/GVL';
+import {GVLFactory} from '../../testing/lib/GVLFactory';
 
 describe('TCModel', (): void => {
 
@@ -147,32 +148,29 @@ describe('TCModel', (): void => {
 
   });
 
-  it('should construct a TCModel with a GVL argument', (done: () => void): void => {
+  it('should construct a TCModel with a GVL argument', async (): Promise<void> => {
 
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const gvl: GVL = new GVL(require('@iabtcf/testing/lib/vendorlist/vendor-list.json'));
+    const gvl: GVL = GVLFactory.getLatest() as unknown as GVL;
 
+    let tcModel: TCModel;
     expect((): void => {
 
-      // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-      const tcModel: TCModel = new TCModel(gvl);
+      tcModel = new TCModel(gvl);
 
     }).to.not.throw();
 
-    const tcModel = new TCModel(gvl);
+    expect(tcModel.gvl, 'tcModel.gvl').to.equal(gvl);
 
-    expect(tcModel.gvl).to.equal(gvl);
-    tcModel.gvl.readyPromise.then((): void => {
+    await gvl.readyPromise;
 
-      expect(tcModel.policyVersion, 'policyVersion should be picked up from gvl')
-        .to.equal(gvl.tcfPolicyVersion);
-      expect(tcModel.vendorListVersion, 'vendorListVersion should be picked up from gvl')
-        .to.equal(gvl.vendorListVersion);
-      expect(tcModel.gvl, 'should save and make accessible the gvl')
-        .to.equal(gvl);
-      done();
+    expect(tcModel.policyVersion, 'tcModel.policyVersion')
+      .to.equal(gvl.tcfPolicyVersion);
 
-    });
+    expect(tcModel.vendorListVersion, 'tcModel.vendorListVersion')
+      .to.equal(gvl.vendorListVersion);
+
+    expect(tcModel.gvl, 'tcModel.gvl')
+      .to.equal(gvl);
 
   });
 

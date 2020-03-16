@@ -11,6 +11,7 @@ export class SegmentSequence implements SequenceVersionMap {
   public '1': Segment[] = [
     Segment.CORE,
   ]
+
   public '2': Segment[] = [
     Segment.CORE,
   ]
@@ -24,14 +25,15 @@ export class SegmentSequence implements SequenceVersionMap {
         /**
          * If it's service specific only, then the publisher TC String can be
          * stored in the cookie and would be transmitted if it's not for
-         * storage
+         * storage.  So it's included regardless of whether or not it's for
+         * saving or the cmp api to surface.
          */
 
         this['2'].push(Segment.PUBLISHER_TC);
 
       } else {
 
-        const isForSaving = (options && options.isForSaving);
+        const isForSaving = !!(options && options.isForSaving);
 
         /**
          * including vendors disclosed only if it is for saving (to the global
@@ -39,7 +41,7 @@ export class SegmentSequence implements SequenceVersionMap {
          * of this being not for saving (surfaced to CMP) and no support of
          * OOB.
          */
-        if (isForSaving || tcModel[Fields.supportOOB]) {
+        if (isForSaving || tcModel[Fields.supportOOB] === true) {
 
           this['2'].push(Segment.VENDORS_DISCLOSED);
 

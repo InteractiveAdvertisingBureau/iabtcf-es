@@ -261,9 +261,9 @@ export class TCModel extends Cloneable<TCModel> {
     if (this.gvl) {
 
       this.gvl.changeLanguage(lang)
-        .then((newLang: string): void => {
+        .then((): void => {
 
-          this.consentLanguage_ = newLang;
+          this.consentLanguage_ = this.gvl.language;
 
         });
 
@@ -349,7 +349,15 @@ export class TCModel extends Cloneable<TCModel> {
 
   public get [Fields.vendorListVersion](): number | string {
 
-    return this.vendorListVersion_;
+    if (this.gvl) {
+
+      return this.gvl.vendorListVersion;
+
+    } else {
+
+      return this.vendorListVersion_;
+
+    }
 
   }
 
@@ -362,31 +370,36 @@ export class TCModel extends Cloneable<TCModel> {
    * If a TCF policy version number is different from the one from the latest
    * GVL, the CMP must re-establish transparency and consent.
    *
-   * @param {number} integer - You do not need to set this.  This comes
+   * @param {number} num - You do not need to set this.  This comes
    * directly from the [[GVL]].
    *
    * @throws {TCModelError} if the value is not an integer greater than 1 as those are not valid.
    */
-  public set [Fields.policyVersion](integer: number | string) {
+  public set [Fields.policyVersion](num: number | string) {
 
-    if (Number.isInteger(+integer) && integer > 1) {
-
-      this.policyVersion_ = +integer;
-
-    } else {
-
-      throw new TCModelError('policyVersion', integer);
-
-    }
+    this.policyVersion_ = parseInt(num as string, 10);
 
   }
 
   public get [Fields.policyVersion](): number | string {
 
-    return this.policyVersion_;
+    if (this.gvl) {
+
+      return this.gvl.tcfPolicyVersion;
+
+    } else {
+
+      return this.policyVersion_;
+
+    }
 
   }
 
+  public set [Fields.version](num: number | string) {
+
+    this.version_ = parseInt(num as string, 10);
+
+  }
   public get [Fields.version](): number | string {
 
     return this.version_;
