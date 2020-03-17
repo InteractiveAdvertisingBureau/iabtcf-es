@@ -1,22 +1,62 @@
 import * as sinon from 'sinon';
 import {GVL, TCString, TCModel} from '../src';
-import {XMLHttpTestTools} from '@iabtcf/testing';
+import {XMLHttpTestTools, makeRandomInt, GVLFactory} from '@iabtcf/testing';
 
 import {expect} from 'chai';
+import {PurposeRestriction} from '../src/model/PurposeRestriction';
+import {RestrictionType} from '../src/model/RestrictionType';
 
 describe('Issues Reported', (): void => {
 
+  it('112 Vendor ranges incorrectly decoded from publisher restrictions', async (): Promise<void> => {
+
+    const CMPID = makeRandomInt(2, 100);
+    const CMPVERSION = makeRandomInt(1, 63);
+    const CONSENTSCREEN = makeRandomInt(1, 63);
+    const purposeRestriction = new PurposeRestriction(2, RestrictionType.NOT_ALLOWED);
+    const tcModel = new TCModel(GVLFactory.getLatest() as unknown as GVL);
+    const vendorID1 = 8;
+    const vendorID2 = vendorID1 + 1;
+
+    tcModel.cmpId = CMPID;
+    tcModel.cmpVersion = CMPVERSION;
+    tcModel.consentScreen = CONSENTSCREEN;
+
+    tcModel.publisherRestrictions.add(vendorID1, purposeRestriction);
+    tcModel.publisherRestrictions.add(vendorID2, purposeRestriction);
+
+    await tcModel.gvl.readyPromise;
+
+    const encodedTCString = TCString.encode(tcModel);
+    const newTCModel = TCString.decode(encodedTCString);
+    const vendors = newTCModel.publisherRestrictions.getVendors(purposeRestriction);
+
+    for (let i = 1; i < 17; i++) {
+
+      if (i === vendorID1 || i === vendorID2) {
+
+        expect(vendors.includes(i), `vendor id ${i}`).to.be.true;
+
+      } else {
+
+        expect(vendors.includes(i), `vendor id ${i}`).to.be.false;
+
+      }
+
+    }
+
+  });
+
   it('91 TCString.encode use 0 as vendorListVersion instead of gvl', (done: () => void): void => {
 
-    const CMPID = 23;
-    const CMPVERSION = 3;
-    const CONSENTSCREEN = 1;
+    const CMPID = makeRandomInt(2, 100);
+    const CMPVERSION = makeRandomInt(1, 63);
+    const CONSENTSCREEN = makeRandomInt(1, 63);
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const vendorlist = require('@iabtcf/testing/lib/vendorlist/vendor-list.json');
 
     GVL.baseUrl = 'http://mydomain.com/cmp/vendorlist';
-    GVL.latestFilename = 'vendor-list.json';
     const gvl = new GVL('LATEST');
     gvl.readyPromise.then(() => {
 

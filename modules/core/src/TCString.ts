@@ -70,7 +70,7 @@ export class TCString {
     tcModel = this.preEncode(tcModel);
 
     let out = '';
-    let sequence: Segment[]; ;
+    let sequence: Segment[];
 
     /**
      * If they pass in a special segment sequence.  The only requirement we

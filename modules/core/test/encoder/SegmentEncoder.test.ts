@@ -26,7 +26,13 @@ describe('encoder->SegmentEncoder', (): void => {
 
       done();
 
-    });
+    })
+      .catch((err: Error): void => {
+
+        expect.fail(err);
+        done();
+
+      });
 
   });
 
