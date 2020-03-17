@@ -15,13 +15,15 @@ describe('Issues Reported', (): void => {
     const CONSENTSCREEN = makeRandomInt(1, 63);
     const purposeRestriction = new PurposeRestriction(2, RestrictionType.NOT_ALLOWED);
     const tcModel = new TCModel(GVLFactory.getLatest() as unknown as GVL);
+    const vendorID1 = 8;
+    const vendorID2 = vendorID1 + 1;
 
     tcModel.cmpId = CMPID;
     tcModel.cmpVersion = CMPVERSION;
     tcModel.consentScreen = CONSENTSCREEN;
 
-    tcModel.publisherRestrictions.add(8, purposeRestriction);
-    tcModel.publisherRestrictions.add(9, purposeRestriction);
+    tcModel.publisherRestrictions.add(vendorID1, purposeRestriction);
+    tcModel.publisherRestrictions.add(vendorID2, purposeRestriction);
 
     await tcModel.gvl.readyPromise;
 
@@ -31,7 +33,7 @@ describe('Issues Reported', (): void => {
 
     for (let i = 1; i < 17; i++) {
 
-      if (i === 8 || i === 9) {
+      if (i === vendorID1 || i === vendorID2) {
 
         expect(vendors.includes(i), `vendor id ${i}`).to.be.true;
 
