@@ -5,6 +5,7 @@ import {FieldSequence} from './sequence';
 import {TCModel, TCModelPropType} from '../';
 import {EncodingError, DecodingError} from '../errors';
 import {Segment, SegmentIDs} from '../model';
+import {Fields} from '../model/Fields';
 
 export class SegmentEncoder {
 
@@ -27,9 +28,19 @@ export class SegmentEncoder {
 
     sequence.forEach((key: string): void => {
 
-      const value: TCModelPropType = tcModel[key];
+      let value: TCModelPropType;
       const numBits: number = BitLength[key];
       const encoder = FieldEncoderMap[key];
+
+      if (key === Fields.version) {
+
+        value = +version;
+
+      } else {
+
+        value = tcModel[key];
+
+      }
 
       try {
 
