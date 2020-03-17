@@ -5,15 +5,25 @@ import {FieldSequence} from './sequence';
 import {TCModel, TCModelPropType} from '../';
 import {EncodingError, DecodingError} from '../errors';
 import {Segment, SegmentIDs} from '../model';
-import {Fields} from '../model/Fields';
 
 export class SegmentEncoder {
 
   private static fieldSequence: FieldSequence = new FieldSequence();
 
-  public static encode(tcModel: TCModel, version: string, segment: Segment): string {
+  public static encode(tcModel: TCModel, segment: Segment): string {
 
-    const sequence = this.fieldSequence[version][segment];
+    let sequence;
+
+    try {
+
+      sequence = this.fieldSequence[''+tcModel.version][segment];
+
+    } catch (err) {
+
+      throw new EncodingError(`Unable to encode version: ${tcModel.version}, segment: ${segment}`);
+
+    }
+
     let bitField = '';
 
     /**
@@ -28,19 +38,9 @@ export class SegmentEncoder {
 
     sequence.forEach((key: string): void => {
 
-      let value: TCModelPropType;
+      const value: TCModelPropType = tcModel[key];
       const numBits: number = BitLength[key];
       const encoder = FieldEncoderMap[key];
-
-      if (key === Fields.version) {
-
-        value = +version;
-
-      } else {
-
-        value = tcModel[key];
-
-      }
 
       try {
 
@@ -58,9 +58,9 @@ export class SegmentEncoder {
     return Base64Url.encode(bitField);
 
   }
-  public static decode(encodedString: string, tcModel: TCModel, version: string, segment: string): TCModel {
+  public static decode(encodedString: string, tcModel: TCModel, segment: string): TCModel {
 
-    const sequence = this.fieldSequence[version][segment];
+    const sequence = this.fieldSequence[''+tcModel.version][segment];
     const bitField = Base64Url.decode(encodedString);
     let bStringIdx = 0;
 

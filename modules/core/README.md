@@ -395,6 +395,8 @@ gvl.readyPromise.then(() => {
 
 - [Decode](#decode-an-iab-tc-string)
 - [Encode](#encode-an-iab-tc-string)
+- [Encodng Options](#encode-an-iab-tc-string)
+- [Encoding a Publisher TC Segment](#encode-an-iab-tc-string)
 
 
 ### Decode an IAB TC String
@@ -435,3 +437,36 @@ gvl.readyPromise.then(() => {
    */
   console.log(encodedTCString);
 });
+
+### Encoding Options
+
+Options may be passed to the encoder to override defaults.  In most cases the encoder can figure out what segments to include but if the string is surfaced to vendors or for storing in a cookie the encoding is slightly different.  The `@iabtcf/cmpapi` handles this difference and CMPs don't need to worry about it.
+
+```typescript
+import {TCString, Segment} from '@iabtcf/core';
+
+// produces the version of the string for the __tcfapi function
+const cmpApiEncodedString = TCString.encode(tcModel, { isForVendors: true });
+
+// Overrides default segments (not recommended unless you know what you're doing)
+const encodingOptions = {
+  segments: [
+    Segment.CORE,
+    Segment.VENDORS_DISCLOSED,
+    Segment.VENDORS_ALLOWED,
+    Segment.PUBLISHER_TC,
+  ]
+}
+const customEncodedString = TCString.encode(tcModel, encodingOptions);
+```
+
+
+### Encode a Publisher TC Segment
+By default if the `TCModel.isServiceSpecific = true` then encoding a string will include the publisherTC segment.  But if `TCModel.isServiceSpecific = false` then the segment should only be surfaced through the `__tcfapi` interface and not saved to the global cookie.  However, one will need a way to access and save the publisher TC segment separately from the main TC String to store as a first-party cookie.  In that case you can use the `EncodingOptions` to generate only a Publisher TC segment.
+
+```typescript
+const encodingOptions = {
+  segments: [Segment.PUBLISHER_TC]
+}
+const publisherTCSegment = TCString.encode(tcModel, encodingOptions);
+```

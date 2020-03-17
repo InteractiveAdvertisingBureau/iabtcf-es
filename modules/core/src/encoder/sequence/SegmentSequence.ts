@@ -16,9 +16,9 @@ export class SegmentSequence implements SequenceVersionMap {
     Segment.CORE,
   ]
 
-  public constructor(tcModel: TCModel, version: number, options?: EncodingOptions) {
+  public constructor(tcModel: TCModel, options?: EncodingOptions) {
 
-    if (version === 2) {
+    if (tcModel.version === 2) {
 
       if (tcModel.isServiceSpecific) {
 
@@ -33,7 +33,7 @@ export class SegmentSequence implements SequenceVersionMap {
 
       } else {
 
-        const isForSaving = !!(options && options.isForSaving);
+        const isForSaving = !!(options && !options.isForVendors);
 
         /**
          * including vendors disclosed only if it is for saving (to the global

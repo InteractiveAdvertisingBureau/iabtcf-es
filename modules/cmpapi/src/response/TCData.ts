@@ -80,7 +80,9 @@ export class TCData extends Response {
 
       } else {
 
-        this.tcString = TCString.encode(tcModel);
+        this.tcString = TCString.encode(tcModel, {
+          isForVendors: true,
+        });
         CmpApiModel.cacheTCString(this.tcString);
 
       }

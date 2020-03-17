@@ -1,104 +1,112 @@
 import {expect} from 'chai';
-import {Vector, TCString, TCModel} from '../src';
-import {TCModelFactory, sameDataDiffRef} from '@iabtcf/testing';
+import {TCString, TCModel} from '../src';
+import {Segment} from '../src/model';
+import {TCModelFactory} from '@iabtcf/testing';
 
 describe('TCString', (): void => {
 
-  const getTCModel = (): TCModel => {
+  const getTCModel = (withoutGVL = false): TCModel => {
 
-    return TCModelFactory.withGVL() as unknown as TCModel;
+    let tcModel: TCModel;
+
+    if (withoutGVL) {
+
+      tcModel = TCModelFactory.noGVL() as unknown as TCModel;
+
+    } else {
+
+      tcModel = TCModelFactory.withGVL() as unknown as TCModel;
+
+    }
+
+    return tcModel;
 
   };
 
-  describe('.encode(tcModel)', (): void => {
+  it('should throw an encoding error if no GVL is set', (): void => {
 
-    it('returns a string with 4 segments if isServiceSpecific=true, supportOOB = true, and tcModel.setAllVendorsAllowed()', (done: () => void): void => {
+    const doEncode = (): void => {
 
-      const tcModel = getTCModel();
-      tcModel.isServiceSpecific = false;
-      tcModel.supportOOB = true;
-      tcModel.setAllVendorsAllowed();
+      TCString.encode(getTCModel(true));
 
-      const encodedStr = TCString.encode(tcModel);
+    };
 
-      expect(encodedStr.split('.'), 'encodedStr.split(".")').to.be.lengthOf(4);
-      done();
+    expect(doEncode, 'encode').to.throw();
+
+  });
+
+  it('should unset purposeLegitimateInterests 1 if it is set', (): void => {
+
+    const tcModel = getTCModel();
+    tcModel.purposeLegitimateInterests.set(1);
+
+    expect(tcModel.purposeLegitimateInterests.has(1), 'purposeLegitimateInterests.has(1)').to.be.true;
+
+    const encodedString = TCString.encode(tcModel);
+    const newModel = TCString.decode(encodedString);
+
+    expect(newModel.purposeLegitimateInterests.has(1), 'newModel.purposeLegitimateInterests.has(1)').to.be.false;
+
+  });
+
+  it('should set all vendorsDisclosed in the GVL when isServiceSpecific is false', (): void => {
+
+    const tcModel = getTCModel();
+
+    tcModel.vendorsDisclosed.empty();
+    tcModel.isServiceSpecific = false;
+
+    const encodedString = TCString.encode(tcModel);
+    const newModel = TCString.decode(encodedString);
+
+    const vIds: number[] = Object.keys(tcModel.gvl.vendors).map((vId: string): number => parseInt(vId, 10));
+
+    vIds.forEach((vendorId: number): void => {
+
+      expect(newModel.vendorsDisclosed.has(vendorId), `newModel.vendorsDisclosed.has(${vendorId})`).to.be.true;
+      expect(tcModel.vendorsDisclosed.has(vendorId), `tcModel.vendorsDisclosed.has(${vendorId})`).to.be.false;
 
     });
 
   });
 
-  describe('.decode(encodedString)', (): void => {
+  it('should produce only a publisherTC segment if the encoding option is passed', (): void => {
 
-    it('returns an equivalent model if encoded and decoded, except for the added bitLength property', (done: () => void): void => {
+    const tcModel = getTCModel();
 
-      const tcModel = TCModelFactory.withGVL() as unknown as TCModel;
-      const encodedString = TCString.encode(tcModel);
-      const decodedModel = TCString.decode(encodedString);
+    const encodedString = TCString.encode(tcModel, {
+      segments: [Segment.PUBLISHER_TC],
+    });
 
-      sameDataDiffRef(decodedModel, tcModel, 'TCModel', ['bitLength', 'customPurposes']);
-      done();
+    expect(~encodedString.indexOf('.'), '~encodedString.indexOf(".")').to.equal(0);
+
+    const newModel = TCString.decode(encodedString);
+    expect(newModel.vendorConsents.size, 'vendorConsents.size').to.equal(0);
+    expect(newModel.vendorLegitimateInterests.size, 'vendorLegitimateInterests.size').to.equal(0);
+    expect(newModel.purposeConsents.size, 'purposeConsents.size').to.equal(0);
+    expect(newModel.purposeLegitimateInterests.size, 'purposeLegitimateInterests.size').to.equal(0);
+
+    tcModel.publisherConsents.forEach((value: boolean, id: number): void => {
+
+      expect(newModel.publisherConsents.has(id), `publisherConsents.has(${id})`).to.equal(value);
 
     });
 
-    const testVectorRang = (vector: Vector, min: number, max: number, name: string): void => {
+    tcModel.publisherLegitimateInterests.forEach((value: boolean, id: number): void => {
 
-      expect(vector, `${name} Vector`).not.to.be.undefined;
-      expect(vector.maxId, `${name} maxId`).to.equal(max);
+      expect(newModel.publisherLegitimateInterests.has(id), `publisherLegitimateInterests.has(${id})`).to.equal(value);
 
-      for (let i = 1; i <= max; i ++) {
+    });
 
-        if (i >= min && i <= max) {
+    tcModel.publisherCustomConsents.forEach((value: boolean, id: number): void => {
 
-          expect(vector.has(i), `${name} id ${i}`).to.be.true;
+      expect(newModel.publisherCustomConsents.has(id), `publisherCustomConsents.has(${id})`).to.equal(value);
 
-        } else {
+    });
 
-          expect(vector.has(i), `${name} id ${i}`).to.be.false;
+    tcModel.publisherCustomLegitimateInterests.forEach((value: boolean, id: number): void => {
 
-        }
-
-      }
-
-    };
-
-    it('succesfully decodes a validly encoded TC string', (): void => {
-
-      let tcModel;
-
-      const setTCModel = (): void => {
-
-        tcModel = TCString.decode('COrEAV4OrXx94ACABBENAHCIAD-AAAAAAACAAxAAAAgAIAwgAgAAAAEAgQAAAAAEAYQAQAAAACAAAABAAA.IBAgAAAgAIAwgAgAAAAEAAAACA.QAagAQAgAIAwgA');
-
-      };
-
-      expect(setTCModel).not.to.throw();
-
-      expect(tcModel.cmpId).to.equal(2);
-      expect(tcModel.cmpVersion).to.equal(1);
-      expect(tcModel.consentScreen).to.equal(1);
-      expect(tcModel.policyVersion).to.equal(2);
-      expect(tcModel.vendorListVersion).to.equal(7);
-      expect(tcModel.consentLanguage).to.equal('EN');
-      expect(tcModel.publisherCountryCode).to.equal('AQ');
-
-      expect(tcModel.created).to.be.a('Date');
-      expect(tcModel.created.getFullYear(), 'Created Year').to.equal(2019);
-      expect(tcModel.created.getMonth(), 'Created Month').to.equal(11);
-      expect(tcModel.created.getDay(), 'Created Day').to.equal(3);
-
-      expect(tcModel.lastUpdated).to.be.a('Date');
-      expect(tcModel.lastUpdated.getFullYear(), 'Last Updated Year').to.equal(2019);
-      expect(tcModel.lastUpdated.getMonth(), 'Last Updated Month').to.equal(11);
-      expect(tcModel.lastUpdated.getDay(), 'Last Updated Day').to.equal(2);
-
-      expect(tcModel.gvl).to.be.undefined;
-
-      expect(tcModel.specialFeatureOptins).not.to.be.undefined;
-      expect(tcModel.specialFeatureOptins.has(1), 'specialFeatureOptIn 1').to.be.true;
-      expect(tcModel.specialFeatureOptins.has(2), 'specialFeatureOptIn 2').to.be.false;
-
-      testVectorRang(tcModel.purposeConsents, 3, 9, 'purposeConsents');
+      expect(newModel.publisherCustomLegitimateInterests.has(id), `publisherCustomLegitimateInterests.has(${id})`).to.equal(value);
 
     });
 
