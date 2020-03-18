@@ -20,7 +20,6 @@ export class CmpApiModel {
   public static gdprApplies: boolean;
   public static eventQueue = new EventListenerQueue();
 
-  private static uiVisible_ = false;
   private static disabled_ = false;
   private static tcModel_: TCModel;
   private static tcString_: string;
@@ -45,11 +44,6 @@ export class CmpApiModel {
 
   }
 
-  public static get uiVisible(): boolean {
-
-    return this.uiVisible_;
-
-  }
   public static set uiVisible(bool: boolean) {
 
     if (bool) {
@@ -61,8 +55,6 @@ export class CmpApiModel {
       this.displayStatus = DisplayStatus.DISABLED;
 
     }
-
-    this.uiVisible_ = bool;
 
   }
 
@@ -116,18 +108,20 @@ export class CmpApiModel {
     } else if (this.isTCModel(model)) {
 
       this.gdprApplies = true;
-      this.displayStatus = DisplayStatus.HIDDEN;
 
       switch (this.eventStatus) {
 
         case undefined:
           this.eventStatus = EventStatus.TC_LOADED;
+          this.displayStatus = DisplayStatus.HIDDEN;
           break;
         case EventStatus.TC_LOADED:
           this.eventStatus = EventStatus.CMP_UI_SHOWN;
+          this.displayStatus = DisplayStatus.VISIBLE;
           break;
         case EventStatus.CMP_UI_SHOWN:
           this.eventStatus = EventStatus.USER_ACTION_COMPLETE;
+          this.displayStatus = DisplayStatus.HIDDEN;
           break;
 
       }
@@ -217,7 +211,6 @@ export class CmpApiModel {
     delete this.gdprApplies;
     delete this.eventStatus;
 
-    this.uiVisible_ = false;
     this.disabled_ = false;
     this.cmpStatus = CmpStatus.LOADING;
     this.displayStatus = DisplayStatus.HIDDEN;

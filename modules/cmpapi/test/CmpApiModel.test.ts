@@ -13,7 +13,6 @@ describe('CmpApiModel', (): void => {
     expect(CmpApiModel.cmpStatus, 'assert default cmpStatus').to.equal(CmpStatus.LOADING);
     expect(CmpApiModel.displayStatus, 'assert default displayStatus').to.equal(DisplayStatus.HIDDEN);
 
-    expect(CmpApiModel.uiVisible, 'assert default uiVisible').to.be.false;
     expect(CmpApiModel.disabled, 'assert default disabled').to.be.false;
 
     expect(CmpApiModel.cmpId, 'assert default cmpId').to.be.undefined;
@@ -51,7 +50,6 @@ describe('CmpApiModel', (): void => {
     CmpApiModel.uiVisible = true;
 
     expect(CmpApiModel.displayStatus, 'displayStatus after').to.equal(DisplayStatus.VISIBLE);
-    expect(CmpApiModel.uiVisible, 'uiVisible after').to.true;
 
     done();
 
@@ -64,7 +62,6 @@ describe('CmpApiModel', (): void => {
     CmpApiModel.uiVisible = false;
 
     expect(CmpApiModel.displayStatus, 'displayStatus after').to.equal(DisplayStatus.DISABLED);
-    expect(CmpApiModel.uiVisible, 'uiVisible after').to.false;
 
     done();
 

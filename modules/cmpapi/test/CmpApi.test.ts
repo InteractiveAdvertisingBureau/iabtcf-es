@@ -173,19 +173,19 @@ describe('CmpApi', (): void => {
 
   });
 
-  it('should set CmpApiModel.uiVisible to passed in value when CmpApi.uiVisible is set', (done: () => void): void => {
+  it('should set CmpApiModel.displayStatus to visible when CmpApiModel.uiVisible is set to true', (done: () => void): void => {
 
     const cmpApi = getCmpApi();
 
-    expect(CmpApiModel.uiVisible, 'CmpApiModel.uiVisible - initial').to.be.false;
+    expect(CmpApiModel.displayStatus, 'CmpApiModel.displayStatus - initial').to.equal(DisplayStatus.HIDDEN);
 
     cmpApi.uiVisible = true;
 
-    expect(CmpApiModel.uiVisible, 'CmpApiModel.uiVisible after set cmpApi.uiVisible to true').to.be.true;
+    expect(CmpApiModel.displayStatus, 'CmpApiModel.displayStatus - after set cmpApi.uiVisible to true').to.equal(DisplayStatus.VISIBLE);
 
     cmpApi.uiVisible = false;
 
-    expect(CmpApiModel.uiVisible, 'CmpApiModel.uiVisible after set cmpApi.uiVisible to false').to.be.false;
+    expect(CmpApiModel.displayStatus, 'CmpApiModel.displayStatus - after set cmpApi.uiVisible to false').to.equal(DisplayStatus.DISABLED);
 
     done();
 
