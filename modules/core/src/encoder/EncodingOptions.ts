@@ -1,6 +1,7 @@
 import {Segment} from '../model';
 
 export interface EncodingOptions {
-  isForSaving?: boolean;
+  isForVendors?: boolean;
+  version?: 1 | 2;
   segments?: Segment[];
 }

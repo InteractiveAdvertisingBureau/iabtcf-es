@@ -2,9 +2,10 @@ import {Cloneable} from './Cloneable';
 import {TCModelError} from './errors';
 import {GVL} from './GVL';
 
-import {ConsentLanguages, Fields, IntMap, PurposeRestrictionVector, Vector} from './model';
+import {ConsentLanguages, IntMap, PurposeRestrictionVector, Vector} from './model';
 import {Feature, Purpose, Vendor} from './model/gvl';
 
+type StringOrNumber = number | string;
 export type TCModelPropType = number | Date | string | boolean | Vector | PurposeRestrictionVector;
 
 export class TCModel extends Cloneable<TCModel> {
@@ -19,19 +20,19 @@ export class TCModel extends Cloneable<TCModel> {
   private useNonStandardStacks_ = false;
   private purposeOneTreatment_ = false;
   private publisherCountryCode_ = 'AA';
-  private version_: number;
-  private consentScreen_: number | string = 0;
-  private policyVersion_: number | string = 2;
+  private version_ = 2;
+  private consentScreen_: StringOrNumber = 0;
+  private policyVersion_: StringOrNumber = 2;
   private consentLanguage_ = 'EN';
-  private cmpId_: number | string = 0;
-  private cmpVersion_: number | string = 0;
-  private vendorListVersion_: number | string = 0;
+  private cmpId_: StringOrNumber = 0;
+  private cmpVersion_: StringOrNumber = 0;
+  private vendorListVersion_: StringOrNumber = 0;
 
   // Member Variable for GVL
   private gvl_: GVL;
 
-  public [Fields.created]: Date;
-  public [Fields.lastUpdated]: Date;
+  public created: Date;
+  public lastUpdated: Date;
 
   /**
    * The TCF designates certain Features as special, that is, a CMP must afford
@@ -39,49 +40,49 @@ export class TCModel extends Cloneable<TCModel> {
    * published and numbered in the GVL separately from normal Features.
    * Provides for up to 12 special features.
    */
-  public readonly [Fields.specialFeatureOptIns]: Vector = new Vector();
+  public readonly specialFeatureOptins: Vector = new Vector();
 
   /**
    * Renamed from `PurposesAllowed` in TCF v1.1
    * The user’s consent value for each Purpose established on the legal basis
    * of consent. Purposes are published in the Global Vendor List (see. [[GVL]]).
    */
-  public readonly [Fields.purposeConsents]: Vector = new Vector();
+  public readonly purposeConsents: Vector = new Vector();
 
   /**
    * The user’s permission for each Purpose established on the legal basis of
    * legitimate interest. If the user has exercised right-to-object for a
    * purpose.
    */
-  public readonly [Fields.purposeLegitimateInterests]: Vector = new Vector();
+  public readonly purposeLegitimateInterests: Vector = new Vector();
 
   /**
    * The user’s consent value for each Purpose established on the legal basis
    * of consent, for the publisher.  Purposes are published in the Global
    * Vendor List.
    */
-  public readonly [Fields.publisherConsents]: Vector = new Vector();
+  public readonly publisherConsents: Vector = new Vector();
 
   /**
    * The user’s permission for each Purpose established on the legal basis of
    * legitimate interest.  If the user has exercised right-to-object for a
    * purpose.
    */
-  public readonly [Fields.publisherLegitimateInterests]: Vector = new Vector();
+  public readonly publisherLegitimateInterests: Vector = new Vector();
 
   /**
    * The user’s consent value for each Purpose established on the legal basis
    * of consent, for the publisher.  Purposes are published in the Global
    * Vendor List.
    */
-  public readonly [Fields.publisherCustomConsents]: Vector = new Vector();
+  public readonly publisherCustomConsents: Vector = new Vector();
 
   /**
    * The user’s permission for each Purpose established on the legal basis of
    * legitimate interest.  If the user has exercised right-to-object for a
    * purpose that is established in the publisher's custom purposes.
    */
-  public readonly [Fields.publisherCustomLegitimateInterests]: Vector = new Vector();
+  public readonly publisherCustomLegitimateInterests: Vector = new Vector();
 
   /**
    * set by a publisher if they wish to collect consent and LI Transparency for
@@ -93,14 +94,14 @@ export class TCModel extends Cloneable<TCModel> {
    * Each [[Vendor]] is keyed by id. Their consent value is true if it is in
    * the Vector
    */
-  public readonly [Fields.vendorConsents]: Vector = new Vector();
+  public readonly vendorConsents: Vector = new Vector();
 
   /**
    * Each [[Vendor]] is keyed by id. Whether their Legitimate Interests
    * Disclosures have been established is stored as boolean.
    * see: [[Vector]]
    */
-  public readonly [Fields.vendorLegitimateInterests]: Vector = new Vector();
+  public readonly vendorLegitimateInterests: Vector = new Vector();
 
   /**
    * The value included for disclosed vendors signals which vendors have been
@@ -112,14 +113,14 @@ export class TCModel extends Cloneable<TCModel> {
    * that had not been disclosed by other CMPs in prior interactions with this
    * device/user agent.
    */
-  public readonly [Fields.vendorsDisclosed]: Vector = new Vector();
+  public readonly vendorsDisclosed: Vector = new Vector();
 
   /**
    * Signals which vendors the publisher permits to use OOB legal bases.
    */
-  public readonly [Fields.vendorsAllowed]: Vector = new Vector();
+  public readonly vendorsAllowed: Vector = new Vector();
 
-  public readonly [Fields.publisherRestrictions]: PurposeRestrictionVector = new PurposeRestrictionVector();
+  public readonly publisherRestrictions: PurposeRestrictionVector = new PurposeRestrictionVector();
 
   /**
    * Constructs the TCModel. Passing a [[GVL]] is optional when constructing
@@ -172,7 +173,7 @@ export class TCModel extends Cloneable<TCModel> {
    *
    * @throws {TCModelError} if the value is not an integer greater than 1 as those are not valid.
    */
-  public set [Fields.cmpId](integer: number | string) {
+  public set cmpId(integer: StringOrNumber) {
 
     if (Number.isInteger(+integer) && integer > 1) {
 
@@ -186,7 +187,7 @@ export class TCModel extends Cloneable<TCModel> {
 
   }
 
-  public get [Fields.cmpId](): number | string {
+  public get cmpId(): StringOrNumber {
 
     return this.cmpId_;
 
@@ -201,7 +202,7 @@ export class TCModel extends Cloneable<TCModel> {
    *
    * @throws {TCModelError} if the value is not an integer greater than 1 as those are not valid.
    */
-  public set [Fields.cmpVersion](integer: number | string) {
+  public set cmpVersion(integer: StringOrNumber) {
 
     if (Number.isInteger(+integer) && integer > -1) {
 
@@ -214,7 +215,7 @@ export class TCModel extends Cloneable<TCModel> {
     }
 
   }
-  public get [Fields.cmpVersion](): number | string {
+  public get cmpVersion(): StringOrNumber {
 
     return this.cmpVersion_;
 
@@ -230,7 +231,7 @@ export class TCModel extends Cloneable<TCModel> {
    *
    * @throws {TCModelError} if the value is not an integer greater than 0 as those are not valid.
    */
-  public set [Fields.consentScreen](integer: number | string) {
+  public set consentScreen(integer: StringOrNumber) {
 
     if (Number.isInteger(+integer) && integer > -1) {
 
@@ -243,7 +244,7 @@ export class TCModel extends Cloneable<TCModel> {
     }
 
   }
-  public get [Fields.consentScreen](): number | string {
+  public get consentScreen(): StringOrNumber {
 
     return this.consentScreen_;
 
@@ -256,7 +257,7 @@ export class TCModel extends Cloneable<TCModel> {
    *
    * @throws {TCModelError} if the value is not a length-2 string of alpha characters
    */
-  public set [Fields.consentLanguage](lang: string) {
+  public set consentLanguage(lang: string) {
 
     if (this.gvl) {
 
@@ -285,7 +286,7 @@ export class TCModel extends Cloneable<TCModel> {
 
   }
 
-  public get [Fields.consentLanguage](): string {
+  public get consentLanguage(): string {
 
     return this.consentLanguage_;
 
@@ -298,7 +299,7 @@ export class TCModel extends Cloneable<TCModel> {
    *
    * @throws {TCModelError} if the value is not a length-2 string of alpha characters
    */
-  public set [Fields.publisherCountryCode](countryCode: string) {
+  public set publisherCountryCode(countryCode: string) {
 
     if (/^([A-z]){2}$/.test(countryCode)) {
 
@@ -311,7 +312,7 @@ export class TCModel extends Cloneable<TCModel> {
     }
 
   }
-  public get [Fields.publisherCountryCode](): string {
+  public get publisherCountryCode(): string {
 
     return this.publisherCountryCode_;
 
@@ -325,7 +326,7 @@ export class TCModel extends Cloneable<TCModel> {
    *
    * @throws {TCModelError} if the value is not an integer greater than 0 as those are not valid.
    */
-  public set [Fields.vendorListVersion](integer: number | string) {
+  public set vendorListVersion(integer: StringOrNumber) {
 
     if (Number.isInteger(+integer) && integer > 0) {
 
@@ -347,7 +348,7 @@ export class TCModel extends Cloneable<TCModel> {
 
   }
 
-  public get [Fields.vendorListVersion](): number | string {
+  public get vendorListVersion(): StringOrNumber {
 
     if (this.gvl) {
 
@@ -375,13 +376,13 @@ export class TCModel extends Cloneable<TCModel> {
    *
    * @throws {TCModelError} if the value is not an integer greater than 1 as those are not valid.
    */
-  public set [Fields.policyVersion](num: number | string) {
+  public set policyVersion(num: StringOrNumber) {
 
     this.policyVersion_ = parseInt(num as string, 10);
 
   }
 
-  public get [Fields.policyVersion](): number | string {
+  public get policyVersion(): StringOrNumber {
 
     if (this.gvl) {
 
@@ -395,12 +396,12 @@ export class TCModel extends Cloneable<TCModel> {
 
   }
 
-  public set [Fields.version](num: number | string) {
+  public set version(num: StringOrNumber) {
 
     this.version_ = parseInt(num as string, 10);
 
   }
-  public get [Fields.version](): number | string {
+  public get version(): StringOrNumber {
 
     return this.version_;
 
@@ -417,12 +418,12 @@ export class TCModel extends Cloneable<TCModel> {
    * model will automatically change this value like adding publisher
    * restrictions.
    */
-  public set [Fields.isServiceSpecific](bool: boolean) {
+  public set isServiceSpecific(bool: boolean) {
 
     this.isServiceSpecific_ = bool;
 
   };
-  public get [Fields.isServiceSpecific](): boolean {
+  public get isServiceSpecific(): boolean {
 
     return this.isServiceSpecific_;
 
@@ -437,12 +438,12 @@ export class TCModel extends Cloneable<TCModel> {
    *
    * @param {boolean} bool - value to set
    */
-  public set [Fields.useNonStandardStacks](bool: boolean) {
+  public set useNonStandardStacks(bool: boolean) {
 
     this.useNonStandardStacks_ = bool;
 
   };
-  public get [Fields.useNonStandardStacks](): boolean {
+  public get useNonStandardStacks(): boolean {
 
     return this.useNonStandardStacks_;
 
@@ -454,13 +455,13 @@ export class TCModel extends Cloneable<TCModel> {
    * these vendors they should set this to false.
    * @param {boolean} bool - value to set
    */
-  public set [Fields.supportOOB](bool: boolean) {
+  public set supportOOB(bool: boolean) {
 
     this.supportOOB_ = bool;
 
   };
 
-  public get [Fields.supportOOB](): boolean {
+  public get supportOOB(): boolean {
 
     return this.supportOOB_;
 
@@ -478,13 +479,13 @@ export class TCModel extends Cloneable<TCModel> {
    *
    * @param {boolean} bool
    */
-  public set [Fields.purposeOneTreatment](bool: boolean) {
+  public set purposeOneTreatment(bool: boolean) {
 
     this.purposeOneTreatment_ = bool;
 
   };
 
-  public get [Fields.purposeOneTreatment](): boolean {
+  public get purposeOneTreatment(): boolean {
 
     return this.purposeOneTreatment_;
 
@@ -623,24 +624,24 @@ export class TCModel extends Cloneable<TCModel> {
   }
 
   /**
-   * setAllSpecialFeatureOptIns - sets all special featuresOptins on the GVL (true)
+   * setAllSpecialFeatureOptins - sets all special featuresOptins on the GVL (true)
    *
    * @return {void}
    */
-  public setAllSpecialFeatureOptIns(): void {
+  public setAllSpecialFeatureOptins(): void {
 
-    this.specialFeatureOptIns.setAll<Feature>(this.gvl.specialFeatures);
+    this.specialFeatureOptins.setAll<Feature>(this.gvl.specialFeatures);
 
   }
 
   /**
-   * unsetAllSpecialFeatureOptIns - unsets all special featuresOptins on the GVL (true)
+   * unsetAllSpecialFeatureOptins - unsets all special featuresOptins on the GVL (true)
    *
    * @return {void}
    */
-  public unsetAllSpecialFeatureOptIns(): void {
+  public unsetAllSpecialFeatureOptins(): void {
 
-    this.specialFeatureOptIns.empty();
+    this.specialFeatureOptins.empty();
 
   }
 
@@ -648,7 +649,7 @@ export class TCModel extends Cloneable<TCModel> {
 
     this.setAllVendorConsents();
     this.setAllPurposeLegitimateInterests();
-    this.setAllSpecialFeatureOptIns();
+    this.setAllSpecialFeatureOptins();
     this.setAllPurposeConsents();
     this.setAllVendorLegitimateInterests();
 
@@ -658,7 +659,7 @@ export class TCModel extends Cloneable<TCModel> {
 
     this.unsetAllVendorConsents();
     this.unsetAllPurposeLegitimateInterests();
-    this.unsetAllSpecialFeatureOptIns();
+    this.unsetAllSpecialFeatureOptins();
     this.unsetAllPurposeConsents();
     this.unsetAllVendorLegitimateInterests();
 

@@ -36,7 +36,7 @@ export class InAppTCDataToTCModel {
     this.checkVectorToBitField('vendor.consents', tcModel.vendorConsents, inAppTCData.vendor.consents as string);
     this.checkVectorToBitField('vendor.legitimateInterests', tcModel.vendorLegitimateInterests, inAppTCData.vendor.legitimateInterests as string);
 
-    this.checkVectorToBitField('specialFeatureOptIns', tcModel.specialFeatureOptIns, inAppTCData.specialFeatureOptins as string);
+    this.checkVectorToBitField('specialFeatureOptins', tcModel.specialFeatureOptins, inAppTCData.specialFeatureOptins as string);
 
     this.checkVectorToBitField('publisher.consents', tcModel.publisherConsents, inAppTCData.publisher.consents as string);
     this.checkVectorToBitField('publisher.legitimateInterests', tcModel.publisherLegitimateInterests, inAppTCData.publisher.legitimateInterests as string);

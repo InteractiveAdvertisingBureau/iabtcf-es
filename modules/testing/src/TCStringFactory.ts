@@ -3,15 +3,23 @@ import {TCString} from '@iabtcf/core';
 
 export class TCStringFactory {
 
-  public static base(forSaving = false): string {
+  public static base(isForSaving = false): string {
 
-    return TCString.encode(TCModelFactory.withGVL(), forSaving);
+    const encodingOptions = {isForVendors: !isForSaving};
+    const tcModel = TCModelFactory.withGVL();
+
+    return TCString.encode(tcModel, encodingOptions);
 
   }
 
-  public static withPubRestrictions(forSaving: boolean): string {
+  public static withPubRestrictions(isForSaving = false): string {
 
-    return TCString.encode(TCModelFactory.addPublisherRestrictions(TCModelFactory.withGVL()), forSaving);
+    const encodingOptions = {isForVendors: !isForSaving};
+    let tcModel = TCModelFactory.withGVL();
+
+    tcModel = TCModelFactory.addPublisherRestrictions(tcModel);
+
+    return TCString.encode(tcModel, encodingOptions);
 
   }
 

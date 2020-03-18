@@ -20,7 +20,7 @@ export class FieldEncoderMap {
   public static readonly [Fields.policyVersion]: typeof IntEncoder = IntEncoder;
   public static readonly [Fields.isServiceSpecific]: typeof BooleanEncoder = BooleanEncoder;
   public static readonly [Fields.useNonStandardStacks]: typeof BooleanEncoder = BooleanEncoder;
-  public static readonly [Fields.specialFeatureOptIns]: typeof FixedVectorEncoder = FixedVectorEncoder;
+  public static readonly [Fields.specialFeatureOptins]: typeof FixedVectorEncoder = FixedVectorEncoder;
   public static readonly [Fields.purposeConsents]: typeof FixedVectorEncoder = FixedVectorEncoder;
   public static readonly [Fields.purposeLegitimateInterests]: typeof FixedVectorEncoder = FixedVectorEncoder;
   public static readonly [Fields.purposeOneTreatment]: typeof BooleanEncoder = BooleanEncoder;

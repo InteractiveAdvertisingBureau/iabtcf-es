@@ -1,10 +1,8 @@
-import {IntEncoder} from './IntEncoder';
-import {BooleanEncoder} from './BooleanEncoder';
 import {BitLength} from '../BitLength';
-import {
-  PurposeRestrictionVector,
-  PurposeRestriction,
-} from '../../model';
+import {BooleanEncoder} from './BooleanEncoder';
+import {DecodingError} from '../../errors';
+import {IntEncoder} from './IntEncoder';
+import {PurposeRestrictionVector, PurposeRestriction} from '../../model';
 
 export class PurposeRestrictionVectorEncoder {
 
@@ -92,6 +90,7 @@ export class PurposeRestrictionVectorEncoder {
     let index = 0;
     const vector: PurposeRestrictionVector = new PurposeRestrictionVector();
     const numRestrictions: number = IntEncoder.decode(encodedString.substr(index, BitLength.numRestrictions));
+
     index += BitLength.numRestrictions;
 
     for (let i = 0; i < numRestrictions; i++) {
@@ -121,7 +120,13 @@ export class PurposeRestrictionVectorEncoder {
           const endVendorId: number = IntEncoder.decode(encodedString.substr(index, BitLength.vendorId));
           index += BitLength.vendorId;
 
-          for ( let k: number = startOrOnlyVendorId; k < startOrOnlyVendorId + endVendorId; k++) {
+          if (endVendorId < startOrOnlyVendorId) {
+
+            throw new DecodingError(`Invalid RangeEntry: endVendorId ${endVendorId} is less than ${startOrOnlyVendorId}`);
+
+          }
+
+          for ( let k: number = startOrOnlyVendorId; k <= endVendorId; k++) {
 
             vector.add(k, purposeRestriction);
 

@@ -52,7 +52,7 @@ export class TCModelFactory {
     tcModel.vendorConsents.set(makeRandomIntArray(1, numVendors, makeRandomInt(0, numVendors)));
     tcModel.vendorLegitimateInterests.set(makeRandomIntArray(1, numVendors, makeRandomInt(0, numVendors)));
 
-    tcModel.specialFeatureOptIns.set(makeRandomIntArray(1, numSpecialFeatures, makeRandomInt(0, numSpecialFeatures)));
+    tcModel.specialFeatureOptins.set(makeRandomIntArray(1, numSpecialFeatures, makeRandomInt(0, numSpecialFeatures)));
 
     tcModel.vendorsAllowed.set(makeRandomIntArray(1, numVendors, makeRandomInt(0, numVendors)));
     tcModel.vendorsDisclosed.set(makeRandomIntArray(1, numVendors, makeRandomInt(0, numVendors)));

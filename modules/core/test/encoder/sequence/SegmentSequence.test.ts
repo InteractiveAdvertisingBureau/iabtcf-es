@@ -18,6 +18,7 @@ describe('encoder/sequence->SegmentSequence', (): void => {
 
       const tcModel = new TCModel();
 
+      tcModel.version = 2;
       tcModel.isServiceSpecific = isServiceSpecific;
       tcModel.supportOOB = supportOOB;
 
@@ -27,7 +28,7 @@ describe('encoder/sequence->SegmentSequence', (): void => {
 
       }
 
-      const sSequence = new SegmentSequence(tcModel, 2, {isForSaving: isForSaving});
+      const sSequence = new SegmentSequence(tcModel, {isForVendors: !isForSaving});
       callback(sSequence[version]);
 
     });

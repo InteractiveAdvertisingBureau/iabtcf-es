@@ -67,7 +67,7 @@ export class TCDataToTCModel {
     this.checkVectorToBooleanVector('vendor.consents', tcModel.vendorConsents, tcData.vendor.consents as BooleanVector, vendors);
     this.checkVectorToBooleanVector('vendor.legitimateInterests', tcModel.vendorLegitimateInterests, tcData.vendor.legitimateInterests as BooleanVector, vendors);
 
-    this.checkVectorToBooleanVector('specialFeatureOptIns', tcModel.specialFeatureOptIns, tcData.specialFeatureOptins as BooleanVector);
+    this.checkVectorToBooleanVector('specialFeatureOptins', tcModel.specialFeatureOptins, tcData.specialFeatureOptins as BooleanVector);
 
     this.checkVectorToBooleanVector('publisher.consents', tcModel.publisherConsents, tcData.publisher.consents as BooleanVector);
     this.checkVectorToBooleanVector('publisher.legitimateInterests', tcModel.publisherLegitimateInterests, tcData.publisher.legitimateInterests as BooleanVector);

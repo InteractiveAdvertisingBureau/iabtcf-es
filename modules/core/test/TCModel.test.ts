@@ -200,7 +200,7 @@ describe('TCModel', (): void => {
 
   testInstanceOf('vendorConsents', Vector);
   testInstanceOf('vendorLegitimateInterests', Vector);
-  testInstanceOf('specialFeatureOptIns', Vector);
+  testInstanceOf('specialFeatureOptins', Vector);
 
   describe('consentLanguage', (): void => {
 
@@ -333,7 +333,7 @@ describe('TCModel', (): void => {
       vendorLegitimateInterests: {gvlKey: 'vendors'},
       purposeConsents: {gvlKey: 'purposes'},
       purposeLegitimateInterests: {gvlKey: 'purposes'},
-      specialFeatureOptIns: {gvlKey: 'specialFeatures'},
+      specialFeatureOptins: {gvlKey: 'specialFeatures'},
     };
 
     for (const vectorName in setUnSetAlls) {

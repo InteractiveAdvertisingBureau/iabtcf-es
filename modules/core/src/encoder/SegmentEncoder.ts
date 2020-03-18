@@ -10,9 +10,20 @@ export class SegmentEncoder {
 
   private static fieldSequence: FieldSequence = new FieldSequence();
 
-  public static encode(tcModel: TCModel, version: string, segment: Segment): string {
+  public static encode(tcModel: TCModel, segment: Segment): string {
 
-    const sequence = this.fieldSequence[version][segment];
+    let sequence;
+
+    try {
+
+      sequence = this.fieldSequence[''+tcModel.version][segment];
+
+    } catch (err) {
+
+      throw new EncodingError(`Unable to encode version: ${tcModel.version}, segment: ${segment}`);
+
+    }
+
     let bitField = '';
 
     /**
@@ -47,9 +58,9 @@ export class SegmentEncoder {
     return Base64Url.encode(bitField);
 
   }
-  public static decode(encodedString: string, tcModel: TCModel, version: string, segment: string): TCModel {
+  public static decode(encodedString: string, tcModel: TCModel, segment: string): TCModel {
 
-    const sequence = this.fieldSequence[version][segment];
+    const sequence = this.fieldSequence[''+tcModel.version][segment];
     const bitField = Base64Url.decode(encodedString);
     let bStringIdx = 0;
 

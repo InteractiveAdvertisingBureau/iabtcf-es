@@ -91,7 +91,7 @@ if (encoded) {
     print('vendorListVersion', tcModel.vendorListVersion);
     print('purposeConsents', tcModel.purposeConsents);
     print('purposeLegitimateInterests', tcModel.purposeLegitimateInterests);
-    print('specialFeatureOptIns', tcModel.specialFeatureOptIns);
+    print('specialFeatureOptins', tcModel.specialFeatureOptins);
     print('publisherLegitimateInterests', tcModel.publisherLegitimateInterests);
     print('publisherCustomConsents', tcModel.publisherCustomConsents);
     print('publisherConsents', tcModel.publisherConsents);

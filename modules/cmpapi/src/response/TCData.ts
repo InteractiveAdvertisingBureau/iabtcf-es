@@ -80,7 +80,9 @@ export class TCData extends Response {
 
       } else {
 
-        this.tcString = TCString.encode(tcModel);
+        this.tcString = TCString.encode(tcModel, {
+          isForVendors: true,
+        });
         CmpApiModel.cacheTCString(this.tcString);
 
       }
@@ -111,7 +113,7 @@ export class TCData extends Response {
 
       };
 
-      this.specialFeatureOptins = this.createVectorField(tcModel.specialFeatureOptIns);
+      this.specialFeatureOptins = this.createVectorField(tcModel.specialFeatureOptins);
 
       this.publisher = {
 

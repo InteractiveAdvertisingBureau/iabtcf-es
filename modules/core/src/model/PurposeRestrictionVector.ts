@@ -43,7 +43,7 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
         const vendor: Vendor = this.gvl.vendors[vIDStr];
 
-        if (vendor.flexiblePurposes) {
+        if (vendor.flexiblePurposes.length) {
 
           switch (restrictionType) {
 
