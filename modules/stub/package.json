@@ -10,7 +10,7 @@
     "lib/stub.js"
   ],
   "scripts": {
-    "build": "rm -rf lib && mkdir lib ; babel src/stub.js | terser -m -c --source-map url='stub.js.map' -o lib/stub.js",
+    "build": "rm -rf lib && mkdir lib ; babel src/stub.js | terser -m -c -o lib/stub.js",
     "build:dev": "rm -rf lib && ln -s src lib",
     "lint:fix": "exit 0",
     "lint": "exit 0"
