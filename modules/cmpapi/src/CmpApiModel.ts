@@ -103,6 +103,7 @@ export class CmpApiModel {
 
       this.gdprApplies = false;
       this.displayStatus = DisplayStatus.DISABLED;
+      this.eventStatus = EventStatus.TC_LOADED;
       this.tcModel_ = null;
 
     } else if (this.isTCModel(model)) {
