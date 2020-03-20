@@ -15,7 +15,7 @@ type PageCallHandler = (
   ...param: any
 ) => void;
 
-export class PageHandler {
+export class CallResponder {
 
   private queuedCalls: TcfApiArgs[];
   private readonly API_FUNCTION_NAME: string = '__tcfapi';
@@ -110,12 +110,13 @@ export class PageHandler {
        */
       this.queuedCalls.push([command, version, callback, params]);
 
-    } else if (CommandMap[command]) {
-
-      new CommandMap[command](callback, params[0]);
-
     } else {
 
+      /**
+       * at this point we know the command exists and we are free to call it
+       */
+
+      new CommandMap[command](callback, params[0]);
       // hopefully this isn't possible
       throw new Error('unknown error');
 

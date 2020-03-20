@@ -9,7 +9,7 @@ Ensures other in-page digital marketing technologies have access to CMP transpar
 
 # CmpApi
 
-CmpApi is the only class needed to provide in-page digital marketing technologies access to a CMP transparency and consent information.
+`CmpApi` is the only class needed to provide in-page digital marketing technologies access to a CMP transparency and consent information.
 The process involves setting the state of a few properties and/or a validly ecnoded [TC string](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#about-the-transparency--consent-string-tc-string)
 
 ## Installation
@@ -30,7 +30,6 @@ yarn add @iabtcf/cmpapi
 
 ````javascript
 import {CmpApi} from '@iabtcf/cmpapi';
-import {TCModel} from '@iabtcf/core';
 
 /**
  * To create an instance of the CmpApi. Pass in your Cmp ID and the Cmp Version
@@ -39,8 +38,8 @@ import {TCModel} from '@iabtcf/core';
 const cmpApi = new CmpApi(1, 3);
 ````
 
-During construction of the CmpApi, the __tcfapi stub is replaced with CmpApi's own function
-for handling __tcfapi command requests. Commands that were waiting to be executed in the stub are
+During construction of the `CmpApi`, the `window.__tcfapi` stub is replaced with `CmpApi`'s own function
+for handling `window.__tcfapi` command requests. Commands that were waiting to be executed in the stub are
 filtered out if not valid. Ping and custom commands are executed and removed from the queue while
 all other commands remain queued until a valid [TC string](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#about-the-transparency--consent-string-tc-string) is set.
 
@@ -48,7 +47,7 @@ all other commands remain queued until a valid [TC string](https://github.com/In
 will be queue until `update()` is called for the first time.
 
 ## Set TC string
-Create a **valid** [TC string](https://www.iabtcf.com/api/core/classes/tcmodel.html) and set it in CmpApi.
+Create a **valid** [TC string](https://www.iabtcf.com/api/core/classes/tcmodel.html) and set it in `CmpApi`.
 
 ````javascript
 cmpApi.update(encodedTCString);
@@ -71,7 +70,7 @@ cmpApi.update(null);
 ## Disabling the CmpApi
 If, for any reason, we are unable to perform the operations in compliance with
 the TCF and thus should not continue to serve page request commands (other than ping),
-the CmpApi provides a disable method. Calling the disabled method will put the CmpApi
+the `CmpApi` provides a disable method. Calling the disabled method will put the `CmpApi`
 into a permanent error state. Only ping and custom commands will continue to be executed
 for page requests.
 
@@ -82,7 +81,7 @@ cmpApi.disable();
 ## Custom Commands
 `CmpApi` has an optional parameter to pass in your map of custom commands.
 CmpApi will not perform any validation on custom commands. The CMP is responsible for handling validations and errors. Custom function signatures
-must have parameters at least a callback and any additonal params will be passed to the custom command.
+must have a callback and may define additonal params that will be passed from the calling script.
 
 ### Example
 ````javascript
@@ -127,7 +126,7 @@ __tcfapi('connectBones', 2, songLyricCallback, 'knee', 'thigh');
 
 ## CmpApi Examples
 
-### Example 1: CMP decides not to show the UI
+### Example 1: GDPR Applies and TC string exists and UI doesn't need to be shown
 
 ````javascript
 import {CmpApi} from '@iabtcf/cmpapi';
@@ -145,7 +144,7 @@ cmpApi.update(encodedTCString, false);
 
 ````
 
-### Example 2: CMP decides to show the UI
+### Example 2: GDPR Applies and the UI needs to show
 
 ````javascript
 import {CmpApi} from '@iabtcf/cmpapi';

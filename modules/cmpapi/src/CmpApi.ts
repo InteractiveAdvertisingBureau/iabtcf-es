@@ -2,7 +2,7 @@
 import {CmpApiModel} from './CmpApiModel';
 import {CustomCommands} from './CustomCommands';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
-import {PageHandler} from './PageHandler';
+import {CallResponder} from './CallResponder';
 import {TCString, Base64Url, Segment, SegmentIDs} from '@iabtcf/core';
 
 /**
@@ -12,7 +12,7 @@ import {TCString, Base64Url, Segment, SegmentIDs} from '@iabtcf/core';
  */
 export class CmpApi {
 
-  private pageHandler: PageHandler;
+  private callResponder: CallResponder;
 
   /**
    * @param {number} cmpId - IAB assigned CMP ID
@@ -26,7 +26,7 @@ export class CmpApi {
 
     CmpApiModel.cmpId = cmpId;
     CmpApiModel.cmpVersion = cmpVersion;
-    this.pageHandler = new PageHandler(customCommands);
+    this.callResponder = new CallResponder(customCommands);
 
   }
   private throwIfInvalidInt(value: number, name: string, minValue: number): void | never {
@@ -143,7 +143,7 @@ export class CmpApi {
 
     }
 
-    this.pageHandler.purgeQueuedCalls();
+    this.callResponder.purgeQueuedCalls();
 
   }
 

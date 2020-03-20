@@ -386,6 +386,18 @@ describe('CmpApi', (): void => {
 
   });
 
+  it('should throw an error if no publisher TC String segment exists on the TCString', (): void => {
+
+    const cmpApi = getCmpApi();
+
+    expect((): void => {
+
+      cmpApi.update(TCStringFactory.base().split('.')[0], false);
+
+    }).to.throw();
+
+  });
+
   it(`should set gdprApplies=true, displayStatus="${DisplayStatus.DISABLED}", eventStatus="${EventStatus.TC_LOADED}", and cmpStatus="${CmpStatus.LOADED}" on the first set of the tcString when uiVisible=false`, (): void => {
 
     const cmpApi = getCmpApi();
