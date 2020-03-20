@@ -21,9 +21,21 @@ export class CmpApi {
    */
   public constructor(cmpId: number, cmpVersion: number, customCommands?: CustomCommands) {
 
+    this.throwIfInvalidInt(cmpId, 'cmpId', 2);
+    this.throwIfInvalidInt(cmpVersion, 'cmpVersion', 0);
+
     CmpApiModel.cmpId = cmpId;
     CmpApiModel.cmpVersion = cmpVersion;
     this.pageHandler = new PageHandler(customCommands);
+
+  }
+  private throwIfInvalidInt(value: number, name: string, minValue: number): void | never {
+
+    if (!(typeof value === 'number' && Number.isInteger(value) && value >= minValue)) {
+
+      throw new Error(`Invalid ${name}: ${value}`);
+
+    }
 
   }
 
@@ -89,19 +101,6 @@ export class CmpApi {
 
     this.throwMaybe(encodedTCString);
 
-    if (encodedTCString === null) {
-
-      CmpApiModel.gdprApplies = false;
-      CmpApiModel.tcModel = null;
-
-    } else {
-
-      CmpApiModel.gdprApplies = true;
-      CmpApiModel.tcModel = TCString.decode(encodedTCString);
-      CmpApiModel.tcString = encodedTCString;
-
-    }
-
     CmpApiModel.cmpStatus = CmpStatus.LOADED;
 
     if (uiVisible) {
@@ -123,9 +122,28 @@ export class CmpApi {
 
       }
 
+    }
+
+    if (encodedTCString === null) {
+
+      CmpApiModel.gdprApplies = false;
+      CmpApiModel.tcModel = null;
+
+    } else {
+
+      CmpApiModel.gdprApplies = true;
+      CmpApiModel.tcModel = TCString.decode(encodedTCString);
+      CmpApiModel.tcString = encodedTCString;
+
+    }
+
+    if (CmpApiModel.displayStatus !== DisplayStatus.VISIBLE) {
+
       CmpApiModel.eventQueue.exec();
 
     }
+
+    this.pageHandler.purgeQueuedCalls();
 
   }
 

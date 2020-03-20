@@ -7,14 +7,10 @@
 
 Ensures other in-page digital marketing technologies have access to CMP transparency and consent information for the [IAB's Transparency and Consent Framework (TCF)](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework).
 
-
-
-
 # CmpApi
 
 CmpApi is the only class needed to provide in-page digital marketing technologies access to a CMP transparency and consent information.
-The process involves setting the state of a few properties and/or a valid [TCModel](https://www.iabtcf.com/api/core/classes/tcmodel.html).
- * [API Docs](https://www.iabtcf.com/api/cmpapi/)
+The process involves setting the state of a few properties and/or a validly ecnoded [TC string](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#about-the-transparency--consent-string-tc-string)
 
 ## Installation
 
@@ -46,70 +42,31 @@ const cmpApi = new CmpApi(1, 3);
 During construction of the CmpApi, the __tcfapi stub is replaced with CmpApi's own function
 for handling __tcfapi command requests. Commands that were waiting to be executed in the stub are
 filtered out if not valid. Ping and custom commands are executed and removed from the queue while
-all other commands remain queued until a valid [TCModel](https://www.iabtcf.com/api/core/classes/tcmodel.html) is set.
+all other commands remain queued until a valid [TC string](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#about-the-transparency--consent-string-tc-string) is set.
 
-**Note:** After creation, __tcfapi can service ping commands and custom commands only. All other commands
-will be queue until we have a valid TCModel. So lets create and set one.
+**Note:** After creation, `window.__tcfapi` will respond to "ping" commands and custom commands only. All other commands
+will be queue until `update()` is called for the first time.
 
-
-
-
-## Set TCModel
-Create a **valid** [TCModel](https://www.iabtcf.com/api/core/classes/tcmodel.html) and set it in CmpApi. The CmpApi doesn't keep the reference to the passed in TCModel, it will create it's own deep copy.
+## Set TC string
+Create a **valid** [TC string](https://www.iabtcf.com/api/core/classes/tcmodel.html) and set it in CmpApi.
 
 ````javascript
-// Create a TCModel
-const tcModel = new TCModel();
-
-// Set valid TCModel values here. See TCModel Usage link above!
-
-// Set the TCModel.
-cmpApi.tcModel = tcModel;
+cmpApi.update(encodedTCString);
 ````
-After creation, __tcfapi can service ping commands and custom commands only. All other commands
-will be queue until we have a valid TCModel. So lets create and set one.
 
-
-
-## Show UI and Update TCModel
-The CmpApi needs to know when you are going to show the user the CMP UI.
-
-**Note:** You do not have to let CmpApi know when you stop showing the UI as setting the [TCModel](https://www.iabtcf.com/api/core/classes/tcmodel.html) will handle this.
+## Show UI and Update TC string
+`CmpApi` needs to know when you are going to show the user the CMP UI. The second parameter is a `boolean` letting `CmpApi` know that the UI is now visible to the user (it defaults to `false`).
 
 ````javascript
-// Set uiVisible to true. No need to set it to false afterward.
-cmpApi.uiVisible = true;
-
-// ... User makes selections and we update TCModel
-
-cmpApi.tcModel = tcModel;
+cmpApi.update(encodedTCString, true);
 ````
-
 
 ## GDPR doesn't apply
-In the case that GDPR does not apply, simply set the TCModel to null. That's all.
+In the case that GDPR does not apply, simply update with null. That's all.
 
 ````javascript
-cmpApi.tcModel = null;
+cmpApi.update(null);
 ````
-
-
-## UI Options: uiVisible
-
-There are two scenarios in which you would set uiVisible. One for true and one for false.
-
-#### False - If TCData is current and does not need renewal
-If TCData is current and does not need renewal, then we will not show the ui.
-````javascript
-cmpApi.uiVisible = false;
-````
-
-#### True - If TCData is **not** current and we are about to show the CMP UI
-
-````javascript
-cmpApi.uiVisible = true;
-````
-
 
 ## Disabling the CmpApi
 If, for any reason, we are unable to perform the operations in compliance with
@@ -122,10 +79,9 @@ for page requests.
 cmpApi.disable();
 ````
 
-
 ## Custom Commands
-The [Constructor]([TCModel](https://www.iabtcf.com/api/core/classes/tcmodel.html)) for CmpApi has an optional parameter to pass in your map of custom commands.
-CmpApi will not perform any validation custom commands. The CMP is responsible for handling validations and errors. Custom function signatures
+`CmpApi` has an optional parameter to pass in your map of custom commands.
+CmpApi will not perform any validation on custom commands. The CMP is responsible for handling validations and errors. Custom function signatures
 must have parameters at least a callback and any additonal params will be passed to the custom command.
 
 ### Example
@@ -171,98 +127,64 @@ __tcfapi('connectBones', 2, songLyricCallback, 'knee', 'thigh');
 
 ## CmpApi Examples
 
-### Example 1: Typical Use - Create, Set, Show and Update TCModel
-The basic usage of CmpApi would be to create an instance, set the [TCModel](https://www.iabtcf.com/api/core/classes/tcmodel.html), optionally show the CMP UI and update the TCModel.
+### Example 1: CMP decides not to show the UI
 
 ````javascript
 import {CmpApi} from '@iabtcf/cmpapi';
-import {TCModel} from '@iabtcf/core';
-import {MyCustomCommands} from './MyCustomCommands';
+
+// cmp ID 100, cmp version 2
+const cmpApi = new CmpApi(100, 2);
 
 /**
- * To create an instance of the CmpApi. Pass in your Cmp ID, Cmp Version and
- * optional custom commands to constructor.
- */
-const cmpApi = new CmpApi(1, 3, MyCustomCommands);
-
-/**
- * During initialization of the CmpApi, the __tcfapi stub is replaced with
- * CmpApi's own function for handling __tcfapi command requests. All commands
- * that were waiting to be executed in the stub are filtered out if not valid.
- * If any commands are able to executed at this point, they are.
- *
- * For example, if their is a ping command in the queue, it will be executed
- * immediately and removed from the queue, while getTcData command requests
- * will not.
- *
- * At this point, __tcfapi can serve ping commands and custom commands only.
- * All other commands will be queue until we have a valid TCModel. So lets
- * create and set one.
+ * ... CMP makes determination not to show the UI
+ *     based on the encodedTCString...
  */
 
-// Create a TCModel
-const tcModel = new TCModel();
+// set string and the UI determination (false)
+cmpApi.update(encodedTCString, false);
 
-// Set valid TCModel values. See TCModel link above!
-
-// Set the TCModel. Note: the CmpApi doesn't keep a reference, it will create it's own deep copy.
-cmpApi.tcModel = tcModel;
-
-/**
- * With a valid TCModel set, Any queued __tcfapi page request commands will be
- * executed and the queue will be cleared. All event listeners will be evoked
- * (and every time you set a new TCModel).  All __tcfapi page requests from
- * this point on will be executed immediately without queuing.
- *
- * Now, optionally, we may want to show the CMP UI to the user to make
- * selections.
- */
-
-// Set uiVisible to true. No need to set it to false afterward.
-cmpApi.uiVisible = true;
-
-// ... User makes selections and we update TCModel
-
-cmpApi.tcModel = tcModel;
-
-// Done
 ````
 
-
-
-### Example 2: TCData is current and does not need renewal
+### Example 2: CMP decides to show the UI
 
 ````javascript
 import {CmpApi} from '@iabtcf/cmpapi';
-import {TCModel} from '@iabtcf/core';
 
-const cmpApi = new CmpApi(1, 3);
-
-// Create a TCModel
-const tcModel = new TCModel();
-
-// Set the TCModel. Must be a valid TCModel.
-cmpApi.tcModel = tcModel;
-
-// We are not going to show the ui.
-cmpApi.uiVisible = false;
-
-// Done
-````
-
-### Example 3: GDPR doesn't apply
-
-````javascript
-import {CmpApi} from '@iabtcf/cmpapi';
-import {TCModel} from '@iabtcf/core';
+// cmp ID 100, cmp version 2
+const cmpApi = new CmpApi(100, 2);
 
 /**
- * To create an instance of the CmpApi. Pass in your Cmp ID and the Cmp Version
- * to constructor.
+ * ... CMP makes determination to show the UI
+ *     based on the encodedTCString...
  */
-const cmpApi = new CmpApi(1, 3);
 
-cmpApi.tcModel = null;
+// set string and the UI determination (false)
+cmpApi.update(encodedTCString, true);
 
-// Done
+/**
+ * ... CMP waits for user to make their
+ *     choices and encodes a new TC string...
+ */
+
+// update the cmpApi with the new value and in this case the
+// second parameter doesn't matter
+cmpApi.update(newEncodedTCString);
+
+````
+
+### Example 3: GDPR Does not apply to this user
+
+````javascript
+import {CmpApi} from '@iabtcf/cmpapi';
+
+// cmp ID 100, cmp version 2
+const cmpApi = new CmpApi(100, 2);
+
+/**
+ * ... CMP makes determination not that gdprApplies=false
+ */
+
+// Setting this to null sets gdprApplies=false
+cmpApi.update(null);
+
 ````

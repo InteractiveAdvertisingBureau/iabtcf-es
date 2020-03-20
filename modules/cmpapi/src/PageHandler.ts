@@ -98,6 +98,10 @@ export class PageHandler {
        */
       new CommandMap[command](callback, params[0]);
 
+    } else if (this.customCommands && this.customCommands[command]) {
+
+      this.customCommands[command](callback, ...params);
+
     } else if (CmpApiModel.tcModel === undefined) {
 
       /**
@@ -106,32 +110,20 @@ export class PageHandler {
        */
       this.queuedCalls.push([command, version, callback, params]);
 
+    } else if (CommandMap[command]) {
+
+      new CommandMap[command](callback, params[0]);
+
     } else {
 
-      /**
-       * we've passed the checks and we're firing on all cylinders; now lets
-       * get the appropriate command
-       */
-
-      if (this.customCommands && this.customCommands[command]) {
-
-        this.customCommands[command](callback, ...params);
-
-      } else if (CommandMap[command]) {
-
-        new CommandMap[command](callback, params[0]);
-
-      } else {
-
-        // hopefully this isn't possible
-        throw new Error('unknown error');
-
-      }
+      // hopefully this isn't possible
+      throw new Error('unknown error');
 
     }
 
   }
-  private purgeQueuedCalls(): void {
+
+  public purgeQueuedCalls(): void {
 
     if (this.queuedCalls) {
 

@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import {CmpStatus, DisplayStatus, EventStatus} from '../src/status';
+import {makeRandomInt, TCStringFactory} from '@iabtcf/testing';
+import {expect} from 'chai';
 import {CmpApi, CustomCommands} from '../src/';
 import {CmpApiModel} from '../src/CmpApiModel';
 import {Ping} from '../src/response/Ping';
 import {TCData} from '../src/response/TCData';
-import {CmpStatus} from '../src/status/CmpStatus';
-import {DisplayStatus} from '../src/status/DisplayStatus';
 import {TCFCommands} from '../src/command/TCFCommands';
-import {expect} from 'chai';
-import {makeRandomInt, TCModelFactory, TCStringFactory} from '@iabtcf/testing';
-import {TCDataToTCModel} from './TCDataToTCModel';
+import {TestUtils} from './TestUtils';
+
 import * as stub from '@iabtcf/stub';
 
 const API_FUNCTION_NAME = '__tcfapi';
@@ -41,9 +41,18 @@ describe('CmpApi', (): void => {
 
   };
 
+  const getCmpApi = (customCommands?: CustomCommands): CmpApi => {
+
+    const cmpId = makeRandomInt(2, 100);
+    const cmpVersion = makeRandomInt(1, 15);
+    return new CmpApi(cmpId, cmpVersion, customCommands);
+
+  };
+
   beforeEach((): void => {
 
     stub.default();
+    TestUtils.assertDefaultCmpApiModel();
 
   });
   afterEach((): void => {
@@ -52,48 +61,55 @@ describe('CmpApi', (): void => {
 
   });
 
-  const assertStub = (): void => {
+  const assertStub = async (): Promise<void> => {
 
     expect(window[API_FUNCTION_NAME], `window.${API_FUNCTION_NAME} while stub`).to.be.a('function');
 
-    window[API_FUNCTION_NAME](TCFCommands.PING, 2, (ping: Ping): void => {
+    return new Promise((resolve: () => void): void => {
 
-      expect(ping.cmpId, 'ping.cmpId with stub').to.be.undefined;
-      expect(ping.cmpVersion, 'ping.cmpVersion with stub').to.be.undefined;
-      expect(ping.cmpLoaded, 'ping.cmpLoaded with stub').to.be.false;
-      expect(ping.gdprApplies, 'ping.gdprApplies with stub').to.be.undefined;
-      expect(ping.cmpStatus, 'ping.cmpStatus with stub').to.equal('stub');
-      expect(ping.displayStatus, 'ping.displayStatus with stub').to.be.undefined;
-      expect(ping.gvlVersion, 'ping.gvlVersion with stub').to.be.undefined;
-      expect(ping.apiVersion, 'ping.apiVersion with stub').to.be.undefined;
+      window[API_FUNCTION_NAME](TCFCommands.PING, 2, (ping: Ping): void => {
+
+        expect(ping.cmpId, 'ping.cmpId with stub').to.be.undefined;
+        expect(ping.cmpVersion, 'ping.cmpVersion with stub').to.be.undefined;
+        expect(ping.cmpLoaded, 'ping.cmpLoaded with stub').to.be.false;
+        expect(ping.gdprApplies, 'ping.gdprApplies with stub').to.be.undefined;
+        expect(ping.cmpStatus, 'ping.cmpStatus with stub').to.equal('stub');
+        expect(ping.displayStatus, 'ping.displayStatus with stub').to.be.undefined;
+        expect(ping.gvlVersion, 'ping.gvlVersion with stub').to.be.undefined;
+        expect(ping.apiVersion, 'ping.apiVersion with stub').to.be.undefined;
+
+        resolve();
+
+      });
 
     });
 
   };
 
-  it('should override the stub', (done: () => void): void => {
+  it('should override the stub', async (): Promise<void> => {
 
-    assertStub();
+    await assertStub();
 
-    const cmpId = makeRandomInt(2, 100);
-    const cmpVersion = makeRandomInt(0, 15);
-    new CmpApi(cmpId, cmpVersion);
+    getCmpApi();
 
     expect(window[API_FUNCTION_NAME], `window.${API_FUNCTION_NAME} after cmpApi created`).to.be.a('function');
-    window[API_FUNCTION_NAME]('ping', 2, (ping: Ping): void => {
+    return new Promise((resolve: () => void): void => {
 
-      expect(ping.cmpId, 'ping.cmpId after cmpApi created').to.equal(cmpId);
-      expect(ping.cmpVersion, 'ping.cmpVersion after cmpApi created').to.equal(cmpVersion);
-      expect(ping.cmpLoaded, 'ping.cmpLoaded after cmpApi created').to.be.true;
-      expect(ping.gdprApplies, 'ping.gdprApplies after cmpApi created').to.be.undefined;
-      expect(ping.cmpStatus, 'ping.cmpStatus after cmpApi created').to.equal(CmpStatus.LOADING);
-      expect(ping.apiVersion, 'ping.apiVersion after cmpApi created').to.equal('2');
-      expect(ping.displayStatus, 'ping.displayStatus after cmpApi created').to.equal(DisplayStatus.HIDDEN);
-      expect(ping.gvlVersion, 'ping.gvlVersion after cmpApi created').to.be.undefined;
+      window[API_FUNCTION_NAME]('ping', 2, (ping: Ping): void => {
+
+        expect(ping.cmpId, 'ping.cmpId after cmpApi created').is.above(2);
+        expect(ping.cmpVersion, 'ping.cmpVersion after cmpApi created').is.above(0);
+        expect(ping.cmpLoaded, 'ping.cmpLoaded after cmpApi created').to.be.true;
+        expect(ping.gdprApplies, 'ping.gdprApplies after cmpApi created').to.be.undefined;
+        expect(ping.cmpStatus, 'ping.cmpStatus after cmpApi created').to.equal(CmpStatus.LOADING);
+        expect(ping.apiVersion, 'ping.apiVersion after cmpApi created').to.equal('2');
+        expect(ping.displayStatus, 'ping.displayStatus after cmpApi created').to.equal(DisplayStatus.HIDDEN);
+        expect(ping.gvlVersion, 'ping.gvlVersion after cmpApi created').to.be.undefined;
+        resolve();
+
+      });
 
     });
-
-    done();
 
   });
 
@@ -128,14 +144,6 @@ describe('CmpApi', (): void => {
   runContructionFail(2, 'banana');
   runContructionFail(2, null);
 
-  const getCmpApi = (customCommands?: CustomCommands): CmpApi => {
-
-    const cmpId = makeRandomInt(2, 100);
-    const cmpVersion = makeRandomInt(0, 15);
-    return new CmpApi(cmpId, cmpVersion, customCommands);
-
-  };
-
   it('should pick up a queued stub function an excecute it if it can when tcModel is set', (done: () => void): void => {
 
     assertStub();
@@ -143,14 +151,24 @@ describe('CmpApi', (): void => {
     window[API_FUNCTION_NAME](TCFCommands.GET_TC_DATA, API_VERSION, (tcData: TCData, success: boolean): void => {
 
       expect(success).to.be.true;
-      TCDataToTCModel.equal();
+      TestUtils.tcModelToTCData();
       done();
 
     });
 
     const cmpApi = getCmpApi();
 
-    cmpApi.tcModel = TCModelFactory.withGVL();
+    cmpApi.update(TCStringFactory.base());
+
+  });
+
+  it(`should set cmpStatus to "${CmpStatus.ERROR}" if disabled is set to true`, (): void => {
+
+    const cmpApi = getCmpApi();
+    cmpApi.disable();
+
+    expect(CmpApiModel.cmpStatus, 'cmpStatus after').to.equal(CmpStatus.ERROR);
+    expect(CmpApiModel.disabled, 'disabled after').to.true;
 
   });
 
@@ -169,29 +187,27 @@ describe('CmpApi', (): void => {
 
     const cmpApi = getCmpApi();
 
-    cmpApi.tcString = tcString;
+    cmpApi.update(tcString);
 
   });
 
-  it('should set CmpApiModel.displayStatus to visible when CmpApiModel.uiVisible is set to true', (done: () => void): void => {
+  it('should set CmpApiModel.displayStatus = "visible" when uiVisible is passed as true to the update function', (): void => {
 
     const cmpApi = getCmpApi();
 
     expect(CmpApiModel.displayStatus, 'CmpApiModel.displayStatus - initial').to.equal(DisplayStatus.HIDDEN);
 
-    cmpApi.uiVisible = true;
+    cmpApi.update(TCStringFactory.base(), true);
 
     expect(CmpApiModel.displayStatus, 'CmpApiModel.displayStatus - after set cmpApi.uiVisible to true').to.equal(DisplayStatus.VISIBLE);
 
-    cmpApi.uiVisible = false;
+    cmpApi.update(TCStringFactory.base(), false);
 
-    expect(CmpApiModel.displayStatus, 'CmpApiModel.displayStatus - after set cmpApi.uiVisible to false').to.equal(DisplayStatus.DISABLED);
-
-    done();
+    expect(CmpApiModel.displayStatus, 'CmpApiModel.displayStatus - after set cmpApi.uiVisible to false').to.equal(DisplayStatus.HIDDEN);
 
   });
 
-  it('should set CmpApiModel.dsiabled to true when CmpApi.disable() is called', (done: () => void): void => {
+  it('should set CmpApiModel.dsiabled to true when CmpApi.disable() is called', (): void => {
 
     const cmpApi = getCmpApi();
 
@@ -201,39 +217,19 @@ describe('CmpApi', (): void => {
 
     expect(CmpApiModel.disabled, 'CmpApiModel.disabled - after cmpApi.disable() is called').to.be.true;
 
-    done();
-
   });
 
-  it('should throw errors when disabled and tcModel, tcString, or uiVisible are set', (done: () => void): void => {
+  it('should throw an error when disabled and update is called', (): void => {
 
     const cmpApi = getCmpApi();
 
-    expect(CmpApiModel.disabled, 'CmpApiModel.disabled - initial').to.be.false;
-
     cmpApi.disable();
-
-    expect(CmpApiModel.disabled, 'CmpApiModel.disabled - after cmpApi.disable() is called').to.be.true;
 
     expect((): void => {
 
-      cmpApi.tcModel = TCModelFactory.withGVL();
+      cmpApi.update(TCStringFactory.base());
 
     }, 'cmpApi.tcModel after disabled').to.throw();
-
-    expect((): void => {
-
-      cmpApi.uiVisible = true;
-
-    }, 'cmpApi.uiVisible after disabled').to.throw();
-
-    expect((): void => {
-
-      cmpApi.tcString = TCStringFactory.base();
-
-    }, 'cmpApi.tcString after disabled').to.throw();
-
-    done();
 
   });
 
@@ -242,7 +238,7 @@ describe('CmpApi', (): void => {
     it(`should callback with success=true and result=something if command=${command} and version=${version} because ${because}`, (done: () => void): void => {
 
       const cmpApi = getCmpApi();
-      cmpApi.tcModel = TCModelFactory.withGVL();
+      cmpApi.update(TCStringFactory.base());
 
       const callDat = (): void => {
 
@@ -328,7 +324,8 @@ describe('CmpApi', (): void => {
 
     const commandName = 'superRadCommand';
     const passParam = true;
-    const cmpApi = getCmpApi({
+
+    getCmpApi({
       [commandName]: (callback: (...params) => void, param: boolean): void => {
 
         expect(callback, 'callback').to.be.a('function');
@@ -340,6 +337,7 @@ describe('CmpApi', (): void => {
       },
 
     });
+
     window[API_FUNCTION_NAME](commandName, 2, (param: boolean): void => {
 
       expect(param, 'param').to.be.a('boolean');
@@ -347,8 +345,6 @@ describe('CmpApi', (): void => {
       done();
 
     }, passParam);
-
-    cmpApi.tcModel = TCModelFactory.withGVL();
 
   });
 
@@ -358,7 +354,8 @@ describe('CmpApi', (): void => {
     const passParam = true;
     const passParam2 = 'banana';
     const passParam3 = 'orange';
-    const cmpApi = getCmpApi({
+
+    getCmpApi({
       [commandName]: (callback: (...params) => void, param: boolean, param2: string, param3: string): void => {
 
         expect(callback, 'callback').to.be.a('function');
@@ -374,6 +371,7 @@ describe('CmpApi', (): void => {
       },
 
     });
+
     window[API_FUNCTION_NAME](commandName, 2, (param: boolean, param2: string, param3: string): void => {
 
       expect(param, 'param').to.be.a('boolean');
@@ -386,7 +384,77 @@ describe('CmpApi', (): void => {
 
     }, passParam, passParam2, passParam3);
 
-    cmpApi.tcModel = TCModelFactory.withGVL();
+  });
+
+  it(`should set gdprApplies=true, displayStatus="${DisplayStatus.DISABLED}", eventStatus="${EventStatus.TC_LOADED}", and cmpStatus="${CmpStatus.LOADED}" on the first set of the tcString when uiVisible=false`, (): void => {
+
+    const cmpApi = getCmpApi();
+
+    cmpApi.update(TCStringFactory.base(), false);
+
+    expect(CmpApiModel.gdprApplies, 'CmpApiModel.gdprApplies').to.be.true;
+    expect(CmpApiModel.displayStatus, 'CmpApiModel.displayStatus').to.equal(DisplayStatus.DISABLED);
+    expect(CmpApiModel.eventStatus, 'CmpApiModel.eventStatus').to.equal(EventStatus.TC_LOADED);
+    expect(CmpApiModel.cmpStatus, 'CmpApiModel.cmpStatus').to.equal(CmpStatus.LOADED);
+
+  });
+
+  it(`should set gdprApplies=true, displayStatus="${DisplayStatus.VISIBLE}", eventStatus="${EventStatus.CMP_UI_SHOWN}", and cmpStatus="${CmpStatus.LOADED}" on the first set of the tcString when uiVisible=true`, (): void => {
+
+    const cmpApi = getCmpApi();
+
+    cmpApi.update(TCStringFactory.base(), true);
+
+    expect(CmpApiModel.gdprApplies, 'CmpApiModel.gdprApplies').to.be.true;
+    expect(CmpApiModel.displayStatus, 'CmpApiModel.displayStatus').to.equal(DisplayStatus.VISIBLE);
+    expect(CmpApiModel.eventStatus, 'CmpApiModel.eventStatus').to.equal(EventStatus.CMP_UI_SHOWN);
+    expect(CmpApiModel.cmpStatus, 'CmpApiModel.cmpStatus').to.equal(CmpStatus.LOADED);
+
+  });
+
+  it(`should set gdprApplies=false, displayStatus="${DisplayStatus.DISABLED}", eventStatus="${EventStatus.TC_LOADED}", and cmpStatus="${CmpStatus.LOADED}" when the tcString is set to null`, (): void => {
+
+    const cmpApi = getCmpApi();
+
+    cmpApi.update(null);
+
+    expect(CmpApiModel.gdprApplies, 'CmpApiModel.gdprApplies').to.be.false;
+    expect(CmpApiModel.displayStatus, 'CmpApiModel.displayStatus').to.equal(DisplayStatus.DISABLED);
+    expect(CmpApiModel.eventStatus, 'CmpApiModel.eventStatus').to.equal(EventStatus.TC_LOADED);
+    expect(CmpApiModel.cmpStatus, 'CmpApiModel.cmpStatus').to.equal(CmpStatus.LOADED);
+
+  });
+
+  it(`should set gdprApplies=true, displayStatus="${DisplayStatus.HIDDEN}", eventStatus="${EventStatus.USER_ACTION_COMPLETE}", and cmpStatus="${CmpStatus.LOADED}" when the tcString is set a second time`, (): void => {
+
+    const cmpApi = getCmpApi();
+
+    cmpApi.update(TCStringFactory.base());
+    cmpApi.update(TCStringFactory.base());
+
+    expect(CmpApiModel.gdprApplies, 'CmpApiModel.gdprApplies').to.be.true;
+    expect(CmpApiModel.displayStatus, 'CmpApiModel.displayStatus').to.equal(DisplayStatus.HIDDEN);
+    expect(CmpApiModel.eventStatus, 'CmpApiModel.eventStatus').to.equal(EventStatus.USER_ACTION_COMPLETE);
+    expect(CmpApiModel.cmpStatus, 'CmpApiModel.cmpStatus').to.equal(CmpStatus.LOADED);
+
+  });
+
+  it(`should set gdprApplies=true, displayStatus="${DisplayStatus.HIDDEN}", eventStatus="${EventStatus.USER_ACTION_COMPLETE}", and cmpStatus="${CmpStatus.LOADED}" when the tcString is set a third time`, (): void => {
+
+    /**
+     * simulates a manual summon
+     */
+
+    const cmpApi = getCmpApi();
+
+    cmpApi.update(TCStringFactory.base());
+    cmpApi.update(TCStringFactory.base());
+    cmpApi.update(TCStringFactory.base());
+
+    expect(CmpApiModel.gdprApplies, 'CmpApiModel.gdprApplies').to.be.true;
+    expect(CmpApiModel.displayStatus, 'CmpApiModel.displayStatus').to.equal(DisplayStatus.HIDDEN);
+    expect(CmpApiModel.eventStatus, 'CmpApiModel.eventStatus').to.equal(EventStatus.USER_ACTION_COMPLETE);
+    expect(CmpApiModel.cmpStatus, 'CmpApiModel.cmpStatus').to.equal(CmpStatus.LOADED);
 
   });
 
