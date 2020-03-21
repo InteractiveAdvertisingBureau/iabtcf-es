@@ -1,21 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {Callback, ErrorCallback} from './callback';
 import {CmpApiModel} from './CmpApiModel';
-import {CommandMap} from './command/CommandMap';
-import {TCFCommands} from './command/TCFCommands';
-import {DisabledCommand} from './command/DisabledCommand';
 import {CustomCommands} from './CustomCommands';
-import {TCModel} from '@iabtcf/core';
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export type PageCallHandler = (
-  command: string,
-  version: number,
-  callback: (response?: any, success?: any) => void,
-  ...param: any
-) => void;
-type TcfApiArgs = [string, number, Callback, any];
-type GetQueueFunction = () => TcfApiArgs[];
+import {CmpStatus, DisplayStatus, EventStatus} from './status';
+import {CallResponder} from './CallResponder';
+import {TCString, Base64Url, Segment, SegmentIDs} from '@iabtcf/core';
+import {TCModel} from '../../core/lib/TCModel';
 
 /**
  * Consent Management Platform API
@@ -24,16 +13,12 @@ type GetQueueFunction = () => TcfApiArgs[];
  */
 export class CmpApi {
 
-  private readonly customCommands: CustomCommands;
-  private readonly API_FUNCTION_NAME: string = '__tcfapi';
-  private win: Window = window;
-  private queuedCalls: TcfApiArgs[];
+  private callResponder: CallResponder;
 
   /**
-   * Constructor
-   * @param {number} cmpId
-   * @param {number} cmpVersion
-   * @param {CustomCommands} customCommands
+   * @param {number} cmpId - IAB assigned CMP ID
+   * @param {number} cmpVersion - version of the CMP
+   * @param {CustomCommands} customCommands - custom commands from the cmp
    */
   public constructor(cmpId: number, cmpVersion: number, customCommands?: CustomCommands) {
 
@@ -42,35 +27,34 @@ export class CmpApi {
 
     CmpApiModel.cmpId = cmpId;
     CmpApiModel.cmpVersion = cmpVersion;
+    this.callResponder = new CallResponder(customCommands);
 
-    if (customCommands) {
+  }
 
-      this.customCommands = customCommands;
+  public set tcModel(tcModel: TCModel | null) {
 
-    }
+    // eslint-disable-next-line no-console
+    console.error('@iabtcf/cmpapi: As of v1.0.0-beta.21 setting tcModel via CmpApi.tcModel is deprecated.  Use cmpApi.update(tcString, uiVisible) instead');
+    // eslint-disable-next-line no-console
+    console.log('  see: https://github.com/InteractiveAdvertisingBureau/iabtcf-es/tree/master/modules/cmpapi#cmpapi-examples');
 
-    /**
-     * Attempt to grab the queue – we could call ping and see if it is the stub,
-     * but instead we'll just a feature-detection method of just trying to get
-     * a queue by calling the function with no parameters and see if we get a
-     * queue back. If there is no stub or the stub doesn't return the queue by
-     * calling with no arguments, then we'll just move on and create our
-     * function.
-     */
-    try {
+  }
 
-      // get queued commands
-      this.queuedCalls = (window[this.API_FUNCTION_NAME] as GetQueueFunction)();
+  public set tcString(tcString: string | null) {
 
-    } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('@iabtcf/cmpapi: As of v1.0.0-beta.21 setting tcString via CmpApi.tcString is deprecated.  Use cmpApi.update(tcString, uiVisible) instead');
+    // eslint-disable-next-line no-console
+    console.log('  see: https://github.com/InteractiveAdvertisingBureau/iabtcf-es/tree/master/modules/cmpapi#cmpapi-examples');
 
-      // nothing to do here - we tried... no harm no foul
+  }
 
-    } finally {
+  public set uiVisible(bool: boolean) {
 
-      window[this.API_FUNCTION_NAME] = this.pageCallHandler.bind(this);
-
-    }
+    // eslint-disable-next-line no-console
+    console.error('@iabtcf/cmpapi: As of v1.0.0-beta.21 setting uiVisible via CmpApi.uiVisible is deprecated.  Use cmpApi.update(tcString, uiVisible) instead');
+    // eslint-disable-next-line no-console
+    console.log('  see: https://github.com/InteractiveAdvertisingBureau/iabtcf-es/tree/master/modules/cmpapi#cmpapi-examples');
 
   }
 
@@ -85,9 +69,15 @@ export class CmpApi {
   }
 
   /**
-   * Throws an error if the Cmp has disabled the CmpApi
+   * throwMaybe - checks to make sure the value is null or an encoded string is
+   * passed with a publisher TC segment which is required in the CMP API.  It
+   * also checks to see if the we are disabled
+   *
+   * @param {string} str - value to check
    */
-  private throwIfCmpApiIsDisabled(): void {
+  private throwMaybe(str: string): void {
+
+    let valid = (str === null);
 
     if (CmpApiModel.disabled) {
 
@@ -95,77 +85,94 @@ export class CmpApi {
 
     }
 
-  }
+    if (typeof str === 'string' && !!~str.indexOf('.')) {
 
-  private purgeQueuedCalls(): void {
+      const segments = str.split('.');
+      let hasPubTC = false;
 
-    if (this.queuedCalls) {
+      segments.forEach((segment: string): void => {
 
-      const apiCall = this.pageCallHandler.bind(this);
-      this.queuedCalls.forEach((args: TcfApiArgs): void =>{
+        if (!hasPubTC) {
 
-        const [command, version, callback, params] = args;
-
-        if (params !== undefined) {
-
-          apiCall(command, version, callback, ...params);
-
-        } else {
-
-          apiCall(command, version, callback);
+          const segNumber = parseInt(Base64Url.decode(segment.charAt(0)).substr(0, 3), 2);
+          hasPubTC = (segNumber === SegmentIDs.KEY_TO_ID[Segment.PUBLISHER_TC]);
 
         }
 
       });
 
-      delete this.queuedCalls;
+      valid = hasPubTC;
+
+    }
+
+    if (!valid) {
+
+      CmpApiModel.cmpStatus = CmpStatus.ERROR;
+      throw new Error(`Invalid string: ${str}! If encoded with @iabtcf/core, please make sure the it is encoded with TCString.encode(tcModel, {isForVendors:true}) encoding option`);
 
     }
 
   }
 
   /**
-   * On may choose to either set the TCModel directly (tcModel)  or set an
-   * encoded tc string (tcString) that will become. On the first set, CmpApi
-   * will set Event status to 'tcloaded' and gdprApplies to true.  On the
-   * second set of CmpApi the eventStatus will be set to 'useractionscomplete'.
-   * If tcString is set explicitly to null that indicates gdprApplies == false.
-   * @param {string | null} encodedString
+   * update - When the state of a CMP changes this function should be called
+   * with the updated tc string and whether or not the UI is visible or not
+   *
+   * @param {string|null} encodedTCString - set a string to signal that
+   * gdprApplies and that an encoded tc string is being passed.  If GDPR does
+   * not apply, set to null.
+   * @param {boolean} uiVisible - default false.  set to true if the ui is
+   * being shown with this tc string update, this will set the correct values
+   * for eventStatus and displayStatus.
+   * @return {void}
    */
-  public set tcString(encodedString: string | null) {
+  public update(encodedTCString: string | null, uiVisible = false): void {
 
-    this.throwIfCmpApiIsDisabled();
-    CmpApiModel.tcString = encodedString;
+    this.throwMaybe(encodedTCString);
 
-    this.purgeQueuedCalls();
+    CmpApiModel.cmpStatus = CmpStatus.LOADED;
 
-  }
+    if (uiVisible) {
 
-  /**
-   * On may choose to either set the TCModel directly (tcModel)  or set an
-   * encoded tc string (tcString) that will become. On the first set, CmpApi
-   * will set Event status to 'tcloaded' and gdprApplies to true.  On the
-   * second set of CmpApi the eventStatus will be set to 'useractionscomplete'.
-   * If tcModel is set explicitly to null that indicates gdprApplies == false.
-   * @param {TCModel | null} tcModel
-   */
-  public set tcModel(tcModel: TCModel | null) {
+      CmpApiModel.displayStatus = DisplayStatus.VISIBLE;
+      CmpApiModel.eventStatus = EventStatus.CMP_UI_SHOWN;
 
-    this.throwIfCmpApiIsDisabled();
-    CmpApiModel.tcModel = tcModel;
+    } else {
 
-    this.purgeQueuedCalls();
+      if (CmpApiModel.tcModel === undefined) {
 
-  }
+        CmpApiModel.displayStatus = DisplayStatus.DISABLED;
+        CmpApiModel.eventStatus = EventStatus.TC_LOADED;
 
-  /**
-   * Sets whether or not the CMP is going to show the CMP UI to the user.
-   * @param {boolean} isVisible
-   */
-  public set uiVisible(isVisible: boolean) {
+      } else {
 
-    this.throwIfCmpApiIsDisabled();
-    CmpApiModel.uiVisible = isVisible;
+        CmpApiModel.displayStatus = DisplayStatus.HIDDEN;
+        CmpApiModel.eventStatus = EventStatus.USER_ACTION_COMPLETE;
+
+      }
+
+    }
+
+    if (encodedTCString === null) {
+
+      CmpApiModel.gdprApplies = false;
+      CmpApiModel.tcModel = null;
+
+    } else {
+
+      CmpApiModel.gdprApplies = true;
+      CmpApiModel.tcModel = TCString.decode(encodedTCString);
+      CmpApiModel.tcString = encodedTCString;
+
+    }
+
+    if (CmpApiModel.displayStatus !== DisplayStatus.VISIBLE) {
+
+      CmpApiModel.eventQueue.exec();
+
+    }
+
+    this.callResponder.purgeQueuedCalls();
 
   }
 
@@ -176,103 +183,7 @@ export class CmpApi {
   public disable(): void {
 
     CmpApiModel.disabled = true;
-
-  }
-
-  /**
-   * Checks to see if the command exists in either the set of TCF Commands or
-   * if custom commands
-   *
-   * @param {string} command - command to check
-   * @return {boolean} - whether or not this command is known
-   */
-  private isKnownCommand(command: string): boolean {
-
-    return ((this.customCommands !== undefined && this.customCommands[command] !== undefined) ||
-      (CommandMap[command] !== undefined));
-
-  }
-
-  /**
-   * Handler for all page call commands
-   * @param {string} command
-   * @param {number} version
-   * @param {CallbackFunction} callback
-   * @param {any} [param]
-   */
-  private pageCallHandler(command: string, version: number, callback: Callback, ...params: any): void | never {
-
-    if (typeof command !== 'string') {
-
-      (callback as ErrorCallback)(`invalid command: ${command}`, false);
-
-    } else if (version != 2) {
-
-      /**
-       * Loosely checking version here on purpose.  If a string is passed
-       * that's probably ok, we don't need strict adherence here.
-       */
-
-      (callback as ErrorCallback)(`unsupported version: ${version}`, false);
-
-    } else if (typeof callback !== 'function') {
-
-      throw new Error('invalid callback function');
-
-    } else if (CmpApiModel.disabled) {
-
-      new DisabledCommand(callback);
-
-    } else if (!this.isKnownCommand(command)) {
-
-      /**
-       * This check is here just because the call shouldn't be queued if it's
-       * something we know isn't going to work.  It's kind of like breaking off a bad
-       * relationshipthe instant you know things are not going to work out
-       * instead of letting it linger.
-       */
-
-      (callback as ErrorCallback)(`CmpApi does not support the "${command}" command`, false);
-
-    } else if (command === TCFCommands.PING) {
-
-      /**
-       * if it's a ping we always respond right away regardless of our tcModel
-       * status or other things.
-       */
-      new CommandMap[command](callback, params[0]);
-
-    } else if (CmpApiModel.tcModel === undefined) {
-
-      /**
-       * If we are still waiting for the TC data to be set we can push this
-       * onto the queue that we have and once the model is set it'll be called
-       */
-      this.queuedCalls.push([command, version, callback, params]);
-
-    } else {
-
-      /**
-       * we've passed the checks and we're firing on all cylinders; now lets
-       * get the appropriate command
-       */
-
-      if (this.customCommands && this.customCommands[command]) {
-
-        this.customCommands[command](callback, ...params);
-
-      } else if (CommandMap[command]) {
-
-        new CommandMap[command](callback, params[0]);
-
-      } else {
-
-        // hopefully this isn't possible
-        throw new Error('unknown error');
-
-      }
-
-    }
+    CmpApiModel.cmpStatus = CmpStatus.ERROR;
 
   }
 

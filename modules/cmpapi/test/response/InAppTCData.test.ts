@@ -1,37 +1,39 @@
-import {TCModelFactory, makeRandomIntArray} from '@iabtcf/testing';
 import {CmpApiModel} from '../../src/CmpApiModel';
-import {InAppTCDataToTCModel} from '../InAppTCDataToTCModel';
+import {TestUtils} from '../TestUtils';
+import {TCModelFactory, makeRandomIntArray} from '@iabtcf/testing';
+import {TCString} from '@iabtcf/core';
 
 describe('response->InAppTCData', (): void => {
 
-  it('should create a InAppTCData based on the TCModel with unrestricted vendors', (done: () => void): void => {
+  it('should create a InAppTCData based on the TCModel with unrestricted vendors', (): void => {
 
+    CmpApiModel.gdprApplies = true;
     CmpApiModel.tcModel = TCModelFactory.withGVL();
-    InAppTCDataToTCModel.equal();
+    CmpApiModel.tcString = TCString.encode(CmpApiModel.tcModel);
 
-    done();
+    TestUtils.inAppTCDataToTCModel();
 
   });
 
-  it('should create a InAppTCData based on the TCModel with vendors', (done: () => void): void => {
+  it('should create a InAppTCData based on the TCModel with vendors', (): void => {
 
+    CmpApiModel.gdprApplies = true;
     CmpApiModel.tcModel = TCModelFactory.withGVL();
+    CmpApiModel.tcString = TCString.encode(CmpApiModel.tcModel);
 
-    InAppTCDataToTCModel.equal(makeRandomIntArray(1, 25, 10));
-
-    done();
+    TestUtils.inAppTCDataToTCModel(makeRandomIntArray(1, 25, 10));
 
   });
 
-  it('should encode purpose restrictions', (done: () => void): void => {
+  it('should encode purpose restrictions', (): void => {
 
     const tcModel = TCModelFactory.withGVL();
 
+    CmpApiModel.gdprApplies = true;
     CmpApiModel.tcModel = TCModelFactory.addPublisherRestrictions(tcModel);
+    CmpApiModel.tcString = TCString.encode(CmpApiModel.tcModel);
 
-    InAppTCDataToTCModel.equal();
-
-    done();
+    TestUtils.inAppTCDataToTCModel();
 
   });
 

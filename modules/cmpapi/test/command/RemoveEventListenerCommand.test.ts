@@ -1,16 +1,19 @@
 import {AddEventListenerCommand} from '../../src/command/AddEventListenerCommand';
+import {CmpApiModel} from '../../src/CmpApiModel';
 import {RemoveEventListenerCommand} from '../../src/command/RemoveEventListenerCommand';
 import {TCDataCallback} from '../../src/callback';
-import {CmpApiModel} from '../../src/CmpApiModel';
 import {TCData} from '../../src/response';
 import {TCStringFactory} from '@iabtcf/testing';
+import {TCString} from '@iabtcf/core';
 import {expect} from 'chai';
 
 describe('command->RemoveEventListenerCommand', (): void => {
 
   it('should remove a queued TCDataCallback', (done: () => void): void => {
 
+    CmpApiModel.gdprApplies = true;
     CmpApiModel.tcString = TCStringFactory.base();
+    CmpApiModel.tcModel = TCString.decode(CmpApiModel.tcString);
 
     new AddEventListenerCommand(function(tcData: TCData): void {
 
@@ -55,7 +58,9 @@ describe('command->RemoveEventListenerCommand', (): void => {
 
       };
 
+      CmpApiModel.gdprApplies = true;
       CmpApiModel.tcString = TCStringFactory.base();
+      CmpApiModel.tcModel = TCString.decode(CmpApiModel.tcString);
 
       new AddEventListenerCommand(tcDataCallback);
 

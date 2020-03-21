@@ -1,4 +1,4 @@
-import {TCModel, TCString, PurposeRestriction, PurposeRestrictionVector, Vector, IdBoolTuple} from '@iabtcf/core';
+import {TCModel, PurposeRestriction, PurposeRestrictionVector, Vector, IdBoolTuple} from '@iabtcf/core';
 
 import {CmpApiModel} from '../CmpApiModel';
 import {BooleanVector} from './BooleanVector';
@@ -74,19 +74,7 @@ export class TCData extends Response {
 
       const tcModel = CmpApiModel.tcModel as TCModel;
 
-      if (CmpApiModel.tcString) {
-
-        this.tcString = CmpApiModel.tcString;
-
-      } else {
-
-        this.tcString = TCString.encode(tcModel, {
-          isForVendors: true,
-        });
-        CmpApiModel.cacheTCString(this.tcString);
-
-      }
-
+      this.tcString = CmpApiModel.tcString;
       this.isServiceSpecific = tcModel.isServiceSpecific;
       this.useNonStandardStacks = tcModel.useNonStandardStacks;
       this.purposeOneTreatment = tcModel.purposeOneTreatment;

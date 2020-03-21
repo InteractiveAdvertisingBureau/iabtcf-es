@@ -23,10 +23,21 @@ export class Json {
            */
           if (req.status >= 200 &&
             req.status < 300 &&
-            req.responseType === 'json' &&
             req.response) {
 
-            resolve(req.response);
+            let response = req.response;
+
+            if (typeof req.response === 'string') {
+
+              try {
+
+                response = JSON.parse(response);
+
+              } catch (e) {}
+
+            }
+
+            resolve(response);
 
           } else {
 

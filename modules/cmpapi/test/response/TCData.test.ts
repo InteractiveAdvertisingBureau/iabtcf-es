@@ -1,34 +1,34 @@
 import {CmpApiModel} from '../../src/CmpApiModel';
-import {expect} from 'chai';
-import {PurposeRestriction} from '@iabtcf/core';
-import {TCDataToTCModel} from '../TCDataToTCModel';
+import {PurposeRestriction, TCString} from '@iabtcf/core';
+import {TestUtils} from '../TestUtils';
 import {TCData} from '../../src/response/TCData';
 import {TCModelFactory, makeRandomInt, makeRandomIntArray} from '@iabtcf/testing';
+import {expect} from 'chai';
 
 describe('response->TCData', (): void => {
 
-  it('should create a TCData based on the TCModel with unrestricted vendors', (done: () => void): void => {
+  it('should create a TCData based on the TCModel with unrestricted vendors', (): void => {
 
+    CmpApiModel.gdprApplies = true;
     CmpApiModel.tcModel = TCModelFactory.withGVL();
-    TCDataToTCModel.equal();
-
-    done();
+    CmpApiModel.tcString = TCString.encode(CmpApiModel.tcModel);
+    TestUtils.tcModelToTCData();
 
   });
 
-  it('should create a TCData based on the TCModel with vendors', (done: () => void): void => {
+  it('should create a TCData based on the TCModel with vendors', (): void => {
 
+    CmpApiModel.gdprApplies = true;
     CmpApiModel.tcModel = TCModelFactory.withGVL();
+    CmpApiModel.tcString = TCString.encode(CmpApiModel.tcModel);
 
-    TCDataToTCModel.equal(makeRandomIntArray(1, 25, 10));
-
-    done();
+    TestUtils.tcModelToTCData(makeRandomIntArray(1, 25, 10));
 
   });
 
-  it('should create a TCData with only gdprApplies, tcfPolicyVersion, cmpId and cmpVersion if gdprApplies=false (tcModel is set to null)', (done: () => void): void => {
+  it('should create a TCData with only gdprApplies, tcfPolicyVersion, cmpId and cmpVersion if gdprApplies=false', (): void => {
 
-    CmpApiModel.tcModel = null;
+    CmpApiModel.gdprApplies = false;
 
     const tcData = new TCData();
 
@@ -47,11 +47,9 @@ describe('response->TCData', (): void => {
     expect(tcData.specialFeatureOptins, 'specialFeatureOptins').to.be.undefined;
     expect(tcData.publisher, 'publisher').to.be.undefined;
 
-    done();
-
   });
 
-  it('should encode purpose restrictions', (done: () => void): void => {
+  it('should encode purpose restrictions', (): void => {
 
     const tcModel = TCModelFactory.withGVL();
     const vendorLength = tcModel.vendorConsents.size;
@@ -62,11 +60,11 @@ describe('response->TCData', (): void => {
 
     }
 
+    CmpApiModel.gdprApplies = true;
     CmpApiModel.tcModel = tcModel;
+    CmpApiModel.tcString = TCString.encode(CmpApiModel.tcModel);
 
-    TCDataToTCModel.equal();
-
-    done();
+    TestUtils.tcModelToTCData();
 
   });
 
