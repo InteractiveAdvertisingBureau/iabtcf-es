@@ -4,6 +4,7 @@ import {CustomCommands} from './CustomCommands';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
 import {CallResponder} from './CallResponder';
 import {TCString, Base64Url, Segment, SegmentIDs} from '@iabtcf/core';
+import {TCModel} from '../../core/lib/TCModel';
 
 /**
  * Consent Management Platform API
@@ -29,6 +30,34 @@ export class CmpApi {
     this.callResponder = new CallResponder(customCommands);
 
   }
+
+  public set tcModel(tcModel: TCModel | null) {
+
+    // eslint-disable-next-line no-console
+    console.error('@iabtcf/cmpapi: As of v1.0.0-beta.21 setting tcModel via CmpApi.tcModel is deprecated.  Use cmpApi.update(tcString, uiVisible) instead');
+    // eslint-disable-next-line no-console
+    console.log('  see: https://github.com/InteractiveAdvertisingBureau/iabtcf-es/tree/master/modules/cmpapi#cmpapi-examples');
+
+  }
+
+  public set tcString(tcString: string | null) {
+
+    // eslint-disable-next-line no-console
+    console.error('@iabtcf/cmpapi: As of v1.0.0-beta.21 setting tcString via CmpApi.tcString is deprecated.  Use cmpApi.update(tcString, uiVisible) instead');
+    // eslint-disable-next-line no-console
+    console.log('  see: https://github.com/InteractiveAdvertisingBureau/iabtcf-es/tree/master/modules/cmpapi#cmpapi-examples');
+
+  }
+
+  public set uiVisible(bool: boolean) {
+
+    // eslint-disable-next-line no-console
+    console.error('@iabtcf/cmpapi: As of v1.0.0-beta.21 setting uiVisible via CmpApi.uiVisible is deprecated.  Use cmpApi.update(tcString, uiVisible) instead');
+    // eslint-disable-next-line no-console
+    console.log('  see: https://github.com/InteractiveAdvertisingBureau/iabtcf-es/tree/master/modules/cmpapi#cmpapi-examples');
+
+  }
+
   private throwIfInvalidInt(value: number, name: string, minValue: number): void | never {
 
     if (!(typeof value === 'number' && Number.isInteger(value) && value >= minValue)) {
