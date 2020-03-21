@@ -1,4 +1,4 @@
-import {TCModel, TCString, PurposeRestriction, PurposeRestrictionVector, Vector, IdBoolTuple} from '@iabtcf/core';
+import {TCModel, PurposeRestriction, PurposeRestrictionVector, Vector, IdBoolTuple} from '@iabtcf/core';
 
 import {CmpApiModel} from '../CmpApiModel';
 import {BooleanVector} from './BooleanVector';
