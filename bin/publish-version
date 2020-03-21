@@ -60,7 +60,8 @@ for pkg in ./modules/*; do
 done
 
 git push
-git tag -a $npm_package_version -m "Released $npm_package_version"
+
+# pushes the tag
 git push origin $npm_package_version
 
 git checkout $BRANCH
