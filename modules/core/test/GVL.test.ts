@@ -201,16 +201,49 @@ describe('GVL', (): void => {
 
   it('should narrow a group of vendors when narrowVendorsTo is called with list of ids', (): void => {
 
-    if (Object.keys(vendorlistJson.vendors).length > 1) {
+    const gvl: GVL = new GVL(vendorlistJson);
+    const onlyVendorId: string = Object.keys(vendorlistJson.vendors)[0];
 
-      const gvl: GVL = new GVL(vendorlistJson);
-      const onlyVendorId: string = Object.keys(vendorlistJson.vendors)[0];
+    gvl.narrowVendorsTo([parseInt(onlyVendorId, 10)]);
+    expect(gvl.vendors[onlyVendorId]).to.deep.equal(vendorlistJson.vendors[onlyVendorId]);
+    expect(Object.keys(gvl.vendors).length).to.equal(1);
+    expect(gvl.vendors[Object.keys(vendorlistJson.vendors)[1]]).to.be.undefined;
 
-      gvl.narrowVendorsTo([parseInt(onlyVendorId, 10)]);
-      expect(gvl.vendors[onlyVendorId]).to.deep.equal(vendorlistJson.vendors[onlyVendorId]);
-      expect(gvl.vendors[Object.keys(vendorlistJson.vendors)[1]]).to.be.undefined;
+  });
 
-    }
+  it('should remove a vendor if it has a deletedDate', (): void => {
+
+    const vendorId = '1';
+
+    vendorlistJson.vendors[vendorId] = {
+      id: +vendorId,
+      name: 'Fake Vendor with ID 1',
+      purposes: [
+        1,
+        2,
+        3,
+        4,
+      ],
+      legIntPurposes: [
+        7,
+        9,
+        10,
+      ],
+      flexiblePurposes: [
+        2,
+      ],
+      deletedDate: '2020-01-28T00:00:00Z',
+      specialPurposes: [],
+      features: [
+        2,
+      ],
+      specialFeatures: [],
+      policyUrl: 'http://www.fakevendor.com/privacy-policy/',
+    };
+
+    expect(vendorlistJson.vendors[vendorId], `vendorlistJson.vendors["${vendorId}"]`).not.to.be.undefined;
+    const gvl: GVL = new GVL(vendorlistJson);
+    expect(gvl.vendors[vendorId], `gvl.vendors["${vendorId}"]`).to.be.undefined;
 
   });
 

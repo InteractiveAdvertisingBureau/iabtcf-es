@@ -1,12 +1,45 @@
-// import {Fields} from '../../src/model/Fields';
+import {Fields} from '../../src/model/Fields';
 import {expect} from 'chai';
 
 describe('model->Fields', (): void => {
 
-  it('\x1b[36mNeeds Unit Tests\x1b[0m', (done: () => void): void => {
+  it('should be this', (): void => {
 
-    expect(true).to.be.true;
-    done();
+    const reference = {
+      cmpId: 'cmpId',
+      cmpVersion: 'cmpVersion',
+      consentLanguage: 'consentLanguage',
+      consentScreen: 'consentScreen',
+      created: 'created',
+      supportOOB: 'supportOOB',
+      isServiceSpecific: 'isServiceSpecific',
+      lastUpdated: 'lastUpdated',
+      numCustomPurposes: 'numCustomPurposes',
+      policyVersion: 'policyVersion',
+      publisherCountryCode: 'publisherCountryCode',
+      publisherCustomConsents: 'publisherCustomConsents',
+      publisherCustomLegitimateInterests: 'publisherCustomLegitimateInterests',
+      publisherLegitimateInterests: 'publisherLegitimateInterests',
+      publisherConsents: 'publisherConsents',
+      publisherRestrictions: 'publisherRestrictions',
+      purposeConsents: 'purposeConsents',
+      purposeLegitimateInterests: 'purposeLegitimateInterests',
+      purposeOneTreatment: 'purposeOneTreatment',
+      specialFeatureOptins: 'specialFeatureOptins',
+      useNonStandardStacks: 'useNonStandardStacks',
+      vendorConsents: 'vendorConsents',
+      vendorLegitimateInterests: 'vendorLegitimateInterests',
+      vendorListVersion: 'vendorListVersion',
+      vendorsAllowed: 'vendorsAllowed',
+      vendorsDisclosed: 'vendorsDisclosed',
+      version: 'version',
+    };
+
+    Object.keys(reference).forEach((key: string): void => {
+
+      expect(Fields[key], key).to.equal(reference[key]);
+
+    });
 
   });
 
