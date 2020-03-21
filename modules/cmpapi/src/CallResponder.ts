@@ -117,8 +117,6 @@ export class CallResponder {
        */
 
       new CommandMap[command](callback, params[0]);
-      // hopefully this isn't possible
-      throw new Error('unknown error');
 
     }
 
