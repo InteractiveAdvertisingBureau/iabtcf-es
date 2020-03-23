@@ -77,7 +77,7 @@ export class CmpApi {
    */
   private throwMaybe(str: string): void {
 
-    let valid = (str === null);
+    let valid = (str === null || str === '');
 
     if (CmpApiModel.disabled) {
 
@@ -85,7 +85,7 @@ export class CmpApi {
 
     }
 
-    if (typeof str === 'string' && !!~str.indexOf('.')) {
+    if (!valid && typeof str === 'string' && !!~str.indexOf('.')) {
 
       const segments = str.split('.');
       let hasPubTC = false;
