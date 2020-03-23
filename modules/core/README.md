@@ -61,7 +61,7 @@ tcModel.gvl.readyPromise.then(() => {
 
   console.log(encodedString); // TC string encoded begins with 'C'
 
-}
+});
 
 // take an encoded TC string and decode into a TCModel
 const decodedTCModel = TCString.decode(encodedString);
