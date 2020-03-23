@@ -368,6 +368,8 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
       if (langUpper !== this.lang_) {
 
+        this.lang_ = langUpper;
+
         if (GVL.LANGUAGE_CACHE.has(langUpper)) {
 
           const cached: Declarations = GVL.LANGUAGE_CACHE.get(langUpper) as Declarations;
@@ -402,8 +404,6 @@ export class GVL extends Cloneable<GVL> implements VendorList {
         }
 
       }
-
-      this.lang_ = langUpper;
 
     } else {
 
@@ -708,6 +708,13 @@ export class GVL extends Cloneable<GVL> implements VendorList {
   public clone(): GVL {
 
     return new GVL(this.getJson());
+
+  }
+
+  public static isInstanceOf(questionableInstance: unknown): questionableInstance is GVL {
+
+    const isSo = typeof questionableInstance === 'object';
+    return (isSo && typeof (questionableInstance as GVL).narrowVendorsTo === 'function');
 
   }
 

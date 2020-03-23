@@ -151,8 +151,15 @@ export class TCModel extends Cloneable<TCModel> {
   public set gvl(gvl: GVL) {
 
     /**
-     * Set the reference but wait to see the other values for when the data populates
+     * set the reference, but make sure it's our GVL wrapper class.
      */
+
+    if (!(GVL.isInstanceOf(gvl))) {
+
+      gvl = new GVL(gvl);
+
+    }
+
     this.gvl_ = gvl;
     this.publisherRestrictions.gvl = gvl;
 
@@ -261,12 +268,8 @@ export class TCModel extends Cloneable<TCModel> {
 
     if (this.gvl) {
 
-      this.gvl.changeLanguage(lang)
-        .then((): void => {
-
-          this.consentLanguage_ = this.gvl.language;
-
-        });
+      this.gvl.changeLanguage(lang);
+      this.consentLanguage_ = this.gvl.language;
 
     } else {
 

@@ -110,4 +110,21 @@ describe('Issues Reported', (): void => {
 
   });
 
+  it('122 consentLanguage should not be ignored', (): void => {
+
+    const FRENCH = 'FR';
+    const ENGLISH = 'EN';
+
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const gvl = new GVL(require('@iabtcf/testing/lib/vendorlist/vendor-list.json'));
+    const tcModel = new TCModel(gvl);
+
+    expect(tcModel.consentLanguage, 'consentLanguage').to.equal(ENGLISH);
+
+    tcModel.consentLanguage = FRENCH;
+
+    expect(tcModel.consentLanguage, 'consentLanguage').to.equal(FRENCH);
+
+  });
+
 });
