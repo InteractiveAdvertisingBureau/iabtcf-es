@@ -41,11 +41,11 @@ describe('CmpApi', (): void => {
 
   };
 
-  const getCmpApi = (customCommands?: CustomCommands): CmpApi => {
+  const getCmpApi = (isServiceSpecific = false, customCommands?: CustomCommands): CmpApi => {
 
     const cmpId = makeRandomInt(2, 100);
     const cmpVersion = makeRandomInt(1, 15);
-    return new CmpApi(cmpId, cmpVersion, customCommands);
+    return new CmpApi(cmpId, cmpVersion, isServiceSpecific, customCommands);
 
   };
 
@@ -325,7 +325,7 @@ describe('CmpApi', (): void => {
     const commandName = 'superRadCommand';
     const passParam = true;
 
-    getCmpApi({
+    getCmpApi(false,{
       [commandName]: (callback: (...params) => void, param: boolean): void => {
 
         expect(callback, 'callback').to.be.a('function');
@@ -355,7 +355,7 @@ describe('CmpApi', (): void => {
     const passParam2 = 'banana';
     const passParam3 = 'orange';
 
-    getCmpApi({
+    getCmpApi(false,{
       [commandName]: (callback: (...params) => void, param: boolean, param2: string, param3: string): void => {
 
         expect(callback, 'callback').to.be.a('function');
