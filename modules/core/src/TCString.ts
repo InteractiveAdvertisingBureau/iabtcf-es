@@ -109,14 +109,22 @@ export class TCString {
    * Decodes a string into a TCModel
    *
    * @param {string} encodedTCString - base64url encoded Transparency and
-   * Consent String to decode
+   * Consent String to decode - can also be a single or group of segments of
+   * the string
+   * @param {string} [tcModel] - model to enhance with the information.  If
+   * none is passed a new instance of TCModel will be created.
    * @return {TCModel} - Returns populated TCModel
    */
-  public static decode(encodedTCString: string): TCModel {
+  public static decode(encodedTCString: string, tcModel?: TCModel): TCModel {
 
-    const tcModel: TCModel = new TCModel();
     const segments: string[] = encodedTCString.split('.');
     const len: number = segments.length;
+
+    if (!tcModel) {
+
+      tcModel = new TCModel();
+
+    }
 
     for (let i = 0; i < len; i ++) {
 

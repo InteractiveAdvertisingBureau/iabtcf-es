@@ -112,4 +112,51 @@ describe('TCString', (): void => {
 
   });
 
+  it('should add a segment to a model on decode if a model is passed in', (): void => {
+
+    const tcModel = getTCModel();
+
+    const publisherTC = TCString.encode(tcModel, {
+      segments: [Segment.PUBLISHER_TC],
+    });
+    const core = TCString.encode(tcModel, {
+      segments: [Segment.CORE],
+    });
+
+    const newModel = new TCModel();
+
+    TCString.decode(core, newModel);
+    expect(newModel.vendorConsents.size, 'vendorConsents.size').to.equal(tcModel.vendorConsents.size);
+    expect(newModel.vendorLegitimateInterests.size, 'vendorLegitimateInterests.size').to.equal(tcModel.vendorLegitimateInterests.size);
+    expect(newModel.purposeConsents.size, 'purposeConsents.size').to.equal(tcModel.purposeConsents.size);
+    expect(newModel.purposeLegitimateInterests.size, 'purposeLegitimateInterests.size').to.equal(tcModel.purposeLegitimateInterests.size);
+
+    TCString.decode(publisherTC, newModel);
+
+    tcModel.publisherConsents.forEach((value: boolean, id: number): void => {
+
+      expect(newModel.publisherConsents.has(id), `publisherConsents.has(${id})`).to.equal(value);
+
+    });
+
+    tcModel.publisherLegitimateInterests.forEach((value: boolean, id: number): void => {
+
+      expect(newModel.publisherLegitimateInterests.has(id), `publisherLegitimateInterests.has(${id})`).to.equal(value);
+
+    });
+
+    tcModel.publisherCustomConsents.forEach((value: boolean, id: number): void => {
+
+      expect(newModel.publisherCustomConsents.has(id), `publisherCustomConsents.has(${id})`).to.equal(value);
+
+    });
+
+    tcModel.publisherCustomLegitimateInterests.forEach((value: boolean, id: number): void => {
+
+      expect(newModel.publisherCustomLegitimateInterests.has(id), `publisherCustomLegitimateInterests.has(${id})`).to.equal(value);
+
+    });
+
+  });
+
 });

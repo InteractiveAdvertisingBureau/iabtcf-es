@@ -40,6 +40,7 @@ yarn add @iabtcf/core
 
 #### Using
 
+This example demonstrates the basic use case of a CMP creating a "default all-no" TC string.
 ```javascript
 import {TCModel, TCString, GVL} from '@iabtcf/core';
 
@@ -94,6 +95,8 @@ tcModel.cmpVersion = //{myCMPVersion}
 ```
 
 ### CMP Meta Fields
+
+This exmple shows how to set the basic fields that all TC strings need to have set.
 
 ```javascript
 import {TCModel} from '@iabtcf/core';
@@ -402,11 +405,13 @@ gvl.readyPromise.then(() => {
 ### Decode an IAB TC String
 
 ```typescript
+
 import {TCString, TCModel} from '@iabtcf/core';
 
 const myTCModel = TCString.decode(encodedTCString);
 
 ```
+
 *returns:* [`TCModel`](#tcmodel)
 
 ### Encode an IAB TC String
@@ -436,7 +441,34 @@ gvl.readyPromise.then(() => {
    * lastest GVL version.
    */
   console.log(encodedTCString);
+
 });
+```
+
+### Decoding A Segment At A Time
+
+It is possible to pass a reference to an already created `TCModel` and add individual segments to the model.  An important use case for this is if using a globally-scoped TC string and storing the Publisher TC Segment separately in a first-party cookie.
+
+```typescript
+
+import {TCString, Segment} from '@iabtcf/core';
+
+// if you had a getCookie function that returned just that segment
+const publisherTCSegment = getCookie('euconsent-ptc');
+
+let tcModel;
+
+// if you had an asynchronous function to get the cookie from global
+getGlobalTCString().then((encodedTCString) => {
+
+  tcModel = TCString.decode(encodedTCString);
+  TCString.decode(publisherTCSegment, tcModel);
+
+  // now you have a combined TCModel
+
+});
+
+
 ```
 
 ### Encoding Options
@@ -463,7 +495,6 @@ const customEncodedString = TCString.encode(tcModel, encodingOptions);
 
 ```
 
-
 ### Encoding a Publisher TC Segment
 By default if the `TCModel.isServiceSpecific = true` then encoding a string will include the publisherTC segment.  But if `TCModel.isServiceSpecific = false` then the segment should only be surfaced through the `__tcfapi` interface and not saved to the global cookie.  However, one will need a way to access and save the publisher TC segment separately from the main TC String to store as a first-party cookie.  In that case you can use the `EncodingOptions` to generate only a Publisher TC segment.
 
@@ -472,4 +503,5 @@ const encodingOptions = {
   segments: [Segment.PUBLISHER_TC]
 }
 const publisherTCSegment = TCString.encode(tcModel, encodingOptions);
+
 ```
