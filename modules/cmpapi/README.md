@@ -67,23 +67,55 @@ an empty string (`''`) or `null`.
 * `null`, `CmpApi` will respond to [`TCData`](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#tcdata) with the correct structure but all primitive values will be empty.
   * `gdprApplies` will be set to `false`
 
-## Show UI and Update TC string
 `CmpApi` needs to know when you are going to show the user the UI to the user
 to recapture consent in order to set the correct
 [`eventStatus`](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#addeventlistener).
 The second parameter is a `boolean` letting `CmpApi` know that the UI is now
 visible to the user (it defaults to `false`).
 
+### Show UI – TC string needs update
+
 ````javascript
+
 // showing the ui to the user
 cmpApi.update(encodedTCString, true);
+
+/** CMP gathers user preferences */
+
+cmpApi.update(updatedEncodedTCString, false);
+
 ````
 
-## GDPR doesn't apply
+### Don't Show UI – TC string does not need an update
+
+````javascript
+
+// not showing the ui to the user, only one update is needed
+cmpApi.update(encodedTCString, false);
+
+````
+
+### Show UI – New User – no TC string
+
+````javascript
+
+// showing the ui to the user
+cmpApi.update('', true);
+
+/** CMP gathers user preferences */
+
+cmpApi.update(updatedEncodedTCString, false);
+
+````
+
+### GDPR doesn't apply
 In the case that GDPR does not apply, simply update with null. That's all.
 
 ````javascript
+
+// only one update needed to let CmpApi that gdpr doesn't apply
 cmpApi.update(null);
+
 ````
 
 ## Disabling the CmpApi
@@ -106,6 +138,7 @@ the calling script.
 
 ### Example
 ````javascript
+
 import {CmpApi} from '@iabtcf/cmpapi';
 
 const cmpApi = new CmpApi(1, 3, {
@@ -143,68 +176,5 @@ __tcfapi('bingo', 2, songLyricCallback, 'Bingo');
 
 __tcfapi('connectBones', 2, songLyricCallback, 'knee', 'thigh');
 // ouput: The knee bone is connected to the thigh bone
-````
-
-## CmpApi Examples
-
-### Example 1: GDPR Applies and TC string exists and UI doesn't need to be shown
-
-````javascript
-import {CmpApi} from '@iabtcf/cmpapi';
-
-// cmp ID 100, cmp version 2
-const cmpApi = new CmpApi(100, 2);
-
-/**
- * ... CMP makes determination not to show the UI
- *     based on the encodedTCString...
- */
-
-// set string and the UI determination (false)
-cmpApi.update(encodedTCString, false);
-
-````
-
-### Example 2: GDPR Applies and the UI needs to show
-
-````javascript
-import {CmpApi} from '@iabtcf/cmpapi';
-
-// cmp ID 100, cmp version 2
-const cmpApi = new CmpApi(100, 2);
-
-/**
- * ... CMP makes determination to show the UI
- *     based on the encodedTCString...
- */
-
-// set string and the UI determination (false)
-cmpApi.update(encodedTCString, true);
-
-/**
- * ... CMP waits for user to make their
- *     choices and encodes a new TC string...
- */
-
-// update the cmpApi with the new value and in this case the
-// second parameter doesn't matter
-cmpApi.update(newEncodedTCString);
-
-````
-
-### Example 3: GDPR Does not apply to this user
-
-````javascript
-import {CmpApi} from '@iabtcf/cmpapi';
-
-// cmp ID 100, cmp version 2
-const cmpApi = new CmpApi(100, 2);
-
-/**
- * ... CMP makes determination not that gdprApplies=false
- */
-
-// Setting this to null sets gdprApplies=false
-cmpApi.update(null);
 
 ````
