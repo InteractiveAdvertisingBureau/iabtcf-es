@@ -11,10 +11,4 @@ assignees: ''
 
 **Module (core, cmpapi, cli, stub, or testing)**
 
-**Describe the bug**
-
-**Steps to Reproduce**
-
-**Expected behavior**
-
-**Actual behavior**
+**Describe with reproduction steps – What is the expected behavior?**
