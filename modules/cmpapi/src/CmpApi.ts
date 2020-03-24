@@ -13,19 +13,22 @@ import {TCString, Base64Url, Segment, SegmentIDs, TCModel} from '@iabtcf/core';
 export class CmpApi {
 
   private callResponder: CallResponder;
+  private isServiceSpecific: boolean;
 
   /**
    * @param {number} cmpId - IAB assigned CMP ID
-   * @param {number} cmpVersion - version of the CMP
-   * @param {CustomCommands} customCommands - custom commands from the cmp
+   * @param {number} cmpVersion - integer version of the CMP
+   * @param {boolean} isServiceSpecific - whether or not this cmp is configured to be service specific
+   * @param {CustomCommands} [customCommands] - custom commands from the cmp
    */
-  public constructor(cmpId: number, cmpVersion: number, customCommands?: CustomCommands) {
+  public constructor(cmpId: number, cmpVersion: number, isServiceSpecific: boolean, customCommands?: CustomCommands) {
 
     this.throwIfInvalidInt(cmpId, 'cmpId', 2);
     this.throwIfInvalidInt(cmpVersion, 'cmpVersion', 0);
 
     CmpApiModel.cmpId = cmpId;
     CmpApiModel.cmpVersion = cmpVersion;
+    this.isServiceSpecific = !!isServiceSpecific;
     this.callResponder = new CallResponder(customCommands);
 
   }
@@ -164,8 +167,6 @@ export class CmpApi {
       if (encodedTCString === '') {
 
         CmpApiModel.tcModel = new TCModel();
-        CmpApiModel.tcModel.cmpId = CmpApiModel.cmpId;
-        CmpApiModel.tcModel.cmpVersion = CmpApiModel.cmpVersion;
 
       } else {
 
@@ -173,6 +174,7 @@ export class CmpApi {
 
       }
 
+      CmpApiModel.tcModel.isServiceSpecific = this.isServiceSpecific;
       CmpApiModel.tcString = encodedTCString;
 
     }
