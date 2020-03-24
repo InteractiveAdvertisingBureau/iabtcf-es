@@ -51,7 +51,7 @@ will be queue until `update()` is called for the first time.
 
 ## Trigger Change Event
 
-In the [specification](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#addeventlistener) events occur and registered callbacks are called "whenever the TC String is changed and a new one is available".  `CmpApi` will trigger an event whenever `update` is called.
+In the [specification](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#addeventlistener), events occur and registered callbacks are called "whenever the TC String is changed and a new one is available".  `CmpApi` will trigger an event whenever `update` is called.
 ````javascript
 cmpApi.update(encodedTCString || '' || null);
 ````
@@ -62,22 +62,28 @@ an empty string (`''`) or `null`.
 
 1. Encoded TC string, `CmpApi` will decode the string and respond to
    [`TCData`](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#tcdata)
-with the decoded values.  a. `gdprApplies` will be set to `true`
+with the decoded values.
+  a. `gdprApplies` will be set to `true`
 2. Empty string (`''`), `CmpApi` will respond to
    [`TCData`](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#tcdata)
-with the correct structure but all primitive values will be empty.  a.
-`gdprApplies` will be set to `true` b. `cmpId`, `cmpVersion`, and
-`isServiceSpecific` will come from the values passed into the constructor.
-2.`null`, `CmpApi` will respond to
+with the correct structure but all primitive values will be empty.
+  a. `gdprApplies` will be set to `true`
+  b. `cmpId`, `cmpVersion`, and `isServiceSpecific` will come from the values passed into the constructor.
+3.`null`, `CmpApi` will respond to
 [`TCData`](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#tcdata)
-with the correct structure but all primitive values will be empty.  a.
-`gdprApplies` will be set to `false` b. `cmpId`, `cmpVersion`, and
-`isServiceSpecific` will come from the values passed into the constructor.
+with the correct structure but all primitive values will be empty.
+  a.`gdprApplies` will be set to `false`
+  b. `cmpId`, `cmpVersion`, and `isServiceSpecific` will come from the values passed into the constructor.
 
 ## Show UI and Update TC string
-`CmpApi` needs to know when you are going to show the user the CMP UI. The second parameter is a `boolean` letting `CmpApi` know that the UI is now visible to the user (it defaults to `false`).
+`CmpApi` needs to know when you are going to show the user the UI to the user
+to recapture consent in order to set the correct
+[`eventStatus`](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#addeventlistener).
+The second parameter is a `boolean` letting `CmpApi` know that the UI is now
+visible to the user (it defaults to `false`).
 
 ````javascript
+// showing the ui to the user
 cmpApi.update(encodedTCString, true);
 ````
 
