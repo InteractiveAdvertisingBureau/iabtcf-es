@@ -12,6 +12,7 @@
     "lib/**/*"
   ],
   "scripts": {
+    "preversion": "echo 'woops I think you meant to go to the root' && exit 1",
     "build": "rm -rf lib ; tsc ; chmod a+x lib/index.js",
     "lint": "eslint `find src -name '*.ts'`",
     "lint:fix": "yarn run lint -- --fix"
