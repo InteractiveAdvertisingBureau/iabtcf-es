@@ -3,8 +3,7 @@ import {CmpApiModel} from './CmpApiModel';
 import {CustomCommands} from './CustomCommands';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
 import {CallResponder} from './CallResponder';
-import {TCString, Base64Url, Segment, SegmentIDs} from '@iabtcf/core';
-import {TCModel} from '../../core/lib/TCModel';
+import {TCString, Base64Url, Segment, SegmentIDs, TCModel} from '@iabtcf/core';
 
 /**
  * Consent Management Platform API
@@ -161,7 +160,19 @@ export class CmpApi {
     } else {
 
       CmpApiModel.gdprApplies = true;
-      CmpApiModel.tcModel = TCString.decode(encodedTCString);
+
+      if (encodedTCString === '') {
+
+        CmpApiModel.tcModel = new TCModel();
+        CmpApiModel.tcModel.cmpId = CmpApiModel.cmpId;
+        CmpApiModel.tcModel.cmpVersion = CmpApiModel.cmpVersion;
+
+      } else {
+
+        CmpApiModel.tcModel = TCString.decode(encodedTCString);
+
+      }
+
       CmpApiModel.tcString = encodedTCString;
 
     }

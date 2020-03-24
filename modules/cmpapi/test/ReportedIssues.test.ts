@@ -62,7 +62,7 @@ describe('Reported github issues', (): void => {
 
   });
 
-  it('Should not throw an error if getTCData is called before a tcModel is set', (done: () => void): void => {
+  it('Should not throw an error if getTCData is called before update is called', (done: () => void): void => {
 
     const cmpApi = new CmpApi(makeRandomInt(2, Math.pow(2, 6)), makeRandomInt(2, Math.pow(2, 6)));
 
@@ -81,6 +81,36 @@ describe('Reported github issues', (): void => {
     expect(callDatFunc, 'call getTCData').not.to.throw();
 
     cmpApi.update(TCStringFactory.base());
+
+  });
+
+  it('126 Should not throw an error tc string is set as ""', (done: () => void): void => {
+
+    const cmpId = makeRandomInt(2, Math.pow(2, 6));
+    const cmpVersion = makeRandomInt(2, Math.pow(2, 6));
+    const cmpApi = new CmpApi(cmpId, cmpVersion);
+    const emptyString = '';
+
+    expect((): void => {
+
+      cmpApi.update(emptyString);
+
+    }).not.to.throw();
+
+    expect(CmpApiModel.tcModel, 'tcModel').not.to.be.undefined;
+    expect(CmpApiModel.tcModel, 'tcModel').not.to.be.null;
+    expect(CmpApiModel.tcString, 'tcString').to.equal(emptyString);
+    expect(CmpApiModel.tcModel.cmpId, 'tcModel.cmpId').to.equal(cmpId);
+    expect(CmpApiModel.tcModel.cmpVersion, 'tcModel.cmpVersion').to.equal(cmpVersion);
+
+    window[API_FUNCTION_NAME]('getTCData', 2, (tcData: TCData): void => {
+
+      expect(tcData.tcString, 'tcData.tcString').to.equal(emptyString);
+      expect(tcData.cmpId, 'tcData.tcModel.cmpId').to.equal(cmpId);
+      expect(tcData.cmpVersion, 'tcData.cmpVersion').to.equal(cmpVersion);
+      done();
+
+    });
 
   });
 
