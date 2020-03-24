@@ -20,12 +20,12 @@
     "test:cov": "rm -rf coverage; nyc --reporter=html mocha `find test -name '*.test.ts'`",
     "test:lcov": "nyc --reporter=lcov mocha `find test -name '*.test.ts'`"
   },
-  "dependencies": {
-    "@iabtcf/core": "1.0.0-beta.25"
+  "peerDependencies": {
+    "@iabtcf/core": ">=1.0.0-beta.25"
   },
   "devDependencies": {
-    "@iabtcf/stub": "1.0.0-beta.25",
-    "@iabtcf/testing": "1.0.0-beta.25",
+    "@iabtcf/stub": ">=1.0.0-beta",
+    "@iabtcf/testing": ">=1.0.0-beta.25",
     "@istanbuljs/nyc-config-typescript": "^0.1.3",
     "@types/mocha": "^5.2.7",
     "@types/sinon": "7.0.13",
