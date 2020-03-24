@@ -64,10 +64,8 @@ an empty string (`''`) or `null`.
   * `gdprApplies` will be set to `true`
 * Empty string (`''`), `CmpApi` will respond to [`TCData`](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#tcdata) with the correct structure but all primitive values will be empty.
   * `gdprApplies` will be set to `true`
-  * `cmpId`, `cmpVersion`, and `isServiceSpecific` will come from the values passed into the constructor.
 * `null`, `CmpApi` will respond to [`TCData`](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#tcdata) with the correct structure but all primitive values will be empty.
   * `gdprApplies` will be set to `false`
-  * `cmpId`, `cmpVersion`, and `isServiceSpecific` will come from the values passed into the constructor.
 
 ## Show UI and Update TC string
 `CmpApi` needs to know when you are going to show the user the UI to the user
