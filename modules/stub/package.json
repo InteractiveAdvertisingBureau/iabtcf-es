@@ -1,6 +1,6 @@
 {
   "name": "@iabtcf/stub",
-  "version": "1.0.0-beta.25",
+  "version": "1.0.0-beta.26",
   "description": "CMP API Stub code",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://github.com/chrispaterson/iabtcf/tree/master/modules/cli/",
@@ -15,9 +15,6 @@
     "build:dev": "rm -rf lib && ln -s src lib",
     "lint:fix": "exit 0",
     "lint": "exit 0"
-  },
-  "dependencies": {
-    "@iabtcf/core": "1.0.0-beta.25"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",

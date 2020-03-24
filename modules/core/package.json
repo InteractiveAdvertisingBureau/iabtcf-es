@@ -1,6 +1,6 @@
 {
   "name": "@iabtcf/core",
-  "version": "1.0.0-beta.25",
+  "version": "1.0.0-beta.26",
   "description": "Ensures consistent encoding and decoding of TC Signals for the iab. Transparency and Consent Framework (TCF).",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://github.com/chrispaterson/iabtcf/tree/master/modules/core/",
@@ -21,9 +21,8 @@
     "test:cov": "rm -rf coverage; nyc --reporter=html mocha `find test -name '*.test.ts'`",
     "test:lcov": "nyc --reporter=lcov mocha `find test -name '*.test.ts'`"
   },
-  "dependencies": {},
   "devDependencies": {
-    "@iabtcf/testing": "1.0.0-beta.25",
+    "@iabtcf/testing": "1.0.0-beta.26",
     "@istanbuljs/nyc-config-typescript": "^0.1.3",
     "@types/sinon": "^7.0.13",
     "@types/sinon-chai": "3.2.2",
