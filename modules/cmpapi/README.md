@@ -28,43 +28,94 @@ yarn add @iabtcf/cmpapi
 
 ## Create CmpApi
 
+To create an instance of the CmpApi. Pass in your Cmp ID (assigned by IAB) and the Version (integer), and whether or not this instance is configured to use a [service-specific scope](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#what-are-the-different-scopes-for-a-tc-string) to the constructor.
+
+A [custom commands object map](#custom-commands) may optionally be passed to extend the page-call functionality as well.
+
 ````javascript
 import {CmpApi} from '@iabtcf/cmpapi';
 
-/**
- * To create an instance of the CmpApi. Pass in your Cmp ID and the Cmp Version
- * to constructor. Custom commands are optional.
- */
-const cmpApi = new CmpApi(1, 3);
+const cmpApi = new CmpApi(1, 3, true);
 ````
 
-During construction of the `CmpApi`, the `window.__tcfapi` stub is replaced with `CmpApi`'s own function
-for handling `window.__tcfapi` command requests. Commands that were waiting to be executed in the stub are
-filtered out if not valid. Ping and custom commands are executed and removed from the queue while
-all other commands remain queued until a valid [TC string](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#about-the-transparency--consent-string-tc-string) is set.
+During construction of the `CmpApi`, the `window.__tcfapi` stub is replaced
+with `CmpApi`'s own function for handling `window.__tcfapi` command requests.
+Commands that were waiting to be executed in the stub are filtered out if not
+valid. Ping and custom commands are executed and removed from the queue while
+all other commands remain queued until a valid [TC
+string](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#about-the-transparency--consent-string-tc-string)
+is set.
 
 **Note:** After creation, `window.__tcfapi` will respond to "ping" commands and custom commands only. All other commands
 will be queue until `update()` is called for the first time.
 
-## Set TC string
-Create a **valid** [TC string](https://www.iabtcf.com/api/core/classes/tcmodel.html) and set it in `CmpApi`.
+## Trigger Change Event
 
+In the [specification](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#addeventlistener), events occur and registered callbacks are called "whenever the TC String is changed and a new one is available".  `CmpApi` will trigger an event whenever `update` is called.
 ````javascript
-cmpApi.update(encodedTCString);
+cmpApi.update(encodedTCString || '' || null);
 ````
 
-## Show UI and Update TC string
-`CmpApi` needs to know when you are going to show the user the CMP UI. The second parameter is a `boolean` letting `CmpApi` know that the UI is now visible to the user (it defaults to `false`).
+`update()` may be called either an encoded [TC
+string](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#creating-a-tc-string)
+an empty string (`''`) or `null`.
+
+* Encoded TC string, `CmpApi` will decode the string and respond to [`TCData`](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#tcdata) with the decoded values.
+  * `gdprApplies` will be set to `true`
+* Empty string (`''`), `CmpApi` will respond to [`TCData`](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#tcdata) with the correct structure but all primitive values will be empty.
+  * `gdprApplies` will be set to `true`
+* `null`, `CmpApi` will respond to [`TCData`](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#tcdata) with the correct structure but all primitive values will be empty.
+  * `gdprApplies` will be set to `false`
+
+`CmpApi` needs to know when you are going to show the user the UI to the user
+to recapture consent in order to set the correct
+[`eventStatus`](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#addeventlistener).
+The second parameter is a `boolean` letting `CmpApi` know that the UI is now
+visible to the user (it defaults to `false`).
+
+### Show UI – TC string needs update
 
 ````javascript
+
+// showing the ui to the user
 cmpApi.update(encodedTCString, true);
+
+/** CMP gathers user preferences */
+
+cmpApi.update(updatedEncodedTCString, false);
+
 ````
 
-## GDPR doesn't apply
+### Don't Show UI – TC string does not need an update
+
+````javascript
+
+// not showing the ui to the user, only one update is needed
+cmpApi.update(encodedTCString, false);
+
+````
+
+### Show UI – New User – no TC string
+
+````javascript
+
+// showing the ui to the user
+cmpApi.update('', true);
+
+/** CMP gathers user preferences */
+
+cmpApi.update(updatedEncodedTCString, false);
+
+````
+
+### GDPR doesn't apply
 In the case that GDPR does not apply, simply update with null. That's all.
 
 ````javascript
+
+// only one update needed to let CmpApi that gdpr doesn't apply
 cmpApi.update(null);
+
 ````
 
 ## Disabling the CmpApi
@@ -80,11 +131,14 @@ cmpApi.disable();
 
 ## Custom Commands
 `CmpApi` has an optional parameter to pass in your map of custom commands.
-CmpApi will not perform any validation on custom commands. The CMP is responsible for handling validations and errors. Custom function signatures
-must have a callback and may define additonal params that will be passed from the calling script.
+`CmpApi` will not perform any validation on custom commands. The CMP is
+responsible for handling validations and errors. Custom function signatures
+must have a callback and may define additonal params that will be passed from
+the calling script.
 
 ### Example
 ````javascript
+
 import {CmpApi} from '@iabtcf/cmpapi';
 
 const cmpApi = new CmpApi(1, 3, {
@@ -122,68 +176,5 @@ __tcfapi('bingo', 2, songLyricCallback, 'Bingo');
 
 __tcfapi('connectBones', 2, songLyricCallback, 'knee', 'thigh');
 // ouput: The knee bone is connected to the thigh bone
-````
-
-## CmpApi Examples
-
-### Example 1: GDPR Applies and TC string exists and UI doesn't need to be shown
-
-````javascript
-import {CmpApi} from '@iabtcf/cmpapi';
-
-// cmp ID 100, cmp version 2
-const cmpApi = new CmpApi(100, 2);
-
-/**
- * ... CMP makes determination not to show the UI
- *     based on the encodedTCString...
- */
-
-// set string and the UI determination (false)
-cmpApi.update(encodedTCString, false);
-
-````
-
-### Example 2: GDPR Applies and the UI needs to show
-
-````javascript
-import {CmpApi} from '@iabtcf/cmpapi';
-
-// cmp ID 100, cmp version 2
-const cmpApi = new CmpApi(100, 2);
-
-/**
- * ... CMP makes determination to show the UI
- *     based on the encodedTCString...
- */
-
-// set string and the UI determination (false)
-cmpApi.update(encodedTCString, true);
-
-/**
- * ... CMP waits for user to make their
- *     choices and encodes a new TC string...
- */
-
-// update the cmpApi with the new value and in this case the
-// second parameter doesn't matter
-cmpApi.update(newEncodedTCString);
-
-````
-
-### Example 3: GDPR Does not apply to this user
-
-````javascript
-import {CmpApi} from '@iabtcf/cmpapi';
-
-// cmp ID 100, cmp version 2
-const cmpApi = new CmpApi(100, 2);
-
-/**
- * ... CMP makes determination not that gdprApplies=false
- */
-
-// Setting this to null sets gdprApplies=false
-cmpApi.update(null);
 
 ````
