@@ -321,6 +321,18 @@ describe('GVL', (): void => {
   langNotOk('US');
   langNotOk('usa');
   langNotOk('..');
+  langNotOk(' EN');
+  langNotOk('  ');
+  langNotOk('aa');
+  langNotOk('aaa');
+  langNotOk('zz');
+  langNotOk('AA');
+  langNotOk('ZZ');
+  // too short
+  langNotOk('a');
+  langNotOk('@#');
+  langNotOk('15');
+  langNotOk('{{');
 
   it('should not request a file if the language is the same', (): void => {
 

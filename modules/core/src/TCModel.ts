@@ -266,26 +266,7 @@ export class TCModel extends Cloneable<TCModel> {
    */
   public set consentLanguage(lang: string) {
 
-    if (this.gvl) {
-
-      this.gvl.changeLanguage(lang);
-      this.consentLanguage_ = this.gvl.language;
-
-    } else {
-
-      lang = lang.toUpperCase();
-
-      if (TCModel.consentLanguages.has(lang)) {
-
-        this.consentLanguage_ = lang;
-
-      } else {
-
-        throw new TCModelError('consentLanguage', lang);
-
-      }
-
-    }
+    this.consentLanguage_ = lang;
 
   }
 

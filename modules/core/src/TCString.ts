@@ -38,7 +38,14 @@ export class TCString {
 
     }
 
+    if (!gvl.isReady) {
+
+      throw new EncodingError('Unable to encode TCModel tcModel.gvl.readyPromise is not resolved');
+
+    }
+
     tcModel = tcModel.clone();
+    tcModel.consentLanguage = gvl.language;
 
     /**
      * Purpose 1 is never allowed to be true for legitimate interest
@@ -49,7 +56,6 @@ export class TCString {
 
     }
 
-    tcModel.vendorsDisclosed.empty();
     const vIds: number[] = Object.keys(gvl.vendors).map((vId: string): number => parseInt(vId, 10));
     tcModel.vendorsDisclosed.set(vIds);
 

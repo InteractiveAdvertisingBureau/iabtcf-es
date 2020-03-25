@@ -204,109 +204,17 @@ describe('TCModel', (): void => {
 
   describe('consentLanguage', (): void => {
 
-    const shouldBeOk: (value: string) => void = (value: string): void => {
+    it('should default to "EN" and set and get whatever I want', (): void => {
 
-      it(`should be ok with ${value}`, (): void => {
+      const altLang = 'fr';
+      const tcModel = new TCModel();
+      expect(tcModel.consentLanguage, 'consentLanguage default').to.equal('EN');
 
-        const tcModel = new TCModel();
+      tcModel.consentLanguage = altLang;
 
-        expect((): void => {
+      expect(tcModel.consentLanguage, 'consentLanguage default').to.equal(altLang);
 
-          tcModel.consentLanguage = value;
-
-        }).not.to.throw();
-
-        expect(tcModel.consentLanguage).to.equal(value.toUpperCase());
-
-      });
-
-    };
-
-    const shouldBeNotOk: (value: string) => void = (value: string): void => {
-
-      it(`should not be ok with ${value}`, (): void => {
-
-        const tcModel = new TCModel();
-
-        expect((): void => {
-
-          tcModel.consentLanguage = value;
-
-        }).to.throw();
-
-        // default language
-        expect(tcModel.consentLanguage).to.equal('EN');
-
-      });
-
-    };
-
-    shouldBeOk('EN');
-    shouldBeOk('BG');
-    shouldBeOk('CS');
-    shouldBeOk('DA');
-    shouldBeOk('DE');
-    shouldBeOk('EL');
-    shouldBeOk('ES');
-    shouldBeOk('ET');
-    shouldBeOk('FI');
-    shouldBeOk('FR');
-    shouldBeOk('GA');
-    shouldBeOk('HR');
-    shouldBeOk('HU');
-    shouldBeOk('IT');
-    shouldBeOk('LT');
-    shouldBeOk('LV');
-    shouldBeOk('MT');
-    shouldBeOk('NL');
-    shouldBeOk('PL');
-    shouldBeOk('PT');
-    shouldBeOk('RO');
-    shouldBeOk('SK');
-    shouldBeOk('SL');
-    shouldBeOk('SV');
-
-    shouldBeOk('en');
-    shouldBeOk('bg');
-    shouldBeOk('cs');
-    shouldBeOk('da');
-    shouldBeOk('de');
-    shouldBeOk('el');
-    shouldBeOk('es');
-    shouldBeOk('et');
-    shouldBeOk('fi');
-    shouldBeOk('fr');
-    shouldBeOk('ga');
-    shouldBeOk('hr');
-    shouldBeOk('hu');
-    shouldBeOk('it');
-    shouldBeOk('lt');
-    shouldBeOk('lv');
-    shouldBeOk('mt');
-    shouldBeOk('nl');
-    shouldBeOk('pl');
-    shouldBeOk('pt');
-    shouldBeOk('ro');
-    shouldBeOk('sk');
-    shouldBeOk('sl');
-    shouldBeOk('sv');
-
-    shouldBeNotOk(' EN');
-    shouldBeNotOk('  ');
-    shouldBeNotOk('aa');
-    shouldBeNotOk('zz');
-    shouldBeNotOk('AA');
-    shouldBeNotOk('ZZ');
-
-    // too long
-    shouldBeNotOk('aaa');
-
-    // too short
-    shouldBeNotOk('a');
-
-    shouldBeNotOk('@#');
-    shouldBeNotOk('15');
-    shouldBeNotOk('{{');
+    });
 
   });
 
