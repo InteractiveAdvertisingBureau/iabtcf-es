@@ -127,4 +127,30 @@ describe('Issues Reported', (): void => {
 
   });
 
+  it('117 TCString.encode writes all vendors as disclosed even after GVL.narrowVendorsTo([...])', async (): Promise<void> => {
+
+    const tcModel = new TCModel(new GVL());
+    tcModel.cmpId = makeRandomInt(2, 100);
+    tcModel.cmpVersion = makeRandomInt(1, 100);
+
+    const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const vendorlist = require('@iabtcf/testing/lib/vendorlist/vendor-list.json');
+    req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(vendorlist));
+
+    await tcModel.gvl.readyPromise;
+
+    tcModel.gvl.narrowVendorsTo([12, 100]);
+    tcModel.vendorsDisclosed.empty();
+    tcModel.setAllVendorsDisclosed();
+    expect(tcModel.vendorsDisclosed.size, 'tcModel.vendorsDisclosed.size').to.equal(2);
+
+    const encoded = TCString.encode(tcModel);
+    const decoded = TCString.decode(encoded);
+
+    expect(decoded.vendorsDisclosed.size, 'decoded.vendorsDisclosed.size').to.equal(2);
+
+  });
+
 });

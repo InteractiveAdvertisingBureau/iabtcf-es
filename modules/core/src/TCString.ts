@@ -30,14 +30,15 @@ export class TCString {
 
     let out = '';
     let sequence: Segment[];
+    const gvl = tcModel.gvl;
 
-    tcModel = tcModel.clone();
-
-    if (!tcModel.gvl) {
+    if (!gvl) {
 
       throw new EncodingError('Unable to encode TCModel without a GVL');
 
     }
+
+    tcModel = tcModel.clone();
 
     /**
      * Purpose 1 is never allowed to be true for legitimate interest
@@ -48,20 +49,9 @@ export class TCString {
 
     }
 
-    if (!tcModel[Fields.isServiceSpecific]) {
-
-      /**
-       * Sets vendorsDisclosed
-       *
-       * If this is a globally-scoped string (not service-specific) or they
-       * want to explicitly include it then we will set the vendorsDisclosed
-       * segement with all the vendors that were disclosed to the user
-       */
-
-      const vIds: number[] = Object.keys(tcModel.gvl.vendors).map((vId: string): number => parseInt(vId, 10));
-      tcModel[Fields.vendorsDisclosed].set(vIds);
-
-    }
+    tcModel.vendorsDisclosed.empty();
+    const vIds: number[] = Object.keys(gvl.vendors).map((vId: string): number => parseInt(vId, 10));
+    tcModel.vendorsDisclosed.set(vIds);
 
     if (options && options.version === 1) {
 
