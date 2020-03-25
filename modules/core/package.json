@@ -14,7 +14,6 @@
     "preversion": "echo 'woops I think you meant to go to the root' && exit 1",
     "build": "../build",
     "lint": "eslint `find test src -name '*.ts'`",
-    "lint:fix": "yarn run lint -- --fix",
     "debug": "ndb yarn test --no-timeouts",
     "serve:cov": "npx http-server ./coverage/",
     "test": "mocha `find test -name '*.test.ts'`",

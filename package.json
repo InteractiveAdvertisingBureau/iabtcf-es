@@ -18,7 +18,6 @@
     "tidy": "rm -rf modules/**/lib coverage modules/**/coverage .nyc_output modules/**/.nyc_output modules/**/*.log",
     "clean": "rm -rf node_modules modules/**/node_modules && yarn run tidy",
     "lint": "yarn workspaces run lint",
-    "lint:fix": "yarn workspaces run lint:fix",
     "test": "yarn && mocha",
     "debug": "ndb mocha",
     "version": "./bin/version",

@@ -181,11 +181,7 @@ export class CmpApi {
 
     }
 
-    if (CmpApiModel.displayStatus !== DisplayStatus.VISIBLE) {
-
-      CmpApiModel.eventQueue.exec();
-
-    }
+    CmpApiModel.eventQueue.exec();
 
     this.callResponder.purgeQueuedCalls();
 

@@ -17,7 +17,7 @@ describe('command->RemoveEventListenerCommand', (): void => {
 
     new AddEventListenerCommand(function(tcData: TCData): void {
 
-      expect(tcData.listenerId, 'listenerId').to.equal(1);
+      expect(tcData.listenerId, 'listenerId').to.equal(0);
 
       const listenerId = tcData.listenerId;
 

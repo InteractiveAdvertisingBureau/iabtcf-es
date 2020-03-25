@@ -23,15 +23,13 @@ cd $ROOT
 
 git checkout develop
 git pull
-git push
 
 git checkout master
 git pull
 
 git merge develop
-git push
 
-yarn lint:fix
+yarn lint
 
 if [[ $? != 0 ]]; then
   echo
@@ -64,7 +62,9 @@ for pkg in ./modules/*; do
   fi
 done
 
+git push
 # pushes the tag
 git push origin $npm_package_version
 
 git checkout $BRANCH
+git push

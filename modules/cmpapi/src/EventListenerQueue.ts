@@ -31,6 +31,7 @@ export class EventListenerQueue {
 
   public clear(): void {
 
+    this.queueNumber = 0;
     this.eventQueue.clear();
 
   }

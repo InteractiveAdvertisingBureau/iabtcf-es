@@ -13,7 +13,6 @@
     "preversion": "echo 'woops I think you meant to go to the root' && exit 1",
     "build": "rm -rf lib && mkdir lib ; babel src/stub.js | terser -m -c -o lib/stub.js",
     "build:dev": "rm -rf lib && ln -s src lib",
-    "lint:fix": "exit 0",
     "lint": "exit 0"
   },
   "devDependencies": {

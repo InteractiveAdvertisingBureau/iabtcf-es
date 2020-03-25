@@ -14,8 +14,7 @@
   "scripts": {
     "preversion": "echo 'woops I think you meant to go to the root' && exit 1",
     "build": "../build ; cp -r src/vendorlist lib/",
-    "lint": "eslint `find src -name '*.ts'`",
-    "lint:fix": "yarn run lint --fix"
+    "lint": "eslint `find src -name '*.ts'`"
   },
   "peerDependencies": {
     "@iabtcf/core": "1.0.0-beta.26"

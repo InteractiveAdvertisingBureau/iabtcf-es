@@ -4,6 +4,8 @@ import {CmpApi} from '../src/';
 import {Disabled, Response, TCData} from '../src/response';
 import {expect} from 'chai';
 import {makeRandomInt, TCStringFactory} from '@iabtcf/testing';
+import {EventStatus} from '../src/status/EventStatus';
+import {TCFCommands} from '../src/command/TCFCommands';
 
 const API_FUNCTION_NAME = '__tcfapi';
 
@@ -42,7 +44,6 @@ describe('Reported github issues', (): void => {
   afterEach((): void => {
 
     removeStub();
-    CmpApiModel.reset();
 
   });
 
@@ -68,7 +69,7 @@ describe('Reported github issues', (): void => {
 
     const callDatFunc = (): void => {
 
-      window[API_FUNCTION_NAME]('getTCData', 2, (response: Response): void => {
+      window[API_FUNCTION_NAME](TCFCommands.GET_TC_DATA, 2, (response: Response): void => {
 
         expect(response instanceof TCData, 'response instanceof TCData').to.be.true;
 
@@ -103,7 +104,7 @@ describe('Reported github issues', (): void => {
     expect(CmpApiModel.tcModel.cmpId, 'tcModel.cmpId').to.equal(cmpId);
     expect(CmpApiModel.tcModel.cmpVersion, 'tcModel.cmpVersion').to.equal(cmpVersion);
 
-    window[API_FUNCTION_NAME]('getTCData', 2, (tcData: TCData): void => {
+    window[API_FUNCTION_NAME](TCFCommands.GET_TC_DATA, 2, (tcData: TCData): void => {
 
       expect(tcData.tcString, 'tcData.tcString').to.equal(emptyString);
       expect(tcData.cmpId, 'tcData.tcModel.cmpId').to.equal(cmpId);
@@ -111,6 +112,48 @@ describe('Reported github issues', (): void => {
       done();
 
     });
+
+  });
+
+  it('120 AddEventListener: \'cmpuishown\' isn\'t being triggered ', (done: () => void): void => {
+
+    const cmpId = makeRandomInt(2, Math.pow(2, 6));
+    const cmpVersion = makeRandomInt(2, Math.pow(2, 6));
+    const cmpApi = new CmpApi(cmpId, cmpVersion);
+    const numTimes = 6;
+    let count = 0;
+
+    window[API_FUNCTION_NAME](TCFCommands.ADD_EVENT_LISTENER, 2, (tcData: TCData): void => {
+
+      count++;
+
+      let eventStatus: EventStatus;
+
+      if (count % 2) {
+
+        eventStatus = EventStatus.CMP_UI_SHOWN;
+
+      } else {
+
+        eventStatus = EventStatus.USER_ACTION_COMPLETE;
+
+      }
+
+      expect(tcData.eventStatus, `evenStatus #${count}`).to.equal(eventStatus);
+
+      if (count === numTimes) {
+
+        done();
+
+      }
+
+    });
+
+    for (let i = 0; i < numTimes; i++) {
+
+      cmpApi.update(TCStringFactory.base(), !(i%2));
+
+    }
 
   });
 
