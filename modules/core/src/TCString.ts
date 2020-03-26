@@ -78,8 +78,7 @@ export class TCString {
 
     } else {
 
-      const segSequence: SegmentSequence = new SegmentSequence(tcModel, options);
-      sequence = segSequence[''+tcModel.version];
+      sequence = new SegmentSequence(tcModel, options)[''+tcModel.version];
 
     }
 
