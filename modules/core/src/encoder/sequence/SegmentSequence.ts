@@ -33,21 +33,21 @@ export class SegmentSequence implements SequenceVersionMap {
 
       } else {
 
-        const isForSaving = !!(options && !options.isForVendors);
+        const isForVendors = !!(options && options.isForVendors);
 
         /**
          * including vendors disclosed only if it is for saving (to the global
-         * scope) or supportOOB is turned on (either or both).  The compliment
-         * of this being not for saving (surfaced to CMP) and no support of
-         * OOB.
+         * scope and not for vendors through the CMP API) or supportOOB is
+         * turned on (either or both).  The compliment of this being not for
+         * saving (surfaced to CMP) and no support of OOB.
          */
-        if (isForSaving || tcModel[Fields.supportOOB] === true) {
+        if (!isForVendors || tcModel[Fields.supportOOB] === true) {
 
           this['2'].push(Segment.VENDORS_DISCLOSED);
 
         }
 
-        if (!isForSaving) {
+        if (isForVendors) {
 
           /**
            * If a publisher does support OOB and they have narrowed the allowed
