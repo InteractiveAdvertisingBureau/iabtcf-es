@@ -1,6 +1,6 @@
 import {CmpApiModel} from '../CmpApiModel';
 import {Command} from './Command';
-import {GVL, TCModel} from '@iabtcf/core';
+import {GVL} from '@iabtcf/core';
 import {VendorListCallback} from '../callback';
 
 /**
@@ -10,45 +10,22 @@ export class GetVendorListCommand extends Command {
 
   protected success(): void {
 
-    let gvl: GVL;
     const callback = this.callback as VendorListCallback;
 
     if (!this.param) {
 
-      const tcModel = CmpApiModel.tcModel as TCModel;
-
-      if (tcModel.gvl) {
-
-        callback(tcModel.gvl.getJson(), true);
-
-      } else {
-
-        tcModel.gvl = new GVL(tcModel.vendorListVersion);
-        tcModel.gvl.readyPromise.then(() => {
-
-          callback(tcModel.gvl.getJson(), true);
-
-        }, this.fail).catch(this.fail);
-
-      }
-
-    } else {
-
-      gvl = new GVL(this.param);
-
-      const woops = (): void => {
-
-        this.fail();
-
-      };
-
-      gvl.readyPromise.then(() => {
-
-        callback(gvl.getJson(), true);
-
-      }, woops).catch(woops);
+      this.param = CmpApiModel.tcModel.vendorListVersion;
 
     }
+
+    const gvl = new GVL(this.param);
+
+    gvl.readyPromise.then(() => {
+
+      callback(gvl.getJson(), true);
+
+    }, this.fail.bind(this))
+      .catch(this.fail.bind(this));
 
   }
   protected isValid(): boolean {

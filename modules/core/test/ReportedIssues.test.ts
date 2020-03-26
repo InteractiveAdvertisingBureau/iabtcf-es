@@ -60,10 +60,13 @@ describe('Issues Reported', (): void => {
     const gvl = new GVL('LATEST');
     gvl.readyPromise.then(() => {
 
+      debugger;
+
       const tcModel = new TCModel(gvl);
       tcModel.cmpId = CMPID;
       tcModel.cmpVersion = CMPVERSION;
       tcModel.consentScreen = CONSENTSCREEN;
+
       const encodedTCString = TCString.encode(tcModel);
 
       const decodeFunc = (): void => {

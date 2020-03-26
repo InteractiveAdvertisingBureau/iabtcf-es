@@ -16,7 +16,9 @@ type PurposeSubType = 'consent' | 'legInt' | 'flexible';
  */
 export class GVL extends Cloneable<GVL> implements VendorList {
 
-  private static LANGUAGE_CACHE: Map<string, Declarations> = new Map<string, Declarations>();
+  private static LANGUAGE_CACHE: Map<string, Declarations> = new Map<string, VendorList>();
+  private static CACHE: Map<number, Declarations> = new Map<number, Declarations>();
+
   public static readonly DEFAULT_LANGUAGE: string = 'EN';
 
   /**
@@ -237,8 +239,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
     if (this.isVendorList(versionOrVendorList as GVL)) {
 
-      this.deserialize(versionOrVendorList as Declarations);
-      this.isReady_ = true;
+      this.populate(versionOrVendorList as Declarations);
       this.readyPromise = Promise.resolve();
 
     } else {
@@ -251,26 +252,29 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
       if (versionOrVendorList as number > 0) {
 
-        // load version specified
-        url += GVL.versionedFilename.replace('[VERSION]', versionOrVendorList + '');
+        const version = versionOrVendorList as number;
+
+        if (GVL.CACHE.has(version)) {
+
+          this.populate(GVL.CACHE.get(version));
+          this.readyPromise = Promise.resolve();
+
+        } else {
+
+          // load version specified
+          url += GVL.versionedFilename.replace('[VERSION]', version + '');
+          this.readyPromise = this.fetchJson(url);
+
+        }
 
       } else {
 
         // whatever it is (or isn't)... it doesn't matter we'll just get the latest
-        url += GVL.latestFilename;
+        this.readyPromise = this.fetchJson(url + GVL.latestFilename);
 
       }
 
-      this.readyPromise = this.fetchJson(url);
-
     }
-
-    this.readyPromise.then((): void => {
-
-      this.cacheLanguage(GVL.DEFAULT_LANGUAGE);
-      this.isReady_ = true;
-
-    }).catch((): void => {});// eslint-disable-line @typescript-eslint/no-empty-function
 
   }
 
@@ -302,9 +306,14 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
   }
 
-  private cacheLanguage(lang: string): void {
+  private cacheVendors(): void {
 
-    GVL.LANGUAGE_CACHE.set(lang, {
+    GVL.CACHE.set(this.vendorListVersion, this.getJson());
+
+  }
+  private cacheLanguage(): void {
+
+    GVL.LANGUAGE_CACHE.set(this.lang_, {
       purposes: this.purposes,
       specialPurposes: this.specialPurposes,
       features: this.features,
@@ -318,7 +327,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
     try {
 
-      this.deserialize(await Json.fetch(url) as GVL);
+      this.populate(await Json.fetch(url) as VendorList);
 
     } catch (err) {
 
@@ -393,7 +402,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
             await this.fetchJson(url);
 
-            this.cacheLanguage(langUpper);
+            this.cacheLanguage();
 
           } catch (err) {
 
@@ -425,10 +434,10 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
   }
 
-  private deserialize(gvlObject: Declarations): void {
+  private populate(gvlObject: Declarations): void {
 
     /**
-     * these are deserialized regardless of whether it's a Declarations file or
+     * these are populated regardless of whether it's a Declarations file or
      * a VendorList
      */
     this.purposes = gvlObject.purposes;
@@ -455,6 +464,9 @@ export class GVL extends Cloneable<GVL> implements VendorList {
       this.mapVendors();
 
     }
+
+    this.cacheLanguage();
+    this.isReady_ = true;
 
   }
 

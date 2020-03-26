@@ -126,10 +126,30 @@ describe('TCString', (): void => {
     const newModel = new TCModel();
 
     TCString.decode(core, newModel);
-    expect(newModel.vendorConsents.size, 'vendorConsents.size').to.equal(tcModel.vendorConsents.size);
-    expect(newModel.vendorLegitimateInterests.size, 'vendorLegitimateInterests.size').to.equal(tcModel.vendorLegitimateInterests.size);
-    expect(newModel.purposeConsents.size, 'purposeConsents.size').to.equal(tcModel.purposeConsents.size);
-    expect(newModel.purposeLegitimateInterests.size, 'purposeLegitimateInterests.size').to.equal(tcModel.purposeLegitimateInterests.size);
+
+    tcModel.vendorConsents.forEach((value: boolean, id: number): void => {
+
+      expect(newModel.vendorConsents.has(id), `vendorConsents.has(${id})`).to.equal(value);
+
+    });
+
+    tcModel.vendorLegitimateInterests.forEach((value: boolean, id: number): void => {
+
+      expect(newModel.vendorLegitimateInterests.has(id), `vendorLegitimateInterests.has(${id})`).to.equal(value);
+
+    });
+
+    tcModel.purposeConsents.forEach((value: boolean, id: number): void => {
+
+      expect(newModel.purposeConsents.has(id), `purposeConsents.has(${id})`).to.equal(value);
+
+    });
+
+    tcModel.purposeLegitimateInterests.forEach((value: boolean, id: number): void => {
+
+      expect(newModel.purposeLegitimateInterests.has(id), `purposeLegitimateInterests.has(${id})`).to.equal(value);
+
+    });
 
     TCString.decode(publisherTC, newModel);
 
