@@ -655,7 +655,11 @@ export class TCModel extends Cloneable<TCModel> {
 
     if (this.customPurposes) {
 
-      len = Object.keys(this.customPurposes).length;
+      Object.keys(this.customPurposes).forEach((id: string): void => {
+
+        len = Math.max(len, parseInt(id, 10));
+
+      });
 
     }
 
@@ -676,7 +680,7 @@ export class TCModel extends Cloneable<TCModel> {
         this.customPurposes[id] = {
           id: i+1,
           name: `publisher purpose ${id}`,
-          description: `publisher purpose description${id}`,
+          description: `publisher purpose description ${id}`,
           descriptionLegal: `publisher purpose legal description ${id}`,
         };
 
