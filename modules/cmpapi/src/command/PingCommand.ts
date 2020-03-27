@@ -4,7 +4,7 @@ import {Command} from './Command';
 
 export class PingCommand extends Command {
 
-  protected success(): void {
+  protected async success(): Promise<void> {
 
     const callback = this.callback as PingCallback;
 

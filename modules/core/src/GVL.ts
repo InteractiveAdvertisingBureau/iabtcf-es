@@ -18,6 +18,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
   private static LANGUAGE_CACHE: Map<string, Declarations> = new Map<string, VendorList>();
   private static CACHE: Map<number, Declarations> = new Map<number, Declarations>();
+  private static LATEST_CACHE_KEY = 0;
 
   public static readonly DEFAULT_LANGUAGE: string = 'EN';
 
@@ -219,6 +220,8 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
   private lang_: string;
 
+  private isLatest = false;
+
   /**
    * @param {VersionOrVendorList} [versionOrVendorList] - can be either a
    * [[VendorList]] object or a version number represented as a string or
@@ -269,8 +272,24 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
       } else {
 
-        // whatever it is (or isn't)... it doesn't matter we'll just get the latest
-        this.readyPromise = this.fetchJson(url + GVL.latestFilename);
+        /**
+         * whatever it is (or isn't)... it doesn't matter we'll just get the
+         * latest. In this case we may have cached the latest version at key 0.
+         * If we have then we'll just use that instead of making a request.
+         * Otherwise we'll have to load it (and then we'll cache it for next
+         * time)
+         */
+        if (GVL.CACHE.has(GVL.LATEST_CACHE_KEY)) {
+
+          this.populate(GVL.CACHE.get(GVL.LATEST_CACHE_KEY));
+          this.readyPromise = Promise.resolve();
+
+        } else {
+
+          this.isLatest = true;
+          this.readyPromise = this.fetchJson(url + GVL.latestFilename);
+
+        }
 
       }
 
@@ -282,22 +301,22 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    * emptyLanguageCache
    *
    * @param {string} [lang] - Optional ISO 639-1 langauge code to remove from
-   * the cache.  If a falsy value is passed it will empty the entire cache.
-   * @return {boolean} - whether or not the item specified was in the cache and
-   * subsequently removed
+   * the cache.  Should be one of the languages in GVL.consentLanguages set.
+   * If not then the whole cache will be deleted.
+   * @return {boolean} - true if anything was deleted from the cache
    */
-  public emptyLanguageCache(lang?: string): boolean {
+  public static emptyLanguageCache(lang?: string): boolean {
 
     let retr = false;
 
-    if (lang) {
+    if (lang === undefined && GVL.LANGUAGE_CACHE.size > 0) {
 
       GVL.LANGUAGE_CACHE = new Map<string, Declarations>();
       retr = true;
 
-    } else if (GVL.LANGUAGE_CACHE.has(lang as string)) {
+    } else if (typeof lang === 'string' && this.consentLanguages.has(lang.toUpperCase())) {
 
-      GVL.LANGUAGE_CACHE.delete(lang as string);
+      GVL.LANGUAGE_CACHE.delete(lang.toUpperCase());
       retr = true;
 
     }
@@ -306,20 +325,46 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
   }
 
-  private cacheVendors(): void {
+  /**
+   * emptyCache
+   *
+   * @param {number} [vendorListVersion] - version of the vendor list to delete
+   * from the cache.  If none is specified then the whole cache is deleted.
+   * @return {boolean} - true if anything was deleted from the cache
+   */
+  public static emptyCache(vendorListVersion?: number): boolean {
 
-    GVL.CACHE.set(this.vendorListVersion, this.getJson());
+    let retr = false;
+
+    if (Number.isInteger(vendorListVersion) && vendorListVersion >= 0) {
+
+      GVL.CACHE.delete(vendorListVersion);
+      retr = true;
+
+    } else if (vendorListVersion === undefined) {
+
+      GVL.CACHE = new Map<number, VendorList>();
+      retr = true;
+
+    }
+
+    return retr;
 
   }
+
   private cacheLanguage(): void {
 
-    GVL.LANGUAGE_CACHE.set(this.lang_, {
-      purposes: this.purposes,
-      specialPurposes: this.specialPurposes,
-      features: this.features,
-      specialFeatures: this.specialFeatures,
-      stacks: this.stacks,
-    });
+    if (!GVL.LANGUAGE_CACHE.has(this.lang_)) {
+
+      GVL.LANGUAGE_CACHE.set(this.lang_, {
+        purposes: this.purposes,
+        specialPurposes: this.specialPurposes,
+        features: this.features,
+        specialFeatures: this.specialFeatures,
+        stacks: this.stacks,
+      });
+
+    }
 
   }
 
@@ -462,11 +507,33 @@ export class GVL extends Cloneable<GVL> implements VendorList {
       this.vendors_ = gvlObject.vendors;
       this.fullVendorList = gvlObject.vendors;
       this.mapVendors();
+      this.isReady_ = true;
+
+      if (this.isLatest) {
+
+        /**
+         * If the "LATEST" was requested then this flag will be set to true.
+         * In that case we'll cache the GVL at the special key
+         */
+
+        GVL.CACHE.set(GVL.LATEST_CACHE_KEY, this.getJson());
+
+      }
+
+      /**
+       * Whether or not it's the "LATEST" we'll cache the gvl at the version it
+       * is declared to be (if it's not already). to avoid downloading it again
+       * in the future.
+       */
+      if (!GVL.CACHE.has(this.vendorListVersion)) {
+
+        GVL.CACHE.set(this.vendorListVersion, this.getJson());
+
+      }
 
     }
 
     this.cacheLanguage();
-    this.isReady_ = true;
 
   }
 
@@ -679,6 +746,12 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
   }
 
+  /**
+   * vendors
+   *
+   * @return {IntMap<Vendor>} - the list of vendors as it would on the JSON file
+   * except if `narrowVendorsTo` was called, it would be that narrowed list
+   */
   public get vendors(): IntMap<Vendor> {
 
     return this.vendors_;

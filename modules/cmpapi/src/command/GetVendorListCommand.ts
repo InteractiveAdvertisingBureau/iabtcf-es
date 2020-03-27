@@ -8,11 +8,11 @@ import {VendorListCallback} from '../callback';
  */
 export class GetVendorListCommand extends Command {
 
-  protected success(): void {
+  protected async success(): Promise<void> {
 
     const callback = this.callback as VendorListCallback;
 
-    if (!this.param) {
+    if (this.param === undefined) {
 
       this.param = CmpApiModel.tcModel.vendorListVersion;
 
@@ -20,12 +20,17 @@ export class GetVendorListCommand extends Command {
 
     const gvl = new GVL(this.param);
 
-    gvl.readyPromise.then(() => {
+    try {
+
+      await gvl.readyPromise;
 
       callback(gvl.getJson(), true);
 
-    }, this.fail.bind(this))
-      .catch(this.fail.bind(this));
+    } catch (err) {
+
+      this.fail();
+
+    }
 
   }
   protected isValid(): boolean {

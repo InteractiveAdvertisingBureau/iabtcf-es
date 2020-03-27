@@ -147,7 +147,17 @@ describe('TCString', (): void => {
 
     tcModel.purposeLegitimateInterests.forEach((value: boolean, id: number): void => {
 
-      expect(newModel.purposeLegitimateInterests.has(id), `purposeLegitimateInterests.has(${id})`).to.equal(value);
+      if ( id === 1 && value ) {
+
+        // id 1 gets unset on encoding for legitimate interests
+
+        expect(newModel.purposeLegitimateInterests.has(id), `purposeLegitimateInterests.has(${id})`).to.be.false;
+
+      } else {
+
+        expect(newModel.purposeLegitimateInterests.has(id), `purposeLegitimateInterests.has(${id})`).to.equal(value);
+
+      }
 
     });
 

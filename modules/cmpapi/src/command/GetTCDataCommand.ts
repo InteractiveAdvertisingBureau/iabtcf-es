@@ -4,7 +4,7 @@ import {TCData} from '../response';
 
 export class GetTCDataCommand extends Command {
 
-  protected success(): void {
+  protected async success(): Promise<void> {
 
     const callback = this.callback as TCDataCallback;
     callback(new TCData(this.param, this.listenerId), true);

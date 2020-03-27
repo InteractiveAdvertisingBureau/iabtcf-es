@@ -16,7 +16,7 @@ describe('GVL', (): void => {
 
     Object.keys(vendorlistJson).forEach((key: string): void => {
 
-      const msg = `gvl["${key}"]`;
+      const msg = `assertPopulated(): gvl.${key}]`;
 
       if (key === 'lastUpdated') {
 
@@ -34,6 +34,23 @@ describe('GVL', (): void => {
       }
 
     });
+
+  };
+
+  const assertTranslated = (gvl: GVL, lang: string): void => {
+
+    expect(gvl.purposes, 'gvl.purposes').to.deep.equal(translationJson.purposes);
+    expect(gvl.specialPurposes, 'gvl.specialPurposes').to.deep.equal(translationJson.specialPurposes);
+    expect(gvl.features, 'gvl.features').to.deep.equal(translationJson.features);
+    expect(gvl.specialFeatures, 'gvl.specialFeatures').to.deep.equal(translationJson.specialFeatures);
+    expect(gvl.stacks, 'gvl.stacks').to.deep.equal(translationJson.stacks);
+
+    expect(gvl.purposes, 'gvl.purposes').to.not.deep.equal(vendorlistJson.purposes);
+    expect(gvl.specialPurposes, 'gvl.specialPurposes').to.not.deep.equal(vendorlistJson.specialPurposes);
+    expect(gvl.features, 'gvl.features').to.not.deep.equal(vendorlistJson.features);
+    expect(gvl.specialFeatures, 'gvl.specialFeatures').to.not.deep.equal(vendorlistJson.specialFeatures);
+
+    expect(gvl.language, 'gvl.language').to.equal(lang.toUpperCase());
 
   };
 
@@ -65,6 +82,17 @@ describe('GVL', (): void => {
 
   });
 
+  it('should fail to set baseUrl to https://vendorlist.consensu.org/ (secure url)', (): void => {
+
+    // calls constructor
+    expect((): void => {
+
+      GVL.baseUrl = 'https://vendorlist.consensu.org/';
+
+    }).to.throw('Invalid baseUrl!  You may not pull directly from vendorlist.consensu.org and must provide your own cache');
+
+  });
+
   it('should add a trailing slash to baseUrl if one is not there', (): void => {
 
     const myURL = 'http://vendorlist.mysweetcmp.mgr.consensu.org';
@@ -77,17 +105,6 @@ describe('GVL', (): void => {
     }).not.to.throw();
 
     expect(GVL.baseUrl).to.equal(myURL + '/');
-
-  });
-
-  it('should fail to set baseUrl to https://vendorlist.consensu.org/ (secure url)', (): void => {
-
-    // calls constructor
-    expect((): void => {
-
-      GVL.baseUrl = 'https://vendorlist.consensu.org/';
-
-    }).to.throw('Invalid baseUrl!  You may not pull directly from vendorlist.consensu.org and must provide your own cache');
 
   });
 
@@ -109,7 +126,7 @@ describe('GVL', (): void => {
 
   });
 
-  it('should get latest GVL if nothing is passed to the constructor', (done): void => {
+  it('should get latest GVL if nothing is passed to the constructor', async (): Promise<void> => {
 
     GVL.baseUrl = 'http://sweetcmp.com/';
 
@@ -122,27 +139,40 @@ describe('GVL', (): void => {
     expect(req.method).to.equal('GET');
     expect(req.url).to.equal(`${GVL.baseUrl}vendor-list.json`);
 
-    gvl.readyPromise
-      .then((): void => {
-
-        assertPopulated(gvl);
-        done();
-
-      })
-      .catch((): void => {
-
-        expect.fail('Should have worked');
-
-      });
     req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(vendorlistJson));
+
+    await gvl.readyPromise;
+
+    assertPopulated(gvl);
 
   });
 
-  it('should get versioned GVL if version number is passed', (done): void => {
+  it('should get latest GVL if "LATEST" is passed to the constructor', async (): Promise<void> => {
 
     GVL.baseUrl = 'http://sweetcmp.com/';
 
-    const version = 23;
+    const gvl: GVL = new GVL('LATEST');
+
+    expect(XMLHttpTestTools.requests.length).to.equal(1);
+
+    const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+
+    expect(req.method).to.equal('GET');
+    expect(req.url).to.equal(`${GVL.baseUrl}vendor-list.json`);
+
+    req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(vendorlistJson));
+
+    await gvl.readyPromise;
+
+    assertPopulated(gvl);
+
+  });
+
+  it('should get versioned GVL if version number is passed', async (): Promise<void> => {
+
+    GVL.baseUrl = 'http://sweetcmp.com/';
+
+    const version = 22;
     const gvl: GVL = new GVL(version);
 
     expect(XMLHttpTestTools.requests.length).to.equal(1);
@@ -152,23 +182,15 @@ describe('GVL', (): void => {
     expect(req.method).to.equal('GET');
     expect(req.url).to.equal(`${GVL.baseUrl}archives/vendor-list-v${version}.json`);
 
-    gvl.readyPromise
-      .then((): void => {
-
-        assertPopulated(gvl);
-        done();
-
-      })
-      .catch((): void => {
-
-        expect.fail('Should have worked');
-
-      });
     req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(vendorlistJson));
+
+    await gvl.readyPromise;
+
+    assertPopulated(gvl);
 
   });
 
-  it('should get versioned GVL if version number as string is passed', (done): void => {
+  it('should get versioned GVL if version number as string is passed', async (): Promise<void> => {
 
     GVL.baseUrl = 'http://sweetcmp.com/';
 
@@ -182,20 +204,113 @@ describe('GVL', (): void => {
     expect(req.method).to.equal('GET');
     expect(req.url).to.equal(`${GVL.baseUrl}archives/vendor-list-v${version}.json`);
 
-    gvl.readyPromise
-      .then((): void => {
+    req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(vendorlistJson));
+    await gvl.readyPromise;
+    assertPopulated(gvl);
 
-        assertPopulated(gvl);
-        done();
+  });
 
-      })
-      .catch((): void => {
+  it('should not re-request the "LATEST" vendorlist json if it has already downloaded it', async (): Promise<void> => {
 
-        expect.fail('Should have worked');
+    GVL.baseUrl = 'http://sweetcmp.com/';
 
-      });
+    const gvl: GVL = new GVL('LATEST');
+
+    expect(XMLHttpTestTools.requests.length, 'requests.length').to.equal(1);
+
+    const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+
+    expect(req.method).to.equal('GET');
+    expect(req.url).to.equal(`${GVL.baseUrl}vendor-list.json`);
 
     req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(vendorlistJson));
+    await gvl.readyPromise;
+
+    const gvl2: GVL = new GVL('LATEST');
+    expect(XMLHttpTestTools.requests.length, 'requests.length').to.equal(1);
+    expect(XMLHttpTestTools.requests[0], 'request').to.deep.equal(req);
+
+    await gvl2.readyPromise;
+
+    assertPopulated(gvl2);
+
+  });
+
+  it('should not re-request a versioned vendorlist json if it has already downloaded it', async (): Promise<void> => {
+
+    GVL.baseUrl = 'http://sweetcmp.com/';
+
+    const gvlVersion = vendorlistJson.vendorListVersion;
+    const gvl: GVL = new GVL(gvlVersion);
+
+    expect(XMLHttpTestTools.requests.length, 'requests.length').to.equal(1);
+
+    const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+
+    expect(req.method).to.equal('GET');
+    expect(req.url).to.equal(`${GVL.baseUrl}archives/vendor-list-v${gvlVersion}.json`);
+
+    req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(vendorlistJson));
+
+    await gvl.readyPromise;
+    assertPopulated(gvl);
+
+    const gvl2: GVL = new GVL(gvlVersion);
+    expect(XMLHttpTestTools.requests.length, 'requests.length').to.equal(1);
+    expect(XMLHttpTestTools.requests[0], 'request').to.deep.equal(req);
+
+    await gvl2.readyPromise;
+
+    assertPopulated(gvl2);
+
+  });
+
+  it('should not re-request a vendorlist json if it has been passed in to the constructor', async (): Promise<void> => {
+
+    GVL.baseUrl = 'http://sweetcmp.com/';
+
+    const gvlVersion = vendorlistJson.vendorListVersion;
+    const gvl: GVL = new GVL(vendorlistJson);
+
+    expect(XMLHttpTestTools.requests.length, 'requests.length').to.equal(0);
+
+    await gvl.readyPromise;
+    assertPopulated(gvl);
+
+    const gvl2: GVL = new GVL(gvlVersion);
+    expect(XMLHttpTestTools.requests.length, 'requests.length').to.equal(0);
+
+    await gvl2.readyPromise;
+
+    assertPopulated(gvl2);
+
+  });
+
+  it('should not re-request a vendorlist json latest is request and then that version is requested later', async (): Promise<void> => {
+
+    GVL.baseUrl = 'http://sweetcmp.com/';
+
+    const gvlVersion = vendorlistJson.vendorListVersion;
+    const gvl: GVL = new GVL();
+
+    expect(XMLHttpTestTools.requests.length, 'requests.length').to.equal(1);
+
+    const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+
+    expect(req.method).to.equal('GET');
+    expect(req.url).to.equal(`${GVL.baseUrl}vendor-list.json`);
+
+    req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(vendorlistJson));
+    await gvl.readyPromise;
+    assertPopulated(gvl);
+
+    const gvl2: GVL = new GVL(gvlVersion);
+    expect(XMLHttpTestTools.requests.length, 'requests.length').to.equal(1);
+    expect(XMLHttpTestTools.requests[0], 'request').to.deep.equal(req);
+
+    await gvl2.readyPromise;
+
+    assertPopulated(gvl2);
 
   });
 
@@ -215,7 +330,8 @@ describe('GVL', (): void => {
 
     const vendorId = '1';
 
-    vendorlistJson.vendors[vendorId] = {
+    const json = new GVL(vendorlistJson).clone().getJson();
+    json.vendors[vendorId] = {
       id: +vendorId,
       name: 'Fake Vendor with ID 1',
       purposes: [
@@ -241,74 +357,54 @@ describe('GVL', (): void => {
       policyUrl: 'http://www.fakevendor.com/privacy-policy/',
     };
 
-    expect(vendorlistJson.vendors[vendorId], `vendorlistJson.vendors["${vendorId}"]`).not.to.be.undefined;
-    const gvl: GVL = new GVL(vendorlistJson);
+    expect(json.vendors[vendorId], `json.vendors["${vendorId}"]`).not.to.be.undefined;
+    const gvl: GVL = new GVL(json);
     expect(gvl.vendors[vendorId], `gvl.vendors["${vendorId}"]`).to.be.undefined;
 
   });
 
-  it('should replace the language when changeLanguage() is called with valid language', (done: () => void): void => {
+  it('should replace the language when changeLanguage() is called with valid language', async (): Promise<void> => {
 
     GVL.baseUrl = 'http://sweetcmp.com';
 
     const gvl: GVL = new GVL(vendorlistJson);
     const language = 'fr';
-    const languageUpperCase = language.toUpperCase();
 
     expect(gvl.language).to.equal(GVL.DEFAULT_LANGUAGE);
 
-    gvl.changeLanguage(language)
-      .then((): void => {
-
-        expect(gvl.purposes, 'gvl.purposes').to.deep.equal(translationJson.purposes);
-        expect(gvl.specialPurposes, 'gvl.specialPurposes').to.deep.equal(translationJson.specialPurposes);
-        expect(gvl.features, 'gvl.features').to.deep.equal(translationJson.features);
-        expect(gvl.specialFeatures, 'gvl.specialFeatures').to.deep.equal(translationJson.specialFeatures);
-        expect(gvl.stacks, 'gvl.stacks').to.deep.equal(translationJson.stacks);
-
-        expect(gvl.purposes, 'gvl.purposes').to.not.deep.equal(vendorlistJson.purposes);
-        expect(gvl.specialPurposes, 'gvl.specialPurposes').to.not.deep.equal(vendorlistJson.specialPurposes);
-        expect(gvl.features, 'gvl.features').to.not.deep.equal(vendorlistJson.features);
-        expect(gvl.specialFeatures, 'gvl.specialFeatures').to.not.deep.equal(vendorlistJson.specialFeatures);
-
-        expect(gvl.language, 'gvl.language').to.equal(languageUpperCase);
-
-        done();
-
-      })
-      .catch((): void => {
-
-        expect.fail('Should have worked');
-
-      });
+    const changePromise = gvl.changeLanguage(language);
 
     expect(XMLHttpTestTools.requests.length).to.equal(1);
 
     const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
 
-    expect(req.method).to.equal('GET');
     expect(req.url).to.equal(GVL.baseUrl + GVL.languageFilename.replace('[LANG]', language));
 
     req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(translationJson));
+
+    await changePromise;
+
+    assertTranslated(gvl, language);
 
   });
 
   const langNotOk = (language: string): void => {
 
-    it(`should throw an error if ${language} is passed to changeLanguage()`, (done: () => void): void => {
+    it(`should throw an error if ${language} is passed to changeLanguage()`, async (): Promise<void> => {
 
       GVL.baseUrl = 'http://sweetcmp.com';
 
       const gvl: GVL = new GVL(vendorlistJson);
 
-      gvl.changeLanguage(language)
-        .catch((err): void => {
+      try {
 
-          expect(err.message).to.contain('unsupported');
+        await gvl.changeLanguage(language);
 
-          done();
+      } catch (err) {
 
-        });
+        expect(err.message).to.contain('unsupported');
+
+      }
 
     });
 
@@ -334,7 +430,7 @@ describe('GVL', (): void => {
   langNotOk('15');
   langNotOk('{{');
 
-  it('should not request a file if the language is the same', (): void => {
+  it('should not request a file if the language is "EN"', (): void => {
 
     GVL.baseUrl = 'http://sweetcmp.com';
 
@@ -347,13 +443,49 @@ describe('GVL', (): void => {
 
   });
 
+  it('should not re-request the same language file if it has already been loaded', async (): Promise<void> => {
+
+    GVL.baseUrl = 'http://sweetcmp.com';
+
+    const gvl: GVL = new GVL(vendorlistJson);
+    const lang = 'fr';
+
+    expect(gvl.language).to.equal(GVL.DEFAULT_LANGUAGE);
+
+    const changePromise = gvl.changeLanguage(lang);
+
+    expect(XMLHttpTestTools.requests.length).to.equal(1);
+
+    const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+
+    expect(req.method).to.equal('GET');
+    expect(req.url).to.equal(GVL.baseUrl + GVL.languageFilename.replace('[LANG]', lang));
+
+    req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(translationJson));
+
+    await changePromise;
+
+    assertTranslated(gvl, lang);
+
+    const gvl2 = new GVL(vendorlistJson);
+
+    expect(XMLHttpTestTools.requests.length).to.equal(1);
+    expect(XMLHttpTestTools.requests[0], 'request').to.deep.equal(req);
+
+    await gvl2.changeLanguage(lang);
+    assertTranslated(gvl2, lang);
+
+    expect(XMLHttpTestTools.requests.length).to.equal(1);
+    expect(XMLHttpTestTools.requests[0], 'request').to.deep.equal(req);
+
+  });
+
   it('should error if a 404 for the language file occurs', (done: () => void): void => {
 
     GVL.baseUrl = 'http://sweetcmp.com';
 
     const gvl: GVL = new GVL(vendorlistJson);
     const language = 'FR';
-    gvl.emptyLanguageCache('FR');
 
     expect(gvl.language).to.equal(GVL.DEFAULT_LANGUAGE);
 
@@ -379,6 +511,82 @@ describe('GVL', (): void => {
     expect(req.url).to.equal(GVL.baseUrl + GVL.languageFilename.replace('[LANG]', language));
 
     req.respond(404, XMLHttpTestTools.JSON_HEADER, JSON.stringify({}));
+
+  });
+
+  it('should delete a language from the cache when requested', async (): Promise<void> => {
+
+    GVL.baseUrl = 'http://sweetcmp.com';
+
+    const gvl: GVL = new GVL(vendorlistJson);
+    const lang = 'fr';
+
+    expect(gvl.language).to.equal(GVL.DEFAULT_LANGUAGE);
+
+    const changePromise = gvl.changeLanguage(lang);
+
+    expect(XMLHttpTestTools.requests.length).to.equal(1);
+
+    const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+
+    expect(req.url).to.equal(GVL.baseUrl + GVL.languageFilename.replace('[LANG]', lang));
+
+    req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(translationJson));
+
+    await changePromise;
+
+    assertTranslated(gvl, lang);
+
+    GVL.emptyLanguageCache();
+    const gvl2 = new GVL(vendorlistJson);
+
+    expect(XMLHttpTestTools.requests.length).to.equal(1);
+    expect(XMLHttpTestTools.requests[0], 'request').to.deep.equal(req);
+
+    const changePromise2 = gvl2.changeLanguage(lang);
+
+    expect(XMLHttpTestTools.requests.length).to.equal(2);
+    const req2: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[1];
+    req2.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(translationJson));
+
+    await changePromise2;
+    assertTranslated(gvl2, lang);
+
+  });
+
+  it('should delete a gvl version from the cache when requested', async (): Promise<void> => {
+
+    GVL.baseUrl = 'http://sweetcmp.com/';
+
+    const gvl: GVL = new GVL();
+
+    expect(XMLHttpTestTools.requests.length, 'requests.length').to.equal(1);
+
+    const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+
+    expect(req.method).to.equal('GET');
+    expect(req.url).to.equal(`${GVL.baseUrl}vendor-list.json`);
+
+    req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(vendorlistJson));
+    await gvl.readyPromise;
+    assertPopulated(gvl);
+
+    GVL.emptyCache();
+
+    const gvl2: GVL = new GVL();
+
+    expect(XMLHttpTestTools.requests.length, 'requests.length').to.equal(2);
+
+    const req2: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[1];
+
+    expect(req2.method).to.equal('GET');
+    expect(req2.url).to.equal(`${GVL.baseUrl}vendor-list.json`);
+
+    req2.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(vendorlistJson));
+
+    await gvl2.readyPromise;
+
+    assertPopulated(gvl2);
 
   });
 

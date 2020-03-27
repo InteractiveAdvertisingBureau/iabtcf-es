@@ -21,12 +21,6 @@ describe('command->GetVendorListCommand', (): void => {
 
     });
 
-    expect(XMLHttpTestTools.requests.length).to.equal(1);
-
-    const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
-
-    req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(CmpApiModel.tcModel.gvl.getJson()));
-
   });
 
   it('should return latest GVL if "LATEST" is passed', (done: () => void): void => {
@@ -54,13 +48,19 @@ describe('command->GetVendorListCommand', (): void => {
   it('should return version of GVL if integer is passed', (done: () => void): void => {
 
     CmpApiModel.tcModel = TCModelFactory.noGVL();
-    const latest = GVLFactory.getLatest().vendorListVersion;
-    const version = makeRandomInt(1, latest);
-    const json = GVLFactory.getVersion(version).getJson();
+
+    const version = makeRandomInt(1, 22);
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const json = require(`@iabtcf/testing/lib/vendorlist/vendor-list-v${version}.json`);
+    const stringified = JSON.stringify(json);
 
     new GetVendorListCommand((gvl: VendorList, success: boolean): void => {
 
       expect(success, 'success').to.be.true;
+
+      // the lastUpdated date gets wonky because of the require
+      delete json.lastUpdated;
+      delete gvl.lastUpdated;
       expect(gvl, 'gvl').to.deep.equal(json);
 
       done();
@@ -73,7 +73,7 @@ describe('command->GetVendorListCommand', (): void => {
 
     expect(req.url, 'req.url').to.include(`vendor-list-v${version}.json`);
 
-    req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(json));
+    req.respond(200, XMLHttpTestTools.JSON_HEADER, stringified);
 
   });
 
@@ -86,15 +86,13 @@ describe('command->GetVendorListCommand', (): void => {
 
     CmpApiModel.tcModel.gvl.readyPromise.then((): void => {
 
-      debugger;
       new GetVendorListCommand((gvl: VendorList, success: boolean): void => {
 
         expect(success, 'success').to.be.true;
         expect(gvl, 'gvl').to.deep.equal(json);
-
         done();
 
-      }, 'LATEST');
+      });
 
       expect(XMLHttpTestTools.requests.length, 'requests.length - after').to.equal(0);
 
