@@ -47,7 +47,7 @@ describe('Issues Reported', (): void => {
 
   });
 
-  it('91 TCString.encode use 0 as vendorListVersion instead of gvl', (done: () => void): void => {
+  it('91 TCString.encode use 0 as vendorListVersion instead of gvl', async (): Promise<void> => {
 
     const CMPID = makeRandomInt(2, 100);
     const CMPVERSION = makeRandomInt(1, 63);
@@ -57,31 +57,27 @@ describe('Issues Reported', (): void => {
     const vendorlist = require('@iabtcf/testing/lib/vendorlist/vendor-list.json');
 
     GVL.baseUrl = 'http://mydomain.com/cmp/vendorlist';
+
     const gvl = new GVL('LATEST');
-    gvl.readyPromise.then(() => {
-
-      debugger;
-
-      const tcModel = new TCModel(gvl);
-      tcModel.cmpId = CMPID;
-      tcModel.cmpVersion = CMPVERSION;
-      tcModel.consentScreen = CONSENTSCREEN;
-
-      const encodedTCString = TCString.encode(tcModel);
-
-      const decodeFunc = (): void => {
-
-        TCString.decode(encodedTCString);// Throw error
-
-      };
-
-      expect(decodeFunc, 'decodeFunc').not.to.throw();
-      done();
-
-    });
-
     const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+
     req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(vendorlist));
+    await gvl.readyPromise;
+
+    const tcModel = new TCModel(gvl);
+    tcModel.cmpId = CMPID;
+    tcModel.cmpVersion = CMPVERSION;
+    tcModel.consentScreen = CONSENTSCREEN;
+
+    const encodedTCString = TCString.encode(tcModel);
+
+    const decodeFunc = (): void => {
+
+      TCString.decode(encodedTCString);// Throw error
+
+    };
+
+    expect(decodeFunc, 'decodeFunc').not.to.throw();
 
   });
 
