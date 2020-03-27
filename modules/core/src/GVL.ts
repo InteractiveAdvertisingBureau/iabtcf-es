@@ -588,7 +588,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
       const vendor: Vendor = this.vendors_[''+vendorId];
 
-      if (vendor.deletedDate === undefined) {
+      if (vendor && vendor.deletedDate === undefined) {
 
         vendor.purposes.forEach((purposeId: number): void => {
 
