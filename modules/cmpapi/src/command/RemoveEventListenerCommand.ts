@@ -4,7 +4,7 @@ import {CmpApiModel} from '../CmpApiModel';
 
 export class RemoveEventListenerCommand extends Command {
 
-  protected success(): void {
+  protected async success(): Promise<void> {
 
     const callback = this.callback as RemoveListenerCallback;
 

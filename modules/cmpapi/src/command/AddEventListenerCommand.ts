@@ -4,7 +4,7 @@ import {CmpApiModel} from '../CmpApiModel';
 
 export class AddEventListenerCommand extends GetTCDataCommand {
 
-  protected success(): void {
+  protected async success(): Promise<void> {
 
     const listenerId = CmpApiModel.eventQueue.add(this.callback as TCDataCallback);
 

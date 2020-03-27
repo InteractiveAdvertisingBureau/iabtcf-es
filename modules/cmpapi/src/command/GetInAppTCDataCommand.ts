@@ -4,7 +4,7 @@ import {InAppTCData} from '../response';
 
 export class GetInAppTCDataCommand extends GetTCDataCommand {
 
-  protected success(): void {
+  protected async success(): Promise<void> {
 
     const callback = this.callback as InAppTCDataCallback;
 

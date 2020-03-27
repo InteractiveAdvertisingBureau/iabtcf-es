@@ -21,5 +21,6 @@ beforeEach((): void => {
 
   CmpApiModel.reset();
   XMLHttpTestTools.beforeEach();
+  GVL.emptyCache();
 
 });

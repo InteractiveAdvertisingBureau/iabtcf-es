@@ -37,7 +37,7 @@ export abstract class Command {
     return true;
 
   }
-  protected abstract success(): void
+  protected abstract async success(): Promise<void>
   protected fail(): void {
 
     const callback = this.callback as FailCallback;

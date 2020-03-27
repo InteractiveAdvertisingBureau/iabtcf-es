@@ -6,6 +6,7 @@
     "downlevelIteration": true,
     "esModuleInterop": true,
     "preserveConstEnums": true,
+    "sourceMap": true,
     "declaration": true,
     "forceConsistentCasingInFileNames": true
   }

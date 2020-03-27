@@ -1,6 +1,6 @@
 import {CmpApiModel} from '../CmpApiModel';
 import {Command} from './Command';
-import {GVL, TCModel} from '@iabtcf/core';
+import {GVL} from '@iabtcf/core';
 import {VendorListCallback} from '../callback';
 
 /**
@@ -8,45 +8,27 @@ import {VendorListCallback} from '../callback';
  */
 export class GetVendorListCommand extends Command {
 
-  protected success(): void {
+  protected async success(): Promise<void> {
 
-    let gvl: GVL;
     const callback = this.callback as VendorListCallback;
 
-    if (!this.param) {
+    if (this.param === undefined) {
 
-      const tcModel = CmpApiModel.tcModel as TCModel;
+      this.param = CmpApiModel.tcModel.vendorListVersion;
 
-      if (tcModel.gvl) {
+    }
 
-        callback(tcModel.gvl.getJson(), true);
+    const gvl = new GVL(this.param);
 
-      } else {
+    try {
 
-        tcModel.gvl = new GVL(tcModel.vendorListVersion);
-        tcModel.gvl.readyPromise.then(() => {
+      await gvl.readyPromise;
 
-          callback(tcModel.gvl.getJson(), true);
+      callback(gvl.getJson(), true);
 
-        }, this.fail).catch(this.fail);
+    } catch (err) {
 
-      }
-
-    } else {
-
-      gvl = new GVL(this.param);
-
-      const woops = (): void => {
-
-        this.fail();
-
-      };
-
-      gvl.readyPromise.then(() => {
-
-        callback(gvl.getJson(), true);
-
-      }, woops).catch(woops);
+      this.fail();
 
     }
 
