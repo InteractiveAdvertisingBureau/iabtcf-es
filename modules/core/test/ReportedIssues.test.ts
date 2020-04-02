@@ -174,6 +174,12 @@ describe('Issues Reported', (): void => {
 
     }).not.to.throw();
 
+    optedInPurposeIds.forEach((id: number): void => {
+
+      expect(tcModel.purposeConsents.has(id), 'purpose conset ' + id).to.be.true;
+
+    });
+
   });
 
 });
