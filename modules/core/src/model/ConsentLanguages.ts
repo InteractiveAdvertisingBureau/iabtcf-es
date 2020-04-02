@@ -1,17 +1,17 @@
 export class ConsentLanguages {
 
   private static readonly langSet: Set<string> = new Set([
-    'EN',
     'BG',
+    'CA',
     'CS',
     'DA',
     'DE',
     'EL',
+    'EN',
     'ES',
     'ET',
     'FI',
     'FR',
-    'GA',
     'HR',
     'HU',
     'IT',
@@ -19,12 +19,15 @@ export class ConsentLanguages {
     'LV',
     'MT',
     'NL',
+    'NO',
     'PL',
     'PT',
     'RO',
+    'RU',
     'SK',
     'SL',
     'SV',
+    'ZH',
   ]);
 
   public has(key: string): boolean {

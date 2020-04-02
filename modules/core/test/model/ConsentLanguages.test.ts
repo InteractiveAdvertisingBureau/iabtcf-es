@@ -7,17 +7,17 @@ describe('model->ConsentLanguages', (): void => {
 
     const consentLanguages = new ConsentLanguages();
     const languages = [
-      'EN',
       'BG',
+      'CA',
       'CS',
       'DA',
       'DE',
       'EL',
+      'EN',
       'ES',
       'ET',
       'FI',
       'FR',
-      'GA',
       'HR',
       'HU',
       'IT',
@@ -25,12 +25,15 @@ describe('model->ConsentLanguages', (): void => {
       'LV',
       'MT',
       'NL',
+      'NO',
       'PL',
       'PT',
       'RO',
+      'RU',
       'SK',
       'SL',
       'SV',
+      'ZH',
     ];
 
     expect(consentLanguages.size, 'size').to.equal(languages.length);
