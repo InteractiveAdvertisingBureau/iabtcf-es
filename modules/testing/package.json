@@ -1,6 +1,6 @@
 {
   "name": "@iabtcf/testing",
-  "version": "1.0.0-beta.29",
+  "version": "1.0.0-beta.30",
   "description": "Shared testing utilities",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://github.com/chrispaterson/iabtcf",
@@ -17,7 +17,7 @@
     "lint": "eslint `find src -name '*.ts'`"
   },
   "peerDependencies": {
-    "@iabtcf/core": "1.0.0-beta.29"
+    "@iabtcf/core": "1.0.0-beta.30"
   },
   "dependencies": {
     "@types/sinon": "^7.0.13",
