@@ -152,4 +152,28 @@ describe('Issues Reported', (): void => {
 
   });
 
+  it('140 Unable to set and unset individual purposes, specialFeatures, or vendors', async (): Promise<void> => {
+
+    const tcModel = new TCModel(new GVL());
+    tcModel.cmpId = makeRandomInt(2, 100);
+    tcModel.cmpVersion = makeRandomInt(1, 100);
+
+    const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const vendorlist = require('@iabtcf/testing/lib/vendorlist/vendor-list.json');
+    req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(vendorlist));
+
+    await tcModel.gvl.readyPromise;
+
+    const optedInPurposeIds = [1, 2, 3]; // purposes the user has selected
+    tcModel.purposeConsents.set(optedInPurposeIds);
+    expect((): void => {
+
+      TCString.encode(tcModel);
+
+    }).not.to.throw();
+
+  });
+
 });
