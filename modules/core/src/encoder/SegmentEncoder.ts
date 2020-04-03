@@ -75,7 +75,7 @@ export class SegmentEncoder {
       const encoder = FieldEncoderMap[key];
       const bits = bitField.substr(bStringIdx, BitLength[key]);
 
-      tcModel[key] = encoder.decode(bits);
+      tcModel[key] = encoder.decode(bits, BitLength[key]);
 
       if (BitLength[key]) {
 

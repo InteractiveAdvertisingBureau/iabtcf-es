@@ -43,7 +43,7 @@ describe('encoder/field->DateEncoder', (): void => {
 
       const date: Date = new Date();
       const encoded = DateEncoder.encode(date, 36);
-      const decoded = DateEncoder.decode(encoded);
+      const decoded = DateEncoder.decode(encoded, 36);
       const expected = Math.round(date.getTime()/100)*100;
 
       expect(decoded.getTime()).to.equal(expected);

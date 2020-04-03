@@ -152,4 +152,16 @@ describe('Issues Reported', (): void => {
 
   });
 
+  it('142 it should throw an error if the bitfield length does not match the maxId', (): void => {
+
+    const str = 'CLSYjTaOngnCIAOABBENAXCMAGOAABBAAA7IA5n-m7fP6_3fbqVv6E__PoA5Aqff3aJx8tv_1967rfnQEQoAIAAQCrwkAEABAcACABIMACAAuApEVABABUSABgBCAVSAtIoACACIArYQAHACgAFgAVwBJgDcAI7AWgMAAgBiKgAgBMgFfKQAQBRkQAQA4AFiBAAoA-AEVAJlAVgAtYcACAJcAr4eABAK8OgBgFzAOmAqwgABAWyA.IFukWSQh';
+
+    expect((): void => {
+
+      TCString.decode(str);
+
+    }).to.throw();
+
+  });
+
 });

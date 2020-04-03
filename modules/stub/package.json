@@ -1,6 +1,6 @@
 {
   "name": "@iabtcf/stub",
-  "version": "1.0.0-beta.32",
+  "version": "1.0.0-beta.33",
   "description": "CMP API Stub code",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://github.com/chrispaterson/iabtcf/tree/master/modules/cli/",

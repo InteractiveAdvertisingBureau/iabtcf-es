@@ -23,13 +23,7 @@ module.exports = {
   },
   rules: {
     'import/no-cycle': ['error', { maxDepth: 1 }],
-    'max-len': ['error', {
-      'ignoreUrls': true,
-      'ignoreStrings': true,
-      'ignoreTemplateLiterals': true,
-      'ignoreRegExpLiterals': true,
-      'code': 120
-    }],
+    'max-len': 0,
     'no-multiple-empty-lines':['error', {'max':1, 'maxEOF':0, 'maxBOF':0}],
     'require-jsdoc': [0],
     'semi': ['error', 'always'],

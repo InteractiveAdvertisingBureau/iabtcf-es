@@ -66,25 +66,25 @@ describe('encoder/field->PurposeRestrictionVectorEncoder', (): void => {
     expect(encoded, 'encoded string').not.to.be.empty;
 
     // num restrictions
-    const numRestrictions: number = IntEncoder.decode(encoded.substr(index, BitLength.numRestrictions));
+    const numRestrictions: number = IntEncoder.decode(encoded.substr(index, BitLength.numRestrictions), BitLength.numRestrictions);
 
     expect(numRestrictions, 'numRestrictions').to.equal(prVector.numRestrictions);
     index += BitLength.numRestrictions;
 
     // purposeId
-    const purpId: number = IntEncoder.decode(encoded.substr(index, BitLength.purposeId));
+    const purpId: number = IntEncoder.decode(encoded.substr(index, BitLength.purposeId), BitLength.purposeId);
 
     expect(purpId, 'purpId').to.equal(purposeId);
     index += BitLength.purposeId;
 
     // restrictionType
-    const restrictionType: number = IntEncoder.decode(encoded.substr(index, BitLength.restrictionType));
+    const restrictionType: number = IntEncoder.decode(encoded.substr(index, BitLength.restrictionType), BitLength.restrictionType);
 
     expect(restrictionType, 'restrictionType').to.equal(RestrictionType.NOT_ALLOWED);
     index += BitLength.restrictionType;
 
     // numEntries
-    const numEntries: number = IntEncoder.decode(encoded.substr(index, BitLength.numEntries));
+    const numEntries: number = IntEncoder.decode(encoded.substr(index, BitLength.numEntries), BitLength.numEntries);
 
     expect(numEntries, 'numEntries').to.equal(2);
     index += BitLength.numEntries;
