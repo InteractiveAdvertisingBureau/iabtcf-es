@@ -152,4 +152,19 @@ describe('Issues Reported', (): void => {
 
   });
 
+  it('142 it should have proper disclosed vendors', (): void => {
+
+    const str = 'CLSYjTaOngnCIAOABBENAXCMAGOAABBAAA7IA5n-m7fP6_3fbqVv6E__PoA5Aqff3aJx8tv_1967rfnQEQoAIAAQCrwkAEABAcACABIMACAAuApEVABABUSABgBCAVSAtIoACACIArYQAHACgAFgAVwBJgDcAI7AWgMAAgBiKgAgBMgFfKQAQBRkQAQA4AFiBAAoA-AEVAJlAVgAtYcACAJcAr4eABAK8OgBgFzAOmAqwgABAWyA.IFukWSQh';
+    const tcModel = TCString.decode(str);
+
+    tcModel.vendorsDisclosed.empty();
+    tcModel.gvl = GVLFactory.getVersion(+tcModel.vendorListVersion) as unknown as GVL;
+
+    const str2 = TCString.encode(tcModel);
+
+    // fails
+    expect(str2, 'string 2').to.equal(str);
+
+  });
+
 });
