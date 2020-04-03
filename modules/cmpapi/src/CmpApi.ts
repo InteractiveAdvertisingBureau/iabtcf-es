@@ -3,7 +3,7 @@ import {CmpApiModel} from './CmpApiModel';
 import {CustomCommands} from './CustomCommands';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
 import {CallResponder} from './CallResponder';
-import {TCString, Base64Url, Segment, SegmentIDs, TCModel} from '@iabtcf/core';
+import {TCString, TCModel} from '@iabtcf/core';
 
 /**
  * Consent Management Platform API
