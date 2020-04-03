@@ -29,7 +29,7 @@ describe('encoder/field->FixedVectorEncoder', (): void => {
     it('should decode a fixed vector', (): void => {
 
       const vectorBits = '01100011101';
-      const vector: Vector = FixedVectorEncoder.decode(vectorBits);
+      const vector: Vector = FixedVectorEncoder.decode(vectorBits, vectorBits.length);
 
       expect(vector.maxId).to.equal(vectorBits.length);
 

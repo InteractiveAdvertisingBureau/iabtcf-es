@@ -134,7 +134,7 @@ export class TCString {
        */
       const firstChar: string = Base64Url.decode(segString.charAt(0));
       const segTypeBits: string = firstChar.substr(0, BitLength.segmentType);
-      const segment = SegmentIDs.ID_TO_KEY[IntEncoder.decode(segTypeBits).toString()];
+      const segment = SegmentIDs.ID_TO_KEY[IntEncoder.decode(segTypeBits, BitLength.segmentType).toString()];
 
       SegmentEncoder.decode(segString, tcModel, segment);
 
