@@ -2,24 +2,7 @@ import {DecodingError, EncodingError} from '../errors';
 
 export class Base64Url {
 
-  private static readonly ONE_BYTE: number = 8;
-  private static btoa(str: string | Buffer): string {
-
-    let buffer;
-
-    if (str instanceof Buffer) {
-
-      buffer = str;
-
-    } else {
-
-      buffer = Buffer.from(str.toString(), 'binary');
-
-    }
-
-    return buffer.toString('base64');
-
-  };
+  private static readonly BYTE: number = 8;
 
   /**
    * encodes an arbitrary-length bitfield string into base64url
@@ -35,19 +18,19 @@ export class Base64Url {
      */
     if (!/^[0-1]+$/.test(str)) {
 
-      throw new EncodingError('Base64url Encoding: Invalid bitField');
+      throw new EncodingError('Invalid bitField');
 
     }
 
     const len: number = str.length;
     let retr = '';
 
-    for (let i = 0; i < len; i += Base64Url.ONE_BYTE) {
+    for (let i = 0; i < len; i += Base64Url.BYTE) {
 
       // grab our chunk
-      let chunk: string = str.substr(i, Base64Url.ONE_BYTE);
+      let chunk: string = str.substr(i, Base64Url.BYTE);
 
-      if (chunk.length < Base64Url.ONE_BYTE) {
+      if (chunk.length < Base64Url.BYTE) {
 
         /**
          * on the very last bucket we could have something less than a byte and
@@ -55,7 +38,7 @@ export class Base64Url {
          * pad right the difference between what we have and what we need
          */
 
-        chunk = chunk + '0'.repeat(Base64Url.ONE_BYTE - chunk.length);
+        chunk = chunk + '0'.repeat(Base64Url.BYTE - chunk.length);
 
       }
 
@@ -66,7 +49,15 @@ export class Base64Url {
 
     }
 
-    retr = this.btoa(retr);
+    if (typeof btoa === 'function') {
+
+      retr = btoa(retr);
+
+    } else {
+
+      retr = Buffer.from(retr, 'base64').toString();
+
+    }
 
     // remove trailing '=' for url-safeness
     while (retr.charAt(retr.length - 1) === '=') {
@@ -93,12 +84,14 @@ export class Base64Url {
    */
   public static decode(str: string): string {
 
+    const decodingError = new DecodingError('Invalidly encoded Base64URL string');
+
     /**
      * should contain only characters from the base64url set
      */
     if (!/^[A-Za-z0-9\-_]+$/.test(str)) {
 
-      throw new DecodingError('Invalid Base64url Encoding');
+      throw decodingError;
 
     }
 
@@ -131,12 +124,19 @@ export class Base64Url {
         str += '=';
         break;
       default:
-        throw new DecodingError('Invalidly encoded Base64URL string');
+        throw decodingError;
 
     }
 
-    // Decode Base64 – same as atob
-    str = Buffer.from(str, 'base64').toString('binary');
+    if (typeof atob === 'function') {
+
+      str = atob(str);
+
+    } else {
+
+      str = Buffer.from(str, 'base64').toString('binary');
+
+    }
 
     const len: number = str.length;
     let bitField = '';
@@ -151,7 +151,7 @@ export class Base64Url {
        * leading zeros and all encoded characters must fit into a six bit
        * bucket we will pad to the left for all characters
        */
-      const pad = '0'.repeat(Base64Url.ONE_BYTE - strBits.length);
+      const pad = '0'.repeat(Base64Url.BYTE - strBits.length);
 
       bitField += pad + strBits;
 
