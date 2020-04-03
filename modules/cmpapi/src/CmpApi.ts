@@ -71,52 +71,6 @@ export class CmpApi {
   }
 
   /**
-   * throwMaybe - checks to make sure the value is null or an encoded string is
-   * passed with a publisher TC segment which is required in the CMP API.  It
-   * also checks to see if the we are disabled
-   *
-   * @param {string} str - value to check
-   */
-  private throwMaybe(str: string): void {
-
-    let valid = (str === null || str === '');
-
-    if (CmpApiModel.disabled) {
-
-      throw new Error('CmpApi Disabled');
-
-    }
-
-    if (!valid && typeof str === 'string' && !!~str.indexOf('.')) {
-
-      const segments = str.split('.');
-      let hasPubTC = false;
-
-      segments.forEach((segment: string): void => {
-
-        if (!hasPubTC) {
-
-          const segNumber = parseInt(Base64Url.decode(segment.charAt(0)).substr(0, 3), 2);
-          hasPubTC = (segNumber === SegmentIDs.KEY_TO_ID[Segment.PUBLISHER_TC]);
-
-        }
-
-      });
-
-      valid = hasPubTC;
-
-    }
-
-    if (!valid) {
-
-      CmpApiModel.cmpStatus = CmpStatus.ERROR;
-      throw new Error(`Invalid string: ${str}! If encoded with @iabtcf/core, please make sure the it is encoded with TCString.encode(tcModel, {isForVendors:true}) encoding option`);
-
-    }
-
-  }
-
-  /**
    * update - When the state of a CMP changes this function should be called
    * with the updated tc string and whether or not the UI is visible or not
    *
@@ -130,7 +84,11 @@ export class CmpApi {
    */
   public update(encodedTCString: string | null, uiVisible = false): void {
 
-    this.throwMaybe(encodedTCString);
+    if (CmpApiModel.disabled) {
+
+      throw new Error('CmpApi Disabled');
+
+    }
 
     CmpApiModel.cmpStatus = CmpStatus.LOADED;
 
