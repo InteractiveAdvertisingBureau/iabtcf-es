@@ -111,9 +111,9 @@ export class VendorVectorEncoder {
 
     let vector: Vector;
     let index = 0;
-    const maxId: number = IntEncoder.decode(value.substr(index, BitLength.maxId));
+    const maxId: number = IntEncoder.decode(value.substr(index, BitLength.maxId), BitLength.maxId);
     index += BitLength.maxId;
-    const encodingType: VectorEncodingType = IntEncoder.decode(value.charAt(index));
+    const encodingType: VectorEncodingType = IntEncoder.decode(value.charAt(index), BitLength.encodingType);
     index += BitLength.encodingType;
 
     /**
@@ -123,7 +123,7 @@ export class VendorVectorEncoder {
 
       vector = new Vector();
 
-      const numEntries: number = IntEncoder.decode(value.substr(index, BitLength.numEntries));
+      const numEntries: number = IntEncoder.decode(value.substr(index, BitLength.numEntries), BitLength.numEntries);
 
       index += BitLength.numEntries;
 
@@ -139,14 +139,14 @@ export class VendorVectorEncoder {
          * regardless of whether or not it's a single entry or range, the next
          * set of bits is a vendor ID
          */
-        const firstId: number = IntEncoder.decode(value.substr(index, BitLength.vendorId));
+        const firstId: number = IntEncoder.decode(value.substr(index, BitLength.vendorId), BitLength.vendorId);
 
         index += BitLength.vendorId;
 
         // if it's a range, the next set of bits is the second id
         if (isIdRange) {
 
-          const secondId: number = IntEncoder.decode(value.substr(index, BitLength.vendorId));
+          const secondId: number = IntEncoder.decode(value.substr(index, BitLength.vendorId), BitLength.vendorId);
 
           index += BitLength.vendorId;
 
@@ -170,7 +170,7 @@ export class VendorVectorEncoder {
       const bitField = value.substr(index, maxId);
 
       index += maxId;
-      vector = FixedVectorEncoder.decode(bitField);
+      vector = FixedVectorEncoder.decode(bitField, maxId);
 
     }
 

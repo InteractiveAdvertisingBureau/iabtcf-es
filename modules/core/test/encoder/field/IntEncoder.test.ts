@@ -61,7 +61,7 @@ describe('encoder/field->IntEncoder', (): void => {
       expect((): void => {
 
         // shouldn't throw an error, '1010' fits in 6 bits
-        decoded = IntEncoder.decode(binaryStringInt);
+        decoded = IntEncoder.decode(binaryStringInt, binaryStringInt.length);
 
       }).not.to.throw();
 

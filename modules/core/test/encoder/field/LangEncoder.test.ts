@@ -52,7 +52,7 @@ describe('encoder/field->LangEncoder', (): void => {
 
       const lang = 'FR';
       const encoded = LangEncoder.encode(lang, 12);
-      const decoded = LangEncoder.decode(encoded);
+      const decoded = LangEncoder.decode(encoded, 12);
 
       expect(decoded).to.equal(lang);
 
@@ -64,7 +64,7 @@ describe('encoder/field->LangEncoder', (): void => {
 
       expect((): void => {
 
-        const decoded = LangEncoder.decode('0' + encoded);
+        const decoded = LangEncoder.decode('0' + encoded, 12);
 
         expect.fail(`should have thrown an error and not returned: ${decoded}`);
 

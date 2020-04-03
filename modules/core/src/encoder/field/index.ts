@@ -1,5 +1,3 @@
-// created from 'create-ts-index'
-
 export * from './BooleanEncoder';
 export * from './DateEncoder';
 export * from './FieldEncoderMap';

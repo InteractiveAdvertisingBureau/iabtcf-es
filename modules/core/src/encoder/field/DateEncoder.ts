@@ -1,6 +1,9 @@
 import {
   IntEncoder,
 } from './IntEncoder';
+import {
+  DecodingError,
+} from '../../errors';
 
 export class DateEncoder {
 
@@ -10,11 +13,17 @@ export class DateEncoder {
 
   }
 
-  public static decode(value: string): Date {
+  public static decode(value: string, numBits: number): Date {
+
+    if (numBits !== value.length) {
+
+      throw new DecodingError('invalid bit length');
+
+    }
 
     const date: Date = new Date();
 
-    date.setTime(IntEncoder.decode(value) * 100);
+    date.setTime(IntEncoder.decode(value, numBits) * 100);
 
     return date;
 

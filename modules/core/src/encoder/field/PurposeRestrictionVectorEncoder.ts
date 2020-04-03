@@ -89,22 +89,22 @@ export class PurposeRestrictionVectorEncoder {
 
     let index = 0;
     const vector: PurposeRestrictionVector = new PurposeRestrictionVector();
-    const numRestrictions: number = IntEncoder.decode(encodedString.substr(index, BitLength.numRestrictions));
+    const numRestrictions: number = IntEncoder.decode(encodedString.substr(index, BitLength.numRestrictions), BitLength.numRestrictions);
 
     index += BitLength.numRestrictions;
 
     for (let i = 0; i < numRestrictions; i++) {
 
       // First is purpose ID
-      const purposeId = IntEncoder.decode(encodedString.substr(index, BitLength.purposeId));
+      const purposeId = IntEncoder.decode(encodedString.substr(index, BitLength.purposeId), BitLength.purposeId);
       index += BitLength.purposeId;
       // Second Restriction Type
-      const restrictionType = IntEncoder.decode(encodedString.substr(index, BitLength.restrictionType));
+      const restrictionType = IntEncoder.decode(encodedString.substr(index, BitLength.restrictionType), BitLength.restrictionType);
       index += BitLength.restrictionType;
 
       const purposeRestriction: PurposeRestriction = new PurposeRestriction(purposeId, restrictionType);
       // Num Entries (number of vendors)
-      const numEntries: number = IntEncoder.decode(encodedString.substr(index, BitLength.numEntries));
+      const numEntries: number = IntEncoder.decode(encodedString.substr(index, BitLength.numEntries), BitLength.numEntries);
       index += BitLength.numEntries;
 
       for (let j = 0; j < numEntries; j++) {
@@ -112,12 +112,12 @@ export class PurposeRestrictionVectorEncoder {
         const isARange: boolean = BooleanEncoder.decode(encodedString.substr(index, BitLength.anyBoolean));
         index += BitLength.anyBoolean;
 
-        const startOrOnlyVendorId: number = IntEncoder.decode(encodedString.substr(index, BitLength.vendorId));
+        const startOrOnlyVendorId: number = IntEncoder.decode(encodedString.substr(index, BitLength.vendorId), BitLength.vendorId);
         index += BitLength.vendorId;
 
         if (isARange) {
 
-          const endVendorId: number = IntEncoder.decode(encodedString.substr(index, BitLength.vendorId));
+          const endVendorId: number = IntEncoder.decode(encodedString.substr(index, BitLength.vendorId), BitLength.vendorId);
           index += BitLength.vendorId;
 
           if (endVendorId < startOrOnlyVendorId) {

@@ -39,17 +39,17 @@ export class LangEncoder {
 
   }
 
-  public static decode(value: string): string {
+  public static decode(value: string, numBits: number): string {
 
     let retr: string;
 
     // is it an even number of bits? we have to divide it
-    if (!(value.length % 2)) {
+    if (numBits === value.length && !(value.length % 2)) {
 
       const ASCII_START = 65;
       const mid: number = value.length/2;
-      const firstLetter = IntEncoder.decode(value.slice(0, mid)) + ASCII_START;
-      const secondLetter = IntEncoder.decode(value.slice(mid)) + ASCII_START;
+      const firstLetter = IntEncoder.decode(value.slice(0, mid), mid) + ASCII_START;
+      const secondLetter = IntEncoder.decode(value.slice(mid), mid) + ASCII_START;
 
       retr = String.fromCharCode(firstLetter) + String.fromCharCode(secondLetter);
 
