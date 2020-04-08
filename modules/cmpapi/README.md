@@ -141,7 +141,7 @@ the calling script.
 
 import {CmpApi} from '@iabtcf/cmpapi';
 
-const cmpApi = new CmpApi(1, 3, {
+const cmpApi = new CmpApi(1, 3, false, {
 
   'bingo': (callback, dogName) => {
 

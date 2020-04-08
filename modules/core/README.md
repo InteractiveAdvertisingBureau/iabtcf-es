@@ -425,7 +425,7 @@ import {TCString, TCModel, GVL} from '@iabtcf/core';
  * outlined in the GVL URL Version scheme.  (latest at vendor-list.json and
  * version specific at archives/vendor-list-v{vendor-list-version}.json
  */
-GVL.baseURL = "http://mydomain.com/cmp/vendorlist";
+GVL.baseUrl = "http://mydomain.com/cmp/vendorlist";
 
 // we'll get the latest GVL to encode this TCString to
 const gvl = new GVL("LATEST");
