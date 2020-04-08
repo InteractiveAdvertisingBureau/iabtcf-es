@@ -1,6 +1,7 @@
 import {SegmentSequence} from '../../../src/encoder/sequence/SegmentSequence';
 import {TCModel} from '../../../src/TCModel';
 import {Segment} from '../../../src/model';
+import {PowerSet} from '@iabtcf/testing';
 import {expect} from 'chai';
 
 describe('encoder/sequence->SegmentSequence', (): void => {
@@ -35,25 +36,7 @@ describe('encoder/sequence->SegmentSequence', (): void => {
 
   };
 
-  const numValues = 5;
-  const total = 1 << numValues;
-  const powSet: boolean[][] = [];
-
-  for (let i =0; i < total; i++) {
-
-    const group: boolean[] = [];
-
-    for (let j=0; j < numValues; j++) {
-
-      group.push(!!((i >> j) & 1));
-
-    }
-
-    powSet.push(group);
-
-  }
-
-  powSet.forEach((boolSet: boolean[]): void => {
+  PowerSet.generate(5).forEach((boolSet: boolean[]): void => {
 
     const version = (+boolSet[0] + 1);
     const isServiceSpecific = boolSet[1];

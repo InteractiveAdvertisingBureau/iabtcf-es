@@ -1,6 +1,5 @@
-// created from 'create-ts-index'
-
 export * from './GVLFactory';
+export * from './PowerSet';
 export * from './TCModelFactory';
 export * from './TCStringFactory';
 export * from './XMLHttpTestTools';
