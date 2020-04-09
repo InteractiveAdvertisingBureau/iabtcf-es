@@ -27,7 +27,7 @@ git pull
 git checkout master
 git pull
 
-git merge develop
+git merge develop --no-edit
 
 yarn lint
 
