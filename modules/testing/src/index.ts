@@ -6,5 +6,6 @@ export * from './XMLHttpTestTools';
 export * from './isPrimitive';
 export * from './makeRandomInt';
 export * from './makeRandomIntArray';
+export * from './makeRandomString';
 export * from './sameDataDiffRef';
 export * from './smellsLikeGVL';
