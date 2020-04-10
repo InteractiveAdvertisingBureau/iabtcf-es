@@ -1,9 +1,9 @@
 {
   "name": "@iabtcf/stub",
-  "version": "1.0.0-beta.36",
+  "version": "1.0.0",
   "description": "CMP API Stub code",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
-  "homepage": "https://github.com/chrispaterson/iabtcf/tree/master/modules/cli/",
+  "homepage": "https://iabtcf.com/",
   "license": "Apache-2.0",
   "main": "lib/stub.js",
   "files": [
@@ -53,8 +53,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/chrispaterson/iabtcf.git",
+    "url": "https://github.com/InteractiveAdvertisingBureau/iabtcf-es.git",
     "directory": "modules/stub"
-  },
-  "gitHead": "fb56d5db3fbb56677a07bc99fec207394476d87f"
+  }
 }

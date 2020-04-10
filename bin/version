@@ -15,5 +15,5 @@ for pkg in ./modules/*; do
   fi
 done
 
-# Updated references to other iab libs
-sed -i '' 's/\(\@iabtcf\/.*\)":\s*.*"/\1": "'$npm_package_version'"/g' ./modules/**/package.json
+# Updated references to other iab libs but only hard versions
+sed -i '' 's/\(\@iabtcf\/.*\)":.*"[0-9]*\..*"/\1": "'$npm_package_version'"/g' ./modules/**/package.json
