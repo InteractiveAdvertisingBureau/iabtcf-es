@@ -2,9 +2,10 @@ import {Base64Url} from './Base64Url';
 import {BitLength} from './BitLength';
 import {FieldEncoderMap, IntEncoder} from './field';
 import {FieldSequence} from './sequence';
-import {TCModel, TCModelPropType} from '../';
 import {EncodingError, DecodingError} from '../errors';
+import {Fields} from '../model/Fields';
 import {Segment, SegmentIDs} from '../model';
+import {TCModel, TCModelPropType} from '../';
 
 export class SegmentEncoder {
 
@@ -39,8 +40,23 @@ export class SegmentEncoder {
     sequence.forEach((key: string): void => {
 
       const value: TCModelPropType = tcModel[key];
-      const numBits: number = BitLength[key];
       const encoder = FieldEncoderMap[key];
+      let numBits: number = BitLength[key];
+
+      if (numBits === undefined) {
+
+        if (this.isPublisherCustom(key)) {
+
+          /**
+           * publisherCustom[Consents | LegitimateInterests] are an edge case
+           * because they are of variable length. The length is defined in a
+           * separate field named numCustomPurposes.
+           */
+          numBits = +tcModel[Fields.numCustomPurposes];
+
+        }
+
+      }
 
       try {
 
@@ -58,6 +74,7 @@ export class SegmentEncoder {
     return Base64Url.encode(bitField);
 
   }
+
   public static decode(encodedString: string, tcModel: TCModel, segment: string): TCModel {
 
     const sequence = this.fieldSequence[''+tcModel.version][segment];
@@ -73,27 +90,62 @@ export class SegmentEncoder {
     sequence.forEach((key: string): void => {
 
       const encoder = FieldEncoderMap[key];
-      const bits = bitField.substr(bStringIdx, BitLength[key]);
+      let numBits = BitLength[key];
 
-      tcModel[key] = encoder.decode(bits, BitLength[key]);
+      if (numBits === undefined) {
 
-      if (BitLength[key]) {
+        if (this.isPublisherCustom(key)) {
 
-        bStringIdx += BitLength[key];
+          /**
+           * publisherCustom[Consents | LegitimateInterests] are an edge case
+           * because they are of variable length. The length is defined in a
+           * separate field named numCustomPurposes.
+           */
+          numBits = +tcModel[Fields.numCustomPurposes];
 
-      } else if (tcModel[key].bitLength) {
+        }
 
-        bStringIdx += tcModel[key].bitLength;
+      }
 
-      } else {
+      if (numBits !== 0) {
 
-        throw new DecodingError(`error decoding ${key}`);
+        /**
+         * numBits could be 0 if this is a publisher custom purposes field and
+         * no custom purposes are defined. If that is the case, we don't need
+         * to gather no bits and we don't need to increment our bStringIdx
+         * pointer because those would all be 0 increments and would mess up
+         * the next logical if statement.
+         */
+
+        const bits = bitField.substr(bStringIdx, numBits);
+
+        tcModel[key] = encoder.decode(bits, numBits);
+
+        if (Number.isInteger(numBits)) {
+
+          bStringIdx += numBits;
+
+        } else if (Number.isInteger(tcModel[key].bitLength)) {
+
+          bStringIdx += tcModel[key].bitLength;
+
+        } else {
+
+          throw new DecodingError(key);
+
+        }
 
       }
 
     });
 
     return tcModel;
+
+  }
+
+  private static isPublisherCustom(key: string): boolean {
+
+    return key.indexOf('publisherCustom') === 0;
 
   }
 

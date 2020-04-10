@@ -10,8 +10,6 @@ export class BitLength {
   public static readonly [Fields.lastUpdated]: number = 36;
   public static readonly [Fields.policyVersion]: number = 6;
   public static readonly [Fields.publisherCountryCode]: number = 12;
-  public static readonly [Fields.publisherCustomLegitimateInterests]: number = 24;
-  public static readonly [Fields.publisherCustomConsents]: number = 24;
   public static readonly [Fields.publisherLegitimateInterests]: number = 24;
   public static readonly [Fields.publisherConsents]: number = 24;
   public static readonly [Fields.purposeConsents]: number = 24;
@@ -21,6 +19,7 @@ export class BitLength {
   public static readonly [Fields.useNonStandardStacks]: number = 1;
   public static readonly [Fields.vendorListVersion]: number = 12;
   public static readonly [Fields.version]: number = 6;
+
   public static readonly anyBoolean: number = 1;
   public static readonly encodingType: number = 1;
   public static readonly maxId: number = 16;

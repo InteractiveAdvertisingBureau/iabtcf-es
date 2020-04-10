@@ -1,9 +1,9 @@
 {
   "name": "@iabtcf/testing",
-  "version": "1.0.0-beta.36",
+  "version": "1.0.0",
   "description": "Shared testing utilities",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
-  "homepage": "https://github.com/chrispaterson/iabtcf",
+  "homepage": "https://iabtcf.com/",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -17,7 +17,7 @@
     "lint": "eslint `find src -name '*.ts'`"
   },
   "peerDependencies": {
-    "@iabtcf/core": "1.0.0-beta.36"
+    "@iabtcf/core": ">=1.0.0"
   },
   "dependencies": {
     "@types/sinon": "^7.0.13",
@@ -36,6 +36,9 @@
   "eslintIgnore": [
     "lib"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "interactive",
     "advertising",
@@ -64,8 +67,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/chrispaterson/iabtcf-es.git",
+    "url": "https://github.com/InteractiveAdvertisingBureau/iabtcf-es.git",
     "directory": "modules/testing"
-  },
-  "gitHead": "fb56d5db3fbb56677a07bc99fec207394476d87f"
+  }
 }
