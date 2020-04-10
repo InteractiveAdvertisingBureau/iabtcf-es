@@ -27,6 +27,7 @@ export class TCModel extends Cloneable<TCModel> {
   private cmpId_: StringOrNumber = 0;
   private cmpVersion_: StringOrNumber = 0;
   private vendorListVersion_: StringOrNumber = 0;
+  private numCustomPurposes_ = 0;
 
   // Member Variable for GVL
   private gvl_: GVL;
@@ -312,19 +313,9 @@ export class TCModel extends Cloneable<TCModel> {
    */
   public set vendorListVersion(integer: StringOrNumber) {
 
-    if (Number.isInteger(+integer) && integer > 0) {
+    this.vendorListVersion_ = parseInt(integer as string, 10);
 
-      if (!this.gvl) {
-
-        this.vendorListVersion_ = +integer;
-
-      } else if (this.gvl.vendorListVersion !== +integer) {
-
-        this.gvl = new GVL(+integer);
-
-      }
-
-    } else {
+    if (this.vendorListVersion_ < 0) {
 
       throw new TCModelError('vendorListVersion', integer);
 
@@ -358,11 +349,16 @@ export class TCModel extends Cloneable<TCModel> {
    * @param {number} num - You do not need to set this.  This comes
    * directly from the [[GVL]].
    *
-   * @throws {TCModelError} if the value is not an integer greater than 1 as those are not valid.
    */
   public set policyVersion(num: StringOrNumber) {
 
     this.policyVersion_ = parseInt(num as string, 10);
+
+    if (this.policyVersion_ < 0) {
+
+      throw new TCModelError('policyVersion', num);
+
+    }
 
   }
 
@@ -649,17 +645,23 @@ export class TCModel extends Cloneable<TCModel> {
 
   }
 
-  public get numCustomPurposes(): number {
+  public get numCustomPurposes(): StringOrNumber {
 
-    let len = 0;
+    let len = this.numCustomPurposes_;
 
-    if (this.customPurposes) {
+    if (typeof this.customPurposes === 'object') {
 
-      Object.keys(this.customPurposes).forEach((id: string): void => {
+      /**
+       * Keys are not guaranteed to be in order and likewise there is no
+       * requirement that the customPurposes be non-sparse.  So we have to sort
+       * and take the highest value.  Even if the set only contains 3 purposes
+       * but goes to ID 6 we need to set the number to 6 for the encoding to
+       * work properly since it's positional.
+       */
+      const purposeIds: string[] = Object.keys(this.customPurposes)
+        .sort((a: string, b: string): number => +a - +b);
 
-        len = Math.max(len, parseInt(id, 10));
-
-      });
+      len = parseInt(purposeIds.pop(), 10);
 
     }
 
@@ -667,24 +669,13 @@ export class TCModel extends Cloneable<TCModel> {
 
   }
 
-  public set numCustomPurposes(num: number) {
+  public set numCustomPurposes(num: StringOrNumber) {
 
-    if (!this.customPurposes) {
+    this.numCustomPurposes_ = parseInt(num as string, 10);
 
-      this.customPurposes = {};
+    if (this.numCustomPurposes_ < 0) {
 
-      for (let i = 0; i < num; i++) {
-
-        const id: string = (i + 1).toString();
-
-        this.customPurposes[id] = {
-          id: i+1,
-          name: `publisher purpose ${id}`,
-          description: `publisher purpose description ${id}`,
-          descriptionLegal: `publisher purpose legal description ${id}`,
-        };
-
-      }
+      throw new TCModelError('numCustomPurposes', num);
 
     }
 
