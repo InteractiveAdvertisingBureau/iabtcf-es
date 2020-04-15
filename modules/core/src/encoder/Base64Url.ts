@@ -2,7 +2,30 @@ import {DecodingError, EncodingError} from '../errors';
 
 export class Base64Url {
 
-  private static readonly BYTE: number = 8;
+  /**
+   * Base 64 URL character set.  Different from standard Base64 char set
+   * in that '+' and '/' are replaced with '-' and '_'.
+   */
+  private static DICT = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+  private static REVERSE_DICT: Map<string, number> = new Map([
+    ['A', 0], ['B', 1], ['C', 2], ['D', 3], ['E', 4], ['F', 5],
+    ['G', 6], ['H', 7], ['I', 8], ['J', 9], ['K', 10], ['L', 11],
+    ['M', 12], ['N', 13], ['O', 14], ['P', 15], ['Q', 16], ['R', 17],
+    ['S', 18], ['T', 19], ['U', 20], ['V', 21], ['W', 22], ['X', 23],
+    ['Y', 24], ['Z', 25], ['a', 26], ['b', 27], ['c', 28], ['d', 29],
+    ['e', 30], ['f', 31], ['g', 32], ['h', 33], ['i', 34], ['j', 35],
+    ['k', 36], ['l', 37], ['m', 38], ['n', 39], ['o', 40], ['p', 41],
+    ['q', 42], ['r', 43], ['s', 44], ['t', 45], ['u', 46], ['v', 47],
+    ['w', 48], ['x', 49], ['y', 50], ['z', 51], ['0', 52], ['1', 53],
+    ['2', 54], ['3', 55], ['4', 56], ['5', 57], ['6', 58], ['7', 59],
+    ['8', 60], ['9', 61], ['-', 62], ['_', 63],
+  ]);
+
+  /**
+   * log2(64) = 6
+   */
+  private static BASIS = 6;
+  private static LCM = 24;
 
   /**
    * encodes an arbitrary-length bitfield string into base64url
@@ -22,56 +45,21 @@ export class Base64Url {
 
     }
 
-    const len: number = str.length;
-    let retr = '';
+    /**
+     * Pad the end of the string to the least common mutliple of 6 (basis for
+     * base64) and 8 (one byte)
+     */
+    str += '0'.repeat(this.LCM - (str.length % this.LCM));
 
-    for (let i = 0; i < len; i += Base64Url.BYTE) {
+    let result = '';
 
-      // grab our chunk
-      let chunk: string = str.substr(i, Base64Url.BYTE);
+    for (let i = 0; i < str.length; i += this.BASIS) {
 
-      if (chunk.length < Base64Url.BYTE) {
-
-        /**
-         * on the very last bucket we could have something less than a byte and
-         * we'll need to pad to the right to preserve the bit positions on decode
-         * pad right the difference between what we have and what we need
-         */
-
-        chunk = chunk + '0'.repeat(Base64Url.BYTE - chunk.length);
-
-      }
-
-      /**
-       * Create a char from our Byte and get push it to our return
-       */
-      retr += String.fromCharCode(parseInt(chunk, 2));
+      result += this.DICT[parseInt(str.substr(i, this.BASIS), 2)];
 
     }
 
-    if (typeof btoa === 'function') {
-
-      retr = btoa(retr);
-
-    } else {
-
-      retr = Buffer.from(retr, 'base64').toString();
-
-    }
-
-    // remove trailing '=' for url-safeness
-    while (retr.charAt(retr.length - 1) === '=') {
-
-      retr = retr.slice(0, -1);
-
-    }
-
-    // make it url safe by replacing slashes with underscores
-    retr = retr.replace(/\//g, '_');
-    // make it url safe by replacing pluses with dashes (or minuses)
-    retr = retr.replace(/\+/g, '-');
-
-    return retr;
+    return result;
 
   }
 
@@ -84,80 +72,33 @@ export class Base64Url {
    */
   public static decode(str: string): string {
 
-    const decodingError = new DecodingError('Invalidly encoded Base64URL string');
-
     /**
      * should contain only characters from the base64url set
      */
     if (!/^[A-Za-z0-9\-_]+$/.test(str)) {
 
-      throw decodingError;
+      throw new DecodingError('Invalidly encoded Base64URL string');
 
     }
 
-    /**
-     * Replace url safe characters with url unsafe, but base64 correct encoding
-     */
-    str = str.replace(/_/g, '/');
-    str = str.replace(/-/g, '\+');
+    let result = '';
 
-    /**
-     * we need at least two characters to be able to decode a Base64 string
-     */
-    if (str.length < 2) {
+    for (let i = 0; i < str.length; i ++) {
 
-      str += 'A'.repeat(2 - str.length);
-
-    }
-
-    /**
-     * Add back the padding characters if necessary
-     */
-    switch (str.length % 4) {
-
-      case 0:// No pad chars in this case
-        break;
-      case 2: // Two pad chars
-        str += '==';
-        break;
-      case 3: // One pad char
-        str += '=';
-        break;
-      default:
-        throw decodingError;
-
-    }
-
-    if (typeof atob === 'function') {
-
-      str = atob(str);
-
-    } else {
-
-      str = Buffer.from(str, 'base64').toString('binary');
-
-    }
-
-    const len: number = str.length;
-    let bitField = '';
-
-    for (let i = 0; i < len; i ++) {
-
-      // index the binary value of the character from out reverse map
-      const strBits = str.charCodeAt(i).toString(2);
+      /**
+       * index the binary value of the character from out reverse map
+       */
+      const strBits = this.REVERSE_DICT.get(str[i]).toString(2);
 
       /**
        * Since a bit string converted to an integer on encoding will lose
-       * leading zeros and all encoded characters must fit into a six bit
-       * bucket we will pad to the left for all characters
+       * leading zeros – pad to the left for those missing leading zeros
        */
-      const pad = '0'.repeat(Base64Url.BYTE - strBits.length);
-
-      bitField += pad + strBits;
+      result += '0'.repeat(this.BASIS - strBits.length) + strBits;
 
     }
 
-    return bitField;
+    return result;
 
   }
 
