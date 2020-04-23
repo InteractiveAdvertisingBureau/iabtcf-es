@@ -22,6 +22,7 @@
     "debug": "ndb mocha",
     "version": "./bin/version",
     "deploy": "./bin/publish-version",
+    "preflight": "yarn lint && yarn build && yarn test",
     "serve:cov": "npx http-server ./coverage/",
     "test:cov": "rm -rf coverage; nyc --reporter html mocha",
     "test:lcov": "nyc --reporter=lcov mocha",
