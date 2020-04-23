@@ -1,4 +1,3 @@
-import {IntMap} from './IntMap';
 import {KeyMap} from './KeyMap';
 import {Segment} from './Segment';
 
@@ -10,12 +9,12 @@ export class SegmentIDs {
    * 2 = OOB vendors allowed
    * 3 = PublisherTC
    */
-  public static readonly ID_TO_KEY: IntMap<Segment> = {
-    '0': Segment.CORE,
-    '1': Segment.VENDORS_DISCLOSED,
-    '2': Segment.VENDORS_ALLOWED,
-    '3': Segment.PUBLISHER_TC,
-  }
+  public static readonly ID_TO_KEY: Segment[] = [
+    Segment.CORE,
+    Segment.VENDORS_DISCLOSED,
+    Segment.VENDORS_ALLOWED,
+    Segment.PUBLISHER_TC,
+  ]
 
   public static readonly KEY_TO_ID: KeyMap<number> = {
     [Segment.CORE]: 0,
