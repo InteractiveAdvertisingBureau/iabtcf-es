@@ -266,7 +266,7 @@ describe('CmpApi', (): void => {
       getCmpApi();
       window[API_FUNCTION_NAME](command, version, (result: string, success: boolean): void => {
 
-        expect(result, 'result').to.be.a('string');
+        expect(result, 'result').to.be.null;
         expect(success, 'success').to.be.false;
 
         done();

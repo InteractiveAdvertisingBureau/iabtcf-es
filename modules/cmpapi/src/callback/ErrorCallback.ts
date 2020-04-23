@@ -1,1 +1,1 @@
-export type ErrorCallback = (msg: string, success: false) => void;
+export type ErrorCallback = (res: null, success: false) => void;
