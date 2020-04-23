@@ -1,6 +1,6 @@
 {
   "name": "iabtcf",
-  "version": "1.0.1-0",
+  "version": "1.0.1-1",
   "description": "Official compliant tool suite for implementing the iab. Transparency and Consent Framework (TCF).",
   "private": true,
   "workspaces": [
@@ -22,6 +22,7 @@
     "debug": "ndb mocha",
     "version": "./bin/version",
     "deploy": "./bin/publish-version",
+    "preflight": "yarn lint && yarn build && yarn test",
     "serve:cov": "npx http-server ./coverage/",
     "test:cov": "rm -rf coverage; nyc --reporter html mocha",
     "test:lcov": "nyc --reporter=lcov mocha",
