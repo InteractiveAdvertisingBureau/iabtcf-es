@@ -62,7 +62,7 @@ export class CallResponder {
 
     if (typeof command !== 'string') {
 
-      (callback as ErrorCallback)(`invalid command: ${command}`, false);
+      (callback as ErrorCallback)(null, false);
 
     } else if (!SupportedVersions.has(version)) {
 
@@ -71,7 +71,7 @@ export class CallResponder {
        * that's probably ok, we don't need strict adherence here.
        */
 
-      (callback as ErrorCallback)(`unsupported version: ${version}`, false);
+      (callback as ErrorCallback)(null, false);
 
     } else if (typeof callback !== 'function') {
 
@@ -90,7 +90,7 @@ export class CallResponder {
        * instead of letting it linger.
        */
 
-      (callback as ErrorCallback)(`CmpApi does not support the "${command}" command`, false);
+      (callback as ErrorCallback)(null, false);
 
     } else if (command === TCFCommands.PING) {
 
