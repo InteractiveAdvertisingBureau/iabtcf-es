@@ -5,6 +5,7 @@ import {Callback, ErrorCallback} from './callback';
 import {TCFCommands} from './command/TCFCommands';
 import {DisabledCommand} from './command/DisabledCommand';
 import {CustomCommands} from './CustomCommands';
+import {SupportedVersions} from './SupportedVersions';
 
 type TcfApiArgs = [string, number, Callback, any];
 type GetQueueFunction = () => TcfApiArgs[];
@@ -49,6 +50,7 @@ export class CallResponder {
     }
 
   }
+
   /**
    * Handler for all page call commands
    * @param {string} command
@@ -62,7 +64,7 @@ export class CallResponder {
 
       (callback as ErrorCallback)(`invalid command: ${command}`, false);
 
-    } else if (version != 2) {
+    } else if (!SupportedVersions.has(version)) {
 
       /**
        * Loosely checking version here on purpose.  If a string is passed
@@ -122,6 +124,12 @@ export class CallResponder {
 
   }
 
+  /**
+   * purgeQueuedCalls - if there have been calls that are queued up this method
+   * will go through and call them in a FIFO order
+   *
+   * @return {void}
+   */
   public purgeQueuedCalls(): void {
 
     if (this.queuedCalls) {
@@ -148,6 +156,7 @@ export class CallResponder {
     }
 
   }
+
   /**
    * Checks to see if the command exists in either the set of TCF Commands or
    * if custom commands

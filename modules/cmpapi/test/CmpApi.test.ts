@@ -287,7 +287,6 @@ describe('CmpApi', (): void => {
   runFailCommand(TCFCommands.GET_TC_DATA, 2.1, 'version is a floating point number that is greater than 2');
   runFailCommand(TCFCommands.GET_TC_DATA, '2.1', 'version is a floating point that doesn\'t evaluate to 2');
   runFailCommand(TCFCommands.GET_TC_DATA, 1, 'version is not supported');
-  runFailCommand(TCFCommands.GET_TC_DATA, null, 'version is null');
   runFailCommand(TCFCommands.GET_TC_DATA, true, 'version is a boolean');
   runFailCommand(TCFCommands.GET_TC_DATA, false, 'version is a boolean');
   runFailCommand(TCFCommands.GET_TC_DATA, {}, 'version is an object');
@@ -295,6 +294,8 @@ describe('CmpApi', (): void => {
   runSucceedCommand(TCFCommands.GET_TC_DATA, '2', 'is a string but still 2');
   runSucceedCommand(TCFCommands.GET_TC_DATA, '2.0', 'is a string but still 2');
   runSucceedCommand(TCFCommands.GET_TC_DATA, 2.0, 'version is a floating point number that evaluates to 2');
+  runSucceedCommand(TCFCommands.GET_TC_DATA, null, 'null is valid');
+  runSucceedCommand(TCFCommands.GET_TC_DATA, 0, '0 is valid');
 
   const runFailCallback = (callback: any, because = ''): void => {
 
@@ -318,7 +319,6 @@ describe('CmpApi', (): void => {
   runFailCallback({}, 'an object');
   runFailCallback('foo', 'a string');
   runFailCallback(2, 'a number');
-  runFailCallback(null, 'null');
 
   it('should call a custom command through the page interface', (done: () => void): void => {
 

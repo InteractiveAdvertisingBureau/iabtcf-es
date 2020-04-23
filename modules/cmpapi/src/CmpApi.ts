@@ -1,15 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {CmpApiModel} from './CmpApiModel';
 import {CustomCommands} from './CustomCommands';
 import {CmpStatus, DisplayStatus, EventStatus} from './status';
 import {CallResponder} from './CallResponder';
 import {TCString, TCModel} from '@iabtcf/core';
 
-/**
- * Consent Management Platform API
- *
- * This is the only class that the CMP should create and interface with to set data for commands to utilize.
- */
 export class CmpApi {
 
   private callResponder: CallResponder;
@@ -148,6 +142,8 @@ export class CmpApi {
   /**
    * Disables the CmpApi from serving anything but ping and custom commands
    * Cannot be undone
+   *
+   * @return {void}
    */
   public disable(): void {
 
