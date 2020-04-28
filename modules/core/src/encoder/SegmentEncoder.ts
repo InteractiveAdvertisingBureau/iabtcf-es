@@ -77,15 +77,22 @@ export class SegmentEncoder {
 
   public static decode(encodedString: string, tcModel: TCModel, segment: string): TCModel {
 
-    const sequence = this.fieldSequence[''+tcModel.version][segment];
     const bitField = Base64Url.decode(encodedString);
     let bStringIdx = 0;
+
+    if (segment === Segment.CORE) {
+
+      tcModel.version = IntEncoder.decode(bitField.substr(bStringIdx, BitLength[Fields.version]), BitLength[Fields.version]);
+
+    }
 
     if (segment !== Segment.CORE) {
 
       bStringIdx += BitLength.segmentType;
 
     }
+
+    const sequence = this.fieldSequence[''+tcModel.version][segment];
 
     sequence.forEach((key: string): void => {
 

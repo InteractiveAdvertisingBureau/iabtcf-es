@@ -164,4 +164,14 @@ describe('Issues Reported', (): void => {
 
   });
 
+  it('156 it should auto detect 1 version', (): void => {
+
+    const str = 'BOhwdphOxFC7tAHABBFRC--AAAAuhr_7__7-_9_-_f__9uj3Or_v_f__32ccL59v_h_7v-_7fi_20nV4u_1vft9yfk1-5ctDztp507iakivXmqdeb9v_nz3_5pxP78k89r7337Ew_v8_v-b7BCON_YxEiA';
+
+    const decoded = TCString.decode(str);
+
+    expect(decoded.version, 'decoded.version').to.equal(1);
+
+  });
+
 });
