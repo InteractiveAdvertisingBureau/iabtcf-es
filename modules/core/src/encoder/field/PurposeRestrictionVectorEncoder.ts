@@ -12,7 +12,7 @@ export class PurposeRestrictionVectorEncoder {
     let bitString = IntEncoder.encode(prVector.numRestrictions, BitLength.numRestrictions);
 
     // if the vector is empty we'll just return a string with just the numRestricitons being 0
-    if (prVector.isEncodable()) {
+    if (!prVector.isEmpty()) {
 
       // create each restriction group
       prVector.getRestrictions().forEach((purpRestriction: PurposeRestriction): void => {

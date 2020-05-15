@@ -31,60 +31,65 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
   private isOkToHave(restrictionType: RestrictionType, purposeId: number, vendorId: number): boolean {
 
     const vIDStr: string = vendorId.toString();
+    let result = true;
 
     /**
      * without a gvl set, there's no way to know... in that case we'll return
      * true but once the GVL is set later we'll go through these and clean up
      * the mess.
      */
-    if (this.gvl) {
+    if (this.gvl?.vendors) {
 
-      if (this.gvl.vendors && this.gvl.vendors[vIDStr]) {
+      if (this.gvl.vendors[vIDStr]) {
 
         const vendor: Vendor = this.gvl.vendors[vIDStr];
 
-        if (vendor.flexiblePurposes.length) {
+        if (restrictionType === RestrictionType.NOT_ALLOWED) {
+
+          /**
+           * if it's "not allowed" then flexible declaration is ignored but if
+           * if it isn't even listed as one of the purposes the vendor uses,
+           * then there is no reason to encode the value so check both arrays
+           * to see if it exists.  If it does then we can restrict it.
+           */
+
+          result = (vendor.legIntPurposes.includes(purposeId) || vendor.purposes.includes(purposeId));
+
+        } else if (vendor.flexiblePurposes.length) {
 
           switch (restrictionType) {
 
-            case RestrictionType.NOT_ALLOWED:
-              return (vendor.legIntPurposes.includes(purposeId) || vendor.purposes.includes(purposeId));
-
+            /**
+             * If the vendor has the purposeId in flexiblePurposes and it is
+             * listed as a legitimate interest purpose we can set the
+             * override to require consent.
+             */
             case RestrictionType.REQUIRE_CONSENT:
-              return (vendor.flexiblePurposes.includes(purposeId) && vendor.legIntPurposes.includes(purposeId));
+              result = (vendor.flexiblePurposes.includes(purposeId) && vendor.legIntPurposes.includes(purposeId));
 
+            /**
+             * If the vendor has the purposeId in flexiblePurposes and it is
+             * listed as a consent purpose we can set the
+             * override to require legitimate interest.
+             */
             case RestrictionType.REQUIRE_LI:
-              return (vendor.flexiblePurposes.includes(purposeId) && vendor.purposes.includes(purposeId));
-
-            default:
-              // if we made it here, they passed something strange for the
-              // restriction type so we ain't gonna add it
-              return false;
+              result = (vendor.flexiblePurposes.includes(purposeId) && vendor.purposes.includes(purposeId));
 
           }
-
-        } else if (restrictionType === RestrictionType.NOT_ALLOWED) {
-
-          /**
-           * if it's "not allowed" we don't care about flexible basis but if
-           * they don't even list it, no reason to encode the value so we check
-           * both arrays to see if it exists
-           */
-          return (vendor.legIntPurposes.includes(purposeId) || vendor.purposes.includes(purposeId));
 
         }
 
       } else {
 
         // this vendor doesn't exist
-        return false;
+        result = false;
 
       }
 
     }
 
     // if the gvl isn't defined, we can't do anything until later
-    return true;
+    return result;
 
   }
 
@@ -326,26 +331,23 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
        * if we have restrictions set before the gvl is set then we'll have to
        * go through and remove some if they're not valid
        */
-      if (this.numRestrictions) {
 
-        this.map.forEach((bst: BinarySearchTree, hash: string): void => {
+      this.map.forEach((bst: BinarySearchTree, hash: string): void => {
 
-          const purposeRestriction: PurposeRestriction = PurposeRestriction.unHash(hash);
-          const vendors: number[] = bst.get();
+        const purposeRestriction: PurposeRestriction = PurposeRestriction.unHash(hash);
+        const vendors: number[] = bst.get();
 
-          vendors.forEach((vendorId: number): void => {
+        vendors.forEach((vendorId: number): void => {
 
-            if (!this.isOkToHave(purposeRestriction.restrictionType, purposeRestriction.purposeId, vendorId)) {
+          if (!this.isOkToHave(purposeRestriction.restrictionType, purposeRestriction.purposeId, vendorId)) {
 
-              bst.remove(vendorId);
+            bst.remove(vendorId);
 
-            }
-
-          });
+          }
 
         });
 
-      }
+      });
 
     }
 
@@ -372,21 +374,6 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
     return this.map.size === 0;
 
   };
-
-  /**
-   * isEncodable - The Vector will add restrictions even if they are not
-   * allowed by the GVL until it can verify that the GVL permits them to be
-   * added. This check determines if Vector is ready to be encoded. Another
-   * case is that this vector is empty and does not need a GVL instance
-   * because there's nothing to check.
-   *
-   * @return {boolean}
-   */
-  public isEncodable(): boolean {
-
-    return (this.gvl_ !== undefined && !this.isEmpty());
-
-  }
 
   /**
    * numRestrictions - returns the number of Purpose Restrictions.

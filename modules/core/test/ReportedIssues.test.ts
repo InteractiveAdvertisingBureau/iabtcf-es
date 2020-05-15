@@ -174,4 +174,25 @@ describe('Issues Reported', (): void => {
 
   });
 
+  it('162 Legal basis purpose restriction is reflected on vendors without flexible purposes too', (): void => {
+
+    const gvl = new GVL(36);
+    gvl.readyPromise.then(() => {
+
+      // Vendor 4 does not have any flexible purpose at GVL version 36
+      const vendorId = 4;
+      // Vendor 4 specifies purpose 2 as consent purpose
+      const purposeId = 2;
+      const tcModel = new TCModel(gvl);
+      const purposeRestriction = new PurposeRestriction(purposeId, RestrictionType.REQUIRE_LI);
+
+      tcModel.publisherRestrictions.add(vendorId, purposeRestriction);
+      tcModel.publisherRestrictions.gvl = gvl;
+
+      expect(tcModel.publisherRestrictions.vendorHasRestriction(vendorId, purposeRestriction), `vendor ${vendorId} has restriction Require LI for ${purposeId}`).to.be.false;
+
+    });
+
+  });
+
 });

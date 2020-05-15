@@ -281,7 +281,6 @@ export function run(): void {
       expect(prv.getRestrictions(chosenVendorId)).to.be.empty;
       expect(prv.getVendors(purpRestriction)).not.to.include(chosenVendorId);
       expect(prv.isEmpty()).to.be.true;
-      expect(prv.isEncodable()).to.be.true;
 
     });
 

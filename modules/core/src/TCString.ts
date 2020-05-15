@@ -45,23 +45,25 @@ export class TCString {
     }
 
     tcModel = tcModel.clone();
-    tcModel.consentLanguage = gvl.language;
+    tcModel.consentLanguage = gvl.language.toUpperCase();
+
+    /**
+     * in case this wasn't set previously.  This should filter out invalid
+     * purpose restrictions.
+     */
+    tcModel.publisherRestrictions.gvl = gvl;
 
     /**
      * Purpose 1 is never allowed to be true for legitimate interest
      */
-    if (tcModel[Fields.purposeLegitimateInterests].has(1)) {
-
-      tcModel[Fields.purposeLegitimateInterests].unset(1);
-
-    }
+    tcModel[Fields.purposeLegitimateInterests].unset(1);
 
     const vIds: number[] = Object.keys(gvl.vendors).map((vId: string): number => parseInt(vId, 10));
     tcModel.vendorsDisclosed.set(vIds);
 
-    if (options && options.version === 1) {
+    if (options?.version > 0 && options?.version <= TCString.MAX_ENCODING_VERSION) {
 
-      tcModel.version = 1;
+      tcModel.version = options.version;
 
     } else {
 
@@ -72,7 +74,7 @@ export class TCString {
     /**
      * If they pass in a special segment sequence.
      */
-    if (options && Array.isArray(options.segments)) {
+    if (Array.isArray(options?.segments)) {
 
       sequence = options.segments;
 
