@@ -115,6 +115,7 @@ describe('TCString', (): void => {
   it('should add a segment to a model on decode if a model is passed in', (): void => {
 
     const tcModel = getTCModel();
+    const gvl = tcModel.gvl;
 
     const publisherTC = TCString.encode(tcModel, {
       segments: [Segment.PUBLISHER_TC],
@@ -135,7 +136,17 @@ describe('TCString', (): void => {
 
     tcModel.vendorLegitimateInterests.forEach((value: boolean, id: number): void => {
 
-      expect(newModel.vendorLegitimateInterests.has(id), `vendorLegitimateInterests.has(${id})`).to.equal(value);
+      const vendor = gvl.vendors[id+''];
+
+      if (!vendor || (value && vendor.legIntPurposes.length === 0 && vendor.specialPurposes.length === 0)) {
+
+        expect(newModel.vendorLegitimateInterests.has(id), `vendorLegitimateInterests.has(${id})`).to.be.false;
+
+      } else {
+
+        expect(newModel.vendorLegitimateInterests.has(id), `vendorLegitimateInterests.has(${id})`).to.equal(value);
+
+      }
 
     });
 

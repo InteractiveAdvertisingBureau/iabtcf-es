@@ -2,7 +2,7 @@ import {Cloneable} from '../Cloneable';
 import {TCModelError} from '../errors';
 import {IntMap} from './IntMap';
 
-type IdOrIds = number | number[];
+type SingleIDOrCollection = number | number[] | IntMap<unknown> | Set<number | string>;
 export type IdBoolTuple = [number, boolean];
 
 /**
@@ -59,14 +59,18 @@ class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
   /**
    * unset
    *
-   * @param {IdOrIds} id - id or ids to unset
+   * @param {SingleIDOrCollection} id - id or ids to unset
    * @return {void}
    */
-  public unset(id: IdOrIds): void {
+  public unset(id: SingleIDOrCollection): void {
 
     if (Array.isArray(id)) {
 
       id.forEach((id): void => this.unset(id));
+
+    } else if (typeof id === 'object') {
+
+      this.unset(Object.keys(id).map((strId: string): number => +strId));
 
     } else {
 
@@ -96,37 +100,87 @@ class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
 
   }
 
+  private isIntMap<T>(item: unknown): item is IntMap<T> {
+
+    let result = (typeof item === 'object');
+    result = (result && Object.keys(item).every((key: string): boolean => {
+
+      let itemResult =Number.isInteger(parseInt(key, 10));
+
+      itemResult = (itemResult && this.isValidNumber(item[key].id));
+      itemResult = (itemResult && item[key].name !== undefined);
+
+      return itemResult;
+
+    },
+    ));
+    return result;
+
+  }
+
+  private isValidNumber(item: unknown): item is number {
+
+    return (parseInt(item as string, 10) > 0);
+
+  }
+
+  private isSet(item: unknown): item is Set<number> {
+
+    let result = false;
+
+    if (item instanceof Set) {
+
+      result = Array.from(item).every(this.isValidNumber);
+
+    }
+
+    return result;
+
+  }
+
   /**
-   * set - sets an id assumed to be a truthy value by its presence
+   * set - sets an item assumed to be a truthy value by its presence
    *
-   * @param {IdOrIds} id - id to set a value for or array of ids to
-   * include
+   * @param {SingleIDOrCollection} item - May be a single id (positive integer)
+   * or collection of ids in a set, GVL Int Map, or Array.
    *
    * @return {void}
    */
-  public set(id: IdOrIds): void {
+  public set(item: SingleIDOrCollection): void {
 
-    if (Array.isArray(id)) {
+    /**
+     * strategy here is to just recursively call set if it's a collection until
+     * we get to the final integer ID
+     */
 
-      id.forEach((id): void => this.set(id));
+    if (Array.isArray(item)) {
 
-    } else {
+      item.forEach((item): void => this.set(item));
 
-      if (!(Number.isInteger(id) && id > 0)) {
+    } else if (this.isSet(item)) {
 
-        /**
-         * Super not cool to try and set something that's not a positive integer
-         */
-        throw new TCModelError('set()', id, 'must be positive integer');
+      this.set(Array.from(item));
 
-      }
+    } else if (this.isIntMap(item)) {
 
-      this.set_.add(id);
-      this.maxId_ = Math.max(this.maxId, id);
+      this.set(Object.keys(item).map((strId: string): number => +strId));
+
+    } else if (this.isValidNumber(item)) {
+
+      this.set_.add(item);
+      this.maxId_ = Math.max(this.maxId, item);
+
       /**
        * if bitLength was set before, it must now be unset
        */
       this.bitLength = 0;
+
+    } else {
+
+      /**
+       * Super not cool to try and set something that's not valid
+       */
+      throw new TCModelError('set()', item, 'must be positive integer array, positive integer, Set<number>, or IntMap');
 
     }
 
@@ -166,11 +220,7 @@ class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
 
   public setAll<T>(intMap: IntMap<T>): void {
 
-    Object.keys(intMap).forEach((strId: string): void => {
-
-      this.set(+strId);
-
-    });
+    this.set(intMap);
 
   }
 

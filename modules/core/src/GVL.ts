@@ -183,10 +183,13 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    * @param {boolean} internal reference of when the GVL is ready to be used
    */
   private isReady_ = false;
+
   /**
    * @param {IntMap<Vendor>} a collection of [[Vendor]]s
    */
   private vendors_: IntMap<Vendor>;
+
+  public vendorIds: Set<number>;
 
   /**
    * @param {IntMap<Vendor>} a collection of [[Vendor]]. Used as a backup if a whitelist is sets
@@ -582,6 +585,8 @@ export class GVL extends Cloneable<GVL> implements VendorList {
       vendorIds = Object.keys(this.fullVendorList).map((vId: string) => +vId);
 
     }
+
+    this.vendorIds = new Set(vendorIds);
 
     // assigns vendor ids to their respective maps
     this.vendors_ = vendorIds.reduce((vendors: {}, vendorId: number): {} => {

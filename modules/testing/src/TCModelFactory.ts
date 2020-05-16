@@ -1,19 +1,18 @@
 import {TCModel, PurposeRestriction, RestrictionType} from '@iabtcf/core';
 import {makeRandomInt} from './makeRandomInt';
-import {makeRandomIntArray} from './makeRandomIntArray';
 import {GVLFactory} from './GVLFactory';
 
 export class TCModelFactory {
 
-  public static noGVL(): TCModel {
+  public static noGVL(tcModel?: TCModel): TCModel {
 
     const latestGVL = GVLFactory.getLatest();
 
-    const numPurposes = Object.keys(latestGVL.purposes).length;
-    const numVendors = Object.keys(latestGVL.vendors).length;
-    const numSpecialFeatures = Object.keys(latestGVL.specialFeatures).length;
+    if (!tcModel) {
 
-    const tcModel = new TCModel();
+      tcModel = new TCModel();
+
+    }
 
     tcModel.cmpId = makeRandomInt(2, 100);
     tcModel.cmpVersion = makeRandomInt(1, 10);
@@ -23,6 +22,7 @@ export class TCModelFactory {
 
     let counter = 0;
     const rand = makeRandomInt(1, TCModel.consentLanguages.size);
+
     TCModel.consentLanguages.forEach((lang: string): void => {
 
       counter ++;
@@ -40,22 +40,47 @@ export class TCModelFactory {
 
     const now = (new Date()).getTime();
     const GDPRMageddon = 1576883249;
+
     tcModel.created = new Date(makeRandomInt(GDPRMageddon, now));
     tcModel.lastUpdated = new Date(makeRandomInt(tcModel.created.getTime(), now));
 
-    tcModel.publisherConsents.set(makeRandomIntArray(1, numPurposes, makeRandomInt(0, numPurposes)));
-    tcModel.publisherLegitimateInterests.set(makeRandomIntArray(1, numPurposes, makeRandomInt(0, numPurposes)));
+    const mapping = {
+      'purposes': [
+        'publisherConsents',
+        'publisherLegitimateInterests',
+        'purposeConsents',
+        'purposeLegitimateInterests',
+      ],
+      'specialFeatures': [
+        'specialFeatureOptins',
+      ],
+      'vendors': [
+        'vendorConsents',
+        'vendorLegitimateInterests',
+        'vendorsAllowed',
+        'vendorsDisclosed',
+      ],
+    };
+    Object.keys(mapping).forEach((gvlIntMap: string): void => {
 
-    tcModel.purposeConsents.set(makeRandomIntArray(1, numPurposes, makeRandomInt(0, numPurposes)));
-    tcModel.purposeLegitimateInterests.set(makeRandomIntArray(1, numPurposes, makeRandomInt(0, numPurposes)));
+      const ids = Object.keys(latestGVL[gvlIntMap]).map((strId: string): number => +strId);
 
-    tcModel.vendorConsents.set(makeRandomIntArray(1, numVendors, makeRandomInt(0, numVendors)));
-    tcModel.vendorLegitimateInterests.set(makeRandomIntArray(1, numVendors, makeRandomInt(0, numVendors)));
+      ids.forEach((id: number): void => {
 
-    tcModel.specialFeatureOptins.set(makeRandomIntArray(1, numSpecialFeatures, makeRandomInt(0, numSpecialFeatures)));
+        mapping[gvlIntMap].forEach((vectorName: string): void => {
 
-    tcModel.vendorsAllowed.set(makeRandomIntArray(1, numVendors, makeRandomInt(0, numVendors)));
-    tcModel.vendorsDisclosed.set(makeRandomIntArray(1, numVendors, makeRandomInt(0, numVendors)));
+          // 75% chance of being set
+          if (makeRandomInt(1, 4) !== 3) {
+
+            tcModel[vectorName].set(id);
+
+          }
+
+        });
+
+      });
+
+    });
 
     return tcModel;
 

@@ -42,7 +42,7 @@
     "terser": "^4.6.3",
     "ts-node": "^8.3.0",
     "typedoc": "^0.15.0",
-    "typescript": "^3.7.0"
+    "typescript": "3.7"
   },
   "eslintIgnore": [
     "lib"
@@ -80,5 +80,9 @@
     "type": "git",
     "url": "https://github.com/InteractiveAdvertisingBureau/iabtcf-es.git",
     "directory": "modules/core"
+  },
+  "dependencies": {
+    "global": "^4.4.0",
+    "typescript": "3.7"
   }
 }

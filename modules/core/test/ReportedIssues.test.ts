@@ -139,16 +139,16 @@ describe('Issues Reported', (): void => {
     req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(vendorlist));
 
     await tcModel.gvl.readyPromise;
+    const vendors = [12, 100];
 
-    tcModel.gvl.narrowVendorsTo([12, 100]);
+    tcModel.gvl.narrowVendorsTo(vendors);
     tcModel.vendorsDisclosed.empty();
     tcModel.setAllVendorsDisclosed();
-    expect(tcModel.vendorsDisclosed.size, 'tcModel.vendorsDisclosed.size').to.equal(2);
+    expect(tcModel.vendorsDisclosed.size, 'tcModel.vendorsDisclosed.size').to.equal(vendors.length);
 
-    const encoded = TCString.encode(tcModel);
-    const decoded = TCString.decode(encoded);
+    const decoded = TCString.decode(TCString.encode(tcModel));
 
-    expect(decoded.vendorsDisclosed.size, 'decoded.vendorsDisclosed.size').to.equal(2);
+    expect(decoded.vendorsDisclosed.size, 'decoded.vendorsDisclosed.size').to.equal(vendors.length);
 
   });
 

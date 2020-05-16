@@ -4,11 +4,11 @@ import {
   EncodingOptions,
   SegmentEncoder,
   SegmentSequence,
+  SemanticPreEncoder,
 } from './encoder';
 
-import {EncodingError} from './errors';
+import {Segment, SegmentIDs} from './model';
 import {IntEncoder} from './encoder/field/IntEncoder';
-import {Fields, Segment, SegmentIDs} from './model';
 import {TCModel} from './TCModel';
 
 /**
@@ -16,8 +16,6 @@ import {TCModel} from './TCModel';
  * TCF Transparency and Consent String
  */
 export class TCString {
-
-  private static readonly MAX_ENCODING_VERSION: number = 2;
 
   /**
    * encodes a model into a TCString
@@ -30,50 +28,12 @@ export class TCString {
 
     let out = '';
     let sequence: Segment[];
-    const gvl = tcModel.gvl;
 
-    if (!gvl) {
-
-      throw new EncodingError('Unable to encode TCModel without a GVL');
-
-    }
-
-    if (!gvl.isReady) {
-
-      throw new EncodingError('Unable to encode TCModel tcModel.gvl.readyPromise is not resolved');
-
-    }
-
-    tcModel = tcModel.clone();
-    tcModel.consentLanguage = gvl.language.toUpperCase();
+    tcModel = SemanticPreEncoder.process(tcModel, options);
 
     /**
-     * in case this wasn't set previously.  This should filter out invalid
-     * purpose restrictions.
-     */
-    tcModel.publisherRestrictions.gvl = gvl;
-
-    /**
-     * Purpose 1 is never allowed to be true for legitimate interest
-     */
-    tcModel[Fields.purposeLegitimateInterests].unset(1);
-
-    const vIds: number[] = Object.keys(gvl.vendors).map((vId: string): number => parseInt(vId, 10));
-    tcModel.vendorsDisclosed.set(vIds);
-
-    if (options?.version > 0 && options?.version <= TCString.MAX_ENCODING_VERSION) {
-
-      tcModel.version = options.version;
-
-    } else {
-
-      tcModel.version = TCString.MAX_ENCODING_VERSION;
-
-    }
-
-    /**
-     * If they pass in a special segment sequence.
-     */
+       * If they pass in a special segment sequence.
+       */
     if (Array.isArray(options?.segments)) {
 
       sequence = options.segments;

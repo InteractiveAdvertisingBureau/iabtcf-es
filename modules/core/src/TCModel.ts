@@ -3,7 +3,7 @@ import {TCModelError} from './errors';
 import {GVL} from './GVL';
 
 import {ConsentLanguages, IntMap, PurposeRestrictionVector, Vector} from './model';
-import {Feature, Purpose, Vendor} from './model/gvl';
+import {Purpose} from './model/gvl';
 
 type StringOrNumber = number | string;
 export type TCModelPropType = number | Date | string | boolean | Vector | PurposeRestrictionVector;
@@ -478,7 +478,7 @@ export class TCModel extends Cloneable<TCModel> {
    */
   public setAllVendorConsents(): void {
 
-    this.vendorConsents.setAll<Vendor>(this.gvl.vendors);
+    this.vendorConsents.set(this.gvl.vendors);
 
   }
 
@@ -500,7 +500,7 @@ export class TCModel extends Cloneable<TCModel> {
    */
   public setAllVendorsDisclosed(): void {
 
-    this.vendorsDisclosed.setAll<Vendor>(this.gvl.vendors);
+    this.vendorsDisclosed.set(this.gvl.vendors);
 
   }
 
@@ -522,7 +522,7 @@ export class TCModel extends Cloneable<TCModel> {
    */
   public setAllVendorsAllowed(): void {
 
-    this.vendorsAllowed.setAll<Vendor>(this.gvl.vendors);
+    this.vendorsAllowed.set(this.gvl.vendors);
 
   }
 
@@ -544,7 +544,7 @@ export class TCModel extends Cloneable<TCModel> {
    */
   public setAllVendorLegitimateInterests(): void {
 
-    this.vendorLegitimateInterests.setAll<Vendor>(this.gvl.vendors);
+    this.vendorLegitimateInterests.set(this.gvl.vendors);
 
   }
 
@@ -566,7 +566,7 @@ export class TCModel extends Cloneable<TCModel> {
    */
   public setAllPurposeConsents(): void {
 
-    this.purposeConsents.setAll<Purpose>(this.gvl.purposes);
+    this.purposeConsents.set(this.gvl.purposes);
 
   }
 
@@ -588,7 +588,7 @@ export class TCModel extends Cloneable<TCModel> {
    */
   public setAllPurposeLegitimateInterests(): void {
 
-    this.purposeLegitimateInterests.setAll<Purpose>(this.gvl.purposes);
+    this.purposeLegitimateInterests.set(this.gvl.purposes);
 
   }
 
@@ -610,7 +610,7 @@ export class TCModel extends Cloneable<TCModel> {
    */
   public setAllSpecialFeatureOptins(): void {
 
-    this.specialFeatureOptins.setAll<Feature>(this.gvl.specialFeatures);
+    this.specialFeatureOptins.set(this.gvl.specialFeatures);
 
   }
 
