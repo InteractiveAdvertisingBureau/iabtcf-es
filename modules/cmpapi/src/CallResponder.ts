@@ -137,17 +137,7 @@ export class CallResponder {
       const apiCall = this.apiCall.bind(this);
       this.queuedCalls.forEach((args: TcfApiArgs): void =>{
 
-        const [command, version, callback, params] = args;
-
-        if (params !== undefined) {
-
-          apiCall(command, version, callback, ...params);
-
-        } else {
-
-          apiCall(command, version, callback);
-
-        }
+        apiCall(...args);
 
       });
 

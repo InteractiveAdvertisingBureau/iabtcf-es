@@ -157,4 +157,32 @@ describe('Reported github issues', (): void => {
 
   });
 
+  it('164 Queued \'getTCData\' failing when vendorIds is set', (done: () => void): void => {
+
+    let callNum = 0;
+
+    const callback = (tcData: TCData, success: boolean): void => {
+
+      callNum++;
+
+      expect(success, `success call #${callNum}`).to.be.true;
+      expect(tcData, `tcData call #${callNum}`).not.to.be.null;
+
+      if (callNum === 2) {
+
+        done();
+
+      }
+
+    };
+
+    window[API_FUNCTION_NAME](TCFCommands.GET_TC_DATA, null, callback);
+    window[API_FUNCTION_NAME](TCFCommands.GET_TC_DATA, null, callback, [9]);
+
+    debugger;
+    const cmpApi = new CmpApi(makeRandomInt(2, Math.pow(2, 6)), makeRandomInt(2, Math.pow(2, 6)));
+    cmpApi.update(TCStringFactory.base());
+
+  });
+
 });
