@@ -27,7 +27,7 @@ export class SemanticPreEncoder {
 
         const vendor = gvl.vendors[id.toString()];
 
-        if (!vendor || (value && vendor.legIntPurposes.length === 0 && vendor.specialPurposes.length === 0)) {
+        if (!vendor || (value && vendor.legIntPurposes.length === 0)) {
 
           /**
            * If a Vendor does not declare any legitimate interest purposes or special
