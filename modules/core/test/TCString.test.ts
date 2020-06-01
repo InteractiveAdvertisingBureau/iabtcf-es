@@ -138,7 +138,7 @@ describe('TCString', (): void => {
 
       const vendor = gvl.vendors[id+''];
 
-      if (!vendor || (value && vendor.legIntPurposes.length === 0 && vendor.specialPurposes.length === 0)) {
+      if (!vendor || (value && vendor.legIntPurposes.length === 0)) {
 
         expect(newModel.vendorLegitimateInterests.has(id), `vendorLegitimateInterests.has(${id})`).to.be.false;
 
