@@ -1,211 +1,244 @@
-(function() {
+(() => {
 
   const makeStub = () => {
 
-    const TCF_LOCATOR_NAME = '__tcfapiLocator';
-    const queue = [];
-    let win = window;
-    let cmpFrame;
+    if (!(window.frames[TCF_LOCATOR_NAME])) {
 
-    function addFrame() {
+      if (document.body) {
 
-      const doc = win.document;
-      const otherCMP = !!(win.frames[TCF_LOCATOR_NAME]);
+        const TCF_API_NAME = '__tcfapi';
+        const EVENT_NAME = 'message';
+        const TCF_POST_MSG_CALL = TCF_API_NAME + 'Call';
+        const TCF_POST_MSG_RETURN = TCF_API_NAME + 'Return';
+        const TCF_LOCATOR_NAME = TCF_API_NAME + 'Locator';
+        const CMP_STATUS = 'stub';
+        const TARGET_ORIGIN = '*';
+        const PING_COMMAND = 'ping';
+        const GDPR_APPLIES_COMMAND = 'setGdprApplies';
+        const iframe = document.createElement('iframe');
 
-      if (!otherCMP) {
+        /**
+         * Create the locator frame in this frame since we've established that
+         * none exists in this frame.  This is to prevent instances of this
+         * script from overriding each other.  If this one queues calls and
+         * gets overridden then the queue is lost and calls are dropped.
+         */
+        iframe.style.cssText = 'display:none';
+        iframe.name = TCF_LOCATOR_NAME;
+        document.body.appendChild(iframe);
 
-        if (doc.body) {
+        if (window === window.top || !(window.parent.frames[TCF_LOCATOR_NAME])) {
 
-          const iframe = doc.createElement('iframe');
+          /**
+           * There are no parent stubs or CMPs, so it falls on this instance to
+           * collect calls in a queue
+           */
 
-          iframe.style.cssText = 'display:none';
-          iframe.name = TCF_LOCATOR_NAME;
-          doc.body.appendChild(iframe);
+          const queue = [];
+
+          window[TCF_API_NAME] = (command, version, callback, parameter) => {
+
+            let gdprApplies;
+
+            if (!command) {
+
+              /**
+               * shortcut to get the queue when the full CMP
+               * implementation loads; it can call __tcfapi
+               * with no arguments to get the queued arguments
+               */
+
+              return queue;
+
+            } else if (command === GDPR_APPLIES_COMMAND) {
+
+              /**
+               * shortcut to set gdprApplies if the publisher
+               * knows that they apply GDPR rules to all
+               * traffic (see the section on "What does the
+               * gdprApplies value mean" for more
+               */
+
+              gdprApplies = parameter;
+
+              if (callback) {
+
+                callback(null, true);
+
+              }
+
+            } else if (command === PING_COMMAND) {
+
+              /**
+               * Only supported method; give PingReturn
+               * object as response
+               */
+
+              if (callback) {
+
+                callback({
+                  gdprApplies,
+                  cmpLoaded: false,
+                  cmpStatus: CMP_STATUS,
+                }, true);
+
+              }
+
+            } else {
+
+              /**
+               * some other method, just queue it for the
+               * full CMP implementation to deal with
+               */
+
+              queue.push([command, version, callback, parameter]);
+
+            }
+
+          };
+
+          const postMessageEventHandler = (event) => {
+
+            if (event && event.source && event.source.postMessage) {
+
+              const msgIsString = typeof event.data === 'string';
+              let json = {};
+
+              if (msgIsString) {
+
+                try {
+
+                  /**
+                   * Try to parse the data from the event.  It is important to
+                   * have in a try/catch because often string messages may come
+                   * through that are not json
+                   */
+
+                  json = JSON.parse(event.data);
+
+                } catch (ignore) {/* oh well... */}
+
+              } else {
+
+                json = event.data;
+
+              }
+
+              const payload = json[TCF_POST_MSG_CALL];
+
+              if (payload) {
+
+                const {command, version, callId, parameter} = payload;
+
+                const wrapperCallback = (returnValue, success) => {
+
+                  let returnMsg = {
+                    [TCF_POST_MSG_RETURN]: {
+                      returnValue,
+                      success,
+                      callId,
+                    },
+                  };
+
+                  if (msgIsString) {
+
+                    /**
+                     * If it came in as a string it will be return in the same
+                     * manner
+                     */
+
+                    returnMsg = JSON.stringify(returnMsg);
+
+                  }
+
+                  event.source.postMessage(returnMsg, TARGET_ORIGIN);
+
+                };
+
+                window[TCF_API_NAME](
+                  command,
+                  version,
+                  wrapperCallback,
+                  parameter,
+                );
+
+              }
+
+            }
+
+          };
+
+          window.addEventListener(EVENT_NAME, postMessageEventHandler);
 
         } else {
 
-          setTimeout(addFrame, 5);
+          let callId = 0;
+          const callMap = new Map();
 
-        }
+          window[TCF_API_NAME] = (command, version, callback, parameter) => {
 
-      }
+            callMap.set(callId, callback);
 
-      return !otherCMP;
+            const msg = {
+              [TCF_POST_MSG_CALL]: {
+                command,
+                parameter,
+                version,
+                callId,
+              },
+            };
 
-    }
+            window.parent.postMessage(msg, TARGET_ORIGIN);
+            callId++;
 
-    function tcfAPIHandler(...args) {
+          };
 
-      let gdprApplies;
+          const responseHandler = () => {
 
-      if (!args.length) {
+            let json;
 
-        /**
-         * shortcut to get the queue when the full CMP
-         * implementation loads; it can call tcfapiHandler()
-         * with no arguments to get the queued arguments
-         */
+            if (typeof event.data === 'string') {
 
-        return queue;
+              try {
 
-      } else if (args[0] === 'setGdprApplies') {
+                json = JSON.parse(event.data);
 
-        /**
-         * shortcut to set gdprApplies if the publisher
-         * knows that they apply GDPR rules to all
-         * traffic (see the section on "What does the
-         * gdprApplies value mean" for more
-         */
+              } catch (ignore) {}
 
-        if (args.length > 3 && parseInt(args[1], 10) === 2 && typeof args[3] === 'boolean') {
+            } else if ( typeof event.data === 'object') {
 
-          gdprApplies = args[3];
+              json = event.data;
 
-          if (typeof args[2] === 'function') {
+            }
 
-            args[2]('set', true);
+            const payload = json[TCF_POST_MSG_RETURN];
 
-          }
+            if (payload && callMap.has(payload.callId)) {
 
-        }
+              const callback = callMap.get(payload.callId);
 
-      } else if (args[0] === 'ping') {
+              callback(payload.returnValue, payload.success);
+              callMap.delete(payload.callId);
 
-        /**
-       * Only supported method; give PingReturn
-       * object as response
-       */
+            }
 
-        const retr = {
-          gdprApplies: gdprApplies,
-          cmpLoaded: false,
-          cmpStatus: 'stub',
-        };
+          };
 
-        if (typeof args[2] === 'function') {
-
-          args[2](retr);
+          window.addEventListener(EVENT_NAME, responseHandler, false);
 
         }
 
       } else {
 
-        /**
-       * some other method, just queue it for the
-       * full CMP implementation to deal with
-       */
-
-        queue.push(args);
+        setTimeout(makeStub, 5);
 
       }
-
-    }
-
-    function postMessageEventHandler(event) {
-
-      const msgIsString = typeof event.data === 'string';
-      let json = {};
-
-      try {
-
-        /**
-       * Try to parse the data from the event.  This is important
-       * to have in a try/catch because often messages may come
-       * through that are not JSON
-       */
-
-        if (msgIsString) {
-
-          json = JSON.parse(event.data);
-
-        } else {
-
-          json = event.data;
-
-        }
-
-      } catch (ignore) {}
-
-      const payload = json.__tcfapiCall;
-
-      if (payload) {
-
-        window.__tcfapi(
-          payload.command,
-          payload.version,
-          function(retValue, success) {
-
-            let returnMsg = {
-              __tcfapiReturn: {
-                returnValue: retValue,
-                success: success,
-                callId: payload.callId,
-              },
-            };
-
-            if (msgIsString) {
-
-              returnMsg = JSON.stringify(returnMsg);
-
-            }
-
-            if (event && event.source && event.source.postMessage) {
-
-              event.source.postMessage(returnMsg, '*');
-
-            }
-
-          },
-          payload.parameter,
-        );
-
-      }
-
-    }
-
-    /**
-   * Iterate up to the top window checking for an already-created
-   * "__tcfapilLocator" frame on every level. If one exists already then we are
-   * not the master CMP and will not queue commands.
-   */
-    while (win) {
-
-      try {
-
-        if (win.frames[TCF_LOCATOR_NAME]) {
-
-          cmpFrame = win;
-          break;
-
-        }
-
-      } catch (ignore) {}
-
-      // if we're at the top and no cmpFrame
-      if (win === window.top) {
-
-        break;
-
-      }
-
-      // Move up
-      win = win.parent;
-
-    }
-
-    if (!cmpFrame) {
-
-      // we have recur'd up the windows and have found no __tcfapiLocator frame
-
-      addFrame();
-      win.__tcfapi = tcfAPIHandler;
-      win.addEventListener('message', postMessageEventHandler, false);
 
     }
 
   };
 
-  if (typeof module !== 'undefined') {
+  if (module !== undefined) {
 
     module.exports = makeStub;
 
@@ -215,4 +248,4 @@
 
   }
 
-}());
+})();

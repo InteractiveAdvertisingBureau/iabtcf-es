@@ -55,5 +55,8 @@
     "type": "git",
     "url": "https://github.com/InteractiveAdvertisingBureau/iabtcf-es.git",
     "directory": "modules/stub"
+  },
+  "dependencies": {
+    "mocha": "6"
   }
 }
