@@ -149,7 +149,11 @@
 
             }
 
-            event.source.postMessage(returnMsg, '*');
+            if (event && event.source && event.source.postMessage) {
+
+              event.source.postMessage(returnMsg, '*');
+
+            }
 
           },
           payload.parameter,
