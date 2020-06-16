@@ -1,6 +1,7 @@
 import {EncodingError} from '../errors';
 import {TCModel} from '../TCModel';
 import {EncodingOptions} from './EncodingOptions';
+import {Vector} from '../model';
 import {GVL} from '../GVL';
 
 type ProcessorFunction = (tcModel: TCModel, gvl: GVL) => TCModel;
@@ -23,21 +24,24 @@ export class SemanticPreEncoder {
        */
       tcModel.purposeLegitimateInterests.unset(1);
 
-      tcModel.vendorLegitimateInterests.forEach((value: boolean, id: number) => {
+      const vectorToIntMap = new Map<Vector, string>();
 
-        const vendor = gvl.vendors[id.toString()];
+      vectorToIntMap.set(tcModel.vendorLegitimateInterests, 'legIntPurposes');
+      vectorToIntMap.set(tcModel.vendorConsents, 'purposes');
 
-        if (!vendor || (value && vendor.legIntPurposes.length === 0)) {
+      vectorToIntMap.forEach((gvlVendorKey: string, vector: Vector): void => {
 
-          /**
-           * If a Vendor does not declare any legitimate interest purposes or special
-           * purposes, then we should not set their legitimate interest establishment
-           * bit. So unset it, because it should be impossible.
-           */
+        vector.forEach((value: boolean, id: number) => {
 
-          tcModel.vendorLegitimateInterests.unset(id);
+          const vendor = gvl.vendors[id];
 
-        }
+          if (!vendor || (value && vendor[gvlVendorKey].length === 0)) {
+
+            vector.unset(id);
+
+          }
+
+        });
 
       });
 

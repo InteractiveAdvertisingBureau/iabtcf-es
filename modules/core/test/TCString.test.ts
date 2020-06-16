@@ -116,27 +116,35 @@ describe('TCString', (): void => {
 
     const tcModel = getTCModel();
     const gvl = tcModel.gvl;
-
     const publisherTC = TCString.encode(tcModel, {
       segments: [Segment.PUBLISHER_TC],
     });
     const core = TCString.encode(tcModel, {
       segments: [Segment.CORE],
     });
-
     const newModel = new TCModel();
 
     TCString.decode(core, newModel);
 
     tcModel.vendorConsents.forEach((value: boolean, id: number): void => {
 
-      expect(newModel.vendorConsents.has(id), `vendorConsents.has(${id})`).to.equal(value);
+      const vendor = gvl.vendors[id];
+
+      if (!vendor || (value && vendor.purposes.length === 0)) {
+
+        expect(newModel.vendorConsents.has(id), `vendorConsents.has(${id})`).to.be.false;
+
+      } else {
+
+        expect(newModel.vendorConsents.has(id), `vendorConsents.has(${id})`).to.equal(value);
+
+      }
 
     });
 
     tcModel.vendorLegitimateInterests.forEach((value: boolean, id: number): void => {
 
-      const vendor = gvl.vendors[id+''];
+      const vendor = gvl.vendors[id];
 
       if (!vendor || (value && vendor.legIntPurposes.length === 0)) {
 
