@@ -1,21 +1,22 @@
-(() => {
+((win, doc) => {
 
   const makeStub = () => {
 
-    if (!(window.frames[TCF_LOCATOR_NAME])) {
+    const TCF_API_NAME = '__tcfapi';
+    const EVENT_NAME = 'message';
+    const TCF_POST_MSG_CALL = TCF_API_NAME + 'Call';
+    const TCF_POST_MSG_RETURN = TCF_API_NAME + 'Return';
+    const TCF_LOCATOR_NAME = TCF_API_NAME + 'Locator';
+    const CMP_STATUS = 'stub';
+    const TARGET_ORIGIN = '*';
+    const PING_COMMAND = 'ping';
+    const GDPR_APPLIES_COMMAND = 'setGdprApplies';
 
-      if (document.body) {
+    if (!(win.frames[TCF_LOCATOR_NAME])) {
 
-        const TCF_API_NAME = '__tcfapi';
-        const EVENT_NAME = 'message';
-        const TCF_POST_MSG_CALL = TCF_API_NAME + 'Call';
-        const TCF_POST_MSG_RETURN = TCF_API_NAME + 'Return';
-        const TCF_LOCATOR_NAME = TCF_API_NAME + 'Locator';
-        const CMP_STATUS = 'stub';
-        const TARGET_ORIGIN = '*';
-        const PING_COMMAND = 'ping';
-        const GDPR_APPLIES_COMMAND = 'setGdprApplies';
-        const iframe = document.createElement('iframe');
+      if (doc.body) {
+
+        const iframe = doc.createElement('iframe');
 
         /**
          * Create the locator frame in this frame since we've established that
@@ -25,9 +26,9 @@
          */
         iframe.style.cssText = 'display:none';
         iframe.name = TCF_LOCATOR_NAME;
-        document.body.appendChild(iframe);
+        doc.body.appendChild(iframe);
 
-        if (window === window.top || !(window.parent.frames[TCF_LOCATOR_NAME])) {
+        if (win === win.top || !(win.parent.frames[TCF_LOCATOR_NAME])) {
 
           /**
            * There are no parent stubs or CMPs, so it falls on this instance to
@@ -36,7 +37,7 @@
 
           const queue = [];
 
-          window[TCF_API_NAME] = (command, version, callback, parameter) => {
+          win[TCF_API_NAME] = (command, version, callback, parameter) => {
 
             let gdprApplies;
 
@@ -155,7 +156,7 @@
 
                 };
 
-                window[TCF_API_NAME](
+                win[TCF_API_NAME](
                   command,
                   version,
                   wrapperCallback,
@@ -168,14 +169,14 @@
 
           };
 
-          window.addEventListener(EVENT_NAME, postMessageEventHandler);
+          win.addEventListener(EVENT_NAME, postMessageEventHandler);
 
         } else {
 
           let callId = 0;
           const callMap = new Map();
 
-          window[TCF_API_NAME] = (command, version, callback, parameter) => {
+          win[TCF_API_NAME] = (command, version, callback, parameter) => {
 
             callMap.set(callId, callback);
 
@@ -188,7 +189,7 @@
               },
             };
 
-            window.parent.postMessage(msg, TARGET_ORIGIN);
+            win.parent.postMessage(msg, TARGET_ORIGIN);
             callId++;
 
           };
@@ -224,7 +225,7 @@
 
           };
 
-          window.addEventListener(EVENT_NAME, responseHandler, false);
+          win.addEventListener(EVENT_NAME, responseHandler, false);
 
         }
 
@@ -248,4 +249,4 @@
 
   }
 
-})();
+})(window, document);
