@@ -9,7 +9,7 @@ let encoded = '';
 
 for (const arg of args) {
 
-  if (arg.charAt(0) === 'C') {
+  if (arg.charAt(0) === 'C' || arg.charAt(0) === 'B') {
 
     encoded = arg;
     break;
