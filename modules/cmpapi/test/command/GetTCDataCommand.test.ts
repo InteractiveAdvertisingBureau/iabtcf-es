@@ -1,7 +1,6 @@
 import {CmpApiModel} from '../../src/CmpApiModel';
 import {TCModelFactory, TCStringFactory, XMLHttpTestTools} from '@iabtcf/testing';
 import {GetTCDataCommand} from '../../src/command/GetTCDataCommand';
-import {TCDataCallback} from '../../src/callback';
 import {TCData} from '../../src/response/TCData';
 import {TCString} from '@iabtcf/core';
 import {expect} from 'chai';
@@ -14,7 +13,7 @@ describe('command->GetTCDataCommand', (): void => {
     CmpApiModel.tcModel = TCModelFactory.withGVL();
     CmpApiModel.tcString = TCString.encode(CmpApiModel.tcModel);
 
-    const tcDataCallback: TCDataCallback = (tcData: TCData, success: boolean): void => {
+    const tcDataCallback = (tcData: TCData, success: boolean): void => {
 
       expect(success, 'success').to.be.true;
       expect(tcData instanceof TCData, 'tcData instanceof TCData').to.be.true;
@@ -33,7 +32,7 @@ describe('command->GetTCDataCommand', (): void => {
     CmpApiModel.tcString = TCStringFactory.base();
     CmpApiModel.tcModel = TCString.decode(CmpApiModel.tcString);
 
-    const tcDataCallback: TCDataCallback = (tcData: TCData, success: boolean): void => {
+    const tcDataCallback = (tcData: TCData, success: boolean): void => {
 
       expect(success, 'success').to.be.true;
       expect(tcData instanceof TCData, 'tcData instanceof TCData').to.be.true;

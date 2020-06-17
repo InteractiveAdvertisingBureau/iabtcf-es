@@ -6,7 +6,7 @@
  * @enum {string}
  */
 
-export enum CmpStatus{
+export enum CmpStatus {
   /**
    * CMP not yet loaded – stub still in place
    * @type {string}

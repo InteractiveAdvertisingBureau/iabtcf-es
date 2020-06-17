@@ -1,14 +1,18 @@
 #!/bin/bash
 
-rm -rf lib
-mkdir lib
+TARGET=lib
+
+rm -rf $TARGET
+mkdir $TARGET
 
 tsc
 
-FILES=$(find lib -name "*.js")
+FILES=$(find $TARGET -name "*.js")
 
 for FILE in $FILES; do
 
   terser $FILE --ecma 5 -m -c -o $FILE
 
 done
+
+cp ../../LICENSE $TARGET/

@@ -1,22 +1,17 @@
 import {Command} from './Command';
-import {RemoveListenerCallback} from '../callback';
 import {CmpApiModel} from '../CmpApiModel';
 
 export class RemoveEventListenerCommand extends Command {
 
   protected async success(): Promise<void> {
 
-    const callback = this.callback as RemoveListenerCallback;
-
-    callback(true);
+    this.callback(true);
 
   }
 
   protected fail(): void {
 
-    const callback = this.callback as RemoveListenerCallback;
-
-    callback(false);
+    this.callback(false);
 
   }
 

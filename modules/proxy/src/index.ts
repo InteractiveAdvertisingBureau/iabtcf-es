@@ -1,0 +1,6 @@
+class ProxyAPI {
+
+  public constructor() {
+  }
+
+}

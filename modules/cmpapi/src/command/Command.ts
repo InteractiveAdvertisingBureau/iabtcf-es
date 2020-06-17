@@ -1,4 +1,4 @@
-import {Callback, FailCallback} from '../callback';
+import {Callback} from '../types';
 /**
  * Base command class holds basic command parameters and has functionality to
  * handle basic validation.
@@ -40,9 +40,7 @@ export abstract class Command {
   protected abstract async success(): Promise<void>
   protected fail(): void {
 
-    const callback = this.callback as FailCallback;
-
-    callback(null, false);
+    this.callback(null, false);
 
   }
 

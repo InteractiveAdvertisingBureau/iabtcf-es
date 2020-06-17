@@ -1,25 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {CommandMap} from './command/CommandMap';
+import {Callback, TCFAPIArgs, TCFAPI_KEY} from './types';
 import {CmpApiModel} from './CmpApiModel';
-import {Callback, ErrorCallback} from './callback';
-import {TCFCommands} from './command/TCFCommands';
-import {DisabledCommand} from './command/DisabledCommand';
+import {CommandMap} from './command/CommandMap';
 import {CustomCommands} from './CustomCommands';
+import {DisabledCommand} from './command/DisabledCommand';
 import {SupportedVersions} from './SupportedVersions';
-
-type TcfApiArgs = [string, number, Callback, any];
-type GetQueueFunction = () => TcfApiArgs[];
-type PageCallHandler = (
-  command: string,
-  version: number,
-  callback: (response?: any, success?: any) => void,
-  ...param: any
-) => void;
+import {TCFCommands} from './command/TCFCommands';
 
 export class CallResponder {
 
-  private queuedCalls: TcfApiArgs[];
-  private readonly API_FUNCTION_NAME: string = '__tcfapi';
+  private queuedCalls: TCFAPIArgs[];
   private readonly customCommands: CustomCommands;
 
   public constructor(customCommands?: CustomCommands) {
@@ -37,7 +27,7 @@ export class CallResponder {
     try {
 
       // get queued commands
-      this.queuedCalls = (window[this.API_FUNCTION_NAME] as GetQueueFunction)();
+      this.queuedCalls = window[TCFAPI_KEY]();
 
     } catch (err) {
 
@@ -45,7 +35,7 @@ export class CallResponder {
 
     } finally {
 
-      window[this.API_FUNCTION_NAME] = this.apiCall.bind(this);
+      window[TCFAPI_KEY] = this.apiCall.bind(this);
 
     }
 
@@ -62,7 +52,7 @@ export class CallResponder {
 
     if (typeof command !== 'string') {
 
-      (callback as ErrorCallback)(null, false);
+      callback(null, false);
 
     } else if (!SupportedVersions.has(version)) {
 
@@ -71,7 +61,7 @@ export class CallResponder {
        * that's probably ok, we don't need strict adherence here.
        */
 
-      (callback as ErrorCallback)(null, false);
+      callback(null, false);
 
     } else if (typeof callback !== 'function') {
 
@@ -90,7 +80,7 @@ export class CallResponder {
        * instead of letting it linger.
        */
 
-      (callback as ErrorCallback)(null, false);
+      callback(null, false);
 
     } else if (command === TCFCommands.PING) {
 
@@ -135,7 +125,7 @@ export class CallResponder {
     if (this.queuedCalls) {
 
       const apiCall = this.apiCall.bind(this);
-      this.queuedCalls.forEach((args: TcfApiArgs): void =>{
+      this.queuedCalls.forEach((args: TCFAPIArgs): void =>{
 
         apiCall(...args);
 

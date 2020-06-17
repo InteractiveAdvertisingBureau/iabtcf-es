@@ -1,10 +1,10 @@
-export class TCFCommands {
+export enum TCFCommands {
 
-  public static readonly PING: 'ping' = 'ping';
-  public static readonly GET_TC_DATA: 'getTCData' = 'getTCData';
-  public static readonly GET_IN_APP_TC_DATA: 'getInAppTCData' = 'getInAppTCData';
-  public static readonly GET_VENDOR_LIST: 'getVendorList' = 'getVendorList';
-  public static readonly ADD_EVENT_LISTENER: 'addEventListener' = 'addEventListener';
-  public static readonly REMOVE_EVENT_LISTENER: 'removeEventListener' = 'removeEventListener';
+  PING = 'ping',
+  GET_TC_DATA = 'getTCData',
+  GET_IN_APP_TC_DATA = 'getInAppTCData',
+  GET_VENDOR_LIST = 'getVendorList',
+  ADD_EVENT_LISTENER = 'addEventListener',
+  REMOVE_EVENT_LISTENER = 'removeEventListener',
 
 }

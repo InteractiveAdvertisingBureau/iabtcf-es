@@ -1,5 +1,4 @@
 import {AddEventListenerCommand} from '../../src/command/AddEventListenerCommand';
-import {TCDataCallback} from '../../src/callback';
 import {CmpApiModel} from '../../src/CmpApiModel';
 import {TCModelFactory} from '@iabtcf/testing';
 import {TCData} from '../../src/response/TCData';
@@ -14,7 +13,7 @@ describe('command->AddEventListenerCommand', (): void => {
 
     CmpApiModel.tcModel = TCModelFactory.noGVL();
 
-    const tcDataCallback: TCDataCallback = function(tcData: TCData): void {
+    const tcDataCallback = function(tcData: TCData): void {
 
       callsReceived++;
       // only set after call is queued

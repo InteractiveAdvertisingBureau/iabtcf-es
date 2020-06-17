@@ -1,12 +1,12 @@
 import {GetTCDataCommand} from './command/GetTCDataCommand';
-import {TCDataCallback} from './callback';
+import {Callback} from './types';
 
 export class EventListenerQueue {
 
-  private eventQueue = new Map<number, TCDataCallback>();
+  private eventQueue = new Map<number, Callback>();
   private queueNumber = 0;
 
-  public add(tcDataCallback: TCDataCallback): number {
+  public add(tcDataCallback: Callback): number {
 
     this.eventQueue.set(this.queueNumber, tcDataCallback);
     return this.queueNumber++;
@@ -21,7 +21,7 @@ export class EventListenerQueue {
 
   public exec(): void {
 
-    this.eventQueue.forEach((callback: TCDataCallback, listenerId: number): void => {
+    this.eventQueue.forEach((callback: Callback, listenerId: number): void => {
 
       new GetTCDataCommand(callback, undefined, listenerId);
 

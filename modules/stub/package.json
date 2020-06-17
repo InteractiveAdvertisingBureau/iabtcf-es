@@ -11,16 +11,20 @@
   ],
   "scripts": {
     "preversion": "echo 'woops I think you meant to go to the root' && exit 1",
-    "build": "rm -rf lib && mkdir lib ; babel src/stub.js | terser -m -c -o lib/stub.js",
-    "build:dev": "rm -rf lib && ln -s src lib",
-    "lint": "exit 0"
+    "build": "../build",
+    "debug": "ndb yarn test --no-timeouts",
+    "test": "mocha `find test -name '*.test.ts'`",
+    "lint": "eslint `find test src -name '*.ts'`"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",
     "@babel/core": "^7.7.5",
     "@babel/preset-env": "^7.7.6",
+    "@iabtcf/cmpapi": "^1.0.2-3",
     "eslint": "6.8.0",
-    "terser": "^4.4.3"
+    "mocha": "6",
+    "ndb": "^1.1.4",
+    "terser": "^4.6.3"
   },
   "publishConfig": {
     "access": "public"
@@ -57,6 +61,6 @@
     "directory": "modules/stub"
   },
   "dependencies": {
-    "mocha": "6"
+    "@iabtcf/testing": "^1.0.2-3"
   }
 }

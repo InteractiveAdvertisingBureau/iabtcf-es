@@ -1,0 +1,30 @@
+#!/bin/bash
+
+cd $(git rev-parse --show-toplevel)
+
+yarn lint
+
+if [[ $? != 0 ]]; then
+  echo
+  echo "Fix yo lint errors"
+  echo
+  exit 1
+fi
+
+yarn build
+
+if [[ $? != 0 ]]; then
+  echo
+  echo "Unsuccessful build... Bailing"
+  echo
+  exit 1
+fi
+
+yarn test
+
+if [[ $? != 0 ]]; then
+  echo
+  echo "Unsuccessful tests... Bailing"
+  echo
+  exit 1
+fi
