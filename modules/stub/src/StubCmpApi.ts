@@ -1,15 +1,27 @@
-import {TCFAPI_KEY, CmpStatus, TCFAPIArgs, TCFCommands, Callback} from '@iabtcf/cmpapi';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import {
+  Callback,
+  CmpStatus,
+  TCFAPIFunction,
+  TCFAPIArgs,
+  TCFAPI_KEY,
+  TCFAPI_LOCATOR,
+  TCFAPIPostMessageCall,
+  TCFAPIPostMessageReturn,
+  TCFAPI_POSTMSG_CALL,
+  TCFAPI_POSTMSG_RETURN,
+  TCFCommands,
+} from '@iabtcf/cmpapi';
 
 export class StubCmpApi {
 
-  private static readonly POST_MESSAGE_EVENT = 'message';
-  private static readonly TCF_POST_MSG_CALL = TCFAPI_KEY + 'Call';
-  private static readonly TCF_POST_MSG_RETURN = TCFAPI_KEY + 'Return';
-  private static readonly TCF_LOCATOR_NAME = TCFAPI_KEY + 'Locator';
+  private static POST_MESSAGE_EVENT = 'message';
   private static readonly TARGET_ORIGIN = '*';
   private static readonly GDPR_APPLIES_COMMAND = 'setGdprApplies';
 
   private queue: TCFAPIArgs[] = [];
+  private callId = 0;
   private gdprApplies: boolean;
 
   public constructor() {
@@ -18,6 +30,7 @@ export class StubCmpApi {
 
       window[TCFAPI_KEY] = this.apiCall.bind(this);
       this.addLocatorFrame();
+      window.addEventListener(StubCmpApi.POST_MESSAGE_EVENT, this.postMessageApiCall);
 
     }
 
@@ -86,14 +99,14 @@ export class StubCmpApi {
 
   private addLocatorFrame(): void {
 
-    if (!window.frames[StubCmpApi.TCF_LOCATOR_NAME]) {
+    if (!window.frames[TCFAPI_LOCATOR]) {
 
       if (document.body) {
 
         const iframe = document.createElement('iframe');
 
         iframe.style.cssText = 'display:none';
-        iframe.name = StubCmpApi.TCF_LOCATOR_NAME;
+        iframe.name = TCFAPI_LOCATOR;
         document.body.appendChild(iframe);
 
       } else {
@@ -104,6 +117,64 @@ export class StubCmpApi {
 
     }
 
-  };
+  }
+
+  private postMessageApiCall(event: MessageEvent): void {
+
+    if (event && event.data) {
+
+      let call: TCFAPIPostMessageCall;
+
+      if (typeof event.data === 'string') {
+
+        try {
+
+          /**
+           * Try to parse the data from the event; there is no guarantee
+           * that this string is a stringified object – in fact it's
+           * probably more likely that it's not.
+           */
+
+          call = JSON.parse(event.data)[TCFAPI_POSTMSG_CALL];
+
+        } catch (ignore) {/* oh well... */}
+
+      } else if (typeof event.data === 'object') {
+
+        call = event.data[TCFAPI_POSTMSG_CALL];
+
+      }
+
+      if (call) {
+
+        const {command, version, parameter} = call;
+
+        const wrapperCallback: Callback = (returnValue?: any, success?: boolean): void => {
+
+          if (event.source !== null) {
+
+            const response = {
+              [TCFAPI_POSTMSG_RETURN]: {
+                returnValue,
+                success,
+                callId: this.callId,
+              },
+            };
+
+            (event.source as WindowProxy).postMessage(response, StubCmpApi.TARGET_ORIGIN);
+
+          }
+
+        };
+
+        (window[TCFAPI_KEY] as TCFAPIFunction)(command, version, wrapperCallback, parameter);
+
+        this.callId++;
+
+      }
+
+    }
+
+  }
 
 }

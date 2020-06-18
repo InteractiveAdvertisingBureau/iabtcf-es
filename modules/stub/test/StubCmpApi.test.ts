@@ -1,11 +1,9 @@
 import {StubCmpApi} from '../src/StubCmpApi';
-import {TCFAPI_KEY, TCFAPIArgs, TCFCommands, CmpStatus} from '@iabtcf/cmpapi';
+import {TCFAPI_KEY, TCFAPI_LOCATOR, TCFAPIArgs, TCFCommands, CmpStatus} from '@iabtcf/cmpapi';
 import {makeRandomString, makeRandomInt, makeRandomIntArray} from '@iabtcf/testing';
 import {expect} from 'chai';
 
 describe('StubCmpApi', (): void => {
-
-  const locatorFrame = `${TCFAPI_KEY}Locator`;
 
   beforeEach((): void => {
 
@@ -30,9 +28,9 @@ describe('StubCmpApi', (): void => {
 
   });
 
-  it(`should create ${locatorFrame}`, (): void => {
+  it(`should create ${TCFAPI_LOCATOR}`, (): void => {
 
-    expect(window.frames[locatorFrame], `window.frames.${locatorFrame}`).to.exist;
+    expect(window.frames[TCFAPI_LOCATOR], `window.frames.${TCFAPI_LOCATOR}`).to.exist;
 
   });
 
