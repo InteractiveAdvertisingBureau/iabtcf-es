@@ -7,7 +7,7 @@ import {DisabledCommand} from './command/DisabledCommand';
 import {CustomCommands} from './CustomCommands';
 import {SupportedVersions} from './SupportedVersions';
 
-type TcfApiArgs = [string, number, Callback, any];
+type TcfApiArgs = [string, number, Callback, ...any[]];
 type GetQueueFunction = () => TcfApiArgs[];
 type PageCallHandler = (
   command: string,
@@ -18,7 +18,7 @@ type PageCallHandler = (
 
 export class CallResponder {
 
-  private queuedCalls: TcfApiArgs[];
+  private callQueue: TcfApiArgs[];
   private readonly API_FUNCTION_NAME: string = '__tcfapi';
   private readonly customCommands: CustomCommands;
 
@@ -37,17 +37,19 @@ export class CallResponder {
     try {
 
       // get queued commands
-      this.queuedCalls = (window[this.API_FUNCTION_NAME] as GetQueueFunction)();
+      this.callQueue = (window[this.API_FUNCTION_NAME] as GetQueueFunction)();
 
     } catch (err) {
 
-      // nothing to do here - we tried... no harm no foul
+      this.callQueue = [];
 
     } finally {
 
       window[this.API_FUNCTION_NAME] = this.apiCall.bind(this);
 
     }
+
+    this.purgeQueuedCalls();
 
   }
 
@@ -110,7 +112,7 @@ export class CallResponder {
        * If we are still waiting for the TC data to be set we can push this
        * onto the queue that we have and once the model is set it'll be called
        */
-      this.queuedCalls.push([command, version, callback, params]);
+      this.callQueue.push([command, version, callback, ...params]);
 
     } else {
 
@@ -132,18 +134,15 @@ export class CallResponder {
    */
   public purgeQueuedCalls(): void {
 
-    if (this.queuedCalls) {
+    const apiCall = this.apiCall.bind(this);
+    const queueCopy: TcfApiArgs[] = this.callQueue;
 
-      const apiCall = this.apiCall.bind(this);
-      this.queuedCalls.forEach((args: TcfApiArgs): void =>{
+    this.callQueue = [];
+    queueCopy.forEach((args: TcfApiArgs): void => {
 
-        apiCall(...args);
+      apiCall(...args);
 
-      });
-
-      delete this.queuedCalls;
-
-    }
+    });
 
   }
 

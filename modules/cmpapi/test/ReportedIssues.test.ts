@@ -180,6 +180,7 @@ describe('Reported github issues', (): void => {
     window[API_FUNCTION_NAME](TCFCommands.GET_TC_DATA, null, callback, [9]);
 
     const cmpApi = new CmpApi(makeRandomInt(2, Math.pow(2, 6)), makeRandomInt(2, Math.pow(2, 6)));
+
     cmpApi.update(TCStringFactory.base());
 
   });
