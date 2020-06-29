@@ -49,7 +49,8 @@ export class Base64Url {
      * Pad the end of the string to the least common mutliple of 6 (basis for
      * base64) and 8 (one byte)
      */
-    str += '0'.repeat(this.LCM - (str.length % this.LCM));
+    const padding = str.length % this.LCM;
+    str += padding ? '0'.repeat(this.LCM - padding) : '';
 
     let result = '';
 
