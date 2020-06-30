@@ -64,6 +64,9 @@ export function run(): void {
     // length: 16
     shouldBeGood(createRandomBinaryString(Math.pow(2, 4)));
 
+    // length: 24
+    shouldBeGood(createRandomBinaryString(24));
+
     // length: 64
     shouldBeGood(createRandomBinaryString(Math.pow(2, 6)));
 
