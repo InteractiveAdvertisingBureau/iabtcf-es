@@ -165,7 +165,7 @@ export class CallResponder {
   }
 
     /**
-     * Checks to see if the command exists in the set of if custom commands
+     * Checks to see if the command exists in the set of custom commands
      *
      * @param {string} command - command to check
      * @return {boolean} - whether or not this command is a custom command
