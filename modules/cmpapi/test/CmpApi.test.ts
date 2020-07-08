@@ -386,6 +386,120 @@ describe('CmpApi', (): void => {
 
   });
 
+  it('should call a built-in getTCData command through the page interface and decorate the response in the middleware ', (done: () => void): void => {
+
+    const commandName = 'getTCData';
+    const additionalTCDataKey = 'google_consent_string'
+    const additionalTCDataValue = '1~1.35.41.101'
+
+    const cmpApi = getCmpApi(false, {
+      [commandName]: (TCDataObj: any, success: boolean, next: Function): void => {
+        TCDataObj[additionalTCDataKey] = additionalTCDataValue
+        next(TCDataObj, success)
+      }
+    });
+
+    cmpApi.update(TCStringFactory.base());
+
+    window[API_FUNCTION_NAME](commandName, 2, (TCData: any, success: boolean): void => {
+      expect(TCData[additionalTCDataKey]).to.equal(additionalTCDataValue);
+      expect(success).to.equal(true);
+      done();
+    });
+
+  });
+
+  it('should call a built-in addEventListener command through the page interface and decorate the response in the middleware ', (done: () => void): void => {
+
+    const commandName = 'addEventListener';
+    const additionalTCDataKey = 'google_consent_string'
+    const additionalTCDataValue = '1~1.35.41.101'
+
+    const cmpApi = getCmpApi(false, {
+      [commandName]: (TCDataObj: any, success: boolean, next: Function): void => {
+        TCDataObj[additionalTCDataKey] = additionalTCDataValue
+        next(TCDataObj, success)
+      }
+    });
+
+    cmpApi.update(TCStringFactory.base());
+
+    window[API_FUNCTION_NAME](commandName, 2, (TCData: any, success: boolean): void => {
+      expect(TCData[additionalTCDataKey]).to.equal(additionalTCDataValue);
+      expect(success).to.equal(true);
+      done();
+    });
+
+  });
+
+  it('should call a built-in removeEventListener command through the page interface and decorate the response in the middleware ', (done: () => void): void => {
+
+    const commandName = 'removeEventListener';
+    const mutatedStatus = 'success'
+
+    const cmpApi = getCmpApi(false, {
+      [commandName]: (status: any, next: Function): void => {
+        status = mutatedStatus
+        next(mutatedStatus)
+      }
+    });
+
+    cmpApi.update(TCStringFactory.base());
+
+    window[API_FUNCTION_NAME](commandName, 2, (status: any): void => {
+      expect(status).to.equal(mutatedStatus);
+      done();
+    });
+
+  });
+
+  it('should call a built-in inAppTCData command through the page interface and decorate the response in the middleware ', (done: () => void): void => {
+
+    const commandName = 'getInAppTCData';
+    const additionalTCDataKey = 'google_consent_string'
+    const additionalTCDataValue = '1~1.35.41.101'
+
+    const cmpApi = getCmpApi(false, {
+      [commandName]: (TCDataObj: any, success: boolean, next: Function): void => {
+        TCDataObj[additionalTCDataKey] = additionalTCDataValue
+        next(TCDataObj, success)
+      }
+    });
+
+    cmpApi.update(TCStringFactory.base());
+
+    window[API_FUNCTION_NAME](commandName, 2, (TCData: any, success: boolean): void => {
+      expect(TCData[additionalTCDataKey]).to.equal(additionalTCDataValue);
+      expect(success).to.equal(true)
+      done();
+    });
+
+  });
+
+  it('should call a built-in getVendorList command through the page interface and decorate the response in the middleware ', (done: () => void): void => {
+
+    const commandName = 'getVendorList';
+    const additionalGVLKey = 'google_consent_string'
+    const additionalGVLValue = '1~1.35.41.101'
+
+    const cmpApi = getCmpApi(false, {
+      [commandName]: (gvl: any, success: boolean, next: Function): void => {
+        gvl[additionalGVLKey] = additionalGVLValue
+        next(gvl, success)
+      }
+    });
+
+    cmpApi.update(TCStringFactory.base());
+
+    window[API_FUNCTION_NAME](commandName, 2, (TCData: any, success: boolean): void => {
+      expect(TCData[additionalGVLKey]).to.equal(additionalGVLValue);
+      expect(success).to.equal(true)
+      done();
+    });
+
+  });
+
+
   it(`should set gdprApplies=true, displayStatus="${DisplayStatus.DISABLED}", eventStatus="${EventStatus.TC_LOADED}", and cmpStatus="${CmpStatus.LOADED}" on the first set of the tcString when uiVisible=false`, (): void => {
 
     const cmpApi = getCmpApi();

@@ -7,7 +7,7 @@ export class GetTCDataCommand extends Command {
   protected async success(): Promise<void> {
 
     const callback = this.callback as TCDataCallback;
-    callback(new TCData(this.param, this.listenerId), true);
+    callback(new TCData(this.param, this.listenerId), true, this.next);
 
   }
 

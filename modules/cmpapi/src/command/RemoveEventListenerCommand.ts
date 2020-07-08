@@ -8,7 +8,7 @@ export class RemoveEventListenerCommand extends Command {
 
     const callback = this.callback as RemoveListenerCallback;
 
-    callback(true);
+    callback(true, this.next);
 
   }
 
@@ -16,7 +16,7 @@ export class RemoveEventListenerCommand extends Command {
 
     const callback = this.callback as RemoveListenerCallback;
 
-    callback(false);
+    callback(false, this.next);
 
   }
 

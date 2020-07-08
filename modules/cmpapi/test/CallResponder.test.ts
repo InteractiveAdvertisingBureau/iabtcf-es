@@ -48,4 +48,26 @@ describe('CallResponder', (): void => {
 
   });
 
+  it('should call a built-in custom command only after tcModel exists', (): void => {
+
+    const command = 'getTCData';
+    let modelSet = false;
+
+    const callResponser = new CallResponder({
+      [command]: (TCDataObj: any, success: boolean, next: Function): void => {
+        next(TCDataObj, success)
+      }
+    });
+
+    callResponser.apiCall(command, null, (): void => {
+
+      expect(modelSet, 'model is set').to.be.true;
+
+    });
+
+    CmpApiModel.tcModel = TCModelFactory.withGVL();
+    modelSet = true;
+
+  });
+
 });

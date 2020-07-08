@@ -24,7 +24,7 @@ export class GetVendorListCommand extends Command {
 
       await gvl.readyPromise;
 
-      callback(gvl.getJson(), true);
+      callback(gvl.getJson(), true, this.next);
 
     } catch (err) {
 

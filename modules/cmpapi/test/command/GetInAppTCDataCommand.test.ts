@@ -14,7 +14,7 @@ describe('command->GetInAppTCDataCommand', (): void => {
     const tcDataCallback: InAppTCDataCallback = function(tcData: InAppTCData): void {
 
       expect(tcData instanceof InAppTCData, 'tcData instanceof InAppTCData').to.be.true;
-      expect(arguments.length, 'arguments.length').to.equal(2);
+      expect(arguments.length, 'arguments.length').to.equal(3);
 
       done();
 

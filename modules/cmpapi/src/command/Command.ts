@@ -12,12 +12,15 @@ export abstract class Command {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected param?: any;
 
+  protected next?: Function
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public constructor(callback: Callback, param?: any, listenerId?: number) {
+  public constructor(callback: Callback, param?: any, listenerId?: number, next?: Function) {
 
     this.callback = callback;
     this.param = param;
     this.listenerId = listenerId;
+    this.next = next;
 
     if (this.isValid()) {
 

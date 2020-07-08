@@ -10,7 +10,7 @@ export class AddEventListenerCommand extends GetTCDataCommand {
 
     if (CmpApiModel.tcModel !== undefined) {
 
-      new GetTCDataCommand(this.callback, undefined, listenerId);
+      new GetTCDataCommand(this.callback, undefined, listenerId, this.next);
 
     }
 

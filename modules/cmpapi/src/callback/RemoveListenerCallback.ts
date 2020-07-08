@@ -1,1 +1,1 @@
-export type RemoveListenerCallback = (status: boolean) => void;
+export type RemoveListenerCallback = (status: boolean, next?: Function) => void;

@@ -102,7 +102,7 @@ export class CallResponder {
        */
       new CommandMap[command](callback, params[0]);
 
-    } else if (this.customCommands && this.customCommands[command]) {
+    } else if (this.customCommands && this.customCommands[command] && !this.isBuiltInCommand(command)) {
 
       this.customCommands[command](callback, ...params);
 
@@ -114,6 +114,10 @@ export class CallResponder {
        */
       this.callQueue.push([command, version, callback, ...params]);
 
+    } else if (this.isCustomCommand(command) && this.isBuiltInCommand(command)) {
+
+        new CommandMap[command](this.customCommands[command], params[0], null, callback);
+        
     } else {
 
       /**
@@ -159,5 +163,29 @@ export class CallResponder {
       (CommandMap[command] !== undefined));
 
   }
+
+    /**
+     * Checks to see if the command exists in the set of if custom commands
+     *
+     * @param {string} command - command to check
+     * @return {boolean} - whether or not this command is a custom command
+     */
+    private isCustomCommand(command: string): boolean {
+
+        return ((this.customCommands !== undefined && this.customCommands[command] !== undefined));
+
+    }
+
+    /**
+     * Checks to see if the command exists in the set of TCF Commands
+     *
+     * @param {string} command - command to check
+     * @return {boolean} - whether or not this command is a built-in command
+     */
+    private isBuiltInCommand(command: string): boolean {
+
+        return ((CommandMap[command] !== undefined));
+
+    }
 
 }

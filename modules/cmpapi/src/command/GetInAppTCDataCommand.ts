@@ -8,7 +8,7 @@ export class GetInAppTCDataCommand extends GetTCDataCommand {
 
     const callback = this.callback as InAppTCDataCallback;
 
-    callback(new InAppTCData(this.param), true);
+    callback(new InAppTCData(this.param), true, this.next);
 
   }
 
