@@ -20,3 +20,5 @@ sed -i '' 's/\(\@iabtcf\/.*\)":.*"[0-9]*\..*"/\1": "'$npm_package_version'"/g' .
 
 # add this to the previous commit
 git add -A && git commit --amend --no-edit
+
+./bin/publish-version
