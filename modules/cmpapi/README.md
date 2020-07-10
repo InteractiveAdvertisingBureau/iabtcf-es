@@ -179,7 +179,9 @@ __tcfapi('connectBones', 2, songLyricCallback, 'knee', 'thigh');
 
 ````
 ### Built-In and Custom Commands
-If a custom command is defined that overlaps with a built-in command (`"ping"`, `"getTCData"`, `"getInAppTCData"`, `"getVendorList"`) then the custom command will act as a "middleware" being passed the built-in command's response and expected to pass along the response when finished.
+Beginning in 1.1.0, if a custom command is defined that overlaps with a built-in command (`"ping"`, `"getTCData"`, `"getInAppTCData"`, `"getVendorList"`) then the custom command will act as a "middleware" being passed the built-in command's response and expected to pass along the response when finished.
+
+
 
 **Example**
 ````javascript
