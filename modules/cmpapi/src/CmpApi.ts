@@ -107,14 +107,13 @@ export class CmpApi {
 
     }
 
-    if (encodedTCString === null) {
+    CmpApiModel.gdprApplies = (encodedTCString !== null);
 
-      CmpApiModel.gdprApplies = false;
+    if (!CmpApiModel.gdprApplies) {
+
       CmpApiModel.tcModel = null;
 
     } else {
-
-      CmpApiModel.gdprApplies = true;
 
       if (encodedTCString === '') {
 
@@ -133,9 +132,9 @@ export class CmpApi {
 
     }
 
-    CmpApiModel.eventQueue.exec();
-
     this.callResponder.purgeQueuedCalls();
+
+    CmpApiModel.eventQueue.exec();
 
   }
 

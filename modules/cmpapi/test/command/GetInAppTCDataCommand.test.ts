@@ -1,5 +1,4 @@
 import {GetInAppTCDataCommand} from '../../src/command/GetInAppTCDataCommand';
-import {InAppTCDataCallback} from '../../src/callback';
 import {CmpApiModel} from '../../src/CmpApiModel';
 import {TCModelFactory} from '@iabtcf/testing';
 import {InAppTCData} from '../../src/response/InAppTCData';
@@ -11,10 +10,10 @@ describe('command->GetInAppTCDataCommand', (): void => {
 
     CmpApiModel.tcModel = TCModelFactory.withGVL();
 
-    const tcDataCallback: InAppTCDataCallback = function(tcData: InAppTCData): void {
+    const tcDataCallback = function(tcData: InAppTCData): void {
 
       expect(tcData instanceof InAppTCData, 'tcData instanceof InAppTCData').to.be.true;
-      expect(arguments.length, 'arguments.length').to.equal(3);
+      expect(arguments.length, 'arguments.length').to.equal(2);
 
       done();
 

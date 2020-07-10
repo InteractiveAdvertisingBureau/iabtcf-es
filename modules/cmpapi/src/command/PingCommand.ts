@@ -1,14 +1,11 @@
-import {PingCallback} from '../callback';
 import {Ping} from '../response';
 import {Command} from './Command';
 
 export class PingCommand extends Command {
 
-  protected async success(): Promise<void> {
+  protected async getResponse(): Promise<Ping> {
 
-    const callback = this.callback as PingCallback;
-
-    callback(new Ping());
+    return new Ping();
 
   }
 

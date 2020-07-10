@@ -1,17 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {CmpStatus, DisplayStatus, EventStatus} from '../src/status';
-import {makeRandomInt, TCStringFactory} from '@iabtcf/testing';
-import {expect} from 'chai';
-import {CmpApi, CustomCommands} from '../src/';
+import {API_KEY, CmpApi, CustomCommands} from '../src/';
 import {CmpApiModel} from '../src/CmpApiModel';
+import {CmpStatus, DisplayStatus, EventStatus} from '../src/status';
+import {CommandCallback} from '../src/command/CommandCallback';
 import {Ping} from '../src/response/Ping';
 import {TCData} from '../src/response/TCData';
-import {TCFCommands} from '../src/command/TCFCommands';
+import {TCFCommand} from '../src/command/TCFCommand';
 import {TestUtils} from './TestUtils';
+import {VendorList} from '@iabtcf/core';
+import {expect} from 'chai';
+import {makeRandomInt, makeRandomString, TCStringFactory} from '@iabtcf/testing';
 
 import * as stub from '@iabtcf/stub';
 
-const API_FUNCTION_NAME = '__tcfapi';
 const API_VERSION = 2;
 
 describe('CmpApi', (): void => {
@@ -19,9 +20,9 @@ describe('CmpApi', (): void => {
   const removeStub = (): void =>{
 
     // clean up that junk
-    if (typeof window[API_FUNCTION_NAME] === 'function') {
+    if (typeof window[API_KEY] === 'function') {
 
-      delete window[API_FUNCTION_NAME];
+      delete window[API_KEY];
 
     }
 
@@ -63,11 +64,11 @@ describe('CmpApi', (): void => {
 
   const assertStub = async (): Promise<void> => {
 
-    expect(window[API_FUNCTION_NAME], `window.${API_FUNCTION_NAME} while stub`).to.be.a('function');
+    expect(window[API_KEY], `window.${API_KEY} while stub`).to.be.a('function');
 
     return new Promise((resolve: () => void): void => {
 
-      window[API_FUNCTION_NAME](TCFCommands.PING, 2, (ping: Ping): void => {
+      window[API_KEY](TCFCommand.PING, 2, (ping: Ping): void => {
 
         expect(ping.cmpId, 'ping.cmpId with stub').to.be.undefined;
         expect(ping.cmpVersion, 'ping.cmpVersion with stub').to.be.undefined;
@@ -92,10 +93,10 @@ describe('CmpApi', (): void => {
 
     getCmpApi();
 
-    expect(window[API_FUNCTION_NAME], `window.${API_FUNCTION_NAME} after cmpApi created`).to.be.a('function');
+    expect(window[API_KEY], `window.${API_KEY} after cmpApi created`).to.be.a('function');
     return new Promise((resolve: () => void): void => {
 
-      window[API_FUNCTION_NAME]('ping', 2, (ping: Ping): void => {
+      window[API_KEY]('ping', 2, (ping: Ping): void => {
 
         expect(ping.cmpId, 'ping.cmpId after cmpApi created').is.above(2);
         expect(ping.cmpVersion, 'ping.cmpVersion after cmpApi created').is.above(0);
@@ -148,7 +149,7 @@ describe('CmpApi', (): void => {
 
     assertStub();
 
-    window[API_FUNCTION_NAME](TCFCommands.GET_TC_DATA, API_VERSION, (tcData: TCData, success: boolean): void => {
+    window[API_KEY](TCFCommand.GET_TC_DATA, API_VERSION, (tcData: TCData, success: boolean): void => {
 
       expect(success).to.be.true;
       TestUtils.tcModelToTCData();
@@ -177,7 +178,7 @@ describe('CmpApi', (): void => {
     assertStub();
     const tcString = TCStringFactory.base();
 
-    window[API_FUNCTION_NAME](TCFCommands.GET_TC_DATA, API_VERSION, (tcData: TCData, success: boolean): void => {
+    window[API_KEY](TCFCommand.GET_TC_DATA, API_VERSION, (tcData: TCData, success: boolean): void => {
 
       expect(success).to.be.true;
       expect(tcData.tcString, 'tcString').to.equal(tcString);
@@ -242,7 +243,7 @@ describe('CmpApi', (): void => {
 
       const callDat = (): void => {
 
-        window[API_FUNCTION_NAME](command, version, (result: any, success: boolean): void => {
+        window[API_KEY](command, version, (result: any, success: boolean): void => {
 
           expect(result, 'result').not.to.be.undefined;
           expect(success, 'success').to.be.true;
@@ -264,7 +265,7 @@ describe('CmpApi', (): void => {
     it(`should callback with success=false and result=error message if command=${command} and version=${version} because ${because}`, (done: () => void): void => {
 
       getCmpApi();
-      window[API_FUNCTION_NAME](command, version, (result: string, success: boolean): void => {
+      window[API_KEY](command, version, (result: string, success: boolean): void => {
 
         expect(result, 'result').to.be.null;
         expect(success, 'success').to.be.false;
@@ -284,18 +285,18 @@ describe('CmpApi', (): void => {
   runFailCommand(true, 2, 'command is a boolean');
   runFailCommand(false, 2, 'command is a boolean');
 
-  runFailCommand(TCFCommands.GET_TC_DATA, 2.1, 'version is a floating point number that is greater than 2');
-  runFailCommand(TCFCommands.GET_TC_DATA, '2.1', 'version is a floating point that doesn\'t evaluate to 2');
-  runFailCommand(TCFCommands.GET_TC_DATA, 1, 'version is not supported');
-  runFailCommand(TCFCommands.GET_TC_DATA, true, 'version is a boolean');
-  runFailCommand(TCFCommands.GET_TC_DATA, false, 'version is a boolean');
-  runFailCommand(TCFCommands.GET_TC_DATA, {}, 'version is an object');
+  runFailCommand(TCFCommand.GET_TC_DATA, 2.1, 'version is a floating point number that is greater than 2');
+  runFailCommand(TCFCommand.GET_TC_DATA, '2.1', 'version is a floating point that doesn\'t evaluate to 2');
+  runFailCommand(TCFCommand.GET_TC_DATA, 1, 'version is not supported');
+  runFailCommand(TCFCommand.GET_TC_DATA, true, 'version is a boolean');
+  runFailCommand(TCFCommand.GET_TC_DATA, false, 'version is a boolean');
+  runFailCommand(TCFCommand.GET_TC_DATA, {}, 'version is an object');
 
-  runSucceedCommand(TCFCommands.GET_TC_DATA, '2', 'is a string but still 2');
-  runSucceedCommand(TCFCommands.GET_TC_DATA, '2.0', 'is a string but still 2');
-  runSucceedCommand(TCFCommands.GET_TC_DATA, 2.0, 'version is a floating point number that evaluates to 2');
-  runSucceedCommand(TCFCommands.GET_TC_DATA, null, 'null is valid');
-  runSucceedCommand(TCFCommands.GET_TC_DATA, 0, '0 is valid');
+  runSucceedCommand(TCFCommand.GET_TC_DATA, '2', 'is a string but still 2');
+  runSucceedCommand(TCFCommand.GET_TC_DATA, '2.0', 'is a string but still 2');
+  runSucceedCommand(TCFCommand.GET_TC_DATA, 2.0, 'version is a floating point number that evaluates to 2');
+  runSucceedCommand(TCFCommand.GET_TC_DATA, null, 'null is valid');
+  runSucceedCommand(TCFCommand.GET_TC_DATA, 0, '0 is valid');
 
   const runFailCallback = (callback: any, because = ''): void => {
 
@@ -304,7 +305,7 @@ describe('CmpApi', (): void => {
       getCmpApi();
       expect((): void => {
 
-        window[API_FUNCTION_NAME](TCFCommands.GET_TC_DATA, 2, callback);
+        window[API_KEY](TCFCommand.GET_TC_DATA, 2, callback);
 
       }).to.throw();
       done();
@@ -338,7 +339,7 @@ describe('CmpApi', (): void => {
 
     });
 
-    window[API_FUNCTION_NAME](commandName, 2, (param: boolean): void => {
+    window[API_KEY](commandName, 2, (param: boolean): void => {
 
       expect(param, 'param').to.be.a('boolean');
       expect(param, 'param').to.equal(passParam);
@@ -372,7 +373,7 @@ describe('CmpApi', (): void => {
 
     });
 
-    window[API_FUNCTION_NAME](commandName, 2, (param: boolean, param2: string, param3: string): void => {
+    window[API_KEY](commandName, 2, (param: boolean, param2: string, param3: string): void => {
 
       expect(param, 'param').to.be.a('boolean');
       expect(param, 'param').to.equal(passParam);
@@ -386,119 +387,43 @@ describe('CmpApi', (): void => {
 
   });
 
-  it('should call a built-in getTCData command through the page interface and decorate the response in the middleware ', (done: () => void): void => {
+  const runBuiltInCustomTest = (command: TCFCommand): void => {
 
-    const commandName = 'getTCData';
-    const additionalTCDataKey = 'google_consent_string'
-    const additionalTCDataValue = '1~1.35.41.101'
+    if (command !== TCFCommand.REMOVE_EVENT_LISTENER) {
 
-    const cmpApi = getCmpApi(false, {
-      [commandName]: (TCDataObj: any, success: boolean, next: Function): void => {
-        TCDataObj[additionalTCDataKey] = additionalTCDataValue
-        next(TCDataObj, success)
-      }
-    });
+      it(`should call a built-in ${command} command through the page interface and decorate the response in the middleware`, (done: () => void): void => {
 
-    cmpApi.update(TCStringFactory.base());
+        const additionalKey = makeRandomString(1, 100);
+        const additionalValue = makeRandomString(1, 100);
 
-    window[API_FUNCTION_NAME](commandName, 2, (TCData: any, success: boolean): void => {
-      expect(TCData[additionalTCDataKey]).to.equal(additionalTCDataValue);
-      expect(success).to.equal(true);
-      done();
-    });
+        const cmpApi = getCmpApi(false, {
+          [command]: (next: CommandCallback, response: Response | boolean | VendorList, success: boolean): void => {
 
-  });
+            response[additionalKey] = additionalValue;
+            next(response, success);
 
-  it('should call a built-in addEventListener command through the page interface and decorate the response in the middleware ', (done: () => void): void => {
+          },
+        });
 
-    const commandName = 'addEventListener';
-    const additionalTCDataKey = 'google_consent_string'
-    const additionalTCDataValue = '1~1.35.41.101'
+        cmpApi.update(TCStringFactory.base());
 
-    const cmpApi = getCmpApi(false, {
-      [commandName]: (TCDataObj: any, success: boolean, next: Function): void => {
-        TCDataObj[additionalTCDataKey] = additionalTCDataValue
-        next(TCDataObj, success)
-      }
-    });
+        window[API_KEY](command, 2, (response: Response, success: boolean): void => {
 
-    cmpApi.update(TCStringFactory.base());
+          expect(response, 'response').not.to.be.null;
+          expect(response[additionalKey]).to.equal(additionalValue);
+          expect(success).to.equal(true);
+          done();
 
-    window[API_FUNCTION_NAME](commandName, 2, (TCData: any, success: boolean): void => {
-      expect(TCData[additionalTCDataKey]).to.equal(additionalTCDataValue);
-      expect(success).to.equal(true);
-      done();
-    });
+        });
 
-  });
+      });
 
-  it('should call a built-in removeEventListener command through the page interface and decorate the response in the middleware ', (done: () => void): void => {
+    }
 
-    const commandName = 'removeEventListener';
-    const mutatedStatus = 'success'
+  };
 
-    const cmpApi = getCmpApi(false, {
-      [commandName]: (status: any, next: Function): void => {
-        status = mutatedStatus
-        next(mutatedStatus)
-      }
-    });
-
-    cmpApi.update(TCStringFactory.base());
-
-    window[API_FUNCTION_NAME](commandName, 2, (status: any): void => {
-      expect(status).to.equal(mutatedStatus);
-      done();
-    });
-
-  });
-
-  it('should call a built-in inAppTCData command through the page interface and decorate the response in the middleware ', (done: () => void): void => {
-
-    const commandName = 'getInAppTCData';
-    const additionalTCDataKey = 'google_consent_string'
-    const additionalTCDataValue = '1~1.35.41.101'
-
-    const cmpApi = getCmpApi(false, {
-      [commandName]: (TCDataObj: any, success: boolean, next: Function): void => {
-        TCDataObj[additionalTCDataKey] = additionalTCDataValue
-        next(TCDataObj, success)
-      }
-    });
-
-    cmpApi.update(TCStringFactory.base());
-
-    window[API_FUNCTION_NAME](commandName, 2, (TCData: any, success: boolean): void => {
-      expect(TCData[additionalTCDataKey]).to.equal(additionalTCDataValue);
-      expect(success).to.equal(true)
-      done();
-    });
-
-  });
-
-  it('should call a built-in getVendorList command through the page interface and decorate the response in the middleware ', (done: () => void): void => {
-
-    const commandName = 'getVendorList';
-    const additionalGVLKey = 'google_consent_string'
-    const additionalGVLValue = '1~1.35.41.101'
-
-    const cmpApi = getCmpApi(false, {
-      [commandName]: (gvl: any, success: boolean, next: Function): void => {
-        gvl[additionalGVLKey] = additionalGVLValue
-        next(gvl, success)
-      }
-    });
-
-    cmpApi.update(TCStringFactory.base());
-
-    window[API_FUNCTION_NAME](commandName, 2, (TCData: any, success: boolean): void => {
-      expect(TCData[additionalGVLKey]).to.equal(additionalGVLValue);
-      expect(success).to.equal(true)
-      done();
-    });
-
-  });
-
+  Object.keys(TCFCommand)
+    .map((key) => runBuiltInCustomTest(TCFCommand[key]));
 
   it(`should set gdprApplies=true, displayStatus="${DisplayStatus.DISABLED}", eventStatus="${EventStatus.TC_LOADED}", and cmpStatus="${CmpStatus.LOADED}" on the first set of the tcString when uiVisible=false`, (): void => {
 
