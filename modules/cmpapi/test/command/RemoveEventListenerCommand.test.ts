@@ -1,7 +1,6 @@
 import {AddEventListenerCommand} from '../../src/command/AddEventListenerCommand';
 import {CmpApiModel} from '../../src/CmpApiModel';
 import {RemoveEventListenerCommand} from '../../src/command/RemoveEventListenerCommand';
-import {TCDataCallback} from '../../src/callback';
 import {TCData} from '../../src/response';
 import {TCStringFactory} from '@iabtcf/testing';
 import {TCString} from '@iabtcf/core';
@@ -42,7 +41,7 @@ describe('command->RemoveEventListenerCommand', (): void => {
 
     it(`should return result=null and success=false for param=${badParam}`, (done: () => void): void => {
 
-      const tcDataCallback: TCDataCallback = function(): void {
+      const tcDataCallback = function(): void {
 
         // is queued
         expect(CmpApiModel.eventQueue.size, 'CmpApiModel.eventQueue.size after AddEventListenerCommand').to.equal(1);

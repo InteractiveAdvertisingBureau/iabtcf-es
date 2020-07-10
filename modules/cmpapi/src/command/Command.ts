@@ -1,49 +1,58 @@
-import {Callback, FailCallback} from '../callback';
+import {CommandCallback} from './CommandCallback';
+import {Response} from '../response/Response';
+import {VendorList} from '@iabtcf/core';
 /**
  * Base command class holds basic command parameters and has functionality to
  * handle basic validation.
  */
 export abstract class Command {
 
-  protected versionString: string;
-  protected callback: Callback;
   protected listenerId: number;
+  protected callback: CommandCallback;
+  protected next: CommandCallback;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  protected param: any;
+  protected success = true;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected param?: any;
+  public constructor(callback: CommandCallback, param?: any, listenerId?: number, next?: CommandCallback) {
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public constructor(callback: Callback, param?: any, listenerId?: number) {
+    Object.assign(this, {
+      callback,
+      listenerId,
+      param,
+      next,
+    });
 
-    this.callback = callback;
-    this.param = param;
-    this.listenerId = listenerId;
+    this.respond();
 
-    if (this.isValid()) {
+  }
 
-      this.success();
+  private async respond(): Promise<void> {
+
+    let response = null;
+
+    try {
+
+      response = await this.getResponse();
+
+    } catch (ignore) {}
+
+    const success = (response !== null);
+
+    if (typeof this.next === 'function') {
+
+      this.callback(this.next, response, success);
 
     } else {
 
-      this.fail();
+      this.callback(response, success);
 
     }
 
   }
 
-  // if not overwritten it's always true
-  protected isValid(): boolean {
-
-    return true;
-
-  }
-  protected abstract async success(): Promise<void>
-  protected fail(): void {
-
-    const callback = this.callback as FailCallback;
-
-    callback(null, false);
-
-  }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  protected abstract async getResponse(): Promise<Response | VendorList | boolean | null>
 
 }

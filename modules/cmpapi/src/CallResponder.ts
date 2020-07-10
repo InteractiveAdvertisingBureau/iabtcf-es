@@ -1,25 +1,20 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import {CommandCallback, TCFCommand} from './command';
 import {CommandMap} from './command/CommandMap';
 import {CmpApiModel} from './CmpApiModel';
-import {Callback, ErrorCallback} from './callback';
-import {TCFCommands} from './command/TCFCommands';
-import {DisabledCommand} from './command/DisabledCommand';
+import {Disabled} from './response/Disabled';
 import {CustomCommands} from './CustomCommands';
 import {SupportedVersions} from './SupportedVersions';
 
-type TcfApiArgs = [string, number, Callback, ...any[]];
-type GetQueueFunction = () => TcfApiArgs[];
-type PageCallHandler = (
-  command: string,
-  version: number,
-  callback: (response?: any, success?: any) => void,
-  ...param: any
-) => void;
+export const API_KEY = '__tcfapi';
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type APIArgs = [string, number, CommandCallback, ...any[]];
+
+type GetQueueFunction = () => APIArgs[];
+type PageCallHandler = (...APIArgs) => void;
 
 export class CallResponder {
 
-  private callQueue: TcfApiArgs[];
-  private readonly API_FUNCTION_NAME: string = '__tcfapi';
+  private callQueue: APIArgs[];
   private readonly customCommands: CustomCommands;
 
   public constructor(customCommands?: CustomCommands) {
@@ -37,7 +32,7 @@ export class CallResponder {
     try {
 
       // get queued commands
-      this.callQueue = (window[this.API_FUNCTION_NAME] as GetQueueFunction)();
+      this.callQueue = (window[API_KEY] as GetQueueFunction)();
 
     } catch (err) {
 
@@ -45,7 +40,7 @@ export class CallResponder {
 
     } finally {
 
-      window[this.API_FUNCTION_NAME] = this.apiCall.bind(this);
+      window[API_KEY] = this.apiCall.bind(this);
 
     }
 
@@ -57,14 +52,15 @@ export class CallResponder {
    * Handler for all page call commands
    * @param {string} command
    * @param {number} version
-   * @param {CallbackFunction} callback
+   * @param {CommandCallback} callback
    * @param {any} [param]
    */
-  public apiCall(command: string, version: number, callback: Callback, ...params: any): void | never {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public apiCall(command: string, version: number, callback: CommandCallback, ...params: any): void | never {
 
     if (typeof command !== 'string') {
 
-      (callback as ErrorCallback)(null, false);
+      callback(null, false);
 
     } else if (!SupportedVersions.has(version)) {
 
@@ -73,7 +69,7 @@ export class CallResponder {
        * that's probably ok, we don't need strict adherence here.
        */
 
-      (callback as ErrorCallback)(null, false);
+      callback(null, false);
 
     } else if (typeof callback !== 'function') {
 
@@ -81,9 +77,9 @@ export class CallResponder {
 
     } else if (CmpApiModel.disabled) {
 
-      new DisabledCommand(callback);
+      callback(new Disabled(), false);
 
-    } else if (!this.isKnownCommand(command)) {
+    } else if (!this.isCustomCommand(command) && !this.isBuiltInCommand(command)) {
 
       /**
        * This check is here just because the call shouldn't be queued if it's
@@ -92,27 +88,39 @@ export class CallResponder {
        * instead of letting it linger.
        */
 
-      (callback as ErrorCallback)(null, false);
+      callback(null, false);
 
-    } else if (command === TCFCommands.PING) {
+    } else if (this.isCustomCommand(command) && !this.isBuiltInCommand(command)) {
+
+      this.customCommands[command](callback, ...params);
+
+    } else if (command === TCFCommand.PING) {
 
       /**
        * if it's a ping we always respond right away regardless of our tcModel
        * status or other things.
        */
-      new CommandMap[command](callback, params[0]);
+      if (this.isCustomCommand(command)) {
 
-    } else if (this.customCommands && this.customCommands[command]) {
+        new CommandMap[command](this.customCommands[command], params[0], null, callback);
 
-      this.customCommands[command](callback, ...params);
+      } else {
 
-    } else if (CmpApiModel.tcModel === undefined) {
+        new CommandMap[command](callback, params[0]);
+
+      }
+
+    } else if (!CmpApiModel.tcModel) {
 
       /**
        * If we are still waiting for the TC data to be set we can push this
        * onto the queue that we have and once the model is set it'll be called
        */
       this.callQueue.push([command, version, callback, ...params]);
+
+    } else if (this.isCustomCommand(command) && this.isBuiltInCommand(command)) {
+
+      new CommandMap[command](this.customCommands[command], params[0], null, callback);
 
     } else {
 
@@ -135,10 +143,10 @@ export class CallResponder {
   public purgeQueuedCalls(): void {
 
     const apiCall = this.apiCall.bind(this);
-    const queueCopy: TcfApiArgs[] = this.callQueue;
+    const queueCopy: APIArgs[] = this.callQueue;
 
     this.callQueue = [];
-    queueCopy.forEach((args: TcfApiArgs): void => {
+    queueCopy.forEach((args: APIArgs): void => {
 
       apiCall(...args);
 
@@ -147,16 +155,26 @@ export class CallResponder {
   }
 
   /**
-   * Checks to see if the command exists in either the set of TCF Commands or
-   * if custom commands
-   *
-   * @param {string} command - command to check
-   * @return {boolean} - whether or not this command is known
-   */
-  private isKnownCommand(command: string): boolean {
+     * Checks to see if the command exists in the set of custom commands
+     *
+     * @param {string} command - command to check
+     * @return {boolean} - whether or not this command is a custom command
+     */
+  private isCustomCommand(command: string): boolean {
 
-    return ((this.customCommands !== undefined && this.customCommands[command] !== undefined) ||
-      (CommandMap[command] !== undefined));
+    return ((this.customCommands && typeof this.customCommands[command] === 'function'));
+
+  }
+
+  /**
+     * Checks to see if the command exists in the set of TCF Commands
+     *
+     * @param {string} command - command to check
+     * @return {boolean} - whether or not this command is a built-in command
+     */
+  private isBuiltInCommand(command: string): boolean {
+
+    return ((CommandMap[command] !== undefined));
 
   }
 

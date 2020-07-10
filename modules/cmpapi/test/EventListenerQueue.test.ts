@@ -13,14 +13,14 @@ describe('EventListenerQueue', (): void => {
 
     expect(elq.size, 'size - initial').to.equal(0);
 
-    elq.add((tcData: TCData): void => {
+    elq.add({callback: (tcData: TCData): void => {
 
       expect(tcData.listenerId, 'listenerId').to.equal(0);
       elq.remove(tcData.listenerId);
       expect(elq.size, 'size - after remove').to.equal(0);
       done();
 
-    });
+    }});
 
     CmpApiModel.gdprApplies = true;
     CmpApiModel.tcString = TCStringFactory.base();
@@ -42,7 +42,7 @@ describe('EventListenerQueue', (): void => {
     for (let i =0; i < numListeners; i++) {
 
       // eslint-disable-next-line @typescript-eslint/no-empty-function
-      elq.add((): void => {});
+      elq.add({callback: (): void => {}});
 
     }
 

@@ -1,14 +1,12 @@
 import {GetTCDataCommand} from './GetTCDataCommand';
-import {InAppTCDataCallback} from '../callback';
 import {InAppTCData} from '../response';
 
 export class GetInAppTCDataCommand extends GetTCDataCommand {
 
-  protected async success(): Promise<void> {
+  protected async getResponse(): Promise<InAppTCData> {
 
-    const callback = this.callback as InAppTCDataCallback;
-
-    callback(new InAppTCData(this.param), true);
+    this.throwIfParamInvalid();
+    return new InAppTCData(this.param);
 
   }
 

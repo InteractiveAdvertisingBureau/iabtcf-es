@@ -1,1 +1,2 @@
-export * from './TCFCommands';
+export * from './TCFCommand';
+export * from './CommandCallback';

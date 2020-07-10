@@ -1,37 +1,30 @@
 import {Command} from './Command';
-import {TCDataCallback} from '../callback';
 import {TCData} from '../response';
 
 export class GetTCDataCommand extends Command {
 
-  protected async success(): Promise<void> {
+  protected async getResponse(): Promise<TCData> {
 
-    const callback = this.callback as TCDataCallback;
-    callback(new TCData(this.param, this.listenerId), true);
+    this.throwIfParamInvalid();
+    return new TCData(this.param, this.listenerId);
 
   }
 
-  protected isValid(): boolean {
-
-    let retr = true;
+  protected throwIfParamInvalid(): void {
 
     /**
      * if they have passed something in as a parameter we'll need to see if
-     * it's usable.  If not then we'll need to respond with a fail.
+     * it's usable.  If not then we'll need to throw an error.  Check to see if
+     * the array is not undefined and is an array of integers, otherwise it's
+     * unusable
      */
-    if (this.param !== undefined) {
+    if (this.param !== undefined &&
+      (!Array.isArray(this.param) ||
+       !this.param.every(Number.isInteger))) {
 
-      /**
-       * Check to see if the array is not undefined and is an array of
-       * integers, otherwise it's unusable
-       */
-
-      retr = Array.isArray(this.param);
-      retr = (retr && this.param.every((item: number): boolean => Number.isInteger(item)));
+      throw new Error('Invalid Parameter');
 
     }
-
-    return retr;
 
   }
 

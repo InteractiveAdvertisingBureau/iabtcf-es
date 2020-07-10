@@ -1,61 +1,37 @@
 import {CmpApiModel} from '../CmpApiModel';
 import {Command} from './Command';
-import {GVL} from '@iabtcf/core';
-import {VendorListCallback} from '../callback';
+import {GVL, VendorList} from '@iabtcf/core';
 
 /**
  * Gets a version of the Global Vendors List
  */
 export class GetVendorListCommand extends Command {
 
-  protected async success(): Promise<void> {
+  protected async getResponse(): Promise<VendorList | null> {
 
-    const callback = this.callback as VendorListCallback;
+    const tcModel = CmpApiModel.tcModel;
+    const tcModelVersion = tcModel.vendorListVersion;
+    let gvl: GVL;
 
     if (this.param === undefined) {
 
-      this.param = CmpApiModel.tcModel.vendorListVersion;
+      this.param = tcModelVersion;
 
     }
 
-    const gvl = new GVL(this.param);
+    if (this.param === tcModelVersion && tcModel.gvl) {
 
-    try {
+      gvl = tcModel.gvl;
 
-      await gvl.readyPromise;
+    } else {
 
-      callback(gvl.getJson(), true);
-
-    } catch (err) {
-
-      this.fail();
+      gvl = new GVL(this.param);
 
     }
 
-  }
-  protected isValid(): boolean {
+    await gvl.readyPromise;
 
-    let retr = true;
-
-    if (this.param !== undefined) {
-
-      if (typeof this.param === 'string' || typeof this.param === 'number') {
-
-        retr = (
-          Number.isInteger(+this.param) &&
-            +this.param > 0 ||
-            this.param === 'LATEST'
-        );
-
-      } else {
-
-        retr = false;
-
-      }
-
-    }
-
-    return retr;
+    return gvl.getJson();
 
   }
 

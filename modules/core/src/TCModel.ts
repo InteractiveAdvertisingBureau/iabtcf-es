@@ -313,11 +313,20 @@ export class TCModel extends Cloneable<TCModel> {
    */
   public set vendorListVersion(integer: StringOrNumber) {
 
-    this.vendorListVersion_ = parseInt(integer as string, 10);
+    /**
+     * first coerce to a number via leading '+' then take the integer value by
+     * bitshifting to the right.  This works on all types in JavaScript and if
+     * it's not valid then value will be 0.
+     */
+    integer = +integer>>0;
 
-    if (this.vendorListVersion_ < 0) {
+    if (integer < 0) {
 
       throw new TCModelError('vendorListVersion', integer);
+
+    } else {
+
+      this.vendorListVersion_ = integer;
 
     }
 
