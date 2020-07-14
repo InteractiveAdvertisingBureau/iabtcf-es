@@ -110,7 +110,14 @@ export class CallResponder {
 
       }
 
-    } else if (!CmpApiModel.tcModel) {
+      /**
+       * tcModel will be either:
+       * 1. undefined - update has not been called
+       * 2. null - gdpr does not apply
+       * 3. Valid TCModel - gdpr applies and update was called
+       */
+
+    } else if (CmpApiModel.tcModel === undefined) {
 
       /**
        * If we are still waiting for the TC data to be set we can push this
