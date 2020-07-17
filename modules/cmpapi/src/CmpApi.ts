@@ -128,6 +128,7 @@ export class CmpApi {
       }
 
       CmpApiModel.tcModel.isServiceSpecific = this.isServiceSpecific;
+      CmpApiModel.tcfPolicyVersion = +CmpApiModel.tcModel.policyVersion;
       CmpApiModel.tcString = encodedTCString;
 
     }
