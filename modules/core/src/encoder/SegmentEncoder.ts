@@ -13,11 +13,11 @@ export class SegmentEncoder {
 
   public static encode(tcModel: TCModel, segment: Segment): string {
 
-    let sequence;
+    let sequence: string[];
 
     try {
 
-      sequence = this.fieldSequence[''+tcModel.version][segment];
+      sequence = this.fieldSequence[tcModel.version][segment];
 
     } catch (err) {
 
@@ -37,22 +37,22 @@ export class SegmentEncoder {
 
     }
 
-    sequence.forEach((key: string): void => {
+    sequence.forEach((field: string): void => {
 
-      const value: TCModelPropType = tcModel[key];
-      const encoder = FieldEncoderMap[key];
-      let numBits: number = BitLength[key];
+      const value: TCModelPropType = tcModel[field];
+      const encoder = FieldEncoderMap[field];
+      let numBits: number = BitLength[field];
 
       if (numBits === undefined) {
 
-        if (this.isPublisherCustom(key)) {
+        if (this.isPublisherCustom(field)) {
 
           /**
            * publisherCustom[Consents | LegitimateInterests] are an edge case
            * because they are of variable length. The length is defined in a
            * separate field named numCustomPurposes.
            */
-          numBits = +tcModel[Fields.numCustomPurposes];
+          numBits = tcModel[Fields.numCustomPurposes] as number;
 
         }
 
@@ -64,7 +64,7 @@ export class SegmentEncoder {
 
       } catch (err) {
 
-        throw new EncodingError(`Error encoding ${segment}->${key}: ${err.message}`);
+        throw new EncodingError(`Error encoding ${segment}->${field}: ${err.message}`);
 
       }
 
@@ -80,37 +80,27 @@ export class SegmentEncoder {
     const bitField = Base64Url.decode(encodedString);
     let bStringIdx = 0;
 
-    if (segment === Segment.CORE) {
-
-      tcModel.version = IntEncoder.decode(bitField.substr(bStringIdx, BitLength[Fields.version]), BitLength[Fields.version]);
-
-    }
-
     if (segment !== Segment.CORE) {
 
       bStringIdx += BitLength.segmentType;
 
     }
 
-    const sequence = this.fieldSequence[''+tcModel.version][segment];
+    const sequence = this.fieldSequence[tcModel.version][segment];
 
-    sequence.forEach((key: string): void => {
+    sequence.forEach((field: string): void => {
 
-      const encoder = FieldEncoderMap[key];
-      let numBits = BitLength[key];
+      const encoder = FieldEncoderMap[field];
+      let numBits: number | undefined = BitLength[field];
 
-      if (numBits === undefined) {
+      if (numBits === undefined && this.isPublisherCustom(field)) {
 
-        if (this.isPublisherCustom(key)) {
-
-          /**
-           * publisherCustom[Consents | LegitimateInterests] are an edge case
-           * because they are of variable length. The length is defined in a
-           * separate field named numCustomPurposes.
-           */
-          numBits = +tcModel[Fields.numCustomPurposes];
-
-        }
+        /**
+         * publisherCustom[Consents | LegitimateInterests] are an edge case
+         * because they are of variable length. The length is defined in a
+         * separate field named numCustomPurposes.
+         */
+        numBits = tcModel[Fields.numCustomPurposes] as number;
 
       }
 
@@ -126,19 +116,19 @@ export class SegmentEncoder {
 
         const bits = bitField.substr(bStringIdx, numBits);
 
-        tcModel[key] = encoder.decode(bits, numBits);
+        tcModel[field] = encoder.decode(bits, numBits);
 
         if (Number.isInteger(numBits)) {
 
           bStringIdx += numBits;
 
-        } else if (Number.isInteger(tcModel[key].bitLength)) {
+        } else if (tcModel[field].bitLength !== undefined) {
 
-          bStringIdx += tcModel[key].bitLength;
+          bStringIdx += tcModel[field].bitLength as number;
 
         } else {
 
-          throw new DecodingError(key);
+          throw new DecodingError(field);
 
         }
 
@@ -152,7 +142,7 @@ export class SegmentEncoder {
 
   private static isPublisherCustom(key: string): boolean {
 
-    return key.indexOf('publisherCustom') === 0;
+    return key.startsWith('publisherCustom');
 
   }
 
