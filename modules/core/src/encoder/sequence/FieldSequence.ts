@@ -17,6 +17,7 @@ export class FieldSequence implements SequenceVersionMap {
       Fields.vendorConsents,
     ],
   };
+
   public readonly '2': SVMItem = {
     [Segment.CORE]: [
       Fields.version,
