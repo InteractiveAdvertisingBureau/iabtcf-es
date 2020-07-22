@@ -21,11 +21,7 @@ export class DateEncoder {
 
     }
 
-    const date: Date = new Date();
-
-    date.setTime(IntEncoder.decode(value, numBits) * 100);
-
-    return date;
+    return new Date(IntEncoder.decode(value, numBits) * 100);
 
   }
 
