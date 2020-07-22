@@ -88,11 +88,12 @@ class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
          * all the ids and find the biggest one.
          */
         this.maxId_ = 0;
-        this.set_.forEach((id: number): void => {
 
-          this.maxId_ = Math.max(this.maxId, id);
+        for (const id of this.set_) {
 
-        });
+          this.maxId_ = Math.max(this.maxId_, id);
+
+        }
 
       }
 
@@ -102,39 +103,51 @@ class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
 
   private isIntMap<T>(item: unknown): item is IntMap<T> {
 
-    let result = (typeof item === 'object');
-    result = (result && Object.keys(item).every((key: string): boolean => {
+    if (typeof item === 'object') {
 
-      let itemResult =Number.isInteger(parseInt(key, 10));
+      for (const key of Object.keys(item)) {
 
-      itemResult = (itemResult && this.isValidNumber(item[key].id));
-      itemResult = (itemResult && item[key].name !== undefined);
+        if (!this.isValidNumber(item[key].id) || item[key].name === undefined){
 
-      return itemResult;
+          return false;
 
-    },
-    ));
-    return result;
+        }
+  
+      }
+
+      return true;
+
+    }
+
+    return false;
 
   }
 
   private isValidNumber(item: unknown): item is number {
 
-    return (parseInt(item as string, 10) > 0);
+    return typeof item === 'number' && item > 0;
 
   }
 
   private isSet(item: unknown): item is Set<number> {
 
-    let result = false;
-
     if (item instanceof Set) {
 
-      result = Array.from(item).every(this.isValidNumber);
+      for (const entry of item) {
+        
+        if (!this.isValidNumber(entry)) {
+
+          return false;
+
+        }
+
+      }
+      
+      return true;
 
     }
 
-    return result;
+    return false;
 
   }
 
@@ -185,9 +198,10 @@ class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
     }
 
   }
+
   public empty(): void {
 
-    this.set_ = new Set<number>();
+    this.set_.clear();
 
   }
 
@@ -225,4 +239,5 @@ class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
   }
 
 }
+
 export {Vector};
