@@ -121,10 +121,9 @@ export class VendorVectorEncoder {
      */
     if (encodingType === VectorEncodingType.RANGE) {
 
-      vector = new Vector();
-
       const numEntries: number = IntEncoder.decode(value.substr(index, BitLength.numEntries), BitLength.numEntries);
 
+      vector = new Vector();
       index += BitLength.numEntries;
 
       // loop through each group of entries
@@ -187,7 +186,7 @@ export class VendorVectorEncoder {
     let rangeString = IntEncoder.encode(numEntries, BitLength.numEntries);
 
     // each range
-    ranges.forEach((range: number[]): void => {
+    for (const range of ranges) {
 
       // is this range a single?
       const single = (range.length === 1);
@@ -206,7 +205,7 @@ export class VendorVectorEncoder {
 
       }
 
-    });
+    }
 
     return rangeString;
 

@@ -28,11 +28,11 @@ export class FixedVectorEncoder {
 
     const vector: Vector = new Vector();
 
-    for (let i = 1; i <= numBits; i ++) {
+    for (let i = 0; i < numBits; i++) {
 
-      if (BooleanEncoder.decode(value[i - 1])) {
+      if (BooleanEncoder.decode(value[i])) {
 
-        vector.set(i);
+        vector.set(i + 1);
 
       }
 
