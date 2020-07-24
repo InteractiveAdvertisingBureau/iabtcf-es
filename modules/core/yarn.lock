@@ -89,17 +89,11 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@iabtcf/core@1.0.0-beta.19":
-  version "1.0.0-beta.19"
-  resolved "https://registry.yarnpkg.com/@iabtcf/core/-/core-1.0.0-beta.19.tgz#d20887201b0335e90fc4c953a4b52de2b8cc3765"
-  integrity sha512-oUZj7aglmN1Sq/sh6aUvinLyi2EdvOa4/CSOjtLuOCopgpxY4m9onEFm+bCr5Wvt7MBCRQeS1uorCbz+SDWSIg==
-
-"@iabtcf/testing@1.0.0-beta.19":
-  version "1.0.0-beta.19"
-  resolved "https://registry.yarnpkg.com/@iabtcf/testing/-/testing-1.0.0-beta.19.tgz#8ba671a1ccd654fbae48b110149a1813fbf7f5dd"
-  integrity sha512-+9OIg0EO57JR6y3v+ros/yJhbe+KC5neoqrxAKBY4vJIUlUc/UqHfNvbVq0HfntLLSe6HU6Zg9fBNYPvmA/vzw==
+"@iabtcf/testing@1.0.1-4":
+  version "1.0.1-4"
+  resolved "https://registry.yarnpkg.com/@iabtcf/testing/-/testing-1.0.1-4.tgz#f076d97be1315aa06c82b12a0b5b31ba9a6797be"
+  integrity sha512-7Yjv1ex4bfllt84CgX98e2jNQMYqYog17fhbf0wrl77rMTTlWHsc/xQMt5fSz4RtbA+KqT6beVAVuFzIYIoEig==
   dependencies:
-    "@iabtcf/core" "1.0.0-beta.19"
     "@types/sinon" "^7.0.13"
     "@types/sinon-chai" "3.2.2"
     sinon "^7.3.2"
@@ -1732,9 +1726,9 @@ istanbul-reports@^2.2.4:
     handlebars "^4.1.2"
 
 jquery@^3.4.1:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
-  integrity sha512-36+AdBzCL+y6qjw5Tx7HgzeGCzC81MDDgaUP8ld2zhx58HdqXGoBd+tHdrBMiyjGQs0Hxs/MLZTu/eHNJJuWPw==
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.0.tgz#9980b97d9e4194611c36530e7dc46a58d7340fc9"
+  integrity sha512-Xb7SVYMvygPxbFMpTFQiHh1J7HClEaThguL15N/Gg37Lri/qKyhRGZYzHRyLH8Stq3Aow0LsHO2O2ci86fCrNQ==
 
 js-tokens@^4.0.0:
   version "4.0.0"
