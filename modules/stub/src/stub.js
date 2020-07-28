@@ -30,8 +30,6 @@
           setTimeout(addFrame, 5);
         }
       }
-
-      return !otherCMP;
     }
 
     function tcfAPIHandler(...args) {
