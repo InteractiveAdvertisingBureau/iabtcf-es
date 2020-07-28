@@ -667,11 +667,7 @@ export class TCModel extends Cloneable<TCModel> {
        * but goes to ID 6 we need to set the number to 6 for the encoding to
        * work properly since it's positional.
        */
-      const purposeIds: string[] = Object.keys(this.customPurposes)
-        .sort((a: string, b: string): number => +a - +b);
-
-      len = parseInt(purposeIds.pop(), 10);
-
+      len = Math.max(0, ...Object.keys(this.customPurposes).map((id: string): number => +id));
     }
 
     return len;
