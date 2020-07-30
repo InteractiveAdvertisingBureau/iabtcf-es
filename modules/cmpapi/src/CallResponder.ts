@@ -162,11 +162,11 @@ export class CallResponder {
   }
 
   /**
-     * Checks to see if the command exists in the set of custom commands
-     *
-     * @param {string} command - command to check
-     * @return {boolean} - whether or not this command is a custom command
-     */
+   * Checks to see if the command exists in the set of custom commands
+   *
+   * @param {string} command - command to check
+   * @return {boolean} - whether or not this command is a custom command
+   */
   private isCustomCommand(command: string): boolean {
 
     return ((this.customCommands && typeof this.customCommands[command] === 'function'));
@@ -174,11 +174,11 @@ export class CallResponder {
   }
 
   /**
-     * Checks to see if the command exists in the set of TCF Commands
-     *
-     * @param {string} command - command to check
-     * @return {boolean} - whether or not this command is a built-in command
-     */
+   * Checks to see if the command exists in the set of TCF Commands
+   *
+   * @param {string} command - command to check
+   * @return {boolean} - whether or not this command is a built-in command
+   */
   private isBuiltInCommand(command: string): boolean {
 
     return ((CommandMap[command] !== undefined));
