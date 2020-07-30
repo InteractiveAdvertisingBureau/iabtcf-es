@@ -89,24 +89,16 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@iabtcf/core@1.0.0-beta.19":
-  version "1.0.0-beta.19"
-  resolved "https://registry.yarnpkg.com/@iabtcf/core/-/core-1.0.0-beta.19.tgz#d20887201b0335e90fc4c953a4b52de2b8cc3765"
-  integrity sha512-oUZj7aglmN1Sq/sh6aUvinLyi2EdvOa4/CSOjtLuOCopgpxY4m9onEFm+bCr5Wvt7MBCRQeS1uorCbz+SDWSIg==
+"@iabtcf/stub@1.1.0-1":
+  version "1.1.0-1"
+  resolved "https://registry.yarnpkg.com/@iabtcf/stub/-/stub-1.1.0-1.tgz#05a56d636b1e29471f164661888968824fdf0863"
+  integrity sha512-9z7QtgcleH7J043b0pzR/QwBHntMgDzRcOQ5wpgXqknCBDbjPqw9oMeYFWaWbrWzLhe2EVRPxTVpsw2V5NYTKg==
 
-"@iabtcf/stub@1.0.0-beta.19":
-  version "1.0.0-beta.19"
-  resolved "https://registry.yarnpkg.com/@iabtcf/stub/-/stub-1.0.0-beta.19.tgz#8954dacf5fe9e47da2d2b8cc48741805cce4f4c0"
-  integrity sha512-lRj7wi/yLI6bFtouzBYl+DcHlSIgWOH874+2YwzJvpjI9Xcyzf6Wx1n8siPxiO8H0rpWe90uPwaOABRbwnemQQ==
+"@iabtcf/testing@1.1.0-1":
+  version "1.1.0-1"
+  resolved "https://registry.yarnpkg.com/@iabtcf/testing/-/testing-1.1.0-1.tgz#849c123ce802a09db06c75e6620b3cd1c1699dbc"
+  integrity sha512-jcLbfvZ+NvQkFaHTG9sm930GBwUUUJlGafRJClk5QDw9nesy23em/JeU6RjZJ22rFhvExV/Yc0SkqxeLfv7wRw==
   dependencies:
-    "@iabtcf/core" "1.0.0-beta.19"
-
-"@iabtcf/testing@1.0.0-beta.19":
-  version "1.0.0-beta.19"
-  resolved "https://registry.yarnpkg.com/@iabtcf/testing/-/testing-1.0.0-beta.19.tgz#8ba671a1ccd654fbae48b110149a1813fbf7f5dd"
-  integrity sha512-+9OIg0EO57JR6y3v+ros/yJhbe+KC5neoqrxAKBY4vJIUlUc/UqHfNvbVq0HfntLLSe6HU6Zg9fBNYPvmA/vzw==
-  dependencies:
-    "@iabtcf/core" "1.0.0-beta.19"
     "@types/sinon" "^7.0.13"
     "@types/sinon-chai" "3.2.2"
     sinon "^7.3.2"
@@ -2176,9 +2168,9 @@ lodash.sortby@^4.7.0:
   integrity sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
 
 lodash@^4.17.10, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+  version "4.17.19"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
+  integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
 
 log-driver@^1.2.7:
   version "1.2.7"
@@ -3605,10 +3597,10 @@ typescript@3.2.x:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.2.4.tgz#c585cb952912263d915b462726ce244ba510ef3d"
   integrity sha512-0RNDbSdEokBeEAkgNbxJ+BLwSManFy9TeXz8uW+48j/xhEXv1ePME60olyzw2XzUqUBNAYFeJadIqAgNqIACwg==
 
-typescript@^3.7.0:
-  version "3.8.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.8.3.tgz#409eb8544ea0335711205869ec458ab109ee1061"
-  integrity sha512-MYlEfn5VrLNsgudQTVJeNaQFUAI7DkhnOjdpAp4T+ku1TfQClewlbSuTVHiA+8skNBgaf02TL/kLOvig4y3G8w==
+typescript@3.7:
+  version "3.7.5"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.7.5.tgz#0692e21f65fd4108b9330238aac11dd2e177a1ae"
+  integrity sha512-/P5lkRXkWHNAbcJIiHPfRoKqyd7bsyCma1hZNUGfn20qm64T6ZBlrzprymeu918H+mB/0rIg2gGK/BXkhhYgBw==
 
 uglify-js@^3.1.4:
   version "3.6.9"

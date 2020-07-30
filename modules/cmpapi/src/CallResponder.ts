@@ -32,7 +32,7 @@ export class CallResponder {
     try {
 
       // get queued commands
-      this.callQueue = (window[API_KEY] as GetQueueFunction)();
+      this.callQueue = (window[API_KEY] as GetQueueFunction)() || [];
 
     } catch (err) {
 
