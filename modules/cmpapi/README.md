@@ -136,7 +136,7 @@ responsible for handling validations and errors. Custom function signatures
 must have a callback and may define additonal params that will be passed from
 the calling script.
 
-### Example
+**Example**
 ````javascript
 
 import {CmpApi} from '@iabtcf/cmpapi';
@@ -178,3 +178,31 @@ __tcfapi('connectBones', 2, songLyricCallback, 'knee', 'thigh');
 // ouput: The knee bone is connected to the thigh bone
 
 ````
+### Built-In and Custom Commands
+Beginning in 1.1.0, if a custom command is defined that overlaps with a built-in command (`"ping"`, `"getTCData"`, `"getInAppTCData"`, `"getVendorList"`) then the custom command will act as a "middleware" being passed the built-in command's response and expected to pass along the response when finished.
+
+
+
+**Example**
+````javascript
+
+import {CmpApi} from '@iabtcf/cmpapi';
+
+const cmpApi = new CmpApi(1, 3, false, {
+
+  'getTCData': (next, tcData) => {
+
+    // tcData will be constructed via the TC string and can be added to here
+    tcData.reallyImportantExtraProperty = true;
+
+    // pass data along
+    next(tcData);
+
+
+  },
+
+});
+
+
+````
+**Note**: If the `next()` function is not called with the `TCData` object, then the caller's callback will not be executed.
