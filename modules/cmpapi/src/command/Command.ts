@@ -1,10 +1,5 @@
 import {CommandCallback} from './CommandCallback';
-import {Response} from '../response/Response';
-import {VendorList} from '@iabtcf/core';
-/**
- * Base command class holds basic command parameters and has functionality to
- * handle basic validation.
- */
+
 export abstract class Command {
 
   protected listenerId: number;
@@ -24,35 +19,40 @@ export abstract class Command {
       next,
     });
 
-    this.respond();
-
-  }
-
-  private async respond(): Promise<void> {
-
-    let response = null;
-
     try {
 
-      response = await this.getResponse();
+      this.respond();
 
-    } catch (ignore) {}
+    } catch (error) {
 
-    const success = (response !== null);
-
-    if (typeof this.next === 'function') {
-
-      this.callback(this.next, response, success);
-
-    } else {
-
-      this.callback(response, success);
+      this.invokeCallback(null);
 
     }
 
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected abstract async getResponse(): Promise<Response | VendorList | boolean | null>
+  protected invokeCallback(response: any): void {
+
+    if (response !== null) {
+
+      if (typeof this.next === 'function') {
+
+        this.callback(this.next, response, true);
+
+      } else {
+
+        this.callback(response, true);
+
+      }
+
+    } else {
+
+      this.callback(response, false);
+
+    }
+
+  }
+  protected abstract respond(): void;
 
 }

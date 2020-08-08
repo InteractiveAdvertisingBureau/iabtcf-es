@@ -3,9 +3,9 @@ import {Command} from './Command';
 
 export class PingCommand extends Command {
 
-  protected async getResponse(): Promise<Ping> {
+  protected respond(): void {
 
-    return new Ping();
+    this.invokeCallback(new Ping());
 
   }
 

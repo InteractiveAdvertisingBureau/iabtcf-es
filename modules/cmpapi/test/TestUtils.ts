@@ -1,29 +1,12 @@
 import {BooleanVector} from '../src/response/BooleanVector';
 import {CmpApiModel} from '../src/CmpApiModel';
-import {CmpStatus, DisplayStatus} from '../src/status';
 import {InAppTCData} from '../src/response/InAppTCData';
 import {PurposeRestriction, TCString, Vector} from '@iabtcf/core';
-import {TCData} from '../src/response/TCData';
 import {expect} from 'chai';
+import {TCData} from '../src/response/TCData';
 
 export class TestUtils {
 
-  public static assertDefaultCmpApiModel(): void {
-
-    expect(CmpApiModel.apiVersion, 'assert default apiVersion').to.equal('2');
-    expect(CmpApiModel.tcfPolicyVersion, 'assert default tcfPolicyVersion').to.equal(2);
-    expect(CmpApiModel.cmpStatus, 'assert default cmpStatus').to.equal(CmpStatus.LOADING);
-    expect(CmpApiModel.displayStatus, 'assert default displayStatus').to.equal(DisplayStatus.HIDDEN);
-
-    expect(CmpApiModel.disabled, 'assert default disabled').to.be.false;
-
-    expect(CmpApiModel.cmpId, 'assert default cmpId').to.be.undefined;
-    expect(CmpApiModel.cmpVersion, 'assert default cmpVersion').to.be.undefined;
-    expect(CmpApiModel.gdprApplies, 'assert default gdprApplies').to.be.undefined;
-    expect(CmpApiModel.eventStatus, 'assert default eventStatus').to.be.undefined;
-    expect(CmpApiModel.tcModel, 'assert default tcModel').to.be.undefined;
-
-  }
   private static checkVectorToBooleanVector(name: string,
                                             vector: Vector,
                                             boolVector: BooleanVector,

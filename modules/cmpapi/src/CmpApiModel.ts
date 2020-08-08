@@ -31,6 +31,7 @@ export class CmpApiModel {
     delete this.gdprApplies;
     delete this.tcModel;
     delete this.tcString;
+    delete this.tcfPolicyVersion;
 
     this.cmpStatus = CmpStatus.LOADING;
     this.disabled = false;

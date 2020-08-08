@@ -29,6 +29,7 @@ export class CallResponder {
      * calling with no arguments, then we'll just move on and create our
      * function.
      */
+
     try {
 
       // get queued commands
@@ -43,8 +44,6 @@ export class CallResponder {
       window[API_KEY] = this.apiCall.bind(this);
 
     }
-
-    this.purgeQueuedCalls();
 
   }
 
@@ -149,13 +148,12 @@ export class CallResponder {
    */
   public purgeQueuedCalls(): void {
 
-    const apiCall = this.apiCall.bind(this);
     const queueCopy: APIArgs[] = this.callQueue;
 
     this.callQueue = [];
     queueCopy.forEach((args: APIArgs): void => {
 
-      apiCall(...args);
+      window[API_KEY](...args);
 
     });
 

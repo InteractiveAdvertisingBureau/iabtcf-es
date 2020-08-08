@@ -3,10 +3,10 @@ import {TCData} from '../response';
 
 export class GetTCDataCommand extends Command {
 
-  protected async getResponse(): Promise<TCData> {
+  protected respond(): void {
 
     this.throwIfParamInvalid();
-    return new TCData(this.param, this.listenerId);
+    this.invokeCallback(new TCData(this.param, this.listenerId));
 
   }
 

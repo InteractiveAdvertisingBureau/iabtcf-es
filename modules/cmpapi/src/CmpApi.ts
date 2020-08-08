@@ -8,6 +8,7 @@ export class CmpApi {
 
   private callResponder: CallResponder;
   private isServiceSpecific: boolean;
+  private numUpdates = 0;
 
   /**
    * @param {number} cmpId - IAB assigned CMP ID
@@ -133,9 +134,25 @@ export class CmpApi {
 
     }
 
-    this.callResponder.purgeQueuedCalls();
+    if (this.numUpdates === 0) {
 
-    CmpApiModel.eventQueue.exec();
+      /**
+       * Will make AddEventListener Commands respond immediately.
+       */
+
+      this.callResponder.purgeQueuedCalls();
+
+    } else {
+
+      /**
+       * Should be no queued calls and only any addEventListener commands
+       */
+
+      CmpApiModel.eventQueue.exec();
+
+    }
+
+    this.numUpdates++;
 
   }
 

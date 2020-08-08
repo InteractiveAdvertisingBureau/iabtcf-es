@@ -53,7 +53,6 @@ describe('CmpApi', (): void => {
   beforeEach((): void => {
 
     stub.default();
-    TestUtils.assertDefaultCmpApiModel();
 
   });
   afterEach((): void => {

@@ -1,13 +1,13 @@
 import {CmpApiModel} from '../CmpApiModel';
 import {Command} from './Command';
-import {GVL, VendorList} from '@iabtcf/core';
+import {GVL} from '@iabtcf/core';
 
 /**
  * Gets a version of the Global Vendors List
  */
 export class GetVendorListCommand extends Command {
 
-  protected async getResponse(): Promise<VendorList | null> {
+  protected respond(): void {
 
     const tcModel = CmpApiModel.tcModel;
     const tcModelVersion = tcModel.vendorListVersion;
@@ -29,9 +29,11 @@ export class GetVendorListCommand extends Command {
 
     }
 
-    await gvl.readyPromise;
+    gvl.readyPromise.then((): void => {
 
-    return gvl.getJson();
+      this.invokeCallback(gvl.getJson());
+
+    });
 
   }
 
