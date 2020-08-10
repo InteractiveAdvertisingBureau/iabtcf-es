@@ -1,15 +1,20 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import {Callback, TCFAPIArgs, TCFAPI_KEY} from './types';
-import {CmpApiModel} from './CmpApiModel';
+import {CommandCallback, TCFCommand} from './command';
 import {CommandMap} from './command/CommandMap';
+import {CmpApiModel} from './CmpApiModel';
+import {Disabled} from './response/Disabled';
 import {CustomCommands} from './CustomCommands';
-import {DisabledCommand} from './command/DisabledCommand';
 import {SupportedVersions} from './SupportedVersions';
-import {TCFCommands} from './command/TCFCommands';
+
+export const API_KEY = '__tcfapi';
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type APIArgs = [string, number, CommandCallback, ...any[]];
+
+type GetQueueFunction = () => APIArgs[];
+type PageCallHandler = (...APIArgs) => void;
 
 export class CallResponder {
 
-  private queuedCalls: TCFAPIArgs[];
+  private callQueue: APIArgs[];
   private readonly customCommands: CustomCommands;
 
   public constructor(customCommands?: CustomCommands) {
@@ -24,18 +29,19 @@ export class CallResponder {
      * calling with no arguments, then we'll just move on and create our
      * function.
      */
+
     try {
 
       // get queued commands
-      this.queuedCalls = window[TCFAPI_KEY]();
+      this.callQueue = (window[API_KEY] as GetQueueFunction)() || [];
 
     } catch (err) {
 
-      // nothing to do here - we tried... no harm no foul
+      this.callQueue = [];
 
     } finally {
 
-      window[TCFAPI_KEY] = this.apiCall.bind(this);
+      window[API_KEY] = this.apiCall.bind(this);
 
     }
 
@@ -45,10 +51,11 @@ export class CallResponder {
    * Handler for all page call commands
    * @param {string} command
    * @param {number} version
-   * @param {CallbackFunction} callback
+   * @param {CommandCallback} callback
    * @param {any} [param]
    */
-  public apiCall(command: string, version: number, callback: Callback, ...params: any): void | never {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public apiCall(command: string, version: number, callback: CommandCallback, ...params: any): void | never {
 
     if (typeof command !== 'string') {
 
@@ -69,9 +76,9 @@ export class CallResponder {
 
     } else if (CmpApiModel.disabled) {
 
-      new DisabledCommand(callback);
+      callback(new Disabled(), false);
 
-    } else if (!this.isKnownCommand(command)) {
+    } else if (!this.isCustomCommand(command) && !this.isBuiltInCommand(command)) {
 
       /**
        * This check is here just because the call shouldn't be queued if it's
@@ -82,17 +89,32 @@ export class CallResponder {
 
       callback(null, false);
 
-    } else if (command === TCFCommands.PING) {
+    } else if (this.isCustomCommand(command) && !this.isBuiltInCommand(command)) {
+
+      this.customCommands[command](callback, ...params);
+
+    } else if (command === TCFCommand.PING) {
 
       /**
        * if it's a ping we always respond right away regardless of our tcModel
        * status or other things.
        */
-      new CommandMap[command](callback, params[0]);
+      if (this.isCustomCommand(command)) {
 
-    } else if (this.customCommands && this.customCommands[command]) {
+        new CommandMap[command](this.customCommands[command], params[0], null, callback);
 
-      this.customCommands[command](callback, ...params);
+      } else {
+
+        new CommandMap[command](callback, params[0]);
+
+      }
+
+      /**
+       * tcModel will be either:
+       * 1. undefined - update has not been called
+       * 2. null - gdpr does not apply
+       * 3. Valid TCModel - gdpr applies and update was called
+       */
 
     } else if (CmpApiModel.tcModel === undefined) {
 
@@ -100,7 +122,11 @@ export class CallResponder {
        * If we are still waiting for the TC data to be set we can push this
        * onto the queue that we have and once the model is set it'll be called
        */
-      this.queuedCalls.push([command, version, callback, params]);
+      this.callQueue.push([command, version, callback, ...params]);
+
+    } else if (this.isCustomCommand(command) && this.isBuiltInCommand(command)) {
+
+      new CommandMap[command](this.customCommands[command], params[0], null, callback);
 
     } else {
 
@@ -122,32 +148,38 @@ export class CallResponder {
    */
   public purgeQueuedCalls(): void {
 
-    if (this.queuedCalls) {
+    const queueCopy: APIArgs[] = this.callQueue;
 
-      const apiCall = this.apiCall.bind(this);
-      this.queuedCalls.forEach((args: TCFAPIArgs): void =>{
+    this.callQueue = [];
+    queueCopy.forEach((args: APIArgs): void => {
 
-        apiCall(...args);
+      window[API_KEY](...args);
 
-      });
-
-      delete this.queuedCalls;
-
-    }
+    });
 
   }
 
   /**
-   * Checks to see if the command exists in either the set of TCF Commands or
-   * if custom commands
+   * Checks to see if the command exists in the set of custom commands
    *
    * @param {string} command - command to check
-   * @return {boolean} - whether or not this command is known
+   * @return {boolean} - whether or not this command is a custom command
    */
-  private isKnownCommand(command: string): boolean {
+  private isCustomCommand(command: string): boolean {
 
-    return ((this.customCommands !== undefined && this.customCommands[command] !== undefined) ||
-      (CommandMap[command] !== undefined));
+    return ((this.customCommands && typeof this.customCommands[command] === 'function'));
+
+  }
+
+  /**
+   * Checks to see if the command exists in the set of TCF Commands
+   *
+   * @param {string} command - command to check
+   * @return {boolean} - whether or not this command is a built-in command
+   */
+  private isBuiltInCommand(command: string): boolean {
+
+    return ((CommandMap[command] !== undefined));
 
   }
 

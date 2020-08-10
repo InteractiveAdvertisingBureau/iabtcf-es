@@ -6,44 +6,23 @@ import {expect} from 'chai';
 
 describe('command->AddEventListenerCommand', (): void => {
 
-  it('should immediately return a TCData object when called and again when state changes', (done: () => void): void => {
-
-    let callsMade = 0;
-    let callsReceived = 0;
+  it('should immediately return a TCData object when called and queue a call as well', (done: () => void): void => {
 
     CmpApiModel.tcModel = TCModelFactory.noGVL();
 
     const tcDataCallback = function(tcData: TCData): void {
 
-      callsReceived++;
       // only set after call is queued
-      expect(callsMade, 'callsReceived').to.equal(callsReceived);
       expect(tcData instanceof TCData).to.be.true;
 
-      if (callsReceived === 4) {
-
-        done();
-
-      }
+      done();
 
     };
 
-    callsMade++;
     new AddEventListenerCommand(tcDataCallback);
 
     // is queued
     expect(CmpApiModel.eventQueue.size, 'CmpApiModel.eventQueue.size').to.equal(1);
-    callsMade++;
-
-    CmpApiModel.tcModel = TCModelFactory.noGVL();
-    expect(CmpApiModel.eventQueue.size, 'CmpApiModel.eventQueue.size').to.equal(1);
-    callsMade++;
-
-    CmpApiModel.tcModel = TCModelFactory.noGVL();
-    expect(CmpApiModel.eventQueue.size, 'CmpApiModel.eventQueue.size').to.equal(1);
-    callsMade++;
-
-    done();
 
   });
 

@@ -1,16 +1,16 @@
-import {TCFCommands} from '../../src/command/TCFCommands';
+import {TCFCommand} from '../../src/command/TCFCommand';
 import {expect} from 'chai';
 
-describe('command->TCFCommands', (): void => {
+describe('command->TCFCommand', (): void => {
 
   it('should have these values', (done: () => void): void => {
 
-    expect(TCFCommands.PING, 'TCFCommands.PING').to.equal('ping');
-    expect(TCFCommands.GET_TC_DATA, 'TCFCommands.GET_TC_DATA').to.equal('getTCData');
-    expect(TCFCommands.GET_IN_APP_TC_DATA, 'TCFCommands.GET_IN_APP_TC_DATA').to.equal('getInAppTCData');
-    expect(TCFCommands.GET_VENDOR_LIST, 'TCFCommands.GET_VENDOR_LIST').to.equal('getVendorList');
-    expect(TCFCommands.ADD_EVENT_LISTENER, 'TCFCommands.ADD_EVENT_LISTENER').to.equal('addEventListener');
-    expect(TCFCommands.REMOVE_EVENT_LISTENER, 'TCFCommands.REMOVE_EVENT_LISTENER').to.equal('removeEventListener');
+    expect(TCFCommand.PING, 'TCFCommand.PING').to.equal('ping');
+    expect(TCFCommand.GET_TC_DATA, 'TCFCommand.GET_TC_DATA').to.equal('getTCData');
+    expect(TCFCommand.GET_IN_APP_TC_DATA, 'TCFCommand.GET_IN_APP_TC_DATA').to.equal('getInAppTCData');
+    expect(TCFCommand.GET_VENDOR_LIST, 'TCFCommand.GET_VENDOR_LIST').to.equal('getVendorList');
+    expect(TCFCommand.ADD_EVENT_LISTENER, 'TCFCommand.ADD_EVENT_LISTENER').to.equal('addEventListener');
+    expect(TCFCommand.REMOVE_EVENT_LISTENER, 'TCFCommand.REMOVE_EVENT_LISTENER').to.equal('removeEventListener');
 
     done();
 

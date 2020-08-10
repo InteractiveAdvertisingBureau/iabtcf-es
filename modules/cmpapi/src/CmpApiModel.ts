@@ -10,7 +10,7 @@ import {TCModel} from '@iabtcf/core';
 export class CmpApiModel {
 
   public static readonly apiVersion = '2';
-  public static readonly tcfPolicyVersion = 2;
+  public static tcfPolicyVersion: number;
   public static readonly eventQueue = new EventListenerQueue();
   public static cmpStatus: CmpStatus = CmpStatus.LOADING;
   public static disabled = false;
@@ -31,6 +31,7 @@ export class CmpApiModel {
     delete this.gdprApplies;
     delete this.tcModel;
     delete this.tcString;
+    delete this.tcfPolicyVersion;
 
     this.cmpStatus = CmpStatus.LOADING;
     this.disabled = false;

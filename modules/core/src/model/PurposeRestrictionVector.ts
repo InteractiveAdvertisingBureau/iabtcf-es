@@ -66,6 +66,7 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
              */
             case RestrictionType.REQUIRE_CONSENT:
               result = (vendor.flexiblePurposes.includes(purposeId) && vendor.legIntPurposes.includes(purposeId));
+              break;
 
             /**
              * If the vendor has the purposeId in flexiblePurposes and it is
@@ -74,6 +75,7 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
              */
             case RestrictionType.REQUIRE_LI:
               result = (vendor.flexiblePurposes.includes(purposeId) && vendor.purposes.includes(purposeId));
+              break;
 
           }
 

@@ -1,47 +1,58 @@
-import {Callback} from '../types';
-/**
- * Base command class holds basic command parameters and has functionality to
- * handle basic validation.
- */
+import {CommandCallback} from './CommandCallback';
+
 export abstract class Command {
 
-  protected versionString: string;
-  protected callback: Callback;
   protected listenerId: number;
+  protected callback: CommandCallback;
+  protected next: CommandCallback;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  protected param: any;
+  protected success = true;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected param?: any;
+  public constructor(callback: CommandCallback, param?: any, listenerId?: number, next?: CommandCallback) {
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public constructor(callback: Callback, param?: any, listenerId?: number) {
+    Object.assign(this, {
+      callback,
+      listenerId,
+      param,
+      next,
+    });
 
-    this.callback = callback;
-    this.param = param;
-    this.listenerId = listenerId;
+    try {
 
-    if (this.isValid()) {
+      this.respond();
 
-      this.success();
+    } catch (error) {
 
-    } else {
-
-      this.fail();
+      this.invokeCallback(null);
 
     }
 
   }
 
-  // if not overwritten it's always true
-  protected isValid(): boolean {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  protected invokeCallback(response: any): void {
 
-    return true;
+    if (response !== null) {
+
+      if (typeof this.next === 'function') {
+
+        this.callback(this.next, response, true);
+
+      } else {
+
+        this.callback(response, true);
+
+      }
+
+    } else {
+
+      this.callback(response, false);
+
+    }
 
   }
-  protected abstract async success(): Promise<void>
-  protected fail(): void {
-
-    this.callback(null, false);
-
-  }
+  protected abstract respond(): void;
 
 }

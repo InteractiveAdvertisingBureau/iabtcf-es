@@ -9,7 +9,7 @@ let encoded = '';
 
 for (const arg of args) {
 
-  if (arg.charAt(0) === 'C' || arg.charAt(0) === 'B') {
+  if (arg.charAt(0) === 'C' || arg.charAt(0) === 'B') {
 
     encoded = arg;
     break;
@@ -76,30 +76,48 @@ if (encoded) {
   try {
 
     const tcModel = TCString.decode(encoded);
-    print('version', tcModel.version);
+    const version = tcModel.version;
+    print('version', version);
     print('cmpId', tcModel.cmpId);
     print('cmpVersion', tcModel.cmpVersion);
     print('consentScreen', tcModel.consentScreen);
     print('consentLanguage', tcModel.consentLanguage);
     print('created', tcModel.created);
     print('lastUpdated', tcModel.lastUpdated);
-    print('policyVersion', tcModel.policyVersion);
-    print('isServiceSpecific', tcModel.isServiceSpecific);
-    print('useNonStandardStacks', tcModel.useNonStandardStacks);
-    print('purposeOneTreatment', tcModel.purposeOneTreatment);
-    print('publisherCountryCode', tcModel.publisherCountryCode);
+
+    if (version !== 1) {
+
+      print('policyVersion', tcModel.policyVersion);
+      print('isServiceSpecific', tcModel.isServiceSpecific);
+      print('useNonStandardStacks', tcModel.useNonStandardStacks);
+      print('purposeOneTreatment', tcModel.purposeOneTreatment);
+      print('publisherCountryCode', tcModel.publisherCountryCode);
+
+    }
+
     print('vendorListVersion', tcModel.vendorListVersion);
     print('purposeConsents', tcModel.purposeConsents);
-    print('purposeLegitimateInterests', tcModel.purposeLegitimateInterests);
-    print('specialFeatureOptins', tcModel.specialFeatureOptins);
-    print('publisherLegitimateInterests', tcModel.publisherLegitimateInterests);
-    print('publisherCustomConsents', tcModel.publisherCustomConsents);
-    print('publisherConsents', tcModel.publisherConsents);
-    print('publisherCustomLegitimateInterests', tcModel.publisherCustomLegitimateInterests);
+
+    if (version !== 1) {
+
+      print('purposeLegitimateInterests', tcModel.purposeLegitimateInterests);
+      print('specialFeatureOptins', tcModel.specialFeatureOptins);
+      print('publisherLegitimateInterests', tcModel.publisherLegitimateInterests);
+      print('publisherCustomConsents', tcModel.publisherCustomConsents);
+      print('publisherConsents', tcModel.publisherConsents);
+      print('publisherCustomLegitimateInterests', tcModel.publisherCustomLegitimateInterests);
+
+    }
+
     print('vendorConsents', tcModel.vendorConsents);
-    print('vendorLegitimateInterests', tcModel.vendorLegitimateInterests);
-    print('vendorsDisclosed', tcModel.vendorsDisclosed);
-    print('vendorsAllowed', tcModel.vendorsAllowed);
+
+    if (version !== 1) {
+
+      print('vendorLegitimateInterests', tcModel.vendorLegitimateInterests);
+      print('vendorsDisclosed', tcModel.vendorsDisclosed);
+      print('vendorsAllowed', tcModel.vendorsAllowed);
+
+    }
 
   } catch (err) {
 

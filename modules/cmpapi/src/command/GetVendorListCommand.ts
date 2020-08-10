@@ -7,52 +7,33 @@ import {GVL} from '@iabtcf/core';
  */
 export class GetVendorListCommand extends Command {
 
-  protected async success(): Promise<void> {
+  protected respond(): void {
+
+    const tcModel = CmpApiModel.tcModel;
+    const tcModelVersion = tcModel.vendorListVersion;
+    let gvl: GVL;
 
     if (this.param === undefined) {
 
-      this.param = CmpApiModel.tcModel.vendorListVersion;
+      this.param = tcModelVersion;
 
     }
 
-    const gvl = new GVL(this.param);
+    if (this.param === tcModelVersion && tcModel.gvl) {
 
-    try {
+      gvl = tcModel.gvl;
 
-      await gvl.readyPromise;
+    } else {
 
-      this.callback(gvl.getJson(), true);
-
-    } catch (err) {
-
-      this.fail();
+      gvl = new GVL(this.param);
 
     }
 
-  }
-  protected isValid(): boolean {
+    gvl.readyPromise.then((): void => {
 
-    let retr = true;
+      this.invokeCallback(gvl.getJson());
 
-    if (this.param !== undefined) {
-
-      if (typeof this.param === 'string' || typeof this.param === 'number') {
-
-        retr = (
-          Number.isInteger(+this.param) &&
-            +this.param > 0 ||
-            this.param === 'LATEST'
-        );
-
-      } else {
-
-        retr = false;
-
-      }
-
-    }
-
-    return retr;
+    });
 
   }
 

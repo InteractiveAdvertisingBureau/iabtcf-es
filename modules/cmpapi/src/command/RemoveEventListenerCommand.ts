@@ -1,23 +1,11 @@
-import {Command} from './Command';
 import {CmpApiModel} from '../CmpApiModel';
+import {Command} from './Command';
 
 export class RemoveEventListenerCommand extends Command {
 
-  protected async success(): Promise<void> {
+  protected respond(): void {
 
-    this.callback(true);
-
-  }
-
-  protected fail(): void {
-
-    this.callback(false);
-
-  }
-
-  protected isValid(): boolean {
-
-    return (typeof this.param === 'number' && CmpApiModel.eventQueue.remove(this.param));
+    this.invokeCallback(CmpApiModel.eventQueue.remove(this.param));
 
   }
 

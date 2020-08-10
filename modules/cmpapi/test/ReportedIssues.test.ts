@@ -1,22 +1,21 @@
 import * as stub from '@iabtcf/stub';
+import sinon from 'sinon';
+import {API_KEY, CmpApi} from '../src/';
 import {CmpApiModel} from '../src/CmpApiModel';
-import {CmpApi} from '../src/';
-import {Disabled, Response, TCData} from '../src/response';
+import {Disabled, Response, TCData, InAppTCData} from '../src/response';
+import {EventStatus} from '../src/status/EventStatus';
+import {TCFCommand} from '../src/command/TCFCommand';
 import {expect} from 'chai';
 import {makeRandomInt, TCStringFactory} from '@iabtcf/testing';
-import {EventStatus} from '../src/status/EventStatus';
-import {TCFCommands} from '../src/command/TCFCommands';
 
-const API_FUNCTION_NAME = '__tcfapi';
-
-describe('Reported github issues', (): void => {
+describe('Reported issues', (): void => {
 
   const removeStub = (): void =>{
 
     // clean up that junk
-    if (typeof window[API_FUNCTION_NAME] === 'function') {
+    if (typeof window[API_KEY] === 'function') {
 
-      delete window[API_FUNCTION_NAME];
+      delete window[API_KEY];
 
     }
 
@@ -41,6 +40,7 @@ describe('Reported github issues', (): void => {
     stub.default();
 
   });
+
   afterEach((): void => {
 
     removeStub();
@@ -51,9 +51,10 @@ describe('Reported github issues', (): void => {
 
     const cmpApi = new CmpApi(makeRandomInt(2, Math.pow(2, 6)), makeRandomInt(2, Math.pow(2, 6)));
 
+    cmpApi.update(TCStringFactory.base());
     cmpApi.disable();
 
-    window[API_FUNCTION_NAME]('addEventListener', 2, (response: Response): void => {
+    window[API_KEY](TCFCommand.ADD_EVENT_LISTENER, 2, (response: Response): void => {
 
       expect(response instanceof Disabled, 'response instanceof Disabled').to.be.true;
 
@@ -69,7 +70,7 @@ describe('Reported github issues', (): void => {
 
     const callDatFunc = (): void => {
 
-      window[API_FUNCTION_NAME](TCFCommands.GET_TC_DATA, 2, (response: Response): void => {
+      window[API_KEY](TCFCommand.GET_TC_DATA, 2, (response: Response): void => {
 
         expect(response instanceof TCData, 'response instanceof TCData').to.be.true;
 
@@ -104,7 +105,7 @@ describe('Reported github issues', (): void => {
     expect(CmpApiModel.tcModel.cmpId, 'tcModel.cmpId').to.equal(cmpId);
     expect(CmpApiModel.tcModel.cmpVersion, 'tcModel.cmpVersion').to.equal(cmpVersion);
 
-    window[API_FUNCTION_NAME](TCFCommands.GET_TC_DATA, 2, (tcData: TCData): void => {
+    window[API_KEY](TCFCommand.GET_TC_DATA, 2, (tcData: TCData): void => {
 
       expect(tcData.tcString, 'tcData.tcString').to.equal(emptyString);
       expect(tcData.cmpId, 'tcData.tcModel.cmpId').to.equal(cmpId);
@@ -115,15 +116,14 @@ describe('Reported github issues', (): void => {
 
   });
 
-  it('120 AddEventListener: \'cmpuishown\' isn\'t being triggered ', (done: () => void): void => {
+  it('120 AddEventListener: \'cmpuishown\' isn\'t being triggered - test toggles update UIVisible', (done: () => void): void => {
 
     const cmpId = makeRandomInt(2, Math.pow(2, 6));
     const cmpVersion = makeRandomInt(2, Math.pow(2, 6));
-    const cmpApi = new CmpApi(cmpId, cmpVersion);
-    const numTimes = 6;
+    const numTimes = 4;
     let count = 0;
 
-    window[API_FUNCTION_NAME](TCFCommands.ADD_EVENT_LISTENER, 2, (tcData: TCData): void => {
+    window[API_KEY](TCFCommand.ADD_EVENT_LISTENER, 2, (tcData: TCData, success: boolean): void => {
 
       count++;
 
@@ -139,6 +139,8 @@ describe('Reported github issues', (): void => {
 
       }
 
+      expect(success, `success #${count}`).to.be.true;
+      expect(tcData, `tcData #${count}`).not.to.be.null;
       expect(tcData.eventStatus, `evenStatus #${count}`).to.equal(eventStatus);
 
       if (count === numTimes) {
@@ -148,6 +150,8 @@ describe('Reported github issues', (): void => {
       }
 
     });
+
+    const cmpApi = new CmpApi(cmpId, cmpVersion);
 
     for (let i = 0; i < numTimes; i++) {
 
@@ -176,11 +180,44 @@ describe('Reported github issues', (): void => {
 
     };
 
-    window[API_FUNCTION_NAME](TCFCommands.GET_TC_DATA, null, callback);
-    window[API_FUNCTION_NAME](TCFCommands.GET_TC_DATA, null, callback, [9]);
+    window[API_KEY](TCFCommand.GET_TC_DATA, null, callback);
+    window[API_KEY](TCFCommand.GET_TC_DATA, null, callback, [9]);
 
     const cmpApi = new CmpApi(makeRandomInt(2, Math.pow(2, 6)), makeRandomInt(2, Math.pow(2, 6)));
+
     cmpApi.update(TCStringFactory.base());
+
+  });
+
+  it('195 getInAppTCData no longer returns a success argument', (): void => {
+
+    const callback = (inAppTCData: InAppTCData, success: boolean): void => {
+
+      expect(inAppTCData, 'InAppTCData').not.to.be.null;
+      expect(success, 'success').to.be.true;
+
+    };
+
+    window[API_KEY](TCFCommand.GET_IN_APP_TC_DATA, null, callback);
+
+    const cmpApi = new CmpApi(makeRandomInt(2, Math.pow(2, 6)), makeRandomInt(2, Math.pow(2, 6)));
+
+    cmpApi.update(TCStringFactory.base());
+
+  });
+
+  it('196 should not call callback twice on addEventListener', (): void => {
+
+    const callback = sinon.fake();
+
+    window[API_KEY](TCFCommand.ADD_EVENT_LISTENER, null, callback);
+    expect(callback.callCount, 'callback.callCount :: Before CMP API Created').to.equal(0);
+
+    const cmpApi = new CmpApi(makeRandomInt(2, Math.pow(2, 6)), makeRandomInt(2, Math.pow(2, 6)));
+
+    expect(callback.callCount, 'callback.callCount :: After CMP API Created').to.equal(0);
+    cmpApi.update(TCStringFactory.base());
+    expect(callback.callCount, 'callback.callCount :: After CmpApi.update()').to.equal(1);
 
   });
 

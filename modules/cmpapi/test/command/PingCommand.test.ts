@@ -9,7 +9,6 @@ describe('command->PingCommand', (): void => {
     const pingCallback = function(ping: Ping): void {
 
       expect(ping instanceof Ping, 'ping instanceof Ping').to.be.true;
-      expect(arguments.length, 'arguments.length').to.equal(1);
 
       done();
 

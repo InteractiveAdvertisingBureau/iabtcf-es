@@ -1,8 +1,6 @@
-import {Callback} from './types';
-
+import {CommandCallback} from './command/CommandCallback';
 export interface CustomCommands {
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [commandName: string]: (callback: Callback, ...param: any) => void;
+  [commandName: string]: (callback: CommandCallback, ...param) => void;
 
 }

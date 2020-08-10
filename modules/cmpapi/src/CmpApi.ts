@@ -8,6 +8,7 @@ export class CmpApi {
 
   private callResponder: CallResponder;
   private isServiceSpecific: boolean;
+  private numUpdates = 0;
 
   /**
    * @param {number} cmpId - IAB assigned CMP ID
@@ -107,14 +108,13 @@ export class CmpApi {
 
     }
 
-    if (encodedTCString === null) {
+    CmpApiModel.gdprApplies = (encodedTCString !== null);
 
-      CmpApiModel.gdprApplies = false;
+    if (!CmpApiModel.gdprApplies) {
+
       CmpApiModel.tcModel = null;
 
     } else {
-
-      CmpApiModel.gdprApplies = true;
 
       if (encodedTCString === '') {
 
@@ -129,13 +129,30 @@ export class CmpApi {
       }
 
       CmpApiModel.tcModel.isServiceSpecific = this.isServiceSpecific;
+      CmpApiModel.tcfPolicyVersion = +CmpApiModel.tcModel.policyVersion;
       CmpApiModel.tcString = encodedTCString;
 
     }
 
-    CmpApiModel.eventQueue.exec();
+    if (this.numUpdates === 0) {
 
-    this.callResponder.purgeQueuedCalls();
+      /**
+       * Will make AddEventListener Commands respond immediately.
+       */
+
+      this.callResponder.purgeQueuedCalls();
+
+    } else {
+
+      /**
+       * Should be no queued calls and only any addEventListener commands
+       */
+
+      CmpApiModel.eventQueue.exec();
+
+    }
+
+    this.numUpdates++;
 
   }
 

@@ -3,4 +3,4 @@ export * from './response';
 export * from './status';
 export * from './CmpApi';
 export * from './CustomCommands';
-export * from './types';
+export {API_KEY, APIArgs} from './CallResponder';

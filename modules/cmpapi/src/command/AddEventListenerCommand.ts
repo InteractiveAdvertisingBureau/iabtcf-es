@@ -1,17 +1,17 @@
-import {GetTCDataCommand} from './GetTCDataCommand';
 import {CmpApiModel} from '../CmpApiModel';
+import {GetTCDataCommand} from './GetTCDataCommand';
 
 export class AddEventListenerCommand extends GetTCDataCommand {
 
-  protected async success(): Promise<void> {
+  protected respond(): void {
 
-    const listenerId = CmpApiModel.eventQueue.add(this.callback);
+    this.listenerId = CmpApiModel.eventQueue.add({
+      callback: this.callback,
+      param: this.param,
+      next: this.next,
+    });
 
-    if (CmpApiModel.tcModel !== undefined) {
-
-      new GetTCDataCommand(this.callback, undefined, listenerId);
-
-    }
+    super.respond();
 
   }
 

@@ -777,7 +777,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
   /**
    * isReady - Whether or not this instance is ready to be used.  This will be
-   * immediately and synchronously true if a vnedorlist object is passed into
+   * immediately and synchronously true if a vendorlist object is passed into
    * the constructor or once the JSON vendorllist is retrieved.
    *
    * @return {boolean} whether or not the instance is ready to be interacted

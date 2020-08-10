@@ -1,14 +1,21 @@
 import {GetTCDataCommand} from './command/GetTCDataCommand';
-import {Callback} from './types';
+import {CommandCallback} from './command/CommandCallback';
+
+interface EventItem {
+  callback: CommandCallback;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  param?: any;
+  next?: CommandCallback;
+};
 
 export class EventListenerQueue {
 
-  private eventQueue = new Map<number, Callback>();
+  private eventQueue = new Map<number, EventItem>();
   private queueNumber = 0;
 
-  public add(tcDataCallback: Callback): number {
+  public add(eventItems: EventItem): number {
 
-    this.eventQueue.set(this.queueNumber, tcDataCallback);
+    this.eventQueue.set(this.queueNumber, eventItems);
     return this.queueNumber++;
 
   }
@@ -21,9 +28,9 @@ export class EventListenerQueue {
 
   public exec(): void {
 
-    this.eventQueue.forEach((callback: Callback, listenerId: number): void => {
+    this.eventQueue.forEach((eventItem: EventItem, listenerId: number): void => {
 
-      new GetTCDataCommand(callback, undefined, listenerId);
+      new GetTCDataCommand(eventItem.callback, eventItem.param, listenerId, eventItem.next);
 
     });
 
