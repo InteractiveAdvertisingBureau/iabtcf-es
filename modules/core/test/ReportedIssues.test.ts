@@ -195,4 +195,37 @@ describe('Issues Reported', (): void => {
 
   });
 
+  it('204 Not possible to set vendorConsent for vendor which declared felxiblePurposes but no purposes', (): void => {
+
+    const gvl = new GVL(36);
+    gvl.readyPromise.then(() => {
+
+      // vendorId 174 has no purposes, but yet has two flexible legitimate interest purposes
+      const vendorId = 174;
+
+      // purposeId 2 for vendor 174 is defined in legInt but not in purposes (consent) and is flexible
+      const purposeId = 2;
+
+      // create TCModel
+      const tcModel = new TCModel(gvl);
+
+      // set purpose restriction
+      const purposeRestriction = new PurposeRestriction(purposeId, RestrictionType.REQUIRE_CONSENT);
+
+      tcModel.publisherRestrictions.add(vendorId, purposeRestriction);
+      tcModel.publisherRestrictions.gvl = gvl;
+
+      // give the vendor consent
+      tcModel.vendorConsents.set(vendorId);
+
+      expect(tcModel.vendorConsents.has(vendorId), `original tcModel.vendorConsents.has(${vendorId})`).to.be.true;
+
+      const decodedTCModel = TCString.decode(TCString.encode(tcModel));
+
+      expect(decodedTCModel.vendorConsents.has(vendorId), `decoded tcModel.vendorConsents.has(${vendorId})`).to.be.true;
+
+    });
+
+  });
+
 });
