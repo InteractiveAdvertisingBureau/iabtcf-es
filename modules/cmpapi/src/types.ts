@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export type TCFAPIArgs = [string, number, Callback, ...any[]];
+export type TCFTCFAPI_ARGS = [string, number, Callback, ...any[]];
 export type Callback = (result?: any, success?: boolean) => void;
 
 export type TCFAPIFunction = (
@@ -8,12 +8,12 @@ export type TCFAPIFunction = (
   version?: number,
   callback?: Callback,
   ...param: any
-) => void | TCFAPIArgs[];
+) => void | TCFTCFAPI_ARGS[];
 
-export const TCFAPI_KEY = '__tcfapi';
-export const TCFAPI_POSTMSG_CALL = TCFAPI_KEY + 'Call';
-export const TCFAPI_POSTMSG_RETURN = TCFAPI_KEY + 'Return';
-export const TCFAPI_LOCATOR = TCFAPI_KEY + 'Locator';
+export const TCFTCFAPI_KEY = '__tcfapi';
+export const TCFAPI_POSTMSG_CALL = TCFTCFAPI_KEY + 'Call';
+export const TCFAPI_POSTMSG_RETURN = TCFTCFAPI_KEY + 'Return';
+export const TCFAPI_LOCATOR = TCFTCFAPI_KEY + 'Locator';
 
 export interface TCFAPIPostMessageReturn {
   returnValue?: any;

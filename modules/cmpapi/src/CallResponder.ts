@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import {CommandCallback, TCFCommand} from './command';
 import {CommandMap} from './command/CommandMap';
 import {CmpApiModel} from './CmpApiModel';
@@ -5,16 +7,25 @@ import {Disabled} from './response/Disabled';
 import {CustomCommands} from './CustomCommands';
 import {SupportedVersions} from './SupportedVersions';
 
-export const API_KEY = '__tcfapi';
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type APIArgs = [string, number, CommandCallback, ...any[]];
+export const TCFAPI_KEY = '__tcfapi';
+export type TCFAPI_ARGS = [string, number, CommandCallback, ...any[]];
 
-type GetQueueFunction = () => APIArgs[];
-type PageCallHandler = (...APIArgs) => void;
+export type TCFAPIFunction = ((
+  command?: string,
+  version?: number | null,
+  callback?: CommandCallback,
+  ...param: any
+) => void) | (() => TCFAPI_ARGS[]);
+
+declare global {
+  interface Window {
+    __tcfapi: TCFAPIFunction;
+  }
+}
 
 export class CallResponder {
 
-  private callQueue: APIArgs[];
+  private callQueue: TCFAPI_ARGS[];
   private readonly customCommands: CustomCommands;
 
   public constructor(customCommands?: CustomCommands) {
@@ -33,7 +44,7 @@ export class CallResponder {
     try {
 
       // get queued commands
-      this.callQueue = (window[API_KEY] as GetQueueFunction)() || [];
+      this.callQueue = window[TCFAPI_KEY]() || [];
 
     } catch (err) {
 
@@ -41,7 +52,7 @@ export class CallResponder {
 
     } finally {
 
-      window[API_KEY] = this.apiCall.bind(this);
+      window[TCFAPI_KEY] = this.apiCall.bind(this);
 
     }
 
@@ -148,12 +159,12 @@ export class CallResponder {
    */
   public purgeQueuedCalls(): void {
 
-    const queueCopy: APIArgs[] = this.callQueue;
+    const queueCopy: TCFAPI_ARGS[] = this.callQueue;
 
     this.callQueue = [];
-    queueCopy.forEach((args: APIArgs): void => {
+    queueCopy.forEach((args: TCFAPI_ARGS): void => {
 
-      window[API_KEY](...args);
+      window[TCFAPI_KEY](...args);
 
     });
 

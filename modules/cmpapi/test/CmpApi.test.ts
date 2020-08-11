@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {API_KEY, CmpApi, CustomCommands} from '../src/';
+import {TCFAPI_KEY, CmpApi, CustomCommands} from '../src/';
 import {CmpApiModel} from '../src/CmpApiModel';
 import {CmpStatus, DisplayStatus, EventStatus} from '../src/status';
 import {CommandCallback} from '../src/command/CommandCallback';
@@ -20,9 +20,9 @@ describe('CmpApi', (): void => {
   const removeStub = (): void =>{
 
     // clean up that junk
-    if (typeof window[API_KEY] === 'function') {
+    if (typeof window[TCFAPI_KEY] === 'function') {
 
-      delete window[API_KEY];
+      delete window[TCFAPI_KEY];
 
     }
 
@@ -63,11 +63,11 @@ describe('CmpApi', (): void => {
 
   const assertStub = async (): Promise<void> => {
 
-    expect(window[API_KEY], `window.${API_KEY} while stub`).to.be.a('function');
+    expect(window[TCFAPI_KEY], `window.${TCFAPI_KEY} while stub`).to.be.a('function');
 
     return new Promise((resolve: () => void): void => {
 
-      window[API_KEY](TCFCommand.PING, 2, (ping: Ping): void => {
+      window[TCFAPI_KEY](TCFCommand.PING, 2, (ping: Ping): void => {
 
         expect(ping.cmpId, 'ping.cmpId with stub').to.be.undefined;
         expect(ping.cmpVersion, 'ping.cmpVersion with stub').to.be.undefined;
@@ -92,10 +92,10 @@ describe('CmpApi', (): void => {
 
     getCmpApi();
 
-    expect(window[API_KEY], `window.${API_KEY} after cmpApi created`).to.be.a('function');
+    expect(window[TCFAPI_KEY], `window.${TCFAPI_KEY} after cmpApi created`).to.be.a('function');
     return new Promise((resolve: () => void): void => {
 
-      window[API_KEY]('ping', 2, (ping: Ping): void => {
+      window[TCFAPI_KEY]('ping', 2, (ping: Ping): void => {
 
         expect(ping.cmpId, 'ping.cmpId after cmpApi created').is.above(2);
         expect(ping.cmpVersion, 'ping.cmpVersion after cmpApi created').is.above(0);
@@ -148,7 +148,7 @@ describe('CmpApi', (): void => {
 
     assertStub();
 
-    window[API_KEY](TCFCommand.GET_TC_DATA, API_VERSION, (tcData: TCData, success: boolean): void => {
+    window[TCFAPI_KEY](TCFCommand.GET_TC_DATA, API_VERSION, (tcData: TCData, success: boolean): void => {
 
       expect(success).to.be.true;
       TestUtils.tcModelToTCData();
@@ -177,7 +177,7 @@ describe('CmpApi', (): void => {
     assertStub();
     const tcString = TCStringFactory.base();
 
-    window[API_KEY](TCFCommand.GET_TC_DATA, API_VERSION, (tcData: TCData, success: boolean): void => {
+    window[TCFAPI_KEY](TCFCommand.GET_TC_DATA, API_VERSION, (tcData: TCData, success: boolean): void => {
 
       expect(success).to.be.true;
       expect(tcData.tcString, 'tcString').to.equal(tcString);
@@ -242,7 +242,7 @@ describe('CmpApi', (): void => {
 
       const callDat = (): void => {
 
-        window[API_KEY](command, version, (result: any, success: boolean): void => {
+        window[TCFAPI_KEY](command, version, (result: any, success: boolean): void => {
 
           expect(result, 'result').not.to.be.undefined;
           expect(success, 'success').to.be.true;
@@ -264,7 +264,7 @@ describe('CmpApi', (): void => {
     it(`should callback with success=false and result=error message if command=${command} and version=${version} because ${because}`, (done: () => void): void => {
 
       getCmpApi();
-      window[API_KEY](command, version, (result: string, success: boolean): void => {
+      window[TCFAPI_KEY](command, version, (result: string, success: boolean): void => {
 
         expect(result, 'result').to.be.null;
         expect(success, 'success').to.be.false;
@@ -304,7 +304,7 @@ describe('CmpApi', (): void => {
       getCmpApi();
       expect((): void => {
 
-        window[API_KEY](TCFCommand.GET_TC_DATA, 2, callback);
+        window[TCFAPI_KEY](TCFCommand.GET_TC_DATA, 2, callback);
 
       }).to.throw();
       done();
@@ -338,7 +338,7 @@ describe('CmpApi', (): void => {
 
     });
 
-    window[API_KEY](commandName, 2, (param: boolean): void => {
+    window[TCFAPI_KEY](commandName, 2, (param: boolean): void => {
 
       expect(param, 'param').to.be.a('boolean');
       expect(param, 'param').to.equal(passParam);
@@ -372,7 +372,7 @@ describe('CmpApi', (): void => {
 
     });
 
-    window[API_KEY](commandName, 2, (param: boolean, param2: string, param3: string): void => {
+    window[TCFAPI_KEY](commandName, 2, (param: boolean, param2: string, param3: string): void => {
 
       expect(param, 'param').to.be.a('boolean');
       expect(param, 'param').to.equal(passParam);
@@ -406,7 +406,7 @@ describe('CmpApi', (): void => {
 
         cmpApi.update(TCStringFactory.base());
 
-        window[API_KEY](command, 2, (response: Response, success: boolean): void => {
+        window[TCFAPI_KEY](command, 2, (response: Response, success: boolean): void => {
 
           expect(response, 'response').not.to.be.null;
           expect(response[additionalKey]).to.equal(additionalValue);
