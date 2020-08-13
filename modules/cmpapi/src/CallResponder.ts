@@ -53,6 +53,7 @@ export class CallResponder {
     } finally {
 
       window[TCFAPI_KEY] = this.apiCall.bind(this);
+      this.purgeQueuedCalls();
 
     }
 
