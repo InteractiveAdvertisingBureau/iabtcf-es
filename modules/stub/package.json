@@ -12,9 +12,14 @@
   "scripts": {
     "preversion": "echo 'woops I think you meant to go to the root' && exit 1",
     "build": "../build",
+    "lint": "eslint `find test src -name '*.ts'`",
     "debug": "ndb yarn test --no-timeouts",
+    "serve:cov": "npx http-server ./coverage/",
     "test": "mocha `find test -name '*.test.ts'`",
-    "lint": "eslint `find test src -name '*.ts'`"
+    "test-watch": "mocha `find test -name '*.test.ts'` --watch --watch-extensions ts",
+    "test-cov": "rm -rf coverage; nyc --reporter=html mocha `find test -name '*.test.ts'`",
+    "test-watch-cov": "yarn test-cov --watch --watch-extensions ts",
+    "test-lcov": "nyc --reporter=lcov mocha `find test -name '*.test.ts'`"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",

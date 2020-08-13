@@ -1,17 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import {
-  Callback,
   CmpStatus,
+  CommandCallback,
   TCFAPIFunction,
-  TCFAPIArgs,
+  TCFAPIPostMessageCall,
+  TCFAPI_ARGS,
   TCFAPI_KEY,
   TCFAPI_LOCATOR,
-  TCFAPIPostMessageCall,
-  TCFAPIPostMessageReturn,
   TCFAPI_POSTMSG_CALL,
   TCFAPI_POSTMSG_RETURN,
-  TCFCommands,
+  TCFCommand,
 } from '@iabtcf/cmpapi';
 
 export class StubCmpApi {
@@ -20,7 +19,7 @@ export class StubCmpApi {
   private static readonly TARGET_ORIGIN = '*';
   private static readonly GDPR_APPLIES_COMMAND = 'setGdprApplies';
 
-  private queue: TCFAPIArgs[] = [];
+  private queue: TCFAPI_ARGS[] = [];
   private callId = 0;
   private gdprApplies: boolean;
 
@@ -30,13 +29,13 @@ export class StubCmpApi {
 
       window[TCFAPI_KEY] = this.apiCall.bind(this);
       this.addLocatorFrame();
-      window.addEventListener(StubCmpApi.POST_MESSAGE_EVENT, this.postMessageApiCall);
+      window.addEventListener(StubCmpApi.POST_MESSAGE_EVENT, this.postMessageCallHandler);
 
     }
 
   }
 
-  private apiCall(command?: string, version?: number | null, callback?: Callback, ...params): void | TCFAPIArgs[] {
+  private apiCall(command?: string, version?: number | null, callback?: CommandCallback, ...params): void | TCFAPI_ARGS[] {
 
     const hasCallback = (typeof callback === 'function');
 
@@ -72,26 +71,30 @@ export class StubCmpApi {
 
       }
 
-    } else if (command === TCFCommands.PING && hasCallback) {
+    } else if (hasCallback) {
 
-      /**
-       * This is the only method required from a stub.
-       */
+      if (command === TCFCommand.PING) {
 
-      callback({
-        gdprApplies: this.gdprApplies,
-        cmpLoaded: false,
-        cmpStatus: CmpStatus.STUB,
-      });
+        /**
+         * This is the only method required from a stub.
+         */
 
-    } else {
+        callback({
+          gdprApplies: this.gdprApplies,
+          cmpLoaded: false,
+          cmpStatus: CmpStatus.STUB,
+        });
 
-      /**
-       * some other method, just queue it for the
-       * full CMP implementation to deal with
-       */
+      } else {
 
-      this.queue.push([command, version, callback, ...params]);
+        /**
+         * some other method, just queue it for the
+         * full CMP implementation to deal with
+         */
+
+        this.queue.push([command, version, callback, ...params]);
+
+      }
 
     }
 
@@ -119,9 +122,9 @@ export class StubCmpApi {
 
   }
 
-  private postMessageApiCall(event: MessageEvent): void {
+  private postMessageCallHandler(event: MessageEvent): void {
 
-    if (event && event.data) {
+    if (event?.data) {
 
       let call: TCFAPIPostMessageCall;
 
@@ -149,7 +152,7 @@ export class StubCmpApi {
 
         const {command, version, parameter} = call;
 
-        const wrapperCallback: Callback = (returnValue?: any, success?: boolean): void => {
+        const wrapperCallback: CommandCallback = (returnValue?: any, success?: boolean): void => {
 
           if (event.source !== null) {
 

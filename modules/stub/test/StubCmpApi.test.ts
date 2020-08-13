@@ -1,5 +1,5 @@
 import {StubCmpApi} from '../src/StubCmpApi';
-import {TCFAPI_KEY, TCFAPI_LOCATOR, TCFAPIArgs, TCFCommands, CmpStatus} from '@iabtcf/cmpapi';
+import {TCFAPI_ARGS, TCFAPI_KEY, TCFAPI_LOCATOR, TCFCommand, CmpStatus, TCFAPIPostMessageReturn, TCFAPI_POSTMSG_RETURN} from '@iabtcf/cmpapi';
 import {makeRandomString, makeRandomInt, makeRandomIntArray} from '@iabtcf/testing';
 import {expect} from 'chai';
 
@@ -10,15 +10,24 @@ describe('StubCmpApi', (): void => {
     new StubCmpApi();
 
   });
+
   afterEach((): void => {
 
-    if (window[TCFAPI_KEY]) {
+    delete window[TCFAPI_KEY];
+    const iframes = document.querySelectorAll('iframe');
 
-      delete window[TCFAPI_KEY];
+    for (let i = 0, len = iframes.length; i < len; i++) {
+
+      const frame = iframes[i];
+
+      if (frame && frame.name === TCFAPI_LOCATOR && frame.parentNode) {
+
+        frame.parentNode.removeChild(frame);
+        break;
+
+      }
 
     }
-
-    document.body.innerText = '';
 
   });
 
@@ -34,9 +43,9 @@ describe('StubCmpApi', (): void => {
 
   });
 
-  it(`should respond to a ${TCFCommands.PING} command`, (done: () => void): void => {
+  it(`should respond to a ${TCFCommand.PING} command`, (done: () => void): void => {
 
-    window[TCFAPI_KEY](TCFCommands.PING, 2, (ping: {gdprApplies: boolean; cmpLoaded: boolean; cmpStatus: CmpStatus}): void => {
+    window[TCFAPI_KEY](TCFCommand.PING, 2, (ping: {gdprApplies: boolean; cmpLoaded: boolean; cmpStatus: CmpStatus}): void => {
 
       expect(ping.gdprApplies, 'ping.gdprApplies').to.be.undefined;
       expect(ping.cmpLoaded, 'ping.cmpLoaded').to.be.false;
@@ -48,7 +57,7 @@ describe('StubCmpApi', (): void => {
 
   });
 
-  it(`should set gdprApplies and respond to a ${TCFCommands.PING} command with that value`, (done: () => void): void => {
+  it(`should set gdprApplies and respond to a ${TCFCommand.PING} command with that value`, (done: () => void): void => {
 
     const gdprApplies = true;
 
@@ -57,7 +66,7 @@ describe('StubCmpApi', (): void => {
       expect(result, 'result').to.be.null;
       expect(success, 'success').to.be.true;
 
-      window[TCFAPI_KEY](TCFCommands.PING, 2, (ping: {gdprApplies: boolean; cmpLoaded: boolean; cmpStatus: CmpStatus}): void => {
+      window[TCFAPI_KEY](TCFCommand.PING, 2, (ping: {gdprApplies: boolean; cmpLoaded: boolean; cmpStatus: CmpStatus}): void => {
 
         expect(ping.gdprApplies, 'ping.gdprApplies').to.equal(gdprApplies);
         expect(ping.cmpLoaded, 'ping.cmpLoaded').to.be.false;
@@ -71,7 +80,7 @@ describe('StubCmpApi', (): void => {
 
   });
 
-  it(`should queue any command that is not "${TCFCommands.PING}" or "setGdprApplies"`, (): void => {
+  it(`should queue any command that is not "${TCFCommand.PING}" or "setGdprApplies"`, (): void => {
 
     const numCommands = 100;
     const commands = [];
@@ -92,7 +101,7 @@ describe('StubCmpApi', (): void => {
 
     expect(queue, 'queue').to.have.lengthOf(numCommands);
 
-    queue.forEach((argSet: TCFAPIArgs, index: number): void => {
+    queue.forEach((argSet: TCFAPI_ARGS, index: number): void => {
 
       expect(argSet[0], 'argSet[0]').to.equal(commands[index]);
       expect(argSet[1], 'argSet[1]').to.equal(2);
@@ -127,6 +136,31 @@ describe('StubCmpApi', (): void => {
       expect(args[i], `args[${i}]`).to.equal(params[i - argParamOffset]);
 
     }
+
+  });
+
+  it(`should respond to a postMessage command`, (done: () => void): void => {
+
+    window.addEventListener('message', (event: MessageEvent): void => {
+
+      const result = event as unknown as TCFAPIPostMessageReturn;
+
+      if (result[TCFAPI_POSTMSG_RETURN]) {
+
+        expect(result, 'result').to.exist;
+        expect(result[TCFAPI_POSTMSG_RETURN], `result.${TCFAPI_POSTMSG_RETURN}`).to.exist;
+        expect(result[TCFAPI_POSTMSG_RETURN].callId, `result.${TCFAPI_POSTMSG_RETURN}.callId`).to.exist;
+        expect(result[TCFAPI_POSTMSG_RETURN].returnValue, `result.${TCFAPI_POSTMSG_RETURN}.returnValue`).to.exist;
+        done();
+
+      }
+
+    });
+
+    window.postMessage({
+      command: TCFCommand.PING,
+      version: 2,
+    }, '*');
 
   });
 
