@@ -1,12 +1,25 @@
 import {BooleanVector} from '../src/response/BooleanVector';
 import {CmpApiModel} from '../src/CmpApiModel';
+import {CmpApi} from '../src/CmpApi';
+import {CustomCommands} from '../src/CustomCommands';
 import {InAppTCData} from '../src/response/InAppTCData';
 import {PurposeRestriction, TCString, Vector} from '@iabtcf/core';
-import {expect} from 'chai';
 import {TCData} from '../src/response/TCData';
+import {expect} from 'chai';
+import {makeRandomInt} from '@iabtcf/testing';
 
 export class TestUtils {
 
+  public static getCmpApi(customCommands?: CustomCommands): CmpApi {
+
+    return new CmpApi(
+      makeRandomInt(2, Math.pow(2, 6)),
+      makeRandomInt(2, Math.pow(2, 6)),
+      !makeRandomInt(0, 1),
+      customCommands,
+    );
+
+  }
   private static checkVectorToBooleanVector(name: string,
                                             vector: Vector,
                                             boolVector: BooleanVector,

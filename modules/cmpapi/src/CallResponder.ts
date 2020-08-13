@@ -42,6 +42,7 @@ export class CallResponder {
     } finally {
 
       window[API_KEY] = this.apiCall.bind(this);
+      this.purgeQueuedCalls();
 
     }
 

@@ -1,10 +1,11 @@
 import * as stub from '@iabtcf/stub';
-import sinon from 'sinon';
+import * as sinon from 'sinon';
 import {API_KEY, CmpApi} from '../src/';
 import {CmpApiModel} from '../src/CmpApiModel';
 import {Disabled, Response, TCData, InAppTCData} from '../src/response';
 import {EventStatus} from '../src/status/EventStatus';
 import {TCFCommand} from '../src/command/TCFCommand';
+import {TestUtils} from './TestUtils';
 import {expect} from 'chai';
 import {makeRandomInt, TCStringFactory} from '@iabtcf/testing';
 
@@ -49,7 +50,7 @@ describe('Reported issues', (): void => {
 
   it('Issue 96 CmpApi should respond to addEventListener call with an error object when in an Error state', (done: () => void): void => {
 
-    const cmpApi = new CmpApi(makeRandomInt(2, Math.pow(2, 6)), makeRandomInt(2, Math.pow(2, 6)));
+    const cmpApi = TestUtils.getCmpApi();
 
     cmpApi.update(TCStringFactory.base());
     cmpApi.disable();
@@ -66,7 +67,7 @@ describe('Reported issues', (): void => {
 
   it('Should not throw an error if getTCData is called before update is called', (done: () => void): void => {
 
-    const cmpApi = new CmpApi(makeRandomInt(2, Math.pow(2, 6)), makeRandomInt(2, Math.pow(2, 6)));
+    const cmpApi = TestUtils.getCmpApi();
 
     const callDatFunc = (): void => {
 
@@ -183,7 +184,7 @@ describe('Reported issues', (): void => {
     window[API_KEY](TCFCommand.GET_TC_DATA, null, callback);
     window[API_KEY](TCFCommand.GET_TC_DATA, null, callback, [9]);
 
-    const cmpApi = new CmpApi(makeRandomInt(2, Math.pow(2, 6)), makeRandomInt(2, Math.pow(2, 6)));
+    const cmpApi = TestUtils.getCmpApi();
 
     cmpApi.update(TCStringFactory.base());
 
@@ -200,7 +201,7 @@ describe('Reported issues', (): void => {
 
     window[API_KEY](TCFCommand.GET_IN_APP_TC_DATA, null, callback);
 
-    const cmpApi = new CmpApi(makeRandomInt(2, Math.pow(2, 6)), makeRandomInt(2, Math.pow(2, 6)));
+    const cmpApi = TestUtils.getCmpApi();
 
     cmpApi.update(TCStringFactory.base());
 
@@ -213,10 +214,38 @@ describe('Reported issues', (): void => {
     window[API_KEY](TCFCommand.ADD_EVENT_LISTENER, null, callback);
     expect(callback.callCount, 'callback.callCount :: Before CMP API Created').to.equal(0);
 
-    const cmpApi = new CmpApi(makeRandomInt(2, Math.pow(2, 6)), makeRandomInt(2, Math.pow(2, 6)));
+    const cmpApi = TestUtils.getCmpApi();
 
     expect(callback.callCount, 'callback.callCount :: After CMP API Created').to.equal(0);
     cmpApi.update(TCStringFactory.base());
+    expect(callback.callCount, 'callback.callCount :: After CmpApi.update()').to.equal(1);
+
+  });
+
+  it('208 Custom Commands no longer get called before update', (): void => {
+
+    const callback = sinon.fake();
+    const command = sinon.stub();
+    const commandName = 'makeASandwich';
+
+    command.callsFake(callback);
+
+    // call custom command to the stub
+    window[API_KEY](commandName, null, callback);
+
+    // expect the callback not to be called yet because it's still the stub
+    expect(callback.callCount, 'callback.callCount :: Before CMP API Created').to.equal(0);
+
+    const cmpApi = TestUtils.getCmpApi({
+      [commandName]: command,
+    });
+
+    // expect the callback to be called because it should be called on creation
+    expect(callback.callCount, 'callback.callCount :: After CMP API Created').to.equal(1);
+
+    cmpApi.update(TCStringFactory.base());
+
+    // expect the callback not to be called again on update, should equal the last time
     expect(callback.callCount, 'callback.callCount :: After CmpApi.update()').to.equal(1);
 
   });
