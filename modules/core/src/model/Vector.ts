@@ -16,9 +16,6 @@ class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
    */
   public bitLength = 0;
   private maxId_ = 0;
-  /**
-   * keep a set for faster lookup
-   */
   private set_: Set<number> = new Set<number>();
 
   public* [Symbol.iterator](): Iterator<IdBoolTuple> {
@@ -28,6 +25,18 @@ class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
       yield [i, this.has(i)] as IdBoolTuple;
 
     }
+
+  }
+
+  /**
+   * values()
+   *
+   * @return {IterableIterator<number>} - returns an iterator of the positive
+   * values in the set
+   */
+  public values(): IterableIterator<number> {
+
+    return this.set_.values();
 
   }
 
@@ -56,6 +65,7 @@ class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
     return this.set_.has(id);
 
   }
+
   /**
    * unset
    *

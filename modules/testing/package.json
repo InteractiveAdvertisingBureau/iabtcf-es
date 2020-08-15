@@ -1,6 +1,6 @@
 {
   "name": "@iabtcf/testing",
-  "version": "1.1.0-3",
+  "version": "1.1.0-4",
   "description": "Shared testing utilities",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://iabtcf.com/",
@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "preversion": "echo 'woops I think you meant to go to the root' && exit 1",
-    "build": "../build ; cp -r src/vendorlist lib/",
+    "build": "../build ; cp -a src/vendorlist lib/",
     "lint": "eslint `find src -name '*.ts'`"
   },
   "peerDependencies": {

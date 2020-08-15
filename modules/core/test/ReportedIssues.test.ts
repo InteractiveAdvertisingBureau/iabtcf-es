@@ -14,7 +14,7 @@ describe('Issues Reported', (): void => {
     const CMPVERSION = makeRandomInt(1, 63);
     const CONSENTSCREEN = makeRandomInt(1, 63);
     const purposeRestriction = new PurposeRestriction(2, RestrictionType.NOT_ALLOWED);
-    const tcModel = new TCModel(GVLFactory.getLatest() as unknown as GVL);
+    const tcModel = new TCModel(GVLFactory.getVersion(23) as unknown as GVL);
     const vendorID1 = 8;
     const vendorID2 = vendorID1 + 1;
 
@@ -174,22 +174,82 @@ describe('Issues Reported', (): void => {
 
   });
 
-  it('162 Legal basis purpose restriction is reflected on vendors without flexible purposes too', (): void => {
+  it('162 Legal basis purpose restriction is reflected on vendors without flexible purposes too', async (): Promise<void> => {
 
-    const gvl = new GVL(36);
-    gvl.readyPromise.then(() => {
+    const gvl = GVLFactory.getVersion(36) as unknown as GVL;
 
-      // Vendor 4 does not have any flexible purpose at GVL version 36
-      const vendorId = 4;
-      // Vendor 4 specifies purpose 2 as consent purpose
-      const purposeId = 2;
-      const tcModel = new TCModel(gvl);
-      const purposeRestriction = new PurposeRestriction(purposeId, RestrictionType.REQUIRE_LI);
+    await gvl.readyPromise;
+
+    // Vendor 4 does not have any flexible purpose at GVL version 36
+    const vendorId = 4;
+    // Vendor 4 specifies purpose 2 as consent purpose
+    const purposeId = 2;
+    const tcModel = new TCModel(gvl);
+    const purposeRestriction = new PurposeRestriction(purposeId, RestrictionType.REQUIRE_LI);
+
+    tcModel.cmpId = makeRandomInt(2, 100);
+    tcModel.isServiceSpecific = true;
+
+    tcModel.publisherRestrictions.add(vendorId, purposeRestriction);
+
+    const decodedTCModel = TCString.decode(TCString.encode(tcModel));
+
+    expect(decodedTCModel.publisherRestrictions.getVendors(purposeRestriction)).be.an('array')
+      .that.is.empty;
+
+  });
+
+  it('204 Not possible to set vendorConsent for vendor which declared felxiblePurposes but no purposes', async (): Promise<void> => {
+
+    const gvl = GVLFactory.getVersion(51) as unknown as GVL;
+
+    await gvl.readyPromise;
+
+    const vendorIds = [688, 751, 684, 729, 730];
+    const tcModel = new TCModel(gvl);
+    tcModel.cmpId = makeRandomInt(2, 100);
+    tcModel.isServiceSpecific = true;
+
+    vendorIds.forEach((vendorId: number): void => {
+
+      const vendor = gvl.vendors[vendorId];
+
+      // check the vendor first – if the GVL changes then this may not be the same
+      expect(vendor.flexiblePurposes, 'flexiblePurposes for ' + vendor.id).to.be.an('array').that.is.not.empty;
+      const purposeId = vendor.flexiblePurposes[0];
+      let purposeRestriction: PurposeRestriction;
+
+      if (vendor.purposes.length) {
+
+        purposeRestriction = new PurposeRestriction(purposeId, RestrictionType.REQUIRE_CONSENT);
+        tcModel.vendorConsents.set(vendorId);
+
+      } else if (vendor.legIntPurposes.length) {
+
+        purposeRestriction = new PurposeRestriction(purposeId, RestrictionType.REQUIRE_LI);
+        tcModel.vendorLegitimateInterests.set(vendorId);
+
+      }
 
       tcModel.publisherRestrictions.add(vendorId, purposeRestriction);
-      tcModel.publisherRestrictions.gvl = gvl;
 
-      expect(tcModel.publisherRestrictions.vendorHasRestriction(vendorId, purposeRestriction), `vendor ${vendorId} has restriction Require LI for ${purposeId}`).to.be.false;
+    });
+
+    const decodedTCModel = TCString.decode(TCString.encode(tcModel));
+
+    vendorIds.forEach((vendorId: number): void => {
+
+      const vendor = gvl.vendors[vendorId];
+
+      if (vendor.purposes.length) {
+
+        expect(decodedTCModel.vendorConsents.has(vendorId), `decoded tcModel.vendorConsents.has(${vendorId})`).to.be.true;
+
+      } else if (vendor.legIntPurposes.length) {
+
+        expect(decodedTCModel.vendorLegitimateInterests.has(vendorId), `decoded tcModel.vendorLegitimateInterests.has(${vendorId})`).to.be.true;
+
+      }
 
     });
 

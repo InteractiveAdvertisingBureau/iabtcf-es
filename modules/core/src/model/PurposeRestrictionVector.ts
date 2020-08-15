@@ -30,7 +30,6 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
   private isOkToHave(restrictionType: RestrictionType, purposeId: number, vendorId: number): boolean {
 
-    const vIDStr: string = vendorId.toString();
     let result = true;
 
     /**
@@ -40,9 +39,9 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
      */
     if (this.gvl?.vendors) {
 
-      if (this.gvl.vendors[vIDStr]) {
+      const vendor: Vendor = this.gvl.vendors[vendorId];
 
-        const vendor: Vendor = this.gvl.vendors[vIDStr];
+      if (vendor) {
 
         if (restrictionType === RestrictionType.NOT_ALLOWED) {
 
@@ -78,6 +77,10 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
               break;
 
           }
+
+        } else {
+
+          result = false;
 
         }
 
