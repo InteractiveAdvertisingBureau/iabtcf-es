@@ -4,7 +4,7 @@ import {IntEncoder} from './IntEncoder';
 import {BooleanEncoder} from './BooleanEncoder';
 import {FixedVectorEncoder} from './FixedVectorEncoder';
 import {VectorEncodingType} from './VectorEncodingType';
-import {EncodingError, DecodingError} from '../../errors';
+import {DecodingError} from '../../errors';
 
 export class VendorVectorEncoder {
 
