@@ -255,4 +255,12 @@ describe('Issues Reported', (): void => {
 
   });
 
+  it('191 vendorConsents empty when decoding TCF 1.1 consentString that uses vendorRangeList', async (): Promise<void> => {
+
+    const tcModel = TCString.decode('BO2e4qiO2e4qiB9ABADEDS-AAAAxKABgACBiQA');
+
+    expect(tcModel.vendorConsents.size, `vendorConsents size`).not.to.equal(0);
+
+  });
+
 });

@@ -1,6 +1,6 @@
 import {Base64Url} from './Base64Url';
 import {BitLength} from './BitLength';
-import {FieldEncoderMap, IntEncoder} from './field';
+import {FieldEncoderMap, IntEncoder, VendorVectorEncoder} from './field';
 import {FieldSequence} from './sequence';
 import {EncodingError, DecodingError} from '../errors';
 import {Fields} from '../model/Fields';
@@ -126,7 +126,15 @@ export class SegmentEncoder {
 
         const bits = bitField.substr(bStringIdx, numBits);
 
-        tcModel[key] = encoder.decode(bits, numBits);
+        if (encoder === VendorVectorEncoder) {
+
+          tcModel[key] = encoder.decode(bits, tcModel.version);
+
+        } else {
+
+          tcModel[key] = encoder.decode(bits, numBits);
+
+        }
 
         if (Number.isInteger(numBits)) {
 
