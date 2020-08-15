@@ -41,7 +41,7 @@ describe('encoder/field->PurposeRestrictionVectorEncoder', (): void => {
 
     const prVector: PurposeRestrictionVector = new PurposeRestrictionVector();
 
-    prVector.gvl = GVLFactory.getLatest() as unknown as GVL;
+    prVector.gvl = GVLFactory.getVersion(23) as unknown as GVL;
 
     for (let i = 0; i < vendors.length; i++) {
 
