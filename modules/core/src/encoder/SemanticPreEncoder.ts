@@ -1,7 +1,7 @@
 import {EncodingError} from '../errors';
 import {TCModel} from '../TCModel';
 import {EncodingOptions} from './EncodingOptions';
-import {Vector} from '../model';
+import {Vector, RestrictionType} from '../model';
 import {GVL} from '../GVL';
 
 type ProcessorFunction = (tcModel: TCModel, gvl: GVL) => TCModel;
@@ -24,26 +24,110 @@ export class SemanticPreEncoder {
        */
       tcModel.purposeLegitimateInterests.unset(1);
 
-      const vectorToIntMap = new Map<Vector, string>();
+      /**
+       * If a Vendor does not declare a purpose for consent or legitimate
+       * interest they should not have a positive signal for it. This code
+       * removes positive signals created mistakingly.
+       */
+      const vectorToIntMap = new Map<string, Vector>();
 
-      vectorToIntMap.set(tcModel.vendorLegitimateInterests, 'legIntPurposes');
-      vectorToIntMap.set(tcModel.vendorConsents, 'purposes');
+      vectorToIntMap.set('legIntPurposes', tcModel.vendorLegitimateInterests);
+      vectorToIntMap.set('purposes', tcModel.vendorConsents);
 
-      vectorToIntMap.forEach((gvlVendorKey: string, vector: Vector): void => {
+      for (const [gvlVendorKey, vector] of vectorToIntMap) {
 
-        vector.forEach((value: boolean, id: number) => {
+        for (const vendorId of vector.values()) {
 
-          const vendor = gvl.vendors[id];
+          const vendor = gvl.vendors[vendorId];
 
-          if (!vendor || (value && vendor[gvlVendorKey].length === 0)) {
+          if (!vendor || vendor.deletedDate) {
 
-            vector.unset(id);
+            /**
+             * If the vendor doesn't exist, then they should not receive a
+             * positive signal
+             */
+
+            vector.unset(vendorId);
+
+          } else if (vendor[gvlVendorKey].length === 0) {
+
+            /**
+             * If the vendor does exist, but they haven't declared any
+             * purposes for this legal basis, then we need to see if they can
+             * possibly have the legal basis from their flexible purposes.
+             * This, of course, only matters if it is a globally-scoped string.
+             */
+
+            if (tcModel.isServiceSpecific) {
+
+              if (vendor.flexiblePurposes.length === 0) {
+
+                /**
+                 * No flexible basis for any purposes, so we can safely remove
+                 * this vendor from the legal basis.
+                 */
+                vector.unset(vendorId);
+
+              } else {
+
+                /**
+                 * They have some flexible purposes, we should check for a
+                 * publisher restriction value that would enable this vendor to
+                 * have the override-preferred basis.
+                 */
+                const restrictions = tcModel.publisherRestrictions.getRestrictions(vendorId);
+                let isValid = false;
+
+                for (let i = 0, len = restrictions.length; i < len && !isValid; i ++) {
+
+                  /**
+                   * If this condition is true the loop will break.  If we are
+                   * dealing with the consent purposes ('purposes') and the
+                   * publisher restriction overrides to consent then it is
+                   * valid for the vendor to have a positive signal for
+                   * consent.  Likewise for legitimate interest purposes
+                   * ('legIntPurposes') and requiring legitimate interest.
+                   */
+                  isValid = (
+                    (restrictions[i].restrictionType === RestrictionType.REQUIRE_CONSENT &&
+                      gvlVendorKey === 'purposes') ||
+                    (restrictions[i].restrictionType === RestrictionType.REQUIRE_LI &&
+                      gvlVendorKey === 'legIntPurposes'));
+
+                }
+
+                if (!isValid) {
+
+                  /**
+                   * if we came through the previous  loop without finding a
+                   * valid reasing: no overriding restrictions (changes in
+                   * legal basis) then it's not valid for this vendor to have
+                   * this legal basis.
+                   */
+
+                  vector.unset(vendorId);
+
+                }
+
+              }
+
+            } else {
+
+              /**
+               * This is a globally-scoped string so flexible purposes will not
+               * be able to change this value because purposeRestrictions only
+               * apply to service-specific strings.
+               */
+
+              vector.unset(vendorId);
+
+            }
 
           }
 
-        });
+        }
 
-      });
+      }
 
       tcModel.vendorsDisclosed.set(gvl.vendors);
 
@@ -77,6 +161,9 @@ export class SemanticPreEncoder {
 
     } else {
 
+      /**
+       * this is equal to the latest or most current version
+       */
       tcModel.version = this.processor.length;
 
     }

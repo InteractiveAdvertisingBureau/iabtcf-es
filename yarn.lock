@@ -3700,7 +3700,7 @@ ncp@0.2.x:
   resolved "https://registry.yarnpkg.com/ncp/-/ncp-0.2.7.tgz#46fac2b7dda2560a4cb7e628677bd5f64eac5be1"
   integrity sha1-RvrCt92iVgpMt+YoZ3vV9k6sW+E=
 
-ndb@^1.1.4:
+ndb@^1.1.4, ndb@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/ndb/-/ndb-1.1.5.tgz#d09a6c75393e4c4a75fea3a10458b251f2354b85"
   integrity sha512-YiK+1wRe9SnZIyZ3kLDmogV2/Z0+8uPgHNbk3ExXzJg6IEFSenfskkn82v5ajPUJKkeEpsaK+ae1eT1be8Hllw==

@@ -6,7 +6,7 @@ import {IntMap} from '../src/model/IntMap';
 import {XMLHttpTestTools} from '@iabtcf/testing';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const vendorlistJson = require('@iabtcf/testing/lib/vendorlist/vendor-list.json');
+const vendorlistJson = require('@iabtcf/testing/lib/vendorlist/vendor-list-v24.json');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const translationJson = require('@iabtcf/testing/lib/vendorlist/purposes-fr.json');
 
