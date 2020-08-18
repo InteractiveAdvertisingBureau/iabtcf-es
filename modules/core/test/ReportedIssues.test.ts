@@ -263,4 +263,23 @@ describe('Issues Reported', (): void => {
 
   });
 
+  it('201 unable to decode valid TCF2 String', (): void => {
+
+    let tcModel: TCModel;
+
+    /**
+     * This TC String has a purpose restriction encoded for a vendor multiple
+     * times
+     */
+    expect((): void => {
+
+      tcModel = TCString.decode('CO4VGswO4VGswAfZCBDEAzCsAP_AAH_AAAigGUNf_X9fb2vj-_599_t0eY1f9_63t-wzjheMs-8NyZ-X_J4Wv2MyvB34JqQKGRgkunLBAQdtHGncTQgBwIlViTLMY02MjzNKJrJEilsbe2dYGH9vn8XT_ZKZ70-_v__7v3___33_5Ayhr_6_r7e18f3_Pvv9ujzGr_v_W9v2GccLxln3huTPy_5PC1-xmV4O_BNSBQyMEl05YICDto407iaEAOBEqsSZZjGmxkeZpRNZIkUtjb2zrAw_t8_i6f7JTPen39___d-___--__ICgKAOAAcAA4AFAAjgB6AEYALcGACAW0AtoJAHAAOAAcACgARwA9ACMAFuFABALaAW0GgDgAHAAOABQAI4AegBGAC3DgAgFtALaEQBwADgAHAAoAEcAPQAjABbiQAQC2gFtCoA4ABwADgAUACOAHoARgAtxYAIBbQC2hkAcAA4ABwAKABHAD0AIwAW40AEAtoBbQ6AOAAcAA4AFAAjgB6AEYALceACAW0AtohAHAAOAAcACgARwA9ACMAFuRABALaAW0SgDgAHAAOABQAI4AegBGAC3JgAgFtALaKQBwADgAHAAoAEcAPQAjABblQAQC2gFtA');
+
+    }).not.to.throw();
+
+    expect(tcModel.version, `tcModel.version`).to.equal(2);
+    expect(tcModel.publisherRestrictions.getVendors(new PurposeRestriction(1, 1)), `tcModel.publisherRestrictions vendor array`).to.deep.equal([7, 20, 71, 122, 140, 183]);
+
+  });
+
 });
