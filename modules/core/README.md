@@ -71,8 +71,6 @@ const decodedTCModel = TCString.decode(encodedString);
 
 # TCModel
 
-[API Docs](https://www.iabtcf.com/api/core/classes/tcmodel.html)
-
 ### Creating a new TCModel
 
 To encode a `TCModel` a `GVL` must be included.
@@ -109,28 +107,28 @@ tcModel.consentScreen = // On which 'screen' consent was captured; this is a cmp
 
 ### Vectors
 
-The [`TCModel`](https://www.iabtcf.com/api/core/classes/tcmodel.html) leverages a [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) style [`Vector`](https://www.iabtcf.com/api/core/classes/vector.html) data structure to set consents, optins, allowed, disclosed, and legitimate interest establishment.  Properties that leverage this data structure are:
+The `TCModel` leverages a [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) style `Vector` data structure to set consents, optins, allowed, disclosed, and legitimate interest establishment.  Properties that leverage this data structure are:
  - **Vendors**
-   - [`vendorConsents`](https://www.iabtcf.com/api/core/classes/tcmodel.html#vendorconsents)
-   - [`vendorLegitimateInterest`](https://www.iabtcf.com/api/core/classes/tcmodel.html#vendorlegitimateinterest)
-   - [`vendorsAllowed`](https://www.iabtcf.com/api/core/classes/tcmodel.html#vendorsallowed)
-   - [`vendorsDisclosed`](https://www.iabtcf.com/api/core/classes/tcmodel.html#vendorsdisclosed)
+   - `vendorConsents`
+   - `vendorLegitimateInterests`
+   - `vendorsAllowed`
+   - `vendorsDisclosed`
  - **Global Purposes**
-   - [`purposeConsents`](https://www.iabtcf.com/api/core/classes/tcmodel.html#purposeconsents)
-   - [`purposeLegitimateInterest`](https://www.iabtcf.com/api/core/classes/tcmodel.html#legitimateinterest)
+   - `purposeConsents`
+   - `purposeLegitimateInterests`
  - **Special Feature Opt-Ins**
-   - [`specialFeatureOptIns`](https://www.iabtcf.com/api/core/classes/tcmodel.html#specialfeatureoptins)
+   - `specialFeatureOptIns`
  - **Publisher**
-   - [`publisherConsents`](https://www.iabtcf.com/api/core/classes/tcmodel.html#publisherconsents)
-   - [`publisherCustomConsents`](https://www.iabtcf.com/api/core/classes/tcmodel.html#publishercustomconsents)
-   - [`publisherLegitimateInterest`](https://www.iabtcf.com/api/core/classes/tcmodel.html#publisherlegitimateinterest)
-   - [`publisherCustomLegitimateInterest`](https://www.iabtcf.com/api/core/classes/tcmodel.html#publishercustomlegitimateInterest)
-   - [`publisherRestrictions`](https://www.iabtcf.com/api/core/classes/tcmodel.html#publisherrestrictions)
-     - This Vector is a special [`PurposeRestrictionVector`](https://www.iabtcf.com/api/core/classes/purposerestrictionvector.html) of [`PurposeRestrictions`](https://www.iabtcf.com/api/core/classes/purposerestriction.html)
+   - `publisherConsents`
+   - `publisherCustomConsents`
+   - `publisherLegitimateInterests`
+   - `publisherCustomLegitimateInterests`
+   - `publisherRestrictions`
+     - This Vector is a special `PurposeRestrictionVector` of `PurposeRestrictions`
 
 **Example with `vendorConsents`**
 
-The `vendorConsents` property on the `TCModel` is a [`Vector`](https://www.iabtcf.com/api/core/classes/vector.html).  This example illustrates the methods of a [`Vector`](https://www.iabtcf.com/api/core/classes/vector.html). With the exception of the `publisherRestrictions`, which implements a different type of [`PurposeRestrictionVector`](https://www.iabtcf.com/api/core/classes/purposerestrictionvector.html), all of the above Vectors will have this interface and functionality.
+The `vendorConsents` property on the `TCModel` is a `Vector`.  This example illustrates the methods of a `Vector`. With the exception of the `publisherRestrictions`, which implements a different type of `PurposeRestrictionVector`, all of the above Vectors will have this interface and functionality.
 
 ```javascript
 // Give Vendor ID 24 consent
@@ -171,7 +169,7 @@ console.log(tcModel.vendorConsents.size); // 0
 
 ### Setting Publisher Restrictions
 
-A [Publisher Restriction](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#what-are-publisher-restrictions) is a restriction placed on a Vendor by a publisher limiting the purposes for which that Vendor is allowed to process personal data.  The `TCModel.publisherRestrictions` is an instance of the [`PurposeRestrictionVector`](https://www.iabtcf.com/api/core/classes/purposerestrictionvector.html), which is a vector containing [`PurposeRestrictions`](https://www.iabtcf.com/api/core/classes/purposerestriction.html)'s.
+A [Publisher Restriction](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#what-are-publisher-restrictions) is a restriction placed on a Vendor by a publisher limiting the purposes for which that Vendor is allowed to process personal data.  The `TCModel.publisherRestrictions` is an instance of the `PurposeRestrictionVector`, which is a vector containing `PurposeRestrictions`'s.
 
 **Example of setting publisher restrictions**
 
@@ -193,7 +191,6 @@ tcModel.publisherRestrictions.add(2000, purposeRestriction);
 
 # GVL
 
-* [API Docs](https://www.iabtcf.com/api/core/classes/gvl.html)
 * [Autoload latest vendor-list.json](#autoload-latest-vendor-listjson)
 * [Autoload specific vendor-list.json](#autoload-specific-vendor-listjson)
 * [Pass vendor-list.json object](#pass-vendor-list.json-object)
@@ -343,7 +340,7 @@ A CMP UI may want to group vendors by what purpose they use under what legal bas
 * `getVendorsWithSpecialFeature(featureId)`
 * `getVendorsWithSpecialPurpose(purposId)`
 
-All 6 grouping methods return an [IntMap](https://www.iabtcf.com/api/core/interfaces/intmap.html)<[Vendor](https://www.iabtcf.com/api/core/interfaces/vendor.html)> object
+All 6 grouping methods return an `IntMap<Vendor>` object
 
 ```javascript
 import {GVL} from '@iabtcf/core';
@@ -393,8 +390,6 @@ gvl.readyPromise.then(() => {
 ```
 
 # TCString
-
-[API Docs](https://www.iabtcf.com/api/core/classes/tcstring.html)
 
 - [Decode](#decode-an-iab-tc-string)
 - [Encode](#encode-an-iab-tc-string)
