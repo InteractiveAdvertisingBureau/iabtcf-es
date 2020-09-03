@@ -32,7 +32,7 @@ Generate random TC string
 import {TCString} from '@iabtcf/core';
 import {TCModelFactory} from '@iabtcf/testing';
 
-console.log(TCString.decode(TCModelFactory.noGVL()));
+console.log(TCString.encode(TCModelFactory.noGVL()));
 // ... random tc string
 
 ```
