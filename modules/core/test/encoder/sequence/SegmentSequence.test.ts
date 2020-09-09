@@ -4,7 +4,7 @@ import {Segment} from '../../../src/model';
 import {PowerSet} from '@iabtcf/testing';
 import {expect} from 'chai';
 
-describe('encoder/sequence->SegmentSequence', (): void => {
+describe('SegmentSequence', (): void => {
 
   const runPerm = (
     version: number,

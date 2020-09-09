@@ -1,7 +1,7 @@
 import {BooleanEncoder} from '../../../src/encoder/field/BooleanEncoder';
 import {expect} from 'chai';
 
-describe('encoder/field->BooleanEncoder', (): void => {
+describe('BooleanEncoder', (): void => {
 
   describe('encode', (): void => {
 

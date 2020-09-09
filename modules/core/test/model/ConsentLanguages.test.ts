@@ -1,7 +1,7 @@
 import {ConsentLanguages} from '../../src/model/ConsentLanguages';
 import {expect} from 'chai';
 
-describe('model->ConsentLanguages', (): void => {
+describe('ConsentLanguages', (): void => {
 
   it('should have only these languages', (): void => {
 

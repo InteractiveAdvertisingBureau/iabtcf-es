@@ -126,6 +126,12 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
       this.map.get(hash).add(vendorId);
 
+      if (this.gvl && purposeRestriction.restrictionType !== RestrictionType.NOT_ALLOWED) {
+
+        this.gvl.vendorUseAltLegalBasis(vendorId, purposeRestriction.purposeId);
+
+      }
+
     }
 
   }
@@ -298,6 +304,8 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
       bst.remove(vendorId);
 
+      this.gvl?.vendorUsePreferredLegalBasis(vendorId, purposeRestriction.purposeId);
+
       // if it's empty let's delete the key so it doesn't show up empty
       if (bst.isEmpty()) {
 
@@ -337,6 +345,10 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
           if (!this.isOkToHave(purposeRestriction.restrictionType, purposeRestriction.purposeId, vendorId)) {
 
             bst.remove(vendorId);
+
+          } else if (purposeRestriction.restrictionType !== RestrictionType.NOT_ALLOWED) {
+
+            this.gvl.vendorUseAltLegalBasis(vendorId, purposeRestriction.purposeId);
 
           }
 

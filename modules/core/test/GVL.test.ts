@@ -317,12 +317,12 @@ describe('GVL', (): void => {
   it('should narrow a group of vendors when narrowVendorsTo is called with list of ids', (): void => {
 
     const gvl: GVL = new GVL(vendorlistJson);
-    const onlyVendorId: string = Object.keys(vendorlistJson.vendors)[0];
+    const onlyVendorId: number = +Object.keys(vendorlistJson.vendors)[0];
 
-    gvl.narrowVendorsTo([parseInt(onlyVendorId, 10)]);
-    expect(gvl.vendors[onlyVendorId]).to.deep.equal(vendorlistJson.vendors[onlyVendorId]);
-    expect(Object.keys(gvl.vendors).length).to.equal(1);
-    expect(gvl.vendors[Object.keys(vendorlistJson.vendors)[1]]).to.be.undefined;
+    gvl.narrowVendorsTo([onlyVendorId]);
+
+    expect(gvl.vendors[onlyVendorId], `gvl.vendors['${onlyVendorId}']`).to.deep.equal(vendorlistJson.vendors[onlyVendorId]);
+    expect(Object.keys(gvl.vendors).length, `Object.keys(gvl.vendors).length`).to.equal(1);
 
   });
 
@@ -644,8 +644,7 @@ describe('GVL', (): void => {
         }
 
         const gvlMethodName: string = 'getVendorsWith' + specialOrSubType + cappedPORF;
-        const gvlMap: IntMap<Vendor> =
-          gvl[gvlMethodName](intId);
+        const gvlMap: IntMap<Vendor> = gvl[gvlMethodName](intId);
 
         Object.keys(vendorlistJson.vendors).forEach((vendorId: string): void => {
 
@@ -675,5 +674,145 @@ describe('GVL', (): void => {
 
   vendorGroupGoodTest('feature', '', false);
   vendorGroupGoodTest('feature', '', true);
+
+  it('should switch legal basis to alternate for a flexible vendor', (): void => {
+
+    GVL.baseUrl = 'http://sweetcmp.com';
+
+    const gvl: GVL = new GVL(vendorlistJson);
+    const purposeId = 2;
+    const consent = 0;
+    const legInt = 1;
+    const vendorIds = Object.keys(gvl.getVendorsWithFlexiblePurpose(2));
+
+    vendorIds.forEach((vendorId: string): void => {
+
+      const vendor = gvl.vendors[vendorId];
+      let preferred: number;
+
+      if (vendor.purposes.includes(purposeId)) {
+
+        preferred = consent;
+
+      } else {
+
+        preferred = legInt;
+
+      }
+
+      let consentVendorMap = gvl.getVendorsWithConsentPurpose(purposeId);
+      let legIntVendorMap = gvl.getVendorsWithLegIntPurpose(purposeId);
+
+      if (preferred === consent) {
+
+        expect(consentVendorMap[vendorId], `consentVendorMap[${vendorId}] before switch`).to.exist;
+        expect(legIntVendorMap[vendorId], `legIntVendorMap[${vendorId}] before switch`).not.to.exist;
+
+      } else {
+
+        expect(consentVendorMap[vendorId], `consentVendorMap[${vendorId}] before switch`).not.to.exist;
+        expect(legIntVendorMap[vendorId], `legIntVendorMap[${vendorId}] before switch`).to.exist;
+
+      }
+
+      gvl.vendorUseAltLegalBasis(vendor.id, purposeId);
+
+      consentVendorMap = gvl.getVendorsWithConsentPurpose(purposeId);
+      legIntVendorMap = gvl.getVendorsWithLegIntPurpose(purposeId);
+
+      if (preferred === consent) {
+
+        expect(consentVendorMap[vendorId], `consentVendorMap[${vendorId}] after switch`).not.to.exist;
+        expect(legIntVendorMap[vendorId], `legIntVendorMap[${vendorId}] after switch`).to.exist;
+
+      } else {
+
+        expect(consentVendorMap[vendorId], `consentVendorMap[${vendorId}] after switch`).to.exist;
+        expect(legIntVendorMap[vendorId], `legIntVendorMap[${vendorId}] after switch`).not.to.exist;
+
+      }
+
+    });
+
+  });
+
+  it('should switch legal basis back to preferred for a flexible vendor', (): void => {
+
+    GVL.baseUrl = 'http://sweetcmp.com';
+
+    const gvl: GVL = new GVL(vendorlistJson);
+
+    const purposeId = 2;
+    const consent = 0;
+    const legInt = 1;
+    const vendorIds = Object.keys(gvl.getVendorsWithFlexiblePurpose(2));
+
+    vendorIds.forEach((vendorId: string): void => {
+
+      const vendor = gvl.vendors[vendorId];
+      let preferred: number;
+
+      if (vendor.purposes.includes(purposeId)) {
+
+        preferred = consent;
+
+      } else {
+
+        preferred = legInt;
+
+      }
+
+      let consentVendorMap = gvl.getVendorsWithConsentPurpose(purposeId);
+      let legIntVendorMap = gvl.getVendorsWithLegIntPurpose(purposeId);
+
+      if (preferred === consent) {
+
+        expect(consentVendorMap[vendorId], `consentVendorMap[${vendorId}] before switch`).to.exist;
+        expect(legIntVendorMap[vendorId], `legIntVendorMap[${vendorId}] before switch`).not.to.exist;
+
+      } else {
+
+        expect(consentVendorMap[vendorId], `consentVendorMap[${vendorId}] before switch`).not.to.exist;
+        expect(legIntVendorMap[vendorId], `legIntVendorMap[${vendorId}] before switch`).to.exist;
+
+      }
+
+      gvl.vendorUseAltLegalBasis(vendor.id, purposeId);
+
+      consentVendorMap = gvl.getVendorsWithConsentPurpose(purposeId);
+      legIntVendorMap = gvl.getVendorsWithLegIntPurpose(purposeId);
+
+      if (preferred === consent) {
+
+        expect(consentVendorMap[vendorId], `consentVendorMap[${vendorId}] after switch`).not.to.exist;
+        expect(legIntVendorMap[vendorId], `legIntVendorMap[${vendorId}] after switch`).to.exist;
+
+      } else {
+
+        expect(consentVendorMap[vendorId], `consentVendorMap[${vendorId}] after switch`).to.exist;
+        expect(legIntVendorMap[vendorId], `legIntVendorMap[${vendorId}] after switch`).not.to.exist;
+
+      }
+
+      gvl.vendorUsePreferredLegalBasis(vendor.id, purposeId);
+
+      consentVendorMap = gvl.getVendorsWithConsentPurpose(purposeId);
+      legIntVendorMap = gvl.getVendorsWithLegIntPurpose(purposeId);
+
+      if (preferred === consent) {
+
+        expect(consentVendorMap[vendorId], `consentVendorMap[${vendorId}] after switch back`).to.exist;
+        expect(legIntVendorMap[vendorId], `legIntVendorMap[${vendorId}] after switch back`).not.to.exist;
+
+      } else {
+
+        expect(consentVendorMap[vendorId], `consentVendorMap[${vendorId}] after switch back`).not.to.exist;
+        expect(legIntVendorMap[vendorId], `legIntVendorMap[${vendorId}] after switch back`).to.exist;
+
+      }
+
+    });
+
+  });
 
 });

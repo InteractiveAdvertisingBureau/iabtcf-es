@@ -1,7 +1,7 @@
 import {LangEncoder} from '../../../src/encoder/field/LangEncoder';
 import {expect} from 'chai';
 
-describe('encoder/field->LangEncoder', (): void => {
+describe('LangEncoder', (): void => {
 
   describe('encode', (): void => {
 

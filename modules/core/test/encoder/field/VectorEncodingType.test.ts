@@ -1,7 +1,7 @@
 import {VectorEncodingType} from '../../../src/encoder/field/VectorEncodingType';
 import {expect} from 'chai';
 
-describe('encoder/field->VectorEncodingType', (): void => {
+describe('VectorEncodingType', (): void => {
 
   it('should have these values', (done: () => void): void => {
 

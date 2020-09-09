@@ -2,7 +2,7 @@ import {Cloneable} from './Cloneable';
 import {GVLError} from './errors';
 import {Json} from './Json';
 import {ConsentLanguages, IntMap} from './model';
-import {ByPurposeVendorMap, Declarations, Feature, IDSetMap, Purpose, Stack, Vendor, VendorList} from './model/gvl';
+import {Declaration, DeclarationMap, Feature, Purpose, Stack, Vendor, VendorList} from './model/gvl';
 
 export type VersionOrVendorList = string | number | VendorList;
 type PurposeOrFeature = 'purpose' | 'feature';
@@ -16,8 +16,8 @@ type PurposeSubType = 'consent' | 'legInt' | 'flexible';
  */
 export class GVL extends Cloneable<GVL> implements VendorList {
 
-  private static LANGUAGE_CACHE: Map<string, Declarations> = new Map<string, VendorList>();
-  private static CACHE: Map<number, Declarations> = new Map<number, Declarations>();
+  private static LANGUAGE_CACHE: Map<string, DeclarationMap> = new Map<string, VendorList>();
+  private static CACHE: Map<number, DeclarationMap> = new Map<number, DeclarationMap>();
   private static LATEST_CACHE_KEY = 0;
 
   public static readonly DEFAULT_LANGUAGE: string = 'EN';
@@ -164,20 +164,35 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    */
   public purposes: IntMap<Purpose>;
 
+  public purposeIds: Set<number>;
+
   /**
    * @param {IntMap<Purpose>} a collection of [[Purpose]]s
    */
   public specialPurposes: IntMap<Purpose>;
+
+  public specialPurposeIds: Set<number>;
 
   /**
    * @param {IntMap<Feature>} a collection of [[Feature]]s
    */
   public features: IntMap<Feature>;
 
+  public featureIds: Set<number>;
+
   /**
    * @param {IntMap<Feature>} a collection of [[Feature]]s
    */
   public specialFeatures: IntMap<Feature>;
+
+  public specialFeatureIds: Set<number>;
+
+  /**
+   * @param {IntMap<Stack>} a collection of [[Stack]]s
+   */
+  public stacks: IntMap<Stack>;
+
+  public stackIds: Set<number>;
 
   /**
    * @param {boolean} internal reference of when the GVL is ready to be used
@@ -196,30 +211,15 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    */
   private fullVendorList: IntMap<Vendor>;
 
-  /**
-   * @param {ByPurposeVendorMap} vendors by purpose
-   */
-  private byPurposeVendorMap: ByPurposeVendorMap;
+  // key (feature, purpose, etc) -> purposeId -> vendorId -> vendorObject
+  private vendorByDeclarationMap: Map<Declaration, Map<number, Set<number>>>;
 
-  /**
-   * @param {IDSetMap} vendors by special purpose
-   */
-  private bySpecialPurposeVendorMap: IDSetMap;
-
-  /**
-   * @param {IDSetMap} vendors by feature
-   */
-  private byFeatureVendorMap: IDSetMap;
-
-  /**
-   * @param {IDSetMap} vendors by special feature
-   */
-  private bySpecialFeatureVendorMap: IDSetMap;
-
-  /**
-   * @param {IntMap<Stack>} a collection of [[Stack]]s
-   */
-  public stacks: IntMap<Stack>;
+  private gvlToVendorDeclaration = new Map<Declaration, Declaration[]>([
+    [Declaration.purposes, [Declaration.purposes, Declaration.legIntPurposes, Declaration.flexiblePurposes]],
+    [Declaration.features, [Declaration.features]],
+    [Declaration.specialPurposes, [Declaration.specialPurposes]],
+    [Declaration.specialFeatures, [Declaration.specialFeatures]],
+  ]);
 
   private lang_: string;
 
@@ -245,7 +245,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
     if (this.isVendorList(versionOrVendorList as GVL)) {
 
-      this.populate(versionOrVendorList as Declarations);
+      this.populate(versionOrVendorList as DeclarationMap);
       this.readyPromise = Promise.resolve();
 
     } else {
@@ -282,6 +282,9 @@ export class GVL extends Cloneable<GVL> implements VendorList {
          * Otherwise we'll have to load it (and then we'll cache it for next
          * time)
          */
+
+        this.isLatest = true;
+
         if (GVL.CACHE.has(GVL.LATEST_CACHE_KEY)) {
 
           this.populate(GVL.CACHE.get(GVL.LATEST_CACHE_KEY));
@@ -289,7 +292,6 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
         } else {
 
-          this.isLatest = true;
           this.readyPromise = this.fetchJson(url + GVL.latestFilename);
 
         }
@@ -314,7 +316,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
     if (lang === undefined && GVL.LANGUAGE_CACHE.size > 0) {
 
-      GVL.LANGUAGE_CACHE = new Map<string, Declarations>();
+      GVL.LANGUAGE_CACHE = new Map<string, DeclarationMap>();
       retr = true;
 
     } else if (typeof lang === 'string' && this.consentLanguages.has(lang.toUpperCase())) {
@@ -429,7 +431,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
         if (GVL.LANGUAGE_CACHE.has(langUpper)) {
 
-          const cached: Declarations = GVL.LANGUAGE_CACHE.get(langUpper) as Declarations;
+          const cached: DeclarationMap = GVL.LANGUAGE_CACHE.get(langUpper) as DeclarationMap;
 
           for (const prop in cached) {
 
@@ -482,17 +484,27 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
   }
 
-  private populate(gvlObject: Declarations): void {
+  private populate(gvlObject: DeclarationMap | VendorList): void {
 
     /**
-     * these are populated regardless of whether it's a Declarations file or
+     * these are populated regardless of whether it's a DeclarationMap file or
      * a VendorList
      */
     this.purposes = gvlObject.purposes;
+    this.purposeIds =
+      new Set<number>(Object.values(this.purposes).map((purpose: Purpose): number => purpose.id ));
     this.specialPurposes = gvlObject.specialPurposes;
+    this.specialPurposeIds =
+      new Set<number>(Object.values(this.specialPurposes).map((purpose: Purpose): number => purpose.id));
     this.features = gvlObject.features;
+    this.featureIds =
+      new Set<number>(Object.values(this.features).map((feature: Feature): number => feature.id));
     this.specialFeatures = gvlObject.specialFeatures;
+    this.specialFeatureIds =
+      new Set<number>(Object.values(this.specialFeatures).map((feature: Feature): number => feature.id ));
     this.stacks = gvlObject.stacks;
+    this.stackIds =
+      new Set<number>(Object.values(this.stacks).map((stack: Stack): number => stack.id ));
 
     if (this.isVendorList(gvlObject)) {
 
@@ -507,8 +519,14 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
       }
 
-      this.vendors_ = gvlObject.vendors;
       this.fullVendorList = gvlObject.vendors;
+
+      if (this.vendorIds === undefined || this.vendorIds.size === 0) {
+
+        this.vendorIds = new Set(Object.keys(gvlObject.vendors).map((strId: string): number => +strId));
+
+      }
+
       this.mapVendors();
       this.isReady_ = true;
 
@@ -540,142 +558,161 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
   }
 
-  private mapVendors(vendorIds?: number[]): void {
+  private mapVendors(): void {
 
-    // create new instances of the maps
-    this.byPurposeVendorMap = {};
-    this.bySpecialPurposeVendorMap = {};
-    this.byFeatureVendorMap = {};
-    this.bySpecialFeatureVendorMap = {};
+    // key (feature, purpose, etc) -> purposeId -> vendorId -> vendorObject
+    this.vendorByDeclarationMap = new Map<Declaration, Map<number, Set<number>>>();
 
-    // initializes data structure for purpose map
-    Object.keys(this.purposes).forEach((purposeId: string): void => {
+    this.gvlToVendorDeclaration.forEach((vendorDeclarations: Declaration[], gvlKey: string): void => {
 
-      this.byPurposeVendorMap[purposeId] = {
-        legInt: new Set<number>(),
-        consent: new Set<number>(),
-        flexible: new Set<number>(),
-      };
+      vendorDeclarations.forEach((vendorDeclaration: Declaration): void => {
 
-    });
+        // purposes, features, special[etc...] map
+        const declarationMap = new Map();
+        this.vendorByDeclarationMap.set(vendorDeclaration, declarationMap );
+        Object.keys(this[gvlKey]).forEach((id: string): void => {
 
-    // initializes data structure for special purpose map
-    Object.keys(this.specialPurposes).forEach((purposeId: string): void => {
+          // will be the set of vendors
+          declarationMap.set(+id, new Set());
 
-      this.bySpecialPurposeVendorMap[purposeId] = new Set<number>();
+        });
+
+      });
 
     });
 
-    // initializes data structure for feature map
-    Object.keys(this.features).forEach((featureId: string): void => {
+    this.vendors_ = {};
 
-      this.byFeatureVendorMap[featureId] = new Set<number>();
+    this.vendorIds.forEach((id: number): void => {
 
-    });
-
-    // initializes data structure for feature map
-    Object.keys(this.specialFeatures).forEach((featureId: string): void => {
-
-      this.bySpecialFeatureVendorMap[featureId] = new Set<number>();
-
-    });
-
-    if (!Array.isArray(vendorIds)) {
-
-      vendorIds = Object.keys(this.fullVendorList).map((vId: string) => +vId);
-
-    }
-
-    this.vendorIds = new Set(vendorIds);
-
-    // assigns vendor ids to their respective maps
-    this.vendors_ = vendorIds.reduce((vendors: {}, vendorId: number): {} => {
-
-      const vendor: Vendor = this.vendors_[''+vendorId];
+      const vendor = this.fullVendorList[id];
 
       if (vendor && vendor.deletedDate === undefined) {
 
-        vendor.purposes.forEach((purposeId: number): void => {
+        this.gvlToVendorDeclaration.forEach((vendordeclarations: Declaration[]): void => {
 
-          const purpGroup = this.byPurposeVendorMap[purposeId + ''];
+          vendordeclarations.forEach((vendorDeclaration: Declaration): void => {
 
-          purpGroup.consent.add(vendorId);
+            vendor[vendorDeclaration].forEach((id: number): void => {
 
-        });
+              this.vendorByDeclarationMap.get(vendorDeclaration).get(id).add(vendor.id);
 
-        vendor.specialPurposes.forEach((purposeId: number): void => {
-
-          this.bySpecialPurposeVendorMap[purposeId + ''].add(vendorId);
-
-        });
-
-        vendor.legIntPurposes.forEach((purposeId: number): void => {
-
-          this.byPurposeVendorMap[purposeId + ''].legInt.add(vendorId);
-
-        });
-
-        // could not be there
-        if (vendor.flexiblePurposes) {
-
-          vendor.flexiblePurposes.forEach((purposeId: number): void => {
-
-            this.byPurposeVendorMap[purposeId + ''].flexible.add(vendorId);
+            });
 
           });
 
-        }
-
-        vendor.features.forEach((featureId: number): void => {
-
-          this.byFeatureVendorMap[featureId + ''].add(vendorId);
-
         });
 
-        vendor.specialFeatures.forEach((featureId: number): void => {
+        this.vendors_[vendor.id] = vendor;
 
-          this.bySpecialFeatureVendorMap[featureId + ''].add(vendorId);
+      } else {
 
-        });
-
-        vendors[vendorId] = vendor;
+        this.vendorIds.delete(id);
 
       }
 
-      return vendors;
-
-    }, {});
+    });
 
   }
 
-  private getFilteredVendors(
-    purposeOrFeature: PurposeOrFeature,
-    id: number,
-    subType?: PurposeSubType,
-    special?: boolean,
-  ): IntMap<Vendor> {
+  public vendorUsePreferredLegalBasis(vendorId: number, purposeId: number): void {
 
-    const properPurposeOrFeature: string = purposeOrFeature.charAt(0).toUpperCase() + purposeOrFeature.slice(1);
-    let vendorSet: Set<number>;
-    const retr: IntMap<Vendor> = {};
+    /**
+     * Is this vendor flexible?
+     */
+    if (this.vendorByDeclarationMap.get(Declaration.flexiblePurposes).get(purposeId).has(vendorId)) {
 
-    if (purposeOrFeature === 'purpose' && subType) {
+      const vendor = this.vendors[vendorId];
 
-      vendorSet = this['by' + properPurposeOrFeature + 'VendorMap'][id + ''][subType];
+      if (vendor.purposes.includes(purposeId) &&
+        this.vendorByDeclarationMap.get(Declaration.legIntPurposes).get(purposeId).has(vendorId)) {
 
-    } else {
+        /**
+         * ie. is their preferred basis consent and they're in the legInt map?
+         * Then take them out of the legInt map and put them in the consent map
+         */
 
-      vendorSet = this['by' + (special ? 'Special' : '' ) + properPurposeOrFeature + 'VendorMap'][id + ''];
+        this.vendorByDeclarationMap.get(Declaration.legIntPurposes).get(purposeId).delete(vendorId);
+        this.vendorByDeclarationMap.get(Declaration.purposes).get(purposeId).add(vendorId);
+
+      } else if (vendor.legIntPurposes.includes(purposeId) &&
+        this.vendorByDeclarationMap.get(Declaration.purposes).get(purposeId).has(vendorId)) {
+
+        /**
+         * ie. is their preferred basis legInt and they're in the consent map?
+         * Then take them out of the consent map and put them in the legInt map
+         */
+
+        this.vendorByDeclarationMap.get(Declaration.purposes).get(purposeId).delete(vendorId);
+        this.vendorByDeclarationMap.get(Declaration.legIntPurposes).get(purposeId).add(vendorId);
+
+      }
 
     }
 
-    vendorSet.forEach((vendorId: number): void => {
+  }
 
-      retr[vendorId + ''] = this.vendors[vendorId + ''];
+  public vendorUseAltLegalBasis(vendorId: number, purposeId: number): void {
+
+    /**
+     * Is this vendor flexible?
+     */
+    if (this.vendorByDeclarationMap.get(Declaration.flexiblePurposes).get(purposeId).has(vendorId)) {
+
+      const vendor = this.vendors[vendorId];
+
+      if (vendor.purposes.includes(purposeId) &&
+        this.vendorByDeclarationMap.get(Declaration.purposes).get(purposeId).has(vendorId)) {
+
+        /**
+         * ie. is their preferred basis consent and they're in the map for it?
+         * Then take them out of the consent map and put them in the legint map
+         */
+
+        this.vendorByDeclarationMap.get(Declaration.purposes).get(purposeId).delete(vendorId);
+        this.vendorByDeclarationMap.get(Declaration.legIntPurposes).get(purposeId).add(vendorId);
+
+      } else if (vendor.legIntPurposes.includes(purposeId) &&
+        this.vendorByDeclarationMap.get(Declaration.legIntPurposes).get(purposeId).has(vendorId)) {
+
+        /**
+         * ie. is their preferred basis legInt and they're in the map for it?
+         * Then take them out of the legInt map and put them in the consent map
+         */
+
+        this.vendorByDeclarationMap.get(Declaration.legIntPurposes).get(purposeId).delete(vendorId);
+        this.vendorByDeclarationMap.get(Declaration.purposes).get(purposeId).add(vendorId);
+
+      }
+
+    }
+
+  }
+
+  private filterIntMap<T>(fromIntMap: IntMap<T>, filter: number[]): IntMap<T> {
+
+    const result = {};
+
+    filter.forEach((id: number): void => {
+
+      result[id] = fromIntMap[id];
 
     });
 
-    return retr;
+    return result;
+
+  }
+
+  /**
+   * getVendorIdsByDeclaration
+   *
+   * @param {number} purposeId
+   * @param {Declaration} declaration
+   * @return {Set<number>} - Set of vendor ids by a given declaration
+   */
+  public getVendorIdsByDeclaration(purposeId: number, declaration: Declaration): Set<number> {
+
+    return this.vendorByDeclarationMap.get(declaration).get(purposeId);
 
   }
 
@@ -687,7 +724,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    */
   public getVendorsWithConsentPurpose(purposeId: number): IntMap<Vendor> {
 
-    return this.getFilteredVendors('purpose', purposeId, 'consent');
+    return this.filterIntMap(this.vendors, Array.from(this.getVendorIdsByDeclaration(purposeId, Declaration.purposes)));
 
   }
 
@@ -699,7 +736,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    */
   public getVendorsWithLegIntPurpose(purposeId: number): IntMap<Vendor> {
 
-    return this.getFilteredVendors('purpose', purposeId, 'legInt');
+    return this.filterIntMap(this.vendors, Array.from(this.getVendorIdsByDeclaration(purposeId, Declaration.legIntPurposes)));
 
   }
 
@@ -711,7 +748,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    */
   public getVendorsWithFlexiblePurpose(purposeId: number): IntMap<Vendor> {
 
-    return this.getFilteredVendors('purpose', purposeId, 'flexible');
+    return this.filterIntMap(this.vendors, Array.from(this.getVendorIdsByDeclaration(purposeId, Declaration.flexiblePurposes)));
 
   }
 
@@ -723,7 +760,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    */
   public getVendorsWithSpecialPurpose(specialPurposeId: number): IntMap<Vendor> {
 
-    return this.getFilteredVendors('purpose', specialPurposeId, undefined, true);
+    return this.filterIntMap(this.vendors, Array.from(this.getVendorIdsByDeclaration(specialPurposeId, Declaration.specialPurposes)));
 
   }
 
@@ -735,7 +772,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    */
   public getVendorsWithFeature(featureId: number): IntMap<Vendor> {
 
-    return this.getFilteredVendors('feature', featureId);
+    return this.filterIntMap(this.vendors, Array.from(this.getVendorIdsByDeclaration(featureId, Declaration.features)));
 
   }
 
@@ -747,7 +784,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    */
   public getVendorsWithSpecialFeature(specialFeatureId: number): IntMap<Vendor> {
 
-    return this.getFilteredVendors('feature', specialFeatureId, undefined, true);
+    return this.filterIntMap(this.vendors, Array.from(this.getVendorIdsByDeclaration(specialFeatureId, Declaration.specialFeatures)));
 
   }
 
@@ -766,12 +803,22 @@ export class GVL extends Cloneable<GVL> implements VendorList {
   /**
    * narrowVendorsTo - narrows vendors represented in this GVL to the list of ids passed in
    *
-   * @param {number[]} vendorIds - list of ids to narrow this GVL to
+   * @param {number[] | Set<number>} vendorIds - list of ids to narrow this GVL to
    * @return {void}
    */
-  public narrowVendorsTo(vendorIds: number[]): void {
+  public narrowVendorsTo(vendorIds: number[] | Set<number>): void {
 
-    this.mapVendors(vendorIds);
+    if (Array.isArray(vendorIds)) {
+
+      this.vendorIds = new Set(vendorIds);
+
+    } else {
+
+      this.vendorIds = vendorIds;
+
+    }
+
+    this.mapVendors();
 
   }
 

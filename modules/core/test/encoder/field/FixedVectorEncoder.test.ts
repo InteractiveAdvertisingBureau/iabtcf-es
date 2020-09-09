@@ -2,7 +2,7 @@ import {FixedVectorEncoder} from '../../../src/encoder/field/FixedVectorEncoder'
 import {Vector} from '../../../src/model';
 import {expect} from 'chai';
 
-describe('encoder/field->FixedVectorEncoder', (): void => {
+describe('FixedVectorEncoder', (): void => {
 
   describe('encode', (): void => {
 

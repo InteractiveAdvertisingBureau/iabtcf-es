@@ -1,7 +1,7 @@
 import {Fields} from '../../src/model/Fields';
 import {expect} from 'chai';
 
-describe('model->Fields', (): void => {
+describe('Fields', (): void => {
 
   it('should be this', (): void => {
 

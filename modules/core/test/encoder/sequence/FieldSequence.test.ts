@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {Segment} from '../../../src/model/Segment';
 import {Fields} from '../../../src/model/Fields';
 
-describe('encoder/sequence->FieldSequence', (): void => {
+describe('FieldSequence', (): void => {
 
   it('should have this for v1', (): void => {
 

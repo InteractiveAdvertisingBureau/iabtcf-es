@@ -1,8 +1,8 @@
 import {IntMap} from '../IntMap';
 import {Vendor} from './Vendor';
-import {Declarations} from './Declarations';
+import {DeclarationMap} from './DeclarationMap';
 
-export interface VendorList extends Declarations {
+export interface VendorList extends DeclarationMap {
   lastUpdated: string | Date;
   gvlSpecificationVersion: number;
   vendorListVersion: number;

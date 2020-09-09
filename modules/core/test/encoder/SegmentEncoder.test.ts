@@ -8,7 +8,7 @@ import {Purpose} from '../../src/model/gvl/Purpose';
 
 const gvl: GVL = GVLFactory.getLatest() as unknown as GVL;
 
-describe('encoder->SegmentEncoder', (): void => {
+describe('SegmentEncoder', (): void => {
 
   const getTCModelWithGVL = (): TCModel => {
 

@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {BitLength} from '../../../src/encoder';
 import {Vector} from '../../../src/model';
 
-describe('encoder/field->VendorVectorEncoder', (): void => {
+describe('VendorVectorEncoder', (): void => {
 
   const HEADER_LENGTH = 17;
   const RANGE_NUM_ENTRIES = 12;

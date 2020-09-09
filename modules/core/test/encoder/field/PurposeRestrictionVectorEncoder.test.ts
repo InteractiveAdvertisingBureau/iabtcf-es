@@ -20,7 +20,7 @@ const randomize = (ar: number[]): number[] => {
 
 };
 
-describe('encoder/field->PurposeRestrictionVectorEncoder', (): void => {
+describe('PurposeRestrictionVectorEncoder', (): void => {
 
   it(`should return ${BitLength.numRestrictions} 0's for an empty PurposeRestrictionVector`, (): void => {
 

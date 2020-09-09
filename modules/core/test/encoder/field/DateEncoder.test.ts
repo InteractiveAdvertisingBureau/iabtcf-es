@@ -1,7 +1,7 @@
 import {DateEncoder} from '../../../src/encoder/field/DateEncoder';
 import {expect} from 'chai';
 
-describe('encoder/field->DateEncoder', (): void => {
+describe('DateEncoder', (): void => {
 
   describe('encode', (): void => {
 
