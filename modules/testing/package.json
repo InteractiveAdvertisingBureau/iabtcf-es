@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "preversion": "echo 'woops I think you meant to go to the root' && exit 1",
-    "build": "../build ; cp -a src/vendorlist lib/",
+    "build": "../build ; cp -r src/vendorlist lib/",
     "lint": "eslint `find src -name '*.ts'`"
   },
   "peerDependencies": {
