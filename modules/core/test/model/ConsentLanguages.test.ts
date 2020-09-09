@@ -21,6 +21,7 @@ describe('model->ConsentLanguages', (): void => {
       'HR',
       'HU',
       'IT',
+      'JA',
       'LT',
       'LV',
       'MT',
@@ -33,6 +34,7 @@ describe('model->ConsentLanguages', (): void => {
       'SK',
       'SL',
       'SV',
+      'TR',
       'ZH',
     ];
 
