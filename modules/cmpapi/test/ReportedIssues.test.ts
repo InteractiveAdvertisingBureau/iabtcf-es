@@ -250,4 +250,42 @@ describe('Reported issues', (): void => {
 
   });
 
+  it('220 Events are not triggered in addEventListener() after update() in invoked with uiVisible=false', (): void => {
+
+    const spy = sinon.spy();
+    const tcString = 'CO5dPi4O5dPx2B7DvCENA2CgAAAAAAAAAAAAGewAAM8gAAAA.YAAAAAAAAAAA';
+    const cmpApi = new CmpApi(makeRandomInt(2, 100), makeRandomInt(2, 100), true);
+
+    window[API_KEY]('addEventListener', 2, spy);
+
+    cmpApi.update(tcString, false);
+    cmpApi.update(tcString, true);
+    cmpApi.update(tcString, false);
+    cmpApi.update(tcString, true);
+    cmpApi.update(tcString, false);
+
+    expect(spy.callCount, 'spy callCount').to.equal(5);
+
+    let tcData = spy.getCall(0).args[0];
+
+    expect(tcData.eventStatus, `call 0 eventStatus`).to.equal(EventStatus.TC_LOADED);
+
+    tcData = spy.getCall(1).args[0];
+
+    expect(tcData.eventStatus, `call 1 eventStatus`).to.equal(EventStatus.CMP_UI_SHOWN);
+
+    tcData = spy.getCall(2).args[0];
+
+    expect(tcData.eventStatus, `call 2 eventStatus`).to.equal(EventStatus.USER_ACTION_COMPLETE);
+
+    tcData = spy.getCall(3).args[0];
+
+    expect(tcData.eventStatus, `call 3 eventStatus`).to.equal(EventStatus.CMP_UI_SHOWN);
+
+    tcData = spy.getCall(4).args[0];
+
+    expect(tcData.eventStatus, `call 4 eventStatus`).to.equal(EventStatus.USER_ACTION_COMPLETE);
+
+  });
+
 });
