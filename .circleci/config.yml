@@ -6,6 +6,7 @@ jobs:
     steps:
       - checkout
       - run: yarn
+      - run: yarn build
       - run: mkdir ~/junit
       - run:
           command: mocha test --reporter mocha-junit-reporter
