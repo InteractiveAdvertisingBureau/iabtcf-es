@@ -22,6 +22,7 @@
   "dependencies": {
     "@types/sinon": "^7.0.13",
     "@types/sinon-chai": "3.2.2",
+    "mocha-eslint": "^6.0.0",
     "sinon": "^7.3.2",
     "sinon-chai": "^3.3.0"
   },

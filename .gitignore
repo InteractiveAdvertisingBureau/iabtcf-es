@@ -5,6 +5,7 @@ modules/**/dist
 modules/**/coverage
 modules/**/node_modules
 modules/**/.nyc_output
+test-results.xml
 .nyc_output
 coverage
 tags
