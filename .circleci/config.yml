@@ -7,13 +7,13 @@ jobs:
       - checkout
       - run: yarn
       - run: yarn build
-      - run: mkdir ~/tresults
+      - run: mkdir -p test-results/mocha
       - run:
-          command: yarn mocha --reporter mocha-junit-reporter
+          command: yarn test-ci
           environment:
-            MOCHA_FILE: ~/tresults/test-results.xml
+            MOCHA_FILE: test-results/mocha/test-results.xml
           when: always
       - store_test_results:
-          path: ~/tresults
+          path: test-results
       - store_artifacts:
-          path: ~/tresults
+          path: test-results
