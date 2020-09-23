@@ -5,4 +5,5 @@ jobs:
       - image: 'circleci/node:10.15.3'
     steps:
       - checkout
-      - run: echo 'hello world'
+      - run: yarn
+      - run: yarn build
