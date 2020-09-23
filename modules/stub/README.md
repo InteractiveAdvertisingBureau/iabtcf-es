@@ -1,3 +1,7 @@
+[![NPM version](https://img.shields.io/npm/v/@iabtcf/stub.svg?style=flat-square)](https://www.npmjs.com/package/@iabtcf/stub)
+[![npm module downloads per month](http://img.shields.io/npm/dm/@iabtcf/stub.svg?style=flat)](https://www.npmjs.org/package/@iabtcf/stub)
+[![InteractiveAdvertisingBureau](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es.svg?style=shield)](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es)
+
 # @iabtcf/stub
 
 Cmp API Stub code.  Maybe included in commonjs loader or dropped directly on the page.

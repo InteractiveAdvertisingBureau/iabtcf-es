@@ -14,12 +14,10 @@
     "preversion": "echo 'woops I think you meant to go to the root' && exit 1",
     "build": "../build",
     "lint": "eslint `find test src -name '*.ts'`",
-    "debug": "ndb yarn test --no-timeouts",
+    "debug": "ndb mocha --no-timeouts",
     "serve:cov": "npx http-server ./coverage/",
-    "test": "mocha `find test -name '*.test.ts'`",
-    "test-watch": "mocha `find test -name '*.test.ts'` --watch --watch-extensions ts",
-    "test:cov": "rm -rf coverage; nyc --reporter=html mocha `find test -name '*.test.ts'`",
-    "test:lcov": "nyc --reporter=lcov mocha `find test -name '*.test.ts'`"
+    "test": "mocha",
+    "test-cov": "rm -rf coverage; nyc --reporter=html mocha"
   },
   "peerDependencies": {
     "@iabtcf/core": ">=1.0.0"
