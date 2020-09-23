@@ -1,8 +1,0 @@
-sudo: false
-language: node_js
-cache: yarn
-script:
-  - yarn run build
-  - yarn run test:lcov
-after_success:
-  - yarn run upload:lcov

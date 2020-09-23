@@ -1,3 +1,7 @@
+[![NPM version](https://img.shields.io/npm/v/@iabtcf/testing.svg?style=flat-square)](https://www.npmjs.com/package/@iabtcf/testing)
+[![npm module downloads per month](http://img.shields.io/npm/dm/@iabtcf/testing.svg?style=flat)](https://www.npmjs.org/package/@iabtcf/testing)
+[![InteractiveAdvertisingBureau](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es.svg?style=shield)](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es)
+
 # @iabtcf/testing
 
 Testing tools to generate randomized input/output
