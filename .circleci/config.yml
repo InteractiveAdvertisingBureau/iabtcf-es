@@ -1,9 +1,9 @@
 version: 2.1
 jobs:
-  build:
+  test:
     docker:
       - image: 'circleci/node:10.15.3'
     steps:
       - checkout
       - run: yarn
-      - run: yarn build
+      - run: yarn test
