@@ -25,9 +25,7 @@
     "preflight": "yarn build && yarn test",
     "serve-cov": "npx http-server ./coverage/",
     "test-cov": "rm -rf coverage; nyc --reporter html mocha",
-    "test-ci": "mocha --reporter mocha-junit-reporter",
-    "test-lcov": "nyc --reporter=lcov mocha",
-    "upload-lcov": "cat coverage/lcov.info | coveralls"
+    "test-ci": "mocha --reporter mocha-junit-reporter"
   },
   "keywords": [
     "interactive",
