@@ -76,4 +76,22 @@ describe('CallResponder', (): void => {
 
   });
 
+  it('should throw an error if attempting to override addEventListener with a custom command', (): void => {
+
+    const command = TCFCommand.ADD_EVENT_LISTENER;
+
+    expect((): void => {
+
+      new CallResponder({
+        [command]: (next: CommandCallback, tcData: TCData): void => {
+
+          next(tcData);
+
+        },
+      });
+
+    }).to.throw();
+
+  });
+
 });

@@ -388,7 +388,7 @@ describe('CmpApi', (): void => {
 
   const runBuiltInCustomTest = (command: TCFCommand): void => {
 
-    if (command !== TCFCommand.REMOVE_EVENT_LISTENER) {
+    if (command !== TCFCommand.REMOVE_EVENT_LISTENER && command !== TCFCommand.ADD_EVENT_LISTENER) {
 
       it(`should call a built-in ${command} command through the page interface and decorate the response in the middleware`, (done: () => void): void => {
 

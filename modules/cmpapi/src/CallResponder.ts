@@ -19,7 +19,34 @@ export class CallResponder {
 
   public constructor(customCommands?: CustomCommands) {
 
-    this.customCommands = customCommands;
+    if (customCommands) {
+
+      /**
+       * The addEventListener command and removeEventListener are the only ones
+       * that shouldn't be overwritten. The addEventListener command utilizes
+       * getTCData command, so overridding the TCData response should happen
+       * there.
+       */
+
+      let command = TCFCommand.ADD_EVENT_LISTENER;
+
+      if (customCommands?.[command]) {
+
+        throw new Error(`Built-In Custom Commmand for ${command} not allowed: Use ${TCFCommand.GET_TC_DATA} instead`);
+
+      }
+
+      command = TCFCommand.REMOVE_EVENT_LISTENER;
+
+      if (customCommands?.[command]) {
+
+        throw new Error(`Built-In Custom Commmand for ${command} not allowed`);
+
+      }
+
+      this.customCommands = customCommands;
+
+    }
 
     /**
      * Attempt to grab the queue – we could call ping and see if it is the stub,
