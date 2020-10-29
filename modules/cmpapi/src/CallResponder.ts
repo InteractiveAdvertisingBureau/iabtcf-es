@@ -44,6 +44,17 @@ export class CallResponder {
 
       }
 
+      /**
+       * If `getTCData` custom command handler is specified, we should use it 
+       * for `addEventListener` and `removeEventListener` commands.
+       */
+      if(customCommands?.[TCFCommand.GET_TC_DATA]) {
+
+        customCommands[TCFCommand.ADD_EVENT_LISTENER] = customCommands[TCFCommand.GET_TC_DATA]
+        customCommands[TCFCommand.REMOVE_EVENT_LISTENER] = customCommands[TCFCommand.GET_TC_DATA]
+      
+      }
+
       this.customCommands = customCommands;
 
     }
