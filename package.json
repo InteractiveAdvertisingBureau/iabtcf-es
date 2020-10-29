@@ -1,6 +1,6 @@
 {
   "name": "iabtcf",
-  "version": "1.1.0-1",
+  "version": "1.1.4",
   "description": "Official compliant tool suite for implementing the iab. Transparency and Consent Framework (TCF).",
   "private": true,
   "workspaces": [
@@ -18,15 +18,14 @@
     "tidy": "rm -rf modules/**/lib coverage modules/**/coverage .nyc_output modules/**/.nyc_output modules/**/*.log",
     "clean": "rm -rf node_modules modules/**/node_modules && yarn run tidy",
     "lint": "yarn workspaces run lint",
-    "test": "yarn && mocha `find ./modules/**/test/ '*.test.ts'`",
-    "debug": "ndb mocha",
+    "test": "mocha",
+    "debug": "ndb yarn test",
     "postversion": "./bin/version",
     "deploy": "./bin/publish-version",
-    "preflight": "yarn lint && yarn build && yarn test",
-    "serve:cov": "npx http-server ./coverage/",
-    "test:cov": "rm -rf coverage; nyc --reporter html mocha",
-    "test:lcov": "nyc --reporter=lcov mocha",
-    "upload:lcov": "cat coverage/lcov.info | coveralls"
+    "preflight": "yarn build && yarn test",
+    "serve-cov": "npx http-server ./coverage/",
+    "test-cov": "rm -rf coverage; nyc --reporter html mocha",
+    "test-ci": "mocha --reporter mocha-junit-reporter"
   },
   "keywords": [
     "interactive",
@@ -56,6 +55,7 @@
   ],
   "devDependencies": {
     "json": "^9.0.6",
-    "mocha": "6"
+    "mocha": "6",
+    "mocha-junit-reporter": "^2.0.0"
   }
 }

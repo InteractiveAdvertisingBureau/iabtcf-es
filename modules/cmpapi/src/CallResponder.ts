@@ -19,7 +19,34 @@ export class CallResponder {
 
   public constructor(customCommands?: CustomCommands) {
 
-    this.customCommands = customCommands;
+    if (customCommands) {
+
+      /**
+       * The addEventListener command and removeEventListener are the only ones
+       * that shouldn't be overwritten. The addEventListener command utilizes
+       * getTCData command, so overridding the TCData response should happen
+       * there.
+       */
+
+      let command = TCFCommand.ADD_EVENT_LISTENER;
+
+      if (customCommands?.[command]) {
+
+        throw new Error(`Built-In Custom Commmand for ${command} not allowed: Use ${TCFCommand.GET_TC_DATA} instead`);
+
+      }
+
+      command = TCFCommand.REMOVE_EVENT_LISTENER;
+
+      if (customCommands?.[command]) {
+
+        throw new Error(`Built-In Custom Commmand for ${command} not allowed`);
+
+      }
+
+      this.customCommands = customCommands;
+
+    }
 
     /**
      * Attempt to grab the queue – we could call ping and see if it is the stub,
@@ -29,10 +56,11 @@ export class CallResponder {
      * calling with no arguments, then we'll just move on and create our
      * function.
      */
+
     try {
 
       // get queued commands
-      this.callQueue = (window[API_KEY] as GetQueueFunction)();
+      this.callQueue = (window[API_KEY] as GetQueueFunction)() || [];
 
     } catch (err) {
 
@@ -41,10 +69,9 @@ export class CallResponder {
     } finally {
 
       window[API_KEY] = this.apiCall.bind(this);
+      this.purgeQueuedCalls();
 
     }
-
-    this.purgeQueuedCalls();
 
   }
 
@@ -149,24 +176,23 @@ export class CallResponder {
    */
   public purgeQueuedCalls(): void {
 
-    const apiCall = this.apiCall.bind(this);
     const queueCopy: APIArgs[] = this.callQueue;
 
     this.callQueue = [];
     queueCopy.forEach((args: APIArgs): void => {
 
-      apiCall(...args);
+      window[API_KEY](...args);
 
     });
 
   }
 
   /**
-     * Checks to see if the command exists in the set of custom commands
-     *
-     * @param {string} command - command to check
-     * @return {boolean} - whether or not this command is a custom command
-     */
+   * Checks to see if the command exists in the set of custom commands
+   *
+   * @param {string} command - command to check
+   * @return {boolean} - whether or not this command is a custom command
+   */
   private isCustomCommand(command: string): boolean {
 
     return ((this.customCommands && typeof this.customCommands[command] === 'function'));
@@ -174,11 +200,11 @@ export class CallResponder {
   }
 
   /**
-     * Checks to see if the command exists in the set of TCF Commands
-     *
-     * @param {string} command - command to check
-     * @return {boolean} - whether or not this command is a built-in command
-     */
+   * Checks to see if the command exists in the set of TCF Commands
+   *
+   * @param {string} command - command to check
+   * @return {boolean} - whether or not this command is a built-in command
+   */
   private isBuiltInCommand(command: string): boolean {
 
     return ((CommandMap[command] !== undefined));

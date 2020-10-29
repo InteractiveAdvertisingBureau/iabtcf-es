@@ -4,6 +4,7 @@ import {IntEncoder} from './IntEncoder';
 import {BooleanEncoder} from './BooleanEncoder';
 import {FixedVectorEncoder} from './FixedVectorEncoder';
 import {VectorEncodingType} from './VectorEncodingType';
+import {DecodingError} from '../../errors';
 
 export class VendorVectorEncoder {
 
@@ -107,7 +108,7 @@ export class VendorVectorEncoder {
 
   }
 
-  public static decode(value: string): Vector {
+  public static decode(value: string, version?: number): Vector {
 
     let vector: Vector;
     let index = 0;
@@ -122,6 +123,19 @@ export class VendorVectorEncoder {
     if (encodingType === VectorEncodingType.RANGE) {
 
       vector = new Vector();
+
+      if (version === 1) {
+
+        if (value.substr(index, 1) === '1') {
+
+          throw new DecodingError('Unable to decode default consent=1');
+
+        }
+
+        // jump over the default encoding
+        index++;
+
+      }
 
       const numEntries: number = IntEncoder.decode(value.substr(index, BitLength.numEntries), BitLength.numEntries);
 

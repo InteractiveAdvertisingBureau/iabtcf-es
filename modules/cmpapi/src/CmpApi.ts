@@ -8,6 +8,7 @@ export class CmpApi {
 
   private callResponder: CallResponder;
   private isServiceSpecific: boolean;
+  private numUpdates = 0;
 
   /**
    * @param {number} cmpId - IAB assigned CMP ID
@@ -24,33 +25,6 @@ export class CmpApi {
     CmpApiModel.cmpVersion = cmpVersion;
     this.isServiceSpecific = !!isServiceSpecific;
     this.callResponder = new CallResponder(customCommands);
-
-  }
-
-  public set tcModel(tcModel: TCModel | null) {
-
-    // eslint-disable-next-line no-console
-    console.error('@iabtcf/cmpapi: As of v1.0.0-beta.21 setting tcModel via CmpApi.tcModel is deprecated.  Use cmpApi.update(tcString, uiVisible) instead');
-    // eslint-disable-next-line no-console
-    console.log('  see: https://github.com/InteractiveAdvertisingBureau/iabtcf-es/tree/master/modules/cmpapi#cmpapi-examples');
-
-  }
-
-  public set tcString(tcString: string | null) {
-
-    // eslint-disable-next-line no-console
-    console.error('@iabtcf/cmpapi: As of v1.0.0-beta.21 setting tcString via CmpApi.tcString is deprecated.  Use cmpApi.update(tcString, uiVisible) instead');
-    // eslint-disable-next-line no-console
-    console.log('  see: https://github.com/InteractiveAdvertisingBureau/iabtcf-es/tree/master/modules/cmpapi#cmpapi-examples');
-
-  }
-
-  public set uiVisible(bool: boolean) {
-
-    // eslint-disable-next-line no-console
-    console.error('@iabtcf/cmpapi: As of v1.0.0-beta.21 setting uiVisible via CmpApi.uiVisible is deprecated.  Use cmpApi.update(tcString, uiVisible) instead');
-    // eslint-disable-next-line no-console
-    console.log('  see: https://github.com/InteractiveAdvertisingBureau/iabtcf-es/tree/master/modules/cmpapi#cmpapi-examples');
 
   }
 
@@ -128,13 +102,30 @@ export class CmpApi {
       }
 
       CmpApiModel.tcModel.isServiceSpecific = this.isServiceSpecific;
+      CmpApiModel.tcfPolicyVersion = +CmpApiModel.tcModel.policyVersion;
       CmpApiModel.tcString = encodedTCString;
 
     }
 
-    this.callResponder.purgeQueuedCalls();
+    if (this.numUpdates === 0) {
 
-    CmpApiModel.eventQueue.exec();
+      /**
+       * Will make AddEventListener Commands respond immediately.
+       */
+
+      this.callResponder.purgeQueuedCalls();
+
+    } else {
+
+      /**
+       * Should be no queued calls and only any addEventListener commands
+       */
+
+      CmpApiModel.eventQueue.exec();
+
+    }
+
+    this.numUpdates++;
 
   }
 

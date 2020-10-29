@@ -1,7 +1,7 @@
 [![NPM version](https://img.shields.io/npm/v/@iabtcf/cmpapi.svg?style=flat-square)](https://www.npmjs.com/package/@iabtcf/cmpapi)
 [![npm module downloads per month](http://img.shields.io/npm/dm/@iabtcf/cmpapi.svg?style=flat)](https://www.npmjs.org/package/@iabtcf/cmpapi)
-[![Build](https://travis-ci.org/chrispaterson/iabtcf.svg?branch=master)](https://travis-ci.org/chrispaterson/iabtcf)
-[![Coverage Status](https://coveralls.io/repos/github/chrispaterson/iabtcf/badge.svg?branch=master)](https://coveralls.io/github/chrispaterson/iabtcf?branch=master)
+[![InteractiveAdvertisingBureau](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es.svg?style=shield)](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es)
+
 
 # @iabtcf/cmpapi
 
@@ -181,7 +181,7 @@ __tcfapi('connectBones', 2, songLyricCallback, 'knee', 'thigh');
 ### Built-In and Custom Commands
 Beginning in 1.1.0, if a custom command is defined that overlaps with a built-in command (`"ping"`, `"getTCData"`, `"getInAppTCData"`, `"getVendorList"`) then the custom command will act as a "middleware" being passed the built-in command's response and expected to pass along the response when finished.
 
-
+**Note:** `"addEventListener"` and `"removeEventListener"` can __not__ be overwritten.  `"addEventListener"` utilizes the `"getTCData"` command, so to modify `TCData` responses, write a Built-In custom command for that command and both `"getTCData"` and `"addEventListener"` will utilize it. 
 
 **Example**
 ````javascript

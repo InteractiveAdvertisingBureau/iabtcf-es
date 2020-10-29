@@ -15,6 +15,7 @@ export class ConsentLanguages {
     'HR',
     'HU',
     'IT',
+    'JA',
     'LT',
     'LV',
     'MT',
@@ -27,6 +28,7 @@ export class ConsentLanguages {
     'SK',
     'SL',
     'SV',
+    'TR',
     'ZH',
   ]);
 

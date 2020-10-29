@@ -1,6 +1,6 @@
 {
   "name": "@iabtcf/stub",
-  "version": "1.1.0-1",
+  "version": "1.1.4",
   "description": "CMP API Stub code",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://iabtcf.com/",
@@ -12,12 +12,13 @@
   "scripts": {
     "preversion": "echo 'woops I think you meant to go to the root' && exit 1",
     "build": "rm -rf lib && mkdir lib ; babel src/stub.js | terser -m -c -o lib/stub.js",
-    "build:dev": "rm -rf lib && ln -s src lib",
+    "build-dev": "rm -rf lib && ln -s src lib",
     "lint": "exit 0"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",
     "@babel/core": "^7.7.5",
+    "@babel/helper-validator-identifier": "^7.10.4",
     "@babel/preset-env": "^7.7.6",
     "eslint": "6.8.0",
     "terser": "^4.4.3"

@@ -1,9 +1,11 @@
 import * as stub from '@iabtcf/stub';
+import * as sinon from 'sinon';
 import {API_KEY, CmpApi} from '../src/';
 import {CmpApiModel} from '../src/CmpApiModel';
-import {Disabled, Response, TCData} from '../src/response';
+import {Disabled, Response, TCData, InAppTCData} from '../src/response';
 import {EventStatus} from '../src/status/EventStatus';
 import {TCFCommand} from '../src/command/TCFCommand';
+import {TestUtils} from './TestUtils';
 import {expect} from 'chai';
 import {makeRandomInt, TCStringFactory} from '@iabtcf/testing';
 
@@ -39,6 +41,7 @@ describe('Reported issues', (): void => {
     stub.default();
 
   });
+
   afterEach((): void => {
 
     removeStub();
@@ -47,11 +50,12 @@ describe('Reported issues', (): void => {
 
   it('Issue 96 CmpApi should respond to addEventListener call with an error object when in an Error state', (done: () => void): void => {
 
-    const cmpApi = new CmpApi(makeRandomInt(2, Math.pow(2, 6)), makeRandomInt(2, Math.pow(2, 6)));
+    const cmpApi = TestUtils.getCmpApi();
 
+    cmpApi.update(TCStringFactory.base());
     cmpApi.disable();
 
-    window[API_KEY]('addEventListener', 2, (response: Response): void => {
+    window[API_KEY](TCFCommand.ADD_EVENT_LISTENER, 2, (response: Response): void => {
 
       expect(response instanceof Disabled, 'response instanceof Disabled').to.be.true;
 
@@ -63,7 +67,7 @@ describe('Reported issues', (): void => {
 
   it('Should not throw an error if getTCData is called before update is called', (done: () => void): void => {
 
-    const cmpApi = new CmpApi(makeRandomInt(2, Math.pow(2, 6)), makeRandomInt(2, Math.pow(2, 6)));
+    const cmpApi = TestUtils.getCmpApi();
 
     const callDatFunc = (): void => {
 
@@ -117,7 +121,6 @@ describe('Reported issues', (): void => {
 
     const cmpId = makeRandomInt(2, Math.pow(2, 6));
     const cmpVersion = makeRandomInt(2, Math.pow(2, 6));
-    const cmpApi = new CmpApi(cmpId, cmpVersion);
     const numTimes = 4;
     let count = 0;
 
@@ -149,6 +152,8 @@ describe('Reported issues', (): void => {
 
     });
 
+    const cmpApi = new CmpApi(cmpId, cmpVersion);
+
     for (let i = 0; i < numTimes; i++) {
 
       cmpApi.update(TCStringFactory.base(), !(i%2));
@@ -179,9 +184,107 @@ describe('Reported issues', (): void => {
     window[API_KEY](TCFCommand.GET_TC_DATA, null, callback);
     window[API_KEY](TCFCommand.GET_TC_DATA, null, callback, [9]);
 
-    const cmpApi = new CmpApi(makeRandomInt(2, Math.pow(2, 6)), makeRandomInt(2, Math.pow(2, 6)));
+    const cmpApi = TestUtils.getCmpApi();
 
     cmpApi.update(TCStringFactory.base());
+
+  });
+
+  it('195 getInAppTCData no longer returns a success argument', (): void => {
+
+    const callback = (inAppTCData: InAppTCData, success: boolean): void => {
+
+      expect(inAppTCData, 'InAppTCData').not.to.be.null;
+      expect(success, 'success').to.be.true;
+
+    };
+
+    window[API_KEY](TCFCommand.GET_IN_APP_TC_DATA, null, callback);
+
+    const cmpApi = TestUtils.getCmpApi();
+
+    cmpApi.update(TCStringFactory.base());
+
+  });
+
+  it('196 should not call callback twice on addEventListener', (): void => {
+
+    const callback = sinon.fake();
+
+    window[API_KEY](TCFCommand.ADD_EVENT_LISTENER, null, callback);
+    expect(callback.callCount, 'callback.callCount :: Before CMP API Created').to.equal(0);
+
+    const cmpApi = TestUtils.getCmpApi();
+
+    expect(callback.callCount, 'callback.callCount :: After CMP API Created').to.equal(0);
+    cmpApi.update(TCStringFactory.base());
+    expect(callback.callCount, 'callback.callCount :: After CmpApi.update()').to.equal(1);
+
+  });
+
+  it('208 Custom Commands no longer get called before update', (): void => {
+
+    const callback = sinon.fake();
+    const command = sinon.stub();
+    const commandName = 'makeASandwich';
+
+    command.callsFake(callback);
+
+    // call custom command to the stub
+    window[API_KEY](commandName, null, callback);
+
+    // expect the callback not to be called yet because it's still the stub
+    expect(callback.callCount, 'callback.callCount :: Before CMP API Created').to.equal(0);
+
+    const cmpApi = TestUtils.getCmpApi({
+      [commandName]: command,
+    });
+
+    // expect the callback to be called because it should be called on creation
+    expect(callback.callCount, 'callback.callCount :: After CMP API Created').to.equal(1);
+
+    cmpApi.update(TCStringFactory.base());
+
+    // expect the callback not to be called again on update, should equal the last time
+    expect(callback.callCount, 'callback.callCount :: After CmpApi.update()').to.equal(1);
+
+  });
+
+  it('220 Events are not triggered in addEventListener() after update() in invoked with uiVisible=false', (): void => {
+
+    const spy = sinon.spy();
+    const tcString = 'CO5dPi4O5dPx2B7DvCENA2CgAAAAAAAAAAAAGewAAM8gAAAA.YAAAAAAAAAAA';
+    const cmpApi = new CmpApi(makeRandomInt(2, 100), makeRandomInt(2, 100), true);
+
+    window[API_KEY]('addEventListener', 2, spy);
+
+    cmpApi.update(tcString, false);
+    cmpApi.update(tcString, true);
+    cmpApi.update(tcString, false);
+    cmpApi.update(tcString, true);
+    cmpApi.update(tcString, false);
+
+    expect(spy.callCount, 'spy callCount').to.equal(5);
+
+    let tcData = spy.getCall(0).args[0];
+
+    expect(tcData.eventStatus, `call 0 eventStatus`).to.equal(EventStatus.TC_LOADED);
+
+    tcData = spy.getCall(1).args[0];
+
+    expect(tcData.eventStatus, `call 1 eventStatus`).to.equal(EventStatus.CMP_UI_SHOWN);
+
+    tcData = spy.getCall(2).args[0];
+
+    expect(tcData.eventStatus, `call 2 eventStatus`).to.equal(EventStatus.USER_ACTION_COMPLETE);
+
+    tcData = spy.getCall(3).args[0];
+
+    expect(tcData.eventStatus, `call 3 eventStatus`).to.equal(EventStatus.CMP_UI_SHOWN);
+
+    tcData = spy.getCall(4).args[0];
+
+    expect(tcData.eventStatus, `call 4 eventStatus`).to.equal(EventStatus.USER_ACTION_COMPLETE);
 
   });
 

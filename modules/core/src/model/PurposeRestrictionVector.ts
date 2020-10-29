@@ -30,7 +30,6 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
   private isOkToHave(restrictionType: RestrictionType, purposeId: number, vendorId: number): boolean {
 
-    const vIDStr: string = vendorId.toString();
     let result = true;
 
     /**
@@ -40,9 +39,9 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
      */
     if (this.gvl?.vendors) {
 
-      if (this.gvl.vendors[vIDStr]) {
+      const vendor: Vendor = this.gvl.vendors[vendorId];
 
-        const vendor: Vendor = this.gvl.vendors[vIDStr];
+      if (vendor) {
 
         if (restrictionType === RestrictionType.NOT_ALLOWED) {
 
@@ -66,6 +65,7 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
              */
             case RestrictionType.REQUIRE_CONSENT:
               result = (vendor.flexiblePurposes.includes(purposeId) && vendor.legIntPurposes.includes(purposeId));
+              break;
 
             /**
              * If the vendor has the purposeId in flexiblePurposes and it is
@@ -74,8 +74,13 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
              */
             case RestrictionType.REQUIRE_LI:
               result = (vendor.flexiblePurposes.includes(purposeId) && vendor.purposes.includes(purposeId));
+              break;
 
           }
+
+        } else {
+
+          result = false;
 
         }
 
@@ -113,23 +118,13 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
       }
 
-      const currentRestrictions = this.getRestrictions(vendorId);
-      currentRestrictions.forEach((curRestriction: PurposeRestriction): void => {
+      /**
+       * Previously I had a check here to remove a duplicate value, but because
+       * we're using a tree the value is guaranteed to be unique so there is no
+       * need to add an additional de-duplication here.
+       */
 
-        /**
-         * if this vendor is already restricted under this purpose they can only
-         * be restricted in one way so we'll remove them from the other one.
-         * It's a last value wins result
-         */
-        if (curRestriction.purposeId === purposeRestriction.purposeId) {
-
-          this.remove(vendorId, curRestriction);
-
-        }
-
-      });
-
-      (this.map.get(hash) as BinarySearchTree).add(vendorId);
+      this.map.get(hash).add(vendorId);
 
     }
 

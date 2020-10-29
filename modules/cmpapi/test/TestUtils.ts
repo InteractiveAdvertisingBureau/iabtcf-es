@@ -1,27 +1,23 @@
 import {BooleanVector} from '../src/response/BooleanVector';
 import {CmpApiModel} from '../src/CmpApiModel';
-import {CmpStatus, DisplayStatus} from '../src/status';
+import {CmpApi} from '../src/CmpApi';
+import {CustomCommands} from '../src/CustomCommands';
 import {InAppTCData} from '../src/response/InAppTCData';
 import {PurposeRestriction, TCString, Vector} from '@iabtcf/core';
 import {TCData} from '../src/response/TCData';
 import {expect} from 'chai';
+import {makeRandomInt} from '@iabtcf/testing';
 
 export class TestUtils {
 
-  public static assertDefaultCmpApiModel(): void {
+  public static getCmpApi(customCommands?: CustomCommands): CmpApi {
 
-    expect(CmpApiModel.apiVersion, 'assert default apiVersion').to.equal('2');
-    expect(CmpApiModel.tcfPolicyVersion, 'assert default tcfPolicyVersion').to.equal(2);
-    expect(CmpApiModel.cmpStatus, 'assert default cmpStatus').to.equal(CmpStatus.LOADING);
-    expect(CmpApiModel.displayStatus, 'assert default displayStatus').to.equal(DisplayStatus.HIDDEN);
-
-    expect(CmpApiModel.disabled, 'assert default disabled').to.be.false;
-
-    expect(CmpApiModel.cmpId, 'assert default cmpId').to.be.undefined;
-    expect(CmpApiModel.cmpVersion, 'assert default cmpVersion').to.be.undefined;
-    expect(CmpApiModel.gdprApplies, 'assert default gdprApplies').to.be.undefined;
-    expect(CmpApiModel.eventStatus, 'assert default eventStatus').to.be.undefined;
-    expect(CmpApiModel.tcModel, 'assert default tcModel').to.be.undefined;
+    return new CmpApi(
+      makeRandomInt(2, Math.pow(2, 6)),
+      makeRandomInt(2, Math.pow(2, 6)),
+      !makeRandomInt(0, 1),
+      customCommands,
+    );
 
   }
   private static checkVectorToBooleanVector(name: string,
