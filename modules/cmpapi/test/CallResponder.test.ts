@@ -5,6 +5,7 @@ import {TCData} from '../src/response/TCData';
 import {TCFCommand} from '../src/command';
 import {TCModelFactory} from '@iabtcf/testing';
 import {expect} from 'chai';
+import * as sinon from 'sinon';
 
 describe('CallResponder', (): void => {
 
@@ -91,6 +92,30 @@ describe('CallResponder', (): void => {
       });
 
     }).to.throw();
+
+  });
+
+  it('should use custom "getTCData" command handler for "addEventListener" and "removeEventListener" commands', (): void => {
+
+    const customCommandCallback = sinon.stub();
+  
+    const callResponder = new CallResponder({
+      [TCFCommand.GET_TC_DATA]: (): void => {
+        customCommandCallback();
+      },
+    });
+  
+    // Invoke `getTCData` command and make sure custom callback was called
+    callResponder.apiCall(TCFCommand.GET_TC_DATA, null, () => {});
+    expect(customCommandCallback.callCount).to.eql(1);
+  
+    // Invoke `addEventListener` command and make sure custom callback was called
+    callResponder.apiCall(TCFCommand.ADD_EVENT_LISTENER, null, () => {});
+    expect(customCommandCallback.callCount).to.eql(2);
+  
+    // Invoke `removeEventListener` command and make sure custom callback was called
+    callResponder.apiCall(TCFCommand.REMOVE_EVENT_LISTENER, null, () => {});
+    expect(customCommandCallback.callCount).to.eql(3);
 
   });
 
