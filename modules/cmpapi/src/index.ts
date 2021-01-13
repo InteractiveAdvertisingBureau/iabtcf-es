@@ -1,4 +1,6 @@
+export * from './command';
+export * from './response';
+export * from './status';
 export * from './CmpApi';
-export * from './Types';
-export * from './model/';
-export * from './model/status';
+export * from './CustomCommands';
+export {API_KEY, APIArgs} from './CallResponder';

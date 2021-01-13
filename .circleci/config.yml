@@ -1,0 +1,19 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: 'circleci/node:10.15.3'
+    steps:
+      - checkout
+      - run: yarn
+      - run: yarn build
+      - run: mkdir -p test-results/mocha
+      - run:
+          command: yarn test-ci
+          environment:
+            MOCHA_FILE: test-results/mocha/test-results.xml
+          when: always
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results

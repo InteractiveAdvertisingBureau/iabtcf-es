@@ -1,0 +1,70 @@
+#!/bin/bash
+
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+DIFF=$(git diff HEAD)
+ROOT=$(git rev-parse --show-toplevel)
+
+
+if [[ -n $DIFF ]]; then
+
+  echo 'There are unstaged changed, please commit changes before publishing'
+  exit 1
+
+fi
+
+if [[ -z $npm_package_version ]]; then
+
+  echo 'Unable to determine package version to publish'
+  exit 1
+
+fi
+
+cd $ROOT
+
+git checkout develop
+git pull
+
+git checkout master
+git pull
+
+git merge develop --no-edit
+
+yarn lint
+
+if [[ $? != 0 ]]; then
+  echo
+  echo "Fix yo lint errors"
+  echo
+  exit 1
+fi
+
+yarn build
+
+if [[ $? != 0 ]]; then
+  echo
+  echo "Unsuccessful build... Bailing"
+  echo
+  exit 1
+fi
+
+yarn test
+
+if [[ $? != 0 ]]; then
+  echo
+  echo "Unsuccessful tests... Bailing"
+  echo
+  exit 1
+fi
+
+for pkg in ./modules/*; do
+  if [[ -d $pkg ]]; then
+    yarn publish --access public --new-version $npm_package_version $pkg
+  fi
+done
+
+git push
+# pushes the tag
+git push origin $npm_package_version
+
+git checkout $BRANCH
+git push

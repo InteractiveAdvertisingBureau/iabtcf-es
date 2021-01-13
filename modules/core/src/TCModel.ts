@@ -1,49 +1,39 @@
+import {Cloneable} from './Cloneable';
 import {TCModelError} from './errors';
 import {GVL} from './GVL';
-import {
 
-  GVLMapItem,
-  Purpose,
+import {ConsentLanguages, IntMap, PurposeRestrictionVector, Vector} from './model';
+import {Purpose} from './model/gvl';
 
-} from './model/gvl';
-
-import {
-
-  Vector,
-  PurposeRestrictionVector,
-  IntMap,
-  TCFields,
-
-} from './model';
-
-
+type StringOrNumber = number | string;
 export type TCModelPropType = number | Date | string | boolean | Vector | PurposeRestrictionVector;
 
-export class TCModel implements TCFields {
+export class TCModel extends Cloneable<TCModel> {
 
-  private static readonly MAX_ENCODING_VERSION: number = 2;
+  /**
+   * Set of available consent languages published by the IAB
+   */
+  public static readonly consentLanguages: ConsentLanguages = GVL.consentLanguages;
 
-  // Defaults
-  private version_: number = TCModel.MAX_ENCODING_VERSION;
-  private consentScreen_: number = 0;
-  private policyVersion_: number = 2;
-  private isServiceSpecific_: boolean = false;
-  private useNonStandardStacks_: boolean = false;
-  private purposeOneTreatment_: boolean = false;
-  private publisherCountryCode_: string = 'AA';
-  private supportOOB_: boolean = false;
+  private isServiceSpecific_ = false;
+  private supportOOB_ = true;
+  private useNonStandardStacks_ = false;
+  private purposeOneTreatment_ = false;
+  private publisherCountryCode_ = 'AA';
+  private version_ = 2;
+  private consentScreen_: StringOrNumber = 0;
+  private policyVersion_: StringOrNumber = 2;
+  private consentLanguage_ = 'EN';
+  private cmpId_: StringOrNumber = 0;
+  private cmpVersion_: StringOrNumber = 0;
+  private vendorListVersion_: StringOrNumber = 0;
+  private numCustomPurposes_ = 0;
 
-
-  // needs some settin' (no default)
-  private cmpId_: number;
-  private cmpVersion_: number;
-  private consentLanguage_: string;
+  // Member Variable for GVL
   private gvl_: GVL;
 
-  // automagically set when created, updated and gvl set
-  private created_: Date;
-  private lastUpdated_: Date;
-  private vendorListVersion_: number;
+  public created: Date;
+  public lastUpdated: Date;
 
   /**
    * The TCF designates certain Features as special, that is, a CMP must afford
@@ -51,7 +41,7 @@ export class TCModel implements TCFields {
    * published and numbered in the GVL separately from normal Features.
    * Provides for up to 12 special features.
    */
-  public readonly specialFeatureOptIns: Vector = new Vector();
+  public readonly specialFeatureOptins: Vector = new Vector();
 
   /**
    * Renamed from `PurposesAllowed` in TCF v1.1
@@ -59,6 +49,13 @@ export class TCModel implements TCFields {
    * of consent. Purposes are published in the Global Vendor List (see. [[GVL]]).
    */
   public readonly purposeConsents: Vector = new Vector();
+
+  /**
+   * The user’s permission for each Purpose established on the legal basis of
+   * legitimate interest. If the user has exercised right-to-object for a
+   * purpose.
+   */
+  public readonly purposeLegitimateInterests: Vector = new Vector();
 
   /**
    * The user’s consent value for each Purpose established on the legal basis
@@ -69,23 +66,10 @@ export class TCModel implements TCFields {
 
   /**
    * The user’s permission for each Purpose established on the legal basis of
-   * legitimate interest. If the user has exercised right-to-object for a
-   * purpose.
-   */
-  public readonly purposeLITransparency: Vector = new Vector();
-
-  /**
-   * The user’s permission for each Purpose established on the legal basis of
    * legitimate interest.  If the user has exercised right-to-object for a
    * purpose.
    */
-  public readonly publisherLITransparency: Vector = new Vector();
-
-  /**
-   * set by a publisher if they wish to collect consent and LI Transparency for
-   * purposes outside of the TCF
-   */
-  public customPurposes: IntMap<Purpose>;
+  public readonly publisherLegitimateInterests: Vector = new Vector();
 
   /**
    * The user’s consent value for each Purpose established on the legal basis
@@ -99,7 +83,13 @@ export class TCModel implements TCFields {
    * legitimate interest.  If the user has exercised right-to-object for a
    * purpose that is established in the publisher's custom purposes.
    */
-  public readonly publisherCustomLITransparency: Vector = new Vector();
+  public readonly publisherCustomLegitimateInterests: Vector = new Vector();
+
+  /**
+   * set by a publisher if they wish to collect consent and LI Transparency for
+   * purposes outside of the TCF
+   */
+  public customPurposes: IntMap<Purpose>;
 
   /**
    * Each [[Vendor]] is keyed by id. Their consent value is true if it is in
@@ -108,11 +98,11 @@ export class TCModel implements TCFields {
   public readonly vendorConsents: Vector = new Vector();
 
   /**
-   * Each [[Vendor]] is keyed by id. Whether their Legitimate Interest
+   * Each [[Vendor]] is keyed by id. Whether their Legitimate Interests
    * Disclosures have been established is stored as boolean.
    * see: [[Vector]]
    */
-  public readonly vendorLegitimateInterest: Vector = new Vector();
+  public readonly vendorLegitimateInterests: Vector = new Vector();
 
   /**
    * The value included for disclosed vendors signals which vendors have been
@@ -142,6 +132,8 @@ export class TCModel implements TCFields {
    */
   public constructor(gvl?: GVL) {
 
+    super();
+
     if (gvl) {
 
       this.gvl = gvl;
@@ -154,25 +146,23 @@ export class TCModel implements TCFields {
   }
 
   /**
-   * sets the [[GVL]] with side effects of also setting the `vendorListVersion` and `policyVersion`
-   * @param {GVL} gvl - may only be set once for this model.
-   * @throws {TCModelError} if a gvl is already set on this TCModel
+   * sets the [[GVL]] with side effects of also setting the `vendorListVersion`, `policyVersion`, and `consentLanguage`
+   * @param {GVL} gvl
    */
   public set gvl(gvl: GVL) {
 
-    if (this.gvl_ === undefined) {
+    /**
+     * set the reference, but make sure it's our GVL wrapper class.
+     */
 
-      this.gvl_ = gvl;
-      this.vendorListVersion_ = gvl.vendorListVersion;
-      this.policyVersion_ = gvl.tcfPolicyVersion;
-      this.consentLanguage = gvl.language;
-      this.publisherRestrictions.gvl = gvl;
+    if (!(GVL.isInstanceOf(gvl))) {
 
-    } else {
-
-      throw new TCModelError('gvl', gvl, 'can be set only once');
+      gvl = new GVL(gvl);
 
     }
+
+    this.gvl_ = gvl;
+    this.publisherRestrictions.gvl = gvl;
 
   }
 
@@ -186,49 +176,16 @@ export class TCModel implements TCFields {
   }
 
   /**
-   * sets encoded created date.  Will auto convert to deciseconds as the encoding requires
-   *
-   * @param {Date} date - This will be set automatically
-   */
-  public set created(date: Date) {
-
-    this.created_ = date;
-
-  }
-  public get created(): Date {
-
-    return this.created_;
-
-  }
-
-  /**
-   * sets encoded last updated date.  Will auto convert to deciseconds as the encoding requires
-   *
-   * @param {Date} date - this is automatically updated on encoding
-   * */
-  public set lastUpdated(date: Date) {
-
-    this.lastUpdated_ = date;
-
-  }
-  public get lastUpdated(): Date {
-
-    return this.lastUpdated_;
-
-  }
-
-  /**
    * @param {number} integer - A unique ID will be assigned to each Consent
    * Manager Provider (CMP) from the iab.
    *
    * @throws {TCModelError} if the value is not an integer greater than 1 as those are not valid.
    */
-  public set cmpId(integer: number) {
+  public set cmpId(integer: StringOrNumber) {
 
-    if (this.isIntAbove(integer, 1)) {
+    if (Number.isInteger(+integer) && integer > 1) {
 
-
-      this.cmpId_ = integer;
+      this.cmpId_ = +integer;
 
     } else {
 
@@ -237,7 +194,8 @@ export class TCModel implements TCFields {
     }
 
   }
-  public get cmpId(): number {
+
+  public get cmpId(): StringOrNumber {
 
     return this.cmpId_;
 
@@ -252,11 +210,11 @@ export class TCModel implements TCFields {
    *
    * @throws {TCModelError} if the value is not an integer greater than 1 as those are not valid.
    */
-  public set cmpVersion(integer: number) {
+  public set cmpVersion(integer: StringOrNumber) {
 
-    if (this.isIntAbove(integer, -1)) {
+    if (Number.isInteger(+integer) && integer > -1) {
 
-      this.cmpVersion_ = integer;
+      this.cmpVersion_ = +integer;
 
     } else {
 
@@ -265,7 +223,7 @@ export class TCModel implements TCFields {
     }
 
   }
-  public get cmpVersion(): number {
+  public get cmpVersion(): StringOrNumber {
 
     return this.cmpVersion_;
 
@@ -281,11 +239,11 @@ export class TCModel implements TCFields {
    *
    * @throws {TCModelError} if the value is not an integer greater than 0 as those are not valid.
    */
-  public set consentScreen(integer: number) {
+  public set consentScreen(integer: StringOrNumber) {
 
-    if (this.isIntAbove(integer, -1)) {
+    if (Number.isInteger(+integer) && integer > -1) {
 
-      this.consentScreen_ = integer;
+      this.consentScreen_ = +integer;
 
     } else {
 
@@ -294,7 +252,7 @@ export class TCModel implements TCFields {
     }
 
   }
-  public get consentScreen(): number {
+  public get consentScreen(): StringOrNumber {
 
     return this.consentScreen_;
 
@@ -309,17 +267,10 @@ export class TCModel implements TCFields {
    */
   public set consentLanguage(lang: string) {
 
-    if (/^([A-z]){2}$/.test(lang)) {
-
-      this.consentLanguage_ = lang.toUpperCase();
-
-    } else {
-
-      throw new TCModelError('consentLanguage', lang);
-
-    }
+    this.consentLanguage_ = lang;
 
   }
+
   public get consentLanguage(): string {
 
     return this.consentLanguage_;
@@ -360,23 +311,38 @@ export class TCModel implements TCFields {
    *
    * @throws {TCModelError} if the value is not an integer greater than 0 as those are not valid.
    */
-  public set vendorListVersion(integer: number) {
+  public set vendorListVersion(integer: StringOrNumber) {
 
-    if (this.isIntAbove(integer, 0)) {
+    /**
+     * first coerce to a number via leading '+' then take the integer value by
+     * bitshifting to the right.  This works on all types in JavaScript and if
+     * it's not valid then value will be 0.
+     */
+    integer = +integer>>0;
 
-      // TODO: Auto update the GVL?
-      this.vendorListVersion_ = integer;
+    if (integer < 0) {
+
+      throw new TCModelError('vendorListVersion', integer);
 
     } else {
 
-      throw new TCModelError('vendorListVersion', integer);
+      this.vendorListVersion_ = integer;
 
     }
 
   }
-  public get vendorListVersion(): number {
 
-    return this.vendorListVersion_;
+  public get vendorListVersion(): StringOrNumber {
+
+    if (this.gvl) {
+
+      return this.gvl.vendorListVersion;
+
+    } else {
+
+      return this.vendorListVersion_;
+
+    }
 
   }
 
@@ -392,50 +358,39 @@ export class TCModel implements TCFields {
    * @param {number} num - You do not need to set this.  This comes
    * directly from the [[GVL]].
    *
-   * @throws {TCModelError} if the value is not an integer greater than 1 as those are not valid.
    */
-  public set policyVersion(num: number) {
+  public set policyVersion(num: StringOrNumber) {
 
-    if (this.isIntAbove(num, 1)) {
+    this.policyVersion_ = parseInt(num as string, 10);
 
-      this.policyVersion_ = num;
-
-    } else {
+    if (this.policyVersion_ < 0) {
 
       throw new TCModelError('policyVersion', num);
 
     }
 
   }
-  public get policyVersion(): number {
 
-    return this.policyVersion_;
+  public get policyVersion(): StringOrNumber {
 
-  }
+    if (this.gvl) {
 
-  /**
-   * Incremented when TC String format changes. Indicates
-   * what encoding format the TCString will follow v1 or v2.  v1 fields will
-   * omit fields.
-   *
-   * @param {number} num
-   *
-   * @throws {TCModelError} if the value is not either 1 or 2
-   */
-  public set version(num: number) {
-
-    if (this.isIntAbove(num, 0) && num <= TCModel.MAX_ENCODING_VERSION) {
-
-      this.version_ = num;
+      return this.gvl.tcfPolicyVersion;
 
     } else {
 
-      throw new TCModelError('version', num, `max version is ${TCModel.MAX_ENCODING_VERSION}, can't be higher`);
+      return this.policyVersion_;
 
     }
 
   }
-  public get version(): number {
+
+  public set version(num: StringOrNumber) {
+
+    this.version_ = parseInt(num as string, 10);
+
+  }
+  public get version(): StringOrNumber {
 
     return this.version_;
 
@@ -484,9 +439,9 @@ export class TCModel implements TCFields {
   };
 
   /**
-   * Whether or not this publisher supports out-of-band legal basis default is
-   * `true`
-   *
+   * Whether or not this publisher supports OOB signaling.  On Global TC String
+   * OOB Vendors Disclosed will be included if the publish wishes to no allow
+   * these vendors they should set this to false.
    * @param {boolean} bool - value to set
    */
   public set supportOOB(bool: boolean) {
@@ -494,6 +449,7 @@ export class TCModel implements TCFields {
     this.supportOOB_ = bool;
 
   };
+
   public get supportOOB(): boolean {
 
     return this.supportOOB_;
@@ -517,43 +473,12 @@ export class TCModel implements TCFields {
     this.purposeOneTreatment_ = bool;
 
   };
+
   public get purposeOneTreatment(): boolean {
 
     return this.purposeOneTreatment_;
 
   };
-
-  /**
-   * sets all items on the vector
-   *
-   * @param {IntMap} gvlMap - this will be one of the maps defined in the [[IntMap]]
-   * @param {Vector)} vector - vector to affect
-   * @return {void}
-   */
-  private setAllOnVector<T>(gvlMap: IntMap<T>, vector: Vector): void {
-
-    if (!this.gvl) {
-
-      throw new TCModelError('setAll', '' + this.gvl, 'No GVL!');
-
-    }
-    for (const id in gvlMap) {
-
-      if (gvlMap.hasOwnProperty(id)) {
-
-        const pathItem = gvlMap[id];
-
-        if (this.isGVLMapItem(pathItem)) {
-
-          vector.set(pathItem.id);
-
-        }
-
-      }
-
-    }
-
-  }
 
   /**
    * setAllVendorConsents - sets all vendors on the GVL Consent (true)
@@ -562,8 +487,7 @@ export class TCModel implements TCFields {
    */
   public setAllVendorConsents(): void {
 
-    this.vendorConsents.empty();
-    this.setAllOnVector(this.gvl.vendors, this.vendorConsents);
+    this.vendorConsents.set(this.gvl.vendors);
 
   }
 
@@ -579,14 +503,13 @@ export class TCModel implements TCFields {
   }
 
   /**
-   * setAllVendorsDisclosed - sets all vendors on the GVL Consent (true)
+   * setAllVendorsDisclosed - sets all vendors on the GVL Vendors Disclosed (true)
    *
    * @return {void}
    */
   public setAllVendorsDisclosed(): void {
 
-    this.vendorsDisclosed.empty();
-    this.setAllOnVector(this.gvl.vendors, this.vendorsDisclosed);
+    this.vendorsDisclosed.set(this.gvl.vendors);
 
   }
 
@@ -602,25 +525,46 @@ export class TCModel implements TCFields {
   }
 
   /**
-   * setAllVendorLegitimateInterest - sets all vendors on the GVL LegitimateInterest (true)
+   * setAllVendorsAllowed - sets all vendors on the GVL Consent (true)
    *
    * @return {void}
    */
-  public setAllVendorLegitimateInterest(): void {
+  public setAllVendorsAllowed(): void {
 
-    this.vendorLegitimateInterest.empty();
-    this.setAllOnVector(this.gvl.vendors, this.vendorLegitimateInterest);
+    this.vendorsAllowed.set(this.gvl.vendors);
 
   }
 
   /**
-   * unsetAllVendorLegitimateInterest - unsets all vendors on the GVL LegitimateInterest (false)
+   * unsetAllVendorsAllowed - unsets all vendors on the GVL Consent (false)
    *
    * @return {void}
    */
-  public unsetAllVendorLegitimateInterest(): void {
+  public unsetAllVendorsAllowed(): void {
 
-    this.vendorLegitimateInterest.empty();
+    this.vendorsAllowed.empty();
+
+  }
+
+  /**
+   * setAllVendorLegitimateInterests - sets all vendors on the GVL LegitimateInterests (true)
+   *
+   * @return {void}
+   */
+  public setAllVendorLegitimateInterests(): void {
+
+    this.vendorLegitimateInterests.set(this.gvl.vendors);
+
+  }
+
+  /**
+   * unsetAllVendorLegitimateInterests - unsets all vendors on the GVL LegitimateInterests (false)
+   *
+   * @return {void}
+   */
+  public unsetAllVendorLegitimateInterests(): void {
+
+    this.vendorLegitimateInterests.empty();
 
   }
 
@@ -631,8 +575,7 @@ export class TCModel implements TCFields {
    */
   public setAllPurposeConsents(): void {
 
-    this.purposeConsents.empty();
-    this.setAllOnVector(this.gvl.purposes, this.purposeConsents);
+    this.purposeConsents.set(this.gvl.purposes);
 
   }
 
@@ -648,152 +591,102 @@ export class TCModel implements TCFields {
   }
 
   /**
-   * setAllPurposeLITransparency - sets all purposes on the GVL LI Transparency (true)
+   * setAllPurposeLegitimateInterests - sets all purposes on the GVL LI Transparency (true)
    *
    * @return {void}
    */
-  public setAllPurposeLITransparency(): void {
+  public setAllPurposeLegitimateInterests(): void {
 
-    this.purposeLITransparency.empty();
-    this.setAllOnVector(this.gvl.purposes, this.purposeLITransparency);
+    this.purposeLegitimateInterests.set(this.gvl.purposes);
 
   }
 
   /**
-   * unsetAllPurposeLITransparency - unsets all purposes on the GVL LI Transparency (false)
+   * unsetAllPurposeLegitimateInterests - unsets all purposes on the GVL LI Transparency (false)
    *
    * @return {void}
    */
-  public unsetAllPurposeLITransparency(): void {
+  public unsetAllPurposeLegitimateInterests(): void {
 
-    this.purposeLITransparency.empty();
+    this.purposeLegitimateInterests.empty();
 
   }
 
   /**
-   * setAllSpecialFeatureOptIns - sets all special featuresOptins on the GVL (true)
+   * setAllSpecialFeatureOptins - sets all special featuresOptins on the GVL (true)
    *
    * @return {void}
    */
-  public setAllSpecialFeatureOptIns(): void {
+  public setAllSpecialFeatureOptins(): void {
 
-    this.specialFeatureOptIns.empty();
-    this.setAllOnVector(this.gvl.specialFeatures, this.specialFeatureOptIns);
+    this.specialFeatureOptins.set(this.gvl.specialFeatures);
 
   }
 
   /**
-   * unsetAllSpecialFeatureOptIns - unsets all special featuresOptins on the GVL (true)
+   * unsetAllSpecialFeatureOptins - unsets all special featuresOptins on the GVL (true)
    *
    * @return {void}
    */
-  public unsetAllSpecialFeatureOptIns(): void {
+  public unsetAllSpecialFeatureOptins(): void {
 
-    this.specialFeatureOptIns.empty();
+    this.specialFeatureOptins.empty();
 
   }
 
-  /**
-   * setAll - calls:
-   * ```
-    setAllVendorConsents();
-    setAllPurposeLITransparency();
-    setAllSpecialFeatureOptIns();
-    setAllPurposeConsents();
-    setAllVendorLegitimateInterest();
-    setAllVendorsDisclosed();
-   * ```
-   * @return {void}
-   */
   public setAll(): void {
 
     this.setAllVendorConsents();
-    this.setAllPurposeLITransparency();
-    this.setAllSpecialFeatureOptIns();
+    this.setAllPurposeLegitimateInterests();
+    this.setAllSpecialFeatureOptins();
     this.setAllPurposeConsents();
-    this.setAllVendorLegitimateInterest();
-    this.setAllVendorsDisclosed();
+    this.setAllVendorLegitimateInterests();
 
   }
 
-  /**
-   * unsetAll - calls:
-   * ```
-    unsetAllVendorConsents();
-    unsetAllPurposeLITransparency();
-    unsetAllSpecialFeatureOptIns();
-    unsetAllPurposeConsents();
-    unsetAllVendorLegitimateInterest();
-    unsetAllVendorsDisclosed();
-   * ```
-   * @return {void}
-   */
   public unsetAll(): void {
 
     this.unsetAllVendorConsents();
-    this.unsetAllPurposeLITransparency();
-    this.unsetAllSpecialFeatureOptIns();
+    this.unsetAllPurposeLegitimateInterests();
+    this.unsetAllSpecialFeatureOptins();
     this.unsetAllPurposeConsents();
-    this.unsetAllVendorLegitimateInterest();
-    this.unsetAllVendorsDisclosed();
+    this.unsetAllVendorLegitimateInterests();
 
   }
 
-  public get numCustomPurposes(): number {
+  public get numCustomPurposes(): StringOrNumber {
 
-    let len = 0;
+    let len = this.numCustomPurposes_;
 
-    if (this.customPurposes) {
+    if (typeof this.customPurposes === 'object') {
 
-      len = Object.keys(this.customPurposes).length;
+      /**
+       * Keys are not guaranteed to be in order and likewise there is no
+       * requirement that the customPurposes be non-sparse.  So we have to sort
+       * and take the highest value.  Even if the set only contains 3 purposes
+       * but goes to ID 6 we need to set the number to 6 for the encoding to
+       * work properly since it's positional.
+       */
+      const purposeIds: string[] = Object.keys(this.customPurposes)
+        .sort((a: string, b: string): number => +a - +b);
+
+      len = parseInt(purposeIds.pop(), 10);
 
     }
+
     return len;
 
   }
-  public set numCustomPurposes(num: number) {
 
-    if (!this.customPurposes) {
+  public set numCustomPurposes(num: StringOrNumber) {
 
-      this.customPurposes = {};
+    this.numCustomPurposes_ = parseInt(num as string, 10);
 
-      for (let i = 0; i < num; i++) {
+    if (this.numCustomPurposes_ < 0) {
 
-        const id: string = (i + 1).toString();
-        const purpose: Purpose = {
-          id: i+1,
-          name: `publisher purpose ${id}`,
-          description: `publisher purpose description${id}`,
-          descriptionLegal: `publisher purpose legal description ${id}`,
-        };
-
-        this.customPurposes[id] = purpose;
-
-      }
+      throw new TCModelError('numCustomPurposes', num);
 
     }
-
-  }
-
-  /**
-   * isIntAbove - private method for validating that a passed in value is both
-   * an int and above a certain number
-   *
-   * @param {number} possibleInt - value to check
-   * @param {number} above - the lower limit
-   * @return{boolean} - wehther or not `possibleInt` is both an int and above `above` number
-   */
-  private isIntAbove(possibleInt: number, above: number): boolean {
-
-    return (Number.isInteger(possibleInt) && possibleInt > above);
-
-  }
-
-  // This is a type check I need it to be an 'any'
-  // eslint-disable-next-line
-  private isGVLMapItem(obj: any): obj is GVLMapItem {
-
-    return typeof obj.id === 'number' && typeof obj.name === 'string';
 
   }
 
@@ -807,30 +700,5 @@ export class TCModel implements TCFields {
     this.lastUpdated = new Date();
 
   }
-
-  /**
-   * isValid - returns whether all fields have a value
-   *
-   * @return {boolean}
-   */
-  public isValid(): boolean {
-
-    return (this.isServiceSpecific !== undefined
-      && this.useNonStandardStacks !== undefined
-      && this.cmpId !== undefined
-      && this.cmpVersion !== undefined
-      && this.consentLanguage !== undefined
-      && this.publisherCountryCode !== undefined
-      && this.purposeOneTreatment !== undefined
-      && this.consentScreen !== undefined
-      && this.created !== undefined
-      && this.gvl !== undefined
-      && this.lastUpdated !== undefined
-      && this.policyVersion !== undefined
-      && this.vendorListVersion !== undefined
-      && this.version !== undefined);
-
-  }
-
 
 }

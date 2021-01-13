@@ -1,3 +1,2 @@
-export interface IDSetMap {
-  [id:string]: Set<number>;
-}
+import {IntMap} from '../';
+export type IDSetMap = IntMap<Set<number>>

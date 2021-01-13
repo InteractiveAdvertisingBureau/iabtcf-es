@@ -1,20 +1,12 @@
 {
   "compilerOptions": {
+    "target": "ES5",
+    "module": "commonjs",
     "moduleResolution": "node",
-    "removeComments": true,
     "downlevelIteration": true,
-    "noImplicitAny": false,
     "esModuleInterop": true,
     "preserveConstEnums": true,
     "declaration": true,
-    "allowUnreachableCode": false,
-    "strict": true,
-    "strictPropertyInitialization": false,
-    "pretty": true,
-    "forceConsistentCasingInFileNames": true,
-    "target": "ES6",
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true
+    "forceConsistentCasingInFileNames": true
   }
 }

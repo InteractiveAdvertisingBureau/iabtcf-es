@@ -3,20 +3,33 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   extends: [
     'plugin:@typescript-eslint/recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
     'google',
+    'plugin:json/recommended',
   ],
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': [ 
+        '.ts' 
+      ]
+    },
+  },
   parserOptions: {
     parser: '@typescript-eslint/parser',
     ecmaVersion: 2018,
     sourceType: 'module',
   },
   rules: {
-    '@typescript-eslint/indent': ['error', 2],
-    'max-len': ['error', {'code': 120}],
+    'import/no-cycle': ['error', { maxDepth: 1 }],
+    'max-len': 0,
+    'no-multiple-empty-lines':['error', {'max':1, 'maxEOF':0, 'maxBOF':0}],
     'require-jsdoc': [0],
+    'semi': ['error', 'always'],
     'padded-blocks': ['error', 'always'],
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-console': 'error',
+    'no-debugger': 'error',
     'indent': [
       'error', 2, {
         'ArrayExpression': 'first',
@@ -28,9 +41,12 @@ module.exports = {
     ],
     'padding-line-between-statements': [
       'error',
-      {'blankLine': 'always', 'prev': ['const', 'let', 'var'], 'next': '*'},
       {'blankLine': 'any', 'prev': ['const', 'let', 'var'], 'next': ['const', 'let', 'var']},
+      {'blankLine': 'always', 'prev': '*',  'next': 'class'},
+      {'blankLine': 'always', 'prev': '*',  'next': 'function'},
+      {'blankLine': 'always', 'prev': 'block-like',  'next': '*'},
+      {'blankLine': 'always', 'prev': '*',  'next': 'block-like'},
     ],
-    'new-cap': 'off',
+    'new-cap': 'off'
   },
 };

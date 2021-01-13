@@ -6,71 +6,21 @@ export function run(): void {
 
   describe('PurposeRestriction', (): void => {
 
-
     describe('purposeId', (): void => {
 
-      const skip = 5;
-      const max = 12;
+      it(`should be ok with 2`, (): void => {
 
-      beforeEach((): void => {
+        const purposeRestriction = new PurposeRestriction();
 
-        for (let i = 1; i <= max; i++) {
+        expect((): void => {
 
-          if ( i !== skip) {
+          purposeRestriction.purposeId = 2;
 
-            PurposeRestriction.availablePurposeIds.add(i);
+        }).not.to.throw();
 
-          }
-
-        }
+        expect(purposeRestriction.purposeId).to.equal(2);
 
       });
-      afterEach((): void => {
-
-        PurposeRestriction.availablePurposeIds = new Set<number>();
-
-      });
-      const shouldBeOk: (value: number) => void = (value: number): void => {
-
-        it(`should be ok with ${value}`, (): void => {
-
-          const purposeRestriction = new PurposeRestriction();
-
-          expect((): void => {
-
-            purposeRestriction.purposeId = value;
-
-          }).not.to.throw();
-
-          expect(purposeRestriction.purposeId).to.equal(value);
-
-        });
-
-      };
-      const shouldBeNotOk: (value: number) => void = (value: number): void => {
-
-        it(`should not be ok with ${value}`, (): void => {
-
-          const purposeRestriction = new PurposeRestriction();
-
-          expect((): void => {
-
-            purposeRestriction.purposeId = value;
-
-          }).to.throw();
-
-          expect(purposeRestriction.purposeId).to.be.undefined;
-
-        });
-
-      };
-
-      shouldBeOk(2);
-      shouldBeNotOk(1);
-      shouldBeNotOk(0);
-      shouldBeNotOk(skip);
-      shouldBeNotOk(max + 1);
-      shouldBeNotOk(1.1);
 
     });
     describe('restrictionType', (): void => {
@@ -93,13 +43,9 @@ export function run(): void {
     });
     describe('constructor', (): void => {
 
-
       it('should set and get a restrictionType and purposeId through the constructor', (): void => {
 
         const purposeId = 2;
-
-        PurposeRestriction.availablePurposeIds.add(purposeId);
-
         const purposeRestriction = new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
 
         expect(purposeRestriction.isValid()).to.be.true;
@@ -115,9 +61,6 @@ export function run(): void {
       it('should produce a hash', (): void => {
 
         const purposeId = 2;
-
-        PurposeRestriction.availablePurposeIds.add(purposeId);
-
         const purposeRestriction = new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
         const expected = `${purposeId}${PurposeRestriction.hashSeparator}${RestrictionType.NOT_ALLOWED}`;
 
@@ -125,31 +68,9 @@ export function run(): void {
 
       });
 
-      it('should error if it\'s invalid', (): void => {
-
-        const purposeId = 2;
-
-        PurposeRestriction.availablePurposeIds.add(purposeId);
-
-        const purposeRestriction = new PurposeRestriction(purposeId);
-        let hash = '';
-
-        expect((): void => {
-
-          hash = purposeRestriction.hash;
-
-        }).to.throw();
-
-        expect(hash).to.be.empty;
-
-      });
-
       it('should unHash properly', (): void => {
 
         const purposeId = 2;
-
-        PurposeRestriction.availablePurposeIds.add(purposeId);
-
         const purposeRestriction = new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
         const hash = `${purposeId}${PurposeRestriction.hashSeparator}${RestrictionType.NOT_ALLOWED}`;
 
@@ -160,9 +81,6 @@ export function run(): void {
       it('unHash should throw an error with an improper hash', (): void => {
 
         const purposeId = 2;
-
-        PurposeRestriction.availablePurposeIds.add(purposeId);
-
         const hash = `${purposeId}${RestrictionType.NOT_ALLOWED}`;
 
         expect((): void => {

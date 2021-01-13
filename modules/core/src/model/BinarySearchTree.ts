@@ -1,16 +1,18 @@
+import {Cloneable} from '../Cloneable';
+
 type TreeNodeMaybe = TreeNode | null;
 interface TreeNode {
   value: number;
   right: TreeNodeMaybe;
   left: TreeNodeMaybe;
 }
-export class BinarySearchTree {
+export class BinarySearchTree extends Cloneable<BinarySearchTree> {
 
-  private root: TreeNodeMaybe = null;;
+  private root: TreeNodeMaybe = null;
 
   public isEmpty(): boolean {
 
-    // if root is undefined or null thne by definition this is empty
+    // if root is undefined or null then by definition this is empty
     return !(this.root);
 
   }
@@ -51,7 +53,6 @@ export class BinarySearchTree {
             // our work is done here
             break;
 
-
           } else {
 
             /**
@@ -62,7 +63,6 @@ export class BinarySearchTree {
 
           }
 
-
         } else if (value > current.value) {
 
           // if the value is greater than our current value; go right
@@ -71,7 +71,6 @@ export class BinarySearchTree {
             // there's nothing to the right, so put it here
             current.right = node;
             break;
-
 
           } else {
 
@@ -83,7 +82,6 @@ export class BinarySearchTree {
             current = current.right;
 
           }
-
 
         } else {
 
@@ -131,6 +129,7 @@ export class BinarySearchTree {
           pre = pre.right;
 
         }
+
         // this means the pre.right has been set, it's time to go to current node
         if (pre.right == current) {
 
@@ -152,6 +151,7 @@ export class BinarySearchTree {
       }
 
     }
+
     return retr;
 
   }
@@ -179,6 +179,7 @@ export class BinarySearchTree {
       }
 
     }
+
     return retr;
 
   }
@@ -201,6 +202,7 @@ export class BinarySearchTree {
       }
 
     }
+
     return retr;
 
   }
@@ -223,6 +225,7 @@ export class BinarySearchTree {
       }
 
     }
+
     return retr;
 
   }
@@ -234,7 +237,6 @@ export class BinarySearchTree {
     let parentSide = 'left';
 
     while (current) {
-
 
       if (value < current.value) {
 
@@ -336,7 +338,6 @@ export class BinarySearchTree {
         current = null;
 
       }
-
 
     }
 

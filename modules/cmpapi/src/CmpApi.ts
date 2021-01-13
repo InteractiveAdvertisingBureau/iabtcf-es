@@ -1,328 +1,144 @@
-import {
-  TCModel,
-  TCString,
-} from '@iabtcf/core';
-
-import {
-  Ping,
-} from './model';
-
-import {
-  CmpStatus,
-  DisplayStatus,
-  EventStatus,
-} from './model/status';
-
-import {
-
-  InAppTCDataBuilder,
-  TCDataBuilder,
-  PingBuilder,
-
-} from './model/builder';
-
-import {
-  Param,
-  ArgSet,
-  TCDataCallback,
-  IATCDataCallback,
-  PingCallback,
-  Callback,
-} from './Types';
-
-export type Numberish = number | string;
+import {CmpApiModel} from './CmpApiModel';
+import {CustomCommands} from './CustomCommands';
+import {CmpStatus, DisplayStatus, EventStatus} from './status';
+import {CallResponder} from './CallResponder';
+import {TCString, TCModel} from '@iabtcf/core';
 
 export class CmpApi {
 
-  private static readonly API_FUNCTION_NAME: string = '__tcfapi';
-  private static readonly API_LOCATOR_NAME: string = '__tcfapiLocator';
+  private callResponder: CallResponder;
+  private isServiceSpecific: boolean;
+  private numUpdates = 0;
 
-  private static NOT_SUPPORTED: string = 'not supported by this CMP';
-  private static EXISTING_CMP: string = 'CMP Exists already – cannot create';
+  /**
+   * @param {number} cmpId - IAB assigned CMP ID
+   * @param {number} cmpVersion - integer version of the CMP
+   * @param {boolean} isServiceSpecific - whether or not this cmp is configured to be service specific
+   * @param {CustomCommands} [customCommands] - custom commands from the cmp
+   */
+  public constructor(cmpId: number, cmpVersion: number, isServiceSpecific = false, customCommands?: CustomCommands) {
 
-  private tcModel: TCModel;
-  private tcString: TCString = new TCString();
-  private gdprApplies: boolean;
-  private cmpStatus: CmpStatus;
-  private displayStatus: DisplayStatus;
-  private eventStatus: EventStatus;
+    this.throwIfInvalidInt(cmpId, 'cmpId', 2);
+    this.throwIfInvalidInt(cmpVersion, 'cmpVersion', 0);
 
-  /* eslint-disable-next-line */
-  private queuedArgSets: ArgSet[];
-  private win: Window = window;
+    CmpApiModel.cmpId = cmpId;
+    CmpApiModel.cmpVersion = cmpVersion;
+    this.isServiceSpecific = !!isServiceSpecific;
+    this.callResponder = new CallResponder(customCommands);
 
-  public constructor() {
+  }
 
-    /**
-     * Check for locator frame, if there is a stub then this should have been
-     * created if not, we'll need to create it to be able to handle other
-     * frames calling
-     */
+  private throwIfInvalidInt(value: number, name: string, minValue: number): void | never {
 
-    let frame = this.win;
-    let locatorFrameExists = false;
+    if (!(typeof value === 'number' && Number.isInteger(value) && value >= minValue)) {
 
-    while (frame) {
-
-      try {
-
-        /**
-         * throws a reference error if no frames exist
-         */
-
-        if (frame.frames[CmpApi.API_LOCATOR_NAME]) {
-
-          locatorFrameExists = true;
-          break;
-
-        }
-
-      } catch (ignore) {}
-
-      if (frame === this.win.top) {
-
-        break;
-
-      }
-
-      frame = frame.parent;
+      throw new Error(`Invalid ${name}: ${value}`);
 
     }
-
-    if (locatorFrameExists) {
-
-      /**
-       * If the locator frame exists, then that could mean one of two things:
-       * either 1. it's the stub, or 2. it's another CMP.  If it's the stub
-       * we'll want to capture the queue, otherwise we'll just die because we
-       * can't have two CMPs on a page
-       */
-
-      if (frame === this.win) {
-
-        /**
-         * This is the same window as ours, now we can create the API lets see
-         * if this is the stub
-         */
-
-        this.win[CmpApi.API_FUNCTION_NAME]('ping', 2, (ping: Ping): void => {
-
-          if (!ping.cmpLoaded && ping.cmpStatus === CmpStatus.STUB) {
-
-            /**
-             * this is our stub, we are all clear to load the full API
-             */
-
-            try {
-
-              this.queuedArgSets = this.win[CmpApi.API_FUNCTION_NAME]();
-
-            } catch (ignore) {
-
-              this.queuedArgSets = [];
-
-            }
-
-            /**
-             * Hook up handlePageCall function
-             */
-            /* eslint-disable-next-line */
-            this.win[CmpApi.API_FUNCTION_NAME] = this.handlePageCall;
-
-          } else {
-
-            /**
-             * Something exists on this page already, so we're not going to create an API
-             */
-
-            throw new Error(CmpApi.EXISTING_CMP);
-
-          }
-
-        });
-
-
-      } else {
-
-        throw new Error(CmpApi.EXISTING_CMP);
-
-      }
-
-    } else {
-
-      /**
-       * A stub didn't exist, so we have free reign to do whateve we want now.
-       */
-      this.addFrame();
-
-      /**
-       * Hook up handlePageCall function
-       */
-      /* eslint-disable-next-line */
-      this.win[CmpApi.API_FUNCTION_NAME] = this.handlePageCall;
-
-    }
-
-  }
-
-  private addFrame(): void {
-
-    const doc = this.win.document;
-
-    if (doc.body) {
-
-      /**
-       * check for body tag – otherwise we'll be
-       * be having a hard time appending a child
-       * to it if it doesn't exist
-       */
-
-      const iframe = doc.createElement('iframe');
-
-      iframe.style.cssText = 'display:none';
-      iframe.name = CmpApi.API_LOCATOR_NAME;
-      doc.body.appendChild(iframe);
-
-    } else {
-
-      /**
-       * Wait for the body tag to exist.
-       */
-
-      setTimeout(this.addFrame, 5);
-
-    }
-
-  }
-
-  public setTCModel(tcm: TCModel, eventStatus: EventStatus): void {
-
-    this.tcModel = tcm;
-    this.eventStatus = eventStatus;
-
-  }
-
-  public setGdprApplies(applies: boolean): void {
-
-    this.gdprApplies = applies;
-
-  }
-
-  public setCmpStatus(cmpStatus: CmpStatus): void {
-
-    this.cmpStatus = cmpStatus;
-
-  }
-
-  public setDisplayStatus(displayStatus: DisplayStatus): void {
-
-    this.displayStatus = displayStatus;
 
   }
 
   /**
-   * Public-facing CMP API commands
+   * update - When the state of a CMP changes this function should be called
+   * with the updated tc string and whether or not the UI is visible or not
+   *
+   * @param {string|null} encodedTCString - set a string to signal that
+   * gdprApplies and that an encoded tc string is being passed.  If GDPR does
+   * not apply, set to null.
+   * @param {boolean} uiVisible - default false.  set to true if the ui is
+   * being shown with this tc string update, this will set the correct values
+   * for eventStatus and displayStatus.
+   * @return {void}
    */
+  public update(encodedTCString: string | null, uiVisible = false): void {
 
-  public getTCData(callback: TCDataCallback, vendors: number[]): void{
+    if (CmpApiModel.disabled) {
 
-    const builder: TCDataBuilder = new TCDataBuilder();
+      throw new Error('CmpApi Disabled');
 
-    if (builder.isBuildable()) {
+    }
 
-      callback(builder.build(), true);
+    CmpApiModel.cmpStatus = CmpStatus.LOADED;
+
+    if (uiVisible) {
+
+      CmpApiModel.displayStatus = DisplayStatus.VISIBLE;
+      CmpApiModel.eventStatus = EventStatus.CMP_UI_SHOWN;
 
     } else {
 
-      // queue it until we can build it
-    }
+      if (CmpApiModel.tcModel === undefined) {
 
-  }
-
-  public getInAppTCData(callback: IATCDataCallback): void {
-
-    const builder: InAppTCDataBuilder = new InAppTCDataBuilder();
-
-    if (builder.isBuildable()) {
-
-      callback(builder.build(), true);
-
-    } else {
-
-      // queue it until we can build it
-    }
-
-  }
-
-  public ping(callback: PingCallback): void {
-
-    const builder: PingBuilder = new PingBuilder();
-
-    if (builder.isBuildable()) {
-
-      callback(builder.build());
-
-    } else {
-
-      // queue it until we can build it
-    }
-
-  }
-
-  public addEventListener(callback: TCDataCallback): void {
-
-    const builder: TCDataBuilder = new TCDataBuilder();
-
-    if (builder.isBuildable()) {
-
-      callback(builder.build(), true);
-
-    } else {
-
-      // queue it until we can build it
-    }
-
-  }
-
-  public removeventListener(callback: TCDataCallback, registeredCallback: TCDataCallback): void {
-  }
-
-  /**
-   * Handler for page calls
-   */
-  /* eslint-disable-next-line */
-  private handlePageCall(command: string, version: number, callback: Callback, param?: Param): void {
-
-    if (typeof this[command] === 'function') {
-
-      if (version === 2) {
-
-        if (typeof callback === 'function') {
-
-          this[command](callback, param);
-
-        } else {
-
-          this.error(`callback required`);
-
-        }
+        CmpApiModel.displayStatus = DisplayStatus.DISABLED;
+        CmpApiModel.eventStatus = EventStatus.TC_LOADED;
 
       } else {
 
-        this.error(`Version ${version} ${CmpApi.NOT_SUPPORTED}`);
+        CmpApiModel.displayStatus = DisplayStatus.HIDDEN;
+        CmpApiModel.eventStatus = EventStatus.USER_ACTION_COMPLETE;
 
       }
 
+    }
+
+    CmpApiModel.gdprApplies = (encodedTCString !== null);
+
+    if (!CmpApiModel.gdprApplies) {
+
+      CmpApiModel.tcModel = null;
+
     } else {
 
-      this.error(`${command} command ${CmpApi.NOT_SUPPORTED}`);
+      if (encodedTCString === '') {
+
+        CmpApiModel.tcModel = new TCModel();
+        CmpApiModel.tcModel.cmpId = CmpApiModel.cmpId;
+        CmpApiModel.tcModel.cmpVersion = CmpApiModel.cmpVersion;
+
+      } else {
+
+        CmpApiModel.tcModel = TCString.decode(encodedTCString);
+
+      }
+
+      CmpApiModel.tcModel.isServiceSpecific = this.isServiceSpecific;
+      CmpApiModel.tcfPolicyVersion = +CmpApiModel.tcModel.policyVersion;
+      CmpApiModel.tcString = encodedTCString;
 
     }
 
-  }
-  private error(msg: string): void {
+    if (this.numUpdates === 0) {
 
-    console.error(msg);
+      /**
+       * Will make AddEventListener Commands respond immediately.
+       */
+
+      this.callResponder.purgeQueuedCalls();
+
+    } else {
+
+      /**
+       * Should be no queued calls and only any addEventListener commands
+       */
+
+      CmpApiModel.eventQueue.exec();
+
+    }
+
+    this.numUpdates++;
+
+  }
+
+  /**
+   * Disables the CmpApi from serving anything but ping and custom commands
+   * Cannot be undone
+   *
+   * @return {void}
+   */
+  public disable(): void {
+
+    CmpApiModel.disabled = true;
+    CmpApiModel.cmpStatus = CmpStatus.ERROR;
 
   }
 

@@ -5,19 +5,6 @@ export function run(): void {
 
   describe('Vector', (): void => {
 
-    it('should set ids array passed into constructor', (): void => {
-
-      const idAr: number[] = [1, 3, 5, 7, 9, 12, 15];
-      const vector: Vector = new Vector(idAr);
-
-      idAr.forEach((id: number): void => {
-
-        expect(vector.has(id)).to.be.true;
-
-      });
-
-    });
-
     it('should set a single id using the set method', (): void => {
 
       const vector: Vector = new Vector();
@@ -125,6 +112,7 @@ export function run(): void {
           expect(vector.has(id)).to.be.true;
 
         }
+
         i++;
 
       });
@@ -134,7 +122,6 @@ export function run(): void {
       expect(vector.maxId).to.equal(Math.max(...idAr));
 
     });
-
 
   });
 

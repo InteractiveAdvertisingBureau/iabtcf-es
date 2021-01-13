@@ -2,6 +2,6 @@ import {GVLMapItem} from './GVLMapItem';
 
 export interface Stack extends GVLMapItem {
   purposes: number[];
-  specialPurposes: number[];
+  specialFeatures: number[];
   description: string;
 }

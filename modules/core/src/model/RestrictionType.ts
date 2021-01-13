@@ -19,4 +19,5 @@ export enum RestrictionType {
    * if the default declaration is consent then this flips the purpose to Legitimate Interest in the encoding.
    */
   REQUIRE_LI = 2,
+
 }

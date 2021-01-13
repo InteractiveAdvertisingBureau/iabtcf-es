@@ -1,8 +1,10 @@
+import {sameDataDiffRef} from '@iabtcf/testing';
 import {expect} from 'chai';
 import {TCModel} from '../src/TCModel';
 
 import {Vector} from '../src/model/Vector';
 import {GVL} from '../src/GVL';
+import {GVLFactory} from '../../testing/lib/GVLFactory';
 
 describe('TCModel', (): void => {
 
@@ -11,6 +13,7 @@ describe('TCModel', (): void => {
     it(`should be able to set and get a valid ${fieldName}`, handler);
 
   };
+
   const testInt = (fieldName: string, lowestValue: number): void => {
 
     const shouldBeOk = (): void => {
@@ -26,6 +29,7 @@ describe('TCModel', (): void => {
       });
 
     };
+
     const shouldBeNotOk = (valueToTest: number): void => {
 
       it(`should not allow ${fieldName} to be ${valueToTest}`, (): void => {
@@ -49,7 +53,6 @@ describe('TCModel', (): void => {
 
     };
 
-
     describe(fieldName, (): void => {
 
       shouldBeOk();
@@ -60,7 +63,6 @@ describe('TCModel', (): void => {
     });
 
   };
-
 
   const testDate = (fieldName: string): void => {
 
@@ -108,9 +110,7 @@ describe('TCModel', (): void => {
 
     describe(fieldName, (): void => {
 
-      // eslint-disable-next-line
-    const vendorlistJson = require('../dev/vendorlist.json');
-      const gvl: GVL = new GVL(vendorlistJson);
+      const gvl: GVL = new GVL(require('@iabtcf/testing/lib/vendorlist/vendor-list.json'));
 
       it(`should create an instance of ${instanceName} as ${fieldName} on init`, (): void => {
 
@@ -126,7 +126,6 @@ describe('TCModel', (): void => {
     });
 
   };
-
 
   it('should construct a TCModel with no arguments', (): void => {
 
@@ -144,61 +143,47 @@ describe('TCModel', (): void => {
 
     // since we didn't construct with a gvl we should
     // have empty fields here
-    expect(tcModel.vendorListVersion).to.be.undefined;
-    expect(tcModel.policyVersion).to.equal(2);
+    expect(tcModel.vendorListVersion).to.equal(0); expect(tcModel.policyVersion).to.equal(2);
     expect(tcModel.gvl).to.be.undefined;
 
   });
 
-  it('should construct a TCModel with a GVL argument', (): void => {
+  it('should construct a TCModel with a GVL argument', async (): Promise<void> => {
 
-    // eslint-disable-next-line
-    const vendorlistJson = require('../dev/vendorlist.json');
-    const gvl: GVL = new GVL(vendorlistJson);
+    const gvl: GVL = GVLFactory.getLatest() as unknown as GVL;
 
+    let tcModel: TCModel;
     expect((): void => {
 
-      // disabling because it's upset that I'm not doing anything with this
-      // eslint-disable-next-line
-      const tcModel: TCModel = new TCModel(gvl);
+      tcModel = new TCModel(gvl);
 
     }).to.not.throw();
 
-    const tcModel = new TCModel(gvl);
+    expect(tcModel.gvl, 'tcModel.gvl').to.equal(gvl);
 
-    expect(tcModel.policyVersion, 'policyVersion should be picked up from gvl')
+    await gvl.readyPromise;
+
+    expect(tcModel.policyVersion, 'tcModel.policyVersion')
       .to.equal(gvl.tcfPolicyVersion);
-    expect(tcModel.vendorListVersion, 'vendorListVersion should be picked up from gvl')
+
+    expect(tcModel.vendorListVersion, 'tcModel.vendorListVersion')
       .to.equal(gvl.vendorListVersion);
-    expect(tcModel.gvl, 'should save and make accessible the gvl')
+
+    expect(tcModel.gvl, 'tcModel.gvl')
       .to.equal(gvl);
 
   });
 
-  it('should throw an error if gvl is attempted to be set more than once', (): void => {
+  it('should clone a TCModel', (): void => {
 
-    // eslint-disable-next-line
-    const vendorlistJson = require('../dev/vendorlist.json');
-    const gvl: GVL = new GVL(vendorlistJson);
+    const tcModel = new TCModel();
+    tcModel.cmpId = 23;
+    tcModel.cmpVersion = 1;
 
-    expect((): void => {
-
-      // disabling because it's upset that I'm not doing anything with this
-      // eslint-disable-next-line
-      const tcModel: TCModel = new TCModel(gvl);
-
-    }).to.not.throw();
-
-    const tcModel = new TCModel(gvl);
-
-    expect((): void => {
-
-      tcModel.gvl = gvl;
-
-    }).to.throw();
+    const clone = tcModel.clone();
+    sameDataDiffRef(tcModel, clone, 'TCModel');
 
   });
-
 
   testInt('cmpId', 2);
   testInt('cmpVersion', 0);
@@ -211,175 +196,32 @@ describe('TCModel', (): void => {
   testBoolean('useNonStandardStacks');
 
   testInstanceOf('purposeConsents', Vector);
-  testInstanceOf('purposeLITransparency', Vector);
+  testInstanceOf('purposeLegitimateInterests', Vector);
 
   testInstanceOf('vendorConsents', Vector);
-  testInstanceOf('vendorLegitimateInterest', Vector);
-  testInstanceOf('specialFeatureOptIns', Vector);
+  testInstanceOf('vendorLegitimateInterests', Vector);
+  testInstanceOf('specialFeatureOptins', Vector);
 
   describe('consentLanguage', (): void => {
 
-    const shouldBeOk: (value: string) => void = (value: string): void => {
+    it('should default to "EN" and set and get whatever I want', (): void => {
 
-      it(`should be ok with ${value}`, (): void => {
+      const altLang = 'fr';
+      const tcModel = new TCModel();
+      expect(tcModel.consentLanguage, 'consentLanguage default').to.equal('EN');
 
-        const tcModel = new TCModel();
+      tcModel.consentLanguage = altLang;
 
-        expect((): void => {
-
-          tcModel.consentLanguage = value;
-
-        }).not.to.throw();
-
-        expect(tcModel.consentLanguage).to.equal(value.toUpperCase());
-
-      });
-
-    };
-    const shouldBeNotOk: (value: string) => void = (value: string): void => {
-
-      it(`should not be ok with ${value}`, (): void => {
-
-        const tcModel = new TCModel();
-
-        expect((): void => {
-
-          tcModel.consentLanguage = value;
-
-        }).to.throw();
-
-        expect(tcModel.consentLanguage).to.be.undefined;
-
-      });
-
-    };
-
-    shouldBeOk('aa');
-    shouldBeOk('zz');
-    shouldBeOk('AA');
-    shouldBeOk('ZZ');
-
-    // too long
-    shouldBeNotOk('aaa');
-
-    // too short
-    shouldBeNotOk('a');
-
-    shouldBeNotOk('@#');
-    shouldBeNotOk('15');
-    shouldBeNotOk('{{');
-
-
-  });
-
-  describe('version', (): void => {
-
-
-    const shouldBeOk: (value: number) => void = (value: number): void => {
-
-      it(`should be ok with ${value}`, (): void => {
-
-        const tcModel = new TCModel();
-
-        expect((): void => {
-
-          tcModel.version = value;
-
-        }).not.to.throw();
-
-        expect(tcModel.version).to.equal(value);
-
-      });
-
-    };
-    const shouldBeNotOk: (value: number) => void = (value: number): void => {
-
-      it(`should not be ok with ${value}`, (): void => {
-
-        const tcModel = new TCModel();
-
-        const defaultVersion: number = tcModel.version;
-
-        expect((): void => {
-
-          tcModel.version = value;
-
-        }).to.throw();
-
-        // should not be changed
-        expect(tcModel.version).to.equal(defaultVersion);
-
-      });
-
-    };
-
-    shouldBeOk(1);
-    shouldBeOk(2);
-    shouldBeNotOk(0);
-    shouldBeNotOk(3);
-    shouldBeNotOk(1.1);
-
-  });
-
-  describe('isValid()', (): void => {
-
-    // eslint-disable-next-line
-  const vendorlistJson = require('../dev/vendorlist.json');
-    const gvl: GVL = new GVL(vendorlistJson);
-
-
-    it('should be valid if everything is set', (): void => {
-
-      const tcModel = new TCModel(gvl);
-
-      tcModel.cmpId = 23;
-      tcModel.cmpVersion = 1;
-
-      expect(tcModel.isValid()).to.be.true;
+      expect(tcModel.consentLanguage, 'consentLanguage default').to.equal(altLang);
 
     });
-    const makeInvalidTest = (key: string): void => {
-
-      it(`should be invalid if ${key} is not set`, (): void => {
-
-        const tcModel = new TCModel();
-
-        if (key !== 'gvl') {
-
-          tcModel.gvl = gvl;
-
-        }
-
-        if (key !== 'cmpId') {
-
-          tcModel.cmpId = 23;
-
-        }
-        if (key !== 'cmpVersion') {
-
-          tcModel.cmpVersion = 1;
-
-        }
-
-        expect(tcModel.isValid()).to.be.false;
-
-      });
-
-    };
-
-    [
-      'cmpId',
-      'cmpVersion',
-      'gvl',
-    ].forEach(makeInvalidTest);
 
   });
 
   const runSetAllAndUnsetAll = (): void => {
 
-    // eslint-disable-next-line
-  const vendorlistJson = require('../dev/vendorlist.json');
-    const gvl: GVL = new GVL(vendorlistJson);
+    const gvl: GVL = new GVL(require('@iabtcf/testing/lib/vendorlist/vendor-list.json'));
+
     const loopGVLMap = (gvlKey: string, cb ): void => {
 
       for (const id in gvl[gvlKey]) {
@@ -396,10 +238,10 @@ describe('TCModel', (): void => {
 
     const setUnSetAlls = {
       vendorConsents: {gvlKey: 'vendors'},
-      vendorLegitimateInterest: {gvlKey: 'vendors'},
+      vendorLegitimateInterests: {gvlKey: 'vendors'},
       purposeConsents: {gvlKey: 'purposes'},
-      purposeLITransparency: {gvlKey: 'purposes'},
-      specialFeatureOptIns: {gvlKey: 'specialFeatures'},
+      purposeLegitimateInterests: {gvlKey: 'purposes'},
+      specialFeatureOptins: {gvlKey: 'specialFeatures'},
     };
 
     for (const vectorName in setUnSetAlls) {

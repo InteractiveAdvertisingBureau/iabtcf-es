@@ -1,0 +1,14 @@
+#!/bin/bash
+
+rm -rf lib
+mkdir lib
+
+tsc
+
+FILES=$(find lib -name "*.js")
+
+for FILE in $FILES; do
+
+  terser $FILE --ecma 5 -m -c -o $FILE
+
+done

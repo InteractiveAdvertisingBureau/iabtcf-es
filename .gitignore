@@ -1,13 +1,15 @@
 .DS_Store
 node_modules/
 modules/**/lib
+modules/**/dist
 modules/**/coverage
 modules/**/node_modules
 modules/**/.nyc_output
+test-results.xml
 .nyc_output
-npm-debug.log
-lerna-debug.log
 coverage
+tags
+tags.*
 .nyc_output
 .coveralls.yml
 
@@ -19,3 +21,4 @@ coverage
 *.sln
 *.swp
 *.swo
+*.log

@@ -1,75 +1,115 @@
 export class Json {
 
-  /**
-   * @param {string} jsonURL - full path to the json
-   * @param {boolean} sendCookies - Whether or not to send the XMLHttpRequest with credentials or not
-   * @param {number} [timeout] - optional timeout in miliseconds
-   * @return {Promise} - resolves with parsed JSON
-   */
-  public static fetch(jsonURL: string, sendCookies: boolean = false, timeout: number = 0): Promise<object> {
+  private static absCall(url: string, body: string | null, sendCookies: boolean, timeout: number): Promise<object> {
 
     return new Promise((resolve: (response: object) => void, reject: (error: Error) => void): void => {
 
       const req: XMLHttpRequest = new XMLHttpRequest();
+
       const onLoad: (evt: Event) => void = (): void => {
 
         // is the response done
         if (req.readyState == XMLHttpRequest.DONE ) {
 
           /**
-           * anything that is not in the two hundreds is an error and if the
-           * responseText is null that means it failed
+           * For our purposes if it's not a 200 range response, then it's a
+           * failure.
            */
-          if (req.status >= 200
-            && req.status < 300
-            && req.responseType === 'json'
-            && req.response) {
+          if (req.status >= 200 && req.status < 300) {
 
-            resolve(req.response);
+            let response = req.response;
+
+            if (typeof response === 'string') {
+
+              try {
+
+                response = JSON.parse(response);
+
+              } catch (e) {}
+
+            }
+
+            resolve(response);
 
           } else {
 
-            reject(new Error(`JSON Error Status: ${req.status} responeType: ${req.responseType} (should be json)`));
+            reject(new Error(`HTTP Status: ${req.status} response type: ${req.responseType}`));
 
           }
 
         }
 
       };
+
       const onError: (evt: Event) => void = (): void => {
 
-        reject(new Error('fetch error'));
+        reject(new Error('error'));
 
       };
+
       const onAbort: (evt: Event) => void = (): void => {
 
-        reject(new Error('fetch aborted'));
+        reject(new Error('aborted'));
 
       };
+
       const onTimeout: () => void = (): void => {
 
-        reject(new Error('Timeout ' + timeout + 'ms ' + jsonURL));
+        reject(new Error('Timeout ' + timeout + 'ms ' + url));
 
       };
 
-      req.responseType = 'json';
       req.withCredentials = sendCookies;
-
 
       req.addEventListener('load', onLoad);
       req.addEventListener('error', onError);
       req.addEventListener('abort', onAbort);
 
+      if (body === null) {
 
-      req.open('GET', jsonURL, true);
+        req.open('GET', url, true);
+
+      } else {
+
+        req.open('POST', url, true);
+
+      }
+
+      req.responseType = 'json';
 
       // IE has a problem if this is before the open
       req.timeout = timeout;
       req.ontimeout = onTimeout;
 
-      req.send(null);
+      req.send(body);
 
     });
+
+  }
+
+  /**
+   * @static
+   * @param {string} url - full path to POST to
+   * @param {object} body - JSON object to post
+   * @param {boolean} sendCookies - Whether or not to send the XMLHttpRequest with credentials or not
+   * @param {number} [timeout] - optional timeout in milliseconds
+   * @return {Promise<object>} - if the server responds the response will be returned here
+   */
+  public static post(url: string, body: object, sendCookies = false, timeout = 0): Promise<object> {
+
+    return this.absCall(url, JSON.stringify(body), sendCookies, timeout);
+
+  }
+  /**
+   * @static
+   * @param {string} url - full path to the json
+   * @param {boolean} sendCookies - Whether or not to send the XMLHttpRequest with credentials or not
+   * @param {number} [timeout] - optional timeout in milliseconds
+   * @return {Promise<object>} - resolves with parsed JSON
+   */
+  public static fetch(url: string, sendCookies = false, timeout = 0): Promise<object> {
+
+    return this.absCall(url, null, sendCookies, timeout);
 
   }
 

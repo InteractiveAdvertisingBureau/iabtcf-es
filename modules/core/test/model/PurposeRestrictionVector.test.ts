@@ -2,27 +2,11 @@ import {expect} from 'chai';
 import {PurposeRestriction} from '../../src/model/PurposeRestriction';
 import {RestrictionType} from '../../src/model/RestrictionType';
 import {PurposeRestrictionVector} from '../../src/model/PurposeRestrictionVector';
-import {makeRandomInt} from '../support/makeRandomInt';
+import {makeRandomInt} from '@iabtcf/testing';
 
 export function run(): void {
 
   describe('PurposeRestrictionVector', (): void => {
-
-    const makePurposesAvailable = (purposes: number[]): void => {
-
-      purposes.forEach((purposeId: number): void => {
-
-        PurposeRestriction.availablePurposeIds.add(purposeId);
-
-      });
-
-    };
-
-    afterEach((): void => {
-
-      PurposeRestriction.availablePurposeIds = new Set<number>();
-
-    });
 
     it('should intialize as empty', (): void => {
 
@@ -30,15 +14,13 @@ export function run(): void {
 
       expect(prv.isEmpty()).to.be.true;
 
-
     });
     it('should store vendors by purpose restriction in order', (): void => {
 
-      makePurposesAvailable([1, 2, 3]);
       const purposeId = 2;
       const vendors: number[] = [1, 44, 3, 5, 99, 22, 57, 2, 14, 28, 29, 33];
-      const purposeRestriction: PurposeRestriction
-        = new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
+      const purposeRestriction: PurposeRestriction =
+        new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
 
       const prVector: PurposeRestrictionVector = new PurposeRestrictionVector();
 
@@ -61,19 +43,17 @@ export function run(): void {
 
     it('should return an empty array if a purpose restriction hasen\'t been defined for a vendor', (): void => {
 
-      makePurposesAvailable([1, 2, 3]);
       const purposeId = 2;
-      const purposeRestriction: PurposeRestriction
-        = new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
+      const purposeRestriction: PurposeRestriction =
+        new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
       const prVector: PurposeRestrictionVector = new PurposeRestrictionVector();
 
-      expect(prVector.getVendors(purposeRestriction)).to.be.empty;
+      expect(prVector.getVendors(purposeRestriction), 'prVector.getVendors(purposeRestriction)').to.be.empty;
 
     });
 
     it('should return all purposes restrictions set', (): void => {
 
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
       const numItems = 10;
       const vendors: number[] = [];
       const restrictions: Set<string> = new Set<string>();
@@ -92,7 +72,7 @@ export function run(): void {
 
       }
 
-      const result: string[] = prv.getAllRestrictions().map((pr: PurposeRestriction): string => {
+      const result: string[] = prv.getRestrictions().map((pr: PurposeRestriction): string => {
 
         return pr.hash;
 
@@ -104,12 +84,9 @@ export function run(): void {
       expect(result).to.deep.equal(Array.from(restrictions).sort());
       expect(result.length).to.equal(restrictions.size);
 
-
     });
 
     it('should return the restriction set on a particular vendor', (): void => {
-
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 
       const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
       const vendorId: number = makeRandomInt(1, 100);
@@ -119,16 +96,13 @@ export function run(): void {
 
       prv.add(vendorId, purpRestriction);
 
-      const prvRestrictions: PurposeRestriction[] = prv.getRestriction(vendorId);
+      const prvRestrictions: PurposeRestriction[] = prv.getRestrictions(vendorId);
 
       expect(purpRestriction.isSameAs(prvRestrictions[0])).to.be.true;
-
 
     });
 
     it('should remove a restriction', (): void => {
-
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 
       const numItems = 10;
       const vendors: number[] = [];
@@ -149,21 +123,19 @@ export function run(): void {
       }
 
       // select random one
-      const targetVendor: number = vendors[Math.floor(Math.random() * vendors.length - 1)];
+      const targetVendor: number = vendors[Math.floor(Math.random() * vendors.length)];
 
-      expect(prv.getRestriction(targetVendor)).not.to.be.empty;
+      expect(prv.getRestrictions(targetVendor)).not.to.be.empty;
       expect(prv.getVendors(purpRestriction)).to.include(targetVendor);
 
       prv.remove(targetVendor, purpRestriction);
 
-      expect(prv.getRestriction(targetVendor)).to.be.empty;
+      expect(prv.getRestrictions(targetVendor)).to.be.empty;
       expect(prv.getVendors(purpRestriction)).not.to.include(targetVendor);
 
     });
 
     it('should not error when trying to remove a restriction from Vector that is empty', (): void => {
-
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 
       const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
       const purposeId = 2;
@@ -181,8 +153,6 @@ export function run(): void {
 
     it('should remove a restriction if one vendor', (): void => {
 
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-
       const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
       const purposeId = 2;
       const restrictionType: number = RestrictionType.REQUIRE_CONSENT;
@@ -191,13 +161,13 @@ export function run(): void {
 
       prv.add(vendorId, purpRestriction);
 
-      expect(prv.getRestriction(vendorId)).not.to.be.empty;
+      expect(prv.getRestrictions(vendorId)).not.to.be.empty;
       expect(prv.getVendors(purpRestriction)).to.include(vendorId);
       expect(prv.isEmpty()).to.be.false;
 
       prv.remove(vendorId, purpRestriction);
 
-      expect(prv.getRestriction(vendorId)).to.be.empty;
+      expect(prv.getRestrictions(vendorId)).to.be.empty;
       expect(prv.getVendors(purpRestriction)).not.to.include(vendorId);
       expect(prv.isEmpty()).to.be.true;
 
@@ -205,14 +175,12 @@ export function run(): void {
 
     it('should set restriction type 0 on vendor regardless of flexible legal basis', (): void => {
 
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-
       const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
       const purposeId = 2;
       const restrictionType: number = RestrictionType.NOT_ALLOWED;
       const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
       // eslint-disable-next-line
-      const vendorlistJson = require('../../dev/vendorlist.json');
+      const vendorlistJson = require('@iabtcf/testing/lib/vendorlist/purpose-restriction-vendor-list.json');
       const vendorIds = Object.keys(vendorlistJson.vendors);
       let chosenVendorId = 0;
 
@@ -236,7 +204,7 @@ export function run(): void {
 
       prv.add(chosenVendorId, purpRestriction);
 
-      expect(prv.getRestriction(chosenVendorId)).not.to.be.empty;
+      expect(prv.getRestrictions(chosenVendorId)).not.to.be.empty;
       expect(prv.getVendors(purpRestriction)).to.include(chosenVendorId);
       expect(prv.isEmpty()).to.be.false;
 
@@ -244,21 +212,19 @@ export function run(): void {
 
     it('should not set restriction type 1 on vendor if no flexible legal basis for vendor', (): void => {
 
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-
       const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
       const purposeId = 2;
       const restrictionType: number = RestrictionType.REQUIRE_CONSENT;
       const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
       // eslint-disable-next-line
-      const vendorlistJson = require('../../dev/vendorlist.json');
+      const vendorlistJson = require('@iabtcf/testing/lib/vendorlist/purpose-restriction-vendor-list.json');
       const vendorIds = Object.keys(vendorlistJson.vendors);
       let chosenVendorId = 0;
 
       vendorIds.forEach((id: string): void => {
 
-        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId)
-          && vendorlistJson.vendors[id].legIntPurposes.includes(purposeId)) {
+        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId) &&
+          vendorlistJson.vendors[id].legIntPurposes.includes(purposeId)) {
 
           chosenVendorId = vendorlistJson.vendors[id].id;
 
@@ -275,7 +241,7 @@ export function run(): void {
       prv.gvl = vendorlistJson;
       prv.add(chosenVendorId, purpRestriction);
 
-      expect(prv.getRestriction(chosenVendorId)).to.be.empty;
+      expect(prv.getRestrictions(chosenVendorId)).to.be.empty;
       expect(prv.getVendors(purpRestriction)).not.to.include(chosenVendorId);
       expect(prv.isEmpty()).to.be.true;
 
@@ -283,21 +249,19 @@ export function run(): void {
 
     it('should not set restriction type 2 on vendor if no flexible legal basis for vendor', (): void => {
 
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-
       const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
       const purposeId = 2;
       const restrictionType: number = RestrictionType.REQUIRE_LI;
       const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
       // eslint-disable-next-line
-      const vendorlistJson = require('../../dev/vendorlist.json');
+      const vendorlistJson = require('@iabtcf/testing/lib/vendorlist/purpose-restriction-vendor-list.json');
       const vendorIds = Object.keys(vendorlistJson.vendors);
       let chosenVendorId = 0;
 
       vendorIds.forEach((id: string): void => {
 
-        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId)
-          && vendorlistJson.vendors[id].purposes.includes(purposeId)) {
+        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId) &&
+          vendorlistJson.vendors[id].purposes.includes(purposeId)) {
 
           chosenVendorId = vendorlistJson.vendors[id].id;
 
@@ -314,30 +278,27 @@ export function run(): void {
       prv.gvl = vendorlistJson;
       prv.add(chosenVendorId, purpRestriction);
 
-      expect(prv.getRestriction(chosenVendorId)).to.be.empty;
+      expect(prv.getRestrictions(chosenVendorId)).to.be.empty;
       expect(prv.getVendors(purpRestriction)).not.to.include(chosenVendorId);
       expect(prv.isEmpty()).to.be.true;
-      expect(prv.isValid()).to.be.true;
 
     });
 
     it('should set restriction type 0 on vendor if no flexible legal basis for vendor', (): void => {
-
-      makePurposesAvailable([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 
       const prv: PurposeRestrictionVector = new PurposeRestrictionVector();
       const purposeId = 2;
       const restrictionType: number = RestrictionType.NOT_ALLOWED;
       const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
       // eslint-disable-next-line
-      const vendorlistJson = require('../../dev/vendorlist.json');
+      const vendorlistJson = require('@iabtcf/testing/lib/vendorlist/purpose-restriction-vendor-list.json');
       const vendorIds = Object.keys(vendorlistJson.vendors);
       let chosenVendorId = 0;
 
       vendorIds.forEach((id: string): void => {
 
-        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId)
-          && vendorlistJson.vendors[id].legIntPurposes.includes(purposeId)) {
+        if (!vendorlistJson.vendors[id].flexiblePurposes.includes(purposeId) &&
+          vendorlistJson.vendors[id].legIntPurposes.includes(purposeId)) {
 
           chosenVendorId = vendorlistJson.vendors[id].id;
 
@@ -354,7 +315,7 @@ export function run(): void {
       prv.gvl = vendorlistJson;
       prv.add(chosenVendorId, purpRestriction);
 
-      expect(prv.getRestriction(chosenVendorId)).not.to.be.empty;
+      expect(prv.getRestrictions(chosenVendorId)).not.to.be.empty;
       expect(prv.getVendors(purpRestriction)).to.include(chosenVendorId);
       expect(prv.isEmpty()).to.be.false;
 

@@ -1,10 +1,10 @@
+import {Cloneable} from '../Cloneable';
 import {TCModelError} from '../errors';
-import {RestrictionType} from '.';
+import {RestrictionType} from './RestrictionType';
 
-export class PurposeRestriction {
+export class PurposeRestriction extends Cloneable<PurposeRestriction> {
 
-  public static availablePurposeIds: Set<number> = new Set();
-  public static hashSeparator: string = '-';
+  public static hashSeparator = '-';
 
   private purposeId_: number;
   public restrictionType: RestrictionType;
@@ -20,11 +20,14 @@ export class PurposeRestriction {
    */
   public constructor(purposeId?: number, restrictionType?: RestrictionType) {
 
+    super();
+
     if (purposeId !== undefined) {
 
       this.purposeId = purposeId;
 
     }
+
     if (restrictionType !== undefined) {
 
       this.restrictionType = restrictionType;
@@ -32,6 +35,7 @@ export class PurposeRestriction {
     }
 
   }
+
   public static unHash(hash: string): PurposeRestriction {
 
     const splitUp: string[] = hash.split(this.hashSeparator);
@@ -56,6 +60,7 @@ export class PurposeRestriction {
       throw new Error('cannot hash invalid PurposeRestriction');
 
     }
+
     return `${this.purposeId}${PurposeRestriction.hashSeparator}${this.restrictionType}`;
 
   }
@@ -77,27 +82,27 @@ export class PurposeRestriction {
    */
   public set purposeId(idNum: number) {
 
-    if (idNum !== 1 && PurposeRestriction.availablePurposeIds.has(idNum)) {
-
-      this.purposeId_ = idNum;
-
-    } else {
-
-      throw new TCModelError('purposeId', idNum);
-
-    }
+    this.purposeId_ = idNum;
 
   }
 
   public isValid(): boolean {
 
-    return !!(this.purposeId && this.restrictionType !== undefined);
+    return (
+      Number.isInteger(this.purposeId) &&
+      this.purposeId > 0 &&
+      (
+        this.restrictionType === RestrictionType.NOT_ALLOWED ||
+        this.restrictionType === RestrictionType.REQUIRE_CONSENT ||
+        this.restrictionType === RestrictionType.REQUIRE_LI
+      )
+    );
 
   }
   public isSameAs(otherPR: PurposeRestriction): boolean {
 
-    return (this.purposeId === otherPR.purposeId
-      && this.restrictionType === otherPR.restrictionType);
+    return (this.purposeId === otherPR.purposeId &&
+      this.restrictionType === otherPR.restrictionType);
 
   }
 

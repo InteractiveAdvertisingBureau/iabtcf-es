@@ -1,90 +1,104 @@
 import {
-
-  Encoder,
-  BitLength,
-  IntEncoder,
-  SegmentEncoderMap,
-  SegmentType,
   Base64Url,
+  BitLength,
+  EncodingOptions,
+  SegmentEncoder,
+  SegmentSequence,
+  SemanticPreEncoder,
 } from './encoder';
 
+import {Segment, SegmentIDs} from './model';
+import {IntEncoder} from './encoder/field/IntEncoder';
 import {TCModel} from './TCModel';
 
 /**
  * Main class for encoding and decoding a
  * TCF Transparency and Consent String
  */
-export class TCString implements Encoder<TCModel> {
+export class TCString {
 
   /**
-   *  encodes a model into a TCString
+   * encodes a model into a TCString
    *
-   * @type {TCModel}
    * @param {TCModel} tcModel - model to convert into encoded string
+   * @param {EncodingOptions} options - for encoding options other than default
    * @return {string} - base64url encoded Transparency and Consent String
    */
-  public encode(tcModel: TCModel): string {
+  public static encode(tcModel: TCModel, options?: EncodingOptions): string {
 
-    let retrString = '';
-    const segEncMap: SegmentEncoderMap = new SegmentEncoderMap();
-    const len = SegmentType.numTypes;
+    let out = '';
+    let sequence: Segment[];
 
-    for (let i = 0; i < len; i ++) {
+    tcModel = SemanticPreEncoder.process(tcModel, options);
 
-      const encoder: Encoder<TCModel> = new segEncMap[SegmentType[i.toString()]]();
-      const dotOrNot: string = (i < len - 1) ? '.' : '';
-      const encoded: string = encoder.encode(tcModel);
+    /**
+       * If they pass in a special segment sequence.
+       */
+    if (Array.isArray(options?.segments)) {
 
-      if (encoded) {
+      sequence = options.segments;
 
-        retrString += encoded + dotOrNot;
+    } else {
 
-      }
+      sequence = new SegmentSequence(tcModel, options)[''+tcModel.version];
 
     }
 
-    return retrString;
+    sequence.forEach((segment: Segment, idx: number): void => {
+
+      let dotMaybe = '';
+
+      if (idx < sequence.length - 1) {
+
+        dotMaybe = '.';
+
+      }
+
+      out += SegmentEncoder.encode(tcModel, segment) + dotMaybe;
+
+    });
+
+    return out;
 
   }
 
   /**
    * Decodes a string into a TCModel
    *
-   * @param {string} encodedString - base64url encoded Transparency and
-   * Consent String to decode
+   * @param {string} encodedTCString - base64url encoded Transparency and
+   * Consent String to decode - can also be a single or group of segments of
+   * the string
+   * @param {string} [tcModel] - model to enhance with the information.  If
+   * none is passed a new instance of TCModel will be created.
    * @return {TCModel} - Returns populated TCModel
    */
-  public decode(encodedString: string): TCModel {
+  public static decode(encodedTCString: string, tcModel?: TCModel): TCModel {
 
-    const base64Url: Base64Url = new Base64Url();
-    const tcModel: TCModel = new TCModel();
-    const intEnc: IntEncoder = new IntEncoder();
-    const segments: string[] = encodedString.split('.');
-    const segMap: SegmentEncoderMap = new SegmentEncoderMap();
+    const segments: string[] = encodedTCString.split('.');
     const len: number = segments.length;
+
+    if (!tcModel) {
+
+      tcModel = new TCModel();
+
+    }
 
     for (let i = 0; i < len; i ++) {
 
-      const segment: string = segments[i];
-      let encoder: Encoder<TCModel>;
+      const segString: string = segments[i];
 
-      // first is always core
-      if ( i === 0 ) {
+      /**
+       * first char will contain 6 bits, we only need the first 3. In version 1
+       * and 2 of the TC string there is no segment type for the CORE string.
+       * Instead the first 6 bits are reserved for the encoding version, but
+       * because we're only on a maximum of encoding version 2 the first 3 bits
+       * in the core segment will evaluate to 0.
+       */
+      const firstChar: string = Base64Url.decode(segString.charAt(0));
+      const segTypeBits: string = firstChar.substr(0, BitLength.segmentType);
+      const segment = SegmentIDs.ID_TO_KEY[IntEncoder.decode(segTypeBits, BitLength.segmentType).toString()];
 
-        encoder = new segMap.core();
-
-      } else {
-
-        // first char will contain 6 bits, we only need the first 3
-        const firstChar: string = base64Url.decode(segment.charAt(0));
-        const segTypeBits: string = firstChar.substr(0, BitLength.segmentType);
-        const segType: string = intEnc.decode(segTypeBits).toString();
-
-        encoder = new segMap[SegmentType[segType]]();
-
-      }
-
-      encoder.decode(segment, tcModel);
+      SegmentEncoder.decode(segString, tcModel, segment);
 
     }
 
