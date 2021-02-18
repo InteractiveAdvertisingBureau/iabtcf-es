@@ -7,7 +7,7 @@ export interface Vendor extends GVLMapItem {
   features: number[];
   specialFeatures: number[];
   policyUrl: string;
-  cookieMaxAgeSeconds: number;
+  cookieMaxAgeSeconds: number | null;
   usesNonCookieAccess: boolean;
   deviceStorageDisclosureUrl?: string;
   deletedDate?: Date | string;
