@@ -355,6 +355,9 @@ describe('GVL', (): void => {
       ],
       specialFeatures: [],
       policyUrl: 'http://www.fakevendor.com/privacy-policy/',
+      cookieMaxAgeSeconds: 1000,
+      cookieRefresh: true,
+      usesNonCookieAccess: false,
     };
 
     expect(json.vendors[vendorId], `json.vendors["${vendorId}"]`).not.to.be.undefined;
