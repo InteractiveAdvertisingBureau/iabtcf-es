@@ -24,7 +24,6 @@ const processDeviceDisclosure = (objects: unknown): DeviceDisclosure[] => {
     /*
      * Create a clean DeviceDisclosure object with default values. */
     const cleanedDeviceDisclosure: DeviceDisclosure = {
-      domain: '',
       identifier: '',
       maxAgeSeconds: null,
       purposes: [],
@@ -45,20 +44,26 @@ const processDeviceDisclosure = (objects: unknown): DeviceDisclosure[] => {
     });
 
     /*
-     * Only display the domain if disclosure of type 'web' or 'cookie'. */
-    if (cleanedDeviceDisclosure.type === 'app' && cleanedDeviceDisclosure.domain.length > 0) {
+     * Only display the domain if disclosure is of type 'web' or 'cookie'. */
+    if (cleanedDeviceDisclosure.type == 'app' && cleanedDeviceDisclosure.domain) {
 
-      cleanedDeviceDisclosure.domain = '';
+      cleanedDeviceDisclosure.domain = undefined;
 
     }
 
     /*
-     * Only display maxAgeSeconds if disclosure is of type 'cookie'. */
-    if (cleanedDeviceDisclosure.type === 'app' || cleanedDeviceDisclosure.type === 'web') {
+     * Only display maxAgeSeconds and cookieRefresh if disclosure is of type 'cookie'. */
+    if (cleanedDeviceDisclosure.type == 'app' || cleanedDeviceDisclosure.type == 'web') {
 
       if (cleanedDeviceDisclosure.maxAgeSeconds !== null) {
 
         cleanedDeviceDisclosure.maxAgeSeconds = null;
+
+      }
+
+      if (cleanedDeviceDisclosure.cookieRefresh !== undefined) {
+
+        cleanedDeviceDisclosure.cookieRefresh = undefined;
 
       }
 
@@ -73,15 +78,16 @@ const processDeviceDisclosure = (objects: unknown): DeviceDisclosure[] => {
 /**
  * Fetches device disclosure storage JSON file and processes it.
  * @param {string} deviceDisclosureStorageUrl - A URL to a device disclosure storage JSON file.
+ * @param {number} timeout - optional timeout in milliseconds.
  * @return {DeviceDisclosure} - A Promise of processed DeviceDisclosure objects.
  */
-export const getDeviceDisclosures = async (deviceDisclosureStorageUrl: string): Promise<DeviceDisclosure[]> => {
+export const getDeviceDisclosures = async (deviceDisclosureStorageUrl: string, timeout: number): Promise<DeviceDisclosure[]> => {
 
   let res;
 
   try {
 
-    res = await Json.fetch(deviceDisclosureStorageUrl, false, 5000);
+    res = await Json.fetch(deviceDisclosureStorageUrl, false, timeout);
 
   } catch (err) {
 
