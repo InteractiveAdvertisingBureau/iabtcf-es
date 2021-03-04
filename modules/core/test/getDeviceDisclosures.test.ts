@@ -116,4 +116,17 @@ describe('getDeviceDisclosure', (): void => {
 
   });
 
+  it('should only return device disclosures that have non-default values', async (): Promise<void> =>{
+
+    mockDisclosures[0].identifier = '';
+    mockDisclosures[0].maxAgeSeconds = null;
+    mockDisclosures[0].purposes = [];
+    mockDisclosures[0].type = '';
+    jsonStub.resolves({disclosures: mockDisclosures});
+
+    const actual: DeviceDisclosure[] = await getDeviceDisclosures(URL, 5);
+    expect(actual.length).to.equal(0);
+
+  });
+
 });

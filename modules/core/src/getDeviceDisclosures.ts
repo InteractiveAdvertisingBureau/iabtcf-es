@@ -16,62 +16,75 @@ const processDeviceDisclosure = (objects: unknown): DeviceDisclosure[] => {
     'identifier',
     'maxAgeSeconds',
     'purposes',
-    'types',
+    'type',
   ];
 
-  return dirtyDeviceDisclosures.map((dirtyDeviceDisclosure): DeviceDisclosure => {
+  return dirtyDeviceDisclosures
+    .map((dirtyDeviceDisclosure): DeviceDisclosure => {
 
-    /*
+      /*
      * Create a clean DeviceDisclosure object with default values. */
-    const cleanedDeviceDisclosure: DeviceDisclosure = {
-      identifier: '',
-      maxAgeSeconds: null,
-      purposes: [],
-      type: '',
-    };
+      const cleanedDeviceDisclosure: DeviceDisclosure = {
+        identifier: '',
+        maxAgeSeconds: null,
+        purposes: [],
+        type: '',
+      };
 
-    /*
+      /*
      * We process the object by only taking the values with a valid key and assigning it to
      * our clean DeviceDisclosure object. */
-    validKeys.forEach((validKey: string): void => {
+      validKeys.forEach((validKey: string): void => {
 
-      if (dirtyDeviceDisclosure[validKey]) {
+        if (dirtyDeviceDisclosure[validKey]) {
 
-        cleanedDeviceDisclosure[validKey] = dirtyDeviceDisclosure[validKey];
+          cleanedDeviceDisclosure[validKey] = dirtyDeviceDisclosure[validKey];
 
-      }
+        }
 
-    });
+      });
 
-    /*
+      /*
      * Only display the domain if disclosure is of type 'web' or 'cookie'. */
-    if (cleanedDeviceDisclosure.type == 'app' && cleanedDeviceDisclosure.domain) {
+      if (cleanedDeviceDisclosure.type == 'app' && cleanedDeviceDisclosure.domain) {
 
-      cleanedDeviceDisclosure.domain = undefined;
+        cleanedDeviceDisclosure.domain = undefined;
 
-    }
+      }
 
-    /*
+      /*
      * Only display maxAgeSeconds and cookieRefresh if disclosure is of type 'cookie'. */
-    if (cleanedDeviceDisclosure.type == 'app' || cleanedDeviceDisclosure.type == 'web') {
+      if (cleanedDeviceDisclosure.type == 'app' || cleanedDeviceDisclosure.type == 'web') {
 
-      if (cleanedDeviceDisclosure.maxAgeSeconds !== null) {
+        if (cleanedDeviceDisclosure.maxAgeSeconds !== null) {
 
-        cleanedDeviceDisclosure.maxAgeSeconds = null;
+          cleanedDeviceDisclosure.maxAgeSeconds = null;
+
+        }
+
+        if (cleanedDeviceDisclosure.cookieRefresh !== undefined) {
+
+          cleanedDeviceDisclosure.cookieRefresh = undefined;
+
+        }
 
       }
 
-      if (cleanedDeviceDisclosure.cookieRefresh !== undefined) {
+      return cleanedDeviceDisclosure;
 
-        cleanedDeviceDisclosure.cookieRefresh = undefined;
-
-      }
-
-    }
-
-    return cleanedDeviceDisclosure;
-
-  });
+    })
+    /*
+     * Any objects that have default values should be filtered out of the array.  The case being
+     * that if a device disclosure had no valid keys, we would return a default device disclosure
+     * object that does not contain real values.  For the purposes of consumption, this is the same
+     * as that object not existing. */
+    .filter((deviceDisclosure: DeviceDisclosure): boolean =>
+      !(deviceDisclosure.cookieRefresh === undefined &&
+        deviceDisclosure.domain === undefined &&
+        deviceDisclosure.identifier.length < 1 &&
+        deviceDisclosure.maxAgeSeconds === null &&
+        deviceDisclosure.purposes.length < 1 &&
+        deviceDisclosure.type.length < 1));
 
 };
 
