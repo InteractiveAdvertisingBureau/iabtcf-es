@@ -129,4 +129,28 @@ describe('getDeviceDisclosure', (): void => {
 
   });
 
+  it('should return an empty array if response object root key is not explicitly "disclosures"', async (): Promise<void> => {
+
+    jsonStub.resolves({disclosure: mockDisclosures});
+    const actual: DeviceDisclosure[] = await getDeviceDisclosures(URL, 5);
+    expect(actual.length).to.equal(0);
+
+  });
+
+  it('should throw DeviceDisclosureError if Json.fetch throws an error for any reason', async (): Promise<void> => {
+
+    jsonStub.rejects();
+
+    try {
+
+      await getDeviceDisclosures(URL, 5);
+
+    } catch (err) {
+
+      expect(err.name).to.equal('DeviceDisclosureError');
+
+    }
+
+  });
+
 });

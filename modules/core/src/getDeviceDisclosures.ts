@@ -23,7 +23,7 @@ const processDeviceDisclosure = (objects: unknown): DeviceDisclosure[] => {
     .map((dirtyDeviceDisclosure): DeviceDisclosure => {
 
       /*
-     * Create a clean DeviceDisclosure object with default values. */
+       * Create a clean DeviceDisclosure object with default values. */
       const cleanedDeviceDisclosure: DeviceDisclosure = {
         identifier: '',
         maxAgeSeconds: null,
@@ -32,8 +32,8 @@ const processDeviceDisclosure = (objects: unknown): DeviceDisclosure[] => {
       };
 
       /*
-     * We process the object by only taking the values with a valid key and assigning it to
-     * our clean DeviceDisclosure object. */
+       * We process the object by only taking the values with a valid key and assigning it to
+       * our clean DeviceDisclosure object. */
       validKeys.forEach((validKey: string): void => {
 
         if (dirtyDeviceDisclosure[validKey]) {
@@ -45,7 +45,7 @@ const processDeviceDisclosure = (objects: unknown): DeviceDisclosure[] => {
       });
 
       /*
-     * Only display the domain if disclosure is of type 'web' or 'cookie'. */
+      * Only display the domain if disclosure is of type 'web' or 'cookie'. */
       if (cleanedDeviceDisclosure.type == 'app' && cleanedDeviceDisclosure.domain) {
 
         cleanedDeviceDisclosure.domain = undefined;
@@ -53,7 +53,7 @@ const processDeviceDisclosure = (objects: unknown): DeviceDisclosure[] => {
       }
 
       /*
-     * Only display maxAgeSeconds and cookieRefresh if disclosure is of type 'cookie'. */
+       * Only display maxAgeSeconds and cookieRefresh if disclosure is of type 'cookie'. */
       if (cleanedDeviceDisclosure.type == 'app' || cleanedDeviceDisclosure.type == 'web') {
 
         if (cleanedDeviceDisclosure.maxAgeSeconds !== null) {
@@ -91,16 +91,17 @@ const processDeviceDisclosure = (objects: unknown): DeviceDisclosure[] => {
 /**
  * Fetches device disclosure storage JSON file and processes it.
  * @param {string} deviceDisclosureStorageUrl - A URL to a device disclosure storage JSON file.
- * @param {number} timeout - optional timeout in milliseconds.
- * @return {DeviceDisclosure} - A Promise of processed DeviceDisclosure objects.
+ * @param {number} timeout - Optional timeout in milliseconds.
+ * @throws {DeviceDisclosureError} - If Json.fetch throws an error.
+ * @return {DeviceDisclosure} - A Promise of processed DeviceDisclosure objects or an empty array.
  */
-export const getDeviceDisclosures = async (deviceDisclosureStorageUrl: string, timeout: number): Promise<DeviceDisclosure[]> => {
+export const getDeviceDisclosures = async (deviceDisclosureStorageUrl: string, timeout?: number): Promise<DeviceDisclosure[]> => {
 
-  let res;
+  let response;
 
   try {
 
-    res = await Json.fetch(deviceDisclosureStorageUrl, false, timeout);
+    response = await Json.fetch(deviceDisclosureStorageUrl, false, timeout);
 
   } catch (err) {
 
@@ -108,6 +109,6 @@ export const getDeviceDisclosures = async (deviceDisclosureStorageUrl: string, t
 
   }
 
-  return processDeviceDisclosure(res['disclosures']);
+  return response && response['disclosures'] ? processDeviceDisclosure(response['disclosures']) : [];
 
 };
