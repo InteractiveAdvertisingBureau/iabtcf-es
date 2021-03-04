@@ -1,7 +1,6 @@
 import sinon from 'sinon';
 import {expect} from 'chai';
 import {Json} from '../src/Json';
-import {XMLHttpTestTools} from '@iabtcf/testing';
 import {DeviceDisclosure} from '../src/model/DeviceDisclosure';
 import {getDeviceDisclosures} from '../src/getDeviceDisclosures';
 
@@ -24,13 +23,16 @@ describe('getDeviceDisclosure', (): void => {
 
   beforeEach((): void => {
 
-    XMLHttpTestTools.beforeEach(); // can remove when the unit tests join the entire suite.
     mockDisclosures = generateMockDisclosures();
     jsonStub = sinon.stub(Json, 'fetch');
 
   });
 
-  afterEach(sinon.restore);
+  afterEach((): void => {
+
+    jsonStub.restore();
+
+  });
 
   it('should only parse valid keys', async (): Promise<void> => {
 
