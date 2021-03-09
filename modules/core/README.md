@@ -21,6 +21,7 @@ Ensures consistent encoding and decoding of [IAB's Transparency and Consent Fram
       + [sorting of vendors based on purpose legal bases](#get-only-vendors-with-a-specific-feature-or-purpose-under-legal-basis) that the CMP will need to show the vendors in.
       + loading [GVL JSON files](#autoload-specific-vendor-listjson)
       + loading [language translations](#change-gvl-language) of Purposes, Features, Special Features, Special Purposes, and Stacks
+      + loading a Vendors [Device Storage & Access Duration Disclosures](#device-disclosures)
   - [TCString](#tcstring) - Encodes a [`TCModel`](#tcmodel) into a [TC string](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#about-the-transparency--consent-string-tc-string) and decodes a [TC string](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#about-the-transparency--consent-string-tc-string) into a [`TCModel`](#tcmodel)
       + [Decode an IAB TC String](#decode-an-iab-tc-string)
       + [Encode an IAB TC String](#encode-an-iab-tc-string)
@@ -196,6 +197,7 @@ tcModel.publisherRestrictions.add(2000, purposeRestriction);
 * [Change GVL Language](#change-gvl-language)
 * [Get only vendors with a specific feature or purpose under legal basis](#get-only-vendors-with-a-specific-feature-or-purpose-under-legal-basis)
 * [Narrow the list of vendors](#narrow-the-list-of-vendors)
+* [Device Disclosures](#device-disclosures)
 
 The `GVL` class provides two ways to instantiate. Either by passing in a vendor-list.json object to populate it or autoloading a vendor-list.json from a url.
 
@@ -388,6 +390,46 @@ gvl.readyPromise.then(() => {
 
 ```
 
+### Device Disclosures
+Each Vendor in the GVL contains a `deviceStorageDisclosureUrl` that links to a JSON of expanded device disclosure information. The specifications are located [here](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Device%20storage%20duration%20and%20access%20disclosure.md).
+
+The core library provides the interface `DeviceDisclosure` and the function `getDeviceDisclosures`.  `getDeviceDisclosures` fetches and processes the JSON provided by the URL according to the specifications.
+
+```typescript
+import {getDeviceDisclosures, DeviceDisclosure} from '@iabtcf/core';
+
+const URL = 'https://iabexample.com/deviceStorage.json';
+let deviceDisclosures: DeviceDisclosure[];
+
+/* ES5 */
+getDeviceDisclosures(URL)
+  .then((res: DeviceDisclosure[]): void => {
+
+    // This can be an empty array if the response is undefined or does not follow the IAB specifications.
+    deviceDisclosures = res;
+
+  })
+  .catch(err => {
+
+    // Throws an error if anything went wrong when fetching from the URL.
+
+  });
+
+/* ES6 */
+const customAsyncFunc = async (): void => {
+  try {
+
+    deviceDisclosures = await getDeviceDisclosures(URL);
+
+  } catch (err) {
+
+    // Do something for the error.
+
+  }
+}
+
+```
+
 # TCString
 
 - [Decode](#decode-an-iab-tc-string)
@@ -499,3 +541,5 @@ const encodingOptions = {
 const publisherTCSegment = TCString.encode(tcModel, encodingOptions);
 
 ```
+
+###
