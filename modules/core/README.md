@@ -398,10 +398,11 @@ The core library provides the interface `DeviceDisclosure` and the function `get
 ```typescript
 import {getDeviceDisclosures, DeviceDisclosure} from '@iabtcf/core';
 
+const URL = 'https://iabexample.com/deviceStorage.json';
 let deviceDisclosures: DeviceDisclosure[];
 
 /* ES5 */
-getDeviceDisclosures('https://iabexample.com/deviceStorage.json')
+getDeviceDisclosures(URL)
   .then((res: DeviceDisclosure[]): void => {
 
     // This can be an empty array if the response is undefined or does not follow the IAB specifications.
@@ -418,7 +419,7 @@ getDeviceDisclosures('https://iabexample.com/deviceStorage.json')
 const customAsyncFunc = async (): void => {
   try {
 
-    deviceDisclosures = await getDeviceDisclosures('https://iabexample.com/deviceStorage.json');
+    deviceDisclosures = await getDeviceDisclosures(URL);
 
   } catch (err) {
 
