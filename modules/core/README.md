@@ -419,7 +419,8 @@ getDeviceDisclosures(URL)
 const customAsyncFunc = async (): void => {
   try {
 
-    deviceDisclosures = await getDeviceDisclosures(URL);
+    // Optional timeout in milliseconds if necessary.
+    deviceDisclosures = await getDeviceDisclosures(URL, 5000);
 
   } catch (err) {
 
