@@ -34,6 +34,34 @@ describe('encoder->SegmentEncoder', (): void => {
 
   });
 
+  it('should ensure that (en/de)coded (in/out)put restrictions are the same', async (): Promise<void> => {
+
+    const tcModel: TCModel = getTCModelWithGVL();
+    let encoded = '';
+    let decoded: TCModel;
+
+    const encodeIt = (): void => {
+
+      encoded = SegmentEncoder.encode(tcModel, Segment.CORE);
+
+    };
+
+    const decodeIt = (): void => {
+
+      decoded = SegmentEncoder.decode(encoded, tcModel, Segment.CORE);
+
+    };
+
+    await tcModel.gvl.readyPromise;
+
+    expect(encodeIt, 'encode should not throw an error').not.to.throw();
+    expect(encoded, 'shold not be empty').to.not.equal('');
+    expect(decodeIt, 'encode should not throw an error').not.to.throw();
+    expect(decoded, 'shold not be empty').to.not.equal('');
+    expect(tcModel).equals(decoded);
+
+  });
+
   it('TCModel->Core TC String->TCModel and should be equal', async (): Promise<void> => {
 
     const tcModel: TCModel = getTCModelWithGVL();

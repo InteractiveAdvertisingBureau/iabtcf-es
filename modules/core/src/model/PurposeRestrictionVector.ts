@@ -131,6 +131,45 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
   }
 
   /**
+   * restrictPurposeToLegalBasis - adds all Vendors under a given Purpose Restriction
+   *
+   * @param {PurposeRestriction} purposeRestriction
+   * @return {void}
+   */
+  public restrictPurposeToLegalBasis(purposeRestriction: PurposeRestriction): void {
+
+    const vendors = this.gvl.vendorIds;
+    const hash: string = purposeRestriction.hash;
+    const lastEntry = (function() {
+
+      let value;
+      for (value of vendors);
+      return value;
+
+    })();
+
+    for (let i = 1; i <= lastEntry; i++) {
+
+      if (!this.has(hash)) {
+
+        this.map.set(hash, new BinarySearchTree());
+        this.bitLength = 0;
+
+      }
+
+      /**
+       * Previously I had a check here to remove a duplicate value, but because
+       * we're using a tree the value is guaranteed to be unique so there is no
+       * need to add an additional de-duplication here.
+       */
+
+      this.map.get(hash).add(i);
+
+    }
+
+  }
+
+  /**
    * getVendors - returns array of vendor ids optionally narrowed by a given
    * Purpose Restriction.  If no purpose restriction is passed then all vendor
    * ids will be returned.  One can expect this result to be a unique set of
