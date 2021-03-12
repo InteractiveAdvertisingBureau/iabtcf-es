@@ -499,5 +499,3 @@ const encodingOptions = {
 const publisherTCSegment = TCString.encode(tcModel, encodingOptions);
 
 ```
-
-###
