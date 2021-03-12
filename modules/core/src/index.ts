@@ -8,4 +8,3 @@ export * from './GVL';
 export * from './Json';
 export * from './TCModel';
 export * from './TCString';
-export * from './getDeviceDisclosures';

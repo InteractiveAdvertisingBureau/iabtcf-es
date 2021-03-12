@@ -5,6 +5,7 @@ export * from './IntMap';
 export * from './KeyMap';
 export * from './PurposeRestriction';
 export * from './PurposeRestrictionVector';
+export * from './DeviceDisclosureStorageAccessType';
 export * from './DeviceDisclosure';
 export * from './RestrictionType';
 export * from './Segment';
