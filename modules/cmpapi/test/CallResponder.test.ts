@@ -98,23 +98,27 @@ describe('CallResponder', (): void => {
   it('should use custom "getTCData" command handler for "addEventListener" and "removeEventListener" commands', (): void => {
 
     const customCommandCallback = sinon.stub();
-  
+
     const callResponder = new CallResponder({
       [TCFCommand.GET_TC_DATA]: (): void => {
+
         customCommandCallback();
+
       },
     });
-  
+
+    CmpApiModel.tcModel = TCModelFactory.withGVL();
+
     // Invoke `getTCData` command and make sure custom callback was called
-    callResponder.apiCall(TCFCommand.GET_TC_DATA, null, () => {});
+    callResponder.apiCall(TCFCommand.GET_TC_DATA, null, () => undefined);
     expect(customCommandCallback.callCount).to.eql(1);
-  
+
     // Invoke `addEventListener` command and make sure custom callback was called
-    callResponder.apiCall(TCFCommand.ADD_EVENT_LISTENER, null, () => {});
+    callResponder.apiCall(TCFCommand.ADD_EVENT_LISTENER, null, () => undefined);
     expect(customCommandCallback.callCount).to.eql(2);
-  
+
     // Invoke `removeEventListener` command and make sure custom callback was called
-    callResponder.apiCall(TCFCommand.REMOVE_EVENT_LISTENER, null, () => {});
+    callResponder.apiCall(TCFCommand.REMOVE_EVENT_LISTENER, null, () => undefined);
     expect(customCommandCallback.callCount).to.eql(3);
 
   });
