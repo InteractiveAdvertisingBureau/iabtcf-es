@@ -116,7 +116,7 @@ The `TCModel` leverages a [`Set`](https://developer.mozilla.org/en-US/docs/Web/J
    - `purposeConsents`
    - `purposeLegitimateInterests`
  - **Special Feature Opt-Ins**
-   - `specialFeatureOptIns`
+   - `specialFeatureOptins`
  - **Publisher**
    - `publisherConsents`
    - `publisherCustomConsents`
