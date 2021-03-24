@@ -140,9 +140,9 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
     const vendors = this.gvl.vendorIds;
     const hash: string = purposeRestriction.hash;
-    const lastEntry = (function() {
+    const lastEntry = (function(): number {
 
-      let value;
+      let value: number;
       for (value of vendors);
       return value;
 
