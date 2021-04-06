@@ -21,57 +21,74 @@ export class PurposeRestrictionVectorEncoder {
         bitString += IntEncoder.encode(purpRestriction.purposeId, BitLength.purposeId);
         bitString += IntEncoder.encode(purpRestriction.restrictionType, BitLength.restrictionType);
 
-        // now get all the vendors under that restriction
+        // Get available vendor IDs from the GVL
+        const gvlVendors = [...prVector.gvl.vendorIds];
+
+        // Get all vendors to which the restriction applies
         const vendors: number[] = prVector.getVendors(purpRestriction);
-        const len: number = vendors.length;
+
+        // Counts number of element occurances in the array
+        const countElementOccurrences = (array, item): number =>
+          array.reduce(
+            (result, currentValue) => (currentValue === item ? result + 1 : result),
+            0,
+          );
 
         /**
-         * numEntries comes first so we will have to keep a counter and the do
-         * the encoding at the end
+         * Generate vendor ranges.
+         *
+         * When generating vendor range we are looking
+         * for the consecutive vendor IDs in the vendor list
          */
-        let numEntries = 0;
-        let startId = 0;
+        const filteredGvlVendors = gvlVendors.map((currentItem, index) =>
+          // Mark unused vendors from the vendor list with null
+          vendors.includes(currentItem) ? index : null,
+        );
+
+        const generatedVendorRanges = filteredGvlVendors.map((currentItem, index) =>
+          currentItem === null ? null : [index, countElementOccurrences(filteredGvlVendors.slice(0, index), null)],
+        )
+          .filter(Boolean)
+          .reduce((result, [vendorIndex, rangeIndex]) => {
+
+            // Assigns range index to which the vendor belongs
+
+            result[rangeIndex] = [
+              ...(result[rangeIndex] || []),
+              gvlVendors[vendorIndex],
+            ];
+
+            return result;
+
+          }, {});
+
+        const vendorRanges: number[][] = Object.values(generatedVendorRanges);
+
+        const numEntries = vendorRanges.length;
         let rangeField = '';
 
-        for (let i = 0; i < len; i ++) {
+        for (const vendorRange of vendorRanges) {
 
-          const vendorId: number = vendors[i];
+          // We have a vendor range if the range contains more than 1 vendor
+          const isRange = vendorRange.length > 1;
 
-          if (startId === 0) {
+          // 0 means single 1 means range
+          rangeField += BooleanEncoder.encode(isRange);
+          rangeField += IntEncoder.encode(vendorRange[0], BitLength.vendorId);
 
-            numEntries++;
-            startId = vendorId;
+          if (isRange) {
 
-          }
-
-          // either end of the loop or there's a gap greater than 1 number
-          if (i === len - 1 || vendors[i + 1] > vendorId + 1) {
-
-            /**
-             * it's a range entry if we've got something other than the start
-             * ID
-             */
-            const isRange = !(vendorId === startId);
-
-            // 0 means single 1 means range
-            rangeField += BooleanEncoder.encode(isRange);
-            rangeField += IntEncoder.encode(startId, BitLength.vendorId);
-
-            if (isRange) {
-
-              rangeField += IntEncoder.encode(vendorId, BitLength.vendorId);
-
-            }
-
-            // reset the startId so we grab the next id in the list
-            startId = 0;
+            rangeField += IntEncoder.encode(
+              vendorRange[vendorRange.length - 1],
+              BitLength.vendorId,
+            );
 
           }
 
         }
 
         /**
-         * now that  the range encoding is built, encode the number of ranges
+         * now that the range encoding is built, encode the number of ranges
          * and then append the range field to the bitString.
          */
         bitString += IntEncoder.encode(numEntries, BitLength.numEntries);
@@ -126,7 +143,7 @@ export class PurposeRestrictionVectorEncoder {
 
           }
 
-          for ( let k: number = startOrOnlyVendorId; k <= endVendorId; k++) {
+          for (let k: number = startOrOnlyVendorId; k <= endVendorId; k++) {
 
             vector.add(k, purposeRestriction);
 
