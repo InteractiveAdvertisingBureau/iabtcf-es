@@ -35,14 +35,14 @@ describe('encoder/field->PurposeRestrictionVectorEncoder', (): void => {
 
     const purposeId = 2;
     /**
-     * Vendors with IDs 6, 8 and 9 are consecutive
+     * Vendors with IDs 6, 8 are consecutive
      * and they should be encoded as a single
-     * vendor range and consecutive vendors 23 and 37
-     * should be encoded as second range
+     * vendor range and consecutive vendor 686
+     * should be encoded as a separate section
      */
-    const vendors: number[] = randomize([6, 8, 9, 23, 37]);
+    const vendors: number[] = randomize([6, 8, 686]);
     const purposeRestriction: PurposeRestriction =
-        new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
+      new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
 
     const prVector: PurposeRestrictionVector = new PurposeRestrictionVector();
 
