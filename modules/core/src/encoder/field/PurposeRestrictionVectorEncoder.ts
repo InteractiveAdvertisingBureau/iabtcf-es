@@ -44,11 +44,23 @@ export class PurposeRestrictionVectorEncoder {
 
           }
 
+          // we know that `len` is greater than zero because we entered the loop
+          const lastVendorId = vendors[len - 1];
+          const gvlVendorIds = prVector.gvl.vendorIds;
+
+          const nextGvlVendor = (vendorId: number): number => {
+
+            while (++vendorId <= lastVendorId && !gvlVendorIds.has(vendorId)) {
+            }
+
+            return vendorId;
+
+          };
+
           /**
-           * either end of the loop or there's a gap greater than 1 number and
-           * the vendorId is in the GVL
+           * either end of the loop or there are consecutive GVL vendor IDs
            */
-          if (i === len - 1 || (vendors[i + 1] > vendorId + 1 && prVector.gvl.vendorIds.has(vendorId + 1))) {
+          if (i === len - 1 || vendors[i + 1] > nextGvlVendor(vendorId)) {
 
             /**
              * it's a range entry if we've got something other than the start
