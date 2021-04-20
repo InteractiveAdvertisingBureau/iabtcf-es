@@ -58,7 +58,7 @@ export class PurposeRestrictionVectorEncoder {
           };
 
           /**
-           * either end of the loop or there are consecutive GVL vendor IDs
+           * either end of the loop or there are GVL vendor IDs before the next one
            */
           if (i === len - 1 || vendors[i + 1] > nextGvlVendor(vendorId)) {
 
