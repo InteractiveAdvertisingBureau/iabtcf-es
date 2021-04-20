@@ -34,8 +34,77 @@ describe('encoder/field->PurposeRestrictionVectorEncoder', (): void => {
   it('should create one restriction group and two vendor ranges', (): void => {
 
     const purposeId = 2;
-    // No 6
-    const vendors: number[] = randomize([1, 2, 3, 4, 5, 7, 8, 9, 10, 11]);
+    /**
+     * Vendors with IDs 6, 8 are consecutive
+     * and they should be encoded as a single
+     * vendor range and consecutive vendor 686
+     * should be encoded as a separate section
+     */
+    const vendors: number[] = randomize([6, 8, 686]);
+    const purposeRestriction: PurposeRestriction =
+      new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
+
+    const prVector: PurposeRestrictionVector = new PurposeRestrictionVector();
+
+    prVector.gvl = GVLFactory.getVersion(23) as unknown as GVL;
+
+    for (let i = 0; i < vendors.length; i++) {
+
+      prVector.add(vendors[i], purposeRestriction);
+
+    }
+
+    /**
+       * ORDER:
+       * num pub restrictions
+       * purposeId
+       * restrictionType
+       * numEntries
+       * ----
+       * singleOrRange
+       * startVendorId
+       * endVendorId (may not be there)
+       */
+    const encoded: string = PurposeRestrictionVectorEncoder.encode(prVector);
+    let index = 0;
+
+    expect(encoded, 'encoded string').not.to.be.empty;
+
+    // num restrictions
+    const numRestrictions: number = IntEncoder.decode(encoded.substr(index, BitLength.numRestrictions), BitLength.numRestrictions);
+
+    expect(numRestrictions, 'numRestrictions').to.equal(prVector.numRestrictions);
+    index += BitLength.numRestrictions;
+
+    // purposeId
+    const purpId: number = IntEncoder.decode(encoded.substr(index, BitLength.purposeId), BitLength.purposeId);
+
+    expect(purpId, 'purpId').to.equal(purposeId);
+    index += BitLength.purposeId;
+
+    // restrictionType
+    const restrictionType: number = IntEncoder.decode(encoded.substr(index, BitLength.restrictionType), BitLength.restrictionType);
+
+    expect(restrictionType, 'restrictionType').to.equal(RestrictionType.NOT_ALLOWED);
+    index += BitLength.restrictionType;
+
+    // numEntries
+    const numEntries: number = IntEncoder.decode(encoded.substr(index, BitLength.numEntries), BitLength.numEntries);
+
+    expect(numEntries, 'numEntries').to.equal(2);
+    index += BitLength.numEntries;
+
+  });
+
+  it('should create one restriction group and one vendor range if only consecutive vendors from the GVL are used', (): void => {
+
+    const purposeId = 2;
+    /**
+     * Vendors with IDs 12, 15, 18 and 23 are consecutive
+     * vendor IDs in the vendor list and they should be
+     * encoded as a single range
+     */
+    const vendors: number[] = randomize([12, 15, 18, 23]);
     const purposeRestriction: PurposeRestriction =
         new PurposeRestriction(purposeId, RestrictionType.NOT_ALLOWED);
 
@@ -86,7 +155,7 @@ describe('encoder/field->PurposeRestrictionVectorEncoder', (): void => {
     // numEntries
     const numEntries: number = IntEncoder.decode(encoded.substr(index, BitLength.numEntries), BitLength.numEntries);
 
-    expect(numEntries, 'numEntries').to.equal(2);
+    expect(numEntries, 'numEntries').to.equal(1);
     index += BitLength.numEntries;
 
   });
