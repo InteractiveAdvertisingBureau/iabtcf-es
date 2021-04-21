@@ -6,6 +6,7 @@
     const queue = [];
     let win = window;
     let cmpFrame;
+    let gdprApplies;
 
     function addFrame() {
 
@@ -35,8 +36,6 @@
     }
 
     function tcfAPIHandler(...args) {
-
-      let gdprApplies;
 
       if (!args.length) {
 
