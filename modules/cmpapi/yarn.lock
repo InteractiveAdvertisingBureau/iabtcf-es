@@ -89,15 +89,15 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@iabtcf/stub@1.2.1-1":
-  version "1.2.1-1"
-  resolved "https://registry.yarnpkg.com/@iabtcf/stub/-/stub-1.2.1-1.tgz#90abc8d3f53955f6e33ef4de26716358673fb92a"
-  integrity sha512-U0ESl/mTLY0kUp1aEP8bNYKmOoj0R3Frzvy3sP6QVgJKTssy4r6RURXZi2IeDpxyRc/87lEB3Ob7eVT7H94BQQ==
+"@iabtcf/stub@1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@iabtcf/stub/-/stub-1.2.1.tgz#0af5d0f9a294499022960a9897848554bec1c263"
+  integrity sha512-HZQDDCDI+uE0FAiQsJHCOFRiG+Cq1/PWWyHMHH3fgC8mXeJONkStzf4NjUU1QTIG2kI2pCiV2mPNOUY1tCEamQ==
 
-"@iabtcf/testing@1.2.1-1":
-  version "1.2.1-1"
-  resolved "https://registry.yarnpkg.com/@iabtcf/testing/-/testing-1.2.1-1.tgz#332eb9131b7d445cbce679f98a80e9e28080c96e"
-  integrity sha512-GW3PEKKwXxfiZj5lC8ryLRXOZDmdIBxdvjdyZD/i2Yly6TRTcdQ0se2YEXHV0aUKBJGjX8OeIBY5iQl0ENOWDQ==
+"@iabtcf/testing@1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@iabtcf/testing/-/testing-1.2.1.tgz#4c125aa6f534c5b582f3b36b38db45059506c6e1"
+  integrity sha512-rsTSiJ1Hn/ls9Ni6/x/Ml+hCV8e17zDJk4H/Yx3W5pJI1JPyJVro66JpKURcZszcRzN3h0JbmpYP7v8WkIfshQ==
   dependencies:
     "@types/sinon" "^7.0.13"
     "@types/sinon-chai" "3.2.2"
@@ -1672,9 +1672,9 @@ highlight.js@^9.13.1:
   integrity sha512-a5bFyofd/BHCX52/8i8uJkjr9DYwXIPnM/plwI6W7ezItLGqzt7X2G2nXuYSfsIJdkwwj/g9DG1LkcGJI/dDoA==
 
 hosted-git-info@^2.1.4:
-  version "2.8.5"
-  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.5.tgz#759cfcf2c4d156ade59b0b2dfabddc42a6b9c70c"
-  integrity sha512-kssjab8CvdXfcXMXVcvsXum4Hwdq9XGtRD3TteMEvEbq0LXyiNQr6AprqKqfeaDXze7SxWvRxdpwE6ku7ikLkg==
+  version "2.8.9"
+  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.9.tgz#dffc0bf9a21c02209090f2aa69429e1414daf3f9"
+  integrity sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==
 
 html-encoding-sniffer@^1.0.2:
   version "1.0.2"
