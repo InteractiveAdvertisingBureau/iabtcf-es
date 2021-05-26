@@ -89,10 +89,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@iabtcf/testing@1.2.1-1":
-  version "1.2.1-1"
-  resolved "https://registry.yarnpkg.com/@iabtcf/testing/-/testing-1.2.1-1.tgz#332eb9131b7d445cbce679f98a80e9e28080c96e"
-  integrity sha512-GW3PEKKwXxfiZj5lC8ryLRXOZDmdIBxdvjdyZD/i2Yly6TRTcdQ0se2YEXHV0aUKBJGjX8OeIBY5iQl0ENOWDQ==
+"@iabtcf/testing@1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@iabtcf/testing/-/testing-1.2.1.tgz#4c125aa6f534c5b582f3b36b38db45059506c6e1"
+  integrity sha512-rsTSiJ1Hn/ls9Ni6/x/Ml+hCV8e17zDJk4H/Yx3W5pJI1JPyJVro66JpKURcZszcRzN3h0JbmpYP7v8WkIfshQ==
   dependencies:
     "@types/sinon" "^7.0.13"
     "@types/sinon-chai" "3.2.2"
@@ -3345,9 +3345,9 @@ uglify-js@^3.1.4:
     source-map "~0.6.1"
 
 underscore@>=1.8.3, underscore@^1.9.1:
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.9.1.tgz#06dce34a0e68a7babc29b365b8e74b8925203961"
-  integrity sha512-5/4etnCkd9c8gwgowi5/om/mYO5ajCaOgdzj/oW+0eQV9WxKBDZw5+ycmKmeaTXjInS/W0BzpGLo2xR2aBwZdg==
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.13.1.tgz#0c1c6bd2df54b6b69f2314066d65b6cde6fcf9d1"
+  integrity sha512-hzSoAVtJF+3ZtiFX0VgfFPHEDRm7Y/QPjGyNo4TVdnDTdft3tr8hEkD25a1jC+TjTuE7tkHGKkhwCgs9dgBB2g==
 
 unique-string@^1.0.0:
   version "1.0.0"
