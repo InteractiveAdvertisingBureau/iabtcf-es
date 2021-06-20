@@ -41,8 +41,12 @@ export class SemanticPreEncoder {
           if (value) {
 
             const vendor = gvl.vendors[vendorId];
+            const isInactive = !vendor || vendor.deletedDate;
+            const isSpecialPurposesOnly = !isInactive
+              ? vendor['purposes'].length === 0 && vendor['legIntPurposes'].length === 0 && vendor['specialPurposes'].length > 0
+              : false;
 
-            if (!vendor || vendor.deletedDate) {
+            if (isInactive) {
 
               /**
                * If the vendor doesn't exist, then they should not receive a
@@ -125,6 +129,15 @@ export class SemanticPreEncoder {
 
               }
 
+            }
+
+            /**
+             * As special purposes have a special treatment and cannot being objected,
+             * these special purposes only vendors need to set LI signal when present
+             */
+
+            if (gvlVendorKey === 'legIntPurposes' && isSpecialPurposesOnly && !isInactive) {
+              vector.set(vendorId);
             }
 
           }
