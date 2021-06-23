@@ -53,14 +53,14 @@ export class SemanticPreEncoder {
 
             } else if (vendor[gvlVendorKey].length === 0) {
 
-              // Define if the current vendor is special purposes only
-              const isSpecialPurposesOnly = vendor['purposes'].length === 0 && vendor['legIntPurposes'].length === 0 && vendor['specialPurposes'].length > 0;
-
-              if (gvlVendorKey === 'legIntPurposes' && isSpecialPurposesOnly) {
+              if (
+                gvlVendorKey === 'legIntPurposes' && vendor['purposes'].length === 0 && vendor['legIntPurposes'].length === 0 && vendor['specialPurposes'].length > 0
+              ) {
 
                 /**
-                 * As special purposes have a special treatment and cannot being objected,
-                 * these special purposes only vendors need to set LI signal when present
+                 * Per June 2021 Policy change, Vendors declaring only Special Purposes may
+                 * have theirlegitimate interest Vendor bit set if they have been disclosed. 
+                 * This empty block ensures their LI bit remains set
                  */
 
               } else {
