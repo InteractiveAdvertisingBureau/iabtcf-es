@@ -58,8 +58,8 @@ export class SemanticPreEncoder {
               ) {
 
                 /**
-                 * Per June 2021 Policy change, Vendors declaring only Special Purposes may
-                 * have theirlegitimate interest Vendor bit set if they have been disclosed. 
+                 * Per June 2021 Policy change, Vendors declaring only Special Purposes must
+                 * have their legitimate interest Vendor bit set if they have been disclosed.
                  * This empty block ensures their LI bit remains set
                  */
 
