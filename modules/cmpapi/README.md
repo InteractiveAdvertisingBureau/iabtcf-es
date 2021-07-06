@@ -190,13 +190,13 @@ import {CmpApi} from '@iabtcf/cmpapi';
 
 const cmpApi = new CmpApi(1, 3, false, {
 
-  'getTCData': (next, tcData) => {
+  'getTCData': (next, tcData, status) => {
 
     // tcData will be constructed via the TC string and can be added to here
     tcData.reallyImportantExtraProperty = true;
 
-    // pass data along
-    next(tcData);
+    // pass data and status along
+    next(tcData, status);
 
 
   },
