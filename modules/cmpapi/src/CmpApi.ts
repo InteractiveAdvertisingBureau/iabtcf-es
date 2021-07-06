@@ -23,6 +23,8 @@ export class CmpApi {
 
     CmpApiModel.cmpId = cmpId;
     CmpApiModel.cmpVersion = cmpVersion;
+    CmpApiModel.tcfPolicyVersion = 2;
+
     this.isServiceSpecific = !!isServiceSpecific;
     this.callResponder = new CallResponder(customCommands);
 

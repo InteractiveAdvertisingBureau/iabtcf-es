@@ -46,6 +46,7 @@ describe('CmpApi', (): void => {
 
     const cmpId = makeRandomInt(2, 100);
     const cmpVersion = makeRandomInt(1, 15);
+
     return new CmpApi(cmpId, cmpVersion, isServiceSpecific, customCommands);
 
   };
@@ -113,9 +114,9 @@ describe('CmpApi', (): void => {
 
   });
 
-  const runContructionFail = (cmpId: any, cmpVersion: any): void => {
+  const runContructionFail = (cmpId: any, cmpVersion: any, tcfPolicyVersion: any): void => {
 
-    it(`should throw an error if cmpId=${cmpId} and cmpVersion=${cmpVersion}`, (done: () => void): void => {
+    it(`should throw an error if cmpId=${cmpId} and cmpVersion=${cmpVersion} and tcfPolicyVersion=${tcfPolicyVersion}`, (done: () => void): void => {
 
       expect((): void => {
 
@@ -129,20 +130,26 @@ describe('CmpApi', (): void => {
 
   };
 
-  runContructionFail(0, 2);
-  runContructionFail(1, 2);
-  runContructionFail(null, 2);
-  runContructionFail('banana', 2);
-  runContructionFail(0.234, 2);
-  runContructionFail(-1, 2);
-  runContructionFail('2', 2);
-  runContructionFail('2.0', 2);
+  runContructionFail(0, 2, 2);
+  runContructionFail(1, 2, 2);
+  runContructionFail(null, 2, 2);
+  runContructionFail('banana', 2, 2);
+  runContructionFail(0.234, 2, 2);
+  runContructionFail(-1, 2, 2);
+  runContructionFail('2', 2, 2);
+  runContructionFail('2.0', 2, 2);
 
-  runContructionFail(2, -1);
-  runContructionFail(2, 2.02345);
-  runContructionFail(2, '0');
-  runContructionFail(2, 'banana');
-  runContructionFail(2, null);
+  runContructionFail(2, -1, 2);
+  runContructionFail(2, 2.02345, 2);
+  runContructionFail(2, '0', 2);
+  runContructionFail(2, 'banana', 2);
+  runContructionFail(2, null, 2);
+
+  runContructionFail(2, 2, 'pizza');
+  runContructionFail(2, 2, 0.4);
+  runContructionFail(2, 2, '2');
+  runContructionFail(2, 2, 0);
+  runContructionFail(2, 2, null);
 
   it('should pick up a queued stub function an excecute it if it can when tcModel is set', (done: () => void): void => {
 
@@ -450,7 +457,7 @@ describe('CmpApi', (): void => {
 
   });
 
-  it(`should set gdprApplies=false, displayStatus="${DisplayStatus.DISABLED}", eventStatus="${EventStatus.TC_LOADED}", and cmpStatus="${CmpStatus.LOADED}" when the tcString is set to null`, (): void => {
+  it(`should set gdprApplies=false, displayStatus="${DisplayStatus.DISABLED}", eventStatus="${EventStatus.TC_LOADED}", and cmpStatus="${CmpStatus.LOADED}" and return value for tcfPolicyVersion when the tcString is set to null`, (): void => {
 
     const cmpApi = getCmpApi();
 
@@ -460,6 +467,7 @@ describe('CmpApi', (): void => {
     expect(CmpApiModel.displayStatus, 'CmpApiModel.displayStatus').to.equal(DisplayStatus.DISABLED);
     expect(CmpApiModel.eventStatus, 'CmpApiModel.eventStatus').to.equal(EventStatus.TC_LOADED);
     expect(CmpApiModel.cmpStatus, 'CmpApiModel.cmpStatus').to.equal(CmpStatus.LOADED);
+    expect(CmpApiModel.tcfPolicyVersion, 'CmpApiModale.tcfPolicyVersion').to.exist;
 
   });
 
