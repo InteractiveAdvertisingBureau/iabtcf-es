@@ -69,7 +69,6 @@ export class SemanticPreEncoder {
                  * If the vendor does exist, but they haven't declared any
                  * purposes for this legal basis, then we need to see if they can
                  * possibly have the legal basis from their flexible purposes.
-                 * This, of course, only matters if it is a globally-scoped string.
                  */
 
                 if (tcModel.isServiceSpecific) {
