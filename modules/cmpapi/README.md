@@ -181,7 +181,7 @@ __tcfapi('connectBones', 2, songLyricCallback, 'knee', 'thigh');
 ### Built-In and Custom Commands
 Beginning in 1.1.0, if a custom command is defined that overlaps with a built-in command (`"ping"`, `"getTCData"`, `"getInAppTCData"`, `"getVendorList"`) then the custom command will act as a "middleware" being passed the built-in command's response and expected to pass along the response when finished.
 
-**Note:** `"addEventListener"` and `"removeEventListener"` can __not__ be overwritten.  `"addEventListener"` utilizes the `"getTCData"` command, so to modify `TCData` responses, write a Built-In custom command for that command and both `"getTCData"` and `"addEventListener"` will utilize it.
+**Note:** `"addEventListener"` and `"removeEventListener"` can __not__ be overwritten.  `"addEventListener"` utilizes the `"getTCData"` command, so to modify `TCData` responses, write a Built-In custom command for that command and both `"getTCData"` and `"addEventListener"` will utilize it.  If the `"removeEventListener"` command is also used with a custom `"getTCData"` command, note that `"removeEventListener"` will not return `tcData` but rather a boolean that indicates if the listener was removed.  So it is important to add a check, otherwise the CmpApi will catch that error and the callbacks will return with `tcData: null`.
 
 **Example**
 ````javascript
@@ -192,8 +192,14 @@ const cmpApi = new CmpApi(1, 3, false, {
 
   'getTCData': (next, tcData, status) => {
 
-    // tcData will be constructed via the TC string and can be added to here
-    tcData.reallyImportantExtraProperty = true;
+    /*
+     * If using with 'removeEventListener' command, add a check to see if tcData is not a boolean. */
+    if (typeof tcData !== 'boolean') {
+
+      // tcData will be constructed via the TC string and can be added to here
+      tcData.reallyImportantExtraProperty = true;
+
+    }
 
     // pass data and status along
     next(tcData, status);
