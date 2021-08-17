@@ -4,6 +4,7 @@ import {GVL} from '../src/GVL';
 import {Vendor} from '../src/model/gvl';
 import {IntMap} from '../src/model/IntMap';
 import {XMLHttpTestTools} from '@iabtcf/testing';
+import {Json} from '../src/Json';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const vendorlistJson = require('@iabtcf/testing/lib/vendorlist/vendor-list-v24.json');
@@ -123,6 +124,23 @@ describe('GVL', (): void => {
 
     assertPopulated(gvl);
     assertPopulated(clone);
+
+  });
+
+  it('should produce a clone with the same language as the original gvl', async (): Promise<void> => {
+
+    const fetchStub = sinon.stub(Json, 'fetch');
+    const gvl: GVL = new GVL(vendorlistJson);
+    expect(gvl.language).to.equal(GVL.DEFAULT_LANGUAGE);
+    fetchStub.resolves(vendorlistJson);
+
+    await gvl.changeLanguage('fr');
+    expect(gvl.language).to.equal('FR');
+
+    const clone: GVL = gvl.clone();
+    expect(clone.language).to.equal('FR');
+
+    fetchStub.restore();
 
   });
 
