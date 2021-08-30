@@ -791,9 +791,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
   /**
    * clone - overrides base `clone()` method since GVL is a special class that
-   * represents a JSON structure with some additional functionality. If the current
-   * language of the GVL is not the default language, we set the language of
-   * the clone to the current language.
+   * represents a JSON structure with some additional functionality.
    *
    * @return {GVL}
    */
@@ -801,11 +799,18 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
     const result = new GVL(this.getJson());
 
+    /*
+     * If the current language of the GVL is not the default language, we set the language of
+     * the clone to the current language since a new GVL is always created with the default
+     * language. */
     if (this.lang_ !== GVL.DEFAULT_LANGUAGE) {
 
       /*
-       * changeLanguage is an asynchronous function but always behaves synchronously when called from
-       * the clone function so there isn't a need to declare clone as asynchronous. */
+       * Since the GVL language was changed, this means that an asynchronous changeLanguage
+       * call was made prior to cloning the GVL.  The new language specified has been cached
+       * by the GVL and this changeLanguage call made as a part of cloning the GVL will be
+       * synchronous. The code will look for the language definitions in the cache instead
+       * of creating a http request. */
       result.changeLanguage(this.lang_);
 
     }
