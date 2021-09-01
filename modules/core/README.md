@@ -15,6 +15,7 @@ Ensures consistent encoding and decoding of [IAB's Transparency and Consent Fram
       + [Autoload specific version vendor-list.json](#autoload-specific-version-vendor-listjson)
       + [Pass vendor-list.json object](#pass-vendor-listjson-object)
       + [Change GVL Language](#change-gvl-language)
+      + [Cloning a GVL with a Non-Default language](#cloning-a-gvl-with-a-non-default-language)
       + [Get only vendors with a specific feature or purpose under legal basis](#get-only-vendors-with-a-specific-feature-or-purpose-under-legal-basis)
       + [Narrow the list of vendors](#narrow-the-list-of-vendors)
       + [filtering](#narrow-the-list-of-vendors) vendors for subsets of the GVL.
@@ -194,6 +195,7 @@ tcModel.publisherRestrictions.add(2000, purposeRestriction);
 * [Autoload specific vendor-list.json](#autoload-specific-vendor-listjson)
 * [Pass vendor-list.json object](#pass-vendor-list.json-object)
 * [Change GVL Language](#change-gvl-language)
+* [Cloning a GVL with a Non-Default language](#cloning-a-gvl-with-a-non-default-language)
 * [Get only vendors with a specific feature or purpose under legal basis](#get-only-vendors-with-a-specific-feature-or-purpose-under-legal-basis)
 * [Narrow the list of vendors](#narrow-the-list-of-vendors)
 
@@ -327,6 +329,31 @@ gvl.changeLanguage('fr').then(() => {
   // French Language GVL is ready for use
 
 });
+```
+
+### Cloning a GVL with a Non-Default language
+
+When cloning a GVL with a non-default language, make sure that any prior `changeLanguage` call is resolved.  If changeLanguage has not yet resolved, `clone` will make an http request for the current language but will have no indication of resolving that request since it is synchronous.
+
+```javascript
+import {GVL} from '@iabtcf/core';
+
+const gvl = new GVL();
+
+// Resolving changeLanguage promise using thenables.
+gvl.changeLanguage('fr').then(() => {
+
+  const clone = gvl.clone();
+
+})
+
+// Resolving changeLanguage through async/await
+const someAsyncFunction = async () => {
+
+  await gvl.changeLanguage('fr');
+  const clone = gvl.clone();
+
+}
 ```
 
 

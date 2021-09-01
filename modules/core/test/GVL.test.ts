@@ -4,6 +4,7 @@ import {GVL} from '../src/GVL';
 import {Vendor} from '../src/model/gvl';
 import {IntMap} from '../src/model/IntMap';
 import {XMLHttpTestTools} from '@iabtcf/testing';
+import {Json} from '../src/Json';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const vendorlistJson = require('@iabtcf/testing/lib/vendorlist/vendor-list-v24.json');
@@ -123,6 +124,29 @@ describe('GVL', (): void => {
 
     assertPopulated(gvl);
     assertPopulated(clone);
+
+  });
+
+  it('should produce a clone with the same language as the original gvl using its language cache', async (): Promise<void> => {
+
+    const fetchStub = sinon.stub(Json, 'fetch');
+    const gvl: GVL = new GVL(vendorlistJson);
+    expect(gvl.language).to.equal(GVL.DEFAULT_LANGUAGE);
+    fetchStub.resolves(vendorlistJson);
+
+    /*
+     * We test fetchStub call count for both calls to make sure that we are only fetching translations for
+     * the language once, when we 'changeLanguage' is called. Calling the 'clone' function should grab the
+     * translations from the cache and call count will remain at 1. */
+    await gvl.changeLanguage('fr');
+    expect(gvl.language).to.equal('FR');
+    expect(fetchStub.callCount).to.equal(1);
+
+    const clone: GVL = gvl.clone();
+    expect(clone.language).to.equal('FR');
+    expect(fetchStub.callCount).to.equal(1);
+
+    fetchStub.restore();
 
   });
 
