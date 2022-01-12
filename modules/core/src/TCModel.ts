@@ -140,7 +140,6 @@ export class TCModel extends Cloneable<TCModel> {
 
     }
 
-    this.created = new Date();
     this.updated();
 
   }
@@ -691,13 +690,17 @@ export class TCModel extends Cloneable<TCModel> {
   }
 
   /**
-   * updated - updates the lastUpdatedDate with a 'now' timestamp
+   * updated - updates the created and lastUpdated dates with a 'now' day-level UTC timestamp
    *
    * @return {void}
    */
   public updated(): void {
 
-    this.lastUpdated = new Date();
+    const date = new Date();
+    const utcDate = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+
+    this.created = utcDate;
+    this.lastUpdated = utcDate;
 
   }
 
