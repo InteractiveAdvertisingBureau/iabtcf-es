@@ -38,11 +38,13 @@ export class TCModelFactory {
     tcModel.publisherCountryCode = String.fromCharCode(makeRandomInt(65, 90)) +
       String.fromCharCode(makeRandomInt(65, 90));
 
-    const now = (new Date()).getTime();
+    const date = new Date();
+    const utcDate = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+    const now = utcDate.getTime();
     const GDPRMageddon = 1576883249;
 
     tcModel.created = new Date(makeRandomInt(GDPRMageddon, now));
-    tcModel.lastUpdated = new Date(makeRandomInt(tcModel.created.getTime(), now));
+    tcModel.lastUpdated = new Date(makeRandomInt(GDPRMageddon, now));
 
     const mapping = {
       'purposes': [
