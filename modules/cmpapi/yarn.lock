@@ -89,15 +89,15 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@iabtcf/stub@1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@iabtcf/stub/-/stub-1.3.0.tgz#e86ac8f2715123f7e2eb4e96e6e608f2356735d0"
-  integrity sha512-X98edax7dAh1JpW15DpnZ4o7409oh1bRD+nztAMWocrhltEyxCAjz9uJFyPRo9ofKXU5GJPQwtLnGr4YreMuFg==
+"@iabtcf/stub@1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@iabtcf/stub/-/stub-1.4.0.tgz#49e7a920d3ab5356dfc1f909860036a499d52202"
+  integrity sha512-TPspVaebewXPga0rtmNUqtidBz84e+8I08CJz8kup6VCVVNuORvBFAcTPcHV6tz+NaOW5mfAHsaXARVou1q+Gg==
 
-"@iabtcf/testing@1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@iabtcf/testing/-/testing-1.3.0.tgz#3e480d8386b2be0875b22ff6fd71fb4b2f516bf0"
-  integrity sha512-VxQhkortmE/XfDttiFXmS448COhenFlqmw/QPNQi6Upa3UPojPgosxbxuLtdY5yOT5y7HvBMSbxvHCkMsnAUjw==
+"@iabtcf/testing@1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@iabtcf/testing/-/testing-1.4.0.tgz#5935cdff76aedc506b7fc442438b66d41cc182af"
+  integrity sha512-W6USMkGGdOd7hRAvewxcIBzXwyCTI0rXkLbJ72FKjUIltCbz1eVAhD4Y5fdRstF9Og0vflGy/IWs1D1HDEllPA==
   dependencies:
     "@types/sinon" "^7.0.13"
     "@types/sinon-chai" "3.2.2"
@@ -2788,9 +2788,9 @@ path-type@^3.0.0:
     pify "^3.0.0"
 
 pathval@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/pathval/-/pathval-1.1.0.tgz#b942e6d4bde653005ef6b71361def8727d0645e0"
-  integrity sha1-uULm1L3mUwBe9rcTYd74cn0GReA=
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/pathval/-/pathval-1.1.1.tgz#8534e77a77ce7ac5a2512ea21e0fdb8fcf6c3d8d"
+  integrity sha512-Dp6zGqpTdETdR63lehJYPeIOqpiNBNtc7BpWSLrOje7UaIsE5aY92r/AunQA7rsXvet3lrJ3JnZX29UPTKXyKQ==
 
 pend@~1.2.0:
   version "1.2.0"
