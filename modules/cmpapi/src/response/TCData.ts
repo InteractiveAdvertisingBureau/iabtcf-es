@@ -174,7 +174,7 @@ export class TCData extends Response {
 
       return ids.reduce<BooleanVector>((booleanVector, obj): BooleanVector => {
 
-        booleanVector[obj + ''] = vector.has(+obj);
+        booleanVector[String(obj)] = vector.has(+obj);
         return booleanVector;
 
       }, {});
