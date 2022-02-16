@@ -94,12 +94,12 @@ export class VendorVectorEncoder {
 
     if (rangeIsSmaller) {
 
-      retrString += VectorEncodingType.RANGE + '';
+      retrString += String(VectorEncodingType.RANGE);
       retrString += this.buildRangeEncoding(ranges);
 
     } else {
 
-      retrString += VectorEncodingType.FIELD + '';
+      retrString += String(VectorEncodingType.FIELD);
       retrString += bitField;
 
     }
