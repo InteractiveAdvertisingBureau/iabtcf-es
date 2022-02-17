@@ -4,8 +4,22 @@ import {GetVendorListCommand} from '../../src/command/GetVendorListCommand';
 import {TCModelFactory, XMLHttpTestTools, GVLFactory, makeRandomInt} from '@iabtcf/testing';
 import {VendorList, TCModel} from '@iabtcf/core';
 import {expect} from 'chai';
+import * as fs from 'fs';
+import * as path from 'path';
+import {fileURLToPath} from 'url';
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 describe('command->GetVendorListCommand', (): void => {
+
+  beforeEach(() => {
+
+    CmpApiModel.reset();
+    XMLHttpTestTools.beforeEach();
+
+  });
 
   it('should return version of TCModel.vendorListVersion if TCModel does not have a gvl and no parameter is passed', (done: () => void): void => {
 
@@ -51,7 +65,8 @@ describe('command->GetVendorListCommand', (): void => {
 
     const version = makeRandomInt(1, 22);
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const json = require(`@iabtcf/testing/lib/vendorlist/vendor-list-v${version}.json`);
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const json = JSON.parse(fs.readFileSync(__dirname + `/../../../testing/lib/vendorlist/vendor-list-v${version}.json`).toString());
     const stringified = JSON.stringify(json);
 
     new GetVendorListCommand((gvl: VendorList, success: boolean): void => {

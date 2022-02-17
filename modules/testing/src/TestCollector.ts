@@ -4,7 +4,7 @@ import lint from 'mocha-eslint';
 
 export class TestCollector {
 
-  public static requireTests(filePath: string): void {
+  public static async requireTests(filePath: string): Promise<void> {
 
     if (fs.statSync(filePath).isDirectory()) {
 
@@ -20,7 +20,7 @@ export class TestCollector {
 
     } else if (filePath.indexOf('.test.ts') === filePath.length - '.test.ts'.length) {
 
-      require(filePath);
+      await import(filePath);
 
     }
 

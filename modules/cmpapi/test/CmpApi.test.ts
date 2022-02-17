@@ -54,6 +54,7 @@ describe('CmpApi', (): void => {
   beforeEach((): void => {
 
     stub.default();
+    CmpApiModel.reset();
 
   });
   afterEach((): void => {
