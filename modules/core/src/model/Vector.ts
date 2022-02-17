@@ -80,11 +80,11 @@ export class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
 
     } else if (typeof id === 'object') {
 
-      this.unset(Object.keys(id).map((strId: string): number => +strId));
+      this.unset(Object.keys(id).map((strId: string): number => Number(strId)));
 
     } else {
 
-      this.set_.delete(id);
+      this.set_.delete(Number(id));
 
       /**
        * if bitLength was set before, it must now be unset
@@ -173,7 +173,7 @@ export class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
 
     } else if (this.isIntMap(item)) {
 
-      this.set(Object.keys(item).map((strId: string): number => +strId));
+      this.set(Object.keys(item).map((strId: string): number => Number(strId)));
 
     } else if (this.isValidNumber(item)) {
 

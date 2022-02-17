@@ -10,6 +10,7 @@ export const API_KEY = '__tcfapi';
 export type APIArgs = [string, number, CommandCallback, ...any[]];
 
 type GetQueueFunction = () => APIArgs[];
+// eslint-disable-next-line no-unused-vars
 type PageCallHandler = (...APIArgs) => void;
 
 export class CallResponder {
@@ -91,7 +92,7 @@ export class CallResponder {
    * @param {string} command
    * @param {number} version
    * @param {CommandCallback} callback
-   * @param {any} [param]
+   * @param {any} params
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public apiCall(command: string, version: number, callback: CommandCallback, ...params: any): void | never {

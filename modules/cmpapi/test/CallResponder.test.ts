@@ -9,7 +9,7 @@ import * as sinon from 'sinon';
 
 describe('CallResponder', (): void => {
 
-  it('should call a custom command before tcModel exists', (): void => {
+  it('should call a custom command before tcModel exists', (done): void => {
 
     const command = 'slickCustom';
     let modelSet = false;
@@ -19,6 +19,7 @@ describe('CallResponder', (): void => {
 
         expect(modelSet, 'model is set').to.be.false;
         callback();
+        done();
 
       },
     });
@@ -95,31 +96,40 @@ describe('CallResponder', (): void => {
 
   });
 
-  it('should use custom "getTCData" command handler for "addEventListener" and "removeEventListener" commands', (): void => {
+  it('should use custom "getTCData" command handler for "addEventListener" and "removeEventListener" commands', (done): void => {
 
     const customCommandCallback = sinon.stub();
+
+    let doneCallback = (): void => undefined;
 
     const callResponder = new CallResponder({
       [TCFCommand.GET_TC_DATA]: (): void => {
 
         customCommandCallback();
+        doneCallback();
 
       },
     });
 
     CmpApiModel.tcModel = TCModelFactory.withGVL();
 
-    // Invoke `getTCData` command and make sure custom callback was called
-    callResponder.apiCall(TCFCommand.GET_TC_DATA, null, () => undefined);
-    expect(customCommandCallback.callCount).to.eql(1);
+    const testNTimesCalls = 3;
+    let callCount = 1;
 
-    // Invoke `addEventListener` command and make sure custom callback was called
-    callResponder.apiCall(TCFCommand.ADD_EVENT_LISTENER, null, () => undefined);
-    expect(customCommandCallback.callCount).to.eql(2);
+    while (callCount <= testNTimesCalls) {
 
-    // Invoke `removeEventListener` command and make sure custom callback was called
-    callResponder.apiCall(TCFCommand.REMOVE_EVENT_LISTENER, null, () => undefined);
-    expect(customCommandCallback.callCount).to.eql(3);
+      if (callCount == testNTimesCalls) {
+
+        doneCallback = done;
+
+      }
+
+      // Invoke `getTCData` command and make sure custom callback was called
+      callResponder.apiCall(TCFCommand.GET_TC_DATA, null, (): void => undefined);
+      expect(customCommandCallback.callCount).to.eql(callCount);
+      callCount++;
+
+    }
 
   });
 
