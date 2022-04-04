@@ -132,7 +132,7 @@
       }
 
       // Move up
-      frameLocator = currentWindow.parent;
+      frameLocator = frameLocator.parent;
     }
 
     if (!cmpFrame) {
