@@ -9,8 +9,9 @@ import * as sinon from 'sinon';
 
 describe('CallResponder', (): void => {
 
-  it('should call a custom command before tcModel exists', (done): void => {
+  it('should call a custom command before tcModel exists', (): void => {
 
+    const customCommandCallback = sinon.stub();
     const command = 'slickCustom';
     let modelSet = false;
 
@@ -19,7 +20,7 @@ describe('CallResponder', (): void => {
 
         expect(modelSet, 'model is set').to.be.false;
         callback();
-        done();
+        customCommandCallback();
 
       },
     });
@@ -32,6 +33,7 @@ describe('CallResponder', (): void => {
 
     CmpApiModel.tcModel = TCModelFactory.withGVL();
     modelSet = true;
+    expect(customCommandCallback.callCount).to.eql(1);
 
   });
 
