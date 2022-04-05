@@ -1,3 +1,5 @@
+# This job run on GitHub actions on every PR opened.
+# The purpose is to perform the build and all module tests.
 name: CI
 
 on:
