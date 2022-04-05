@@ -96,17 +96,14 @@ describe('CallResponder', (): void => {
 
   });
 
-  it('should use custom "getTCData" command handler for "addEventListener" and "removeEventListener" commands', (done): void => {
+  it('should use custom "getTCData" command handler for "addEventListener" and "removeEventListener" commands', (): void => {
 
     const customCommandCallback = sinon.stub();
-
-    let doneCallback = (): void => undefined;
 
     const callResponder = new CallResponder({
       [TCFCommand.GET_TC_DATA]: (): void => {
 
         customCommandCallback();
-        doneCallback();
 
       },
     });
@@ -118,18 +115,13 @@ describe('CallResponder', (): void => {
 
     while (callCount <= testNTimesCalls) {
 
-      if (callCount == testNTimesCalls) {
-
-        doneCallback = done;
-
-      }
-
       // Invoke `getTCData` command and make sure custom callback was called
       callResponder.apiCall(TCFCommand.GET_TC_DATA, null, (): void => undefined);
-      expect(customCommandCallback.callCount).to.eql(callCount);
       callCount++;
 
     }
+
+    expect(customCommandCallback.callCount).to.eql(testNTimesCalls);
 
   });
 
