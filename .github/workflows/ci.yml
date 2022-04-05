@@ -9,22 +9,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  lint:
-
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.14.2]
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: yarn install
-      - run: yarn lint
   build-and-test:
 
     runs-on: ubuntu-latest
