@@ -268,7 +268,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
         } else {
 
           // load version specified
-          url += GVL.versionedFilename.replace('[VERSION]', version + '');
+          url += GVL.versionedFilename.replace('[VERSION]', String(version));
           this.readyPromise = this.fetchJson(url);
 
         }
@@ -597,7 +597,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
         vendor.purposes.forEach((purposeId: number): void => {
 
-          const purpGroup = this.byPurposeVendorMap[purposeId + ''];
+          const purpGroup = this.byPurposeVendorMap[String(purposeId)];
 
           purpGroup.consent.add(vendorId);
 
@@ -605,13 +605,13 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
         vendor.specialPurposes.forEach((purposeId: number): void => {
 
-          this.bySpecialPurposeVendorMap[purposeId + ''].add(vendorId);
+          this.bySpecialPurposeVendorMap[String(purposeId)].add(vendorId);
 
         });
 
         vendor.legIntPurposes.forEach((purposeId: number): void => {
 
-          this.byPurposeVendorMap[purposeId + ''].legInt.add(vendorId);
+          this.byPurposeVendorMap[String(purposeId)].legInt.add(vendorId);
 
         });
 
@@ -620,7 +620,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
           vendor.flexiblePurposes.forEach((purposeId: number): void => {
 
-            this.byPurposeVendorMap[purposeId + ''].flexible.add(vendorId);
+            this.byPurposeVendorMap[String(purposeId)].flexible.add(vendorId);
 
           });
 
@@ -628,13 +628,13 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
         vendor.features.forEach((featureId: number): void => {
 
-          this.byFeatureVendorMap[featureId + ''].add(vendorId);
+          this.byFeatureVendorMap[String(featureId)].add(vendorId);
 
         });
 
         vendor.specialFeatures.forEach((featureId: number): void => {
 
-          this.bySpecialFeatureVendorMap[featureId + ''].add(vendorId);
+          this.bySpecialFeatureVendorMap[String(featureId)].add(vendorId);
 
         });
 
@@ -661,17 +661,17 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
     if (purposeOrFeature === 'purpose' && subType) {
 
-      vendorSet = this['by' + properPurposeOrFeature + 'VendorMap'][id + ''][subType];
+      vendorSet = this['by' + properPurposeOrFeature + 'VendorMap'][String(id)][subType];
 
     } else {
 
-      vendorSet = this['by' + (special ? 'Special' : '' ) + properPurposeOrFeature + 'VendorMap'][id + ''];
+      vendorSet = this['by' + (special ? 'Special' : '' ) + properPurposeOrFeature + 'VendorMap'][String(id)];
 
     }
 
     vendorSet.forEach((vendorId: number): void => {
 
-      retr[vendorId + ''] = this.vendors[vendorId + ''];
+      retr[String(vendorId)] = this.vendors[String(vendorId)];
 
     });
 

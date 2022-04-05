@@ -99,7 +99,7 @@ describe('encoder/field->VendorVectorEncoder', (): void => {
       index += BitLength.maxId;
 
       expect(result.substr(index, BitLength.encodingType), 'should be a range encoding ie. 1')
-        .to.equal(VectorEncodingType.RANGE + '');
+        .to.equal(String(VectorEncodingType.RANGE));
 
       index += BitLength.encodingType;
 
@@ -122,7 +122,7 @@ describe('encoder/field->VendorVectorEncoder', (): void => {
       index += BitLength.vendorId;
 
       // second ID should be numVendors
-      expect(result.substr(index, BitLength.vendorId)).to.equal(pad(numVendors.toString(2) + '', BitLength.vendorId));
+      expect(result.substr(index, BitLength.vendorId)).to.equal(pad(numVendors.toString(2), BitLength.vendorId));
 
     });
 

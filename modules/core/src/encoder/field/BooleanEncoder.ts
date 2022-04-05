@@ -2,7 +2,7 @@ export class BooleanEncoder {
 
   public static encode(value: boolean): string {
 
-    return +value + '';
+    return String(Number(value));
 
   }
 
