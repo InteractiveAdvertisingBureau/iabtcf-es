@@ -140,6 +140,10 @@ export class TCModel extends Cloneable<TCModel> {
 
     }
 
+    /**
+     * created should be initialized outside of the updated method since it can have a different value.
+     */
+    this.created = this.utcDate();
     this.updated();
 
   }
@@ -690,17 +694,25 @@ export class TCModel extends Cloneable<TCModel> {
   }
 
   /**
-   * updated - updates the created and lastUpdated dates with a 'now' day-level UTC timestamp
+   * updated - updates lastUpdated date with a 'now' day-level UTC timestamp.
    *
    * @return {void}
    */
   public updated(): void {
 
-    const date = new Date();
-    const utcDate = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+    this.lastUpdated = this.utcDate();
 
-    this.created = utcDate;
-    this.lastUpdated = utcDate;
+  }
+
+  /**
+   * utcDate - creates a date with a 'now' day-level UTC timestamp.
+   *
+   * @return {Date}
+   */
+  private utcDate(): Date {
+
+    const date = new Date();
+    return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
 
   }
 
