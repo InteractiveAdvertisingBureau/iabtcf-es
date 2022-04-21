@@ -5,9 +5,16 @@
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://iabtcf.com/",
   "license": "Apache-2.0",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
   "type": "module",
+  "main": "lib/cjs/index.js",
+  "module": "lib/mjs/index.js",
+  "exports": {
+    ".": {
+      "import": "./lib/mjs/index.js",
+      "require": "./lib/cjs/index.js"
+    }
+  },
+  "types": "lib/mjs/index.d.ts",
   "files": [
     "lib/**/*"
   ],

@@ -3,12 +3,26 @@
 rm -rf lib
 mkdir lib
 
-tsc
+tsc -p tsconfig.json
 
-FILES=$(find lib -name "*.js")
+tsc -p tsconfig-cjs.json
+
+FILES=$(find lib/cjs -name "*.js")
 
 for FILE in $FILES; do
 
   terser $FILE --ecma 5 -m -c -o $FILE
 
 done
+
+cat >lib/cjs/package.json <<!EOF
+{
+    "type": "commonjs"
+}
+!EOF
+
+cat >lib/mjs/package.json <<!EOF
+{
+    "type": "module"
+}
+!EOF

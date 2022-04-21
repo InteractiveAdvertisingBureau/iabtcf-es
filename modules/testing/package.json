@@ -5,16 +5,22 @@
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://iabtcf.com/",
   "license": "Apache-2.0",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
   "type": "module",
+  "main": "lib/cjs/index.js",
+  "module": "lib/mjs/index.js",
+  "exports": {
+    ".": {
+      "import": "./lib/mjs/index.js",
+      "require": "./lib/cjs/index.js"
+    }
+  },
+  "types": "lib/mjs/index.d.ts",
   "files": [
-    "lib/*",
     "lib/**/*"
   ],
   "scripts": {
     "preversion": "echo 'woops I think you meant to go to the root' && exit 1",
-    "build": "../build ; cp -r src/vendorlist lib/",
+    "build": "../build ; cp -r src/vendorlist lib/mjs/ ; cp -r src/vendorlist lib/cjs/",
     "lint": "eslint `find src -name '*.ts'`"
   },
   "peerDependencies": {

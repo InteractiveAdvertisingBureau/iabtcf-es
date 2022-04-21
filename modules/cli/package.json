@@ -6,14 +6,24 @@
   "homepage": "https://iabtcf.com/",
   "license": "Apache-2.0",
   "bin": {
-    "tcstring": "./lib/index.js"
+    "tcstring": "./lib/cjs/index.js"
   },
+  "type": "module",
+  "main": "lib/cjs/index.js",
+  "module": "lib/mjs/index.js",
+  "exports": {
+    ".": {
+      "import": "./lib/mjs/index.js",
+      "require": "./lib/cjs/index.js"
+    }
+  },
+  "types": "lib/mjs/index.d.ts",
   "files": [
     "lib/**/*"
   ],
   "scripts": {
     "preversion": "echo 'woops I think you meant to go to the root' && exit 1",
-    "build": "rm -rf lib ; tsc ; chmod a+x lib/index.js",
+    "build": "../build ; chmod a+x lib/mjs/index.js ; chmod a+x lib/cjs/index.js",
     "lint": "eslint `find src -name '*.ts'`"
   },
   "dependencies": {

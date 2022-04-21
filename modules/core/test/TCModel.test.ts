@@ -4,7 +4,7 @@ import {TCModel} from '../src/TCModel';
 
 import {Vector} from '../src/model/Vector';
 import {GVL} from '../src/GVL';
-import {GVLFactory} from '../../testing/lib/GVLFactory';
+import {GVLFactory} from '../../testing/lib/mjs/GVLFactory';
 
 describe('TCModel', (): void => {
 
