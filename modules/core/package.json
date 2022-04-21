@@ -5,6 +5,7 @@
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://iabtcf.com/",
   "license": "Apache-2.0",
+  "type": "module",
   "main": "lib/cjs/index.js",
   "types": "lib/mjs/index.d.ts",
   "module": "lib/mjs/index.js",

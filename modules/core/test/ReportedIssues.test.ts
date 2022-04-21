@@ -66,7 +66,7 @@ describe('Issues Reported', (): void => {
     const CONSENTSCREEN = makeRandomInt(1, 63);
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const vendorlist = JSON.parse(fs.readFileSync(__dirname + '/../../testing/lib/vendorlist/vendor-list.json').toString());
+    const vendorlist = JSON.parse(fs.readFileSync(__dirname + '/../../testing/lib/mjs/vendorlist/vendor-list.json').toString());
 
     GVL.baseUrl = 'http://mydomain.com/cmp/vendorlist';
 
@@ -99,10 +99,10 @@ describe('Issues Reported', (): void => {
 
     const language = 'fr';
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const translationJson = JSON.parse(fs.readFileSync(__dirname + '/../../testing/lib/vendorlist/purposes-fr.json').toString());
+    const translationJson = JSON.parse(fs.readFileSync(__dirname + '/../../testing/lib/mjs/vendorlist/purposes-fr.json').toString());
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const gvl = new GVL(JSON.parse(fs.readFileSync(__dirname + '/../../testing/lib/vendorlist/vendor-list.json').toString()));
+    const gvl = new GVL(JSON.parse(fs.readFileSync(__dirname + '/../../testing/lib/mjs/vendorlist/vendor-list.json').toString()));
     const {tcfPolicyVersion, gvlSpecificationVersion} = gvl;
 
     expect(tcfPolicyVersion, 'tcfPolicyVersion').to.equal(2);
@@ -127,7 +127,7 @@ describe('Issues Reported', (): void => {
     const ENGLISH = 'EN';
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const gvl = new GVL(JSON.parse(fs.readFileSync(__dirname + '/../../testing/lib/vendorlist/vendor-list.json').toString()));
+    const gvl = new GVL(JSON.parse(fs.readFileSync(__dirname + '/../../testing/lib/mjs/vendorlist/vendor-list.json').toString()));
     const tcModel = new TCModel(gvl);
 
     expect(tcModel.consentLanguage, 'consentLanguage').to.equal(ENGLISH);
@@ -141,7 +141,7 @@ describe('Issues Reported', (): void => {
   it('117 TCString.encode writes all vendors as disclosed even after GVL.narrowVendorsTo([...])', async (): Promise<void> => {
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const vendorlist = JSON.parse(fs.readFileSync(__dirname + '/../../testing/lib/vendorlist/vendor-list.json').toString());
+    const vendorlist = JSON.parse(fs.readFileSync(__dirname + '/../../testing/lib/mjs/vendorlist/vendor-list.json').toString());
 
     const tcModel = new TCModel(new GVL(vendorlist));
     tcModel.cmpId = makeRandomInt(2, 100);
