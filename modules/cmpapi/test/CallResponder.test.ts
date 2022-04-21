@@ -15,8 +15,9 @@ describe('CallResponder', (): void => {
 
   });
 
-  it('should call a custom command before tcModel exists', (done): void => {
+  it('should call a custom command before tcModel exists', (): void => {
 
+    const customCommandCallback = sinon.stub();
     const command = 'slickCustom';
     let modelSet = false;
 
@@ -25,7 +26,7 @@ describe('CallResponder', (): void => {
 
         expect(modelSet, 'model is set').to.be.false;
         callback();
-        done();
+        customCommandCallback();
 
       },
     });
@@ -38,6 +39,7 @@ describe('CallResponder', (): void => {
 
     CmpApiModel.tcModel = TCModelFactory.withGVL();
     modelSet = true;
+    expect(customCommandCallback.callCount).to.eql(1);
 
   });
 
@@ -102,17 +104,14 @@ describe('CallResponder', (): void => {
 
   });
 
-  it('should use custom "getTCData" command handler for "addEventListener" and "removeEventListener" commands', (done): void => {
+  it('should use custom "getTCData" command handler for "addEventListener" and "removeEventListener" commands', (): void => {
 
     const customCommandCallback = sinon.stub();
-
-    let doneCallback = (): void => undefined;
 
     const callResponder = new CallResponder({
       [TCFCommand.GET_TC_DATA]: (): void => {
 
         customCommandCallback();
-        doneCallback();
 
       },
     });
@@ -124,18 +123,13 @@ describe('CallResponder', (): void => {
 
     while (callCount <= testNTimesCalls) {
 
-      if (callCount == testNTimesCalls) {
-
-        doneCallback = done;
-
-      }
-
       // Invoke `getTCData` command and make sure custom callback was called
       callResponder.apiCall(TCFCommand.GET_TC_DATA, null, (): void => undefined);
-      expect(customCommandCallback.callCount).to.eql(callCount);
       callCount++;
 
     }
+
+    expect(customCommandCallback.callCount).to.eql(testNTimesCalls);
 
   });
 

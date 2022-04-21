@@ -1,3 +1,5 @@
+# This job run on circleci https://circleci.com/ on every PR.
+# The purpose is to execute all tests and see the result in the test-results.xml
 version: 2.1
 jobs:
   build:

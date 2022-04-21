@@ -54,7 +54,7 @@ export class TestUtils {
     expect(str.length).to.equal(vector.maxId);
     vector.forEach((value: boolean, id: number): void => {
 
-      expect(str.charAt(id - 1), name+' id: ' + id ).to.equal(+value + '');
+      expect(str.charAt(id - 1), name+' id: ' + id ).to.equal(String(Number(value)));
 
     });
 
