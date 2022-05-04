@@ -58,7 +58,7 @@ fi
 
 for pkg in ./modules/*; do
   if [[ -d $pkg ]]; then
-    yarn publish --access public --new-version $npm_package_version $pkg
+    yarn publish --access public --new-version $npm_package_version --tag next $pkg
   fi
 done
 
