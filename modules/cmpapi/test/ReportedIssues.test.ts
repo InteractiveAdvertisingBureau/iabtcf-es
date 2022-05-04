@@ -39,6 +39,7 @@ describe('Reported issues', (): void => {
   beforeEach((): void => {
 
     stub.default();
+    CmpApiModel.reset();
 
   });
 

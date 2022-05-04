@@ -9,6 +9,12 @@ describe('Json->fetch', (): void => {
     foo: 'bar',
   };
 
+  beforeEach(function() {
+
+    XMLHttpTestTools.beforeEach();
+
+  });
+
   it('should fetch and parse a json with only a url', (done: () => void): void => {
 
     Json.fetch('blah')
@@ -111,6 +117,12 @@ describe('Json->fetch', (): void => {
 });
 
 describe('Json->post', (): void => {
+
+  beforeEach(function() {
+
+    XMLHttpTestTools.beforeEach();
+
+  });
 
   const responseObj: object = {
     foo: 'bar',

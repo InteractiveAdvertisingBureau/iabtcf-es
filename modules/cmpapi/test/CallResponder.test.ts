@@ -9,6 +9,12 @@ import * as sinon from 'sinon';
 
 describe('CallResponder', (): void => {
 
+  beforeEach(() => {
+
+    CmpApiModel.reset();
+
+  });
+
   it('should call a custom command before tcModel exists', (): void => {
 
     const customCommandCallback = sinon.stub();

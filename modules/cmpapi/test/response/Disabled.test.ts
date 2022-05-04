@@ -6,6 +6,12 @@ import {makeRandomInt} from '@iabtcf/testing';
 
 describe('response->Disabled', (): void => {
 
+  beforeEach(function() {
+
+    CmpApiModel.reset();
+
+  });
+
   it('populates a response with CmpApiModel values', (done: () => void): void => {
 
     CmpApiModel.cmpId = makeRandomInt(2, 500);

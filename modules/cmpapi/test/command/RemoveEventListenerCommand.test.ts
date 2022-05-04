@@ -8,6 +8,12 @@ import {expect} from 'chai';
 
 describe('command->RemoveEventListenerCommand', (): void => {
 
+  beforeEach(() => {
+
+    CmpApiModel.reset();
+
+  });
+
   it('should remove a queued TCDataCallback', (done: () => void): void => {
 
     CmpApiModel.gdprApplies = true;

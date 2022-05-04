@@ -20,6 +20,7 @@ export class TestUtils {
     );
 
   }
+
   private static checkVectorToBooleanVector(name: string,
                                             vector: Vector,
                                             boolVector: BooleanVector,
@@ -45,6 +46,7 @@ export class TestUtils {
     }
 
   }
+
   private static checkVectorToBitField(name: string,
                                        vector: Vector,
                                        str: string): void {
