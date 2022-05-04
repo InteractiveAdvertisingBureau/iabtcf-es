@@ -11,8 +11,8 @@ module.exports = {
   ],
   settings: {
     'import/parsers': {
-      '@typescript-eslint/parser': [ 
-        '.ts' 
+      '@typescript-eslint/parser': [
+        '.ts'
       ]
     },
   },
@@ -23,6 +23,7 @@ module.exports = {
   },
   rules: {
     'import/no-cycle': ['error', { maxDepth: 1 }],
+    'import/namespace': 0,
     'max-len': 0,
     'no-multiple-empty-lines':['error', {'max':1, 'maxEOF':0, 'maxBOF':0}],
     'require-jsdoc': [0],

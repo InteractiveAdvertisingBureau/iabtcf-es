@@ -2,6 +2,7 @@ import {IdBoolTuple, PurposeRestriction, PurposeRestrictionVector, RestrictionTy
 import {Restrictions} from './Restrictions';
 import {TCData} from './TCData';
 
+// eslint-disable-next-line no-unused-vars
 interface VendorIdRestrictionType {
   vendorId: number;
   restrictionType: RestrictionType;
