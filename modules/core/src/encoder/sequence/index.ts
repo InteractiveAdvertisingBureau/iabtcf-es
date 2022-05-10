@@ -1,5 +1,5 @@
 // created from 'create-ts-index'
 
-export * from './FieldSequence';
-export * from './SegmentSequence';
-export * from './SequenceVersionMap';
+export * from './FieldSequence.js';
+export * from './SegmentSequence.js';
+export * from './SequenceVersionMap.js';

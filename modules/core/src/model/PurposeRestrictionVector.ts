@@ -1,9 +1,9 @@
-import {PurposeRestriction} from './PurposeRestriction';
-import {BinarySearchTree} from './BinarySearchTree';
-import {RestrictionType} from './RestrictionType';
-import {GVL} from '../GVL';
-import {Vendor} from './gvl/Vendor';
-import {Cloneable} from '../Cloneable';
+import {PurposeRestriction} from './PurposeRestriction.js';
+import {BinarySearchTree} from './BinarySearchTree.js';
+import {RestrictionType} from './RestrictionType.js';
+import {GVL} from '../GVL.js';
+import {Vendor} from './gvl/index.js';
+import {Cloneable} from '../Cloneable.js';
 
 export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector> {
 

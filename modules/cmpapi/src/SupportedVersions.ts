@@ -8,7 +8,7 @@ export class SupportedVersions {
 
     if (typeof value === 'string') {
 
-      value = +value;
+      value = Number(value);
 
     }
 

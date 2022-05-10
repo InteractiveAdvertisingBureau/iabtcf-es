@@ -1,6 +1,4 @@
-// created from 'create-ts-index'
-
-export * from './DecodingError';
-export * from './EncodingError';
-export * from './GVLError';
-export * from './TCModelError';
+export * from './DecodingError.js';
+export * from './EncodingError.js';
+export * from './GVLError.js';
+export * from './TCModelError.js';

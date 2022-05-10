@@ -1,4 +1,5 @@
-import {Fields} from '../model';
+import {Fields} from '../model/index.js';
+
 export class BitLength {
 
   public static readonly [Fields.cmpId]: number = 12;

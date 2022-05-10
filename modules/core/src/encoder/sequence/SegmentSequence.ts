@@ -1,10 +1,10 @@
-import {SequenceVersionMap} from './SequenceVersionMap';
-import {TCModel} from '../../';
-import {EncodingOptions} from '../EncodingOptions';
+import {SequenceVersionMap} from './SequenceVersionMap.js';
+import {TCModel} from '../../index.js';
+import {EncodingOptions} from '../EncodingOptions.js';
 import {
   Segment,
   Fields,
-} from '../../model';
+} from '../../model/index.js';
 
 export class SegmentSequence implements SequenceVersionMap {
 

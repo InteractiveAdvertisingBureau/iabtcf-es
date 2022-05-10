@@ -1,8 +1,8 @@
-import {BitLength} from '../BitLength';
-import {BooleanEncoder} from './BooleanEncoder';
-import {DecodingError} from '../../errors';
-import {IntEncoder} from './IntEncoder';
-import {PurposeRestrictionVector, PurposeRestriction} from '../../model';
+import {BitLength} from '../BitLength.js';
+import {BooleanEncoder} from './BooleanEncoder.js';
+import {DecodingError} from '../../errors/index.js';
+import {IntEncoder} from './IntEncoder.js';
+import {PurposeRestrictionVector, PurposeRestriction} from '../../model/index.js';
 
 export class PurposeRestrictionVectorEncoder {
 

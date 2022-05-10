@@ -1,10 +1,10 @@
-import {PingCommand} from './PingCommand';
-import {GetTCDataCommand} from './GetTCDataCommand';
-import {GetInAppTCDataCommand} from './GetInAppTCDataCommand';
-import {GetVendorListCommand} from './GetVendorListCommand';
-import {AddEventListenerCommand} from './AddEventListenerCommand';
-import {RemoveEventListenerCommand} from './RemoveEventListenerCommand';
-import {TCFCommand} from './TCFCommand';
+import {PingCommand} from './PingCommand.js';
+import {GetTCDataCommand} from './GetTCDataCommand.js';
+import {GetInAppTCDataCommand} from './GetInAppTCDataCommand.js';
+import {GetVendorListCommand} from './GetVendorListCommand.js';
+import {AddEventListenerCommand} from './AddEventListenerCommand.js';
+import {RemoveEventListenerCommand} from './RemoveEventListenerCommand.js';
+import {TCFCommand} from './TCFCommand.js';
 
 export class CommandMap {
 

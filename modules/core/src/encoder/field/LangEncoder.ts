@@ -1,11 +1,11 @@
 import {
   IntEncoder,
-} from './IntEncoder';
+} from './IntEncoder.js';
 
 import {
   DecodingError,
   EncodingError,
-} from '../../errors';
+} from '../../errors/index.js';
 
 export class LangEncoder {
 

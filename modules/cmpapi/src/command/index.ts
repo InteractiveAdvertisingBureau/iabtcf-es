@@ -1,2 +1,2 @@
-export * from './TCFCommand';
-export * from './CommandCallback';
+export * from './TCFCommand.js';
+export * from './CommandCallback.js';

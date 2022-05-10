@@ -1,4 +1,4 @@
-import {TCModelFactory} from './TCModelFactory';
+import {TCModelFactory} from './TCModelFactory.js';
 import {TCString} from '@iabtcf/core';
 
 export class TCStringFactory {

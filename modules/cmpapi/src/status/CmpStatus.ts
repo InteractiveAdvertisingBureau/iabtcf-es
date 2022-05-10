@@ -28,4 +28,4 @@ export enum CmpStatus{
    * @type {string}
    */
   ERROR = 'error',
-};
+}

@@ -1,6 +1,6 @@
 import {IdBoolTuple, PurposeRestriction, PurposeRestrictionVector, RestrictionType, Vector} from '@iabtcf/core';
-import {Restrictions} from './Restrictions';
-import {TCData} from './TCData';
+import {Restrictions} from './Restrictions.js';
+import {TCData} from './TCData.js';
 
 // eslint-disable-next-line no-unused-vars
 interface VendorIdRestrictionType {

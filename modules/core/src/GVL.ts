@@ -1,8 +1,8 @@
-import {Cloneable} from './Cloneable';
-import {GVLError} from './errors';
-import {Json} from './Json';
-import {ConsentLanguages, IntMap} from './model';
-import {ByPurposeVendorMap, Declarations, Feature, IDSetMap, Purpose, Stack, Vendor, VendorList} from './model/gvl';
+import {Cloneable} from './Cloneable.js';
+import {GVLError} from './errors/index.js';
+import {Json} from './Json.js';
+import {ConsentLanguages, IntMap} from './model/index.js';
+import {ByPurposeVendorMap, Declarations, Feature, IDSetMap, Purpose, Stack, Vendor, VendorList} from './model/gvl/index.js';
 
 export type VersionOrVendorList = string | number | VendorList;
 type PurposeOrFeature = 'purpose' | 'feature';
@@ -591,7 +591,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
     // assigns vendor ids to their respective maps
     this.vendors_ = vendorIds.reduce((vendors: {}, vendorId: number): {} => {
 
-      const vendor: Vendor = this.vendors_[''+vendorId];
+      const vendor: Vendor = this.vendors_[String(vendorId)];
 
       if (vendor && vendor.deletedDate === undefined) {
 

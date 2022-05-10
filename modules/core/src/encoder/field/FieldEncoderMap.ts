@@ -1,11 +1,11 @@
-import {Fields} from '../../model';
-import {BooleanEncoder} from './BooleanEncoder';
-import {DateEncoder} from './DateEncoder';
-import {FixedVectorEncoder} from './FixedVectorEncoder';
-import {IntEncoder} from './IntEncoder';
-import {LangEncoder} from './LangEncoder';
-import {PurposeRestrictionVectorEncoder} from './PurposeRestrictionVectorEncoder';
-import {VendorVectorEncoder} from './VendorVectorEncoder';
+import {Fields} from '../../model/index.js';
+import {BooleanEncoder} from './BooleanEncoder.js';
+import {DateEncoder} from './DateEncoder.js';
+import {FixedVectorEncoder} from './FixedVectorEncoder.js';
+import {IntEncoder} from './IntEncoder.js';
+import {LangEncoder} from './LangEncoder.js';
+import {PurposeRestrictionVectorEncoder} from './PurposeRestrictionVectorEncoder.js';
+import {VendorVectorEncoder} from './VendorVectorEncoder.js';
 
 export class FieldEncoderMap {
 

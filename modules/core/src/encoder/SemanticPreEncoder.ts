@@ -1,8 +1,8 @@
-import {EncodingError} from '../errors';
-import {TCModel} from '../TCModel';
-import {EncodingOptions} from './EncodingOptions';
-import {Vector, RestrictionType} from '../model';
-import {GVL} from '../GVL';
+import {EncodingError} from '../errors/index.js';
+import {TCModel} from '../TCModel.js';
+import {EncodingOptions} from './EncodingOptions.js';
+import {Vector, RestrictionType} from '../model/index.js';
+import {GVL} from '../GVL.js';
 
 type ProcessorFunction = (tcModel: TCModel, gvl: GVL) => TCModel;
 

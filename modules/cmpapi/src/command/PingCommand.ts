@@ -1,5 +1,5 @@
-import {Ping} from '../response';
-import {Command} from './Command';
+import {Ping} from '../response/index.js';
+import {Command} from './Command.js';
 
 export class PingCommand extends Command {
 

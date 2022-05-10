@@ -8,5 +8,5 @@
  * };
  * ```
  */
-import {IntMap} from './IntMap';
+import {IntMap} from './IntMap.js';
 export type KeyMap<T> = IntMap<T>

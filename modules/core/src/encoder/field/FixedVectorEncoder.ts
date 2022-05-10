@@ -1,6 +1,6 @@
-import {BooleanEncoder} from './BooleanEncoder';
-import {DecodingError} from '../../errors';
-import {Vector} from '../../model';
+import {BooleanEncoder} from './BooleanEncoder.js';
+import {DecodingError} from '../../errors/index.js';
+import {Vector} from '../../model/index.js';
 
 export class FixedVectorEncoder {
 

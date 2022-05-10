@@ -1,5 +1,5 @@
-import {CmpApiModel} from '../CmpApiModel';
-import {Command} from './Command';
+import {CmpApiModel} from '../CmpApiModel.js';
+import {Command} from './Command.js';
 import {GVL} from '@iabtcf/core';
 
 /**

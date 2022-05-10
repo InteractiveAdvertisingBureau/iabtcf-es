@@ -1,3 +1,3 @@
-export * from './CmpStatus';
-export * from './DisplayStatus';
-export * from './EventStatus';
+export * from './CmpStatus.js';
+export * from './DisplayStatus.js';
+export * from './EventStatus.js';

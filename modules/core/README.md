@@ -524,5 +524,4 @@ const encodingOptions = {
   segments: [Segment.PUBLISHER_TC]
 }
 const publisherTCSegment = TCString.encode(tcModel, encodingOptions);
-
 ```
