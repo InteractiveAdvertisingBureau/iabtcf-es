@@ -1,11 +1,11 @@
 import {TCModel, PurposeRestriction, PurposeRestrictionVector, Vector, IdBoolTuple} from '@iabtcf/core';
 
-import {CmpApiModel} from '../CmpApiModel';
-import {BooleanVector} from './BooleanVector';
-import {Restrictions} from './Restrictions';
-import {Booleany} from './Booleany';
-import {Response} from './Response';
-import {EventStatus, CmpStatus} from '../status';
+import {CmpApiModel} from '../CmpApiModel.js';
+import {BooleanVector} from './BooleanVector.js';
+import {Restrictions} from './Restrictions.js';
+import {Booleany} from './Booleany.js';
+import {Response} from './Response.js';
+import {EventStatus, CmpStatus} from '../status/index.js';
 
 export class TCData extends Response {
 
@@ -174,7 +174,7 @@ export class TCData extends Response {
 
       return ids.reduce<BooleanVector>((booleanVector, obj): BooleanVector => {
 
-        booleanVector[String(obj)] = vector.has(+obj);
+        booleanVector[String(obj)] = vector.has(Number(obj));
         return booleanVector;
 
       }, {});

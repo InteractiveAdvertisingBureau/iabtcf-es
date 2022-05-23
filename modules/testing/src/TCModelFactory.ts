@@ -1,6 +1,6 @@
 import {TCModel, PurposeRestriction, RestrictionType} from '@iabtcf/core';
-import {makeRandomInt} from './makeRandomInt';
-import {GVLFactory} from './GVLFactory';
+import {makeRandomInt} from './makeRandomInt.js';
+import {GVLFactory} from './GVLFactory.js';
 
 export class TCModelFactory {
 

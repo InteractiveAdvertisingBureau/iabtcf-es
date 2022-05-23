@@ -1,5 +1,5 @@
-import {CmpApiModel} from '../CmpApiModel';
-import {GetTCDataCommand} from './GetTCDataCommand';
+import {CmpApiModel} from '../CmpApiModel.js';
+import {GetTCDataCommand} from './GetTCDataCommand.js';
 
 export class AddEventListenerCommand extends GetTCDataCommand {
 

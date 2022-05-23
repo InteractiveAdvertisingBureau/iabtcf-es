@@ -1,7 +1,7 @@
-import {CmpApiModel} from './CmpApiModel';
-import {CustomCommands} from './CustomCommands';
-import {CmpStatus, DisplayStatus, EventStatus} from './status';
-import {CallResponder} from './CallResponder';
+import {CmpApiModel} from './CmpApiModel.js';
+import {CustomCommands} from './CustomCommands.js';
+import {CmpStatus, DisplayStatus, EventStatus} from './status/index.js';
+import {CallResponder} from './CallResponder.js';
 import {TCString, TCModel} from '@iabtcf/core';
 
 export class CmpApi {
@@ -104,7 +104,7 @@ export class CmpApi {
       }
 
       CmpApiModel.tcModel.isServiceSpecific = this.isServiceSpecific;
-      CmpApiModel.tcfPolicyVersion = +CmpApiModel.tcModel.policyVersion;
+      CmpApiModel.tcfPolicyVersion = Number(CmpApiModel.tcModel.policyVersion);
       CmpApiModel.tcString = encodedTCString;
 
     }

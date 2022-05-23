@@ -1,4 +1,4 @@
-import {makeRandomInt} from './makeRandomInt';
+import {makeRandomInt} from './makeRandomInt.js';
 
 export function makeRandomIntArray(intsBetweenStart: number, intsBetweenEnd: number, length?: number): number[] {
 

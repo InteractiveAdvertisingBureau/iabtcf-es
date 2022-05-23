@@ -1,4 +1,4 @@
-import {DeviceDisclosureStorageAccessType} from './DeviceDisclosureStorageAccessType';
+import {DeviceDisclosureStorageAccessType} from './DeviceDisclosureStorageAccessType.js';
 
 export interface DeviceDisclosure {
   domain?: string;

@@ -1,4 +1,4 @@
-import {CommandCallback} from './CommandCallback';
+import {CommandCallback} from './CommandCallback.js';
 
 export abstract class Command {
 

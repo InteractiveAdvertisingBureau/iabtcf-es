@@ -1,4 +1,4 @@
-import {Cloneable} from '../Cloneable';
+import {Cloneable} from '../Cloneable.js';
 
 interface TreeNode {
   value: number;

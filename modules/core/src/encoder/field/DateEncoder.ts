@@ -1,9 +1,9 @@
 import {
   IntEncoder,
-} from './IntEncoder';
+} from './IntEncoder.js';
 import {
   DecodingError,
-} from '../../errors';
+} from '../../errors/index.js';
 
 export class DateEncoder {
 

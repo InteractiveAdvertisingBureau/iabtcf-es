@@ -1,9 +1,9 @@
-import {CommandCallback, TCFCommand} from './command';
-import {CommandMap} from './command/CommandMap';
-import {CmpApiModel} from './CmpApiModel';
-import {Disabled} from './response/Disabled';
-import {CustomCommands} from './CustomCommands';
-import {SupportedVersions} from './SupportedVersions';
+import {CommandCallback, TCFCommand} from './command/index.js';
+import {CommandMap} from './command/CommandMap.js';
+import {CmpApiModel} from './CmpApiModel.js';
+import {Disabled} from './response/Disabled.js';
+import {CustomCommands} from './CustomCommands.js';
+import {SupportedVersions} from './SupportedVersions.js';
 
 export const API_KEY = '__tcfapi';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

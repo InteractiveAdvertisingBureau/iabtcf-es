@@ -1,7 +1,7 @@
-import {IntMap} from '../IntMap';
-import {Feature} from './Feature';
-import {Purpose} from './Purpose';
-import {Stack} from './Stack';
+import {IntMap} from '../IntMap.js';
+import {Feature} from './Feature.js';
+import {Purpose} from './Purpose.js';
+import {Stack} from './Stack.js';
 
 export interface Declarations {
   purposes: IntMap<Purpose>;

@@ -22,4 +22,4 @@ export enum DisplayStatus {
    * @type {string}
    */
   DISABLED = 'disabled',
-};
+}

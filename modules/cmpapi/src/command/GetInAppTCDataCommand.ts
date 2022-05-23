@@ -1,5 +1,5 @@
-import {GetTCDataCommand} from './GetTCDataCommand';
-import {InAppTCData} from '../response';
+import {GetTCDataCommand} from './GetTCDataCommand.js';
+import {InAppTCData} from '../response/index.js';
 
 export class GetInAppTCDataCommand extends GetTCDataCommand {
 

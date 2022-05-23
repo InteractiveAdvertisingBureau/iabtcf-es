@@ -5,11 +5,11 @@ import {
   SegmentEncoder,
   SegmentSequence,
   SemanticPreEncoder,
-} from './encoder';
+} from './encoder/index.js';
 
-import {Segment, SegmentIDs} from './model';
-import {IntEncoder} from './encoder/field/IntEncoder';
-import {TCModel} from './TCModel';
+import {Segment, SegmentIDs} from './model/index.js';
+import {IntEncoder} from './encoder/field/IntEncoder.js';
+import {TCModel} from './TCModel.js';
 
 /**
  * Main class for encoding and decoding a

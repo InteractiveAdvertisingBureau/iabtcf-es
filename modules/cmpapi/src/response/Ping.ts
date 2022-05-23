@@ -1,6 +1,6 @@
-import {CmpStatus, DisplayStatus} from '../status';
-import {CmpApiModel} from '../CmpApiModel';
-import {Response} from './Response';
+import {CmpStatus, DisplayStatus} from '../status/index.js';
+import {CmpApiModel} from '../CmpApiModel.js';
+import {Response} from './Response.js';
 
 /**
  * Ping response builder
@@ -26,7 +26,7 @@ export class Ping extends Response {
   /**
    * version of the CMP API that is supported; e.g. “2”
    */
-  public apiVersion: string = '' + CmpApiModel.apiVersion;
+  public apiVersion: string = String(CmpApiModel.apiVersion);
 
   /**
    * Version of the GVL currently loaded by the CMP

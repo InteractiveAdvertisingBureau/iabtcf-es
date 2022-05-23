@@ -1,6 +1,6 @@
-import {Cloneable} from '../Cloneable';
-import {TCModelError} from '../errors';
-import {IntMap} from './IntMap';
+import {Cloneable} from '../Cloneable.js';
+import {TCModelError} from '../errors/index.js';
+import {IntMap} from './IntMap.js';
 
 type SingleIDOrCollection = number | number[] | IntMap<unknown> | Set<number | string>;
 export type IdBoolTuple = [number, boolean];
@@ -115,7 +115,7 @@ export class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
     let result = (typeof item === 'object');
     result = (result && Object.keys(item).every((key: string): boolean => {
 
-      let itemResult =Number.isInteger(parseInt(key, 10));
+      let itemResult = Number.isInteger(parseInt(key, 10));
 
       itemResult = (itemResult && this.isValidNumber(item[key].id));
       itemResult = (itemResult && item[key].name !== undefined);

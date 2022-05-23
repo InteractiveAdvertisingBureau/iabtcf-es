@@ -1,5 +1,5 @@
-import {SequenceVersionMap, SVMItem} from './SequenceVersionMap';
-import {Segment, Fields} from '../../model';
+import {SequenceVersionMap, SVMItem} from './SequenceVersionMap.js';
+import {Segment, Fields} from '../../model/index.js';
 
 export class FieldSequence implements SequenceVersionMap {
 

@@ -1,5 +1,5 @@
-import {CmpStatus, DisplayStatus, EventStatus} from './status';
-import {EventListenerQueue} from './EventListenerQueue';
+import {CmpStatus, DisplayStatus, EventStatus} from './status/index.js';
+import {EventListenerQueue} from './EventListenerQueue.js';
 import {TCModel} from '@iabtcf/core';
 
 /**

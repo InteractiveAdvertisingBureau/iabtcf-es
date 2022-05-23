@@ -1,6 +1,6 @@
-import {GVLMapItem} from './GVLMapItem';
+import {GVLMapItem} from './GVLMapItem.js';
 
 export interface Purpose extends GVLMapItem {
   description: string;
   descriptionLegal: string;
-};
+}
