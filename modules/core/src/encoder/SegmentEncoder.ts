@@ -37,10 +37,11 @@ export class SegmentEncoder {
 
     }
 
+    const fieldEncoderMap = FieldEncoderMap();
     sequence.forEach((key: string): void => {
 
       const value: TCModelPropType = tcModel[key];
-      const encoder = FieldEncoderMap[key];
+      const encoder = fieldEncoderMap[key];
       let numBits: number = BitLength[key];
 
       if (numBits === undefined) {
@@ -94,9 +95,10 @@ export class SegmentEncoder {
 
     const sequence = this.fieldSequence[String(tcModel.version)][segment];
 
+    const fieldEncoderMap = FieldEncoderMap();
     sequence.forEach((key: string): void => {
 
-      const encoder = FieldEncoderMap[key];
+      const encoder = fieldEncoderMap[key];
       let numBits = BitLength[key];
 
       if (numBits === undefined) {
