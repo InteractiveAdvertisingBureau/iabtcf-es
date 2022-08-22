@@ -146,15 +146,15 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@iabtcf/stub@1.5.0-3":
-  version "1.5.0-3"
-  resolved "https://registry.yarnpkg.com/@iabtcf/stub/-/stub-1.5.0-3.tgz#1fa30c0dfe463de27858823f46b1ccceca475745"
-  integrity sha512-gTnhAmh7PZ3dB+/6bFuNfexVC11itINhR2mMx/yvYPxRRQzPQOEAPxci+1YHunnyTVz/FhEngXMuovzR5/0Dbg==
+"@iabtcf/stub@1.5.3":
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/@iabtcf/stub/-/stub-1.5.3.tgz#fe838b0904cf45da5a2f34f794f214d44970c0af"
+  integrity sha512-BoZzm5f1FEAw5GoukihNhqGvJhwpHUQpr2/3kUaBUJkli/zmuqoEkGR0CvMAsJvSZ3B9556Vhck6r8iLfoRSNw==
 
-"@iabtcf/testing@1.5.0-3":
-  version "1.5.0-3"
-  resolved "https://registry.yarnpkg.com/@iabtcf/testing/-/testing-1.5.0-3.tgz#de625dabdabf9805110b1a6c0cff7193b551e5f0"
-  integrity sha512-d/0cgPcL79nbzobeZtKz4OyEFF+6Bxd2U2rXIpHpROur1U8o0i64lI9m0pU+oZ2K646b01lAPS752PZN3g1vMg==
+"@iabtcf/testing@1.5.3":
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/@iabtcf/testing/-/testing-1.5.3.tgz#59afd5376702cd3af9fce87f4848a0bca672367f"
+  integrity sha512-g32C5QkRmu6KTAS3TuGy456NGYJes+MEQp0B37wnQ6cnTwpwKO4KMT7zQ45Acf5hMtJwdaU85RnqAxA9abz9Gw==
   dependencies:
     "@types/sinon" "^10.0.11"
     "@types/sinon-chai" "3.2.8"
@@ -4026,9 +4026,9 @@ term-size@^1.2.0:
     execa "^0.7.0"
 
 terser@^4.6.3:
-  version "4.6.6"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-4.6.6.tgz#da2382e6cafbdf86205e82fb9a115bd664d54863"
-  integrity sha512-4lYPyeNmstjIIESr/ysHg2vUPRGf2tzF9z2yYwnowXVuVzLEamPN1Gfrz7f8I9uEPuHcbFlW4PLIAsJoxXyJ1g==
+  version "4.8.1"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-4.8.1.tgz#a00e5634562de2239fd404c649051bf6fc21144f"
+  integrity sha512-4GnLC0x667eJG0ewJTa6z/yXrbLGv80D9Ru6HIpCQmO+Q4PfEtBFi0ObSckqwL6VyQv/7ENJieXHo2ANmdQwgw==
   dependencies:
     commander "^2.20.0"
     source-map "~0.6.1"
