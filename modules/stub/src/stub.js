@@ -88,7 +88,7 @@
         json = event.data;
       }
 
-      const payload = (typeof json === 'object') ? json.__tcfapiCall : null;
+      const payload = (typeof json === 'object' && json !== null) ? json.__tcfapiCall : null;
 
       if (payload) {
         window.__tcfapi(
