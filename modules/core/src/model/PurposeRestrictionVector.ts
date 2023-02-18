@@ -148,11 +148,13 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
     })();
 
+    const values = [...Array(lastEntry).keys()].map( (i) => i + 1);
+
     for (let i = 1; i <= lastEntry; i++) {
 
       if (!this.has(hash)) {
 
-        this.map.set(hash, new BinarySearchTree());
+        this.map.set(hash, BinarySearchTree.build(values));
         this.bitLength = 0;
 
       }
