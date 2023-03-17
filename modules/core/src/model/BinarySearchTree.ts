@@ -352,7 +352,8 @@ export class BinarySearchTree extends Cloneable<BinarySearchTree> {
   }
 
   /**
-   * Build Binary Search Tree from the ordered number array
+   * Build Binary Search Tree from the ordered number array.
+   *  The depth of the tree will be the `log2` of the array length.
    * @param {number[]} values number array in ascending order
    * @return {BinarySearchTree} Binary Search Tree
    */
