@@ -148,11 +148,16 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
     })();
 
+    /**
+     * Create an ordered array of vendor IDs from `1` (the minimum value for Vendor ID) to `lastEntry`
+     */
+    const values = [...Array(lastEntry).keys()].map( (i) => i + 1);
+
     for (let i = 1; i <= lastEntry; i++) {
 
       if (!this.has(hash)) {
 
-        this.map.set(hash, new BinarySearchTree());
+        this.map.set(hash, BinarySearchTree.build(values)); // use static method `build` to create a `BST` from the ordered array of IDs
         this.bitLength = 0;
 
       }

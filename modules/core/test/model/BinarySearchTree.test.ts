@@ -47,6 +47,18 @@ export function run(): void {
 
     });
 
+    it('should build tree from ordered array using static build method', (): void => {
+
+      const numItems = 40;
+      const values = getOrderedArray(numItems);
+      const bst = BinarySearchTree.build(values);
+
+      const result = bst?.get();
+
+      expect(result).to.deep.equal(values);
+
+    });
+
     it('should get() sorted array', (): void => {
 
       const numItems = 40;

@@ -1,11 +1,17 @@
 // import {Cloneable} from '../src/Cloneable';
+import {BinarySearchTree} from '../../core/src/model/BinarySearchTree';
 import {expect} from 'chai';
 
 describe('Cloneable', (): void => {
 
-  it('\x1b[36mNeeds Unit Tests\x1b[0m', (done: () => void): void => {
+  it('Clone BinarySearchTree', (done: () => void): void => {
 
-    expect(true).to.be.true;
+    const lastEntry = 4057;
+    const values = [...Array(lastEntry).keys()].map( (i) => i + 1);
+    const tree = BinarySearchTree.build(values);
+    expect(tree).to.be.a('object');
+
+    expect(tree?.clone()).to.be.a('object');
     done();
 
   });
