@@ -8,6 +8,12 @@ import {expect} from 'chai';
 
 describe('response->Ping', (): void => {
 
+  beforeEach(function() {
+
+    CmpApiModel.reset();
+
+  });
+
   const isAGoodPing = (ping: Ping): void => {
 
     expect(ping.cmpLoaded, 'ping.cmpLoaded').to.be.true;

@@ -21,7 +21,7 @@ export class TCModel extends Cloneable<TCModel> {
   private publisherCountryCode_ = 'AA';
   private version_ = 2;
   private consentScreen_: StringOrNumber = 0;
-  private policyVersion_: StringOrNumber = 2;
+  private policyVersion_: StringOrNumber = 4;
   private consentLanguage_ = 'EN';
   private cmpId_: StringOrNumber = 0;
   private cmpVersion_: StringOrNumber = 0;

@@ -21,8 +21,9 @@ export class SemanticPreEncoder {
 
       /**
        * Purpose 1 is never allowed to be true for legitimate interest
+       * As of TCF v2.2 purposes 3,4,5 & 6 are not allowed to be true for LI
        */
-      tcModel.purposeLegitimateInterests.unset(1);
+      tcModel.purposeLegitimateInterests.unset([1, 3, 4, 5, 6]);
 
       /**
        * If a Vendor does not declare a purpose for consent or legitimate

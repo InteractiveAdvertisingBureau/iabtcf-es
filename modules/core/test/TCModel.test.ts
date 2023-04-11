@@ -143,7 +143,7 @@ describe('TCModel', (): void => {
 
     // since we didn't construct with a gvl we should
     // have empty fields here
-    expect(tcModel.vendorListVersion).to.equal(0); expect(tcModel.policyVersion).to.equal(2);
+    expect(tcModel.vendorListVersion).to.equal(0); expect(tcModel.policyVersion).to.equal(4);
     expect(tcModel.gvl).to.be.undefined;
 
   });

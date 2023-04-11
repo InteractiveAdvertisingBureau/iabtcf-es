@@ -35,17 +35,25 @@ describe('TCString', (): void => {
 
   });
 
-  it('should unset purposeLegitimateInterests 1 if it is set', (): void => {
+  it('should unset purposeLegitimateInterests 1, 3, 4, 5 & 6 if it is set', (): void => {
 
     const tcModel = getTCModel();
-    tcModel.purposeLegitimateInterests.set(1);
+    tcModel.purposeLegitimateInterests.set([1, 3, 4, 5, 6]);
 
     expect(tcModel.purposeLegitimateInterests.has(1), 'purposeLegitimateInterests.has(1)').to.be.true;
+    expect(tcModel.purposeLegitimateInterests.has(3), 'purposeLegitimateInterests.has(3)').to.be.true;
+    expect(tcModel.purposeLegitimateInterests.has(4), 'purposeLegitimateInterests.has(4)').to.be.true;
+    expect(tcModel.purposeLegitimateInterests.has(5), 'purposeLegitimateInterests.has(5)').to.be.true;
+    expect(tcModel.purposeLegitimateInterests.has(6), 'purposeLegitimateInterests.has(6)').to.be.true;
 
     const encodedString = TCString.encode(tcModel);
     const newModel = TCString.decode(encodedString);
 
     expect(newModel.purposeLegitimateInterests.has(1), 'newModel.purposeLegitimateInterests.has(1)').to.be.false;
+    expect(newModel.purposeLegitimateInterests.has(3), 'newModel.purposeLegitimateInterests.has(3)').to.be.false;
+    expect(newModel.purposeLegitimateInterests.has(4), 'newModel.purposeLegitimateInterests.has(4)').to.be.false;
+    expect(newModel.purposeLegitimateInterests.has(5), 'newModel.purposeLegitimateInterests.has(5)').to.be.false;
+    expect(newModel.purposeLegitimateInterests.has(6), 'newModel.purposeLegitimateInterests.has(6)').to.be.false;
 
   });
 
@@ -174,9 +182,9 @@ describe('TCString', (): void => {
 
     tcModel.purposeLegitimateInterests.forEach((value: boolean, id: number): void => {
 
-      if ( id === 1 && value ) {
+      if ( (id === 1 || id >= 3 && id <= 6) && value ) {
 
-        // id 1 gets unset on encoding for legitimate interests
+        // id 1, 3, 4, 5 & 6 gets unset on encoding for legitimate interests
 
         expect(newModel.purposeLegitimateInterests.has(id), `purposeLegitimateInterests.has(${id})`).to.be.false;
 
