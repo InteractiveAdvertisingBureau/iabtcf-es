@@ -52,7 +52,6 @@ export class CallResponder {
       if (customCommands?.[TCFCommand.GET_TC_DATA]) {
 
         customCommands[TCFCommand.ADD_EVENT_LISTENER] = customCommands[TCFCommand.GET_TC_DATA];
-        customCommands[TCFCommand.REMOVE_EVENT_LISTENER] = customCommands[TCFCommand.GET_TC_DATA];
 
       }
 

@@ -104,7 +104,7 @@ describe('CallResponder', (): void => {
 
   });
 
-  it('should use custom "getTCData" command handler for "addEventListener" and "removeEventListener" commands', (): void => {
+  it('should use custom "getTCData" command handler for "addEventListener" command', (): void => {
 
     const customCommandCallback = sinon.stub();
 
@@ -130,6 +130,38 @@ describe('CallResponder', (): void => {
     }
 
     expect(customCommandCallback.callCount).to.eql(testNTimesCalls);
+
+  });
+  
+  it('should "addEventListener" and "removeEventListener" methods behave properly', (): void => {
+
+    const customCommandCallback = sinon.stub();
+    const callResponder = new CallResponder({
+      [TCFCommand.GET_TC_DATA]: (): void => {
+
+        customCommandCallback();
+
+      },
+    });
+    callResponder.apiCall(TCFCommand.ADD_EVENT_LISTENER, null, () => undefined);
+    // remove listener id == 0 first time should produce success == true
+    callResponder.apiCall(TCFCommand.REMOVE_EVENT_LISTENER, null, (success: boolean) => {
+
+      expect(success).to.be.true;
+
+    }, 0);
+    // remove listener id == 0 second time should produce success == false
+    callResponder.apiCall(TCFCommand.REMOVE_EVENT_LISTENER, null, (success: boolean) => {
+
+      expect(success).to.be.false;
+
+    }, 0);
+    // remove listener id == 1 should produce success == false because it is not added yet
+    callResponder.apiCall(TCFCommand.REMOVE_EVENT_LISTENER, null, (success: boolean) => {
+
+      expect(success).to.be.false;
+
+    }, 1);
 
   });
 

@@ -70,6 +70,8 @@ export class TCData extends Response {
     this.cmpStatus = CmpApiModel.cmpStatus;
     this.listenerId = listenerId;
 
+    const bucket = CmpApiModel.restrictionsCache.getBucket(this.constructor.name);
+
     if (CmpApiModel.gdprApplies) {
 
       const tcModel = CmpApiModel.tcModel as TCModel;
@@ -79,6 +81,8 @@ export class TCData extends Response {
       this.useNonStandardStacks = tcModel.useNonStandardStacks;
       this.purposeOneTreatment = tcModel.purposeOneTreatment;
       this.publisherCC = tcModel.publisherCountryCode;
+      
+      const restrictions = bucket.get(this.tcString, this.createRestrictions.bind(this), tcModel.publisherRestrictions );
 
       this.outOfBand = {
 
@@ -113,7 +117,7 @@ export class TCData extends Response {
           legitimateInterests: this.createVectorField(tcModel.publisherCustomLegitimateInterests),
 
         },
-        restrictions: this.createRestrictions(tcModel.publisherRestrictions),
+        restrictions,
 
       };
 

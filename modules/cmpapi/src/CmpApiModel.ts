@@ -1,6 +1,8 @@
 import {CmpStatus, DisplayStatus, EventStatus} from './status/index.js';
 import {EventListenerQueue} from './EventListenerQueue.js';
 import {TCModel} from '@didomi/iabtcf-core';
+import { Restrictions } from './response/Restrictions.js';
+import {Cache} from './Cache.js';
 
 /**
  * Class holds shareable data across cmp api and provides change event listener for TcModel.
@@ -22,6 +24,7 @@ export class CmpApiModel {
   public static gdprApplies: boolean;
   public static tcModel: TCModel;
   public static tcString: string;
+  public static restrictionsCache = new Cache<Restrictions>();
 
   public static reset(): void {
 
@@ -37,6 +40,7 @@ export class CmpApiModel {
     this.disabled = false;
     this.displayStatus = DisplayStatus.HIDDEN;
     this.eventQueue.clear();
+    this.restrictionsCache.clear();
 
   }
 
