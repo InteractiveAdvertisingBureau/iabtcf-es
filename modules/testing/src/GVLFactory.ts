@@ -1,4 +1,4 @@
-import {GVL} from '@iabtcf/core';
+import {GVL} from '@didomi/iabtcf-core';
 import * as fs from 'fs';
 import * as path from 'path';
 import {fileURLToPath} from 'url';

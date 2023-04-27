@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import * as sinon from 'sinon';
 import {Json} from '../src/Json';
-import {XMLHttpTestTools} from '@iabtcf/testing';
+import {XMLHttpTestTools} from '@didomi/iabtcf-testing';
 
 describe('Json->fetch', (): void => {
 

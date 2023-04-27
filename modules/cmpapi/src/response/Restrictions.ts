@@ -1,4 +1,4 @@
-import {RestrictionType} from '@iabtcf/core';
+import {RestrictionType} from '@didomi/iabtcf-core';
 
 export interface Restrictions {
 

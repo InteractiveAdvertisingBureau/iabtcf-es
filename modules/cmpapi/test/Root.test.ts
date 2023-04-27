@@ -1,7 +1,7 @@
 import {CmpApiModel} from '../src/CmpApiModel';
-import {GVL} from '@iabtcf/core';
+import {GVL} from '@didomi/iabtcf-core';
 import * as path from 'path';
-import {XMLHttpTestTools, TestCollector} from '@iabtcf/testing';
+import {XMLHttpTestTools, TestCollector} from '@didomi/iabtcf-testing';
 import {fileURLToPath} from 'url';
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
@@ -24,7 +24,7 @@ declare global {
 
 GVL.baseUrl = 'http://sweetcmp.mgr.consensu.org';
 
-describe('@iabtcf/cmpapi', (): void => {
+describe('@didomi/iabtcf-cmpapi', (): void => {
 
   beforeEach((): void => {
 
