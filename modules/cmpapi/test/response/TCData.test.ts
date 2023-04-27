@@ -67,7 +67,7 @@ describe('response->TCData', (): void => {
     TestUtils.tcModelToTCData();
 
   });
-  
+
   it('should cache encoded purpose restrictions', (): void => {
 
     const tcModel = TCModelFactory.withGVL();

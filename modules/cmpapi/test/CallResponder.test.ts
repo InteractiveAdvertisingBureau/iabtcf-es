@@ -132,7 +132,7 @@ describe('CallResponder', (): void => {
     expect(customCommandCallback.callCount).to.eql(testNTimesCalls);
 
   });
-  
+
   it('should "addEventListener" and "removeEventListener" methods behave properly', (): void => {
 
     const customCommandCallback = sinon.stub();

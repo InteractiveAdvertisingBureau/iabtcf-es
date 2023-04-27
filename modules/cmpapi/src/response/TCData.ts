@@ -81,7 +81,7 @@ export class TCData extends Response {
       this.useNonStandardStacks = tcModel.useNonStandardStacks;
       this.purposeOneTreatment = tcModel.purposeOneTreatment;
       this.publisherCC = tcModel.publisherCountryCode;
-      
+
       const restrictions = bucket.get(this.tcString, this.createRestrictions.bind(this), tcModel.publisherRestrictions );
 
       this.outOfBand = {

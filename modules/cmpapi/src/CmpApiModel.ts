@@ -1,7 +1,7 @@
 import {CmpStatus, DisplayStatus, EventStatus} from './status/index.js';
 import {EventListenerQueue} from './EventListenerQueue.js';
 import {TCModel} from '@didomi/iabtcf-core';
-import { Restrictions } from './response/Restrictions.js';
+import {Restrictions} from './response/Restrictions.js';
 import {Cache} from './Cache.js';
 
 /**
