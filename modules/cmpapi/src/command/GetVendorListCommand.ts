@@ -1,6 +1,6 @@
 import {CmpApiModel} from '../CmpApiModel.js';
 import {Command} from './Command.js';
-import {GVL} from '@iabtcf/core';
+import {GVL} from '@didomi/iabtcf-core';
 
 /**
  * Gets a version of the Global Vendors List

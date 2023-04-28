@@ -1,8 +1,8 @@
 import {CmpApiModel} from '../../src/CmpApiModel';
-import {PurposeRestriction, TCString} from '@iabtcf/core';
+import {PurposeRestriction, TCString} from '@didomi/iabtcf-core';
 import {TestUtils} from '../TestUtils';
 import {TCData} from '../../src/response/TCData';
-import {TCModelFactory, makeRandomInt, makeRandomIntArray} from '@iabtcf/testing';
+import {TCModelFactory, makeRandomInt, makeRandomIntArray} from '@didomi/iabtcf-testing';
 import {expect} from 'chai';
 
 describe('response->TCData', (): void => {
@@ -65,6 +65,31 @@ describe('response->TCData', (): void => {
     CmpApiModel.tcString = TCString.encode(CmpApiModel.tcModel);
 
     TestUtils.tcModelToTCData();
+
+  });
+
+  it('should cache encoded purpose restrictions', (): void => {
+
+    const tcModel = TCModelFactory.withGVL();
+    const vendorLength = tcModel.vendorConsents.size;
+
+    for (let i =1; i <= vendorLength; i++) {
+
+      tcModel.publisherRestrictions.add(i, new PurposeRestriction(makeRandomInt(1, 12), makeRandomInt(0, 2)));
+
+    }
+
+    CmpApiModel.gdprApplies = true;
+    CmpApiModel.tcModel = tcModel;
+    CmpApiModel.tcString = TCString.encode(CmpApiModel.tcModel);
+
+    CmpApiModel.restrictionsCache.clear();
+
+    TestUtils.tcModelToTCData();
+
+    TestUtils.tcModelToTCData();
+
+    expect(CmpApiModel.restrictionsCache.getBucket(TCData.name).recalculations).to.be.equal(1);
 
   });
 

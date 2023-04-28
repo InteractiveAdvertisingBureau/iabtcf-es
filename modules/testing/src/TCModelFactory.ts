@@ -1,4 +1,4 @@
-import {TCModel, PurposeRestriction, RestrictionType} from '@iabtcf/core';
+import {TCModel, PurposeRestriction, RestrictionType} from '@didomi/iabtcf-core';
 import {makeRandomInt} from './makeRandomInt.js';
 import {GVLFactory} from './GVLFactory.js';
 

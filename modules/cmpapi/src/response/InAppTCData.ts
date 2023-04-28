@@ -1,4 +1,4 @@
-import {IdBoolTuple, PurposeRestriction, PurposeRestrictionVector, RestrictionType, Vector} from '@iabtcf/core';
+import {IdBoolTuple, PurposeRestriction, PurposeRestrictionVector, RestrictionType, Vector} from '@didomi/iabtcf-core';
 import {Restrictions} from './Restrictions.js';
 import {TCData} from './TCData.js';
 

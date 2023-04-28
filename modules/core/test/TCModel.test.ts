@@ -1,4 +1,4 @@
-import {sameDataDiffRef} from '@iabtcf/testing';
+import {sameDataDiffRef} from '@didomi/iabtcf-testing';
 import {expect} from 'chai';
 import {TCModel} from '../src/TCModel';
 
@@ -110,7 +110,7 @@ describe('TCModel', (): void => {
 
     describe(fieldName, (): void => {
 
-      const gvl: GVL = new GVL(require('@iabtcf/testing/lib/vendorlist/vendor-list.json'));
+      const gvl: GVL = new GVL(require('@didomi/iabtcf-testing/lib/vendorlist/vendor-list.json'));
 
       it(`should create an instance of ${instanceName} as ${fieldName} on init`, (): void => {
 
@@ -220,7 +220,7 @@ describe('TCModel', (): void => {
 
   const runSetAllAndUnsetAll = (): void => {
 
-    const gvl: GVL = new GVL(require('@iabtcf/testing/lib/vendorlist/vendor-list.json'));
+    const gvl: GVL = new GVL(require('@didomi/iabtcf-testing/lib/vendorlist/vendor-list.json'));
 
     const loopGVLMap = (gvlKey: string, cb ): void => {
 

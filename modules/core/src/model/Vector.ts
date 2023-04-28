@@ -29,6 +29,28 @@ export class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
   }
 
   /**
+   * toArray()
+   *
+   * While this is not explicitly called by this package, this is required for compatibility with the Prototype library.
+   *
+   * @return {Array<IdBoolTuple>} returns an array of all values in the set
+   *
+   */
+  public toArray(): Array<IdBoolTuple> {
+
+    const result = new Array<IdBoolTuple>(0);
+
+    for (let i = 1; i <= this.maxId; i++) {
+
+      result.push([i, this.has(i)] as IdBoolTuple);
+
+    }
+
+    return result;
+
+  }
+
+  /**
    * values()
    *
    * @return {IterableIterator<number>} - returns an iterator of the positive
