@@ -151,7 +151,13 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
     /**
      * Create an ordered array of vendor IDs from `1` (the minimum value for Vendor ID) to `lastEntry`
      */
-    const values = [...Array(lastEntry).keys()].map( (i) => i + 1);
+    const values = [];
+
+    for (let i = 0; i < lastEntry; i++) {
+
+      values[i] = i + 1;
+
+    }
 
     for (let i = 1; i <= lastEntry; i++) {
 
@@ -168,7 +174,7 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
        * need to add an additional de-duplication here.
        */
 
-      this.map.get(hash).add(i);
+      this.map.get(hash)?.add(i);
 
     }
 
