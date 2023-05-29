@@ -7,9 +7,9 @@ import {XMLHttpTestTools} from '@iabtechlabtcf/testing';
 import {Json} from '../src/Json';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const vendorlistJson = require('@iabtechlabtcf/testing/lib/vendorlist/vendor-list-v24.json');
+const vendorlistJson = require('@iabtechlabtcf/testing/lib/vendorlist/v2/vendor-list-v24.json');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const translationJson = require('@iabtechlabtcf/testing/lib/vendorlist/purposes-fr.json');
+const translationJson = require('@iabtechlabtcf/testing/lib/vendorlist/v2/purposes-fr.json');
 
 describe('GVL', (): void => {
 

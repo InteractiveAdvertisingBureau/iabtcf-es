@@ -13,7 +13,8 @@
       "import": "./lib/mjs/index.js",
       "require": "./lib/cjs/index.js"
     },
-    "./lib/vendorlist/*.json": "./lib/mjs/vendorlist/*.json"
+    "./lib/vendorlist/v2/*.json": "./lib/mjs/vendorlist/v2/*.json",
+    "./lib/vendorlist/v2.2/*.json": "./lib/mjs/vendorlist/v2.2/*.json"
   },
   "types": "lib/mjs/index.d.ts",
   "files": [
