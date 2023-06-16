@@ -97,7 +97,7 @@ export class CallResponder {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public apiCall(command: string, version: number, callback: CommandCallback, ...params: any): void | never {
 
-    if (typeof command !== 'string') {
+    if (typeof command !== 'string' && typeof callback === 'function') {
 
       callback(null, false);
 
