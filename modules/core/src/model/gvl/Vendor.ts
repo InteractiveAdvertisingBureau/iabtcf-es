@@ -1,4 +1,6 @@
 import {GVLMapItem} from './GVLMapItem.js';
+import {DataRetention} from './DataRetention.js';
+import {VendorUrl} from './VendorUrl.js';
 
 export interface Vendor extends GVLMapItem {
   purposes: number[];
@@ -17,4 +19,7 @@ export interface Vendor extends GVLMapItem {
   overflow?: {
     httpGetLimit: 32 | 128;
   };
+  dataRetention?: DataRetention;
+  urls?: VendorUrl[];
+  dataDeclaration?: number[];
 }
