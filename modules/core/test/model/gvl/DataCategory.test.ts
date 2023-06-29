@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {DataCategory} from '../../../src/model/gvl/DataCategory';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const vendorlistJson = require('@didomi/iabtcf-testing/lib/vendorlist/v2.2/vendor-list.json');
+const vendorlistJson = require('@iabtcf/testing/lib/vendorlist/v2.2/vendor-list.json');
 
 export function run(): void {
 
