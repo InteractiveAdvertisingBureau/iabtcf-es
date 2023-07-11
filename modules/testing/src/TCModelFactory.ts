@@ -1,4 +1,4 @@
-import {TCModel, PurposeRestriction, RestrictionType} from '@iabtechlabtcf/core';
+import {TCModel, PurposeRestriction, RestrictionType} from '@internaltestiabtechlab/core';
 import {makeRandomInt} from './makeRandomInt.js';
 import {GVLFactory} from './GVLFactory.js';
 

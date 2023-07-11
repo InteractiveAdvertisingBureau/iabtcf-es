@@ -1,4 +1,4 @@
-import {XMLHttpTestTools, TestCollector} from '@iabtechlabtcf/testing';
+import {XMLHttpTestTools, TestCollector} from '@internaltestiabtechlab/testing';
 import * as path from 'path';
 import {GVL} from '../src/GVL';
 import {fileURLToPath} from 'url';
@@ -7,7 +7,7 @@ import {fileURLToPath} from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-describe('@iabtechlabtcf/core', (): void => {
+describe('@internaltestiabtechlab/core', (): void => {
 
   beforeEach((): void => {
 

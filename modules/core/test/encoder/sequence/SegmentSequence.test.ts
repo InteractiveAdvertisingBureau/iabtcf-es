@@ -1,7 +1,7 @@
 import {SegmentSequence} from '../../../src/encoder/sequence/SegmentSequence';
 import {TCModel} from '../../../src/TCModel';
 import {Segment} from '../../../src/model';
-import {PowerSet} from '@iabtechlabtcf/testing';
+import {PowerSet} from '@internaltestiabtechlab/testing';
 import {expect} from 'chai';
 
 describe('encoder/sequence->SegmentSequence', (): void => {

@@ -21,14 +21,6 @@ fi
 
 cd $ROOT
 
-git checkout develop
-git pull
-
-git checkout master
-git pull
-
-git merge develop --no-edit
-
 yarn lint
 
 if [[ $? != 0 ]]; then

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {GVLFactory, TCModelFactory, sameDataDiffRef, makeRandomInt, makeRandomString} from '@iabtechlabtcf/testing';
+import {GVLFactory, TCModelFactory, sameDataDiffRef, makeRandomInt, makeRandomString} from '@internaltestiabtechlab/testing';
 import {SegmentEncoder} from '../../src/encoder';
 import {TCModel, GVL} from '../../src';
 import {Segment} from '../../src/model';

@@ -1,6 +1,6 @@
 import {GetInAppTCDataCommand} from '../../src/command/GetInAppTCDataCommand';
 import {CmpApiModel} from '../../src/CmpApiModel';
-import {TCModelFactory} from '@iabtechlabtcf/testing';
+import {TCModelFactory} from '@internaltestiabtechlab/testing';
 import {InAppTCData} from '../../src/response/InAppTCData';
 import {expect} from 'chai';
 

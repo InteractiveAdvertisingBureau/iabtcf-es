@@ -1,6 +1,6 @@
 import * as sinon from 'sinon';
 import {GVL, TCString, TCModel} from '../src';
-import {XMLHttpTestTools, makeRandomInt, GVLFactory} from '@iabtechlabtcf/testing';
+import {XMLHttpTestTools, makeRandomInt, GVLFactory} from '@internaltestiabtechlab/testing';
 import {expect} from 'chai';
 import {PurposeRestriction} from '../src/model/PurposeRestriction';
 import {RestrictionType} from '../src/model/RestrictionType';

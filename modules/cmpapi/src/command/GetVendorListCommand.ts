@@ -1,6 +1,6 @@
 import {CmpApiModel} from '../CmpApiModel.js';
 import {Command} from './Command.js';
-import {GVL} from '@iabtechlabtcf/core';
+import {GVL} from '@internaltestiabtechlab/core';
 
 /**
  * Gets a version of the Global Vendors List

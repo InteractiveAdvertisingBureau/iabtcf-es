@@ -2,7 +2,7 @@ import {CmpApiModel} from './CmpApiModel.js';
 import {CustomCommands} from './CustomCommands.js';
 import {CmpStatus, DisplayStatus, EventStatus} from './status/index.js';
 import {CallResponder} from './CallResponder.js';
-import {TCString, TCModel} from '@iabtechlabtcf/core';
+import {TCString, TCModel} from '@internaltestiabtechlab/core';
 
 export class CmpApi {
 

@@ -1,4 +1,4 @@
-import {RestrictionType} from '@iabtechlabtcf/core';
+import {RestrictionType} from '@internaltestiabtechlab/core';
 
 export interface Restrictions {
 

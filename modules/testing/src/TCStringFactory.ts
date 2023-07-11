@@ -1,5 +1,5 @@
 import {TCModelFactory} from './TCModelFactory.js';
-import {TCString} from '@iabtechlabtcf/core';
+import {TCString} from '@internaltestiabtechlab/core';
 
 export class TCStringFactory {
 

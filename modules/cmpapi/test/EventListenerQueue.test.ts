@@ -1,7 +1,7 @@
 import {EventListenerQueue} from '../src/EventListenerQueue';
 import {expect} from 'chai';
-import {TCStringFactory} from '@iabtechlabtcf/testing';
-import {TCString} from '@iabtechlabtcf/core';
+import {TCStringFactory} from '@internaltestiabtechlab/testing';
+import {TCString} from '@internaltestiabtechlab/core';
 import {TCData} from '../src/response/TCData';
 import {CmpApiModel} from '../src/CmpApiModel';
 
