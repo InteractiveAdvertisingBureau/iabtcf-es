@@ -1,6 +1,6 @@
 {
   "name": "internaltestiabtechlab",
-  "version": "1.5.7",
+  "version": "1.5.8",
   "description": "Official compliant tool suite for implementing the iab. Transparency and Consent Framework (TCF).",
   "private": true,
   "workspaces": [
