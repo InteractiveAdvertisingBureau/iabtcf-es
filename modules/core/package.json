@@ -1,6 +1,6 @@
 {
-  "name": "@iabtcf/core",
-  "version": "1.5.6",
+  "name": "@internaltestiabtech/core",
+  "version": "1.5.7",
   "description": "Ensures consistent encoding and decoding of TC Signals for the iab. Transparency and Consent Framework (TCF).",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://iabtcf.com/",
@@ -28,7 +28,7 @@
     "test-cov": "rm -rf coverage; nyc --reporter=html mocha"
   },
   "devDependencies": {
-    "@iabtcf/testing": "1.5.6",
+    "@internaltestiabtech/testing": "1.5.7",
     "@istanbuljs/nyc-config-typescript": "^0.1.3",
     "@types/sinon": "^10.0.11",
     "@types/sinon-chai": "3.2.8",
@@ -91,5 +91,18 @@
     "url": "https://github.com/InteractiveAdvertisingBureau/iabtcf-es.git",
     "directory": "modules/core"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "bundledDependencies": [
+    "react-native-google-mobile-ads",
+    "@usercentrics/cmp-browser-sdk",
+    "@adv-ui/boros-tcf",
+    "@sfbx/appconsent-react-tv-cmp",
+    "@jumpgroup/avacy-banner",
+    "@pubtech-ai/solo-cmp",
+    "@transcend-io/consent-manager-tcf-ui",
+    "didomi-cmpapi",
+    "appconsent-react-tv-cmp",
+    "@iabtechlabtcf/cli",
+    "@wikia/tracking-opt-in"
+  ]
 }

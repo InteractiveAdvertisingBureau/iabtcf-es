@@ -1,6 +1,6 @@
 {
-  "name": "@iabtcf/stub",
-  "version": "1.5.6",
+  "name": "@internaltestiabtech/stub",
+  "version": "1.5.7",
   "description": "CMP API Stub code",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://iabtcf.com/",

@@ -1,6 +1,6 @@
 {
-  "name": "@iabtcf/cli",
-  "version": "1.5.6",
+  "name": "@internaltestiabtech/cli",
+  "version": "1.5.7",
   "description": "Decode a iab TCF (Transparency and Consent Framework) TC String via the command line",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://iabtcf.com/",
