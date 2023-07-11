@@ -1,8 +1,8 @@
-[![NPM version](https://img.shields.io/npm/v/@iabtcf/stub.svg?style=flat-square)](https://www.npmjs.com/package/@iabtcf/stub)
-[![npm module downloads per month](http://img.shields.io/npm/dm/@iabtcf/stub.svg?style=flat)](https://www.npmjs.org/package/@iabtcf/stub)
-[![InteractiveAdvertisingBureau](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es.svg?style=shield)](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es)
+[![NPM version](https://img.shields.io/npm/v/@iabtechlabtcf/stub.svg?style=flat-square)](https://www.npmjs.com/package/@iabtechlabtcf/stub)
+[![npm module downloads per month](http://img.shields.io/npm/dm/@iabtechlabtcf/stub.svg?style=flat)](https://www.npmjs.org/package/@iabtechlabtcf/stub)
+[![InteractiveAdvertisingBureau](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtechlabtcf-es.svg?style=shield)](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtechlabtcf-es)
 
-# @iabtcf/stub
+# @iabtechlabtcf/stub
 
 Cmp API Stub code.  Maybe included in commonjs loader or dropped directly on the page.
 
@@ -10,23 +10,23 @@ Cmp API Stub code.  Maybe included in commonjs loader or dropped directly on the
 
 npm
 ```
-npm install @iabtcf/stub
+npm install @iabtechlabtcf/stub
 ```
 
 yarn
 ```
-yarn add @iabtcf/stub
+yarn add @iabtechlabtcf/stub
 ```
 #### Using
 
 ##### include via module loading
 ```javascript
-import * as cmpstub from '@iabtcf/stub';
+import * as cmpstub from '@iabtechlabtcf/stub';
 ```
 or
 
 ```javascript
-const cmpstub = require('@iabtcf/stub');
+const cmpstub = require('@iabtechlabtcf/stub');
 ```
 
 then execute:
@@ -38,9 +38,9 @@ this should generate the `__tcfapi()` window function with the queing functional
 
 ##### to drop on a page
 ```
-git clone https://github.com/InteractiveAdvertisingBureau/iabtcf-es.git
+git clone https://github.com/InteractiveAdvertisingBureau/iabtechlabtcf-es.git
 
-cd iabtcf-es/modules/stub/
+cd iabtechlabtcf-es/modules/stub/
 
 yarn // or npm install
 

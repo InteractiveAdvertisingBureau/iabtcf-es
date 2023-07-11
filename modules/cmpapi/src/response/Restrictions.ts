@@ -1,4 +1,4 @@
-import {RestrictionType} from '@iabtcf/core';
+import {RestrictionType} from '@iabtechlabtcf/core';
 
 export interface Restrictions {
 

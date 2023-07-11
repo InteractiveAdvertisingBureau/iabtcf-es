@@ -1,7 +1,7 @@
 import {CmpApiModel} from '../../src/CmpApiModel';
 import {TestUtils} from '../TestUtils';
-import {TCModelFactory, makeRandomIntArray} from '@iabtcf/testing';
-import {TCString} from '@iabtcf/core';
+import {TCModelFactory, makeRandomIntArray} from '@iabtechlabtcf/testing';
+import {TCString} from '@iabtechlabtcf/core';
 
 describe('response->InAppTCData', (): void => {
 

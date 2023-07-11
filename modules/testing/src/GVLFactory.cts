@@ -1,4 +1,4 @@
-import {GVL} from '@iabtcf/core';
+import {GVL} from '@iabtechlabtcf/core';
 
 export class GVLFactory {
 

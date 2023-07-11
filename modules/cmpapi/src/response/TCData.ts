@@ -1,4 +1,4 @@
-import {TCModel, PurposeRestriction, PurposeRestrictionVector, Vector, IdBoolTuple} from '@iabtcf/core';
+import {TCModel, PurposeRestriction, PurposeRestrictionVector, Vector, IdBoolTuple} from '@iabtechlabtcf/core';
 
 import {CmpApiModel} from '../CmpApiModel.js';
 import {BooleanVector} from './BooleanVector.js';

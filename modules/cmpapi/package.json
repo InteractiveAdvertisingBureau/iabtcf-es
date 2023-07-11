@@ -1,5 +1,5 @@
 {
-  "name": "@iabtcf/cmpapi",
+  "name": "@iabtechlabtcf/cmpapi",
   "version": "1.5.6",
   "description": "Ensures other in-page digital marketing technologies have access to CMP transparency and consent information for the iab. Transparency and Consent Framework (TCF).",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
@@ -28,11 +28,11 @@
     "test-cov": "rm -rf coverage; nyc --reporter=html mocha"
   },
   "peerDependencies": {
-    "@iabtcf/core": ">=1.0.0"
+    "@iabtechlabtcf/core": ">=1.0.0"
   },
   "devDependencies": {
-    "@iabtcf/stub": "1.5.6",
-    "@iabtcf/testing": "1.5.6",
+    "@iabtechlabtcf/stub": "1.5.6",
+    "@iabtechlabtcf/testing": "1.5.6",
     "@istanbuljs/nyc-config-typescript": "^0.1.3",
     "@types/mocha": "^9.1.0",
     "@types/sinon": "10.0.11",

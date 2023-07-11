@@ -2,7 +2,7 @@ import {CmpApiModel} from '../../src/CmpApiModel';
 import {CmpStatus} from '../../src/status/CmpStatus';
 import {Disabled} from '../../src/response/Disabled';
 import {expect} from 'chai';
-import {makeRandomInt} from '@iabtcf/testing';
+import {makeRandomInt} from '@iabtechlabtcf/testing';
 
 describe('response->Disabled', (): void => {
 

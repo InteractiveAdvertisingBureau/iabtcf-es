@@ -1,6 +1,6 @@
 import {CmpStatus, DisplayStatus, EventStatus} from './status/index.js';
 import {EventListenerQueue} from './EventListenerQueue.js';
-import {TCModel} from '@iabtcf/core';
+import {TCModel} from '@iabtechlabtcf/core';
 
 /**
  * Class holds shareable data across cmp api and provides change event listener for TcModel.

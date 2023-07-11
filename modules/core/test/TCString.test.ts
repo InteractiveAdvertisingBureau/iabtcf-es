@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {TCString, TCModel} from '../src';
 import {Segment} from '../src/model';
-import {TCModelFactory} from '@iabtcf/testing';
+import {TCModelFactory} from '@iabtechlabtcf/testing';
 
 describe('TCString', (): void => {
 
