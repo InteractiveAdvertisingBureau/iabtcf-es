@@ -5,6 +5,7 @@
   "private": true,
   "workspaces": [
     "modules/testing",
+    "modules/core",
     "modules/cmpapi",
     "modules/cli",
     "modules/stub"
