@@ -2,7 +2,7 @@
   "name": "@iabtechlabtcf/stub",
   "version": "1.5.7",
   "description": "CMP API Stub code",
-  "author": "Chris Paterson <tcf@chrispaterson.io>",
+  "author": "Mayank Mishra <mayank@iabtechlab.com>",
   "homepage": "https://iabtcf.com/",
   "license": "Apache-2.0",
   "main": "lib/stub.js",
