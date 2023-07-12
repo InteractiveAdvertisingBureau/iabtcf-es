@@ -1,4 +1,4 @@
-import {IdBoolTuple, PurposeRestriction, PurposeRestrictionVector, RestrictionType, Vector} from '@internaltestiabtechlab/core';
+import {IdBoolTuple, PurposeRestriction, PurposeRestrictionVector, RestrictionType, Vector} from '@iabtechlabtcf/core';
 import {Restrictions} from './Restrictions.js';
 import {TCData} from './TCData.js';
 

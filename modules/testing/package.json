@@ -1,6 +1,6 @@
 {
-  "name": "@internaltestiabtechlab/testing",
-  "version": "1.5.8",
+  "name": "@iabtechlabtcf/testing",
+  "version": "1.5.7",
   "description": "Shared testing utilities",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://iabtcf.com/",
@@ -26,7 +26,7 @@
     "lint": "eslint `find src -name '*.ts'`"
   },
   "peerDependencies": {
-    "@internaltestiabtechlab/core": ">=1.0.0"
+    "@iabtechlabtcf/core": ">=1.0.0"
   },
   "dependencies": {
     "@types/sinon": "^10.0.11",

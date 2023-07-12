@@ -1,4 +1,4 @@
-import {GVL} from '@internaltestiabtechlab/core';
+import {GVL} from '@iabtechlabtcf/core';
 
 export class GVLFactory {
 

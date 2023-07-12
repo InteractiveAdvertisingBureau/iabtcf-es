@@ -1,8 +1,8 @@
 import {CmpApiModel} from '../../src/CmpApiModel';
-import {PurposeRestriction, TCString} from '@internaltestiabtechlab/core';
+import {PurposeRestriction, TCString} from '@iabtechlabtcf/core';
 import {TestUtils} from '../TestUtils';
 import {TCData} from '../../src/response/TCData';
-import {TCModelFactory, makeRandomInt, makeRandomIntArray} from '@internaltestiabtechlab/testing';
+import {TCModelFactory, makeRandomInt, makeRandomIntArray} from '@iabtechlabtcf/testing';
 import {expect} from 'chai';
 
 describe('response->TCData', (): void => {

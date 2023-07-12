@@ -1,4 +1,4 @@
-import * as stub from '@internaltestiabtechlab/stub';
+import * as stub from '@iabtechlabtcf/stub';
 import * as sinon from 'sinon';
 import {API_KEY, CmpApi} from '../src/';
 import {CmpApiModel} from '../src/CmpApiModel';
@@ -7,7 +7,7 @@ import {EventStatus} from '../src/status/EventStatus';
 import {TCFCommand} from '../src/command/TCFCommand';
 import {TestUtils} from './TestUtils';
 import {expect} from 'chai';
-import {makeRandomInt, TCStringFactory} from '@internaltestiabtechlab/testing';
+import {makeRandomInt, TCStringFactory} from '@iabtechlabtcf/testing';
 
 describe('Reported issues', (): void => {
 

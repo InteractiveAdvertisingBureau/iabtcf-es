@@ -3,7 +3,7 @@ import {CmpApiModel} from '../src/CmpApiModel';
 import {CommandCallback} from '../src/command/CommandCallback';
 import {TCData} from '../src/response/TCData';
 import {TCFCommand} from '../src/command';
-import {TCModelFactory} from '@internaltestiabtechlab/testing';
+import {TCModelFactory} from '@iabtechlabtcf/testing';
 import {expect} from 'chai';
 import * as sinon from 'sinon';
 

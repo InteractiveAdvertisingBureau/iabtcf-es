@@ -2,7 +2,7 @@
 
 /* eslint no-console: 0 */
 
-import {TCString, Vector} from '@internaltestiabtechlab/core';
+import {TCString, Vector} from '@iabtechlabtcf/core';
 
 const args = process.argv;
 let encoded = '';
