@@ -10,7 +10,7 @@
     "modules/cli",
     "modules/stub"
   ],
-  "author": "Chris Paterson <tcf@chrispaterson.io>",
+  "author": "Mayank Mishra <mayank@iabtechlab.com>",
   "homepage": "https://github.com/chrispaterson/iabtcf",
   "license": "Apache-2.0",
   "scripts": {
