@@ -1,8 +1,8 @@
 {
   "name": "@iabtechlabtcf/core",
-  "version": "1.5.7",
+  "version": "1.5.6",
   "description": "Ensures consistent encoding and decoding of TC Signals for the iab. Transparency and Consent Framework (TCF).",
-  "author": "Chris Paterson <tcf@chrispaterson.io>",
+  "author": "Mayank Mishra <mayank@iabtechlab.com>",
   "homepage": "https://iabtcf.com/",
   "license": "Apache-2.0",
   "type": "module",
