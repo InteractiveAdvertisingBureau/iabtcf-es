@@ -6,6 +6,12 @@ import {Vector} from '../src/model/Vector';
 import {GVL} from '../src/GVL';
 import {GVLFactory} from '../../testing/lib/mjs/GVLFactory';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+import vendorList24Json from '../../testing/lib/mjs/vendorlist/v2/vendor-list-v24.json';
+import {VersionOrVendorList} from '../lib/mjs';
+
+const vendorListJson: any = vendorList24Json as unknown as VersionOrVendorList;
+
 describe('TCModel', (): void => {
 
   const runValidTest = (fieldName: string, handler: () => void): void => {
@@ -110,7 +116,7 @@ describe('TCModel', (): void => {
 
     describe(fieldName, (): void => {
 
-      const gvl: GVL = new GVL(require('@iabtechlabtcf/testing/lib/vendorlist/v2/vendor-list.json'));
+      const gvl: GVL = new GVL(vendorListJson);
 
       it(`should create an instance of ${instanceName} as ${fieldName} on init`, (): void => {
 
@@ -220,7 +226,7 @@ describe('TCModel', (): void => {
 
   const runSetAllAndUnsetAll = (): void => {
 
-    const gvl: GVL = new GVL(require('@iabtechlabtcf/testing/lib/vendorlist/v2/vendor-list.json'));
+    const gvl: GVL = new GVL(vendorListJson);
 
     const loopGVLMap = (gvlKey: string, cb ): void => {
 
