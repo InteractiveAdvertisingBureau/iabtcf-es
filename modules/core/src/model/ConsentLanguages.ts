@@ -39,7 +39,7 @@ export class ConsentLanguages {
     'ZH',
   ]);
 
-  private has(key: string): boolean {
+  public has(key: string): boolean {
 
     return ConsentLanguages.langSet.has(key);
 
