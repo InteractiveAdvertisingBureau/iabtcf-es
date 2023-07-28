@@ -436,6 +436,34 @@ describe('GVL', (): void => {
 
   });
 
+  it('should replace the language when changeLanguage() is called with same language with different variant', () => {
+
+    GVL.baseUrl = 'http://sweetcmp.com';
+
+    const gvl: GVL = new GVL(vendorlistJson);
+    const language = 'pt-BR';
+
+    expect(gvl.language).to.equal(GVL.DEFAULT_LANGUAGE);
+
+    gvl.changeLanguage(language);
+
+    expect(XMLHttpTestTools.requests.length).to.equal(1);
+
+    const firstReq: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+
+    expect(firstReq.url).to.equal(GVL.baseUrl + GVL.languageFilename.replace('[LANG]', language));
+
+    const secLang = 'pt-PT';
+    gvl.changeLanguage(secLang);
+
+    expect(XMLHttpTestTools.requests.length).to.equal(2);
+
+    const secondReq: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[1];
+
+    expect(secondReq.url).to.equal(GVL.baseUrl + GVL.languageFilename.replace('[LANG]', secLang));
+
+  });
+
   const langNotOk = (language: string): void => {
 
     it(`should throw an error if ${language} is passed to changeLanguage()`, async (): Promise<void> => {
