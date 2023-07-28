@@ -7,9 +7,9 @@ import {XMLHttpTestTools} from '@iabtechlabtcf/testing';
 import {Json} from '../src/Json';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-import vendorListJson from '../../testing/lib/mjs/vendorlist/v2/vendor-list-v24.json';
+import vendorListJson from '../../testing/lib/mjs/vendorlist/vendor-list-v24.json';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-import translationJson from '../../testing/lib/mjs/vendorlist/v2/purposes-fr.json';
+import translationJson from '../../testing/lib/mjs/vendorlist/purposes-fr.json';
 import {VersionOrVendorList} from '../lib/mjs';
 import vendorlistJson22 from '../../testing/lib/vendorlist/v2.2/vendor-list.json');
 
