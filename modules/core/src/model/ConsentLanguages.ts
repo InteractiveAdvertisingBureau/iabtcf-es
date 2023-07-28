@@ -47,19 +47,27 @@ export class ConsentLanguages {
 
   public parseLanguage(lang: string): string {
 
-    lang = lang.toUpperCase();
+    if (lang.length >= 2) {
 
-    if (this.has(lang)) {
+      lang = lang.toUpperCase();
 
-      return lang;
+      const primaryLanguage = lang.split('-')[0];
 
-    }
+      for (const supportedLang of ConsentLanguages.langSet) {
 
-    const primaryLanguage = lang.split('-')[0];
+        if (supportedLang == primaryLanguage) {
 
-    if (this.has(primaryLanguage)) {
+          return primaryLanguage;
 
-      return primaryLanguage;
+        }
+
+        if (supportedLang.indexOf(lang) !== -1) {
+
+          return supportedLang;
+
+        }
+
+      }
 
     }
 

@@ -463,7 +463,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
       } else {
 
         // load Language specified
-        const url = GVL.baseUrl + GVL.languageFilename.replace('[LANG]', lang);
+        const url = GVL.baseUrl + GVL.languageFilename.replace('[LANG]', this.lang_.toLowerCase());
 
         try {
 
