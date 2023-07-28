@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   build-and-test:
-
+    timeout-minutes: 5
     runs-on: ubuntu-latest
 
     strategy:
