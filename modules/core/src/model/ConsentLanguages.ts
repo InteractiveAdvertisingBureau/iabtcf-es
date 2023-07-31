@@ -52,9 +52,7 @@ export class ConsentLanguages {
 
     if (lang.length >= 2 && primaryLanguage.length == 2) {
 
-      if (
-        ConsentLanguages.langSet.has(lang)
-      ) {
+      if (ConsentLanguages.langSet.has(lang)) {
 
         return lang;
 
