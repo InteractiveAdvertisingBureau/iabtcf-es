@@ -1,8 +1,8 @@
 [![InteractiveAdvertisingBureau](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es.svg?style=shield)](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es)
 
-# @iabtcf
+# @iabtechlabtcf
 
-Official JavaScript / TypeScript compliant tool suite for implementing the Transparency and Consent Framework (TCF) v2.0.  The essential toolkit for CMPs.
+Official JavaScript / TypeScript compliant tool suite for implementing the Transparency and Consent Framework (TCF) v2.2.  The essential toolkit for CMPs.
 
 This is a mono repo containing 5 modules:
 
