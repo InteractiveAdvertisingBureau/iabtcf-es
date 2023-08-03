@@ -7,10 +7,10 @@ import {GVL} from '../src/GVL';
 import {GVLFactory} from '../../testing/lib/mjs/GVLFactory';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-import vendorList24Json from '../../testing/lib/mjs/vendorlist/vendor-list-v24.json';
+import vendorListVersion24Json from '../../testing/lib/mjs/vendorlist/vendor-list-v24.json';
 import {VersionOrVendorList} from '../lib/mjs';
 
-const vendorListJson: any = vendorList24Json as unknown as VersionOrVendorList;
+const vendorListJson: any = vendorListVersion24Json as unknown as VersionOrVendorList;
 
 describe('TCModel', (): void => {
 
