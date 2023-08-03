@@ -436,51 +436,73 @@ describe('GVL', (): void => {
 
   });
 
-  it('should replace the language when changeLanguage() is called with most close to valid language', async (): Promise<void> => {
+  const langToTranslationsDataProvider = {
+    'ar': 'ar',
+    'bg': 'bg',
+    'bs': 'bs',
+    'ca': 'ca',
+    'cs': 'cs',
+    'da': 'da',
+    'de': 'de',
+    'el': 'el',
+    'es': 'es',
+    'et': 'et',
+    'eu': 'eu',
+    'fi': 'fi',
+    'fr': 'fr',
+    'gl': 'gl',
+    'hr': 'hr',
+    'hu': 'hu',
+    'it': 'it',
+    'ja': 'ja',
+    'lt': 'lt',
+    'lv': 'lv',
+    'mt': 'mt',
+    'nl': 'nl',
+    'no': 'no',
+    'pl': 'pl',
+    'pt': 'pt-pt',
+    'pt-pt': 'pt-pt',
+    'pt-br': 'pt-br',
+    'ro': 'ro',
+    'ru': 'ru',
+    'sk': 'sk',
+    'sl': 'sl',
+    'sr': 'sr-latn',
+    'sr-latn': 'sr-latn',
+    'sr-cyrl': 'sr-cyrl',
+    'sv': 'sv',
+    'tr': 'tr',
+    'zh': 'zh',
+  };
 
-    GVL.baseUrl = 'http://sweetcmp.com';
+  // eslint-disable-next-line guard-for-in
+  for (const providedLang in langToTranslationsDataProvider) {
 
-    const gvl: GVL = new GVL(vendorlistJson);
-    const language = 'pt';
+    it('should replace the language when changeLanguage() is called with most close to valid language for: ' + providedLang, async (): Promise<void> => {
 
-    expect(gvl.language).to.equal(GVL.DEFAULT_LANGUAGE);
+      GVL.baseUrl = 'http://sweetcmp.com';
 
-    const changePromise = gvl.changeLanguage(language);
+      const gvl: GVL = new GVL(vendorlistJson);
+      const language = providedLang;
 
-    expect(XMLHttpTestTools.requests.length).to.equal(1);
+      expect(gvl.language).to.equal(GVL.DEFAULT_LANGUAGE);
 
-    const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+      const changePromise = gvl.changeLanguage(language);
 
-    expect(req.url).to.equal(GVL.baseUrl + GVL.languageFilename.replace('[LANG]', `${language}-${language}`));
+      expect(XMLHttpTestTools.requests.length).to.equal(1);
 
-    req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(translationJson));
+      const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
 
-    await changePromise;
+      expect(req.url).to.equal(GVL.baseUrl + GVL.languageFilename.replace('[LANG]', `${langToTranslationsDataProvider[providedLang]}`));
 
-  });
+      req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(translationJson));
 
-  it('should request sr-latn as default when sr is provided', async (): Promise<void> => {
+      await changePromise;
 
-    GVL.baseUrl = 'http://sweetcmp.com';
+    });
 
-    const gvl: GVL = new GVL(vendorlistJson);
-    const language = 'sr';
-
-    expect(gvl.language).to.equal(GVL.DEFAULT_LANGUAGE);
-
-    const changePromise = gvl.changeLanguage(language);
-
-    expect(XMLHttpTestTools.requests.length).to.equal(1);
-
-    const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
-
-    expect(req.url).to.equal(GVL.baseUrl + GVL.languageFilename.replace('[LANG]', `${language}-latn`));
-
-    req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(translationJson));
-
-    await changePromise;
-
-  });
+  }
 
   it('should replace the language when changeLanguage() is called with same language with different variant', () => {
 
