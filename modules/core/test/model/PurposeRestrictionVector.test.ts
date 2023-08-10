@@ -180,7 +180,7 @@ export function run(): void {
       const restrictionType: number = RestrictionType.NOT_ALLOWED;
       const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
       // eslint-disable-next-line
-      const vendorlistJson = require('@iabtechlabtcf/testing/lib/vendorlist/purpose-restriction-vendor-list.json');
+      const vendorlistJson = require('@iabtechlabtcf/testing/lib/vendorlist/v2/purpose-restriction-vendor-list.json');
       const vendorIds = Object.keys(vendorlistJson.vendors);
       let chosenVendorId = 0;
 
@@ -217,7 +217,7 @@ export function run(): void {
       const restrictionType: number = RestrictionType.REQUIRE_CONSENT;
       const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
       // eslint-disable-next-line
-      const vendorlistJson = require('@iabtechlabtcf/testing/lib/vendorlist/purpose-restriction-vendor-list.json');
+      const vendorlistJson = require('@iabtechlabtcf/testing/lib/vendorlist/v2/purpose-restriction-vendor-list.json');
       const vendorIds = Object.keys(vendorlistJson.vendors);
       let chosenVendorId = 0;
 
@@ -254,7 +254,7 @@ export function run(): void {
       const restrictionType: number = RestrictionType.REQUIRE_LI;
       const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
       // eslint-disable-next-line
-      const vendorlistJson = require('@iabtechlabtcf/testing/lib/vendorlist/purpose-restriction-vendor-list.json');
+      const vendorlistJson = require('@iabtechlabtcf/testing/lib/vendorlist/v2/purpose-restriction-vendor-list.json');
       const vendorIds = Object.keys(vendorlistJson.vendors);
       let chosenVendorId = 0;
 
@@ -291,7 +291,7 @@ export function run(): void {
       const restrictionType: number = RestrictionType.NOT_ALLOWED;
       const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
       // eslint-disable-next-line
-      const vendorlistJson = require('@iabtechlabtcf/testing/lib/vendorlist/purpose-restriction-vendor-list.json');
+      const vendorlistJson = require('@iabtechlabtcf/testing/lib/vendorlist/v2/purpose-restriction-vendor-list.json');
       const vendorIds = Object.keys(vendorlistJson.vendors);
       let chosenVendorId = 0;
 

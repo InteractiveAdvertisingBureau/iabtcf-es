@@ -110,7 +110,7 @@ describe('TCModel', (): void => {
 
     describe(fieldName, (): void => {
 
-      const gvl: GVL = new GVL(require('@iabtechlabtcf/testing/lib/vendorlist/vendor-list.json'));
+      const gvl: GVL = new GVL(require('@iabtechlabtcf/testing/lib/vendorlist/v2/vendor-list.json'));
 
       it(`should create an instance of ${instanceName} as ${fieldName} on init`, (): void => {
 
@@ -220,7 +220,7 @@ describe('TCModel', (): void => {
 
   const runSetAllAndUnsetAll = (): void => {
 
-    const gvl: GVL = new GVL(require('@iabtechlabtcf/testing/lib/vendorlist/vendor-list.json'));
+    const gvl: GVL = new GVL(require('@iabtechlabtcf/testing/lib/vendorlist/v2/vendor-list.json'));
 
     const loopGVLMap = (gvlKey: string, cb ): void => {
 
