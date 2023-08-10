@@ -1,6 +1,6 @@
 {
   "name": "@iabtechlabtcf/cli",
-  "version": "1.5.7",
+  "version": "1.5.8",
   "description": "Decode a iab TCF (Transparency and Consent Framework) TC String via the command line",
   "author": "Mayank Mishra <mayank@iabtechlab.com>",
   "homepage": "https://iabtcf.com/",
