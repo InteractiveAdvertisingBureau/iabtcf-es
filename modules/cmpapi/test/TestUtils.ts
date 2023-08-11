@@ -68,7 +68,7 @@ export class TestUtils {
     expect(inAppTCData.tcString, 'tcString').to.equal(TCString.encode(tcModel));
     expect(inAppTCData.eventStatus, 'eventStatus').to.equal(CmpApiModel.eventStatus);
     expect(inAppTCData.isServiceSpecific, 'isServiceSpecific').to.equal(tcModel.isServiceSpecific);
-    expect(inAppTCData.useNonStandardStacks, 'useNonStandardStacks').to.equal(tcModel.useNonStandardStacks);
+    expect(inAppTCData.useNonStandardTexts, 'useNonStandardTexts').to.equal(tcModel.useNonStandardTexts);
     expect(inAppTCData.purposeOneTreatment, 'purposeOneTreatment').to.equal(tcModel.purposeOneTreatment);
     expect(inAppTCData.publisherCC, 'publisherCC').to.equal(tcModel.publisherCountryCode);
     expect(inAppTCData.outOfBand, 'outOfBand').to.be.undefined;
@@ -141,7 +141,7 @@ export class TestUtils {
     expect(tcData.eventStatus, 'eventStatus').to.equal(CmpApiModel.eventStatus);
     expect(tcData.cmpStatus, 'cmpStatus').to.equal(CmpApiModel.cmpStatus);
     expect(tcData.isServiceSpecific, 'isServiceSpecific').to.equal(tcModel.isServiceSpecific);
-    expect(tcData.useNonStandardStacks, 'useNonStandardStacks').to.equal(tcModel.useNonStandardStacks);
+    expect(tcData.useNonStandardTexts, 'useNonStandardTexts').to.equal(tcModel.useNonStandardTexts);
     expect(tcData.purposeOneTreatment, 'purposeOneTreatment').to.equal(tcModel.purposeOneTreatment);
     expect(tcData.publisherCC, 'publisherCC').to.equal(tcModel.publisherCountryCode);
 
