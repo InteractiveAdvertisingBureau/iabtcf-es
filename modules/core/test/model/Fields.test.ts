@@ -26,7 +26,7 @@ describe('model->Fields', (): void => {
       purposeLegitimateInterests: 'purposeLegitimateInterests',
       purposeOneTreatment: 'purposeOneTreatment',
       specialFeatureOptins: 'specialFeatureOptins',
-      useNonStandardStacks: 'useNonStandardStacks',
+      useNonStandardTexts: 'useNonStandardTexts',
       vendorConsents: 'vendorConsents',
       vendorLegitimateInterests: 'vendorLegitimateInterests',
       vendorListVersion: 'vendorListVersion',
