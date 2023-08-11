@@ -14,7 +14,7 @@ export class TCData extends Response {
   public eventStatus: EventStatus;
   public cmpStatus: CmpStatus;
   public isServiceSpecific: Booleany;
-  public useNonStandardStacks: Booleany;
+  public useNonStandardTexts: Booleany;
   public publisherCC: string;
   public purposeOneTreatment: Booleany;
 
@@ -76,7 +76,7 @@ export class TCData extends Response {
 
       this.tcString = CmpApiModel.tcString;
       this.isServiceSpecific = tcModel.isServiceSpecific;
-      this.useNonStandardStacks = tcModel.useNonStandardStacks;
+      this.useNonStandardTexts = tcModel.useNonStandardTexts;
       this.purposeOneTreatment = tcModel.purposeOneTreatment;
       this.publisherCC = tcModel.publisherCountryCode;
 

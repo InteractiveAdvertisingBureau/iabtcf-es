@@ -20,7 +20,7 @@ export function FieldEncoderMap(): object {
     [Fields.vendorListVersion]: IntEncoder,
     [Fields.policyVersion]: IntEncoder,
     [Fields.isServiceSpecific]: BooleanEncoder,
-    [Fields.useNonStandardStacks]: BooleanEncoder,
+    [Fields.useNonStandardTexts]: BooleanEncoder,
     [Fields.specialFeatureOptins]: FixedVectorEncoder,
     [Fields.purposeConsents]: FixedVectorEncoder,
     [Fields.purposeLegitimateInterests]: FixedVectorEncoder,
