@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {DataCategory} from '../../../src/model/gvl/DataCategory';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const vendorlistJson = require('@iabtechlabtcf/testing/lib/vendorlist/v2.2/vendor-list.json');
+import vendorlistJson from '../../../../testing/lib/mjs/vendorlist/v2.2/vendor-list.json' assert { type: 'json' };
 
 export function run(): void {
 
