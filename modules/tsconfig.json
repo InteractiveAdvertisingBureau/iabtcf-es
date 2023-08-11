@@ -4,7 +4,8 @@
     "rootDir": "src",
     "outDir": "lib/mjs",
     "module": "esnext",
-    "target": "esnext"
+    "target": "esnext",
+    "resolveJsonModule": true
   },
   "exclude": [
     "node_modules"

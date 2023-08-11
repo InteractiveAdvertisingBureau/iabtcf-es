@@ -6,8 +6,7 @@ import {Vector} from '../src/model/Vector';
 import {GVL} from '../src/GVL';
 import {GVLFactory} from '../../testing/lib/mjs/GVLFactory';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-import vendorListVersion24Json from '../../testing/lib/mjs/vendorlist/vendor-list-v24.json';
+import vendorListVersion24Json from '../../testing/lib/mjs/vendorlist/v2/vendor-list-v24.json' assert { type: 'json' };
 import {VersionOrVendorList} from '../lib/mjs';
 
 const vendorListJson: any = vendorListVersion24Json as unknown as VersionOrVendorList;
