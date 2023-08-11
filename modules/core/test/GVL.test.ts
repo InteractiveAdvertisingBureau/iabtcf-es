@@ -6,12 +6,13 @@ import {IntMap} from '../src/model/IntMap';
 import {XMLHttpTestTools} from '@iabtechlabtcf/testing';
 import {Json} from '../src/Json';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const vendorlistJson = require('@iabtechlabtcf/testing/lib/vendorlist/v2/vendor-list-v24.json');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const translationJson = require('@iabtechlabtcf/testing/lib/vendorlist/v2/purposes-fr.json');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const vendorlistJson22 = require('@iabtechlabtcf/testing/lib/vendorlist/v2.2/vendor-list.json');
+import vendorListJson from '../../testing/lib/mjs/vendorlist/v2/vendor-list-v24.json' assert { type: 'json' };
+import translationJson from '../../testing/lib/mjs/vendorlist/v2/purposes-fr.json' assert { type: 'json' };
+import vendorListJson22 from '../../testing/lib/mjs/vendorlist/v2.2/vendor-list.json' assert { type: 'json' };
+import {VersionOrVendorList} from '../lib/mjs';
+
+const vendorlistJson: any = vendorListJson as unknown as VersionOrVendorList;
+const vendorlistJson22: any = vendorListJson22 as unknown as VersionOrVendorList;
 
 describe('GVL', (): void => {
 
@@ -129,7 +130,7 @@ describe('GVL', (): void => {
 
   it('should clone all values', (): void => {
 
-    const gvl: GVL = new GVL(vendorlistJson);
+    const gvl: GVL = new GVL(vendorlistJson as unknown as VersionOrVendorList);
     const clone: GVL = gvl.clone();
 
     assertPopulated(gvl);
