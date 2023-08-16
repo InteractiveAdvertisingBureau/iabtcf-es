@@ -931,6 +931,11 @@
   dependencies:
     "@cspotcode/source-map-consumer" "0.8.0"
 
+"@didomi/iabtcf-core@1.5.6":
+  version "1.5.6"
+  resolved "https://registry.yarnpkg.com/@didomi/iabtcf-core/-/iabtcf-core-1.5.6.tgz#44052a6a44a3802507c6ff2921a8a57571371b9a"
+  integrity sha512-RZUDtEG3FTk1onyFW5jcHwe3HKKBl0u1DLWiU1MAoB2I97bC+ZQJxjMa+7ZPlONojXOc1+qLg3jQbzJ5nr6G4Q==
+
 "@eslint/eslintrc@^0.4.3":
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-0.4.3.tgz#9e42981ef035beb3dd49add17acb96e8ff6f394c"

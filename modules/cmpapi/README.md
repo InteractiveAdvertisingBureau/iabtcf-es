@@ -1,9 +1,9 @@
-[![NPM version](https://img.shields.io/npm/v/@iabtcf/cmpapi.svg?style=flat-square)](https://www.npmjs.com/package/@iabtcf/cmpapi)
-[![npm module downloads per month](http://img.shields.io/npm/dm/@iabtcf/cmpapi.svg?style=flat)](https://www.npmjs.org/package/@iabtcf/cmpapi)
-[![InteractiveAdvertisingBureau](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es.svg?style=shield)](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es)
+[![NPM version](https://img.shields.io/npm/v/@iabtechlabtcf/cmpapi.svg?style=flat-square)](https://www.npmjs.com/package/@iabtechlabtcf/cmpapi)
+[![npm module downloads per month](http://img.shields.io/npm/dm/@iabtechlabtcf/cmpapi.svg?style=flat)](https://www.npmjs.org/package/@iabtechlabtcf/cmpapi)
+[![InteractiveAdvertisingBureau](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtechlabtcf-es.svg?style=shield)](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtechlabtcf-es)
 
 
-# @iabtcf/cmpapi
+# @iabtechlabtcf/cmpapi
 
 Ensures other in-page digital marketing technologies have access to CMP transparency and consent information for the [IAB's Transparency and Consent Framework (TCF)](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework).
 
@@ -16,12 +16,12 @@ The process involves setting the state of a few properties and/or a validly ecno
 
 npm
 ```
-npm install @iabtcf/cmpapi --save
+npm install @iabtechlabtcf/cmpapi --save
 ```
 
 yarn
 ```
-yarn add @iabtcf/cmpapi
+yarn add @iabtechlabtcf/cmpapi
 ```
 
 
@@ -33,7 +33,7 @@ To create an instance of the CmpApi. Pass in your Cmp ID (assigned by IAB) and t
 A [custom commands object map](#custom-commands) may optionally be passed to extend the page-call functionality as well.
 
 ````javascript
-import {CmpApi} from '@iabtcf/cmpapi';
+import {CmpApi} from '@iabtechlabtcf/cmpapi';
 
 const cmpApi = new CmpApi(1, 3, true);
 ````
@@ -139,7 +139,7 @@ the calling script.
 **Example**
 ````javascript
 
-import {CmpApi} from '@iabtcf/cmpapi';
+import {CmpApi} from '@iabtechlabtcf/cmpapi';
 
 const cmpApi = new CmpApi(1, 3, false, {
 
@@ -186,7 +186,7 @@ Beginning in 1.1.0, if a custom command is defined that overlaps with a built-in
 **Example**
 ````javascript
 
-import {CmpApi} from '@iabtcf/cmpapi';
+import {CmpApi} from '@iabtechlabtcf/cmpapi';
 
 const cmpApi = new CmpApi(1, 3, false, {
 

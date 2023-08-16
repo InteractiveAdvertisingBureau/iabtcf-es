@@ -1,6 +1,6 @@
 {
-  "name": "iabtcf",
-  "version": "1.5.6",
+  "name": "iabtechlabtcf",
+  "version": "1.5.8",
   "description": "Official compliant tool suite for implementing the iab. Transparency and Consent Framework (TCF).",
   "private": true,
   "workspaces": [
@@ -10,7 +10,7 @@
     "modules/cli",
     "modules/stub"
   ],
-  "author": "Chris Paterson <tcf@chrispaterson.io>",
+  "author": "Mayank Mishra <mayank@iabtechlab.com>",
   "homepage": "https://github.com/chrispaterson/iabtcf",
   "license": "Apache-2.0",
   "scripts": {

@@ -1,8 +1,8 @@
 {
   "name": "@didomi/iabtcf-testing",
-  "version": "1.5.6",
+  "version": "1.5.8",
   "description": "Shared testing utilities",
-  "author": "Chris Paterson <tcf@chrispaterson.io>",
+  "author": "Mayank Mishra <mayank@iabtechlab.com>",
   "homepage": "https://iabtcf.com/",
   "license": "Apache-2.0",
   "type": "module",
@@ -13,7 +13,8 @@
       "import": "./lib/mjs/index.js",
       "require": "./lib/cjs/index.js"
     },
-    "./lib/vendorlist/*.json": "./lib/mjs/vendorlist/*.json"
+    "./lib/vendorlist/v2/*.json": "./lib/mjs/vendorlist/v2/*.json",
+    "./lib/vendorlist/v2.2/*.json": "./lib/mjs/vendorlist/v2.2/*.json"
   },
   "types": "lib/mjs/index.d.ts",
   "files": [

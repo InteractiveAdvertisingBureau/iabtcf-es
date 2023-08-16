@@ -9,16 +9,16 @@ const __dirname = path.dirname(__filename);
 
 export class GVLFactory {
 
-  public static getVersion(version: number): GVL {
+  public static getVersion(version: number, schema = 'v2'): GVL {
 
-    const json = JSON.parse(fs.readFileSync(__dirname + `/vendorlist/vendor-list-v${version}.json`).toString());
+    const json = JSON.parse(fs.readFileSync(__dirname + `/vendorlist/${schema}/vendor-list-v${version}.json`).toString());
     return new GVL(json);
 
   }
 
-  public static getLatest(): GVL {
+  public static getLatest(schema = 'v2'): GVL {
 
-    const json = JSON.parse(fs.readFileSync(__dirname + '/vendorlist/vendor-list.json').toString());
+    const json = JSON.parse(fs.readFileSync(__dirname + `/vendorlist/${schema}/vendor-list.json`).toString());
     return new GVL(json);
 
   }

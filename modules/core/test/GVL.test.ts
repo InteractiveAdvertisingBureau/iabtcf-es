@@ -7,30 +7,32 @@ import {XMLHttpTestTools} from '@didomi/iabtcf-testing';
 import {Json} from '../src/Json';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const vendorlistJson = require('@didomi/iabtcf-testing/lib/vendorlist/vendor-list-v24.json');
+const vendorlistJson = require('@didomi/iabtcf-testing/lib/vendorlist/v2/vendor-list-v24.json');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const translationJson = require('@didomi/iabtcf-testing/lib/vendorlist/purposes-fr.json');
+const translationJson = require('@didomi/iabtcf-testing/lib/vendorlist/v2/purposes-fr.json');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const vendorlistJson22 = require('@didomi/iabtcf-testing/lib/vendorlist/v2.2/vendor-list.json');
 
 describe('GVL', (): void => {
 
-  const assertPopulated = (gvl: GVL): void => {
+  const assertPopulated = (gvl: GVL, json = vendorlistJson): void => {
 
-    Object.keys(vendorlistJson).forEach((key: string): void => {
+    Object.keys(json).forEach((key: string): void => {
 
       const msg = `assertPopulated(): gvl.${key}]`;
 
       if (key === 'lastUpdated') {
 
         expect((gvl[key] as Date).getTime(), msg)
-          .to.equal((new Date(vendorlistJson.lastUpdated).getTime()));
+          .to.equal((new Date(json.lastUpdated).getTime()));
 
-      } else if (typeof vendorlistJson[key] === 'object') {
+      } else if (typeof json[key] === 'object') {
 
-        expect(gvl[key], msg).to.deep.equal(vendorlistJson[key]);
+        expect(gvl[key], msg).to.deep.equal(json[key]);
 
       } else {
 
-        expect(gvl[key], msg).to.equal(vendorlistJson[key]);
+        expect(gvl[key], msg).to.equal(json[key]);
 
       }
 
@@ -117,6 +119,14 @@ describe('GVL', (): void => {
 
   });
 
+  it('should propogate all values with passed in json for version 2.2', (): void => {
+
+    const gvl: GVL = new GVL(vendorlistJson22);
+
+    assertPopulated(gvl, vendorlistJson22);
+
+  });
+
   it('should clone all values', (): void => {
 
     const gvl: GVL = new GVL(vendorlistJson);
@@ -124,6 +134,16 @@ describe('GVL', (): void => {
 
     assertPopulated(gvl);
     assertPopulated(clone);
+
+  });
+
+  it('should clone all values for version 2.2', (): void => {
+
+    const gvl: GVL = new GVL(vendorlistJson22);
+    const clone: GVL = gvl.clone();
+
+    assertPopulated(gvl, vendorlistJson22);
+    assertPopulated(clone, vendorlistJson22);
 
   });
 

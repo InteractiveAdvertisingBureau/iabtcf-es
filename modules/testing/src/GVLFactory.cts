@@ -2,15 +2,15 @@ import {GVL} from '@didomi/iabtcf-core';
 
 export class GVLFactory {
 
-  public static getVersion(version: number): GVL {
+  public static getVersion(version: number, schema = 'v2'): GVL {
 
-    return new GVL(require(`./vendorlist/vendor-list-v${version}.json`));
+    return new GVL(require(`./vendorlist/${schema}/vendor-list-v${version}.json`));
 
   }
 
-  public static getLatest(): GVL {
+  public static getLatest(schema = 'v2'): GVL {
 
-    return new GVL(require('./vendorlist/vendor-list.json'));
+    return new GVL(require(`./vendorlist/${schema}/vendor-list.json`));
 
   }
 

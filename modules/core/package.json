@@ -1,8 +1,8 @@
 {
   "name": "@didomi/iabtcf-core",
-  "version": "1.5.7",
+  "version": "1.5.8",
   "description": "Ensures consistent encoding and decoding of TC Signals for the iab. Transparency and Consent Framework (TCF).",
-  "author": "Chris Paterson <tcf@chrispaterson.io>",
+  "author": "Mayank Mishra <mayank@iabtechlab.com>",
   "homepage": "https://iabtcf.com/",
   "license": "Apache-2.0",
   "type": "module",
@@ -28,7 +28,7 @@
     "test-cov": "rm -rf coverage; nyc --reporter=html mocha"
   },
   "devDependencies": {
-    "@didomi/iabtcf-testing": "1.5.6",
+    "@didomi/iabtcf-testing": "1.5.7",
     "@istanbuljs/nyc-config-typescript": "^0.1.3",
     "@types/sinon": "^10.0.11",
     "@types/sinon-chai": "3.2.8",
