@@ -28,7 +28,7 @@
     "test-cov": "rm -rf coverage; nyc --reporter=html mocha"
   },
   "devDependencies": {
-    "@iabtechlabtcf/testing": "1.5.7",
+    "@iabtechlabtcf/testing": "1.5.8",
     "@istanbuljs/nyc-config-typescript": "^0.1.3",
     "@types/sinon": "^10.0.11",
     "@types/sinon-chai": "3.2.8",

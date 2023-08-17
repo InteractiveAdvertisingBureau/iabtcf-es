@@ -31,8 +31,8 @@
     "@iabtechlabtcf/core": ">=1.0.0"
   },
   "devDependencies": {
-    "@iabtechlabtcf/stub": "1.5.7",
-    "@iabtechlabtcf/testing": "1.5.7",
+    "@iabtechlabtcf/stub": "1.5.8",
+    "@iabtechlabtcf/testing": "1.5.8",
     "@istanbuljs/nyc-config-typescript": "^0.1.3",
     "@types/mocha": "^9.1.0",
     "@types/sinon": "10.0.11",

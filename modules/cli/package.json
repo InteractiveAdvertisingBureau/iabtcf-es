@@ -27,7 +27,7 @@
     "lint": "eslint `find src -name '*.ts'`"
   },
   "dependencies": {
-    "@iabtechlabtcf/core": "1.5.7"
+    "@iabtechlabtcf/core": "1.5.8"
   },
   "devDependencies": {
     "@types/node": "^17.0.18",
