@@ -442,6 +442,13 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
     const cacheLang = lang.toUpperCase();
 
+    // Default language EN can be loaded only by default GVL
+    if (parsedLanguage.toLowerCase() === GVL.DEFAULT_LANGUAGE.toLowerCase() && !GVL.LANGUAGE_CACHE.has(cacheLang)) {
+
+      return;
+
+    }
+
     if (parsedLanguage !== this.lang_) {
 
       this.lang_ = parsedLanguage;
