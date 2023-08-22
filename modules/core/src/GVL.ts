@@ -442,37 +442,41 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
     const cacheLang = lang.toUpperCase();
 
-    this.lang_ = parsedLanguage;
+    if (parsedLanguage !== this.lang_) {
 
-    if (GVL.LANGUAGE_CACHE.has(cacheLang)) {
+      this.lang_ = parsedLanguage;
 
-      const cached: Declarations = GVL.LANGUAGE_CACHE.get(cacheLang) as Declarations;
+      if (GVL.LANGUAGE_CACHE.has(cacheLang)) {
 
-      for (const prop in cached) {
+        const cached: Declarations = GVL.LANGUAGE_CACHE.get(cacheLang) as Declarations;
 
-        if (cached.hasOwnProperty(prop)) {
+        for (const prop in cached) {
 
-          this[prop] = cached[prop];
+          if (cached.hasOwnProperty(prop)) {
+
+            this[prop] = cached[prop];
+
+          }
 
         }
 
-      }
+      } else {
 
-    } else {
+        // load Language specified
+        const url = GVL.baseUrl + GVL.languageFilename.replace('[LANG]', this.lang_.toLowerCase());
 
-      // load Language specified
-      const url = GVL.baseUrl + GVL.languageFilename.replace('[LANG]', this.lang_.toLowerCase());
+        try {
 
-      try {
+          await this.fetchJson(url);
 
-        await this.fetchJson(url);
+          this.cacheLang_ = cacheLang;
+          this.cacheLanguage();
 
-        this.cacheLang_ = cacheLang;
-        this.cacheLanguage();
+        } catch (err) {
 
-      } catch (err) {
+          throw new GVLError('unable to load language: ' + err.message);
 
-        throw new GVLError('unable to load language: ' + err.message);
+        }
 
       }
 
