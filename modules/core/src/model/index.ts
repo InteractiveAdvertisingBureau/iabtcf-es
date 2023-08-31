@@ -1,4 +1,3 @@
-export * from './BinarySearchTree.js';
 export * from './ConsentLanguages.js';
 export * from './Fields.js';
 export * from './IntMap.js';
