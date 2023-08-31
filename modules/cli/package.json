@@ -27,16 +27,17 @@
     "lint": "eslint `find src -name '*.ts'`"
   },
   "dependencies": {
-    "@iabtechlabtcf/core": "1.5.7"
+    "@iabtechlabtcf/core": "1.5.8"
   },
   "devDependencies": {
-    "@types/node": "^17.0.18",
+    "@types/node": "18.17.4",
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^5.12.0",
     "eslint": "6.8.0",
     "source-map-support": "^0.5.12",
-    "ts-node": "^10.5.0",
-    "typescript": "^4.5.5"
+    "ts-node": "10.9.1",
+    "typedoc": "0.24.8",
+    "typescript": "4.9.5"
   },
   "eslintIgnore": [
     "lib"
