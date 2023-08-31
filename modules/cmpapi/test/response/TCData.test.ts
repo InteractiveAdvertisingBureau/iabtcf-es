@@ -37,7 +37,7 @@ describe('response->TCData', (): void => {
     expect(tcData.cmpStatus, 'cmpStatus').to.equal(CmpApiModel.cmpStatus);
 
     expect(tcData.isServiceSpecific, 'isServiceSpecific').to.be.undefined;
-    expect(tcData.useNonStandardStacks, 'useNonStandardStacks').to.be.undefined;
+    expect(tcData.useNonStandardTexts, 'useNonStandardTexts').to.be.undefined;
     expect(tcData.purposeOneTreatment, 'purposeOneTreatment').to.be.undefined;
     expect(tcData.publisherCC, 'publisherCC').to.be.undefined;
 

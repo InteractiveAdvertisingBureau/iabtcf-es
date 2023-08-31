@@ -198,7 +198,7 @@ describe('TCModel', (): void => {
   testDate('lastUpdated');
 
   testBoolean('isServiceSpecific');
-  testBoolean('useNonStandardStacks');
+  testBoolean('useNonStandardTexts');
 
   testInstanceOf('purposeConsents', Vector);
   testInstanceOf('purposeLegitimateInterests', Vector);

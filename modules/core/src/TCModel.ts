@@ -16,7 +16,7 @@ export class TCModel extends Cloneable<TCModel> {
 
   private isServiceSpecific_ = false;
   private supportOOB_ = true;
-  private useNonStandardStacks_ = false;
+  private useNonStandardTexts_ = false;
   private purposeOneTreatment_ = false;
   private publisherCountryCode_ = 'AA';
   private version_ = 2;
@@ -434,15 +434,15 @@ export class TCModel extends Cloneable<TCModel> {
    *
    * @param {boolean} bool - value to set
    */
-  public set useNonStandardStacks(bool: boolean) {
+  public set useNonStandardTexts(bool: boolean) {
 
-    this.useNonStandardStacks_ = bool;
+    this.useNonStandardTexts_ = bool;
 
   }
 
-  public get useNonStandardStacks(): boolean {
+  public get useNonStandardTexts(): boolean {
 
-    return this.useNonStandardStacks_;
+    return this.useNonStandardTexts_;
 
   }
 

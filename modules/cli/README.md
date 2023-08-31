@@ -32,7 +32,7 @@ created: Mon Dec 09 2019 00:00:00 GMT
 lastUpdated: Mon Dec 09 2019 00:00:00 GMT
 policyVersion: 2
 isServiceSpecific: false
-useNonStandardStacks: false
+useNonStandardTexts: false
 purposeOneTreatment: false
 publisherCountryCode: "ES"
 supportOOB: false
