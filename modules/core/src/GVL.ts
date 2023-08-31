@@ -227,6 +227,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
   public dataCategories?: IntMap<DataCategory>;
 
   private lang_: string;
+  private cacheLang_: string;
 
   private isLatest = false;
 
@@ -247,6 +248,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
     let url = GVL.baseUrl;
 
     this.lang_ = GVL.DEFAULT_LANGUAGE;
+    this.cacheLang_ = GVL.DEFAULT_LANGUAGE;
 
     if (this.isVendorList(versionOrVendorList as GVL)) {
 
@@ -308,28 +310,28 @@ export class GVL extends Cloneable<GVL> implements VendorList {
   /**
    * emptyLanguageCache
    *
-   * @param {string} [lang] - Optional ISO 639-1 langauge code to remove from
+   * @param {string} [lang] - Optional language code to remove from
    * the cache.  Should be one of the languages in GVL.consentLanguages set.
    * If not then the whole cache will be deleted.
    * @return {boolean} - true if anything was deleted from the cache
    */
   public static emptyLanguageCache(lang?: string): boolean {
 
-    let retr = false;
+    let result = false;
 
-    if (lang === undefined && GVL.LANGUAGE_CACHE.size > 0) {
+    if (lang == null && GVL.LANGUAGE_CACHE.size > 0) {
 
       GVL.LANGUAGE_CACHE = new Map<string, Declarations>();
-      retr = true;
+      result = true;
 
     } else if (typeof lang === 'string' && this.consentLanguages.has(lang.toUpperCase())) {
 
       GVL.LANGUAGE_CACHE.delete(lang.toUpperCase());
-      retr = true;
+      result = true;
 
     }
 
-    return retr;
+    return result;
 
   }
 
@@ -362,9 +364,9 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
   private cacheLanguage(): void {
 
-    if (!GVL.LANGUAGE_CACHE.has(this.lang_)) {
+    if (!GVL.LANGUAGE_CACHE.has(this.cacheLang_)) {
 
-      GVL.LANGUAGE_CACHE.set(this.lang_, {
+      GVL.LANGUAGE_CACHE.set(this.cacheLang_, {
         purposes: this.purposes,
         specialPurposes: this.specialPurposes,
         features: this.features,
@@ -420,58 +422,70 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    * changeLanguage - retrieves the purpose language translation and sets the
    * internal language variable
    *
-   * @param {string} lang - ISO 639-1 langauge code to change language to
+   * @param {string} lang - language code to change language to
    * @return {Promise<void | GVLError>} - returns the `readyPromise` and
    * resolves when this GVL is populated with the data from the language file.
    */
   public async changeLanguage(lang: string): Promise<void | GVLError> {
 
-    const langUpper = lang.toUpperCase();
+    let parsedLanguage: string = lang;
 
-    if (GVL.consentLanguages.has(langUpper)) {
+    try {
 
-      if (langUpper !== this.lang_) {
+      parsedLanguage = GVL.consentLanguages.parseLanguage(lang);
 
-        this.lang_ = langUpper;
+    } catch (e) {
 
-        if (GVL.LANGUAGE_CACHE.has(langUpper)) {
+      throw new GVLError('Error during parsing the language: ' + e.message);
 
-          const cached: Declarations = GVL.LANGUAGE_CACHE.get(langUpper) as Declarations;
+    }
 
-          for (const prop in cached) {
+    const cacheLang = lang.toUpperCase();
 
-            if (cached.hasOwnProperty(prop)) {
+    // Default language EN can be loaded only by default GVL
+    if (parsedLanguage.toLowerCase() === GVL.DEFAULT_LANGUAGE.toLowerCase() && !GVL.LANGUAGE_CACHE.has(cacheLang)) {
 
-              this[prop] = cached[prop];
+      return;
 
-            }
+    }
 
-          }
+    if (parsedLanguage !== this.lang_) {
 
-        } else {
+      this.lang_ = parsedLanguage;
 
-          // load Language specified
-          const url = GVL.baseUrl + GVL.languageFilename.replace('[LANG]', lang);
+      if (GVL.LANGUAGE_CACHE.has(cacheLang)) {
 
-          try {
+        const cached: Declarations = GVL.LANGUAGE_CACHE.get(cacheLang) as Declarations;
 
-            await this.fetchJson(url);
+        for (const prop in cached) {
 
-            this.cacheLanguage();
+          if (cached.hasOwnProperty(prop)) {
 
-          } catch (err) {
-
-            throw new GVLError('unable to load language: ' + err.message);
+            this[prop] = cached[prop];
 
           }
 
         }
 
+      } else {
+
+        // load Language specified
+        const url = GVL.baseUrl + GVL.languageFilename.replace('[LANG]', this.lang_.toLowerCase());
+
+        try {
+
+          await this.fetchJson(url);
+
+          this.cacheLang_ = cacheLang;
+          this.cacheLanguage();
+
+        } catch (err) {
+
+          throw new GVLError('unable to load language: ' + err.message);
+
+        }
+
       }
-
-    } else {
-
-      throw new GVLError(`unsupported language ${lang}`);
 
     }
 

@@ -171,7 +171,7 @@ export class SemanticPreEncoder {
     }
 
     tcModel = tcModel.clone();
-    tcModel.consentLanguage = gvl.language.toUpperCase();
+    tcModel.consentLanguage = gvl.language.slice(0, 2).toUpperCase();
 
     if (options?.version > 0 && options?.version <= this.processor.length) {
 
