@@ -25,7 +25,8 @@
     "debug": "ndb mocha --no-timeouts",
     "serve:cov": "npx http-server ./coverage/",
     "test": "mocha",
-    "test-cov": "rm -rf coverage; nyc --reporter=html mocha"
+    "test-cov": "rm -rf coverage; nyc --reporter=html mocha",
+    "test-ci": "mocha --reporter mocha-junit-reporter"
   },
   "peerDependencies": {
     "@iabtechlabtcf/core": ">=1.0.0"
