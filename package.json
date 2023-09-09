@@ -25,7 +25,7 @@
     "preflight": "yarn build && yarn test",
     "serve-cov": "npx http-server ./coverage/",
     "test-cov": "rm -rf coverage; nyc --reporter html mocha",
-    "test-ci": "mocha --reporter mocha-junit-reporter"
+    "test-ci": "yarn workspace @iabtechlabtcf/core test-ci && yarn workspace @iabtechlabtcf/cmpapi test-ci"
   },
   "keywords": [
     "interactive",
