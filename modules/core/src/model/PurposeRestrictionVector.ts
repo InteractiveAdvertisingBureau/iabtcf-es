@@ -55,7 +55,7 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
           switch (restrictionType) {
 
-            /**
+              /**
                * If the vendor has the purposeId in flexiblePurposes and it is
                * listed as a legitimate interest purpose we can set the
                * override to require consent.
@@ -135,37 +135,33 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
    */
   public restrictPurposeToLegalBasis(purposeRestriction: PurposeRestriction): void {
 
-    const vendors = this.gvl.vendorIds;
+    const vendors = Array.from(this.gvl.vendorIds);
     const hash: string = purposeRestriction.hash;
-    const lastEntry = (function(): number {
-
-      let value: number;
-      for (value of vendors);
-      return value;
-
-    })();
+    const lastEntry = vendors[vendors.length - 1];
 
     /**
      * Create an ordered array of vendor IDs from `1` (the minimum value for Vendor ID) to `lastEntry`
      */
     const values = [...Array(lastEntry).keys()].map( (i) => i + 1);
 
-    for (let i = 1; i <= lastEntry; i++) {
+    if (!this.has(hash)) {
 
-      if (!this.has(hash)) {
+      this.map.set(hash, new Set(values)); // use static method `build` to create a `BST` from the ordered array of IDs
+      this.bitLength = 0;
 
-        this.map.set(hash, new Set(values)); // use static method `build` to create a `BST` from the ordered array of IDs
-        this.bitLength = 0;
+    } else {
+
+      for (let i = 1; i <= lastEntry; i++) {
+
+        /**
+         * Previously I had a check here to remove a duplicate value, but because
+         * we're using a tree the value is guaranteed to be unique so there is no
+         * need to add an additional de-duplication here.
+         */
+
+        this.map.get(hash).add(i);
 
       }
-
-      /**
-       * Previously I had a check here to remove a duplicate value, but because
-       * we're using a tree the value is guaranteed to be unique so there is no
-       * need to add an additional de-duplication here.
-       */
-
-      this.map.get(hash).add(i);
 
     }
 
