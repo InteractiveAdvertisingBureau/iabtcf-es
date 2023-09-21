@@ -14,16 +14,19 @@ export class PurposeRestrictionVectorEncoder {
     // if the vector is empty we'll just return a string with just the numRestricitons being 0
     if (!prVector.isEmpty()) {
 
-      const gvlVendorIds = Array.from(prVector.gvl.vendorIds);
+      const nextGvlVendor = (vendorId, lastVendorId): number => {
 
-      const gvlHasVendorBetween = (vendorId: number, nextVendorId: number): boolean => {
+        for (let nextId = vendorId + 1; nextId <= lastVendorId; nextId++) {
 
-        const firstIndex = gvlVendorIds.indexOf(vendorId);
-        const nextIndex = gvlVendorIds.indexOf(nextVendorId);
+          if (prVector.gvl.vendorIds.has(nextId)) {
 
-        const res = nextIndex - firstIndex;
+            return nextId;
 
-        return res > 1;
+          }
+
+        }
+
+        return vendorId;
 
       };
 
@@ -60,7 +63,7 @@ export class PurposeRestrictionVectorEncoder {
           /**
            * either end of the loop or there are GVL vendor IDs before the next one
            */
-          if (i === len - 1 || gvlHasVendorBetween(vendorId, vendors[i + 1])) {
+          if (i === len - 1 || vendors[i + 1] > nextGvlVendor(vendorId, vendors[len - 1])) {
 
             /**
              * it's a range entry if we've got something other than the start
@@ -141,13 +144,15 @@ export class PurposeRestrictionVectorEncoder {
 
           }
 
-          // required to preserve the default behavior (includes also vendors ids that doesn't exist)
-          const vendorIds = Array.from({length: endVendorId - startOrOnlyVendorId + 1}, (_, index) => startOrOnlyVendorId + index);
-          vector.restrictPurposeToLegalBasis(purposeRestriction, vendorIds);
+          for ( let k: number = startOrOnlyVendorId; k <= endVendorId; k++) {
+
+            vector.add(k, purposeRestriction);
+
+          }
 
         } else {
 
-          vector.restrictPurposeToLegalBasis(purposeRestriction, [startOrOnlyVendorId]);
+          vector.add(startOrOnlyVendorId, purposeRestriction);
 
         }
 
