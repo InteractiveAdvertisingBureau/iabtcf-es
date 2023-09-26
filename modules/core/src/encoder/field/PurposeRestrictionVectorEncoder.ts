@@ -14,15 +14,17 @@ export class PurposeRestrictionVectorEncoder {
     // if the vector is empty we'll just return a string with just the numRestricitons being 0
     if (!prVector.isEmpty()) {
 
+      const gvlVendorIds = Array.from(prVector.gvl.vendorIds);
+
       const nextGvlVendor = (vendorId, lastVendorId): number => {
 
-        for (let nextId = vendorId + 1; nextId <= lastVendorId; nextId++) {
+        const firstIndex = gvlVendorIds.indexOf(vendorId);
+        const lastIndex = gvlVendorIds.indexOf(lastVendorId);
 
-          if (prVector.gvl.vendorIds.has(nextId)) {
+        if (lastIndex - firstIndex > 0) {
 
-            return nextId;
-
-          }
+          const nextIndex = gvlVendorIds.indexOf(vendorId + 1);
+          return gvlVendorIds[nextIndex];
 
         }
 
