@@ -52,7 +52,7 @@ export class CmpApi {
    * for eventStatus and displayStatus.
    * @return {void}
    */
-  public update(encodedTCString: string | null, uiVisible = false): void {
+  public update(encodedTCString: string | null, uiVisible = false, addtlConsent: string): void {
 
     if (CmpApiModel.disabled) {
 
@@ -107,6 +107,10 @@ export class CmpApi {
       CmpApiModel.tcfPolicyVersion = Number(CmpApiModel.tcModel.policyVersion);
       CmpApiModel.tcString = encodedTCString;
 
+    }
+
+    if (addtlConsent !== null) {
+      CmpApiModel.addtlConsent = addtlConsent;
     }
 
     if (this.numUpdates === 0) {

@@ -10,6 +10,7 @@ import {EventStatus, CmpStatus} from '../status/index.js';
 export class TCData extends Response {
 
   public tcString: string;
+  public addtlConsent: string;
   public listenerId: number;
   public eventStatus: EventStatus;
   public cmpStatus: CmpStatus;
@@ -75,6 +76,7 @@ export class TCData extends Response {
       const tcModel = CmpApiModel.tcModel as TCModel;
 
       this.tcString = CmpApiModel.tcString;
+      this.addtlConsent = CmpApiModel.addtlConsent;
       this.isServiceSpecific = tcModel.isServiceSpecific;
       this.useNonStandardStacks = tcModel.useNonStandardStacks;
       this.purposeOneTreatment = tcModel.purposeOneTreatment;
