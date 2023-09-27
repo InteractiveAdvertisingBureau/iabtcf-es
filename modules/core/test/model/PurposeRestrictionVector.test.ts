@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PurposeRestriction} from '../../src/model/PurposeRestriction';
 import {RestrictionType} from '../../src/model/RestrictionType';
 import {PurposeRestrictionVector} from '../../src/model/PurposeRestrictionVector';
-import {makeRandomInt} from '@iabtcf/testing';
+import {makeRandomInt} from '@cookiehub/iabtcf-testing';
 
 export function run(): void {
 
@@ -180,7 +180,7 @@ export function run(): void {
       const restrictionType: number = RestrictionType.NOT_ALLOWED;
       const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
       // eslint-disable-next-line
-      const vendorlistJson = require('@iabtcf/testing/lib/vendorlist/purpose-restriction-vendor-list.json');
+      const vendorlistJson = require('@cookiehub/iabtcf-testing/lib/vendorlist/purpose-restriction-vendor-list.json');
       const vendorIds = Object.keys(vendorlistJson.vendors);
       let chosenVendorId = 0;
 
@@ -217,7 +217,7 @@ export function run(): void {
       const restrictionType: number = RestrictionType.REQUIRE_CONSENT;
       const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
       // eslint-disable-next-line
-      const vendorlistJson = require('@iabtcf/testing/lib/vendorlist/purpose-restriction-vendor-list.json');
+      const vendorlistJson = require('@cookiehub/iabtcf-testing/lib/vendorlist/purpose-restriction-vendor-list.json');
       const vendorIds = Object.keys(vendorlistJson.vendors);
       let chosenVendorId = 0;
 
@@ -254,7 +254,7 @@ export function run(): void {
       const restrictionType: number = RestrictionType.REQUIRE_LI;
       const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
       // eslint-disable-next-line
-      const vendorlistJson = require('@iabtcf/testing/lib/vendorlist/purpose-restriction-vendor-list.json');
+      const vendorlistJson = require('@cookiehub/iabtcf-testing/lib/vendorlist/purpose-restriction-vendor-list.json');
       const vendorIds = Object.keys(vendorlistJson.vendors);
       let chosenVendorId = 0;
 
@@ -291,7 +291,7 @@ export function run(): void {
       const restrictionType: number = RestrictionType.NOT_ALLOWED;
       const purpRestriction = new PurposeRestriction(purposeId, restrictionType);
       // eslint-disable-next-line
-      const vendorlistJson = require('@iabtcf/testing/lib/vendorlist/purpose-restriction-vendor-list.json');
+      const vendorlistJson = require('@cookiehub/iabtcf-testing/lib/vendorlist/purpose-restriction-vendor-list.json');
       const vendorIds = Object.keys(vendorlistJson.vendors);
       let chosenVendorId = 0;
 

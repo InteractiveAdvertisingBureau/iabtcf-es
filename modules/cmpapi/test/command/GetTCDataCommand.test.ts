@@ -1,8 +1,8 @@
 import {CmpApiModel} from '../../src/CmpApiModel';
-import {TCModelFactory, TCStringFactory, XMLHttpTestTools} from '@iabtcf/testing';
+import {TCModelFactory, TCStringFactory, XMLHttpTestTools} from '@cookiehub/iabtcf-testing';
 import {GetTCDataCommand} from '../../src/command/GetTCDataCommand';
 import {TCData} from '../../src/response/TCData';
-import {TCString} from '@iabtcf/core';
+import {TCString} from '@cookiehub/iabtcf-core';
 import {expect} from 'chai';
 
 describe('command->GetTCDataCommand', (): void => {

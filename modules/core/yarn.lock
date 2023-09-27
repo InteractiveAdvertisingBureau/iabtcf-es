@@ -146,9 +146,9 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@iabtcf/testing@1.5.3":
+"@cookiehub/iabtcf-testing@1.5.3":
   version "1.5.3"
-  resolved "https://registry.yarnpkg.com/@iabtcf/testing/-/testing-1.5.3.tgz#59afd5376702cd3af9fce87f4848a0bca672367f"
+  resolved "https://registry.yarnpkg.com/@cookiehub/iabtcf-testing/-/testing-1.5.3.tgz#59afd5376702cd3af9fce87f4848a0bca672367f"
   integrity sha512-g32C5QkRmu6KTAS3TuGy456NGYJes+MEQp0B37wnQ6cnTwpwKO4KMT7zQ45Acf5hMtJwdaU85RnqAxA9abz9Gw==
   dependencies:
     "@types/sinon" "^10.0.11"

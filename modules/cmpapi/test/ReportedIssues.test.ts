@@ -1,4 +1,4 @@
-import * as stub from '@iabtcf/stub';
+import * as stub from '@cookiehub/iabtcf-stub';
 import * as sinon from 'sinon';
 import {API_KEY, CmpApi} from '../src/';
 import {CmpApiModel} from '../src/CmpApiModel';
@@ -7,7 +7,7 @@ import {EventStatus} from '../src/status/EventStatus';
 import {TCFCommand} from '../src/command/TCFCommand';
 import {TestUtils} from './TestUtils';
 import {expect} from 'chai';
-import {makeRandomInt, TCStringFactory} from '@iabtcf/testing';
+import {makeRandomInt, TCStringFactory} from '@cookiehub/iabtcf-testing';
 
 describe('Reported issues', (): void => {
 

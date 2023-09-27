@@ -1,7 +1,7 @@
 import {CmpApiModel} from '../../src/CmpApiModel';
 import {Response} from '../../src/response/Response';
 import {expect} from 'chai';
-import {makeRandomInt} from '@iabtcf/testing';
+import {makeRandomInt} from '@cookiehub/iabtcf-testing';
 
 describe('response->Response', (): void => {
 

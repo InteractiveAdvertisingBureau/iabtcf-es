@@ -1,7 +1,7 @@
 import {EventListenerQueue} from '../src/EventListenerQueue';
 import {expect} from 'chai';
-import {TCStringFactory} from '@iabtcf/testing';
-import {TCString} from '@iabtcf/core';
+import {TCStringFactory} from '@cookiehub/iabtcf-testing';
+import {TCString} from '@cookiehub/iabtcf-core';
 import {TCData} from '../src/response/TCData';
 import {CmpApiModel} from '../src/CmpApiModel';
 

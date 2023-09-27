@@ -2,7 +2,7 @@
 
 /* eslint no-console: 0 */
 
-import {TCString, Vector} from '@iabtcf/core';
+import {TCString, Vector} from '@cookiehub/iabtcf-core';
 
 const args = process.argv;
 let encoded = '';
