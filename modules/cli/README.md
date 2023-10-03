@@ -1,6 +1,6 @@
 [![NPM version](https://img.shields.io/npm/v/@iabtechlabtcf/cli.svg?style=flat-square)](https://www.npmjs.com/package/@iabtechlabtcf/cli)
 [![npm module downloads per month](http://img.shields.io/npm/dm/@iabtechlabtcf/cli.svg?style=flat)](https://www.npmjs.org/package/@iabtechlabtcf/cli)
-[![InteractiveAdvertisingBureau](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtechlabtcf-es.svg?style=shield)](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtechlabtcf-es)
+[![InteractiveAdvertisingBureau](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es.svg?style=shield)](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es)
 
 # @iabtechlabtcf/cli
 

@@ -55,7 +55,7 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
           switch (restrictionType) {
 
-              /**
+            /**
                * If the vendor has the purposeId in flexiblePurposes and it is
                * listed as a legitimate interest purpose we can set the
                * override to require consent.
