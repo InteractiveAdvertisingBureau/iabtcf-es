@@ -16,7 +16,7 @@ export class PurposeRestrictionVectorEncoder {
 
       const gvlVendorIds = Array.from(prVector.gvl.vendorIds);
 
-      const nextGvlVendor = (vendorId, lastVendorId): number => {
+      const nextGvlVendor = (vendorId, lastVendorId) => {
 
         const firstIndex = gvlVendorIds.indexOf(vendorId);
         const lastIndex = gvlVendorIds.indexOf(lastVendorId);
@@ -24,11 +24,18 @@ export class PurposeRestrictionVectorEncoder {
         if (lastIndex - firstIndex > 0) {
 
           const nextIndex = gvlVendorIds.indexOf(vendorId + 1);
-          return gvlVendorIds[nextIndex];
+
+          return {
+            nextVendorId: gvlVendorIds[nextIndex],
+            index: gvlVendorIds[firstIndex + 1],
+          };
 
         }
 
-        return vendorId;
+        return {
+          nextVendorId: vendorId,
+          index: vendorId,
+        };
 
       };
 
@@ -62,10 +69,28 @@ export class PurposeRestrictionVectorEncoder {
 
           }
 
+          let isRangeEncodeRequired = i === len - 1;
+
+          if (!isRangeEncodeRequired) {
+
+            const {nextVendorId, index} = nextGvlVendor(vendorId, vendors[len - 1]);
+
+            if (vendors[i + 1] > nextVendorId) {
+
+              isRangeEncodeRequired = true;
+
+            } else if (index > i && index < len) {
+
+              i = index;
+
+            }
+
+          }
+
           /**
            * either end of the loop or there are GVL vendor IDs before the next one
            */
-          if (i === len - 1 || vendors[i + 1] > nextGvlVendor(vendorId, vendors[len - 1])) {
+          if (isRangeEncodeRequired) {
 
             /**
              * it's a range entry if we've got something other than the start
