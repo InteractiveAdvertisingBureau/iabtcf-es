@@ -11,6 +11,7 @@ describe('model->ConsentLanguages', (): void => {
     'BS',
     'CA',
     'CS',
+    'CY',
     'DA',
     'DE',
     'EL',

@@ -6,6 +6,7 @@ export class ConsentLanguages {
     'BS',
     'CA',
     'CS',
+    'CY',
     'DA',
     'DE',
     'EL',
