@@ -42,6 +42,7 @@ describe('model->ConsentLanguages', (): void => {
     'SR-CYRL',
     'SV',
     'TR',
+    'UK',
     'ZH',
   ];
 

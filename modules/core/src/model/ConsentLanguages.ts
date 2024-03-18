@@ -37,6 +37,7 @@ export class ConsentLanguages {
     'SR-CYRL',
     'SV',
     'TR',
+    'UK',
     'ZH',
   ]);
 
