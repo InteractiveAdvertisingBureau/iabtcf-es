@@ -793,7 +793,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    */
   public narrowVendorsTo(vendorIds: number[]): void {
 
-    this.mapVendors(vendorIds);
+    this.mapVendors(vendorIds.sort((a, b) => a - b));
 
   }
 

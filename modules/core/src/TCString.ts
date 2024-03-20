@@ -11,6 +11,7 @@ import {Segment, SegmentIDs} from './model/index.js';
 import {IntEncoder} from './encoder/field/IntEncoder.js';
 import {TCModel} from './TCModel.js';
 
+let decodeCachedResults = {};
 /**
  * Main class for encoding and decoding a
  * TCF Transparency and Consent String
@@ -68,11 +69,20 @@ export class TCString {
    * @param {string} encodedTCString - base64url encoded Transparency and
    * Consent String to decode - can also be a single or group of segments of
    * the string
-   * @param {string} [tcModel] - model to enhance with the information.  If
+   * @param {TCModel} tcModel - model to enhance with the information.  If
    * none is passed a new instance of TCModel will be created.
+   * @param {boolean} useCached - if true it will return a reference to the same TCModel already created previously.
    * @return {TCModel} - Returns populated TCModel
    */
-  public static decode(encodedTCString: string, tcModel?: TCModel): TCModel {
+  public static decode(encodedTCString: string, tcModel?: TCModel, useCached = false): TCModel {
+
+    if (useCached && decodeCachedResults[encodedTCString]) {
+
+      return decodeCachedResults[encodedTCString];
+
+    }
+
+    decodeCachedResults = {};
 
     const segments: string[] = encodedTCString.split('.');
     const len: number = segments.length;
@@ -101,6 +111,8 @@ export class TCString {
       SegmentEncoder.decode(segString, tcModel, segment);
 
     }
+
+    decodeCachedResults[encodedTCString] = tcModel;
 
     return tcModel;
 
