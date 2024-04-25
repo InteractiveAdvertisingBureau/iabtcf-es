@@ -401,21 +401,33 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    * functionality and methods of this class.
    */
   public getJson(): VendorList {
+    const {
+        gvlSpecificationVersion,
+        vendorListVersion,
+        tcfPolicyVersion,
+        lastUpdated,
+        purposes,
+        specialPurposes,
+        features,
+        specialFeatures,
+        stacks,
+        dataCategories,
+        fullVendorList
+    } = this;
 
-    return JSON.parse(JSON.stringify({
-      gvlSpecificationVersion: this.gvlSpecificationVersion,
-      vendorListVersion: this.vendorListVersion,
-      tcfPolicyVersion: this.tcfPolicyVersion,
-      lastUpdated: this.lastUpdated,
-      purposes: this.purposes,
-      specialPurposes: this.specialPurposes,
-      features: this.features,
-      specialFeatures: this.specialFeatures,
-      stacks: this.stacks,
-      dataCategories: this.dataCategories,
-      vendors: this.fullVendorList,
-    }));
-
+    return {
+        gvlSpecificationVersion,
+        vendorListVersion,
+        tcfPolicyVersion,
+        lastUpdated,
+        purposes,
+        specialPurposes,
+        features,
+        specialFeatures,
+        stacks,
+        dataCategories,
+        vendors: fullVendorList
+    };
   }
 
   /**
