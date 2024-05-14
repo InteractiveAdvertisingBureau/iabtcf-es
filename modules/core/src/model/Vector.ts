@@ -198,6 +198,7 @@ export class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
   public empty(): void {
 
     this.set_ = new Set<number>();
+    this.maxId_ = 0;
 
   }
 
