@@ -2,6 +2,7 @@ import {Cloneable} from '../Cloneable.js';
 import {TCModelError} from '../errors/index.js';
 import {RestrictionType} from './RestrictionType.js';
 
+const unhashCacheResults = {};
 export class PurposeRestriction extends Cloneable<PurposeRestriction> {
 
   public static hashSeparator = '-';
@@ -38,6 +39,12 @@ export class PurposeRestriction extends Cloneable<PurposeRestriction> {
 
   public static unHash(hash: string): PurposeRestriction {
 
+    if (unhashCacheResults[hash]) {
+
+      return unhashCacheResults[hash];
+
+    }
+
     const splitUp: string[] = hash.split(this.hashSeparator);
     const purpRestriction: PurposeRestriction = new PurposeRestriction();
 
@@ -49,6 +56,8 @@ export class PurposeRestriction extends Cloneable<PurposeRestriction> {
 
     purpRestriction.purposeId = parseInt(splitUp[0], 10);
     purpRestriction.restrictionType = parseInt(splitUp[1], 10);
+
+    unhashCacheResults[hash] = purpRestriction;
 
     return purpRestriction;
 
