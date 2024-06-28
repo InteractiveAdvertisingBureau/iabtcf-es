@@ -2,7 +2,7 @@ import {Cloneable} from './Cloneable.js';
 import {GVLError} from './errors/index.js';
 import {Json} from './Json.js';
 import {ConsentLanguages, IntMap} from './model/index.js';
-import {ByPurposeVendorMap, Declarations, Feature, IDSetMap, Purpose, Stack, Vendor, VendorList, DataCategory} from './model/gvl/index.js';
+import {ByPurposeVendorMap, Declarations, Feature, IDSetMap, Purpose, Stack, Vendor, VendorList, DataCategory, GvlCreationOptions} from './model/gvl/index.js';
 import {DataRetention} from './model/gvl/DataRetention';
 import {VendorUrl} from './model/gvl/VendorUrl';
 
@@ -238,8 +238,9 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    * [[VendorList]] object or a version number represented as a string or
    * number to download.  If nothing is passed the latest version of the GVL
    * will be loaded
+   * @param options - it is an optional object where the default language can be set
    */
-  public constructor(versionOrVendorList?: VersionOrVendorList) {
+  public constructor(versionOrVendorList?: VersionOrVendorList, options?: GvlCreationOptions) {
 
     super();
 
@@ -249,8 +250,17 @@ export class GVL extends Cloneable<GVL> implements VendorList {
      */
     let url = GVL.baseUrl;
 
-    this.lang_ = GVL.DEFAULT_LANGUAGE;
-    this.cacheLang_ = GVL.DEFAULT_LANGUAGE;
+    let parsedLanguage: string = options?.language;
+    if (parsedLanguage) {
+      try {
+        parsedLanguage = GVL.consentLanguages.parseLanguage(parsedLanguage);
+      } catch (e) {
+        throw new GVLError('Error during parsing the language: ' + e.message);
+      }
+    }
+
+    this.lang_ = parsedLanguage || GVL.DEFAULT_LANGUAGE;
+    this.cacheLang_ = parsedLanguage || GVL.DEFAULT_LANGUAGE;
 
     if (this.isVendorList(versionOrVendorList as GVL)) {
 
