@@ -130,22 +130,34 @@ describe('GVL', (): void => {
   });
 
   it('should create a new GVL with a valid language', (): void => {
-    const gvl: GVL = new GVL(vendorlistJson22, { language: 'ES' });
+
+    const gvl: GVL = new GVL(vendorlistJson22, {language: 'ES'});
 
     assertPopulated(gvl, vendorlistJson22);
     expect(gvl.language).to.equal('ES');
+
   });
 
   it('should not create GVL object because with a invalid language', (): void => {
+
     let gvl;
+
     try {
-      gvl = new GVL(vendorlistJson22, { language: 'EQ' });
+
+      gvl = new GVL(vendorlistJson22, {language: 'EQ'});
+
     } catch (error) {
+
       expect(error instanceof GVLError).to.equal(true);
+
     } finally {
+
       expect(gvl).to.equal(undefined);
+
     }
-    assert.throws(() => new GVL(vendorlistJson22, { language: 'EQ' }), GVLError);
+
+    assert.throws(() => new GVL(vendorlistJson22, {language: 'EQ'}), GVLError);
+
   });
 
   it('should clone all values', (): void => {
