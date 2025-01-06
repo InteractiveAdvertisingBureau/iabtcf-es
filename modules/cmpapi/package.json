@@ -1,6 +1,6 @@
 {
   "name": "@cookiehub/iabtcf-cmpapi",
-  "version": "1.5.6-3",
+  "version": "1.5.6-4",
   "description": "Ensures other in-page digital marketing technologies have access to CMP transparency and consent information for the iab. Transparency and Consent Framework (TCF).",
   "author": "Chris Paterson <tcf@chrispaterson.io>",
   "homepage": "https://iabtcf.com/",
