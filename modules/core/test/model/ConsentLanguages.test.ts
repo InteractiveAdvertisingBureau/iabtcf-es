@@ -28,6 +28,7 @@ describe('model->ConsentLanguages', (): void => {
     'ID',
     'IT',
     'JA',
+    'KA',
     'KO',
     'LT',
     'LV',
@@ -43,11 +44,15 @@ describe('model->ConsentLanguages', (): void => {
     'RU',
     'SK',
     'SL',
+    'SQ',
     'SR-LATN',
     'SR-CYRL',
     'SV',
+    'SW',
+    'TH',
     'TL',
     'TR',
+    'VI',
     'ZH',
   ];
 

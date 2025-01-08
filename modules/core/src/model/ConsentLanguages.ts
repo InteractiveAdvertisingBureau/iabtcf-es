@@ -23,6 +23,7 @@ export class ConsentLanguages {
     'ID',
     'IT',
     'JA',
+    'KA',
     'KO',
     'LT',
     'LV',
@@ -38,11 +39,15 @@ export class ConsentLanguages {
     'RU',
     'SK',
     'SL',
+    'SQ',
     'SR-LATN',
     'SR-CYRL',
     'SV',
+    'SW',
+    'TH',
     'TL',
     'TR',
+    'VI',
     'ZH',
   ]);
 
