@@ -2,7 +2,9 @@ import {Cloneable} from './Cloneable.js';
 import {GVLError} from './errors/index.js';
 import {Json} from './Json.js';
 import {ConsentLanguages, IntMap} from './model/index.js';
-import {ByPurposeVendorMap, Declarations, Feature, IDSetMap, Purpose, Stack, Vendor, VendorList, DataCategory} from './model/gvl/index.js';
+import {ByPurposeVendorMap, Declarations, Feature, IDSetMap, Purpose, Stack, Vendor, VendorList, DataCategory, GvlCreationOptions} from './model/gvl/index.js';
+import {DataRetention} from './model/gvl/DataRetention';
+import {VendorUrl} from './model/gvl/VendorUrl';
 
 export type VersionOrVendorList = string | number | VendorList;
 type PurposeOrFeature = 'purpose' | 'feature';
@@ -236,8 +238,9 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    * [[VendorList]] object or a version number represented as a string or
    * number to download.  If nothing is passed the latest version of the GVL
    * will be loaded
+   * @param {GvlCreationOptions} [options] - it is an optional object where the default language can be set
    */
-  public constructor(versionOrVendorList?: VersionOrVendorList) {
+  public constructor(versionOrVendorList?: VersionOrVendorList, options?: GvlCreationOptions) {
 
     super();
 
@@ -247,8 +250,24 @@ export class GVL extends Cloneable<GVL> implements VendorList {
      */
     let url = GVL.baseUrl;
 
-    this.lang_ = GVL.DEFAULT_LANGUAGE;
-    this.cacheLang_ = GVL.DEFAULT_LANGUAGE;
+    let parsedLanguage: string = options?.language;
+
+    if (parsedLanguage) {
+
+      try {
+
+        parsedLanguage = GVL.consentLanguages.parseLanguage(parsedLanguage);
+
+      } catch (e) {
+
+        throw new GVLError('Error during parsing the language: ' + e.message);
+
+      }
+
+    }
+
+    this.lang_ = parsedLanguage || GVL.DEFAULT_LANGUAGE;
+    this.cacheLang_ = parsedLanguage || GVL.DEFAULT_LANGUAGE;
 
     if (this.isVendorList(versionOrVendorList as GVL)) {
 
@@ -402,19 +421,210 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    */
   public getJson(): VendorList {
 
-    return JSON.parse(JSON.stringify({
+    return {
       gvlSpecificationVersion: this.gvlSpecificationVersion,
       vendorListVersion: this.vendorListVersion,
       tcfPolicyVersion: this.tcfPolicyVersion,
       lastUpdated: this.lastUpdated,
-      purposes: this.purposes,
-      specialPurposes: this.specialPurposes,
-      features: this.features,
-      specialFeatures: this.specialFeatures,
-      stacks: this.stacks,
-      dataCategories: this.dataCategories,
-      vendors: this.fullVendorList,
-    }));
+      purposes: this.clonePurposes(),
+      specialPurposes: this.cloneSpecialPurposes(),
+      features: this.cloneFeatures(),
+      specialFeatures: this.cloneSpecialFeatures(),
+      stacks: this.cloneStacks(),
+      ...(this.dataCategories ? {dataCategories: this.cloneDataCategories()} : {}),
+      vendors: this.cloneVendors(),
+    };
+
+  }
+
+  private cloneSpecialFeatures(): IntMap<Feature> {
+
+    const features = {};
+
+    for (const featureId of Object.keys(this.specialFeatures)) {
+
+      features[featureId] = GVL.cloneFeature(this.specialFeatures[featureId]);
+
+    }
+
+    return features;
+
+  }
+
+  private cloneFeatures(): IntMap<Feature> {
+
+    const features = {};
+
+    for (const featureId of Object.keys(this.features)) {
+
+      features[featureId] = GVL.cloneFeature(this.features[featureId]);
+
+    }
+
+    return features;
+
+  }
+
+  private cloneStacks(): IntMap<Stack> {
+
+    const stacks = {};
+
+    for (const stackId of Object.keys(this.stacks)) {
+
+      stacks[stackId] = GVL.cloneStack(this.stacks[stackId]);
+
+    }
+
+    return stacks;
+
+  }
+
+  private cloneDataCategories(): IntMap<DataCategory> {
+
+    const dataCategories = {};
+
+    for (const dataCategoryId of Object.keys(this.dataCategories)) {
+
+      dataCategories[dataCategoryId] = GVL.cloneDataCategory(this.dataCategories[dataCategoryId]);
+
+    }
+
+    return dataCategories;
+
+  }
+
+  private cloneSpecialPurposes(): IntMap<Purpose> {
+
+    const purposes = {};
+
+    for (const purposeId of Object.keys(this.specialPurposes)) {
+
+      purposes[purposeId] = GVL.clonePurpose(this.specialPurposes[purposeId]);
+
+    }
+
+    return purposes;
+
+  }
+
+  private clonePurposes(): IntMap<Purpose> {
+
+    const purposes = {};
+
+    for (const purposeId of Object.keys(this.purposes)) {
+
+      purposes[purposeId] = GVL.clonePurpose(this.purposes[purposeId]);
+
+    }
+
+    return purposes;
+
+  }
+
+  private static clonePurpose(purpose: Purpose): Purpose {
+
+    return {
+      id: purpose.id,
+      name: purpose.name,
+      description: purpose.description,
+      ...(purpose.descriptionLegal? {descriptionLegal: purpose.descriptionLegal}: {}),
+      ...(purpose.illustrations? {illustrations: Array.from(purpose.illustrations)}: {}),
+    };
+
+  }
+
+  private static cloneFeature(feature: Feature): Feature {
+
+    return {
+      id: feature.id,
+      name: feature.name,
+      description: feature.description,
+      ...(feature.descriptionLegal? {descriptionLegal: feature.descriptionLegal}: {}),
+      ...(feature.illustrations? {illustrations: Array.from(feature.illustrations)}: {}),
+    };
+
+  }
+
+  private static cloneDataCategory(dataCategory: DataCategory): DataCategory {
+
+    return {
+      id: dataCategory.id,
+      name: dataCategory.name,
+      description: dataCategory.description,
+    };
+
+  }
+
+  private static cloneStack(stack: Stack): Stack {
+
+    return {
+      id: stack.id,
+      name: stack.name,
+      description: stack.description,
+      purposes: Array.from(stack.purposes),
+      specialFeatures: Array.from(stack.specialFeatures),
+    };
+
+  }
+
+  private static cloneDataRetention(dataRetention: DataRetention): DataRetention {
+
+    return {
+      ...(typeof dataRetention.stdRetention === 'number' ? {stdRetention: dataRetention.stdRetention}: {}),
+      purposes: {...dataRetention.purposes},
+      specialPurposes: {...dataRetention.specialPurposes},
+    };
+
+  }
+
+  private static cloneVendorUrls(urls: Array<VendorUrl>): Array<VendorUrl> {
+
+    return urls.map((url) => ({
+      langId: url.langId,
+      privacy: url.privacy,
+      ...(url.legIntClaim? {legIntClaim: url.legIntClaim}: {}),
+    } as VendorUrl));
+
+  }
+
+  private static cloneVendor(vendor: Vendor): Vendor {
+
+    return ({
+      id: vendor.id,
+      name: vendor.name,
+      purposes: Array.from(vendor.purposes),
+      legIntPurposes: Array.from(vendor.legIntPurposes),
+      flexiblePurposes: Array.from(vendor.flexiblePurposes),
+      specialPurposes: Array.from(vendor.specialPurposes),
+      features: Array.from(vendor.features),
+      specialFeatures: Array.from(vendor.specialFeatures),
+      ...(vendor.overflow ? {overflow: {httpGetLimit: vendor.overflow.httpGetLimit}} : {}),
+      ...(typeof vendor.cookieMaxAgeSeconds === 'number' || vendor.cookieMaxAgeSeconds === null ? {cookieMaxAgeSeconds: vendor.cookieMaxAgeSeconds}: {}),
+      ...(vendor.usesCookies !== undefined? {usesCookies: vendor.usesCookies}: {}),
+      ...(vendor.policyUrl ? {policyUrl: vendor.policyUrl} : {}),
+      ...(vendor.cookieRefresh !== undefined ? {cookieRefresh: vendor.cookieRefresh}: {}),
+      ...(vendor.usesNonCookieAccess !== undefined ? {usesNonCookieAccess: vendor.usesNonCookieAccess} : {}),
+      ...(vendor.dataRetention ? {dataRetention: this.cloneDataRetention(vendor.dataRetention)} : {}),
+      ...(vendor.urls ? {urls: this.cloneVendorUrls(vendor.urls)} : {}),
+      ...(vendor.dataDeclaration ? {dataDeclaration: Array.from(vendor.dataDeclaration)} : {}),
+      ...(vendor.deviceStorageDisclosureUrl? {deviceStorageDisclosureUrl: vendor.deviceStorageDisclosureUrl}: {}),
+      ...(vendor.deletedDate? {deletedDate: vendor.deletedDate}: {}),
+
+    } as Vendor);
+
+  }
+
+  private cloneVendors(): IntMap<Vendor> {
+
+    const vendors = {};
+
+    for (const vendorId of Object.keys(this.fullVendorList)) {
+
+      vendors[vendorId] = GVL.cloneVendor(this.fullVendorList[vendorId]);
+
+    }
+
+    return vendors;
 
   }
 

@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import {expect, assert} from 'chai';
 import * as sinon from 'sinon';
 import {GVL} from '../src/GVL';
 import {Vendor} from '../src/model/gvl';
@@ -10,6 +10,7 @@ import vendorListJson from '../../testing/lib/mjs/vendorlist/v2/vendor-list-v24.
 import translationJson from '../../testing/lib/mjs/vendorlist/v2/purposes-fr.json' assert { type: 'json' };
 import vendorListJson22 from '../../testing/lib/mjs/vendorlist/v2.2/vendor-list.json' assert { type: 'json' };
 import {VersionOrVendorList} from '../lib/mjs';
+import {GVLError} from '../src/errors/GVLError';
 
 const vendorlistJson: any = vendorListJson as unknown as VersionOrVendorList;
 const vendorlistJson22: any = vendorListJson22 as unknown as VersionOrVendorList;
@@ -125,6 +126,37 @@ describe('GVL', (): void => {
     const gvl: GVL = new GVL(vendorlistJson22);
 
     assertPopulated(gvl, vendorlistJson22);
+
+  });
+
+  it('should create a new GVL with a valid language', (): void => {
+
+    const gvl: GVL = new GVL(vendorlistJson22, {language: 'ES'});
+
+    assertPopulated(gvl, vendorlistJson22);
+    expect(gvl.language).to.equal('ES');
+
+  });
+
+  it('should not create GVL object because with a invalid language', (): void => {
+
+    let gvl;
+
+    try {
+
+      gvl = new GVL(vendorlistJson22, {language: 'EQ'});
+
+    } catch (error) {
+
+      expect(error instanceof GVLError).to.equal(true);
+
+    } finally {
+
+      expect(gvl).to.equal(undefined);
+
+    }
+
+    assert.throws(() => new GVL(vendorlistJson22, {language: 'EQ'}), GVLError);
 
   });
 
@@ -799,7 +831,7 @@ describe('GVL', (): void => {
 
           if (values && values.includes(intId)) {
 
-            expect(gvlMap[vendorId], `vendorId ${vendorId} should be in the map when ${gvlMethodName}() is called` )
+            expect(gvlMap[vendorId], `vendorId ${vendorId} should be in the map when ${gvlMethodName}() is called`)
               .to.not.be.undefined;
             expect(gvlMap[vendorId]).to.deep.equal(vendor);
 
