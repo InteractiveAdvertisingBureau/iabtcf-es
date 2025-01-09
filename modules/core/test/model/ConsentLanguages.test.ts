@@ -52,6 +52,7 @@ describe('model->ConsentLanguages', (): void => {
     'TH',
     'TL',
     'TR',
+    'UK',
     'VI',
     'ZH',
   ];

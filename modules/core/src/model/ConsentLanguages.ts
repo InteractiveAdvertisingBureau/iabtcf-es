@@ -47,6 +47,7 @@ export class ConsentLanguages {
     'TH',
     'TL',
     'TR',
+    'UK',
     'VI',
     'ZH',
   ]);
