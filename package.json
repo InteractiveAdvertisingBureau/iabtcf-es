@@ -1,6 +1,6 @@
 {
   "name": "iabtechlabtcf",
-  "version": "1.5.13",
+  "version": "1.5.14",
   "description": "Official compliant tool suite for implementing the iab. Transparency and Consent Framework (TCF).",
   "private": true,
   "workspaces": [
