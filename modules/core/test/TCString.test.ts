@@ -212,7 +212,7 @@ describe('TCString', (): void => {
     });
 
     tcModel.vendorLegitimateInterests.forEach((value: boolean, id: number): void => {
-      // gvl spec ver 2, gvl ver 51: vendor ids 415, 612 1n 615 have special purposes only declared. LI needs to be true
+      // gvl spec ver 2, gvl ver 51: vendor ids 415, 612 and 615 have special purposes only declared. LI needs to be true
       if ( (id === 415 || id === 612 || id === 615 ) && value ) {
         expect(newModel.vendorLegitimateInterests.has(id), `vendorLegitimateInterestsForSpecialPurpose.has(${id})`).to.be.true;
       } 
