@@ -433,6 +433,10 @@ const myTCModel = TCString.decode(encodedTCString);
 
 ```
 
+#### Using cache (memoization) to optimize decode performance
+The third argument of TCString.decode enables you to use the previously TCModel created.
+Use if you encounter some extra decoding work that can be skipped.
+
 *returns:* [`TCModel`](#tcmodel)
 
 ### Encode an IAB TC String
