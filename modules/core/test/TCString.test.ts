@@ -195,6 +195,16 @@ describe('TCString', (): void => {
 
     });
 
+    // use case: vendor has at least one special purpose but NO purposes declared. Using tcModel.vendorConsents.set() should not
+    // set the purpose bit (using id 278, 415, 484 (GVL v51) as an example)
+    tcModel.purposeConsents.set([278, 415, 484]);
+    const encodedString = TCString.encode(tcModel);
+    const newModel2 = TCString.decode(encodedString);
+    newModel2.purposeConsents.forEach((value: boolean, id: number): void => {
+      if (id === 278 || id === 415 || id === 484)
+      expect(newModel2.purposeConsents.has(id), `specialPurposeButNoPurposeConsent.has(${id})`).to.equal(false);
+    });
+
     tcModel.purposeLegitimateInterests.forEach((value: boolean, id: number): void => {
 
       if ( (id === 1 || id >= 3 && id <= 6) && value ) {
