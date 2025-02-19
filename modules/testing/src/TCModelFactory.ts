@@ -1,6 +1,6 @@
-import { TCModel, PurposeRestriction, RestrictionType, GVL } from '@iabtechlabtcf/core';
-import { makeRandomInt } from './makeRandomInt.js';
-import { GVLFactory } from './GVLFactory.js';
+import {TCModel, PurposeRestriction, RestrictionType, GVL} from '@iabtechlabtcf/core';
+import {makeRandomInt} from './makeRandomInt.js';
+import {GVLFactory} from './GVLFactory.js';
 
 export class TCModelFactory {
 
