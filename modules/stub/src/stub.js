@@ -91,6 +91,7 @@
       const payload = (typeof json === 'object' && json !== null) ? json.__tcfapiCall : null;
 
       if (payload) {
+        let eventSource = event?.source;
         window.__tcfapi(
           payload.command,
           payload.version,
@@ -103,12 +104,13 @@
               },
             };
 
-            if (event && event.source && event.source.postMessage) {
-              event.source.postMessage((msgIsString) ? JSON.stringify(returnMsg) : returnMsg, '*');
+            if (eventSource && eventSource.postMessage) {
+              eventSource.postMessage((msgIsString) ? JSON.stringify(returnMsg) : returnMsg, '*');
             }
           },
           payload.parameter,
         );
+        eventSource = null;
       }
     }
 
