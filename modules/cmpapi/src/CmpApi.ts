@@ -50,9 +50,11 @@ export class CmpApi {
    * @param {boolean} uiVisible - default false.  set to true if the ui is
    * being shown with this tc string update, this will set the correct values
    * for eventStatus and displayStatus.
+   * @param {TCModel|null} preDecodedTCModel - if provided will be used directly instead of decoding the TCString provided
+   * @param {boolean|null} decodeWithCache - if true it the TCString decode will decode by using cache system
    * @return {void}
    */
-  public update(encodedTCString: string | null, uiVisible = false): void {
+  public update(encodedTCString: string | null, uiVisible = false, {preDecodedTCModel = null, decodeWithCache = false}: {preDecodedTCModel?: TCModel; decodeWithCache?: boolean} = {}): void {
 
     if (CmpApiModel.disabled) {
 
@@ -99,7 +101,15 @@ export class CmpApi {
 
       } else {
 
-        CmpApiModel.tcModel = TCString.decode(encodedTCString);
+        if (preDecodedTCModel) {
+
+          CmpApiModel.tcModel = preDecodedTCModel;
+
+        } else {
+
+          CmpApiModel.tcModel = TCString.decode(encodedTCString, null, decodeWithCache);
+
+        }
 
       }
 

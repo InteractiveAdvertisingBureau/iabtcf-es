@@ -7,6 +7,7 @@ import {Booleany} from './Booleany.js';
 import {Response} from './Response.js';
 import {EventStatus, CmpStatus} from '../status/index.js';
 
+let restrictionCache: {[key: string]: Restrictions} = {};
 export class TCData extends Response {
 
   public tcString: string;
@@ -128,6 +129,15 @@ export class TCData extends Response {
    */
   protected createRestrictions(purpRestrictions: PurposeRestrictionVector): Restrictions {
 
+    if (restrictionCache[CmpApiModel.tcString]) {
+
+      return restrictionCache[CmpApiModel.tcString];
+
+    }
+
+    // Prevent to store a lots of cached results
+    restrictionCache = {};
+
     const retr = {};
 
     if (purpRestrictions.numRestrictions > 0) {
@@ -155,6 +165,8 @@ export class TCData extends Response {
       }
 
     }
+
+    restrictionCache[CmpApiModel.tcString] = retr;
 
     return retr;
 

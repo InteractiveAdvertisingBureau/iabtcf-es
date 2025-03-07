@@ -118,6 +118,19 @@ cmpApi.update(null);
 
 ````
 
+### Options for performance improvements
+The third argument of the CmpApi.update method is an object of options that can be provided
+to improve the performance of skipping some calls to TCString.decode method.
+
+````javascript
+
+// preDecodedTCModel is useful if you already have the relative TCModel of the encodedTCString
+// this will enable you to skip the TCString.decode call
+// decodeWithCache if set to true it will call the TCString.decode using the previously TCModel decoded in cache
+// this skip a lot of works
+cmpApi.update(encodedTCString, false, {preDecodedTCModel: null, decodeWithCache: false});
+````
+
 ## Disabling the CmpApi
 If, for any reason, we are unable to perform the operations in compliance with
 the TCF and thus should not continue to serve page request commands (other than ping),
