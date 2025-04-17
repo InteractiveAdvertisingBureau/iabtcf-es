@@ -1,0 +1,102 @@
+name: Library Release To NPM
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'The library release version'
+        required: true
+        default: ''
+      
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PAT }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          registry-url: "https://registry.npmjs.org/"
+      - name: Install packages
+        run: yarn install
+      - name: Build modules
+        run: yarn build
+      - name: Lint modules
+        run: yarn lint
+      - name: Test
+        run: yarn test
+      - name: Check input version TAG
+        id: check
+        run: |
+          git status
+          VERSION="${{ github.event.inputs.environment }}"
+          echo "Release v  $VERSION"
+          if git show-ref --tags --verify --quiet "refs/tags/${VERSION}"; then
+            echo "Tag ${VERSION} exists"
+            echo "version_changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "Tag ${VERSION} does not exist"
+            echo "version_changed=true" >> $GITHUB_OUTPUT
+          fi
+      - name: Update package.json version
+        if: ${{steps.check.outputs.version_changed == 'true'}}
+        run: |
+            VERSION="${{ github.event.inputs.environment }}"
+            echo "Release v  $VERSION"
+            jq --arg ver "$VERSION" '.dependencies["@iabtechlabtcf/core"] = $ver' modules/cli/package.json > temp.json && mv temp.json modules/cli/package.json
+            jq --arg ver "$VERSION" '.devDependencies["@iabtechlabtcf/stub"] = $ver' modules/cmpapi/package.json > temp.json && mv temp.json modules/cmpapi/package.json
+            jq --arg ver "$VERSION" '.devDependencies["@iabtechlabtcf/testing"] = $ver' modules/cmpapi/package.json > temp.json && mv temp.json modules/cmpapi/package.json
+            jq --arg ver "$VERSION" '.devDependencies["@iabtechlabtcf/testing"] = $ver' modules/core/package.json > temp.json && mv temp.json modules/core/package.json
+
+      - name: Publish to NPM
+        if: ${{steps.check.outputs.version_changed == 'true'}}
+        run: | 
+          VERSION="${{ github.event.inputs.environment }}"
+          git config user.email "mayank@iabtechlab.com"
+          git config user.name "Mayank Mishra"
+          yarn version --new-version $VERSION
+          
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Assign latest tag to packages
+        if: ${{steps.check.outputs.version_changed == 'true'}}
+        run: | 
+          VERSION="${{ github.event.inputs.environment }}"
+          npm dist-tag add @iabtechlabtcf/cmpapi@$VERSION latest
+          npm dist-tag add @iabtechlabtcf/core@$VERSION latest
+          npm dist-tag add @iabtechlabtcf/stub@$VERSION latest
+          npm dist-tag add @iabtechlabtcf/cli@$VERSION latest
+          npm dist-tag add @iabtechlabtcf/testing@$VERSION latest
+          
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Remove next tag from packages
+        if: ${{steps.check.outputs.version_changed == 'true'}}
+        run: | 
+          VERSION="${{ github.event.inputs.environment }}"
+          npm dist-tag rm @iabtechlabtcf/cmpapi@$VERSION next
+          npm dist-tag rm @iabtechlabtcf/core@$VERSION next
+          npm dist-tag rm @iabtechlabtcf/stub@$VERSION next
+          npm dist-tag rm @iabtechlabtcf/cli@$VERSION next
+          npm dist-tag rm @iabtechlabtcf/testing@$VERSION next
+          
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Commit and Push Changes
+        if: ${{steps.check.outputs.version_changed == 'true'}}
+        run: |
+          git status
+          VERSION="${{ github.event.inputs.environment }}"
+          echo "Release v  $VERSION"
+          #Stage the files
+          # git add .
+          # git commit -m "Release v $VERSION"
+           git tag "$VERSION"
+           git push --tags                   #actual tag push to GitHub Repo
+          # git push origin master            #actual push to GitHub Repo
+        env:
+          GITHUB_TOKEN: ${{secrets.PAT}}
