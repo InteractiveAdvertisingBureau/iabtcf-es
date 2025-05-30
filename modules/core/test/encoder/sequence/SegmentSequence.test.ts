@@ -74,9 +74,9 @@ describe('encoder/sequence->SegmentSequence', (): void => {
              * v2:  isServiceSpecific=true, isForSaving=false, hasVendorsAllowed=false, and supportOOB=false
              */
 
-            expect(sequence.length, `sequence.length`).to.equal(2);
+            expect(sequence.length, `sequence.length`).to.equal(3);
             expect(sequence[1], `sequence[1]`).to.equal(Segment.PUBLISHER_TC);
-
+            expect(sequence[2], `sequence[2]`).to.equal(Segment.VENDORS_DISCLOSED);
           } else {
 
             if (!isForSaving) {

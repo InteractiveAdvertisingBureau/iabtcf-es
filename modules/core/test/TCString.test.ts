@@ -57,6 +57,29 @@ describe('TCString', (): void => {
 
   });
 
+  it('should set all vendorsDisclosed for TCF v2.3', (): void => {
+
+    const tcModel = getTCModel();
+
+    tcModel.vendorsDisclosed.empty();
+    tcModel.isServiceSpecific = true;
+    tcModel.supportOOB = false;
+    tcModel.publisherCountryCode = "DE";
+
+    const encodedString = TCString.encode(tcModel);
+    const newModel = TCString.decode(encodedString);
+
+    const vIds: number[] = Object.keys(tcModel.gvl.vendors).map((vId: string): number => parseInt(vId, 10));
+
+    vIds.forEach((vendorId: number): void => {
+
+      expect(newModel.vendorsDisclosed.has(vendorId), `newModel.vendorsDisclosed.has(${vendorId})`).to.be.true;
+      expect(tcModel.vendorsDisclosed.has(vendorId), `tcModel.vendorsDisclosed.has(${vendorId})`).to.be.false;
+
+    });
+
+  });
+
   it('should set all vendorsDisclosed in the GVL when isServiceSpecific is false', (): void => {
 
     const tcModel = getTCModel();

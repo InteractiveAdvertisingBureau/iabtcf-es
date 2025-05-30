@@ -30,6 +30,7 @@ export class SegmentSequence implements SequenceVersionMap {
          */
 
         this['2'].push(Segment.PUBLISHER_TC);
+        this['2'].push(Segment.VENDORS_DISCLOSED);
 
       } else {
 
