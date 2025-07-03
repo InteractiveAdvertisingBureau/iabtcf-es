@@ -1,8 +1,8 @@
 import {CmpApiModel} from '../../src/CmpApiModel';
-import {PurposeRestriction, TCString} from '@iabtcf/core';
+import {PurposeRestriction, TCString} from '@iabtechlabtcf/core';
 import {TestUtils} from '../TestUtils';
 import {TCData} from '../../src/response/TCData';
-import {TCModelFactory, makeRandomInt, makeRandomIntArray} from '@iabtcf/testing';
+import {TCModelFactory, makeRandomInt, makeRandomIntArray} from '@iabtechlabtcf/testing';
 import {expect} from 'chai';
 
 describe('response->TCData', (): void => {
@@ -37,7 +37,7 @@ describe('response->TCData', (): void => {
     expect(tcData.cmpStatus, 'cmpStatus').to.equal(CmpApiModel.cmpStatus);
 
     expect(tcData.isServiceSpecific, 'isServiceSpecific').to.be.undefined;
-    expect(tcData.useNonStandardStacks, 'useNonStandardStacks').to.be.undefined;
+    expect(tcData.useNonStandardTexts, 'useNonStandardTexts').to.be.undefined;
     expect(tcData.purposeOneTreatment, 'purposeOneTreatment').to.be.undefined;
     expect(tcData.publisherCC, 'publisherCC').to.be.undefined;
 

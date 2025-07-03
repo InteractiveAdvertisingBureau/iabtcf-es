@@ -1,12 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "module": "commonjs",
+    "target": "esnext",
+    "module": "esnext",
     "moduleResolution": "node",
     "downlevelIteration": true,
     "esModuleInterop": true,
     "preserveConstEnums": true,
+    "resolveJsonModule": true,
     "declaration": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "lib": [
+      "DOM"
+    ]
   }
 }

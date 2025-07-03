@@ -2,7 +2,7 @@
 
 /* eslint no-console: 0 */
 
-import {TCString, Vector} from '@iabtcf/core';
+import {TCString, Vector} from '@iabtechlabtcf/core';
 
 const args = process.argv;
 let encoded = '';
@@ -89,7 +89,7 @@ if (encoded) {
 
       print('policyVersion', tcModel.policyVersion);
       print('isServiceSpecific', tcModel.isServiceSpecific);
-      print('useNonStandardStacks', tcModel.useNonStandardStacks);
+      print('useNonStandardTexts', tcModel.useNonStandardTexts);
       print('purposeOneTreatment', tcModel.purposeOneTreatment);
       print('publisherCountryCode', tcModel.publisherCountryCode);
 

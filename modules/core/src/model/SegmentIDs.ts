@@ -1,5 +1,5 @@
-import {KeyMap} from './KeyMap';
-import {Segment} from './Segment';
+import {KeyMap} from './KeyMap.js';
+import {Segment} from './Segment.js';
 
 export class SegmentIDs {
 

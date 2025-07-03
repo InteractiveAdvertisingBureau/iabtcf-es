@@ -40,7 +40,7 @@ export function run(): void {
       expect(BitLength.segmentType, 'segmentType').to.equal(3);
       expect(BitLength.singleOrRange, 'singleOrRange').to.equal(1);
       expect(BitLength.specialFeatureOptins, 'specialFeatureOptins').to.equal(12);
-      expect(BitLength.useNonStandardStacks, 'useNonStandardStacks').to.equal(1);
+      expect(BitLength.useNonStandardTexts, 'useNonStandardTexts').to.equal(1);
       expect(BitLength.vendorId, 'vendorId').to.equal(16);
       expect(BitLength.vendorListVersion, 'vendorListVersion').to.equal(12);
       expect(BitLength.version, 'version').to.equal(6);

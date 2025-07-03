@@ -1,5 +1,5 @@
-import {SequenceVersionMap, SVMItem} from './SequenceVersionMap';
-import {Segment, Fields} from '../../model';
+import {SequenceVersionMap, SVMItem} from './SequenceVersionMap.js';
+import {Segment, Fields} from '../../model/index.js';
 
 export class FieldSequence implements SequenceVersionMap {
 
@@ -29,7 +29,7 @@ export class FieldSequence implements SequenceVersionMap {
       Fields.vendorListVersion,
       Fields.policyVersion,
       Fields.isServiceSpecific,
-      Fields.useNonStandardStacks,
+      Fields.useNonStandardTexts,
       Fields.specialFeatureOptins,
       Fields.purposeConsents,
       Fields.purposeLegitimateInterests,

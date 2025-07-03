@@ -1,35 +1,40 @@
-import {expect} from 'chai';
+import {expect, assert} from 'chai';
 import * as sinon from 'sinon';
 import {GVL} from '../src/GVL';
 import {Vendor} from '../src/model/gvl';
 import {IntMap} from '../src/model/IntMap';
-import {XMLHttpTestTools} from '@iabtcf/testing';
+import {XMLHttpTestTools} from '@iabtechlabtcf/testing';
+import {Json} from '../src/Json';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const vendorlistJson = require('@iabtcf/testing/lib/vendorlist/vendor-list-v24.json');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const translationJson = require('@iabtcf/testing/lib/vendorlist/purposes-fr.json');
+import vendorListJson from '../../testing/lib/mjs/vendorlist/v2/vendor-list-v24.json' assert { type: 'json' };
+import translationJson from '../../testing/lib/mjs/vendorlist/v2/purposes-fr.json' assert { type: 'json' };
+import vendorListJson22 from '../../testing/lib/mjs/vendorlist/v2.2/vendor-list.json' assert { type: 'json' };
+import {VersionOrVendorList} from '../lib/mjs';
+import {GVLError} from '../src/errors/GVLError';
+
+const vendorlistJson: any = vendorListJson as unknown as VersionOrVendorList;
+const vendorlistJson22: any = vendorListJson22 as unknown as VersionOrVendorList;
 
 describe('GVL', (): void => {
 
-  const assertPopulated = (gvl: GVL): void => {
+  const assertPopulated = (gvl: GVL, json = vendorlistJson): void => {
 
-    Object.keys(vendorlistJson).forEach((key: string): void => {
+    Object.keys(json).forEach((key: string): void => {
 
       const msg = `assertPopulated(): gvl.${key}]`;
 
       if (key === 'lastUpdated') {
 
         expect((gvl[key] as Date).getTime(), msg)
-          .to.equal((new Date(vendorlistJson.lastUpdated).getTime()));
+          .to.equal((new Date(json.lastUpdated).getTime()));
 
-      } else if (typeof vendorlistJson[key] === 'object') {
+      } else if (typeof json[key] === 'object') {
 
-        expect(gvl[key], msg).to.deep.equal(vendorlistJson[key]);
+        expect(gvl[key], msg).to.deep.equal(json[key]);
 
       } else {
 
-        expect(gvl[key], msg).to.equal(vendorlistJson[key]);
+        expect(gvl[key], msg).to.equal(json[key]);
 
       }
 
@@ -116,13 +121,85 @@ describe('GVL', (): void => {
 
   });
 
+  it('should propogate all values with passed in json for version 2.2', (): void => {
+
+    const gvl: GVL = new GVL(vendorlistJson22);
+
+    assertPopulated(gvl, vendorlistJson22);
+
+  });
+
+  it('should create a new GVL with a valid language', (): void => {
+
+    const gvl: GVL = new GVL(vendorlistJson22, {language: 'ES'});
+
+    assertPopulated(gvl, vendorlistJson22);
+    expect(gvl.language).to.equal('ES');
+
+  });
+
+  it('should not create GVL object because with a invalid language', (): void => {
+
+    let gvl;
+
+    try {
+
+      gvl = new GVL(vendorlistJson22, {language: 'EQ'});
+
+    } catch (error) {
+
+      expect(error instanceof GVLError).to.equal(true);
+
+    } finally {
+
+      expect(gvl).to.equal(undefined);
+
+    }
+
+    assert.throws(() => new GVL(vendorlistJson22, {language: 'EQ'}), GVLError);
+
+  });
+
   it('should clone all values', (): void => {
 
-    const gvl: GVL = new GVL(vendorlistJson);
+    const gvl: GVL = new GVL(vendorlistJson as unknown as VersionOrVendorList);
     const clone: GVL = gvl.clone();
 
     assertPopulated(gvl);
     assertPopulated(clone);
+
+  });
+
+  it('should clone all values for version 2.2', (): void => {
+
+    const gvl: GVL = new GVL(vendorlistJson22);
+    const clone: GVL = gvl.clone();
+
+    assertPopulated(gvl, vendorlistJson22);
+    assertPopulated(clone, vendorlistJson22);
+
+  });
+
+  it('should produce a clone with the same language as the original gvl using its language cache', async (): Promise<void> => {
+
+    const fetchStub = sinon.stub(Json, 'fetch');
+    const gvl: GVL = new GVL(vendorlistJson);
+    expect(gvl.language).to.equal(GVL.DEFAULT_LANGUAGE);
+    fetchStub.resolves(vendorlistJson);
+
+    /*
+     * We test fetchStub call count for both calls to make sure that we are only fetching translations for
+     * the language once, when we 'changeLanguage' is called. Calling the 'clone' function should grab the
+     * translations from the cache and call count will remain at 1. */
+    await gvl.changeLanguage('fr');
+    expect(gvl.language).to.equal('FR');
+    expect(fetchStub.callCount).to.equal(1);
+
+    const clone: GVL = gvl.clone();
+    expect(clone.language).to.equal('FR');
+    expect(fetchStub.callCount).to.equal(1);
+
+    fetchStub.restore();
 
   });
 
@@ -355,6 +432,10 @@ describe('GVL', (): void => {
       ],
       specialFeatures: [],
       policyUrl: 'http://www.fakevendor.com/privacy-policy/',
+      usesCookies: true,
+      cookieMaxAgeSeconds: 1000,
+      cookieRefresh: true,
+      usesNonCookieAccess: false,
     };
 
     expect(json.vendors[vendorId], `json.vendors["${vendorId}"]`).not.to.be.undefined;
@@ -385,6 +466,102 @@ describe('GVL', (): void => {
     await changePromise;
 
     assertTranslated(gvl, language);
+
+  });
+
+  const langToTranslationsDataProvider = {
+    'ar': 'ar',
+    'bg': 'bg',
+    'bs': 'bs',
+    'ca': 'ca',
+    'cs': 'cs',
+    'da': 'da',
+    'de': 'de',
+    'el': 'el',
+    'es': 'es',
+    'et': 'et',
+    'eu': 'eu',
+    'fi': 'fi',
+    'fr': 'fr',
+    'gl': 'gl',
+    'hr': 'hr',
+    'hu': 'hu',
+    'it': 'it',
+    'ja': 'ja',
+    'lt': 'lt',
+    'lv': 'lv',
+    'mt': 'mt',
+    'nl': 'nl',
+    'no': 'no',
+    'pl': 'pl',
+    'pt': 'pt-pt',
+    'pt-pt': 'pt-pt',
+    'pt-br': 'pt-br',
+    'ro': 'ro',
+    'ru': 'ru',
+    'sk': 'sk',
+    'sl': 'sl',
+    'sr': 'sr-latn',
+    'sr-latn': 'sr-latn',
+    'sr-cyrl': 'sr-cyrl',
+    'sv': 'sv',
+    'tr': 'tr',
+    'zh': 'zh',
+  };
+
+  // eslint-disable-next-line guard-for-in
+  for (const providedLang in langToTranslationsDataProvider) {
+
+    it('should replace the language when changeLanguage() is called with most close to valid language for: ' + providedLang, async (): Promise<void> => {
+
+      GVL.baseUrl = 'http://sweetcmp.com';
+
+      const gvl: GVL = new GVL(vendorlistJson);
+      const language = providedLang;
+
+      expect(gvl.language).to.equal(GVL.DEFAULT_LANGUAGE);
+
+      const changePromise = gvl.changeLanguage(language);
+
+      expect(XMLHttpTestTools.requests.length).to.equal(1);
+
+      const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+
+      expect(req.url).to.equal(GVL.baseUrl + GVL.languageFilename.replace('[LANG]', `${langToTranslationsDataProvider[providedLang]}`));
+
+      req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(translationJson));
+
+      await changePromise;
+
+    });
+
+  }
+
+  it('should replace the language when changeLanguage() is called with same language with different variant', () => {
+
+    GVL.baseUrl = 'http://sweetcmp.com';
+
+    const gvl: GVL = new GVL(vendorlistJson);
+    const language = 'pt-BR';
+
+    expect(gvl.language).to.equal(GVL.DEFAULT_LANGUAGE);
+
+    gvl.changeLanguage(language);
+
+    expect(XMLHttpTestTools.requests.length).to.equal(1);
+
+    const firstReq: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+
+    expect(firstReq.url).to.equal(GVL.baseUrl + GVL.languageFilename.replace('[LANG]', language.toLowerCase()));
+
+    const secLang = 'pt-PT';
+    gvl.changeLanguage(secLang);
+
+    expect(XMLHttpTestTools.requests.length).to.equal(2);
+
+    const secondReq: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[1];
+
+    expect(secondReq.url).to.equal(GVL.baseUrl + GVL.languageFilename.replace('[LANG]', secLang.toLowerCase()));
 
   });
 
@@ -508,7 +685,7 @@ describe('GVL', (): void => {
     const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
 
     expect(req.method).to.equal('GET');
-    expect(req.url).to.equal(GVL.baseUrl + GVL.languageFilename.replace('[LANG]', language));
+    expect(req.url).to.equal(GVL.baseUrl + GVL.languageFilename.replace('[LANG]', language.toLowerCase()));
 
     req.respond(404, XMLHttpTestTools.JSON_HEADER, JSON.stringify({}));
 
@@ -654,7 +831,7 @@ describe('GVL', (): void => {
 
           if (values && values.includes(intId)) {
 
-            expect(gvlMap[vendorId], `vendorId ${vendorId} should be in the map when ${gvlMethodName}() is called` )
+            expect(gvlMap[vendorId], `vendorId ${vendorId} should be in the map when ${gvlMethodName}() is called`)
               .to.not.be.undefined;
             expect(gvlMap[vendorId]).to.deep.equal(vendor);
 

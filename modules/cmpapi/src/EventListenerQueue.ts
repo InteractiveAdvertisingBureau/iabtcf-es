@@ -1,12 +1,12 @@
-import {GetTCDataCommand} from './command/GetTCDataCommand';
-import {CommandCallback} from './command/CommandCallback';
+import {GetTCDataCommand} from './command/GetTCDataCommand.js';
+import {CommandCallback} from './command/CommandCallback.js';
 
 interface EventItem {
   callback: CommandCallback;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   param?: any;
   next?: CommandCallback;
-};
+}
 
 export class EventListenerQueue {
 

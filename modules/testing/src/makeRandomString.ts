@@ -1,4 +1,4 @@
-import {makeRandomInt} from './makeRandomInt';
+import {makeRandomInt} from './makeRandomInt.js';
 
 export function makeRandomString(length: number, asciiStart = 0, asciiEnd=127): string {
 

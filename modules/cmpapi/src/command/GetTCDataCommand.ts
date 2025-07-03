@@ -1,5 +1,5 @@
-import {Command} from './Command';
-import {TCData} from '../response';
+import {Command} from './Command.js';
+import {TCData} from '../response/index.js';
 
 export class GetTCDataCommand extends Command {
 

@@ -1,4 +1,4 @@
-import {DecodingError, EncodingError} from '../errors';
+import {DecodingError, EncodingError} from '../errors/index.js';
 
 export class Base64Url {
 

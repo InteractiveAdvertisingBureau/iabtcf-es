@@ -1,8 +1,10 @@
-import {Cloneable} from './Cloneable';
-import {GVLError} from './errors';
-import {Json} from './Json';
-import {ConsentLanguages, IntMap} from './model';
-import {ByPurposeVendorMap, Declarations, Feature, IDSetMap, Purpose, Stack, Vendor, VendorList} from './model/gvl';
+import {Cloneable} from './Cloneable.js';
+import {GVLError} from './errors/index.js';
+import {Json} from './Json.js';
+import {ConsentLanguages, IntMap} from './model/index.js';
+import {ByPurposeVendorMap, Declarations, Feature, IDSetMap, Purpose, Stack, Vendor, VendorList, DataCategory, GvlCreationOptions} from './model/gvl/index.js';
+import {DataRetention} from './model/gvl/DataRetention';
+import {VendorUrl} from './model/gvl/VendorUrl';
 
 export type VersionOrVendorList = string | number | VendorList;
 type PurposeOrFeature = 'purpose' | 'feature';
@@ -221,7 +223,13 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    */
   public stacks: IntMap<Stack>;
 
+  /**
+   * @param {IntMap<DataCategory>} a collection of [[DataCategory]]s
+   */
+  public dataCategories?: IntMap<DataCategory>;
+
   private lang_: string;
+  private cacheLang_: string;
 
   private isLatest = false;
 
@@ -230,8 +238,9 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    * [[VendorList]] object or a version number represented as a string or
    * number to download.  If nothing is passed the latest version of the GVL
    * will be loaded
+   * @param {GvlCreationOptions} [options] - it is an optional object where the default language can be set
    */
-  public constructor(versionOrVendorList?: VersionOrVendorList) {
+  public constructor(versionOrVendorList?: VersionOrVendorList, options?: GvlCreationOptions) {
 
     super();
 
@@ -241,7 +250,24 @@ export class GVL extends Cloneable<GVL> implements VendorList {
      */
     let url = GVL.baseUrl;
 
-    this.lang_ = GVL.DEFAULT_LANGUAGE;
+    let parsedLanguage: string = options?.language;
+
+    if (parsedLanguage) {
+
+      try {
+
+        parsedLanguage = GVL.consentLanguages.parseLanguage(parsedLanguage);
+
+      } catch (e) {
+
+        throw new GVLError('Error during parsing the language: ' + e.message);
+
+      }
+
+    }
+
+    this.lang_ = parsedLanguage || GVL.DEFAULT_LANGUAGE;
+    this.cacheLang_ = parsedLanguage || GVL.DEFAULT_LANGUAGE;
 
     if (this.isVendorList(versionOrVendorList as GVL)) {
 
@@ -268,7 +294,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
         } else {
 
           // load version specified
-          url += GVL.versionedFilename.replace('[VERSION]', version + '');
+          url += GVL.versionedFilename.replace('[VERSION]', String(version));
           this.readyPromise = this.fetchJson(url);
 
         }
@@ -303,28 +329,28 @@ export class GVL extends Cloneable<GVL> implements VendorList {
   /**
    * emptyLanguageCache
    *
-   * @param {string} [lang] - Optional ISO 639-1 langauge code to remove from
+   * @param {string} [lang] - Optional language code to remove from
    * the cache.  Should be one of the languages in GVL.consentLanguages set.
    * If not then the whole cache will be deleted.
    * @return {boolean} - true if anything was deleted from the cache
    */
   public static emptyLanguageCache(lang?: string): boolean {
 
-    let retr = false;
+    let result = false;
 
-    if (lang === undefined && GVL.LANGUAGE_CACHE.size > 0) {
+    if (lang == null && GVL.LANGUAGE_CACHE.size > 0) {
 
       GVL.LANGUAGE_CACHE = new Map<string, Declarations>();
-      retr = true;
+      result = true;
 
     } else if (typeof lang === 'string' && this.consentLanguages.has(lang.toUpperCase())) {
 
       GVL.LANGUAGE_CACHE.delete(lang.toUpperCase());
-      retr = true;
+      result = true;
 
     }
 
-    return retr;
+    return result;
 
   }
 
@@ -357,14 +383,15 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
   private cacheLanguage(): void {
 
-    if (!GVL.LANGUAGE_CACHE.has(this.lang_)) {
+    if (!GVL.LANGUAGE_CACHE.has(this.cacheLang_)) {
 
-      GVL.LANGUAGE_CACHE.set(this.lang_, {
+      GVL.LANGUAGE_CACHE.set(this.cacheLang_, {
         purposes: this.purposes,
         specialPurposes: this.specialPurposes,
         features: this.features,
         specialFeatures: this.specialFeatures,
         stacks: this.stacks,
+        dataCategories: this.dataCategories,
       });
 
     }
@@ -394,18 +421,210 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    */
   public getJson(): VendorList {
 
-    return JSON.parse(JSON.stringify({
+    return {
       gvlSpecificationVersion: this.gvlSpecificationVersion,
       vendorListVersion: this.vendorListVersion,
       tcfPolicyVersion: this.tcfPolicyVersion,
       lastUpdated: this.lastUpdated,
-      purposes: this.purposes,
-      specialPurposes: this.specialPurposes,
-      features: this.features,
-      specialFeatures: this.specialFeatures,
-      stacks: this.stacks,
-      vendors: this.fullVendorList,
-    }));
+      purposes: this.clonePurposes(),
+      specialPurposes: this.cloneSpecialPurposes(),
+      features: this.cloneFeatures(),
+      specialFeatures: this.cloneSpecialFeatures(),
+      stacks: this.cloneStacks(),
+      ...(this.dataCategories ? {dataCategories: this.cloneDataCategories()} : {}),
+      vendors: this.cloneVendors(),
+    };
+
+  }
+
+  private cloneSpecialFeatures(): IntMap<Feature> {
+
+    const features = {};
+
+    for (const featureId of Object.keys(this.specialFeatures)) {
+
+      features[featureId] = GVL.cloneFeature(this.specialFeatures[featureId]);
+
+    }
+
+    return features;
+
+  }
+
+  private cloneFeatures(): IntMap<Feature> {
+
+    const features = {};
+
+    for (const featureId of Object.keys(this.features)) {
+
+      features[featureId] = GVL.cloneFeature(this.features[featureId]);
+
+    }
+
+    return features;
+
+  }
+
+  private cloneStacks(): IntMap<Stack> {
+
+    const stacks = {};
+
+    for (const stackId of Object.keys(this.stacks)) {
+
+      stacks[stackId] = GVL.cloneStack(this.stacks[stackId]);
+
+    }
+
+    return stacks;
+
+  }
+
+  private cloneDataCategories(): IntMap<DataCategory> {
+
+    const dataCategories = {};
+
+    for (const dataCategoryId of Object.keys(this.dataCategories)) {
+
+      dataCategories[dataCategoryId] = GVL.cloneDataCategory(this.dataCategories[dataCategoryId]);
+
+    }
+
+    return dataCategories;
+
+  }
+
+  private cloneSpecialPurposes(): IntMap<Purpose> {
+
+    const purposes = {};
+
+    for (const purposeId of Object.keys(this.specialPurposes)) {
+
+      purposes[purposeId] = GVL.clonePurpose(this.specialPurposes[purposeId]);
+
+    }
+
+    return purposes;
+
+  }
+
+  private clonePurposes(): IntMap<Purpose> {
+
+    const purposes = {};
+
+    for (const purposeId of Object.keys(this.purposes)) {
+
+      purposes[purposeId] = GVL.clonePurpose(this.purposes[purposeId]);
+
+    }
+
+    return purposes;
+
+  }
+
+  private static clonePurpose(purpose: Purpose): Purpose {
+
+    return {
+      id: purpose.id,
+      name: purpose.name,
+      description: purpose.description,
+      ...(purpose.descriptionLegal? {descriptionLegal: purpose.descriptionLegal}: {}),
+      ...(purpose.illustrations? {illustrations: Array.from(purpose.illustrations)}: {}),
+    };
+
+  }
+
+  private static cloneFeature(feature: Feature): Feature {
+
+    return {
+      id: feature.id,
+      name: feature.name,
+      description: feature.description,
+      ...(feature.descriptionLegal? {descriptionLegal: feature.descriptionLegal}: {}),
+      ...(feature.illustrations? {illustrations: Array.from(feature.illustrations)}: {}),
+    };
+
+  }
+
+  private static cloneDataCategory(dataCategory: DataCategory): DataCategory {
+
+    return {
+      id: dataCategory.id,
+      name: dataCategory.name,
+      description: dataCategory.description,
+    };
+
+  }
+
+  private static cloneStack(stack: Stack): Stack {
+
+    return {
+      id: stack.id,
+      name: stack.name,
+      description: stack.description,
+      purposes: Array.from(stack.purposes),
+      specialFeatures: Array.from(stack.specialFeatures),
+    };
+
+  }
+
+  private static cloneDataRetention(dataRetention: DataRetention): DataRetention {
+
+    return {
+      ...(typeof dataRetention.stdRetention === 'number' ? {stdRetention: dataRetention.stdRetention}: {}),
+      purposes: {...dataRetention.purposes},
+      specialPurposes: {...dataRetention.specialPurposes},
+    };
+
+  }
+
+  private static cloneVendorUrls(urls: Array<VendorUrl>): Array<VendorUrl> {
+
+    return urls.map((url) => ({
+      langId: url.langId,
+      privacy: url.privacy,
+      ...(url.legIntClaim? {legIntClaim: url.legIntClaim}: {}),
+    } as VendorUrl));
+
+  }
+
+  private static cloneVendor(vendor: Vendor): Vendor {
+
+    return ({
+      id: vendor.id,
+      name: vendor.name,
+      purposes: Array.from(vendor.purposes),
+      legIntPurposes: Array.from(vendor.legIntPurposes),
+      flexiblePurposes: Array.from(vendor.flexiblePurposes),
+      specialPurposes: Array.from(vendor.specialPurposes),
+      features: Array.from(vendor.features),
+      specialFeatures: Array.from(vendor.specialFeatures),
+      ...(vendor.overflow ? {overflow: {httpGetLimit: vendor.overflow.httpGetLimit}} : {}),
+      ...(typeof vendor.cookieMaxAgeSeconds === 'number' || vendor.cookieMaxAgeSeconds === null ? {cookieMaxAgeSeconds: vendor.cookieMaxAgeSeconds}: {}),
+      ...(vendor.usesCookies !== undefined? {usesCookies: vendor.usesCookies}: {}),
+      ...(vendor.policyUrl ? {policyUrl: vendor.policyUrl} : {}),
+      ...(vendor.cookieRefresh !== undefined ? {cookieRefresh: vendor.cookieRefresh}: {}),
+      ...(vendor.usesNonCookieAccess !== undefined ? {usesNonCookieAccess: vendor.usesNonCookieAccess} : {}),
+      ...(vendor.dataRetention ? {dataRetention: this.cloneDataRetention(vendor.dataRetention)} : {}),
+      ...(vendor.urls ? {urls: this.cloneVendorUrls(vendor.urls)} : {}),
+      ...(vendor.dataDeclaration ? {dataDeclaration: Array.from(vendor.dataDeclaration)} : {}),
+      ...(vendor.deviceStorageDisclosureUrl? {deviceStorageDisclosureUrl: vendor.deviceStorageDisclosureUrl}: {}),
+      ...(vendor.deletedDate? {deletedDate: vendor.deletedDate}: {}),
+
+    } as Vendor);
+
+  }
+
+  private cloneVendors(): IntMap<Vendor> {
+
+    const vendors = {};
+
+    for (const vendorId of Object.keys(this.fullVendorList)) {
+
+      vendors[vendorId] = GVL.cloneVendor(this.fullVendorList[vendorId]);
+
+    }
+
+    return vendors;
 
   }
 
@@ -413,58 +632,70 @@ export class GVL extends Cloneable<GVL> implements VendorList {
    * changeLanguage - retrieves the purpose language translation and sets the
    * internal language variable
    *
-   * @param {string} lang - ISO 639-1 langauge code to change language to
+   * @param {string} lang - language code to change language to
    * @return {Promise<void | GVLError>} - returns the `readyPromise` and
    * resolves when this GVL is populated with the data from the language file.
    */
   public async changeLanguage(lang: string): Promise<void | GVLError> {
 
-    const langUpper = lang.toUpperCase();
+    let parsedLanguage: string = lang;
 
-    if (GVL.consentLanguages.has(langUpper)) {
+    try {
 
-      if (langUpper !== this.lang_) {
+      parsedLanguage = GVL.consentLanguages.parseLanguage(lang);
 
-        this.lang_ = langUpper;
+    } catch (e) {
 
-        if (GVL.LANGUAGE_CACHE.has(langUpper)) {
+      throw new GVLError('Error during parsing the language: ' + e.message);
 
-          const cached: Declarations = GVL.LANGUAGE_CACHE.get(langUpper) as Declarations;
+    }
 
-          for (const prop in cached) {
+    const cacheLang = lang.toUpperCase();
 
-            if (cached.hasOwnProperty(prop)) {
+    // Default language EN can be loaded only by default GVL
+    if (parsedLanguage.toLowerCase() === GVL.DEFAULT_LANGUAGE.toLowerCase() && !GVL.LANGUAGE_CACHE.has(cacheLang)) {
 
-              this[prop] = cached[prop];
+      return;
 
-            }
+    }
 
-          }
+    if (parsedLanguage !== this.lang_) {
 
-        } else {
+      this.lang_ = parsedLanguage;
 
-          // load Language specified
-          const url = GVL.baseUrl + GVL.languageFilename.replace('[LANG]', lang);
+      if (GVL.LANGUAGE_CACHE.has(cacheLang)) {
 
-          try {
+        const cached: Declarations = GVL.LANGUAGE_CACHE.get(cacheLang) as Declarations;
 
-            await this.fetchJson(url);
+        for (const prop in cached) {
 
-            this.cacheLanguage();
+          if (cached.hasOwnProperty(prop)) {
 
-          } catch (err) {
-
-            throw new GVLError('unable to load language: ' + err.message);
+            this[prop] = cached[prop];
 
           }
 
         }
 
+      } else {
+
+        // load Language specified
+        const url = GVL.baseUrl + GVL.languageFilename.replace('[LANG]', this.lang_.toLowerCase());
+
+        try {
+
+          await this.fetchJson(url);
+
+          this.cacheLang_ = cacheLang;
+          this.cacheLanguage();
+
+        } catch (err) {
+
+          throw new GVLError('unable to load language: ' + err.message);
+
+        }
+
       }
-
-    } else {
-
-      throw new GVLError(`unsupported language ${lang}`);
 
     }
 
@@ -493,6 +724,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
     this.features = gvlObject.features;
     this.specialFeatures = gvlObject.specialFeatures;
     this.stacks = gvlObject.stacks;
+    this.dataCategories = gvlObject.dataCategories;
 
     if (this.isVendorList(gvlObject)) {
 
@@ -591,13 +823,13 @@ export class GVL extends Cloneable<GVL> implements VendorList {
     // assigns vendor ids to their respective maps
     this.vendors_ = vendorIds.reduce((vendors: {}, vendorId: number): {} => {
 
-      const vendor: Vendor = this.vendors_[''+vendorId];
+      const vendor: Vendor = this.vendors_[String(vendorId)];
 
       if (vendor && vendor.deletedDate === undefined) {
 
         vendor.purposes.forEach((purposeId: number): void => {
 
-          const purpGroup = this.byPurposeVendorMap[purposeId + ''];
+          const purpGroup = this.byPurposeVendorMap[String(purposeId)];
 
           purpGroup.consent.add(vendorId);
 
@@ -605,13 +837,13 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
         vendor.specialPurposes.forEach((purposeId: number): void => {
 
-          this.bySpecialPurposeVendorMap[purposeId + ''].add(vendorId);
+          this.bySpecialPurposeVendorMap[String(purposeId)].add(vendorId);
 
         });
 
         vendor.legIntPurposes.forEach((purposeId: number): void => {
 
-          this.byPurposeVendorMap[purposeId + ''].legInt.add(vendorId);
+          this.byPurposeVendorMap[String(purposeId)].legInt.add(vendorId);
 
         });
 
@@ -620,7 +852,7 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
           vendor.flexiblePurposes.forEach((purposeId: number): void => {
 
-            this.byPurposeVendorMap[purposeId + ''].flexible.add(vendorId);
+            this.byPurposeVendorMap[String(purposeId)].flexible.add(vendorId);
 
           });
 
@@ -628,13 +860,13 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
         vendor.features.forEach((featureId: number): void => {
 
-          this.byFeatureVendorMap[featureId + ''].add(vendorId);
+          this.byFeatureVendorMap[String(featureId)].add(vendorId);
 
         });
 
         vendor.specialFeatures.forEach((featureId: number): void => {
 
-          this.bySpecialFeatureVendorMap[featureId + ''].add(vendorId);
+          this.bySpecialFeatureVendorMap[String(featureId)].add(vendorId);
 
         });
 
@@ -661,17 +893,17 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
     if (purposeOrFeature === 'purpose' && subType) {
 
-      vendorSet = this['by' + properPurposeOrFeature + 'VendorMap'][id + ''][subType];
+      vendorSet = this['by' + properPurposeOrFeature + 'VendorMap'][String(id)][subType];
 
     } else {
 
-      vendorSet = this['by' + (special ? 'Special' : '' ) + properPurposeOrFeature + 'VendorMap'][id + ''];
+      vendorSet = this['by' + (special ? 'Special' : '' ) + properPurposeOrFeature + 'VendorMap'][String(id)];
 
     }
 
     vendorSet.forEach((vendorId: number): void => {
 
-      retr[vendorId + ''] = this.vendors[vendorId + ''];
+      retr[String(vendorId)] = this.vendors[String(vendorId)];
 
     });
 
@@ -791,13 +1023,31 @@ export class GVL extends Cloneable<GVL> implements VendorList {
 
   /**
    * clone - overrides base `clone()` method since GVL is a special class that
-   * represents a JSON structure with some additional functionality
+   * represents a JSON structure with some additional functionality.
    *
    * @return {GVL}
    */
   public clone(): GVL {
 
-    return new GVL(this.getJson());
+    const result = new GVL(this.getJson());
+
+    /*
+     * If the current language of the GVL is not the default language, we set the language of
+     * the clone to the current language since a new GVL is always created with the default
+     * language. */
+    if (this.lang_ !== GVL.DEFAULT_LANGUAGE) {
+
+      /*
+       * Since the GVL language was changed, this means that an asynchronous changeLanguage
+       * call was made prior to cloning the GVL.  The new language specified has been cached
+       * by the GVL and this changeLanguage call made as a part of cloning the GVL will be
+       * synchronous. The code will look for the language definitions in the cache instead
+       * of creating a http request. */
+      result.changeLanguage(this.lang_);
+
+    }
+
+    return result;
 
   }
 

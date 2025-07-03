@@ -1,4 +1,4 @@
-import {Segment} from '../model';
+import {Segment} from '../model/index.js';
 
 export interface EncodingOptions {
   isForVendors?: boolean;

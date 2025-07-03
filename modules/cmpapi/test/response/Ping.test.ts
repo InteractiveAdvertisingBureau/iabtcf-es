@@ -1,12 +1,18 @@
 import {Ping} from '../../src/response/Ping';
-import {TCModel} from '@iabtcf/core';
-import {makeRandomInt} from '@iabtcf/testing';
+import {TCModel} from '@iabtechlabtcf/core';
+import {makeRandomInt} from '@iabtechlabtcf/testing';
 import {CmpApiModel} from '../../src/CmpApiModel';
 import {CmpStatus} from '../../src/status/CmpStatus';
 import {DisplayStatus} from '../../src/status/DisplayStatus';
 import {expect} from 'chai';
 
 describe('response->Ping', (): void => {
+
+  beforeEach(function() {
+
+    CmpApiModel.reset();
+
+  });
 
   const isAGoodPing = (ping: Ping): void => {
 

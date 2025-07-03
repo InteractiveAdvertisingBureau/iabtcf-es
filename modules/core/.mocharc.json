@@ -1,0 +1,13 @@
+{
+  "require": [
+    "ts-node/register",
+    "jsdom-global/register",
+    "source-map-support/register",
+    "test/hook.mjs"
+  ],
+  "node-option": [
+    "experimental-specifier-resolution=node",
+    "loader=ts-node/esm"
+  ],
+  "spec": "./test/**/*.test.ts"
+}

@@ -10,11 +10,15 @@ module.exports = {
     'plugin:json/recommended',
   ],
   settings: {
-    'import/parsers': {
-      '@typescript-eslint/parser': [ 
-        '.ts' 
-      ]
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts"]
     },
+    "import/resolver": {
+      // This with eslint-import-resolver-typescript allow use '.js' suffix in exports to allow ESM work also in browser
+      "typescript": {
+        "alwaysTryTypes": true,
+      },
+    }
   },
   parserOptions: {
     parser: '@typescript-eslint/parser',
@@ -23,6 +27,7 @@ module.exports = {
   },
   rules: {
     'import/no-cycle': ['error', { maxDepth: 1 }],
+    'import/namespace': 0,
     'max-len': 0,
     'no-multiple-empty-lines':['error', {'max':1, 'maxEOF':0, 'maxBOF':0}],
     'require-jsdoc': [0],

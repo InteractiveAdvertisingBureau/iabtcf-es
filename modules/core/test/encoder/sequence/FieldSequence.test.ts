@@ -52,7 +52,7 @@ describe('encoder/sequence->FieldSequence', (): void => {
       Fields.vendorListVersion,
       Fields.policyVersion,
       Fields.isServiceSpecific,
-      Fields.useNonStandardStacks,
+      Fields.useNonStandardTexts,
       Fields.specialFeatureOptins,
       Fields.purposeConsents,
       Fields.purposeLegitimateInterests,

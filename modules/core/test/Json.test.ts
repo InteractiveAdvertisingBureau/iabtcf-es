@@ -1,13 +1,19 @@
 import {expect} from 'chai';
 import * as sinon from 'sinon';
 import {Json} from '../src/Json';
-import {XMLHttpTestTools} from '@iabtcf/testing';
+import {XMLHttpTestTools} from '@iabtechlabtcf/testing';
 
 describe('Json->fetch', (): void => {
 
   const responseObj: object = {
     foo: 'bar',
   };
+
+  beforeEach(function() {
+
+    XMLHttpTestTools.beforeEach();
+
+  });
 
   it('should fetch and parse a json with only a url', (done: () => void): void => {
 
@@ -111,6 +117,12 @@ describe('Json->fetch', (): void => {
 });
 
 describe('Json->post', (): void => {
+
+  beforeEach(function() {
+
+    XMLHttpTestTools.beforeEach();
+
+  });
 
   const responseObj: object = {
     foo: 'bar',

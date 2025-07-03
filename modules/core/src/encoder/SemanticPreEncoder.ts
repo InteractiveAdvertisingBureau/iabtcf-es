@@ -1,8 +1,8 @@
-import {EncodingError} from '../errors';
-import {TCModel} from '../TCModel';
-import {EncodingOptions} from './EncodingOptions';
-import {Vector, RestrictionType} from '../model';
-import {GVL} from '../GVL';
+import {EncodingError} from '../errors/index.js';
+import {TCModel} from '../TCModel.js';
+import {EncodingOptions} from './EncodingOptions.js';
+import {Vector, RestrictionType} from '../model/index.js';
+import {GVL} from '../GVL.js';
 
 type ProcessorFunction = (tcModel: TCModel, gvl: GVL) => TCModel;
 
@@ -21,8 +21,9 @@ export class SemanticPreEncoder {
 
       /**
        * Purpose 1 is never allowed to be true for legitimate interest
+       * As of TCF v2.2 purposes 3,4,5 & 6 are not allowed to be true for LI
        */
-      tcModel.purposeLegitimateInterests.unset(1);
+      tcModel.purposeLegitimateInterests.unset([1, 3, 4, 5, 6]);
 
       /**
        * If a Vendor does not declare a purpose for consent or legitimate
@@ -53,75 +54,100 @@ export class SemanticPreEncoder {
 
             } else if (vendor[gvlVendorKey].length === 0) {
 
-              /**
-               * If the vendor does exist, but they haven't declared any
-               * purposes for this legal basis, then we need to see if they can
-               * possibly have the legal basis from their flexible purposes.
-               * This, of course, only matters if it is a globally-scoped string.
-               */
+              if (
+                gvlVendorKey === 'legIntPurposes' && vendor['purposes'].length === 0 && vendor['legIntPurposes'].length === 0 && vendor['specialPurposes'].length > 0
+              ) {
 
-              if (tcModel.isServiceSpecific) {
+                /**
+                 * Per June 2021 Policy change, Vendors declaring only Special Purposes must
+                 * have their legitimate interest Vendor bit set if they have been disclosed.
+                 * This block ensures their LI bit remains set
+                 */
+                vector.set(vendorId);
 
-                if (vendor.flexiblePurposes.length === 0) {
+              } else if (
+                gvlVendorKey === 'legIntPurposes' && vendor['purposes'].length > 0 && vendor['legIntPurposes'].length === 0 && vendor['specialPurposes'].length > 0
+              ) {
 
-                  /**
-                   * No flexible basis for any purposes, so we can safely remove
-                   * this vendor from the legal basis.
-                   */
-                  vector.unset(vendorId);
-
-                } else {
-
-                  /**
-                   * They have some flexible purposes, we should check for a
-                   * publisher restriction value that would enable this vendor to
-                   * have the override-preferred basis.
-                   */
-                  const restrictions = tcModel.publisherRestrictions.getRestrictions(vendorId);
-                  let isValid = false;
-
-                  for (let i = 0, len = restrictions.length; i < len && !isValid; i ++) {
-
-                    /**
-                     * If this condition is true the loop will break.  If we are
-                     * dealing with the consent purposes ('purposes') and the
-                     * publisher restriction overrides to consent then it is
-                     * valid for the vendor to have a positive signal for
-                     * consent.  Likewise for legitimate interest purposes
-                     * ('legIntPurposes') and requiring legitimate interest.
-                     */
-                    isValid = (
-                      (restrictions[i].restrictionType === RestrictionType.REQUIRE_CONSENT &&
-                      gvlVendorKey === 'purposes') ||
-                    (restrictions[i].restrictionType === RestrictionType.REQUIRE_LI &&
-                      gvlVendorKey === 'legIntPurposes'));
-
-                  }
-
-                  if (!isValid) {
-
-                    /**
-                     * if we came through the previous  loop without finding a
-                     * valid reasing: no overriding restrictions (changes in
-                     * legal basis) then it's not valid for this vendor to have
-                     * this legal basis.
-                     */
-
-                    vector.unset(vendorId);
-
-                  }
-
-                }
+                /**
+                 * Per June 2021 Policy change, Vendors declaring only Special Purposes must
+                 * have their legitimate interest Vendor bit set if they have been disclosed.
+                 * This block ensures their LI bit remains set
+                 */
+                vector.set(vendorId);
 
               } else {
 
                 /**
-                 * This is a globally-scoped string so flexible purposes will not
-                 * be able to change this value because purposeRestrictions only
-                 * apply to service-specific strings.
+                 * If the vendor does exist, but they haven't declared any
+                 * purposes for this legal basis, then we need to see if they can
+                 * possibly have the legal basis from their flexible purposes.
                  */
 
-                vector.unset(vendorId);
+                if (tcModel.isServiceSpecific) {
+
+                  if (vendor.flexiblePurposes.length === 0) {
+
+                    /**
+                     * No flexible basis for any purposes, so we can safely remove
+                     * this vendor from the legal basis.
+                     */
+                    vector.unset(vendorId);
+
+                  } else {
+
+                    /**
+                     * They have some flexible purposes, we should check for a
+                     * publisher restriction value that would enable this vendor to
+                     * have the override-preferred basis.
+                     */
+                    const restrictions = tcModel.publisherRestrictions.getRestrictions(vendorId);
+                    let isValid = false;
+
+                    for (let i = 0, len = restrictions.length; i < len && !isValid; i ++) {
+
+                      /**
+                       * If this condition is true the loop will break.  If we are
+                       * dealing with the consent purposes ('purposes') and the
+                       * publisher restriction overrides to consent then it is
+                       * valid for the vendor to have a positive signal for
+                       * consent.  Likewise for legitimate interest purposes
+                       * ('legIntPurposes') and requiring legitimate interest.
+                       */
+                      isValid = (
+                        (restrictions[i].restrictionType === RestrictionType.REQUIRE_CONSENT &&
+                        gvlVendorKey === 'purposes') ||
+                      (restrictions[i].restrictionType === RestrictionType.REQUIRE_LI &&
+                        gvlVendorKey === 'legIntPurposes'));
+
+                    }
+
+                    if (!isValid) {
+
+                      /**
+                       * if we came through the previous  loop without finding a
+                       * valid reasing: no overriding restrictions (changes in
+                       * legal basis) then it's not valid for this vendor to have
+                       * this legal basis.
+                       */
+
+                      vector.unset(vendorId);
+
+                    }
+
+                  }
+
+                } else {
+
+                  /**
+                   * This is a globally-scoped string so flexible purposes will not
+                   * be able to change this value because purposeRestrictions only
+                   * apply to service-specific strings.
+                   */
+
+                  vector.unset(vendorId);
+
+                }
 
               }
 
@@ -157,7 +183,7 @@ export class SemanticPreEncoder {
     }
 
     tcModel = tcModel.clone();
-    tcModel.consentLanguage = gvl.language.toUpperCase();
+    tcModel.consentLanguage = gvl.language.slice(0, 2).toUpperCase();
 
     if (options?.version > 0 && options?.version <= this.processor.length) {
 

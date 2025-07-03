@@ -1,6 +1,6 @@
-import {IntMap} from '../IntMap';
-import {Vendor} from './Vendor';
-import {Declarations} from './Declarations';
+import {IntMap} from '../IntMap.js';
+import {Vendor} from './Vendor.js';
+import {Declarations} from './Declarations.js';
 
 export interface VendorList extends Declarations {
   lastUpdated: string | Date;
@@ -8,4 +8,4 @@ export interface VendorList extends Declarations {
   vendorListVersion: number;
   tcfPolicyVersion: number;
   vendors: IntMap<Vendor>;
-};
+}

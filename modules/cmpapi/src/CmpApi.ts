@@ -1,8 +1,8 @@
-import {CmpApiModel} from './CmpApiModel';
-import {CustomCommands} from './CustomCommands';
-import {CmpStatus, DisplayStatus, EventStatus} from './status';
-import {CallResponder} from './CallResponder';
-import {TCString, TCModel} from '@iabtcf/core';
+import {CmpApiModel} from './CmpApiModel.js';
+import {CustomCommands} from './CustomCommands.js';
+import {CmpStatus, DisplayStatus, EventStatus} from './status/index.js';
+import {CallResponder} from './CallResponder.js';
+import {TCString, TCModel} from '@iabtechlabtcf/core';
 
 export class CmpApi {
 
@@ -23,35 +23,10 @@ export class CmpApi {
 
     CmpApiModel.cmpId = cmpId;
     CmpApiModel.cmpVersion = cmpVersion;
+    CmpApiModel.tcfPolicyVersion = 5;
+
     this.isServiceSpecific = !!isServiceSpecific;
     this.callResponder = new CallResponder(customCommands);
-
-  }
-
-  public set tcModel(tcModel: TCModel | null) {
-
-    // eslint-disable-next-line no-console
-    console.error('@iabtcf/cmpapi: As of v1.0.0-beta.21 setting tcModel via CmpApi.tcModel is deprecated.  Use cmpApi.update(tcString, uiVisible) instead');
-    // eslint-disable-next-line no-console
-    console.log('  see: https://github.com/InteractiveAdvertisingBureau/iabtcf-es/tree/master/modules/cmpapi#cmpapi-examples');
-
-  }
-
-  public set tcString(tcString: string | null) {
-
-    // eslint-disable-next-line no-console
-    console.error('@iabtcf/cmpapi: As of v1.0.0-beta.21 setting tcString via CmpApi.tcString is deprecated.  Use cmpApi.update(tcString, uiVisible) instead');
-    // eslint-disable-next-line no-console
-    console.log('  see: https://github.com/InteractiveAdvertisingBureau/iabtcf-es/tree/master/modules/cmpapi#cmpapi-examples');
-
-  }
-
-  public set uiVisible(bool: boolean) {
-
-    // eslint-disable-next-line no-console
-    console.error('@iabtcf/cmpapi: As of v1.0.0-beta.21 setting uiVisible via CmpApi.uiVisible is deprecated.  Use cmpApi.update(tcString, uiVisible) instead');
-    // eslint-disable-next-line no-console
-    console.log('  see: https://github.com/InteractiveAdvertisingBureau/iabtcf-es/tree/master/modules/cmpapi#cmpapi-examples');
 
   }
 
@@ -129,7 +104,7 @@ export class CmpApi {
       }
 
       CmpApiModel.tcModel.isServiceSpecific = this.isServiceSpecific;
-      CmpApiModel.tcfPolicyVersion = +CmpApiModel.tcModel.policyVersion;
+      CmpApiModel.tcfPolicyVersion = Number(CmpApiModel.tcModel.policyVersion);
       CmpApiModel.tcString = encodedTCString;
 
     }

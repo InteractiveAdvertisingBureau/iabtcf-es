@@ -1,8 +1,8 @@
-[![NPM version](https://img.shields.io/npm/v/@iabtcf/testing.svg?style=flat-square)](https://www.npmjs.com/package/@iabtcf/testing)
-[![npm module downloads per month](http://img.shields.io/npm/dm/@iabtcf/testing.svg?style=flat)](https://www.npmjs.org/package/@iabtcf/testing)
+[![NPM version](https://img.shields.io/npm/v/@iabtechlabtcf/testing.svg?style=flat-square)](https://www.npmjs.com/package/@iabtechlabtcf/testing)
+[![npm module downloads per month](http://img.shields.io/npm/dm/@iabtechlabtcf/testing.svg?style=flat)](https://www.npmjs.org/package/@iabtechlabtcf/testing)
 [![InteractiveAdvertisingBureau](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es.svg?style=shield)](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es)
 
-# @iabtcf/testing
+# @iabtechlabtcf/testing
 
 Testing tools to generate randomized input/output
 
@@ -10,12 +10,12 @@ Testing tools to generate randomized input/output
 
 npm
 ```
-npm install @iabtcf/testing --save-dev
+npm install @iabtechlabtcf/testing --save-dev
 ```
 
 yarn
 ```
-yarn add -D @iabtcf/testing
+yarn add -D @iabtechlabtcf/testing
 ```
 
 #### Utilities
@@ -24,7 +24,7 @@ yarn add -D @iabtcf/testing
 Generate random TCModel with GVL
 ```typescript
 
-import {TCModelFactory} from '@iabtcf/testing';
+import {TCModelFactory} from '@iabtechlabtcf/testing';
 
 const tcModel = TCModelFactory.withGVL();
 
@@ -33,10 +33,10 @@ const tcModel = TCModelFactory.withGVL();
 Generate random TC string
 
 ```typescript
-import {TCString} from '@iabtcf/core';
-import {TCModelFactory} from '@iabtcf/testing';
+import {TCString} from '@iabtechlabtcf/core';
+import {TCModelFactory} from '@iabtechlabtcf/testing';
 
-console.log(TCString.decode(TCModelFactory.noGVL()));
+console.log(TCString.encode(TCModelFactory.noGVL()));
 // ... random tc string
 
 ```
@@ -45,7 +45,7 @@ Add publisher restrictions
 
 ```typescript
 
-import {TCModelFactory} from '@iabtcf/testing';
+import {TCModelFactory} from '@iabtechlabtcf/testing';
 let tcModel = TCModelFactory.withGVL();
 tcModel = TCModelFactory.addPublisherRestrictions(tcModel);
 // now has random publisher restrictions
@@ -57,8 +57,8 @@ tcModel = TCModelFactory.addPublisherRestrictions(tcModel);
 Get latest GVL
 
 ```typescript
-import {GVLFactory} from '@iabtcf/testing';
-import {GVL} from '@iabtcf/core';
+import {GVLFactory} from '@iabtechlabtcf/testing';
+import {GVL} from '@iabtechlabtcf/core';
 
 const gvl = GVLFactory.getLatest();
 
@@ -67,8 +67,8 @@ const gvl = GVLFactory.getLatest();
 Get version of GVL
 
 ```typescript
-import {GVLFactory} from '@iabtcf/testing';
-import {GVL} from '@iabtcf/core';
+import {GVLFactory} from '@iabtechlabtcf/testing';
+import {GVL} from '@iabtechlabtcf/core';
 
 const gvl = GVLFactory.getVersion(10);
 

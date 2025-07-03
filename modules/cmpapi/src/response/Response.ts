@@ -1,4 +1,4 @@
-import {CmpApiModel} from '../CmpApiModel';
+import {CmpApiModel} from '../CmpApiModel.js';
 
 export class Response {
 

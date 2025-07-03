@@ -1,9 +1,9 @@
-[![NPM version](https://img.shields.io/npm/v/@iabtcf/cmpapi.svg?style=flat-square)](https://www.npmjs.com/package/@iabtcf/cmpapi)
-[![npm module downloads per month](http://img.shields.io/npm/dm/@iabtcf/cmpapi.svg?style=flat)](https://www.npmjs.org/package/@iabtcf/cmpapi)
+[![NPM version](https://img.shields.io/npm/v/@iabtechlabtcf/cmpapi.svg?style=flat-square)](https://www.npmjs.com/package/@iabtechlabtcf/cmpapi)
+[![npm module downloads per month](http://img.shields.io/npm/dm/@iabtechlabtcf/cmpapi.svg?style=flat)](https://www.npmjs.org/package/@iabtechlabtcf/cmpapi)
 [![InteractiveAdvertisingBureau](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es.svg?style=shield)](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es)
 
 
-# @iabtcf/cmpapi
+# @iabtechlabtcf/cmpapi
 
 Ensures other in-page digital marketing technologies have access to CMP transparency and consent information for the [IAB's Transparency and Consent Framework (TCF)](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework).
 
@@ -16,12 +16,12 @@ The process involves setting the state of a few properties and/or a validly ecno
 
 npm
 ```
-npm install @iabtcf/cmpapi --save
+npm install @iabtechlabtcf/cmpapi --save
 ```
 
 yarn
 ```
-yarn add @iabtcf/cmpapi
+yarn add @iabtechlabtcf/cmpapi
 ```
 
 
@@ -33,7 +33,7 @@ To create an instance of the CmpApi. Pass in your Cmp ID (assigned by IAB) and t
 A [custom commands object map](#custom-commands) may optionally be passed to extend the page-call functionality as well.
 
 ````javascript
-import {CmpApi} from '@iabtcf/cmpapi';
+import {CmpApi} from '@iabtechlabtcf/cmpapi';
 
 const cmpApi = new CmpApi(1, 3, true);
 ````
@@ -139,7 +139,7 @@ the calling script.
 **Example**
 ````javascript
 
-import {CmpApi} from '@iabtcf/cmpapi';
+import {CmpApi} from '@iabtechlabtcf/cmpapi';
 
 const cmpApi = new CmpApi(1, 3, false, {
 
@@ -157,7 +157,7 @@ const cmpApi = new CmpApi(1, 3, false, {
 
 });
 
-const songLyricCallback = (lyrics) => {
+const songLyricCallback = (lyrics, success) => {
 
   if(success) {
 
@@ -181,22 +181,28 @@ __tcfapi('connectBones', 2, songLyricCallback, 'knee', 'thigh');
 ### Built-In and Custom Commands
 Beginning in 1.1.0, if a custom command is defined that overlaps with a built-in command (`"ping"`, `"getTCData"`, `"getInAppTCData"`, `"getVendorList"`) then the custom command will act as a "middleware" being passed the built-in command's response and expected to pass along the response when finished.
 
-
+**Note:** `"addEventListener"` and `"removeEventListener"` can __not__ be overwritten.  `"addEventListener"` utilizes the `"getTCData"` command, so to modify `TCData` responses, write a Built-In custom command for that command and both `"getTCData"` and `"addEventListener"` will utilize it.  If the `"removeEventListener"` command is also used with a custom `"getTCData"` command, note that `"removeEventListener"` will not return `tcData` but rather a boolean that indicates if the listener was removed.  So it is important to add a check, otherwise the CmpApi will catch that error and the callbacks will return with `tcData: null`.
 
 **Example**
 ````javascript
 
-import {CmpApi} from '@iabtcf/cmpapi';
+import {CmpApi} from '@iabtechlabtcf/cmpapi';
 
 const cmpApi = new CmpApi(1, 3, false, {
 
-  'getTCData': (next, tcData) => {
+  'getTCData': (next, tcData, status) => {
 
-    // tcData will be constructed via the TC string and can be added to here
-    tcData.reallyImportantExtraProperty = true;
+    /*
+     * If using with 'removeEventListener' command, add a check to see if tcData is not a boolean. */
+    if (typeof tcData !== 'boolean') {
 
-    // pass data along
-    next(tcData);
+      // tcData will be constructed via the TC string and can be added to here
+      tcData.reallyImportantExtraProperty = true;
+
+    }
+
+    // pass data and status along
+    next(tcData, status);
 
 
   },

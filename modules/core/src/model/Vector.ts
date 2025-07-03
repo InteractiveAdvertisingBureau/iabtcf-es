@@ -1,6 +1,6 @@
-import {Cloneable} from '../Cloneable';
-import {TCModelError} from '../errors';
-import {IntMap} from './IntMap';
+import {Cloneable} from '../Cloneable.js';
+import {TCModelError} from '../errors/index.js';
+import {IntMap} from './IntMap.js';
 
 type SingleIDOrCollection = number | number[] | IntMap<unknown> | Set<number | string>;
 export type IdBoolTuple = [number, boolean];
@@ -80,11 +80,11 @@ export class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
 
     } else if (typeof id === 'object') {
 
-      this.unset(Object.keys(id).map((strId: string): number => +strId));
+      this.unset(Object.keys(id).map((strId: string): number => Number(strId)));
 
     } else {
 
-      this.set_.delete(id);
+      this.set_.delete(Number(id));
 
       /**
        * if bitLength was set before, it must now be unset
@@ -115,7 +115,7 @@ export class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
     let result = (typeof item === 'object');
     result = (result && Object.keys(item).every((key: string): boolean => {
 
-      let itemResult =Number.isInteger(parseInt(key, 10));
+      let itemResult = Number.isInteger(parseInt(key, 10));
 
       itemResult = (itemResult && this.isValidNumber(item[key].id));
       itemResult = (itemResult && item[key].name !== undefined);
@@ -173,7 +173,7 @@ export class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
 
     } else if (this.isIntMap(item)) {
 
-      this.set(Object.keys(item).map((strId: string): number => +strId));
+      this.set(Object.keys(item).map((strId: string): number => Number(strId)));
 
     } else if (this.isValidNumber(item)) {
 
@@ -198,6 +198,7 @@ export class Vector extends Cloneable<Vector> implements Iterable<IdBoolTuple> {
   public empty(): void {
 
     this.set_ = new Set<number>();
+    this.maxId_ = 0;
 
   }
 

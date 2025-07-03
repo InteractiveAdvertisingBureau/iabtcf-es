@@ -1,9 +1,8 @@
-import {Cloneable} from './Cloneable';
-import {TCModelError} from './errors';
-import {GVL} from './GVL';
-
-import {ConsentLanguages, IntMap, PurposeRestrictionVector, Vector} from './model';
-import {Purpose} from './model/gvl';
+import {Cloneable} from './Cloneable.js';
+import {TCModelError} from './errors/index.js';
+import {GVL} from './GVL.js';
+import {ConsentLanguages, IntMap, PurposeRestrictionVector, Vector} from './model/index.js';
+import {Purpose} from './model/gvl/index.js';
 
 type StringOrNumber = number | string;
 export type TCModelPropType = number | Date | string | boolean | Vector | PurposeRestrictionVector;
@@ -17,12 +16,12 @@ export class TCModel extends Cloneable<TCModel> {
 
   private isServiceSpecific_ = false;
   private supportOOB_ = true;
-  private useNonStandardStacks_ = false;
+  private useNonStandardTexts_ = false;
   private purposeOneTreatment_ = false;
   private publisherCountryCode_ = 'AA';
   private version_ = 2;
   private consentScreen_: StringOrNumber = 0;
-  private policyVersion_: StringOrNumber = 2;
+  private policyVersion_: StringOrNumber = 5;
   private consentLanguage_ = 'EN';
   private cmpId_: StringOrNumber = 0;
   private cmpVersion_: StringOrNumber = 0;
@@ -140,7 +139,6 @@ export class TCModel extends Cloneable<TCModel> {
 
     }
 
-    this.created = new Date();
     this.updated();
 
   }
@@ -183,9 +181,11 @@ export class TCModel extends Cloneable<TCModel> {
    */
   public set cmpId(integer: StringOrNumber) {
 
-    if (Number.isInteger(+integer) && integer > 1) {
+    integer = Number(integer);
 
-      this.cmpId_ = +integer;
+    if (Number.isInteger(integer) && integer > 1) {
+
+      this.cmpId_ = integer;
 
     } else {
 
@@ -212,9 +212,11 @@ export class TCModel extends Cloneable<TCModel> {
    */
   public set cmpVersion(integer: StringOrNumber) {
 
-    if (Number.isInteger(+integer) && integer > -1) {
+    integer = Number(integer);
 
-      this.cmpVersion_ = +integer;
+    if (Number.isInteger(integer) && integer > -1) {
+
+      this.cmpVersion_ = integer;
 
     } else {
 
@@ -241,9 +243,11 @@ export class TCModel extends Cloneable<TCModel> {
    */
   public set consentScreen(integer: StringOrNumber) {
 
-    if (Number.isInteger(+integer) && integer > -1) {
+    integer = Number(integer);
 
-      this.consentScreen_ = +integer;
+    if (Number.isInteger(integer) && integer > -1) {
+
+      this.consentScreen_ = integer;
 
     } else {
 
@@ -297,6 +301,7 @@ export class TCModel extends Cloneable<TCModel> {
     }
 
   }
+
   public get publisherCountryCode(): string {
 
     return this.publisherCountryCode_;
@@ -318,7 +323,7 @@ export class TCModel extends Cloneable<TCModel> {
      * bitshifting to the right.  This works on all types in JavaScript and if
      * it's not valid then value will be 0.
      */
-    integer = +integer>>0;
+    integer = Number(integer)>>0;
 
     if (integer < 0) {
 
@@ -390,6 +395,7 @@ export class TCModel extends Cloneable<TCModel> {
     this.version_ = parseInt(num as string, 10);
 
   }
+
   public get version(): StringOrNumber {
 
     return this.version_;
@@ -411,12 +417,13 @@ export class TCModel extends Cloneable<TCModel> {
 
     this.isServiceSpecific_ = bool;
 
-  };
+  }
+
   public get isServiceSpecific(): boolean {
 
     return this.isServiceSpecific_;
 
-  };
+  }
 
   /**
    * Non-standard stacks means that a CMP is using publisher-customized stack
@@ -427,16 +434,17 @@ export class TCModel extends Cloneable<TCModel> {
    *
    * @param {boolean} bool - value to set
    */
-  public set useNonStandardStacks(bool: boolean) {
+  public set useNonStandardTexts(bool: boolean) {
 
-    this.useNonStandardStacks_ = bool;
+    this.useNonStandardTexts_ = bool;
 
-  };
-  public get useNonStandardStacks(): boolean {
+  }
 
-    return this.useNonStandardStacks_;
+  public get useNonStandardTexts(): boolean {
 
-  };
+    return this.useNonStandardTexts_;
+
+  }
 
   /**
    * Whether or not this publisher supports OOB signaling.  On Global TC String
@@ -448,13 +456,13 @@ export class TCModel extends Cloneable<TCModel> {
 
     this.supportOOB_ = bool;
 
-  };
+  }
 
   public get supportOOB(): boolean {
 
     return this.supportOOB_;
 
-  };
+  }
 
   /**
    * `false` There is no special Purpose 1 status.
@@ -472,13 +480,13 @@ export class TCModel extends Cloneable<TCModel> {
 
     this.purposeOneTreatment_ = bool;
 
-  };
+  }
 
   public get purposeOneTreatment(): boolean {
 
     return this.purposeOneTreatment_;
 
-  };
+  }
 
   /**
    * setAllVendorConsents - sets all vendors on the GVL Consent (true)
@@ -668,7 +676,7 @@ export class TCModel extends Cloneable<TCModel> {
        * work properly since it's positional.
        */
       const purposeIds: string[] = Object.keys(this.customPurposes)
-        .sort((a: string, b: string): number => +a - +b);
+        .sort((a: string, b: string): number => Number(a) - Number(b));
 
       len = parseInt(purposeIds.pop(), 10);
 
@@ -691,13 +699,17 @@ export class TCModel extends Cloneable<TCModel> {
   }
 
   /**
-   * updated - updates the lastUpdatedDate with a 'now' timestamp
+   * updated - updates the created and lastUpdated dates with a 'now' day-level UTC timestamp
    *
    * @return {void}
    */
   public updated(): void {
 
-    this.lastUpdated = new Date();
+    const date = new Date();
+    const utcDate = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+
+    this.created = utcDate;
+    this.lastUpdated = utcDate;
 
   }
 

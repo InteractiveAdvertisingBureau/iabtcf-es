@@ -1,8 +1,8 @@
-[![NPM version](https://img.shields.io/npm/v/@iabtcf/cli.svg?style=flat-square)](https://www.npmjs.com/package/@iabtcf/cli)
-[![npm module downloads per month](http://img.shields.io/npm/dm/@iabtcf/cli.svg?style=flat)](https://www.npmjs.org/package/@iabtcf/cli)
+[![NPM version](https://img.shields.io/npm/v/@iabtechlabtcf/cli.svg?style=flat-square)](https://www.npmjs.com/package/@iabtechlabtcf/cli)
+[![npm module downloads per month](http://img.shields.io/npm/dm/@iabtechlabtcf/cli.svg?style=flat)](https://www.npmjs.org/package/@iabtechlabtcf/cli)
 [![InteractiveAdvertisingBureau](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es.svg?style=shield)](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es)
 
-# @iabtcf/cli
+# @iabtechlabtcf/cli
 
 command line decoding of iab TC String
 
@@ -10,12 +10,12 @@ command line decoding of iab TC String
 
 npm
 ```
-npm install -g @iabtcf/cli
+npm install -g @iabtechlabtcf/cli
 ```
 
 yarn
 ```
-yarn add -g @iabtcf/cli
+yarn add -g @iabtechlabtcf/cli
 ```
 
 #### Using
@@ -28,11 +28,11 @@ cmpId: 2
 cmpVersion: 1
 consentScreen: 2
 consentLanguage: "EN"
-created: Mon Dec 09 2019 18:01:46 GMT-0800 (Pacific Standard Time)
-lastUpdated: Mon Dec 09 2019 18:01:46 GMT-0800 (Pacific Standard Time)
+created: Mon Dec 09 2019 00:00:00 GMT
+lastUpdated: Mon Dec 09 2019 00:00:00 GMT
 policyVersion: 2
 isServiceSpecific: false
-useNonStandardStacks: false
+useNonStandardTexts: false
 purposeOneTreatment: false
 publisherCountryCode: "ES"
 supportOOB: false

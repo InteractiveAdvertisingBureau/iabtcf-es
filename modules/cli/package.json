@@ -1,31 +1,43 @@
 {
-  "name": "@iabtcf/cli",
-  "version": "1.1.3",
+  "name": "@iabtechlabtcf/cli",
+  "version": "1.5.16",
   "description": "Decode a iab TCF (Transparency and Consent Framework) TC String via the command line",
-  "author": "Chris Paterson <tcf@chrispaterson.io>",
+  "author": "Mayank Mishra <mayank@iabtechlab.com>",
   "homepage": "https://iabtcf.com/",
   "license": "Apache-2.0",
   "bin": {
-    "tcstring": "./lib/index.js"
+    "tcstring": "./lib/cjs/index.js"
   },
+  "type": "module",
+  "main": "lib/cjs/index.js",
+  "module": "lib/mjs/index.js",
+  "exports": {
+    ".": {
+      "import": "./lib/mjs/index.js",
+      "require": "./lib/cjs/index.js"
+    }
+  },
+  "types": "lib/mjs/index.d.ts",
   "files": [
     "lib/**/*"
   ],
   "scripts": {
     "preversion": "echo 'woops I think you meant to go to the root' && exit 1",
-    "build": "rm -rf lib ; tsc ; chmod a+x lib/index.js",
+    "build": "../build ; chmod a+x lib/mjs/index.js ; chmod a+x lib/cjs/index.js",
     "lint": "eslint `find src -name '*.ts'`"
   },
   "dependencies": {
-    "@iabtcf/core": "1.1.3"
+    "@iabtechlabtcf/core": "1.5.16"
   },
   "devDependencies": {
+    "@types/node": "18.17.4",
     "@typescript-eslint/eslint-plugin": "^2.10.0",
-    "@typescript-eslint/parser": "^2.10.0",
+    "@typescript-eslint/parser": "^5.12.0",
     "eslint": "6.8.0",
     "source-map-support": "^0.5.12",
-    "ts-node": "^8.5.4",
-    "typescript": "^3.7.0"
+    "ts-node": "10.9.1",
+    "typedoc": "0.24.8",
+    "typescript": "4.9.5"
   },
   "eslintIgnore": [
     "lib"

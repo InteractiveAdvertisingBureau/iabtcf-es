@@ -1,18 +1,21 @@
-import {TCModel, PurposeRestriction, RestrictionType} from '@iabtcf/core';
-import {makeRandomInt} from './makeRandomInt';
-import {GVLFactory} from './GVLFactory';
+import {TCModel, PurposeRestriction, RestrictionType, GVL} from '@iabtechlabtcf/core';
+import {makeRandomInt} from './makeRandomInt.js';
+import {GVLFactory} from './GVLFactory.js';
 
 export class TCModelFactory {
 
-  public static noGVL(tcModel?: TCModel): TCModel {
+  public static noGVL(gvl?: GVL): TCModel {
 
-    const latestGVL = GVLFactory.getLatest();
+    const tcModel = this.createBaseTCModel(gvl);
 
-    if (!tcModel) {
+    return tcModel;
 
-      tcModel = new TCModel();
+  }
 
-    }
+  private static createBaseTCModel(gvl?: GVL): TCModel {
+
+    const latestGVL = gvl || GVLFactory.getLatest();
+    const tcModel = new TCModel();
 
     tcModel.cmpId = makeRandomInt(2, 100);
     tcModel.cmpVersion = makeRandomInt(1, 10);
@@ -25,7 +28,7 @@ export class TCModelFactory {
 
     TCModel.consentLanguages.forEach((lang: string): void => {
 
-      counter ++;
+      counter++;
 
       if (counter === rand) {
 
@@ -38,11 +41,13 @@ export class TCModelFactory {
     tcModel.publisherCountryCode = String.fromCharCode(makeRandomInt(65, 90)) +
       String.fromCharCode(makeRandomInt(65, 90));
 
-    const now = (new Date()).getTime();
+    const date = new Date();
+    const utcDate = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+    const now = utcDate.getTime();
     const GDPRMageddon = 1576883249;
 
     tcModel.created = new Date(makeRandomInt(GDPRMageddon, now));
-    tcModel.lastUpdated = new Date(makeRandomInt(tcModel.created.getTime(), now));
+    tcModel.lastUpdated = new Date(makeRandomInt(GDPRMageddon, now));
 
     const mapping = {
       'purposes': [
@@ -86,11 +91,11 @@ export class TCModelFactory {
 
   }
 
-  public static addPublisherRestrictions(tcModel: TCModel): TCModel {
+  public static addPublisherRestrictions(tcModel: TCModel, gvl?: GVL): TCModel {
 
     if (!tcModel.gvl) {
 
-      tcModel.gvl = GVLFactory.getLatest();
+      tcModel.gvl = gvl || GVLFactory.getLatest();
 
     }
 
@@ -129,11 +134,11 @@ export class TCModelFactory {
 
   }
 
-  public static withGVL(): TCModel {
+  public static withGVL(gvl?: GVL): TCModel {
 
-    const tcModel = this.noGVL();
+    const tcModel = this.createBaseTCModel(gvl);
 
-    tcModel.gvl = GVLFactory.getLatest();
+    tcModel.gvl = gvl || GVLFactory.getLatest();
 
     return tcModel;
 

@@ -1,8 +1,8 @@
-[![NPM version](https://img.shields.io/npm/v/@iabtcf/core.svg?style=flat-square)](https://www.npmjs.com/package/@iabtcf/core)
-[![npm module downloads per month](http://img.shields.io/npm/dm/@iabtcf/core.svg?style=flat)](https://www.npmjs.org/package/@iabtcf/core)
+[![NPM version](https://img.shields.io/npm/v/@iabtechlabtcf/core.svg?style=flat-square)](https://www.npmjs.com/package/@iabtechlabtcf/core)
+[![npm module downloads per month](http://img.shields.io/npm/dm/@iabtechlabtcf/core.svg?style=flat)](https://www.npmjs.org/package/@iabtechlabtcf/core)
 [![InteractiveAdvertisingBureau](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es.svg?style=shield)](https://circleci.com/gh/InteractiveAdvertisingBureau/iabtcf-es)
 
-# @iabtcf/core
+# @iabtechlabtcf/core
 
 Ensures consistent encoding and decoding of [IAB's Transparency and Consent Framework (TCF)](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework) [TC Strings](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#about-the-transparency--consent-string-tc-string) and the stateful persistence of the Transparency and Consent information while providing tools for the handling and manipulation of the [TCF](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework) [Global Vendor List](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#the-global-vendor-list) data all free and open sourced ([License](LICENSE)).
 
@@ -15,6 +15,7 @@ Ensures consistent encoding and decoding of [IAB's Transparency and Consent Fram
       + [Autoload specific version vendor-list.json](#autoload-specific-version-vendor-listjson)
       + [Pass vendor-list.json object](#pass-vendor-listjson-object)
       + [Change GVL Language](#change-gvl-language)
+      + [Cloning a GVL with a Non-Default language](#cloning-a-gvl-with-a-non-default-language)
       + [Get only vendors with a specific feature or purpose under legal basis](#get-only-vendors-with-a-specific-feature-or-purpose-under-legal-basis)
       + [Narrow the list of vendors](#narrow-the-list-of-vendors)
       + [filtering](#narrow-the-list-of-vendors) vendors for subsets of the GVL.
@@ -29,19 +30,19 @@ Ensures consistent encoding and decoding of [IAB's Transparency and Consent Fram
 
 npm
 ```
-npm install @iabtcf/core --save
+npm install @iabtechlabtcf/core --save
 ```
 
 yarn
 ```
-yarn add @iabtcf/core
+yarn add @iabtechlabtcf/core
 ```
 
 #### Using
 
 This example demonstrates the basic use case of a CMP creating a "default all-no" TC string.
 ```javascript
-import {TCModel, TCString, GVL} from '@iabtcf/core';
+import {TCModel, TCString, GVL} from '@iabtechlabtcf/core';
 
 /**
  *  the IAB requires CMPs to host their own vendor-list.json files.  This must
@@ -75,7 +76,7 @@ const decodedTCModel = TCString.decode(encodedString);
 To encode a `TCModel` a `GVL` must be included.
 
 ```javascript
-import {TCModel} from '@iabtcf/core';
+import {TCModel} from '@iabtechlabtcf/core';
 
 // creates a TCModel
 const tcModel = new TCModel();
@@ -96,7 +97,7 @@ tcModel.cmpVersion = //{myCMPVersion}
 This exmple shows how to set the basic fields that all TC strings need to have set.
 
 ```javascript
-import {TCModel} from '@iabtcf/core';
+import {TCModel} from '@iabtechlabtcf/core';
 
 const tcModel = new TCModel();
 tcModel.cmpId = // my CMP ID
@@ -116,7 +117,7 @@ The `TCModel` leverages a [`Set`](https://developer.mozilla.org/en-US/docs/Web/J
    - `purposeConsents`
    - `purposeLegitimateInterests`
  - **Special Feature Opt-Ins**
-   - `specialFeatureOptIns`
+   - `specialFeatureOptins`
  - **Publisher**
    - `publisherConsents`
    - `publisherCustomConsents`
@@ -174,7 +175,7 @@ A [Publisher Restriction](https://github.com/InteractiveAdvertisingBureau/GDPR-T
 
 ```javascript
 
-import {TCModel, PurposeRestriction, RestrictionType} from '@iabtcf/core';
+import {TCModel, PurposeRestriction, RestrictionType} from '@iabtechlabtcf/core';
 
 // first you must create a PurposeRestriction
 const purposeRestriction = new PurposeRestriction();
@@ -194,6 +195,7 @@ tcModel.publisherRestrictions.add(2000, purposeRestriction);
 * [Autoload specific vendor-list.json](#autoload-specific-vendor-listjson)
 * [Pass vendor-list.json object](#pass-vendor-list.json-object)
 * [Change GVL Language](#change-gvl-language)
+* [Cloning a GVL with a Non-Default language](#cloning-a-gvl-with-a-non-default-language)
 * [Get only vendors with a specific feature or purpose under legal basis](#get-only-vendors-with-a-specific-feature-or-purpose-under-legal-basis)
 * [Narrow the list of vendors](#narrow-the-list-of-vendors)
 
@@ -204,7 +206,7 @@ Autoloading a vendor-list.json will accept into the constructor a vendor list ve
 
 **Loading default filename**
 ```javascript
-import {GVL} from '@iabtcf/core';
+import {GVL} from '@iabtechlabtcf/core';
 
 // only needs to be set once per application as this is a static variable
 GVL.baseUrl = 'http://cmp.mysupercoolcmp.com/cmp/';
@@ -221,7 +223,7 @@ gvl.readyPromise.then(() => {
 
 **Loading with custom filename**
 ```javascript
-import {GVL} from '@iabtcf/core';
+import {GVL} from '@iabtechlabtcf/core';
 
 // only needs to be set once per application as this is a static variable
 GVL.baseUrl = 'http://cmp.mysupercoolcmp.com/cmp/';
@@ -244,7 +246,7 @@ Autoloading a specific version requires that you both set the `GVL.baseUrl` stat
 
 **Loading default filename for version**
 ```javascript
-import {GVL} from '@iabtcf/core';
+import {GVL} from '@iabtechlabtcf/core';
 
 // only needs to be set once per application as this is a static variable
 GVL.baseUrl = 'http://cmp.mysupercoolcmp.com/cmp/';
@@ -261,7 +263,7 @@ gvl.readyPromise.then(() => {
 
 **Changing version name scheme**
 ```javascript
-import {GVL} from '@iabtcf/core';
+import {GVL} from '@iabtechlabtcf/core';
 
 // only needs to be set once per application as this is a static variable
 GVL.baseUrl = 'http://cmp.mysupercoolcmp.com/cmp/';
@@ -282,7 +284,7 @@ gvl.readyPromise.then(() => {
 You may also just pass in the json object (not strigified)
 
 ```javascript
-import {GVL} from '@iabtcf/core';
+import {GVL} from '@iabtechlabtcf/core';
 
 const gvl = new GVL(gvljson);
 
@@ -295,7 +297,7 @@ All vendorlists are published by default as english.  There are alternate langua
 
 **Default filename load**
 ```javascript
-import {GVL} from '@iabtcf/core';
+import {GVL} from '@iabtechlabtcf/core';
 
 // only needs to be set once per application as this is a static variable
 GVL.baseUrl = 'http://cmp.mysupercoolcmp.com/';
@@ -312,7 +314,7 @@ gvl.changeLanguage('fr').then(() => {
 
 **Changing filename load**
 ```javascript
-import {GVL} from '@iabtcf/core';
+import {GVL} from '@iabtechlabtcf/core';
 
 const gvl = new GVL(gvljson);
 
@@ -329,6 +331,31 @@ gvl.changeLanguage('fr').then(() => {
 });
 ```
 
+### Cloning a GVL with a Non-Default language
+
+When cloning a GVL with a non-default language, make sure that any prior `changeLanguage` call is resolved.  If changeLanguage has not yet resolved, `clone` will make an http request for the current language but will have no indication of resolving that request since it is synchronous.
+
+```javascript
+import {GVL} from '@iabtechlabtcf/core';
+
+const gvl = new GVL();
+
+// Resolving changeLanguage promise using thenables.
+gvl.changeLanguage('fr').then(() => {
+
+  const clone = gvl.clone();
+
+})
+
+// Resolving changeLanguage through async/await
+const someAsyncFunction = async () => {
+
+  await gvl.changeLanguage('fr');
+  const clone = gvl.clone();
+
+}
+```
+
 
 ### Get only vendors with a specific feature or purpose under legal basis
 A CMP UI may want to group vendors by what purpose they use under what legal basis and/or features.  This can be accomplished quite easily by using one of the 6 grouping methods:
@@ -342,7 +369,7 @@ A CMP UI may want to group vendors by what purpose they use under what legal bas
 All 6 grouping methods return an `IntMap<Vendor>` object
 
 ```javascript
-import {GVL} from '@iabtcf/core';
+import {GVL} from '@iabtechlabtcf/core';
 
 // only needs to be set once per application as this is a static variable
 GVL.baseUrl = 'http://cmp.mysupercoolcmp.com/cmp/';
@@ -364,7 +391,7 @@ gvl.readyPromise.then(() => {
 If loading a CMP would like to show a subset of the Vendor List a filter may be passed to only work with those vendors on the list.
 
 ```javascript
-import {GVL} from '@iabtcf/core';
+import {GVL} from '@iabtechlabtcf/core';
 
 // only needs to be set once per application as this is a static variable
 GVL.baseUrl = 'http://cmp.mysupercoolcmp.com/cmp/';
@@ -400,7 +427,7 @@ gvl.readyPromise.then(() => {
 
 ```typescript
 
-import {TCString, TCModel} from '@iabtcf/core';
+import {TCString, TCModel} from '@iabtechlabtcf/core';
 
 const myTCModel = TCString.decode(encodedTCString);
 
@@ -411,7 +438,7 @@ const myTCModel = TCString.decode(encodedTCString);
 ### Encode an IAB TC String
 
 ```typescript
-import {TCString, TCModel, GVL} from '@iabtcf/core';
+import {TCString, TCModel, GVL} from '@iabtechlabtcf/core';
 
 /**
  * With v2.0 of the TCF, CMPs are required to host their own vendor-list.json for
@@ -445,7 +472,7 @@ It is possible to pass a reference to an already created `TCModel` and add indiv
 
 ```typescript
 
-import {TCString, Segment} from '@iabtcf/core';
+import {TCString, Segment} from '@iabtechlabtcf/core';
 
 // if you had a getCookie function that returned just that segment
 const publisherTCSegment = getCookie('euconsent-ptc');
@@ -467,10 +494,10 @@ getGlobalTCString().then((encodedTCString) => {
 
 ### Encoding Options
 
-Options may be passed to the encoder to override defaults.  In most cases the encoder can figure out what segments to include but if the string is surfaced to vendors or for storing in a cookie the encoding is slightly different.  The `@iabtcf/cmpapi` handles this difference and CMPs don't need to worry about it.
+Options may be passed to the encoder to override defaults.  In most cases the encoder can figure out what segments to include but if the string is surfaced to vendors or for storing in a cookie the encoding is slightly different.  The `@iabtechlabtcf/cmpapi` handles this difference and CMPs don't need to worry about it.
 
 ```typescript
-import {TCString, Segment} from '@iabtcf/core';
+import {TCString, Segment} from '@iabtechlabtcf/core';
 
 // produces the version of the string for the __tcfapi function
 const cmpApiEncodedString = TCString.encode(tcModel, { isForVendors: true });
@@ -497,5 +524,4 @@ const encodingOptions = {
   segments: [Segment.PUBLISHER_TC]
 }
 const publisherTCSegment = TCString.encode(tcModel, encodingOptions);
-
 ```

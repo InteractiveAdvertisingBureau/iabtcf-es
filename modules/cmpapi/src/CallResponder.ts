@@ -1,15 +1,16 @@
-import {CommandCallback, TCFCommand} from './command';
-import {CommandMap} from './command/CommandMap';
-import {CmpApiModel} from './CmpApiModel';
-import {Disabled} from './response/Disabled';
-import {CustomCommands} from './CustomCommands';
-import {SupportedVersions} from './SupportedVersions';
+import {CommandCallback, TCFCommand} from './command/index.js';
+import {CommandMap} from './command/CommandMap.js';
+import {CmpApiModel} from './CmpApiModel.js';
+import {Disabled} from './response/Disabled.js';
+import {CustomCommands} from './CustomCommands.js';
+import {SupportedVersions} from './SupportedVersions.js';
 
 export const API_KEY = '__tcfapi';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type APIArgs = [string, number, CommandCallback, ...any[]];
 
 type GetQueueFunction = () => APIArgs[];
+// eslint-disable-next-line no-unused-vars
 type PageCallHandler = (...APIArgs) => void;
 
 export class CallResponder {
@@ -19,7 +20,45 @@ export class CallResponder {
 
   public constructor(customCommands?: CustomCommands) {
 
-    this.customCommands = customCommands;
+    if (customCommands) {
+
+      /**
+       * The addEventListener command and removeEventListener are the only ones
+       * that shouldn't be overwritten. The addEventListener command utilizes
+       * getTCData command, so overridding the TCData response should happen
+       * there.
+       */
+
+      let command = TCFCommand.ADD_EVENT_LISTENER;
+
+      if (customCommands?.[command]) {
+
+        throw new Error(`Built-In Custom Commmand for ${command} not allowed: Use ${TCFCommand.GET_TC_DATA} instead`);
+
+      }
+
+      command = TCFCommand.REMOVE_EVENT_LISTENER;
+
+      if (customCommands?.[command]) {
+
+        throw new Error(`Built-In Custom Commmand for ${command} not allowed`);
+
+      }
+
+      /**
+       * If `getTCData` custom command handler is specified, we should use it
+       * for `addEventListener` and `removeEventListener` commands.
+       */
+      if (customCommands?.[TCFCommand.GET_TC_DATA]) {
+
+        customCommands[TCFCommand.ADD_EVENT_LISTENER] = customCommands[TCFCommand.GET_TC_DATA];
+        customCommands[TCFCommand.REMOVE_EVENT_LISTENER] = customCommands[TCFCommand.GET_TC_DATA];
+
+      }
+
+      this.customCommands = customCommands;
+
+    }
 
     /**
      * Attempt to grab the queue – we could call ping and see if it is the stub,
@@ -53,7 +92,7 @@ export class CallResponder {
    * @param {string} command
    * @param {number} version
    * @param {CommandCallback} callback
-   * @param {any} [param]
+   * @param {any} params
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public apiCall(command: string, version: number, callback: CommandCallback, ...params: any): void | never {

@@ -1,9 +1,8 @@
-import {PurposeRestriction} from './PurposeRestriction';
-import {BinarySearchTree} from './BinarySearchTree';
-import {RestrictionType} from './RestrictionType';
-import {GVL} from '../GVL';
-import {Vendor} from './gvl/Vendor';
-import {Cloneable} from '../Cloneable';
+import {PurposeRestriction} from './PurposeRestriction.js';
+import {RestrictionType} from './RestrictionType.js';
+import {GVL} from '../GVL.js';
+import {Vendor} from './gvl/index.js';
+import {Cloneable} from '../Cloneable.js';
 
 export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector> {
 
@@ -16,10 +15,8 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
   /**
    * a map indexed by a string which will be a 'hash' of the purpose and
    * restriction type.
-   *
-   * Using a BST to keep vendors in a sorted order for encoding later
    */
-  private map: Map<string, BinarySearchTree> = new Map<string, BinarySearchTree>();
+  private map: Map<string, Set<number>> = new Map<string, Set<number>>();
   private gvl_: GVL;
 
   private has(hash: string): boolean {
@@ -59,19 +56,19 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
           switch (restrictionType) {
 
             /**
-             * If the vendor has the purposeId in flexiblePurposes and it is
-             * listed as a legitimate interest purpose we can set the
-             * override to require consent.
-             */
+               * If the vendor has the purposeId in flexiblePurposes and it is
+               * listed as a legitimate interest purpose we can set the
+               * override to require consent.
+               */
             case RestrictionType.REQUIRE_CONSENT:
               result = (vendor.flexiblePurposes.includes(purposeId) && vendor.legIntPurposes.includes(purposeId));
               break;
 
-            /**
-             * If the vendor has the purposeId in flexiblePurposes and it is
-             * listed as a consent purpose we can set the
-             * override to require legitimate interest.
-             */
+              /**
+               * If the vendor has the purposeId in flexiblePurposes and it is
+               * listed as a consent purpose we can set the
+               * override to require legitimate interest.
+               */
             case RestrictionType.REQUIRE_LI:
               result = (vendor.flexiblePurposes.includes(purposeId) && vendor.purposes.includes(purposeId));
               break;
@@ -113,7 +110,7 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
       if (!this.has(hash)) {
 
-        this.map.set(hash, new BinarySearchTree());
+        this.map.set(hash, new Set());
         this.bitLength = 0;
 
       }
@@ -125,6 +122,46 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
        */
 
       this.map.get(hash).add(vendorId);
+
+    }
+
+  }
+
+  /**
+   * restrictPurposeToLegalBasis - adds all Vendors under a given Purpose Restriction
+   *
+   * @param {PurposeRestriction} purposeRestriction
+   * @return {void}
+   */
+  public restrictPurposeToLegalBasis(purposeRestriction: PurposeRestriction): void {
+
+    const vendors = Array.from(this.gvl.vendorIds);
+    const hash: string = purposeRestriction.hash;
+    const lastEntry = vendors[vendors.length - 1];
+
+    /**
+     * Create an ordered array of vendor IDs from `1` (the minimum value for Vendor ID) to `lastEntry`
+     */
+    const values = [...Array(lastEntry).keys()].map( (i) => i + 1);
+
+    if (!this.has(hash)) {
+
+      this.map.set(hash, new Set(values)); // use static method `build` to create a `BST` from the ordered array of IDs
+      this.bitLength = 0;
+
+    } else {
+
+      for (let i = 1; i <= lastEntry; i++) {
+
+        /**
+         * Previously I had a check here to remove a duplicate value, but because
+         * we're using a tree the value is guaranteed to be unique so there is no
+         * need to add an additional de-duplication here.
+         */
+
+        this.map.get(hash).add(i);
+
+      }
 
     }
 
@@ -150,7 +187,7 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
       if (this.has(hash)) {
 
-        vendorIds = (this.map.get(hash) as BinarySearchTree).get();
+        vendorIds = Array.from(this.map.get(hash) as Set<number>);
 
       }
 
@@ -158,9 +195,9 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
       const vendorSet = new Set<number>();
 
-      this.map.forEach((bst: BinarySearchTree): void => {
+      this.map.forEach((set: Set<number>): void => {
 
-        bst.get().forEach((vendorId: number): void => {
+        set.forEach((vendorId: number): void => {
 
           vendorSet.add(vendorId);
 
@@ -172,7 +209,7 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
     }
 
-    return vendorIds;
+    return vendorIds.sort((a, b) => a - b);
 
   }
 
@@ -232,9 +269,9 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
     let retr = 0;
 
-    this.map.forEach((bst: BinarySearchTree): void => {
+    this.map.forEach((set: Set<number>): void => {
 
-      retr = Math.max(bst.max(), retr);
+      retr = Math.max(Array.from(set)[set.size - 1], retr);
 
     });
 
@@ -246,11 +283,11 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
     const retr: PurposeRestriction[] = [];
 
-    this.map.forEach((bst: BinarySearchTree, hash: string): void => {
+    this.map.forEach((set: Set<number>, hash: string): void => {
 
       if (vendorId) {
 
-        if (bst.contains(vendorId)) {
+        if (set.has(vendorId)) {
 
           retr.push(PurposeRestriction.unHash(hash));
 
@@ -272,7 +309,7 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
 
     const purposeIds = new Set<number>();
 
-    this.map.forEach((bst: BinarySearchTree, hash: string): void => {
+    this.map.forEach((set: Set<number>, hash: string): void => {
 
       purposeIds.add(PurposeRestriction.unHash(hash).purposeId);
 
@@ -292,14 +329,14 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
   public remove(vendorId: number, purposeRestriction: PurposeRestriction): void {
 
     const hash: string = purposeRestriction.hash;
-    const bst: BinarySearchTree | undefined = this.map.get(hash);
+    const set: Set<number> | undefined = this.map.get(hash);
 
-    if (bst) {
+    if (set) {
 
-      bst.remove(vendorId);
+      set.delete(vendorId);
 
       // if it's empty let's delete the key so it doesn't show up empty
-      if (bst.isEmpty()) {
+      if (set.size == 0) {
 
         this.map.delete(hash);
         this.bitLength = 0;
@@ -327,16 +364,16 @@ export class PurposeRestrictionVector extends Cloneable<PurposeRestrictionVector
        * go through and remove some if they're not valid
        */
 
-      this.map.forEach((bst: BinarySearchTree, hash: string): void => {
+      this.map.forEach((set: Set<number>, hash: string): void => {
 
         const purposeRestriction: PurposeRestriction = PurposeRestriction.unHash(hash);
-        const vendors: number[] = bst.get();
+        const vendors: number[] = Array.from(set);
 
         vendors.forEach((vendorId: number): void => {
 
           if (!this.isOkToHave(purposeRestriction.restrictionType, purposeRestriction.purposeId, vendorId)) {
 
-            bst.remove(vendorId);
+            set.delete(vendorId);
 
           }
 

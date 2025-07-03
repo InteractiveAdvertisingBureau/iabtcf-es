@@ -1,10 +1,10 @@
-import {Vector} from '../../model';
-import {BitLength} from '../';
-import {IntEncoder} from './IntEncoder';
-import {BooleanEncoder} from './BooleanEncoder';
-import {FixedVectorEncoder} from './FixedVectorEncoder';
-import {VectorEncodingType} from './VectorEncodingType';
-import {DecodingError} from '../../errors';
+import {Vector} from '../../model/index.js';
+import {BitLength} from '../index.js';
+import {IntEncoder} from './IntEncoder.js';
+import {BooleanEncoder} from './BooleanEncoder.js';
+import {FixedVectorEncoder} from './FixedVectorEncoder.js';
+import {VectorEncodingType} from './VectorEncodingType.js';
+import {DecodingError} from '../../errors/index.js';
 
 export class VendorVectorEncoder {
 
@@ -94,12 +94,12 @@ export class VendorVectorEncoder {
 
     if (rangeIsSmaller) {
 
-      retrString += VectorEncodingType.RANGE + '';
+      retrString += String(VectorEncodingType.RANGE);
       retrString += this.buildRangeEncoding(ranges);
 
     } else {
 
-      retrString += VectorEncodingType.FIELD + '';
+      retrString += String(VectorEncodingType.FIELD);
       retrString += bitField;
 
     }

@@ -1,4 +1,4 @@
-import {CommandCallback} from './CommandCallback';
+import {CommandCallback} from './CommandCallback.js';
 
 export abstract class Command {
 
@@ -34,21 +34,15 @@ export abstract class Command {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected invokeCallback(response: any): void {
 
-    if (response !== null) {
+    const success = response !== null;
 
-      if (typeof this.next === 'function') {
+    if (typeof this.next === 'function') {
 
-        this.callback(this.next, response, true);
-
-      } else {
-
-        this.callback(response, true);
-
-      }
+      this.callback(this.next, response, success);
 
     } else {
 
-      this.callback(response, false);
+      this.callback(response, success);
 
     }
 

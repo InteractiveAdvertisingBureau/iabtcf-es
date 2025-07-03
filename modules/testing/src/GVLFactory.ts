@@ -1,16 +1,25 @@
-import {GVL} from '@iabtcf/core';
+import {GVL} from '@iabtechlabtcf/core';
+import * as fs from 'fs';
+import * as path from 'path';
+import {fileURLToPath} from 'url';
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export class GVLFactory {
 
-  public static getVersion(version: number): GVL {
+  public static getVersion(version: number, schema = 'v2'): GVL {
 
-    return new GVL(require(`./vendorlist/vendor-list-v${version}.json`));
+    const json = JSON.parse(fs.readFileSync(__dirname + `/vendorlist/${schema}/vendor-list-v${version}.json`).toString());
+    return new GVL(json);
 
   }
 
-  public static getLatest(): GVL {
+  public static getLatest(schema = 'v2'): GVL {
 
-    return new GVL(require('./vendorlist/vendor-list.json'));
+    const json = JSON.parse(fs.readFileSync(__dirname + `/vendorlist/${schema}/vendor-list.json`).toString());
+    return new GVL(json);
 
   }
 

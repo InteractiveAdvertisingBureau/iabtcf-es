@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {isPrimitive} from './isPrimitive';
+import {isPrimitive} from './isPrimitive.js';
 
 export const sameDataDiffRef = (obj1: object, obj2: object, objName: string, ignoreKeys?: string[]): void => {
 

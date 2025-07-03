@@ -1,11 +1,11 @@
-import {Base64Url} from './Base64Url';
-import {BitLength} from './BitLength';
-import {FieldEncoderMap, IntEncoder, VendorVectorEncoder} from './field';
-import {FieldSequence} from './sequence';
-import {EncodingError, DecodingError} from '../errors';
-import {Fields} from '../model/Fields';
-import {Segment, SegmentIDs} from '../model';
-import {TCModel, TCModelPropType} from '../';
+import {Base64Url} from './Base64Url.js';
+import {BitLength} from './BitLength.js';
+import {FieldEncoderMap, IntEncoder, VendorVectorEncoder} from './field/index.js';
+import {FieldSequence} from './sequence/index.js';
+import {EncodingError, DecodingError} from '../errors/index.js';
+import {Fields} from '../model/Fields.js';
+import {Segment, SegmentIDs} from '../model/index.js';
+import {TCModel, TCModelPropType} from '../index.js';
 
 export class SegmentEncoder {
 
@@ -17,7 +17,7 @@ export class SegmentEncoder {
 
     try {
 
-      sequence = this.fieldSequence[''+tcModel.version][segment];
+      sequence = this.fieldSequence[String(tcModel.version)][segment];
 
     } catch (err) {
 
@@ -37,10 +37,11 @@ export class SegmentEncoder {
 
     }
 
+    const fieldEncoderMap = FieldEncoderMap();
     sequence.forEach((key: string): void => {
 
       const value: TCModelPropType = tcModel[key];
-      const encoder = FieldEncoderMap[key];
+      const encoder = fieldEncoderMap[key];
       let numBits: number = BitLength[key];
 
       if (numBits === undefined) {
@@ -52,7 +53,7 @@ export class SegmentEncoder {
            * because they are of variable length. The length is defined in a
            * separate field named numCustomPurposes.
            */
-          numBits = +tcModel[Fields.numCustomPurposes];
+          numBits = Number(tcModel[Fields.numCustomPurposes]);
 
         }
 
@@ -92,11 +93,12 @@ export class SegmentEncoder {
 
     }
 
-    const sequence = this.fieldSequence[''+tcModel.version][segment];
+    const sequence = this.fieldSequence[String(tcModel.version)][segment];
 
+    const fieldEncoderMap = FieldEncoderMap();
     sequence.forEach((key: string): void => {
 
-      const encoder = FieldEncoderMap[key];
+      const encoder = fieldEncoderMap[key];
       let numBits = BitLength[key];
 
       if (numBits === undefined) {
@@ -108,7 +110,7 @@ export class SegmentEncoder {
            * because they are of variable length. The length is defined in a
            * separate field named numCustomPurposes.
            */
-          numBits = +tcModel[Fields.numCustomPurposes];
+          numBits = Number(tcModel[Fields.numCustomPurposes]);
 
         }
 

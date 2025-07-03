@@ -1,4 +1,5 @@
-import {Fields} from '../model';
+import {Fields} from '../model/index.js';
+
 export class BitLength {
 
   public static readonly [Fields.cmpId]: number = 12;
@@ -16,7 +17,7 @@ export class BitLength {
   public static readonly [Fields.purposeLegitimateInterests]: number = 24;
   public static readonly [Fields.purposeOneTreatment]: number = 1;
   public static readonly [Fields.specialFeatureOptins]: number = 12;
-  public static readonly [Fields.useNonStandardStacks]: number = 1;
+  public static readonly [Fields.useNonStandardTexts]: number = 1;
   public static readonly [Fields.vendorListVersion]: number = 12;
   public static readonly [Fields.version]: number = 6;
 
