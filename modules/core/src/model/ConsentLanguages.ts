@@ -22,6 +22,7 @@ export class ConsentLanguages {
     'HR',
     'HU',
     'ID',
+    'IS',
     'IT',
     'JA',
     'KA',
