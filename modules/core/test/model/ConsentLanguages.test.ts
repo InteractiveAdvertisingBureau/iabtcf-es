@@ -20,6 +20,7 @@ describe('model->ConsentLanguages', (): void => {
       'FR',
       'HR',
       'HU',
+      'IS',
       'IT',
       'JA',
       'LT',
