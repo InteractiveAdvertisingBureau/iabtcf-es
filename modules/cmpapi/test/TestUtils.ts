@@ -162,6 +162,7 @@ export class TestUtils {
 
     this.checkVectorToBooleanVector('vendor.consents', tcModel.vendorConsents, tcData.vendor.consents as BooleanVector, vendors);
     this.checkVectorToBooleanVector('vendor.legitimateInterests', tcModel.vendorLegitimateInterests, tcData.vendor.legitimateInterests as BooleanVector, vendors);
+    this.checkVectorToBooleanVector('vendor.disclosedVendors', tcModel.vendorsDisclosed, tcData.vendor.disclosedVendors as BooleanVector, vendors);
 
     this.checkVectorToBooleanVector('specialFeatureOptins', tcModel.specialFeatureOptins, tcData.specialFeatureOptins as BooleanVector);
 

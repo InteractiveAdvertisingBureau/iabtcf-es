@@ -11,6 +11,9 @@ describe('command->GetTCDataCommand', (): void => {
 
     CmpApiModel.gdprApplies = true;
     CmpApiModel.tcModel = TCModelFactory.withGVL();
+    CmpApiModel.tcModel.isServiceSpecific = true;
+    CmpApiModel.tcModel.supportOOB = false;
+
     CmpApiModel.tcString = TCString.encode(CmpApiModel.tcModel);
 
     const tcDataCallback = (tcData: TCData, success: boolean): void => {

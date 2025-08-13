@@ -36,6 +36,7 @@ export class TCData extends Response {
 
     consents: BooleanVector | string;
     legitimateInterests: BooleanVector | string;
+    disclosedVendors: BooleanVector | string;
 
   };
 
@@ -98,6 +99,7 @@ export class TCData extends Response {
 
         consents: this.createVectorField(tcModel.vendorConsents, vendorIds),
         legitimateInterests: this.createVectorField(tcModel.vendorLegitimateInterests, vendorIds),
+        disclosedVendors: this.createVectorField(tcModel.vendorsDisclosed, vendorIds),
 
       };
 
