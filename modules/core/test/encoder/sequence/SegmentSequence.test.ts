@@ -77,6 +77,7 @@ describe('encoder/sequence->SegmentSequence', (): void => {
             expect(sequence.length, `sequence.length`).to.equal(3);
             expect(sequence[1], `sequence[1]`).to.equal(Segment.PUBLISHER_TC);
             expect(sequence[2], `sequence[2]`).to.equal(Segment.VENDORS_DISCLOSED);
+
           } else {
 
             if (!isForSaving) {

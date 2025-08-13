@@ -64,7 +64,7 @@ describe('TCString', (): void => {
     tcModel.vendorsDisclosed.empty();
     tcModel.isServiceSpecific = true;
     tcModel.supportOOB = false;
-    tcModel.publisherCountryCode = "DE";
+    tcModel.publisherCountryCode = 'DE';
 
     const encodedString = TCString.encode(tcModel);
     const newModel = TCString.decode(encodedString);
