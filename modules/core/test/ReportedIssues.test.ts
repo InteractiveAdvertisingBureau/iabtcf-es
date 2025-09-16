@@ -161,6 +161,28 @@ describe('Issues Reported', (): void => {
 
   });
 
+  it('481 TCString.encode writes given disclosed vendors correctly (vendor set using .set()', async (): Promise<void> => {
+
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const vendorlist = JSON.parse(fs.readFileSync(__dirname + '/../../testing/lib/mjs/vendorlist/v2/vendor-list.json').toString());
+
+    const tcModel = new TCModel(new GVL(vendorlist));
+    tcModel.cmpId = makeRandomInt(2, 100);
+    tcModel.cmpVersion = makeRandomInt(1, 100);
+
+    await tcModel.gvl.readyPromise;
+   
+    tcModel.vendorsDisclosed.empty();
+    tcModel.vendorsDisclosed.set([1]);
+
+    expect(tcModel.vendorsDisclosed.size, 'tcModel.vendorsDisclosed.size').to.equal(1);
+
+    const decoded = TCString.decode(TCString.encode(tcModel));
+
+    expect(decoded.vendorsDisclosed.size, 'decoded.vendorsDisclosed.size').to.equal(1);
+
+  });
+
   it('142 it should throw an error if the bitfield length does not match the maxId', (): void => {
 
     const str = 'CLSYjTaOngnCIAOABBENAXCMAGOAABBAAA7IA5n-m7fP6_3fbqVv6E__PoA5Aqff3aJx8tv_1967rfnQEQoAIAAQCrwkAEABAcACABIMACAAuApEVABABUSABgBCAVSAtIoACACIArYQAHACgAFgAVwBJgDcAI7AWgMAAgBiKgAgBMgFfKQAQBRkQAQA4AFiBAAoA-AEVAJlAVgAtYcACAJcAr4eABAK8OgBgFzAOmAqwgABAWyA.IFukWSQh';
