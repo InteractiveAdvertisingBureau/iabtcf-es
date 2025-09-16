@@ -57,11 +57,12 @@ describe('TCString', (): void => {
 
   });
 
-  it('should set all vendorsDisclosed for TCF v2.3', (): void => {
+  it('should unset vendorsDisclosed', (): void => {
 
     const tcModel = getTCModel();
 
     tcModel.vendorsDisclosed.empty();
+    tcModel.unsetAllVendorsDisclosed();
     tcModel.isServiceSpecific = true;
     tcModel.supportOOB = false;
     tcModel.publisherCountryCode = 'DE';
@@ -73,19 +74,20 @@ describe('TCString', (): void => {
 
     vIds.forEach((vendorId: number): void => {
 
-      expect(newModel.vendorsDisclosed.has(vendorId), `newModel.vendorsDisclosed.has(${vendorId})`).to.be.true;
+      expect(newModel.vendorsDisclosed.has(vendorId), `newModel.vendorsDisclosed.has(${vendorId})`).to.be.false;
       expect(tcModel.vendorsDisclosed.has(vendorId), `tcModel.vendorsDisclosed.has(${vendorId})`).to.be.false;
 
     });
 
   });
 
-  it('should set all vendorsDisclosed in the GVL when isServiceSpecific is false', (): void => {
+  it('should set vendorsDisclosed to all vendors in the GVL', (): void => {
 
     const tcModel = getTCModel();
 
     tcModel.vendorsDisclosed.empty();
-    tcModel.isServiceSpecific = false;
+    tcModel.setAllVendorsDisclosed();
+    tcModel.isServiceSpecific = true;
 
     const encodedString = TCString.encode(tcModel);
     const newModel = TCString.decode(encodedString);
@@ -95,7 +97,7 @@ describe('TCString', (): void => {
     vIds.forEach((vendorId: number): void => {
 
       expect(newModel.vendorsDisclosed.has(vendorId), `newModel.vendorsDisclosed.has(${vendorId})`).to.be.true;
-      expect(tcModel.vendorsDisclosed.has(vendorId), `tcModel.vendorsDisclosed.has(${vendorId})`).to.be.false;
+      expect(tcModel.vendorsDisclosed.has(vendorId), `tcModel.vendorsDisclosed.has(${vendorId})`).to.be.true;
 
     });
 
