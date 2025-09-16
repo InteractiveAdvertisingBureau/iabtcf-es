@@ -171,7 +171,7 @@ describe('Issues Reported', (): void => {
     tcModel.cmpVersion = makeRandomInt(1, 100);
 
     await tcModel.gvl.readyPromise;
-   
+
     tcModel.vendorsDisclosed.empty();
     tcModel.vendorsDisclosed.set([1]);
 
