@@ -34,9 +34,9 @@ describe('encoder/sequence->FieldSequence', (): void => {
 
     expect(seq['2'], 'keys seq["2"]').to.have.all.keys([
       Segment.CORE,
+      Segment.VENDORS_DISCLOSED,
       Segment.PUBLISHER_TC,
       Segment.VENDORS_ALLOWED,
-      Segment.VENDORS_DISCLOSED,
     ]);
 
     const coreSequence = seq['2'][Segment.CORE];
