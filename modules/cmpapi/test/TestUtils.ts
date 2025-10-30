@@ -130,7 +130,7 @@ export class TestUtils {
   public static tcModelToTCData(vendors?: number[], tcData?: TCData): void {
 
     const tcModel = CmpApiModel.tcModel;
-  
+
     if (!tcData) {
 
       tcData = new TCData(vendors);

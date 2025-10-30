@@ -81,7 +81,8 @@ export class TCData extends Response {
       this.purposeOneTreatment = tcModel.purposeOneTreatment;
       this.publisherCC = tcModel.publisherCountryCode;
 
-      if (this.isServiceSpecific === false)
+      if (this.isServiceSpecific === false) {
+
         this.outOfBand = {
 
           allowedVendors: this.createVectorField(tcModel.vendorsAllowed, vendorIds),
@@ -89,12 +90,14 @@ export class TCData extends Response {
 
         };
 
-      this.purpose = {
+        this.purpose = {
 
-        consents: this.createVectorField(tcModel.purposeConsents),
-        legitimateInterests: this.createVectorField(tcModel.purposeLegitimateInterests),
+          consents: this.createVectorField(tcModel.purposeConsents),
+          legitimateInterests: this.createVectorField(tcModel.purposeLegitimateInterests),
 
-      };
+        };
+
+      }
 
       this.vendor = {
 

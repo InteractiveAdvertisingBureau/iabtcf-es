@@ -97,10 +97,15 @@ describe('TCModel', (): void => {
 
         const tcModel = new TCModel();
 
-        if (testVal)
+        if (testVal) {
+
           expect(tcModel[fieldName], `${fieldName} should be default false`).to.be.true;
-        else
+
+        } else {
+
           expect(tcModel[fieldName], `${fieldName} should be default false`).to.be.false;
+
+        }
 
         tcModel[fieldName] = true;
 
