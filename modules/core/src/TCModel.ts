@@ -14,8 +14,8 @@ export class TCModel extends Cloneable<TCModel> {
    */
   public static readonly consentLanguages: ConsentLanguages = GVL.consentLanguages;
 
-  private isServiceSpecific_ = false;
-  private supportOOB_ = true;
+  private isServiceSpecific_ = true;
+  private supportOOB_ = false;
   private useNonStandardTexts_ = false;
   private purposeOneTreatment_ = false;
   private publisherCountryCode_ = 'AA';

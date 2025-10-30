@@ -130,7 +130,7 @@ export class TestUtils {
   public static tcModelToTCData(vendors?: number[], tcData?: TCData): void {
 
     const tcModel = CmpApiModel.tcModel;
-
+  
     if (!tcData) {
 
       tcData = new TCData(vendors);
@@ -145,13 +145,13 @@ export class TestUtils {
     expect(tcData.purposeOneTreatment, 'purposeOneTreatment').to.equal(tcModel.purposeOneTreatment);
     expect(tcData.publisherCC, 'publisherCC').to.equal(tcModel.publisherCountryCode);
 
-    if (tcModel.vendorsAllowed.size) {
+    if (tcData.outOfBand && tcModel.vendorsAllowed.size) {
 
       this.checkVectorToBooleanVector('outOfBand.allowedVendors', tcModel.vendorsAllowed, tcData.outOfBand.allowedVendors as BooleanVector, vendors);
 
     }
 
-    if (tcModel.vendorsDisclosed.size) {
+    if (tcData.outOfBand && tcModel.vendorsDisclosed.size) {
 
       this.checkVectorToBooleanVector('outOfBand.disclosedVendors', tcModel.vendorsDisclosed, tcData.outOfBand.disclosedVendors as BooleanVector, vendors);
 
