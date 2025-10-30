@@ -90,14 +90,14 @@ export class TCData extends Response {
 
         };
 
-        this.purpose = {
-
-          consents: this.createVectorField(tcModel.purposeConsents),
-          legitimateInterests: this.createVectorField(tcModel.purposeLegitimateInterests),
-
-        };
-
       }
+
+      this.purpose = {
+
+        consents: this.createVectorField(tcModel.purposeConsents),
+        legitimateInterests: this.createVectorField(tcModel.purposeLegitimateInterests),
+
+      };
 
       this.vendor = {
 
