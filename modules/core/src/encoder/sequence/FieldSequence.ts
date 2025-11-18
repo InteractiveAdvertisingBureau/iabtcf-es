@@ -39,6 +39,9 @@ export class FieldSequence implements SequenceVersionMap {
       Fields.vendorLegitimateInterests,
       Fields.publisherRestrictions,
     ],
+    [Segment.VENDORS_DISCLOSED]: [
+      Fields.vendorsDisclosed,
+    ],
     [Segment.PUBLISHER_TC]: [
       Fields.publisherConsents,
       Fields.publisherLegitimateInterests,
@@ -48,9 +51,6 @@ export class FieldSequence implements SequenceVersionMap {
     ],
     [Segment.VENDORS_ALLOWED]: [
       Fields.vendorsAllowed,
-    ],
-    [Segment.VENDORS_DISCLOSED]: [
-      Fields.vendorsDisclosed,
     ],
   };
 
