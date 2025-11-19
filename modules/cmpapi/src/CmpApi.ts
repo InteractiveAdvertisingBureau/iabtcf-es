@@ -16,7 +16,7 @@ export class CmpApi {
    * @param {boolean} isServiceSpecific - whether or not this cmp is configured to be service specific
    * @param {CustomCommands} [customCommands] - custom commands from the cmp
    */
-  public constructor(cmpId: number, cmpVersion: number, isServiceSpecific = false, customCommands?: CustomCommands) {
+  public constructor(cmpId: number, cmpVersion: number, isServiceSpecific = true, customCommands?: CustomCommands) {
 
     this.throwIfInvalidInt(cmpId, 'cmpId', 2);
     this.throwIfInvalidInt(cmpVersion, 'cmpVersion', 0);

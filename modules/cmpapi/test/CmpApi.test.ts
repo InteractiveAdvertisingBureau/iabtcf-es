@@ -42,7 +42,7 @@ describe('CmpApi', (): void => {
 
   };
 
-  const getCmpApi = (isServiceSpecific = false, customCommands?: CustomCommands): CmpApi => {
+  const getCmpApi = (isServiceSpecific = true, customCommands?: CustomCommands): CmpApi => {
 
     const cmpId = makeRandomInt(2, 100);
     const cmpVersion = makeRandomInt(1, 15);

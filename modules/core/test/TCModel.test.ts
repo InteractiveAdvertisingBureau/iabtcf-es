@@ -89,7 +89,7 @@ describe('TCModel', (): void => {
 
   };
 
-  const testBoolean = (fieldName: string): void => {
+  const testBoolean = (fieldName: string, testVal: boolean): void => {
 
     describe(fieldName, (): void => {
 
@@ -97,7 +97,15 @@ describe('TCModel', (): void => {
 
         const tcModel = new TCModel();
 
-        expect(tcModel[fieldName], `${fieldName} should be default false`).to.be.false;
+        if (testVal) {
+
+          expect(tcModel[fieldName], `${fieldName} should be default false`).to.be.true;
+
+        } else {
+
+          expect(tcModel[fieldName], `${fieldName} should be default false`).to.be.false;
+
+        }
 
         tcModel[fieldName] = true;
 
@@ -197,8 +205,8 @@ describe('TCModel', (): void => {
   testDate('created');
   testDate('lastUpdated');
 
-  testBoolean('isServiceSpecific');
-  testBoolean('useNonStandardTexts');
+  testBoolean('isServiceSpecific', true);
+  testBoolean('useNonStandardTexts', false);
 
   testInstanceOf('purposeConsents', Vector);
   testInstanceOf('purposeLegitimateInterests', Vector);

@@ -81,12 +81,16 @@ export class TCData extends Response {
       this.purposeOneTreatment = tcModel.purposeOneTreatment;
       this.publisherCC = tcModel.publisherCountryCode;
 
-      this.outOfBand = {
+      if (this.isServiceSpecific === false) {
 
-        allowedVendors: this.createVectorField(tcModel.vendorsAllowed, vendorIds),
-        disclosedVendors: this.createVectorField(tcModel.vendorsDisclosed, vendorIds),
+        this.outOfBand = {
 
-      };
+          allowedVendors: this.createVectorField(tcModel.vendorsAllowed, vendorIds),
+          disclosedVendors: this.createVectorField(tcModel.vendorsDisclosed, vendorIds),
+
+        };
+
+      }
 
       this.purpose = {
 
