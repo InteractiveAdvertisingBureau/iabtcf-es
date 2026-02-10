@@ -161,6 +161,45 @@ describe('Issues Reported', (): void => {
 
   });
 
+  it('441 dataCategories should be in the tcModel.gvl', async (): Promise<void> => {
+
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const vendorlist = JSON.parse(fs.readFileSync(__dirname + '/../../testing/lib/mjs/vendorlist/v2.2/vendor-list.json').toString());
+
+    const tcModel = new TCModel(new GVL(vendorlist));
+    tcModel.cmpId = makeRandomInt(2, 100);
+    tcModel.cmpVersion = makeRandomInt(1, 100);
+
+    await tcModel.gvl.readyPromise;
+
+    expect(tcModel.gvl.dataCategories[1].id, 'tcModel.gvl.dataCategories[1].id').to.equal(1);
+    expect(tcModel.gvl.dataCategories[1].name, 'tcModel.gvl.dataCategories[1].name').to.equal('IP addresses');
+
+  });
+
+  it('439 GVL language change should be applied', async (): Promise<void> => {
+
+    GVL.baseUrl = 'http://sweetcmp.com';
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const vendorlist = JSON.parse(fs.readFileSync('../testing/lib/mjs/vendorlist/v2/vendor-list-v24.json').toString());
+    const gvl: GVL = new GVL(vendorlist);
+    const language = 'fr';
+    const translationJson = JSON.parse(fs.readFileSync('../testing/lib/mjs/vendorlist/v2/purposes-fr.json').toString());
+    const changePromise = gvl.changeLanguage(language);
+    const req: sinon.SinonFakeXMLHttpRequest = XMLHttpTestTools.requests[0];
+
+    expect(req.url).to.equal(GVL.baseUrl + GVL.languageFilename.replace('[LANG]', language));
+    req.respond(200, XMLHttpTestTools.JSON_HEADER, JSON.stringify(translationJson));
+
+    await changePromise;
+
+    const tcModel = new TCModel(gvl);
+
+    expect(tcModel.gvl.language, 'tcModel.gvl.language').to.equal('FR');
+    expect(gvl.specialPurposes, 'gvl.specialPurposes').to.deep.equal(translationJson.specialPurposes);
+
+  });
+
   it('481 TCString.encode writes given disclosed vendors correctly (vendor set using .set()', async (): Promise<void> => {
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
