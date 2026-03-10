@@ -37,7 +37,7 @@
     "@typescript-eslint/parser": "^5.22.0",
     "chai": "^4.3.6",
     "coveralls": "^3.1.1",
-    "eslint": "6.8.0",
+    "eslint": "9.26.0",
     "eslint-import-resolver-typescript": "^2.7.1",
     "eslint-plugin-import": "^2.26.0",
     "jscover": "^1.0.0",
