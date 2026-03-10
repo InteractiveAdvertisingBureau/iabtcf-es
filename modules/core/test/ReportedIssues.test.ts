@@ -351,7 +351,7 @@ describe('Issues Reported', (): void => {
     expect(tcModel.publisherRestrictions.getVendors(new PurposeRestriction(1, 1)), `tcModel.publisherRestrictions vendor array`).to.deep.equal([7, 20, 71, 122, 140, 183]);
 
   });
-/*
+  /*
    it('xxx TCString.decode finds all vendors as disclosed', async (): Promise<void> => {
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -375,4 +375,5 @@ describe('Issues Reported', (): void => {
 
   });
   */
+
 });
