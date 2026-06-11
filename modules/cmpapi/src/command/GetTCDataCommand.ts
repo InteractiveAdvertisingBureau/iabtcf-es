@@ -1,5 +1,6 @@
 import {Command} from './Command.js';
 import {TCData} from '../response/index.js';
+import {registerGetTCDataCommand} from '../EventListenerQueue.js';
 
 export class GetTCDataCommand extends Command {
 
@@ -29,3 +30,11 @@ export class GetTCDataCommand extends Command {
   }
 
 }
+
+/*
+ * Register with EventListenerQueue so it can build GetTCDataCommands during
+ * exec() without importing this module at evaluation time. See the comment on
+ * registerGetTCDataCommand in EventListenerQueue.ts for why this breaks the
+ * circular dependency.
+ */
+registerGetTCDataCommand(GetTCDataCommand);

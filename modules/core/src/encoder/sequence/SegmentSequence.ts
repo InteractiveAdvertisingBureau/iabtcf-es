@@ -1,5 +1,5 @@
 import {SequenceVersionMap} from './SequenceVersionMap.js';
-import {TCModel} from '../../index.js';
+import type {TCModel} from '../../TCModel.js';
 import {EncodingOptions} from '../EncodingOptions.js';
 import {
   Segment,

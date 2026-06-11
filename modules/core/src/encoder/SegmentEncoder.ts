@@ -5,7 +5,7 @@ import {FieldSequence} from './sequence/index.js';
 import {EncodingError, DecodingError} from '../errors/index.js';
 import {Fields} from '../model/Fields.js';
 import {Segment, SegmentIDs} from '../model/index.js';
-import {TCModel, TCModelPropType} from '../index.js';
+import type {TCModel, TCModelPropType} from '../TCModel.js';
 
 export class SegmentEncoder {
 

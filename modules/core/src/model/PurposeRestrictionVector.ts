@@ -1,6 +1,6 @@
 import {PurposeRestriction} from './PurposeRestriction.js';
 import {RestrictionType} from './RestrictionType.js';
-import {GVL} from '../GVL.js';
+import type {GVL} from '../GVL.js';
 import {Vendor} from './gvl/index.js';
 import {Cloneable} from '../Cloneable.js';
 

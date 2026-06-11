@@ -1,5 +1,5 @@
 import {Vector} from '../../model/index.js';
-import {BitLength} from '../index.js';
+import {BitLength} from '../BitLength.js';
 import {IntEncoder} from './IntEncoder.js';
 import {BooleanEncoder} from './BooleanEncoder.js';
 import {FixedVectorEncoder} from './FixedVectorEncoder.js';
