@@ -1,8 +1,8 @@
 {
   "gvlSpecificationVersion": 3,
-  "vendorListVersion": 7,
-  "tcfPolicyVersion": 4,
-  "lastUpdated": "2023-06-29T16:07:26Z",
+  "vendorListVersion": 172,
+  "tcfPolicyVersion": 5,
+  "lastUpdated": "2026-08-13T16:00:19Z",
   "purposes": {
     "1": {
       "id": 1,
@@ -126,19 +126,25 @@
       "id": 1,
       "name": "Match and combine data from other data sources",
       "description": "Information about your activity on this service may be matched and combined with other information relating to you and originating from various sources (for instance your activity on a separate online service, your use of a loyalty card in-store, or your answers to a survey), in support of the purposes explained in this notice.",
-      "illustrations": []
+      "illustrations": [
+        "You used your loyalty card when purchasing sunglasses at a local boutique. If you later browse content relating to summer travel, this information may be combined with your previous purchase recorded by the boutique’s loyalty program to present you with ads for swimsuits or other beach accessories."
+      ]
     },
     "2": {
       "id": 2,
       "name": "Link different devices",
       "description": "In support of the purposes explained in this notice, your device might be considered as likely linked to other devices that belong to you or your household (for instance because you are logged in to the same service on both your phone and your computer, or because you may use the same Internet connection on both devices).",
-      "illustrations": []
+      "illustrations": [
+        "You visited an online retailer website from your computer to look at mystery books and you consented to your data being used to create profiles for personalised advertising. If you later browse on your phone using the same Wifi, a vendor may infer you have been using both devices and you may be presented with an ad about the same mystery books in the mobile app you are using, but only if you have consented to receiving personalised advertising on this app."
+      ]
     },
     "3": {
       "id": 3,
       "name": "Identify devices based on information transmitted automatically",
       "description": "Your device might be distinguished from other devices based on information it automatically sends when accessing the Internet (for instance, the IP address of your Internet connection or the type of browser you are using) in support of the purposes exposed in this notice.",
-      "illustrations": []
+      "illustrations": [
+        "When you see an ad in your weather forecast app, some technical details that your device always transmits when accessing the Internet (such as the IP address of your Wifi and the version of your device’s operating system) can be used for instance to limit the number of times you see the same ad in other apps."
+      ]
     }
   },
   "specialFeatures": {
@@ -150,10 +156,13 @@
     },
     "2": {
       "id": 2,
-      "name": "Actively scan device characteristics for identification",
+      "name": "Identify devices based on information actively requested",
       "description": "With your acceptance, certain characteristics specific to your device might be requested and used to distinguish it from other devices (such as the installed fonts or plugins, the resolution of your screen) in support of the purposes explained in this notice.",
       "illustrations": []
     }
+  },
+  "standardTexts": {
+      "features": "These means of processing can be used solely in pursuit of one or several purposes for which you are given a choice in this notice."
   },
   "stacks": {
     "1": {

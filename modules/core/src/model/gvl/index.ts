@@ -11,3 +11,4 @@ export * from './Vendor.js';
 export * from './VendorList.js';
 export * from './DataCategory.js';
 export * from './GvlCreationOptions.js';
+export * from './StandardTexts.js';
