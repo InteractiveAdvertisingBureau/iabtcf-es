@@ -65,7 +65,7 @@ done
 
 git push
 # pushes the tag
-git push origin $npm_package_version
+git push origin "v$npm_package_version"
 
 git checkout $BRANCH
 git push
