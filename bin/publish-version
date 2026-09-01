@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 DIFF=$(git diff HEAD)
@@ -58,7 +59,7 @@ fi
 
 for pkg in ./modules/*; do
   if [[ -d $pkg ]]; then
-    yarn publish --access public --new-version $npm_package_version --tag next $pkg
+    npm publish --access public --tag next --provenance $pkg
   fi
 done
 
