@@ -3,6 +3,7 @@ import {Feature} from './Feature.js';
 import {Purpose} from './Purpose.js';
 import {Stack} from './Stack.js';
 import {DataCategory} from './DataCategory.js';
+import {StandardTexts} from './StandardTexts.js';
 
 export interface Declarations {
   purposes: IntMap<Purpose>;
@@ -11,4 +12,5 @@ export interface Declarations {
   specialFeatures: IntMap<Feature>;
   stacks: IntMap<Stack>;
   dataCategories?: IntMap<DataCategory>;
+  standardTexts?: StandardTexts;
 }

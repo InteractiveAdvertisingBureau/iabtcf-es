@@ -50,11 +50,12 @@ describe('encoder/field->LangEncoder', (): void => {
 
     it('should decode an encoded language', (): void => {
 
-      const lang = 'FR';
+      const lang = 'SR-LATN';
+      const primaryLanguage = lang.split('-')[0];
       const encoded = LangEncoder.encode(lang, 12);
       const decoded = LangEncoder.decode(encoded, 12);
 
-      expect(decoded).to.equal(lang);
+      expect(decoded).to.equal(primaryLanguage);
 
     });
     it('should throw an error if the bit length is odd', (): void => {
