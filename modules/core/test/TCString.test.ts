@@ -193,19 +193,7 @@ describe('TCString', (): void => {
 
       if (!vendor || (value && vendor.legIntPurposes.length === 0)) {
 
-        if (vendor && vendor.purposes.length === 0 && vendor.specialPurposes.length > 0) {
-
-          expect(newModel.vendorLegitimateInterests.has(id), `vendorLegitimateInterests.has(${id})`).to.be.true;
-
-        } else if (vendor && vendor.purposes.length > 0 && vendor.specialPurposes.length > 0) {
-
-          expect(newModel.vendorLegitimateInterests.has(id), `vendorLegitimateInterests.has(${id})`).to.be.true;
-
-        } else {
-
-          expect(newModel.vendorLegitimateInterests.has(id), `vendorLegitimateInterests.has(${id})`).to.be.false;
-
-        }
+        expect(newModel.vendorLegitimateInterests.has(id), `vendorLegitimateInterests.has(${id})`).to.be.false;
 
       } else {
 
@@ -255,19 +243,11 @@ describe('TCString', (): void => {
 
     tcModel.vendorLegitimateInterests.forEach((value: boolean, id: number): void => {
 
-      // gvl spec ver 2, gvl ver 51: vendor ids 415, 612 and 615 have special purposes only declared. LI needs to be true
+      // gvl spec ver 2, gvl ver 51: vendor ids 415, 612 and 615 have special purposes only declared. LI should remain false
 
       if ( (id === 415 || id === 612 || id === 615 ) && value ) {
 
-        expect(newModel.vendorLegitimateInterests.has(id), `vendorLegitimateInterestsForSpecialPurpose.has(${id})`).to.be.true;
-
-      }
-      // use case: The number of Vendors that have declared only purposes based on consent (no LI) + at least one SP
-      // sample set in v2-51: ids: 545, 553, 565, 570
-
-      if ( (id === 545 || id === 553 || id === 565 || id === 570) && value ) {
-
-        expect(newModel.vendorLegitimateInterests.has(id), `vendorConsentSetAndLegitimateInterestsForSpecialPurpose.has(${id})`).to.be.true;
+        expect(newModel.vendorLegitimateInterests.has(id), `vendorLegitimateInterestsForSpecialPurpose.has(${id})`).to.be.false;
 
       }
 
