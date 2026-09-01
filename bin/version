@@ -17,7 +17,8 @@ for pkg in ./modules/*; do
 done
 
 # Updated references to other iab libs but only hard versions
-sed -i '' 's/\(\@iabtechlabtcf\/.*\)":.*"[0-9]*\..*"/\1": "'$npm_package_version'"/g' ./modules/**/package.json
+sed -i.bak 's/\(\@iabtechlabtcf\/.*\)":.*"[0-9]*\..*"/\1": "'$npm_package_version'"/g' ./modules/**/package.json
+find ./modules -name '*.bak' -delete
 
 # add this to the previous commit
 git add -A && git commit --amend --no-edit
