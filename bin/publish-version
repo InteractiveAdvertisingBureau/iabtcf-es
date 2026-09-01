@@ -59,7 +59,7 @@ fi
 
 for pkg in ./modules/*; do
   if [[ -d $pkg ]]; then
-    npm publish --access public --tag next --provenance $pkg
+    npm publish --access public --tag next --provenance --registry https://registry.npmjs.org/ $pkg
   fi
 done
 
