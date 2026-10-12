@@ -70,6 +70,38 @@
       }
     }
 
+    function makePostMessageCallback(source, command, callId, msgIsString) {
+      // Queued calls and listeners can outlive their sending iframe. Avoid
+      // retaining the iframe when WeakRef is available, without requiring it
+      // in older browsers. Capture only the reply data, not the MessageEvent.
+      let sourceRef = source && typeof WeakRef === 'function' ? new WeakRef(source) : null;
+      let fallbackSource = sourceRef ? null : source;
+
+      return function (retValue, success) {
+        const target = sourceRef ? sourceRef.deref() : fallbackSource;
+        const returnMsg = {
+          __tcfapiReturn: {
+            returnValue: retValue,
+            success: success,
+            callId: callId,
+          },
+        };
+
+        try {
+          if (target && target.postMessage) {
+            target.postMessage(msgIsString ? JSON.stringify(returnMsg) : returnMsg, '*');
+          }
+        } finally {
+          // A successful subscription needs its target for later events.
+          // Other commands have only one reply, even if the queue is retained.
+          if (command !== 'addEventListener' || success === false) {
+            sourceRef = null;
+            fallbackSource = null;
+          }
+        }
+      };
+    }
+
     function postMessageEventHandler(event) {
       const msgIsString = typeof event.data === 'string';
       let json = {};
@@ -91,26 +123,12 @@
       const payload = (typeof json === 'object' && json !== null) ? json.__tcfapiCall : null;
 
       if (payload) {
-        let eventSource = event?.source;
         window.__tcfapi(
           payload.command,
           payload.version,
-          function (retValue, success) {
-            let returnMsg = {
-              __tcfapiReturn: {
-                returnValue: retValue,
-                success: success,
-                callId: payload.callId,
-              },
-            };
-
-            if (eventSource && eventSource.postMessage) {
-              eventSource.postMessage((msgIsString) ? JSON.stringify(returnMsg) : returnMsg, '*');
-            }
-          },
+          makePostMessageCallback(event.source, payload.command, payload.callId, msgIsString),
           payload.parameter,
         );
-        eventSource = null;
       }
     }
 
