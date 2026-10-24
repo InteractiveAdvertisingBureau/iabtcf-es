@@ -49,6 +49,89 @@ describe('Reported issues', (): void => {
 
   });
 
+  [true, false].forEach((queuedBeforeLoad: boolean): void => {
+
+    it(`Issue 511 isolates throwing listeners ${queuedBeforeLoad ? 'queued before load' : 'during later updates'}`, (): void => {
+
+      const clock = sinon.useFakeTimers();
+      const listenerError = new Error('listener failed');
+      const seen: string[] = [];
+      let shouldThrow = queuedBeforeLoad;
+
+      try {
+
+        let cmpApi: CmpApi;
+
+        if (!queuedBeforeLoad) {
+
+          cmpApi = new CmpApi(2, 3);
+          cmpApi.update('');
+
+        }
+
+        window[API_KEY](TCFCommand.ADD_EVENT_LISTENER, 2, (tcData: TCData, success: boolean): void => {
+
+          if (shouldThrow) {
+
+            seen.push(success ? 'A:data' : 'A:failure');
+            throw listenerError;
+
+          }
+
+        });
+
+        window[API_KEY](TCFCommand.ADD_EVENT_LISTENER, 2, (tcData: TCData, success: boolean): void => {
+
+          if (shouldThrow) {
+
+            expect(success).to.be.true;
+            expect(tcData).to.be.instanceOf(TCData);
+            seen.push('B:data');
+
+          }
+
+        });
+
+        if (queuedBeforeLoad) {
+
+          cmpApi = new CmpApi(2, 3);
+
+        }
+
+        shouldThrow = true;
+        expect((): void => cmpApi.update('')).not.to.throw();
+        expect(seen).to.deep.equal(['A:data', 'A:failure', 'B:data']);
+        expect(clock.countTimers()).to.equal(1);
+
+        let reportedError: unknown;
+
+        try {
+
+          clock.tick(0);
+
+        } catch (error) {
+
+          reportedError = error;
+
+        }
+
+        expect(reportedError).to.equal(listenerError);
+
+        // A later update must still deliver to both registered listeners.
+        seen.length = 0;
+        expect((): void => cmpApi.update('')).not.to.throw();
+        expect(seen).to.deep.equal(['A:data', 'A:failure', 'B:data']);
+
+      } finally {
+
+        clock.restore();
+
+      }
+
+    });
+
+  });
+
   it('Issue 96 CmpApi should respond to addEventListener call with an error object when in an Error state', (done: () => void): void => {
 
     const cmpApi = TestUtils.getCmpApi();
