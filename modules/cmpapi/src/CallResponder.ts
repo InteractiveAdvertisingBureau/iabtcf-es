@@ -193,7 +193,20 @@ export class CallResponder {
     this.callQueue = [];
     queueCopy.forEach((args: APIArgs): void => {
 
-      window[API_KEY](...args);
+      try {
+
+        window[API_KEY](...args);
+
+      } catch (error) {
+
+        // Report the error without preventing delivery of other queued calls.
+        setTimeout((): void => {
+
+          throw error;
+
+        }, 0);
+
+      }
 
     });
 

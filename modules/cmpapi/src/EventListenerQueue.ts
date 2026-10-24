@@ -46,7 +46,20 @@ export class EventListenerQueue {
 
     this.eventQueue.forEach((eventItem: EventItem, listenerId: number): void => {
 
-      new GetTCDataCommandCtor(eventItem.callback, eventItem.param, listenerId, eventItem.next);
+      try {
+
+        new GetTCDataCommandCtor(eventItem.callback, eventItem.param, listenerId, eventItem.next);
+
+      } catch (error) {
+
+        // Report the error without preventing delivery to other listeners.
+        setTimeout((): void => {
+
+          throw error;
+
+        }, 0);
+
+      }
 
     });
 
