@@ -92,6 +92,12 @@ tcModel.cmpVersion = //{myCMPVersion}
 
 ```
 
+### Service scope when encoding
+
+`TCString.encode()` requires `isServiceSpecific` to be `true` for TCF v2 encoding. This is already the default for a new `TCModel`. Passing a globally scoped model now throws an `EncodingError`, including when `isForVendors` or an explicit segment selection is supplied. This follows the [`IsServiceSpecific` field requirement](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#the-core-string).
+
+Historical globally scoped strings can still be decoded for inspection. Encoding does not convert historical global consent into consent for a particular service: use a model representing the appropriate service-specific context. Explicit version 1 encoding remains available as a legacy utility; this is not a statement that version 1 strings are valid under the current TCF.
+
 ### CMP Meta Fields
 
 This exmple shows how to set the basic fields that all TC strings need to have set.
@@ -517,7 +523,7 @@ const customEncodedString = TCString.encode(tcModel, encodingOptions);
 ```
 
 ### Encoding a Publisher TC Segment
-By default if the `TCModel.isServiceSpecific = true` then encoding a string will include the publisherTC segment.  But if `TCModel.isServiceSpecific = false` then the segment should only be surfaced through the `__tcfapi` interface and not saved to the global cookie.  However, one will need a way to access and save the publisher TC segment separately from the main TC String to store as a first-party cookie.  In that case you can use the `EncodingOptions` to generate only a Publisher TC segment.
+The default TCF v2 segment sequence includes the Publisher TC segment. To generate that segment separately for a service-specific model, use an explicit segment selection. Do not set `isServiceSpecific` to `false` for this purpose; TCF v2 encoding rejects global scope.
 
 ```typescript
 const encodingOptions = {

@@ -13,6 +13,12 @@ export class SemanticPreEncoder {
     (tcModel: TCModel): TCModel => tcModel,
     (tcModel: TCModel, gvl: GVL): TCModel => {
 
+      if (!tcModel.isServiceSpecific) {
+
+        throw new EncodingError('isServiceSpecific must be true when encoding a TCF v2 string; global scope is deprecated');
+
+      }
+
       /**
        * in case this wasn't set previously.  This should filter out invalid
        * purpose restrictions.
