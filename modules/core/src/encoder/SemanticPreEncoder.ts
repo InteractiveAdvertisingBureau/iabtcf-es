@@ -13,11 +13,9 @@ export class SemanticPreEncoder {
     (tcModel: TCModel): TCModel => tcModel,
     (tcModel: TCModel, gvl: GVL): TCModel => {
 
-      if (!tcModel.isServiceSpecific) {
-
-        throw new EncodingError('isServiceSpecific must be true when encoding a TCF v2 string; global scope is deprecated');
-
-      }
+      // Global scope is deprecated. Apply the policy requirement to the clone,
+      // as with the other semantic corrections below.
+      tcModel.isServiceSpecific = true;
 
       /**
        * in case this wasn't set previously.  This should filter out invalid

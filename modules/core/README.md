@@ -94,7 +94,7 @@ tcModel.cmpVersion = //{myCMPVersion}
 
 ### Service scope when encoding
 
-`TCString.encode()` requires `isServiceSpecific` to be `true` for TCF v2 encoding. This is already the default for a new `TCModel`. Passing a globally scoped model now throws an `EncodingError`, including when `isForVendors` or an explicit segment selection is supplied. This follows the [`IsServiceSpecific` field requirement](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#the-core-string).
+`TCString.encode()` sets `isServiceSpecific` to `true` on its internal model clone for TCF v2 encoding, including when `isForVendors` or an explicit segment selection is supplied. The caller's model is not modified. This follows the [`IsServiceSpecific` field requirement](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20Consent%20string%20and%20vendor%20list%20formats%20v2.md#the-core-string).
 
 Historical globally scoped strings can still be decoded for inspection. Encoding does not convert historical global consent into consent for a particular service: use a model representing the appropriate service-specific context. Explicit version 1 encoding remains available as a legacy utility; this is not a statement that version 1 strings are valid under the current TCF.
 
@@ -523,7 +523,7 @@ const customEncodedString = TCString.encode(tcModel, encodingOptions);
 ```
 
 ### Encoding a Publisher TC Segment
-The default TCF v2 segment sequence includes the Publisher TC segment. To generate that segment separately for a service-specific model, use an explicit segment selection. Do not set `isServiceSpecific` to `false` for this purpose; TCF v2 encoding rejects global scope.
+The default TCF v2 segment sequence includes the Publisher TC segment. To generate that segment separately for a service-specific model, use an explicit segment selection. Do not set `isServiceSpecific` to `false` for this purpose; TCF v2 encoding normalizes it to `true`.
 
 ```typescript
 const encodingOptions = {

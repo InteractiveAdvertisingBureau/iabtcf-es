@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {GVL, TCModel, TCString} from '../src';
-import {EncodingError} from '../src/errors';
 import {Segment} from '../src/model';
 import {GVLFactory} from '@iabtechlabtcf/testing';
 
@@ -18,28 +17,30 @@ describe('TCString global-scope encoding', (): void => {
 
   };
 
-  it('rejects default TCF v2 encoding of a globally scoped model', (): void => {
+  it('normalizes default TCF v2 encoding without mutating the original model', (): void => {
 
     const tcModel = model();
 
-    expect((): void => {
-
-      TCString.encode(tcModel);
-
-    }).to.throw(EncodingError, 'isServiceSpecific must be true');
+    expect(TCString.decode(TCString.encode(tcModel)).isServiceSpecific).to.be.true;
     expect(tcModel.isServiceSpecific).to.be.false;
 
   });
 
   [false, true].forEach((isForVendors: boolean): void => {
 
-    it(`rejects global scope with isForVendors=${isForVendors}`, (): void => {
+    it(`normalizes global scope and retains disclosed vendors with isForVendors=${isForVendors}`, (): void => {
 
-      expect((): void => {
+      const tcModel = model();
 
-        TCString.encode(model(), {isForVendors});
+      tcModel.vendorsDisclosed.set([2, 7]);
 
-      }).to.throw(EncodingError, 'isServiceSpecific must be true');
+      const encoded = TCString.encode(tcModel, {isForVendors});
+      const decoded = TCString.decode(encoded);
+
+      expect(decoded.isServiceSpecific).to.be.true;
+      expect(decoded.vendorsDisclosed.has(2)).to.be.true;
+      expect(decoded.vendorsDisclosed.has(7)).to.be.true;
+      expect(tcModel.isServiceSpecific).to.be.false;
 
     });
 
@@ -62,13 +63,12 @@ describe('TCString global-scope encoding', (): void => {
 
   });
 
-  it('cannot bypass global-scope rejection with an explicit segment selection', (): void => {
+  it('normalizes scope with an explicit segment selection', (): void => {
 
-    expect((): void => {
+    const encoded = TCString.encode(model(), {segments: [Segment.CORE]});
 
-      TCString.encode(model(), {segments: [Segment.CORE]});
-
-    }).to.throw(EncodingError, 'isServiceSpecific must be true');
+    expect(encoded.split('.')).to.have.lengthOf(1);
+    expect(TCString.decode(encoded).isServiceSpecific).to.be.true;
 
   });
 
