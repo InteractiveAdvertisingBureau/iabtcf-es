@@ -13,6 +13,10 @@ export class SemanticPreEncoder {
     (tcModel: TCModel): TCModel => tcModel,
     (tcModel: TCModel, gvl: GVL): TCModel => {
 
+      // Global scope is deprecated. Apply the policy requirement to the clone,
+      // as with the other semantic corrections below.
+      tcModel.isServiceSpecific = true;
+
       /**
        * in case this wasn't set previously.  This should filter out invalid
        * purpose restrictions.

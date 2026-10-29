@@ -20,7 +20,8 @@ export class TCModelFactory {
     tcModel.cmpId = makeRandomInt(2, 100);
     tcModel.cmpVersion = makeRandomInt(1, 10);
     tcModel.consentScreen = makeRandomInt(1, 5);
-    tcModel.isServiceSpecific = !!makeRandomInt(0, 1);
+    // Generate models that can be encoded under the current TCF v2 rules.
+    tcModel.isServiceSpecific = true;
     tcModel.vendorListVersion = makeRandomInt(1, latestGVL.vendorListVersion);
 
     let counter = 0;
