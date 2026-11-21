@@ -73,6 +73,16 @@ for (const weakRef of [undefined, WeakRef]) {
           assertReply(1, {eventStatus: 'useractioncomplete', listenerId: 7}, true);
         });
 
+        it('replies to multiple notifications from a custom command', () => {
+          send('customSubscription');
+          const callback = window.__tcfapi()[0][2];
+          callback({count: 1}, true);
+          callback({count: 2}, true);
+          assert.strictEqual(replies.length, 2);
+          assertReply(0, {count: 1}, true);
+          assertReply(1, {count: 2}, true);
+        });
+
         it('replies to a deferred failed command', () => {
           send('unknown');
           window.__tcfapi()[0][2](null, false);

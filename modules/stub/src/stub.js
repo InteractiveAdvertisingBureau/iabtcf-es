@@ -70,12 +70,12 @@
       }
     }
 
-    function makePostMessageCallback(source, command, callId, msgIsString) {
+    function makePostMessageCallback(source, callId, msgIsString) {
       // Queued calls and listeners can outlive their sending iframe. Avoid
       // retaining the iframe when WeakRef is available, without requiring it
       // in older browsers. Capture only the reply data, not the MessageEvent.
-      let sourceRef = source && typeof WeakRef === 'function' ? new WeakRef(source) : null;
-      let fallbackSource = sourceRef ? null : source;
+      const sourceRef = source && typeof WeakRef === 'function' ? new WeakRef(source) : null;
+      const fallbackSource = sourceRef ? null : source;
 
       return function (retValue, success) {
         const target = sourceRef ? sourceRef.deref() : fallbackSource;
@@ -87,17 +87,8 @@
           },
         };
 
-        try {
-          if (target && target.postMessage) {
-            target.postMessage(msgIsString ? JSON.stringify(returnMsg) : returnMsg, '*');
-          }
-        } finally {
-          // A successful subscription needs its target for later events.
-          // Other commands have only one reply, even if the queue is retained.
-          if (command !== 'addEventListener' || success === false) {
-            sourceRef = null;
-            fallbackSource = null;
-          }
+        if (target && target.postMessage) {
+          target.postMessage(msgIsString ? JSON.stringify(returnMsg) : returnMsg, '*');
         }
       };
     }
@@ -126,7 +117,7 @@
         window.__tcfapi(
           payload.command,
           payload.version,
-          makePostMessageCallback(event.source, payload.command, payload.callId, msgIsString),
+          makePostMessageCallback(event.source, payload.callId, msgIsString),
           payload.parameter,
         );
       }
